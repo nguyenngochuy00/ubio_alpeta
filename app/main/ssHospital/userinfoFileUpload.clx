@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-93dd029f" version="1.0.0.0">
+  <head std:sid="head-f0e5e5f9">
+    <title>userinfoFileUpload</title>
+    <screen std:sid="screen-e913f5d9" id="default" name="default" minwidth="1024px" width="1024px" height="768px"/>
+    <screen std:sid="screen-f55d3425" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-012743ca" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-a644243c">
+      <cl:dataset std:sid="d-set-5678851e" id="UserUploadList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-81d9030f" name="UniqueID"/>
+          <cl:datacolumn std:sid="d-column-f4ac7119" name="Name"/>
+          <cl:datacolumn std:sid="d-column-d5fa7534" name="Balance" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-1f0b5458" name="Birthday" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-7e2ec63c" name="CardNum"/>
+          <cl:datacolumn std:sid="d-column-05d29e3e" name="Result" datatype="number"/>
+        </cl:datacolumnlist>
+        <cl:datarowlist/>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-ab9c534d" id="dsUploadList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-2c940d51" name="Result"/>
+          <cl:datacolumn std:sid="d-column-c40b5157" name="rowIndex" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-795d51aa" id="UserUploadInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-c7a490c9" name="UniqueID"/>
+          <cl:datacolumn std:sid="d-column-9b8580d3" name="Name"/>
+          <cl:datacolumn std:sid="d-column-d6b5a52e" name="Balance" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-8a0aff62" name="GroupCode" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-91262925" name="AccessGroupCode" datatype="number"/>
+          <cl:datacolumn comment="" std:sid="d-column-d9bbc6ef" name="MealCode"/>
+          <cl:datacolumn std:sid="d-column-1c99b515" name="Birthday"/>
+          <cl:datacolumn std:sid="d-column-841e48ce" name="CardNum"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-a33aca7f" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-278d86a9" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-835c3a7f" id="sms_postUserInfoUpload" action="/v1/ssh/users/fileUpload">
+        <cl:listener std:sid="listener-89a428c2" name="submit-done" handler="onSms_postUserInfoUploadSubmitDone"/>
+        <cl:listener std:sid="listener-beb41929" name="submit-error" handler="onSms_postUserInfoUploadSubmitError"/>
+        <cl:listener std:sid="listener-e37002b1" name="submit-timeout" handler="onSms_postUserInfoUploadSubmitTimeout"/>
+        <cl:requestdata dataid="UserUploadInfo"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec dev-comment="SSHUFU_&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;/v1/ssh/users/fileUpload"/>
+  </head>
+  <body std:sid="body-61eda461" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-1510d8bb" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-a72a8372" style="padding-top:5px; padding-left:5px; padding-bottom:5px; padding-right:5px;">
+      <cl:xylayoutdata std:sid="xyl-data-0e1a7631" top="1px" right="1px" bottom="1px" left="1px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-8a95eb33">
+        <cl:formdata std:sid="f-data-3a8f2e45" row="0" col="0"/>
+        <cl:fileinput std:sid="f-input-0e67fdb8" id="SSHUFU_fileInput" placeholder="가져올 파일을 드래그하여 올려 놓으세요.">
+          <cl:listener std:sid="listener-abc1139d" name="value-change" handler="onSSHUFU_fileInputValueChange"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_DragFile"/>
+          <cl:formdata std:sid="f-data-31c5632a" row="0" col="0"/>
+        </cl:fileinput>
+        <cl:button std:sid="button-4fd5d2e8" id="SSHUFU_btnBatchRegist" class="userInfo_btn" visible="true" value="등록">
+          <cl:listener std:sid="listener-07b0458a" name="click" handler="onSSHUFU_btnBatchRegistClick"/>
+          <cl:formdata std:sid="f-data-ccb17c42" row="0" col="4"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-65bf496c">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" minlength="0"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" minlength="0"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="14" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-e2de537f">
+        <cl:formdata std:sid="f-data-4f12734e" row="1" col="0"/>
+        <cl:output std:sid="output-04316257" style="background-color:#f6f6f6; background-image:none; text-align:center;" class="userInfo_bold" value="그룹 일괄지정">
+          <cl:formdata std:sid="f-data-8c8c386d" row="0" col="1"/>
+        </cl:output>
+        <cl:output std:sid="output-d1cb4e0d" style="background-color:#f6f6f6; background-image:none; text-align:center;" class="userInfo_bold" value="출입그룹 지정">
+          <cl:formdata std:sid="f-data-661ffb72" row="0" col="3"/>
+        </cl:output>
+        <cl:output std:sid="output-1be645d0" style="background-color:#f6f6f6; background-image:none; text-align:center;" class="userInfo_bold" value="식수코드 지정">
+          <cl:formdata std:sid="f-data-ee47df9e" row="0" col="5"/>
+        </cl:output>
+        <cl:combobox std:sid="c-box-d2c48a34" id="SSHUFU_cmbGroupSet" style="text-align:center;" value="0">
+          <cl:formdata std:sid="f-data-967b6f38" row="0" col="2"/>
+          <cl:item std:sid="item-0c09f719" label="----" value="0"/>
+        </cl:combobox>
+        <cl:combobox std:sid="c-box-067e913e" id="SSHUFU_cmbAccessGroupSet" style="text-align:center;" value="0">
+          <cl:formdata std:sid="f-data-24cb80da" row="0" col="4"/>
+          <cl:item std:sid="item-80b84d3a" label="----" value="0"/>
+        </cl:combobox>
+        <cl:combobox std:sid="c-box-0b82b2d5" id="SSHUFU_cmbMealSet" style="text-align:center;" value="0">
+          <cl:formdata std:sid="f-data-29822cb2" row="0" col="6"/>
+          <cl:item std:sid="item-f6da8156" label="----" value="0"/>
+        </cl:combobox>
+        <cl:formlayout std:sid="f-layout-df9ad835" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:grid std:sid="grid-d31b24c0" id="SSHUFU_grdUserUploadList" readonly="true" datasetid="UserUploadList" columnResizable="true">
+        <cl:formdata std:sid="f-data-da4e8221" row="2" col="0"/>
+        <cl:gridcolumn std:sid="g-column-a69ad181" width="25px"/>
+        <cl:gridcolumn std:sid="g-column-851c455d"/>
+        <cl:gridcolumn std:sid="g-column-7452ad52"/>
+        <cl:gridcolumn std:sid="g-column-b9c17909"/>
+        <cl:gridcolumn std:sid="g-column-8b8c3cda"/>
+        <cl:gridcolumn std:sid="g-column-6e3c7bde"/>
+        <cl:gridcolumn std:sid="g-column-06753c08"/>
+        <cl:gridheader std:sid="gh-band-98ddff23">
+          <cl:gridrow std:sid="g-row-cb4723af"/>
+          <cl:gridcell std:sid="gh-cell-a2096026" rowindex="0" colindex="0" sortable="false" filterable="false" columntype="checkbox"/>
+          <cl:gridcell std:sid="gh-cell-9136f1dd" rowindex="0" colindex="1" targetcolumnname="UniqueID" sortable="false" filterable="false" text="Q-ID"/>
+          <cl:gridcell std:sid="gh-cell-aca25bfa" rowindex="0" colindex="2" targetcolumnname="Name" sortable="false" filterable="false" text="이름"/>
+          <cl:gridcell std:sid="gh-cell-e2ce4432" rowindex="0" colindex="3" targetcolumnname="Balance" sortable="false" filterable="false" text="잔액"/>
+          <cl:gridcell std:sid="gh-cell-7760a78d" rowindex="0" colindex="4" targetcolumnname="Birthday" sortable="false" filterable="false" text="생년월일"/>
+          <cl:gridcell std:sid="gh-cell-656a1fdb" rowindex="0" colindex="5" text="카드번호"/>
+          <cl:gridcell std:sid="gh-cell-f24378f2" rowindex="0" colindex="6" targetcolumnname="Result" sortable="false" filterable="false" text="결과"/>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-86e6741d">
+          <cl:gridrow std:sid="g-row-9a2406b1"/>
+          <cl:gridcell std:sid="gd-cell-f1728e62" rowindex="0" colindex="0" columntype="checkbox"/>
+          <cl:gridcell std:sid="gd-cell-a81d8594" rowindex="0" colindex="1" columnname="UniqueID"/>
+          <cl:gridcell std:sid="gd-cell-24ed5e55" rowindex="0" colindex="2" columnname="Name"/>
+          <cl:gridcell std:sid="gd-cell-7d9c275d" rowindex="0" colindex="3" columnname="Balance"/>
+          <cl:gridcell std:sid="gd-cell-d98e963d" rowindex="0" colindex="4" columnname="Birthday"/>
+          <cl:gridcell std:sid="gd-cell-7848e783" rowindex="0" colindex="5" columnname="CardNum"/>
+          <cl:gridcell std:sid="gd-cell-ef9c52c4" rowindex="0" colindex="6" columnname="Result">
+            <cl:combobox std:sid="c-box-07df891f" id="SSHUFU_cmbResult">
+              <cl:item std:sid="item-ea638b88" label="" value="0"/>
+              <cl:item std:sid="item-e862fb32" label="등록성공" value="1"/>
+              <cl:item std:sid="item-186de106" label="등록실패" value="2"/>
+              <cl:item std:sid="item-3e941e79" label="대상아님" value="3"/>
+              <cl:item std:sid="item-e42be2de" label="사원번호 중복" value="4"/>
+              <cl:item std:sid="item-2de0a54d" label="카드번호 중복" value="5"/>
+            </cl:combobox>
+          </cl:gridcell>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:formlayout std:sid="f-layout-718bbfdf" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-6a33cf09"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

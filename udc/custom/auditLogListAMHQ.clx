@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-6819e45a" version="1.0.0.0">
+  <head std:sid="head-0f8c52e1">
+    <title>sysLogList</title>
+    <screen std:sid="screen-be1458c9" id="default" name="default" minwidth="1024px" width="1024px" height="768px" customHeight="600" customWidth="800"/>
+    <screen std:sid="screen-2a1afaaa" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-c3f82809" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-0cdada20">
+      <cl:dataset std:sid="d-set-1794d2e3" id="AuditLogList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-9e2326ef" name="EventTime"/>
+          <cl:datacolumn std:sid="d-column-1e48a998" name="UserID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-e22b6b1f" name="Category" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-44e4d5ab" name="Content" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-2fd2fd0a" name="Detail"/>
+          <cl:datacolumn std:sid="d-column-67023d3a" name="Target"/>
+          <cl:datacolumn std:sid="d-column-488fb819" name="Action" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-1a84a49a" name="Location" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+    </cl:model>
+    <cl:appspec>
+      <cl:event name="pagechange" type="cpr.events.CSelectionEvent"/>
+      <cl:event name="before-pagechange" type="cpr.events.CSelectionEvent"/>
+    </cl:appspec>
+  </head>
+  <body std:sid="body-91738389" style="top:0px; left:0px; width:500px; height:400px;">
+    <cl:listener std:sid="listener-e154b002" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-2112058d">
+      <cl:datarowcontext datacontrolid="AuditLogList" rowindex="0"/>
+      <cl:xylayoutdata std:sid="xyl-data-16aa5e9f" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:pageindexer std:sid="p-indexer-1944ac50" id="auditLogListPageIndexer" class="userList_paging">
+        <cl:listener std:sid="listener-5d792956" name="selection-change" handler="onAuditLogListPageIndexerSelectionChange"/>
+        <cl:listener std:sid="listener-9d7a23c3" name="before-selection-change" handler="onAuditLogListPageIndexerBeforeSelectionChange"/>
+        <cl:formdata std:sid="f-data-46055017" width="100" row="1" col="0"/>
+      </cl:pageindexer>
+      <cl:grid std:sid="grid-ea8c72ca" id="auditLogListGrid_amhq" class="grid-amhq" readonly="true" datasetid="AuditLogList" resizablecolumns="all" columnMovable="true">
+        <cl:formdata std:sid="f-data-4d78b83d" row="0" col="0"/>
+        <cl:gridcolumn std:sid="g-column-afb12102"/>
+        <cl:gridcolumn std:sid="g-column-1e7b720e"/>
+        <cl:gridcolumn std:sid="g-column-cea57b9c"/>
+        <cl:gridcolumn std:sid="g-column-27fdf9ac"/>
+        <cl:gridcolumn std:sid="g-column-ab4c6dd1"/>
+        <cl:gridcolumn std:sid="g-column-5b0a1771"/>
+        <cl:gridcolumn std:sid="g-column-faedf5a6"/>
+        <cl:gridcolumn std:sid="g-column-6c85cd64"/>
+        <cl:gridheader std:sid="gh-band-91bd48f4">
+          <cl:gridrow std:sid="g-row-4fee1a5a" height="50px"/>
+          <cl:gridcell std:sid="gh-cell-c4336616" rowindex="0" colindex="0" targetcolumnname="EventTime" sortable="false" filterable="false" text="시간">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_EventTime"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-aebbf56e" rowindex="0" colindex="1" targetcolumnname="UserID" sortable="false" filterable="false" text="사용자 ID">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_UserID"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-744fd034" rowindex="0" colindex="2" targetcolumnname="Category" sortable="false" filterable="false" text="항목">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_BaseCategory"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-396f6999" rowindex="0" colindex="3" targetcolumnname="Content" sortable="false" filterable="false" text="내용">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_Content"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-dfd7be9e" rowindex="0" colindex="4" targetcolumnname="Action" sortable="false" filterable="false" text="액션">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_Action"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-9104f541" rowindex="0" colindex="5" targetcolumnname="Target" sortable="false" filterable="false" text="타겟">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_ARMY_ServiceNumber"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-c2c5ed22" rowindex="0" colindex="6" targetcolumnname="Detail" sortable="false" filterable="false" text="상세">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_Detail"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-30c074bd" rowindex="0" colindex="7" targetcolumnname="Location" sortable="false" filterable="false" text="위치">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_Location"/>
+          </cl:gridcell>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-956e8cfe">
+          <cl:gridrow std:sid="g-row-a5b692b9" height="30px"/>
+          <cl:gridcell std:sid="gd-cell-cbd01491" rowindex="0" colindex="0" columnname="EventTime"/>
+          <cl:gridcell std:sid="gd-cell-7bf0d2b1" rowindex="0" colindex="1" columnname="UserID">
+            <cl:output std:sid="output-67632b0e" style="text-align:center;">
+              <cl:expbind property="value" category="PROPERTY" expression="switch (UserID) {&#xD;&#xA;    case 1000000000000000000: &quot;Master&quot;   &#xD;&#xA;    default: UserID&#xD;&#xA;}"/>
+            </cl:output>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-a6f429c6" rowindex="0" colindex="2" columnname="Category">
+            <cl:combobox std:sid="c-box-202eab81" id="UDC_cmbAuditCategory" style="text-align:center;"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-bcbc406c" rowindex="0" colindex="3" columnname="Content">
+            <cl:combobox std:sid="c-box-73ddfc41" id="UDC_cmbAuditContent" style="text-align:center;"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-65839159" rowindex="0" colindex="4" columnname="Action">
+            <cl:combobox std:sid="c-box-0b757ba3" id="UDC_cmbAuditAction" style="text-align:center;"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-7bdc079f" rowindex="0" colindex="5" columnname="Target"/>
+          <cl:gridcell std:sid="gd-cell-5e866485" rowindex="0" colindex="6" columnname="Detail"/>
+          <cl:gridcell std:sid="gd-cell-719562ef" rowindex="0" colindex="7" columnname="Location">
+            <cl:combobox std:sid="c-box-fcd20fa4" id="UDC_cmbAuditSource" style="text-align:center;"/>
+          </cl:gridcell>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:formlayout std:sid="f-layout-90c7e57c">
+        <cl:rows length="1" unit="FRACTION" shadetype="NONE" shadecolor="#000000"/>
+        <cl:rows length="40" unit="PIXEL" shadetype="NONE" shadecolor="#000000"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-6ed88e26"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-013f30e6" version="1.0.0.0">
+  <head std:sid="head-5ec14796">
+    <title>bhUserSyncManagement</title>
+    <screen std:sid="screen-2ee251d6" id="default" name="default" minwidth="1024px" width="1024px" height="768px"/>
+    <screen std:sid="screen-0211c700" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-4b4dbe9f" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-ead234c6">
+      <cl:dataset std:sid="d-set-06c3f825" id="bhUserInfoList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-54a2acde" name="PriNo" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-062ca0e7" name="Username"/>
+          <cl:datacolumn std:sid="d-column-edd064ac" name="Loginid"/>
+          <cl:datacolumn std:sid="d-column-57bec278" name="Email"/>
+          <cl:datacolumn std:sid="d-column-3abfac17" name="CompName"/>
+          <cl:datacolumn std:sid="d-column-cef6d1b4" name="Deptname"/>
+          <cl:datacolumn std:sid="d-column-0cf4ffcd" name="Codename"/>
+          <cl:datacolumn std:sid="d-column-8c97a568" name="Gradename"/>
+          <cl:datacolumn std:sid="d-column-a41eee54" name="Isdeleted"/>
+          <cl:datacolumn std:sid="d-column-dba46c29" name="Viewyn"/>
+          <cl:datacolumn std:sid="d-column-22990d74" name="BmIndt"/>
+          <cl:datacolumn std:sid="d-column-c576de33" name="BmUpdt"/>
+          <cl:datacolumn std:sid="d-column-bb135627" name="PID"/>
+          <cl:datacolumn std:sid="d-column-15d9cacc" name="Empno"/>
+          <cl:datacolumn std:sid="d-column-4be9d37f" name="A10"/>
+          <cl:datacolumn std:sid="d-column-2e1a6ab6" name="UserInfo"/>
+          <cl:datacolumn std:sid="d-column-b93c85f4" name="UserUseinfo"/>
+          <cl:datacolumn std:sid="d-column-aab78c39" name="WDate"/>
+          <cl:datacolumn std:sid="d-column-0cc862c7" name="MDate"/>
+          <cl:datacolumn std:sid="d-column-c3aef8e7" name="SyncStatus" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-ceee50a2" name="SyncResult" datatype="string"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-532f84ed" id="SyncInfoList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-a3160c3b" name="PriNo" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-161d5f47" name="rowIndex"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-866f6864" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-6b0a42cc" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-b5bf4ffe" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-03aa1e67" name="Count" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-c956fe3f" id="sms_getBhUserInfoList" method="get" action="/v1/bluehouse/users">
+        <cl:listener std:sid="listener-6a806b2c" name="submit-done" handler="onSms_getBhUserInfoListSubmitDone"/>
+        <cl:listener std:sid="listener-abb09043" name="submit-error" handler="onSms_getBhSubmitError"/>
+        <cl:listener std:sid="listener-85c942ce" name="submit-timeout" handler="onSms_getBhSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total"/>
+        <cl:responsedata dataid="bhUserInfoList"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-0724ac20" id="sms_putBhUserInfo" method="put" action="/v1/bluehouse/users">
+        <cl:listener std:sid="listener-bf69f218" name="submit-error" handler="onSms_getBhSubmitError"/>
+        <cl:listener std:sid="listener-3fd75a95" name="submit-timeout" handler="onSms_getBhSubmitTimeout"/>
+        <cl:listener std:sid="listener-459179a6" name="submit-done" handler="onSms_putBhUserInfoSubmitDone"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec dev-comment="BHUSM"/>
+  </head>
+  <body std:sid="body-51642783" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-88ccac06" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-72c32874" id="BHUSM_grpMain">
+      <cl:xylayoutdata std:sid="xyl-data-ac65a098" top="1px" right="1px" bottom="1px" left="1px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:grid std:sid="grid-5115b559" id="BHUSM_grdBhUserList" readonly="true" datasetid="bhUserInfoList" resizablecolumns="all">
+        <cl:formdata std:sid="f-data-59dbf3e5" row="1" col="0"/>
+        <cl:gridcolumn std:sid="g-column-62dd7f6d" width="25px"/>
+        <cl:gridcolumn std:sid="g-column-8dbed08a"/>
+        <cl:gridcolumn std:sid="g-column-fb51638c"/>
+        <cl:gridcolumn std:sid="g-column-9d38c1ea"/>
+        <cl:gridcolumn std:sid="g-column-93e8adbd"/>
+        <cl:gridcolumn std:sid="g-column-35022191"/>
+        <cl:gridcolumn std:sid="g-column-9b649106"/>
+        <cl:gridcolumn std:sid="g-column-9f3c08e4"/>
+        <cl:gridcolumn std:sid="g-column-8177a3e0"/>
+        <cl:gridcolumn std:sid="g-column-a7858ba7"/>
+        <cl:gridcolumn std:sid="g-column-47364665"/>
+        <cl:gridcolumn std:sid="g-column-d8609d97"/>
+        <cl:gridcolumn std:sid="g-column-3b2a5db2"/>
+        <cl:gridcolumn std:sid="g-column-12d843df"/>
+        <cl:gridcolumn std:sid="g-column-6318ea5c"/>
+        <cl:gridcolumn std:sid="g-column-8ec58637"/>
+        <cl:gridcolumn std:sid="g-column-d3a9762c"/>
+        <cl:gridcolumn std:sid="g-column-d98d6cac"/>
+        <cl:gridcolumn std:sid="g-column-d8775584"/>
+        <cl:gridcolumn std:sid="g-column-53e3f25e"/>
+        <cl:gridcolumn std:sid="g-column-ed2f530d"/>
+        <cl:gridcolumn std:sid="g-column-1a0902ba"/>
+        <cl:gridheader std:sid="gh-band-c34c20a7">
+          <cl:gridrow std:sid="g-row-2f5ca5fc"/>
+          <cl:gridcell std:sid="gh-cell-b205e6b6" rowindex="0" colindex="0" sortable="false" filterable="false" columntype="checkbox"/>
+          <cl:gridcell std:sid="gh-cell-ee6e42fb" rowindex="0" colindex="1" targetcolumnname="PriNo" sortable="false" filterable="false" text="고유번호"/>
+          <cl:gridcell std:sid="gh-cell-4cc9133b" rowindex="0" colindex="2" targetcolumnname="Username" sortable="false" filterable="false" text="이름"/>
+          <cl:gridcell std:sid="gh-cell-7f3c9f8b" rowindex="0" colindex="3" targetcolumnname="Loginid" sortable="false" filterable="false" text="로그인아이디"/>
+          <cl:gridcell std:sid="gh-cell-4f042c55" rowindex="0" colindex="4" targetcolumnname="Email" sortable="false" filterable="false" text="E-mail"/>
+          <cl:gridcell std:sid="gh-cell-fac5ddff" rowindex="0" colindex="5" targetcolumnname="CompName" sortable="false" filterable="false" text="조직"/>
+          <cl:gridcell std:sid="gh-cell-ad28762b" rowindex="0" colindex="6" targetcolumnname="Deptname" sortable="false" filterable="false" text="부서"/>
+          <cl:gridcell std:sid="gh-cell-13296d87" rowindex="0" colindex="7" targetcolumnname="Codename" sortable="false" filterable="false" text="직위"/>
+          <cl:gridcell std:sid="gh-cell-b924c246" rowindex="0" colindex="8" targetcolumnname="Gradename" sortable="false" filterable="false" text="직급"/>
+          <cl:gridcell std:sid="gh-cell-e9038c88" rowindex="0" colindex="9" targetcolumnname="Isdeleted" sortable="false" filterable="false" text="사용 여부"/>
+          <cl:gridcell std:sid="gh-cell-4dfa4edd" rowindex="0" colindex="10" targetcolumnname="Viewyn" sortable="false" filterable="false" text="표출 여부"/>
+          <cl:gridcell std:sid="gh-cell-09f8e71d" rowindex="0" colindex="11" targetcolumnname="BmIndt" sortable="false" filterable="false" text="업무관리 등록일"/>
+          <cl:gridcell std:sid="gh-cell-b50146b5" rowindex="0" colindex="12" targetcolumnname="BmUpdt" sortable="false" filterable="false" text="업무관리 수정일"/>
+          <cl:gridcell std:sid="gh-cell-0cf7d95d" rowindex="0" colindex="13" targetcolumnname="PID" sortable="false" filterable="false" text="디지털식별코드"/>
+          <cl:gridcell std:sid="gh-cell-badbc670" rowindex="0" colindex="14" targetcolumnname="Empno" sortable="false" filterable="false" text="사원번호"/>
+          <cl:gridcell std:sid="gh-cell-413f3c22" rowindex="0" colindex="15" targetcolumnname="A10" sortable="false" filterable="false" text="카드번호"/>
+          <cl:gridcell std:sid="gh-cell-45945a87" rowindex="0" colindex="16" targetcolumnname="UserInfo" sortable="false" filterable="false" text="비고"/>
+          <cl:gridcell std:sid="gh-cell-3db4345e" rowindex="0" colindex="17" targetcolumnname="UserUseinfo" sortable="false" filterable="false" text="사용여부"/>
+          <cl:gridcell std:sid="gh-cell-08a74145" rowindex="0" colindex="18" targetcolumnname="WDate" sortable="false" filterable="false" text="등록일"/>
+          <cl:gridcell std:sid="gh-cell-9f999046" rowindex="0" colindex="19" targetcolumnname="MDate" sortable="false" filterable="false" text="최종수정일"/>
+          <cl:gridcell std:sid="gh-cell-815e6e7a" rowindex="0" colindex="20" targetcolumnname="SyncState" sortable="false" filterable="false" text="동기화 상태"/>
+          <cl:gridcell std:sid="gh-cell-fbb4a2d8" rowindex="0" colindex="21" targetcolumnname="SyncResult" sortable="false" filterable="false" text="동기화 결과"/>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-ef0feac1">
+          <cl:gridrow std:sid="g-row-8c2a9588"/>
+          <cl:gridcell std:sid="gd-cell-6027be8a" rowindex="0" colindex="0" columntype="checkbox"/>
+          <cl:gridcell std:sid="gd-cell-cc83a11a" rowindex="0" colindex="1" columnname="PriNo"/>
+          <cl:gridcell std:sid="gd-cell-5683b950" rowindex="0" colindex="2" columnname="Username"/>
+          <cl:gridcell std:sid="gd-cell-9321d9ec" rowindex="0" colindex="3" columnname="Loginid"/>
+          <cl:gridcell std:sid="gd-cell-125c1f96" rowindex="0" colindex="4" columnname="Email"/>
+          <cl:gridcell std:sid="gd-cell-b2c20948" rowindex="0" colindex="5" columnname="CompName"/>
+          <cl:gridcell std:sid="gd-cell-305b2eac" rowindex="0" colindex="6" columnname="Deptname"/>
+          <cl:gridcell std:sid="gd-cell-8f7dbc6c" rowindex="0" colindex="7" columnname="Codename"/>
+          <cl:gridcell std:sid="gd-cell-73a38343" rowindex="0" colindex="8" columnname="Gradename"/>
+          <cl:gridcell std:sid="gd-cell-4dc6136e" rowindex="0" colindex="9" columnname="Isdeleted"/>
+          <cl:gridcell std:sid="gd-cell-320e585e" rowindex="0" colindex="10" columnname="Viewyn"/>
+          <cl:gridcell std:sid="gd-cell-f0c33d2b" rowindex="0" colindex="11" columnname="BmIndt"/>
+          <cl:gridcell std:sid="gd-cell-e7245620" rowindex="0" colindex="12" columnname="BmUpdt"/>
+          <cl:gridcell std:sid="gd-cell-43a1c2d7" rowindex="0" colindex="13" columnname="PID"/>
+          <cl:gridcell std:sid="gd-cell-619ad484" rowindex="0" colindex="14" columnname="Empno"/>
+          <cl:gridcell std:sid="gd-cell-87661cf0" rowindex="0" colindex="15" columnname="A10"/>
+          <cl:gridcell std:sid="gd-cell-830b1c0b" rowindex="0" colindex="16" columnname="UserInfo"/>
+          <cl:gridcell std:sid="gd-cell-8492549f" rowindex="0" colindex="17" columnname="UserUseinfo"/>
+          <cl:gridcell std:sid="gd-cell-31beded5" rowindex="0" colindex="18" columnname="WDate"/>
+          <cl:gridcell std:sid="gd-cell-0f4effd1" rowindex="0" colindex="19" columnname="MDate"/>
+          <cl:gridcell std:sid="gd-cell-a4c4eed2" rowindex="0" colindex="20" columnname="SyncStatus">
+            <cl:combobox std:sid="c-box-6469a9e2" id="cmb1">
+              <cl:item std:sid="t-item-865796e1" label="미동기화" value="0"/>
+              <cl:item std:sid="t-item-aee5978a" label="동기화" value="1"/>
+            </cl:combobox>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-ecdf8387" rowindex="0" colindex="21" columnname="SyncResult"/>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:pageindexer std:sid="p-indexer-700b4b78" id="bhUsersPageIndexer" class="userList_paging">
+        <cl:listener std:sid="listener-63d61728" name="selection-change" handler="onBhUsersPageIndexerSelectionChange"/>
+        <cl:formdata std:sid="f-data-55610ce2" row="2" col="0"/>
+      </cl:pageindexer>
+      <cl:group std:sid="group-a2c395f6">
+        <cl:formdata std:sid="f-data-c56f262d" row="0" col="0"/>
+        <cl:group std:sid="group-a84f9729" style="border-right-style:solid; color:#6b6b6b; border-top-width:1px; border-bottom-color:#cccccc; border-right-width:1px; border-left-color:#cccccc; border-right-color:#cccccc; border-left-width:1px; border-top-style:solid; background-color:#F6F6F6; border-radius:10px; border-left-style:solid; border-bottom-width:1px; border-top-color:#cccccc; border-bottom-style:solid;">
+          <cl:formdata std:sid="f-data-f56080ec" row="0" col="4"/>
+          <cl:combobox std:sid="c-box-6107e546" id="BHUSM_cmbCategory" style="background-color:#F6F6F6; border-right-style:none; border-left-style:none; border-bottom-style:none; border-top-style:none;" preventinput="true">
+            <cl:apppropbind property="value" category="PROPERTY" app-property="searchCategory"/>
+            <cl:formdata std:sid="f-data-8adb84bb" row="0" col="0"/>
+            <cl:item std:sid="item-5588fa99" label="고유번호" value="pri_no"/>
+            <cl:item std:sid="item-3aad8294" label="성명" value="username"/>
+          </cl:combobox>
+          <cl:inputbox std:sid="i-box-c326c7b5" id="BHUSM_ipbKeyword" style="background-color:#F6F6F6; padding:0px 0px 0px 10px; border-bottom-color:#cccccc; border-left-color:#cccccc; border-top-color:#cccccc; border-bottom-style:none; border-right-color:#cccccc; border-top-style:none;">
+            <cl:langbind property="placeholder" category="PROPERTY" keypath="Str_SearchKeword"/>
+            <cl:apppropbind property="value" category="PROPERTY" app-property="searchKeyword"/>
+            <cl:formdata std:sid="f-data-55a7664c" row="0" col="1"/>
+          </cl:inputbox>
+          <cl:group std:sid="group-94b972ce" id="BHUSM_btnSearch" style="border-right-style:none; cursor:pointer; background-color:transparent; background-repeat:no-repeat; border-left-style:none; border-bottom-style:none; background-position:center; background-image:url('../../../theme/images/common/common_text_field_btn_icons_search.png'); border-top-style:none;">
+            <cl:listener std:sid="listener-666bc94a" name="click" handler="onBHUSM_btnSearchClick"/>
+            <cl:formdata std:sid="f-data-838eccbc" height="29" row="0" col="2"/>
+            <cl:xylayout std:sid="xylayout-3b76f87f"/>
+          </cl:group>
+          <cl:formlayout std:sid="f-layout-409a1d5f" hspace="0px" vspace="0px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+            <cl:columns length="3" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:button std:sid="button-b0758abc" id="BHUSM_btnModify" class="userInfo_btn" value="동기화">
+          <cl:listener std:sid="listener-502a8823" name="click" handler="onBHUSM_btnModifyClick"/>
+          <cl:formdata std:sid="f-data-618d7849" row="0" col="6"/>
+        </cl:button>
+        <cl:output std:sid="output-e053a255" style="padding:4px; text-align:right;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_All"/>
+          <cl:formdata std:sid="f-data-747729fb" row="0" col="1"/>
+        </cl:output>
+        <cl:output std:sid="output-5a63dfa3" id="BHUSM_opbTotal" value="">
+          <cl:formdata std:sid="f-data-8ce9775a" row="0" col="2"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-1e2bcaef" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="50" unit="PIXEL" autoSizing="false" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" minlength="0"/>
+          <cl:columns length="2" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" minlength="0"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-8f6daa97" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+        <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-90d6cbe2"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

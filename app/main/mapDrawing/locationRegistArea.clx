@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-38958f96" version="1.0.0.0">
+  <head std:sid="head-d82722d5">
+    <title>locationTerminal</title>
+    <screen std:sid="screen-c3c8fd1c" id="default" name="default" minwidth="1024px" width="1024px" height="768px" customHeight="600" customWidth="800" active="false"/>
+    <screen std:sid="screen-909ccce2" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-75e37eb4" id="new-screen" name="new-screen" minwidth="400px" maxwidth="499px" width="400px" height="500px" active="true"/>
+    <screen std:sid="screen-6e42d1d6" id="mobile" name="mobile" maxwidth="399px" width="350px" height="525px" customHeight="600" customWidth="800" active="false"/>
+    <cl:model std:sid="model-e6ea2f52">
+      <cl:dataset std:sid="d-set-be19fffd" id="terminalList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-3802ebfb" name="ID"/>
+          <cl:datacolumn std:sid="d-column-1ab444df" name="name"/>
+          <cl:datacolumn std:sid="d-column-8f289378" name="type"/>
+          <cl:datacolumn std:sid="d-column-0477f937" name="file"/>
+        </cl:datacolumnlist>
+        <cl:datarowlist/>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-ac738708" id="MapAreaList" filtercondition="PosX==0&amp;&amp;PosY==0">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-fb803c7b" name="MapCode" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-58b4dc7c" name="Name"/>
+          <cl:datacolumn std:sid="d-column-f16dbc84" name="PosX" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-812ef8d5" name="PosY" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-1d729776" name="ImageType"/>
+          <cl:datacolumn std:sid="d-column-f62537b6" name="ImageData"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:submission std:sid="submission-d1f84ed7" id="getTerminalList" action="data/main/tm.json">
+        <cl:responsedata dataid="terminalList"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-cc926ec9" id="sms_getMapAreaList" method="get" action="/v1/map/areas">
+        <cl:listener std:sid="listener-c3064b6e" name="submit-success" handler="onSms_getMapAreaListSubmitSuccess"/>
+        <cl:responsedata dataid="MapAreaList"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-c3415807" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-21dc8cd9" name="load" handler="onBodyLoad"/>
+    <cl:listener std:sid="listener-3e9c6f0e" name="dispose" handler="onBodyDispose"/>
+    <cl:group std:sid="group-90ac15a9" style="padding:10px;">
+      <cl:xylayoutdata std:sid="xyl-data-15e56fbd" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:grid std:sid="grid-d779e041" id="grdAreaSelect" readonly="true" datasetid="MapAreaList" showdeletedrow="false" nodatamessage="double click: open area management." resizablecolumns="none" columnMovable="false">
+        <cl:listener std:sid="listener-f499a5a4" name="row-check" handler="onGrdTmlSelectRowCheck"/>
+        <cl:listener std:sid="listener-5b0f2d7c" name="row-uncheck" handler="onGrdTmlSelectRowUncheck"/>
+        <cl:listener std:sid="listener-c62e3128" name="click" handler="onGrdAreaSelectClick"/>
+        <cl:listener std:sid="listener-72c2517d" name="cell-click" handler="onGrdAreaSelectCellClick"/>
+        <cl:listener std:sid="listener-d5a097e6" name="dblclick" handler="onGrdAreaSelectDblclick"/>
+        <cl:formdata std:sid="f-data-849f2474" row="1" col="0"/>
+        <cl:gridcolumn std:sid="g-column-09b6e510" width="25px"/>
+        <cl:gridcolumn std:sid="g-column-448158c3"/>
+        <cl:gridcolumn std:sid="g-column-0237bfc1"/>
+        <cl:gridcolumn std:sid="g-column-02ae00ad"/>
+        <cl:gridcolumn std:sid="g-column-465ae539"/>
+        <cl:gridcolumn std:sid="g-column-65bc1a20" width="80px"/>
+        <cl:gridheader std:sid="gh-band-f5bc9bf9">
+          <cl:gridrow std:sid="g-row-088abe36"/>
+          <cl:gridcell std:sid="gh-cell-9db98d70" rowindex="0" colindex="0" sortable="false" filterable="false" columntype="checkbox"/>
+          <cl:gridcell std:sid="gh-cell-b4658197" rowindex="0" colindex="1" style="font-weight:bolder;" targetcolumnname="MapCode" sortable="false" filterable="false" text="CODE">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_MapCode"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-d6850624" rowindex="0" colindex="2" style="font-weight:bolder;" targetcolumnname="Name" sortable="false" filterable="false" text="Name">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_Name"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-69780661" rowindex="0" colindex="3" targetcolumnname="PosX" sortable="false" filterable="false" text="PosX" visible="false"/>
+          <cl:gridcell std:sid="gh-cell-35f8d51e" rowindex="0" colindex="4" targetcolumnname="PosY" sortable="false" filterable="false" text="PosY" visible="false"/>
+          <cl:gridcell std:sid="gh-cell-eab54d45" rowindex="0" colindex="5" text="상세보기">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_Detail"/>
+          </cl:gridcell>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-4f9567ae">
+          <cl:gridrow std:sid="g-row-87fd5264"/>
+          <cl:gridcell std:sid="gd-cell-63cd5a8e" rowindex="0" colindex="0" columntype="checkbox"/>
+          <cl:gridcell std:sid="gd-cell-7853ceee" rowindex="0" colindex="1" columnname="MapCode"/>
+          <cl:gridcell std:sid="gd-cell-3cc02151" rowindex="0" colindex="2" columnname="Name"/>
+          <cl:gridcell std:sid="gd-cell-79b22a8d" rowindex="0" colindex="3" columnname="PosX"/>
+          <cl:gridcell std:sid="gd-cell-7fab7423" rowindex="0" colindex="4" columnname="PosY"/>
+          <cl:gridcell std:sid="gd-cell-cd326ffc" rowindex="0" colindex="5" columnname="">
+            <cl:output std:sid="output-dbd5baa9" style="cursor:hand; background-repeat:no-repeat; background-image:url('../../../theme/images/arrow_icon/data_table_pre_page_next.gif'); background-position:center;">
+              <cl:attribute name="mapCode" value=""/>
+            </cl:output>
+          </cl:gridcell>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:group std:sid="group-a542a556">
+        <cl:formdata std:sid="f-data-c5fec3b6" row="0" col="0"/>
+        <cl:button std:sid="button-e7e12a95" id="btnAddIcon" class="userInfo_btn">
+          <cl:listener std:sid="listener-210684c7" name="click" handler="onBtnAddIconClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Select"/>
+          <cl:formdata std:sid="f-data-20e5c933" halign="FILL" valign="FILL" height="30" row="0" col="2"/>
+        </cl:button>
+        <cl:output std:sid="output-24fc1e10" style="padding:0px 0px 0px 5px;" class="common-titlelabel">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_MapList"/>
+          <cl:formdata std:sid="f-data-b5e0741c" halign="FILL" valign="FILL" height="30" row="0" col="0"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-13fc5f23">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-c7998333">
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-81d543f4"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

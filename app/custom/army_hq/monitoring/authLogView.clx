@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-f2b55b10" version="1.0.0.0">
+  <head std:sid="head-15540afc">
+    <title>authLogView</title>
+    <screen std:sid="screen-0777bfeb" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="400" customWidth="800"/>
+    <screen std:sid="screen-d56d82b9" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-a7f4fb8e" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-061d28c1">
+      <cl:dataset std:sid="d-set-30f85485" id="TerminalCameraList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-4e553fc8" name="CameraID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-299795f7" name="CameraName"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-a33aca7f" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-5686d5d5" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-3df49c2d" id="AuthLogDetail">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-22e126bb" name="IndexKey"/>
+          <cl:datacolumn std:sid="d-column-9bdbd729" name="TerminalID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-a9669732" name="UserID"/>
+          <cl:datacolumn std:sid="d-column-bb43dab7" name="UserName"/>
+          <cl:datacolumn std:sid="d-column-c829596f" name="EventTime"/>
+          <cl:datacolumn std:sid="d-column-8e03063c" name="AuthType" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-4670900c" name="AuthResult" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-b8a3370f" name="Card"/>
+          <cl:datacolumn std:sid="d-column-92769126" name="Func" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-2fb86c8d" name="FuncType" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-34f63295" name="UserImage"/>
+          <cl:datacolumn std:sid="d-column-2f6fb4bd" name="LogImage"/>
+          <cl:datacolumn std:sid="d-column-359ebb61" name="UserType" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-9d2f207b" id="OptionInnodep">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-7448f150" name="ServerIP" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-48763c00" name="ServerPort" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-d9f6242c" name="UserID" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-b0f131c4" name="UserPW" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-3ef275c7" name="License" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-8a309048" name="UseRecording" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-196a58e2" name="RegularRecording" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-9b5d3614" name="BeforeRecordingTime" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-f0acf40f" name="AfterRecordingTime" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-0c9bddf1" name="PlayerServerIP" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-f851faf1" name="PlayerServerPort" datatype="number" defaultvalue="0"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-3d8d063a" id="sms_getAuthLogListDetail" method="get" action="/v1/authLogs/{logIndex}" mediatype="application/x-www-form-urlencoded">
+        <cl:listener std:sid="listener-e49c18b2" name="submit-done" handler="onSms_getAuthLogListDetailSubmitDone"/>
+        <cl:listener std:sid="listener-dfe0818a" name="submit-timeout" handler="onSms_getAuthLogListDetailSubmitTimeout"/>
+        <cl:listener std:sid="listener-2e29ff5c" name="submit-error" handler="onSms_getAuthLogListDetailSubmitError"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="AuthLogDetail" alias=""/>
+      </cl:submission>
+      <cl:submission std:sid="submission-6aacc886" id="sms_getOption" method="get" action="/v1/options">
+        <cl:listener std:sid="listener-1b8e3a0b" name="submit-done" handler="onSms_getOptionSubmitDone"/>
+        <cl:listener std:sid="listener-154474e3" name="submit-timeout" handler="onSms_getOptionSubmitTimeout"/>
+        <cl:listener std:sid="listener-b770cf29" name="submit-error" handler="onSms_getOptionSubmitError"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="OptionInnodep"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-209dca34" style="padding:0px; top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-857fef58" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-0cf064a5" id="grp1" style="padding-top:10px; color:#010101; padding-left:10px; padding-bottom:10px; padding-right:10px;">
+      <cl:xylayoutdata std:sid="xyl-data-f73f9b84" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-63f22611" id="grp2" style="color:#010101;">
+        <cl:listener std:sid="listener-a4698cf9" name="dblclick" handler="onGrp2Dblclick"/>
+        <cl:formdata std:sid="f-data-b2d05b45" row="0" col="0"/>
+        <cl:button std:sid="button-48af6007" id="ALVEW_btnPrevAuthLog" style="padding:0px;" class="userInfo_btn">
+          <cl:listener std:sid="listener-be7b7aee" name="click" handler="onALVEW_btnPrevAuthLogClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_PrevLog"/>
+          <cl:formdata std:sid="f-data-ba9eb040" halign="FILL" valign="FILL" height="30" row="0" col="2"/>
+        </cl:button>
+        <cl:button std:sid="button-3a58256d" id="ALVEW_btnNextAuthLog" style="padding:0px;" class="userInfo_btn">
+          <cl:listener std:sid="listener-970e501f" name="click" handler="onALVEW_btnNextAuthLogClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_NextLog"/>
+          <cl:formdata std:sid="f-data-9af4c14c" halign="FILL" valign="FILL" height="30" row="0" col="3"/>
+        </cl:button>
+        <cl:button std:sid="button-b7f4c24f" id="btnPlaybackVideo" style="padding:0px;" class="userInfo_btn" visible="false">
+          <cl:listener std:sid="listener-e38fff39" name="click" handler="onBtnPlaybackVideoClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_PlaybackVideo"/>
+          <cl:formdata std:sid="f-data-bff24575" row="0" col="1"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-61f0c2c5">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false"/>
+          <cl:columns length="120" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-9177a6b9" id="grp3">
+        <cl:formdata std:sid="f-data-db97ade4" row="1" col="0"/>
+        <cl:group std:sid="group-1bad9178" id="grp4">
+          <cl:formdata std:sid="f-data-97fd08cb" row="0" col="0"/>
+          <cl:group std:sid="group-23210552" id="grp7" style="color:#010101;">
+            <cl:formdata std:sid="f-data-3d2afcad" row="0" col="0" rowspan="1" colspan="1"/>
+            <cl:group std:sid="group-6c35cb02" id="grp6" style="color:#010101;">
+              <cl:formdata std:sid="f-data-219e703e" row="0" col="0"/>
+              <cl:output std:sid="output-4ec22c79" style="padding-top:0px; color:#010101; font-weight:bold; padding-left:0px; font-size:14px; padding-bottom:0px; text-align:center; padding-right:0px;">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_AuthLogPicture"/>
+                <cl:formdata std:sid="f-data-6f0644de" row="0" col="0"/>
+              </cl:output>
+              <cl:img std:sid="image-343c1f19" id="log_image" style="border-right-style:solid; border-top-width:1px; border-bottom-color:black; color:#010101; border-right-width:1px; border-left-color:black; border-right-color:black; border-left-width:1px; border-top-style:solid; border-left-style:solid; border-bottom-width:1px; border-top-color:black; border-bottom-style:solid;" src="../../../theme/images/noImg.gif">
+                <cl:formdata std:sid="f-data-2096109e" halign="CENTER" valign="TOP" width="180" height="240" row="1" col="0"/>
+              </cl:img>
+              <cl:formlayout std:sid="f-layout-6822e284" hspace="0px" vspace="5px">
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="260" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="200" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              </cl:formlayout>
+            </cl:group>
+            <cl:group std:sid="group-8595a89b" id="grp8" style="color:#010101;">
+              <cl:formdata std:sid="f-data-b82f3c43" row="0" col="1"/>
+              <cl:output std:sid="output-50789cb2" style="color:#010101; font-weight:bold; font-size:14px; text-align:center;">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_UserPicture"/>
+                <cl:formdata std:sid="f-data-caf34cc6" row="0" col="0"/>
+              </cl:output>
+              <cl:img std:sid="image-5570e420" id="user_image" style="border-right-style:solid; border-top-width:1px; border-bottom-color:black; color:#010101; border-right-width:1px; border-left-color:black; border-right-color:black; border-left-width:1px; border-top-style:solid; border-left-style:solid; border-bottom-width:1px; border-top-color:black; border-bottom-style:solid;" src="../../../theme/images/noImg.gif">
+                <cl:formdata std:sid="f-data-082dc6ef" halign="CENTER" valign="TOP" width="180" height="240" row="1" col="0"/>
+              </cl:img>
+              <cl:formlayout std:sid="f-layout-6888db86" hspace="0px" vspace="5px">
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="260" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="200" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              </cl:formlayout>
+            </cl:group>
+            <cl:formlayout std:sid="f-layout-d0bb5845">
+              <cl:rows length="300" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="200" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="200" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:formlayout std:sid="f-layout-23c8dc11">
+            <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+            <cl:columns length="410" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:group std:sid="group-3861cd21" id="grp5">
+          <cl:formdata std:sid="f-data-f3e74bc5" row="0" col="1"/>
+          <cl:output std:sid="output-1e79e3ae" style="color:#010101; font-weight:bold; font-size:14px; text-align:left;">
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_AuthLogDetail"/>
+            <cl:formdata std:sid="f-data-ae41c69a" row="0" col="0"/>
+          </cl:output>
+          <cl:group std:sid="group-e4d61678" id="ALVEW_grpAuthLogDetailView" style="color:#010101;">
+            <cl:formdata std:sid="f-data-8d5283b7" row="1" col="0"/>
+            <cl:group std:sid="group-00656277" id="grp12">
+              <cl:formdata std:sid="f-data-b8a88870" row="0" col="0"/>
+              <cl:output std:sid="output-28aa1a8e" style="color:#010101;" class="common-controllabel">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_UserID"/>
+                <cl:formdata std:sid="f-data-87ffe04e" valign="CENTER" height="30" row="0" col="0"/>
+              </cl:output>
+              <cl:output std:sid="output-12a918e7" id="user_id" style="border-right-style:solid; border-top-width:1px; border-bottom-color:#c5c5c5; color:#010101; border-right-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; border-top-style:solid; text-align:center;">
+                <cl:formdata std:sid="f-data-2c5c8b02" valign="CENTER" height="30" row="0" col="1"/>
+              </cl:output>
+              <cl:formlayout std:sid="f-layout-1eed159f" hspace="0px" vspace="0px">
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="120" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+                <cl:columns length="1" unit="FRACTION"/>
+              </cl:formlayout>
+            </cl:group>
+            <cl:group std:sid="group-8d92392d" id="grp13">
+              <cl:formdata std:sid="f-data-3b4f2489" row="4" col="0"/>
+              <cl:output std:sid="output-6d052f8a" style="color:#010101;" class="common-controllabel">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_AuthType"/>
+                <cl:formdata std:sid="f-data-a4ffa532" valign="CENTER" height="30" row="0" col="0"/>
+              </cl:output>
+              <cl:combobox std:sid="c-box-186c4222" id="ALVEW_cmbAuthType" style="color:#010101; text-align:center;" readonly="true" hidebutton="true">
+                <cl:datamapbind property="value" datacontrolid="AuthLogDetail" columnname="AuthType"/>
+                <cl:formdata std:sid="f-data-e355cc27" row="0" col="1"/>
+              </cl:combobox>
+              <cl:formlayout std:sid="f-layout-db46f6c4" hspace="0px" vspace="0px">
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="120" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+                <cl:columns length="1" unit="FRACTION"/>
+              </cl:formlayout>
+            </cl:group>
+            <cl:group std:sid="group-ca4d0682" id="grp14">
+              <cl:formdata std:sid="f-data-6b2fe552" row="1" col="0"/>
+              <cl:output std:sid="output-15c727ee" style="color:#010101;" class="common-controllabel" value="성명">
+                <cl:formdata std:sid="f-data-3f5a6e42" valign="CENTER" height="30" row="0" col="0"/>
+              </cl:output>
+              <cl:output std:sid="output-99d27fb1" id="user_name" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; color:#010101; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-top-color:#c5c5c5; border-bottom-style:solid; border-right-color:#c5c5c5; border-top-style:solid; text-align:center;">
+                <cl:formdata std:sid="f-data-ab6591c9" valign="CENTER" height="30" row="0" col="1"/>
+              </cl:output>
+              <cl:formlayout std:sid="f-layout-63640e34" hspace="0px" vspace="0px">
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="120" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+                <cl:columns length="1" unit="FRACTION"/>
+              </cl:formlayout>
+            </cl:group>
+            <cl:group std:sid="group-fbe2d72a" id="grp15">
+              <cl:formdata std:sid="f-data-a22b3228" row="3" col="0"/>
+              <cl:output std:sid="output-f5f99e83" style="color:#010101;" class="common-controllabel">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_EventTime"/>
+                <cl:formdata std:sid="f-data-b81f2187" valign="CENTER" height="30" row="0" col="0"/>
+              </cl:output>
+              <cl:output std:sid="output-6a1b2da7" id="event_time" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; color:#010101; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-top-color:#c5c5c5; border-bottom-style:solid; border-right-color:#c5c5c5; border-top-style:solid; text-align:center;">
+                <cl:formdata std:sid="f-data-3e899b3f" valign="CENTER" height="30" row="0" col="1"/>
+              </cl:output>
+              <cl:formlayout std:sid="f-layout-ce4f6742" hspace="0px" vspace="0px">
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="120" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+                <cl:columns length="1" unit="FRACTION"/>
+              </cl:formlayout>
+            </cl:group>
+            <cl:group std:sid="group-e2c453fe" id="grp16">
+              <cl:formdata std:sid="f-data-eb01d55f" row="6" col="0"/>
+              <cl:output std:sid="output-5fe6b79f" id="optCardNum" style="color:#010101;" class="common-controllabel">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_CardNum"/>
+                <cl:formdata std:sid="f-data-42d0eae2" valign="CENTER" height="30" row="0" col="0"/>
+              </cl:output>
+              <cl:output std:sid="output-7a468387" id="card_no" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; color:#010101; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-top-color:#c5c5c5; border-bottom-style:solid; border-right-color:#c5c5c5; border-top-style:solid; text-align:center;">
+                <cl:formdata std:sid="f-data-73a60f3d" valign="CENTER" height="30" row="0" col="1"/>
+              </cl:output>
+              <cl:formlayout std:sid="f-layout-02902bd4" hspace="0px" vspace="0px">
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="120" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+                <cl:columns length="1" unit="FRACTION"/>
+              </cl:formlayout>
+            </cl:group>
+            <cl:group std:sid="group-efc738a7" id="grp18">
+              <cl:formdata std:sid="f-data-fe3ed4ec" row="5" col="0"/>
+              <cl:output std:sid="output-fc0e5502" style="color:#010101;" class="common-controllabel">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_AuthResult"/>
+                <cl:formdata std:sid="f-data-9231dbcc" valign="CENTER" height="30" row="0" col="0"/>
+              </cl:output>
+              <cl:combobox std:sid="c-box-dbfb4ad1" id="ALVEW_cmbAuthResult" style="color:#010101; text-align:center;" readonly="true" hidebutton="true">
+                <cl:datamapbind property="value" datacontrolid="AuthLogDetail" columnname="AuthResult"/>
+                <cl:formdata std:sid="f-data-99ba2b17" row="0" col="1"/>
+              </cl:combobox>
+              <cl:formlayout std:sid="f-layout-ec92fc4f" hspace="0px" vspace="0px">
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="120" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+                <cl:columns length="1" unit="FRACTION"/>
+              </cl:formlayout>
+            </cl:group>
+            <cl:group std:sid="group-635c2423">
+              <cl:formdata std:sid="f-data-462e527f" row="2" col="0"/>
+              <cl:output std:sid="output-b4b1bbd5" style="color:#010101;" class="common-controllabel" value="인원구분">
+                <cl:formdata std:sid="f-data-34b04e66" valign="CENTER" height="30" row="0" col="0"/>
+              </cl:output>
+              <cl:combobox std:sid="c-box-f06de538" id="MRMAN_cmbUserType" style="color:#010101; text-align:center;">
+                <cl:datamapbind property="value" datacontrolid="AuthLogDetail" columnname="UserType"/>
+                <cl:formdata std:sid="f-data-d0feeecd" row="0" col="1"/>
+                <cl:item std:sid="item-f0ec9085" label="-----" value="0"/>
+                <cl:item std:sid="item-fad03f8f" label="관리자" value="1"/>
+                <cl:item std:sid="item-935ed9b6" label="현역" value="900"/>
+                <cl:item std:sid="item-2b2bf824" label="타부대원" value="901"/>
+                <cl:item std:sid="item-7514ebb2" label="민간인" value="902"/>
+                <cl:item std:sid="item-59bf77dd" label="상주민간인" value="903"/>
+                <cl:item std:sid="item-98f04e77" label="고정출입자" value="904"/>
+                <cl:item std:sid="item-13e3ab40" label="병사" value="905"/>
+                <cl:item std:sid="item-1da09b8c" label="군가족" value="906"/>
+                <cl:item std:sid="item-4237f5bf" label="군무원" value="907"/>
+                <cl:item std:sid="item-7340cacf" label="일반차량" value="10000"/>
+                <cl:item std:sid="item-07fac7ef" label="부대차량" value="10001"/>
+              </cl:combobox>
+              <cl:formlayout std:sid="f-layout-731bfacf" hspace="0px" vspace="0px">
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="120" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+                <cl:columns length="1" unit="FRACTION"/>
+              </cl:formlayout>
+            </cl:group>
+            <cl:formlayout std:sid="f-layout-fc130818" hspace="0px" vspace="0px">
+              <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:rows length="30" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
+              <cl:rows length="30" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
+              <cl:rows length="30" unit="PIXEL"/>
+              <cl:rows length="30" unit="PIXEL"/>
+              <cl:rows length="30" unit="PIXEL"/>
+              <cl:rows length="30" unit="PIXEL"/>
+              <cl:rows length="30" unit="PIXEL"/>
+              <cl:rows length="1" unit="FRACTION"/>
+              <cl:columns length="1" unit="FRACTION"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:formlayout std:sid="f-layout-3f8141bb">
+            <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-9a4d5c5e">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="410" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-cdb3a313">
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-0196ab93"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

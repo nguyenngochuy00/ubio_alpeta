@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-f8222302" version="1.0.0.0">
+  <head std:sid="head-38782247">
+    <title>LoginDialog</title>
+    <link std:sid="link-4e219f30" href="/theme/style/logindialog.css" rel="stylesheet" type="text/css"/>
+    <screen std:sid="screen-d344a5d4" id="default" active="false" customHeight="600" customWidth="800" height="768px" minwidth="1024px" name="default" width="1024px"/>
+    <screen std:sid="screen-80bc8944" id="tablet" height="667px" maxwidth="1023px" minwidth="500px" name="tablet" width="500px"/>
+    <screen std:sid="screen-b1fe879a" id="mobile" active="false" height="525px" maxwidth="499px" minwidth="350px" name="mobile" width="350px"/>
+    <screen std:sid="screen-bb0c7e67" id="ip5/SE" active="true" height="568px" maxwidth="349px" name="ip5/SE" width="320px"/>
+    <cl:model std:sid="model-c956ddca">
+      <cl:datamap std:sid="d-map-98518997" id="dmLoginReq">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-61da6a9f" name="userId"/>
+          <cl:datacolumn std:sid="d-column-d70a3fda" name="password"/>
+          <cl:datacolumn std:sid="d-column-3a3b16c1" datatype="number" name="userType"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-866f6864" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-fdaa5b77" datatype="number" name="ResultCode"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-3f6dd76f" id="AccountInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-c6b6d7c4" datatype="string" name="UserID"/>
+          <cl:datacolumn std:sid="d-column-d81ae937" name="Uuid"/>
+          <cl:datacolumn std:sid="d-column-fa74028a" name="Name"/>
+          <cl:datacolumn std:sid="d-column-3a7e0e66" name="Password"/>
+          <cl:datacolumn std:sid="d-column-ece9306c" name="Privilege"/>
+          <cl:datacolumn std:sid="d-column-e34c27c7" datatype="number" name="ServerID"/>
+          <cl:datacolumn std:sid="d-column-f2c73af3" name="Version"/>
+          <cl:datacolumn std:sid="d-column-fb48a3b1" datatype="number" name="LicenseLevel"/>
+          <cl:datacolumn std:sid="d-column-12629190" datatype="number" name="FirstLoginFlag"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-71ccc0f4" id="brandType">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-c3e047f2" datatype="number" name="Type"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-ac80187c" id="SystemInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-e1adf7ef" name="Version"/>
+          <cl:datacolumn std:sid="d-column-5f79c6bc" datatype="number" name="LicenseLevel"/>
+          <cl:datacolumn std:sid="d-column-f76c4eef" datatype="number" name="BrandType"/>
+          <cl:datacolumn std:sid="d-column-8aa617c4" datatype="number" name="TimezoneVersion"/>
+          <cl:datacolumn std:sid="d-column-01114d79" datatype="number" name="HTTPSFlag"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-5e733d3b" id="initOption">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-ab6ef827" datatype="number" name="userIDLength"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-6e68316e" id="LoginFailInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-0e2e38c6" datatype="number" name="RemindCount"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-5329f83c" id="sms_login" action="/login" withCredentials="true">
+        <cl:listener std:sid="listener-83ffc8fb" handler="onSms_loginSubmitTimeout" name="submit-timeout"/>
+        <cl:listener std:sid="listener-cfe83223" handler="onSms_loginSubmitError" name="submit-error"/>
+        <cl:listener std:sid="listener-6a05b4ad" handler="onSms_loginSubmitSuccess" name="submit-success"/>
+        <cl:requestdata dataid="dmLoginReq"/>
+        <cl:responsedata dataid="Result" isadd="true"/>
+        <cl:responsedata dataid="AccountInfo" isadd="true"/>
+        <cl:responsedata dataid="SystemInfo" isadd="true"/>
+        <cl:responsedata dataid="LoginFailInfo" isadd="true"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-1d1a48cd" id="sms_getInitOption" action="/initOption" method="get">
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="brandType"/>
+        <cl:responsedata dataid="initOption"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-27c986e0" id="sms_getLangList" action="data/lang/lang.json" method="get">
+        <cl:responsedata dataid="LangList"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-be862117" id="sms_chkLogin" action="/chkLogin" method="get">
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="AccountInfo"/>
+        <cl:responsedata dataid="SystemInfo"/>
+      </cl:submission>
+      <cl:dataset std:sid="d-set-018ac910" id="LangList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-766b6208" datatype="string" name="Locale"/>
+          <cl:datacolumn std:sid="d-column-6212f552" name="Key"/>
+          <cl:datacolumn std:sid="d-column-6343b005" name="Value"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+    </cl:model>
+    <cl:appspec dev-comment="keyCode">
+      <cl:property bindable="true" default="CustomerID 를 입력 해주세요." name="siteCodePlaceholder" translatable="false" type="string"/>
+      <cl:property bindable="true" default="ID를 입력 해주세요." name="idPlaceholder" type="string"/>
+      <cl:property bindable="true" default="PW를 입력 해주세요" name="passwordPlaceholder" type="string"/>
+      <cl:property bindable="true" default="로그인" name="loginButtonText" type="string"/>
+      <cl:property bindable="true" default="서비스 사용을 위해 아이디와 비밀번호를 입력 해주세요." name="loginMessage" type="string"/>
+      <cl:property bindable="true" name="siteCodeValue" type="string"/>
+      <cl:property bindable="true" name="idValue" type="string"/>
+      <cl:property bindable="true" name="passwordValue" type="string"/>
+      <cl:event name="login" type="cpr.events.CUIEvent"/>
+      <cl:event name="loginSuccess" type="cpr.events.CUIEvent"/>
+      <cl:event name="loginFail" type="cpr.events.CUIEvent"/>
+      <cl:event name="networkError" type="cpr.events.CUIEvent"/>
+      <cl:event name="ValidationError" type="cpr.events.CUIEvent"/>
+      <cl:event name="formFocus" type="cpr.events.CUIEvent"/>
+    </cl:appspec>
+  </head>
+  <body std:sid="body-f5d4b088" style="top:0px; left:0px; width:300px; height:256px;">
+    <cl:group std:sid="group-0bd66810">
+      <cl:responsivexylayoutdata std:sid="rxyl-data-d9dc2003">
+        <cl:xylayoutdata std:sid="sxyl-data-aa18adab" height="256px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="TOP" screenid="default"/>
+        <cl:xylayoutdata std:sid="sxyl-data-5265af4b" height="256px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="TOP" screenid="mobile"/>
+        <cl:xylayoutdata std:sid="sxyl-data-8f4bb152" height="256px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="TOP" screenid="ip5/SE"/>
+      </cl:responsivexylayoutdata>
+      <cl:group std:sid="group-0d1be719" id="loginInputs" style="border-radius:20px; background-color:#FFFFFF; box-shadow:1px 1px 1px 0px rgba(0,0,0,0.75);">
+        <cl:responsivexylayoutdata std:sid="rxyl-data-0c4e9c9d">
+          <cl:xylayoutdata std:sid="sxyl-data-16750581" height="220px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="TOP" screenid="default"/>
+          <cl:xylayoutdata std:sid="sxyl-data-18da1297" height="220px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="TOP" screenid="mobile"/>
+          <cl:xylayoutdata std:sid="sxyl-data-9a49cb0a" height="220px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="TOP" screenid="ip5/SE"/>
+        </cl:responsivexylayoutdata>
+        <cl:inputbox std:sid="i-box-e1593e63" id="ipbSiteCode" style="background-repeat:no-repeat; border-top-width:0px; color:#848484; border-right-width:0px; border-bottom-width:0px; font-size:13px; background-image:none; border-left-width:0px;">
+          <cl:listener std:sid="listener-654ee53c" handler="onIpbSiteCodeFocus" name="focus"/>
+          <cl:listener std:sid="listener-7fa0ca13" handler="onIpbSiteCodeKeydown" name="keydown"/>
+          <cl:apppropbind property="value" app-property="siteCodeValue"/>
+          <cl:langbind category="PROPERTY" property="placeholder" keypath="Str_Common_Login_siteCodePlaceholder"/>
+          <cl:xylayoutdata std:sid="xyl-data-a2457572" height="39px" horizontalAnchor="BOTH" left="20px" right="20px" top="20px" verticalAnchor="TOP"/>
+        </cl:inputbox>
+        <cl:img std:sid="image-a9ee84d4" src="/theme/images/mobile/common_divider_gray_1x1.png">
+          <cl:xylayoutdata std:sid="xyl-data-215fa761" height="1px" horizontalAnchor="BOTH" left="20px" right="20px" top="59px" verticalAnchor="TOP"/>
+        </cl:img>
+        <cl:inputbox std:sid="i-box-a5b57cc8" id="ipbId" style="border-top-width:0px; color:#848484; border-right-width:0px; border-bottom-width:0px; font-size:13px; background-image:none; border-left-width:0px;" maxlength="30">
+          <cl:listener std:sid="listener-fb06652b" handler="onIpbIdFocus" name="focus"/>
+          <cl:listener std:sid="listener-c3d2ece3" handler="onIpbIdKeydown" name="keydown"/>
+          <cl:apppropbind property="value" app-property="idValue"/>
+          <cl:langbind category="PROPERTY" property="placeholder" keypath="Str_Common_Login_idPlaceholder"/>
+          <cl:xylayoutdata std:sid="xyl-data-70eb6700" height="39px" horizontalAnchor="BOTH" left="20px" right="20px" top="60px" verticalAnchor="TOP"/>
+        </cl:inputbox>
+        <cl:img std:sid="image-337f0977" src="/theme/images/mobile/common_divider_gray_1x1.png">
+          <cl:xylayoutdata std:sid="xyl-data-2a5ad492" height="39px" horizontalAnchor="BOTH" left="20px" right="20px" top="99px" verticalAnchor="TOP"/>
+        </cl:img>
+        <cl:inputbox std:sid="i-box-407fedd0" id="ipbPassword" style="border-top-width:0px; color:#848484; border-right-width:0px; border-bottom-width:0px; font-size:13px; background-image:none; border-left-width:0px;" maxlength="30" secret="true">
+          <cl:listener std:sid="listener-1be85d6a" handler="onIpbPasswordFocus" name="focus"/>
+          <cl:listener std:sid="listener-e87f16b1" handler="onIpbPasswordKeydown" name="keydown"/>
+          <cl:apppropbind property="value" app-property="passwordValue"/>
+          <cl:langbind category="PROPERTY" property="placeholder" keypath="Str_Common_Login_PasswordPlaceholder"/>
+          <cl:xylayoutdata std:sid="xyl-data-08aa6bc2" height="39px" horizontalAnchor="BOTH" left="20px" right="20px" top="100px" verticalAnchor="TOP"/>
+        </cl:inputbox>
+        <cl:img std:sid="image-d6067d55" src="/theme/images/mobile/common_divider_gray_1x1.png">
+          <cl:xylayoutdata std:sid="xyl-data-025fd5f0" height="1px" horizontalAnchor="BOTH" left="20px" right="20px" top="139px" verticalAnchor="TOP"/>
+        </cl:img>
+        <cl:button std:sid="button-2224718d" id="loginBtn" style="border-right-style:none; background-size:200%; color:#FFFFFF; font-weight:normal; font-size:14px; background-position:center; font-style:normal; border-top-style:none; border-radius:24px; background-repeat:no-repeat; text-shadow:none; border-left-style:none; font-family:@NanumSquareRound Regular; border-bottom-style:none; background-image:url('/theme/images/mobile/common_btn_bg_big_green.9.png');">
+          <cl:listener std:sid="listener-3c4ad9a3" handler="onButtonClick" name="click"/>
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_SignIn"/>
+          <cl:xylayoutdata std:sid="xyl-data-78d0fb06" bottom="20px" height="40px" horizontalAnchor="BOTH" left="50px" right="50px" verticalAnchor="BOTTOM"/>
+          <cl:iconstyle style="background-size:0; width:0px; height:0px;"/>
+        </cl:button>
+        <cl:img std:sid="image-3bdcd0fd" style="background-repeat:no-repeat; background-size:contain; background-image:none; background-position:center;" src="/theme/images/mobile/common_textfield_icon_hide.png">
+          <cl:listener std:sid="listener-d1a21ff3" handler="onImageClick" name="click"/>
+          <cl:xylayoutdata std:sid="xyl-data-65fbb1ef" height="23px" horizontalAnchor="RIGHT" right="20px" top="108px" verticalAnchor="TOP" width="23px"/>
+        </cl:img>
+        <cl:xylayout std:sid="xylayout-fabe92d9"/>
+      </cl:group>
+      <cl:group std:sid="group-18e2d817" id="loginBreak">
+        <cl:responsivexylayoutdata std:sid="rxyl-data-c0b464bf">
+          <cl:xylayoutdata std:sid="sxyl-data-6e4d6a1c" height="16px" horizontalAnchor="BOTH" left="0px" right="0px" top="220px" verticalAnchor="TOP" screenid="default"/>
+          <cl:xylayoutdata std:sid="sxyl-data-5ce49c17" height="16px" horizontalAnchor="BOTH" left="0px" right="0px" top="220px" verticalAnchor="TOP" screenid="mobile"/>
+          <cl:xylayoutdata std:sid="sxyl-data-631515f9" height="16px" horizontalAnchor="BOTH" left="0px" right="0px" top="220px" verticalAnchor="TOP" screenid="ip5/SE"/>
+        </cl:responsivexylayoutdata>
+        <cl:responsivexylayout std:sid="r-xylayout-d8c986c5"/>
+      </cl:group>
+      <cl:group std:sid="group-d85b7aee" style="text-align:center;">
+        <cl:responsivexylayoutdata std:sid="rxyl-data-faeb288b">
+          <cl:xylayoutdata std:sid="sxyl-data-4a0bb10e" bottom="0px" height="20px" horizontalAnchor="BOTH" left="0px" right="0px" verticalAnchor="BOTTOM" screenid="default"/>
+          <cl:xylayoutdata std:sid="sxyl-data-cc1fcb2e" bottom="0px" height="20px" horizontalAnchor="BOTH" left="0px" right="0px" verticalAnchor="BOTTOM" screenid="mobile"/>
+          <cl:xylayoutdata std:sid="sxyl-data-367429cc" bottom="0px" height="20px" horizontalAnchor="BOTH" left="0px" right="0px" verticalAnchor="BOTTOM" screenid="ip5/SE"/>
+        </cl:responsivexylayoutdata>
+        <cl:output std:sid="output-996b9bdf" id="loginMessage" style="color:#80E0A7; font-size:12px; text-align:center;">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_Common_Login_Message"/>
+          <cl:responsivexylayoutdata std:sid="rxyl-data-f7c15dd5">
+            <cl:xylayoutdata std:sid="sxyl-data-178839aa" bottom="0px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="BOTH" screenid="default"/>
+            <cl:xylayoutdata std:sid="sxyl-data-0b970e2e" bottom="0px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="BOTH" screenid="mobile"/>
+            <cl:xylayoutdata std:sid="sxyl-data-74300657" bottom="0px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="BOTH" screenid="ip5/SE"/>
+          </cl:responsivexylayoutdata>
+        </cl:output>
+        <cl:responsivexylayout std:sid="r-xylayout-57f8cbaf"/>
+      </cl:group>
+      <cl:responsivexylayout std:sid="r-xylayout-3d612620"/>
+    </cl:group>
+    <cl:responsivexylayout std:sid="r-xylayout-8ed0c1a4"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler>
+      <std:guide position="399"/>
+    </std:hruler>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

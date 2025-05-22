@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-eb5cdbb9" version="1.0.0.0">
+  <head std:sid="head-50e3f9e0">
+    <title>masterShift</title>
+    <screen std:sid="screen-3df7a2c7" id="default" name="default" minwidth="1024px" width="1024px" height="768px"/>
+    <screen std:sid="screen-931371a9" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-01b97b46" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-2fe3cdfe">
+      <cl:dataset std:sid="d-set-865aceb5" id="UserList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-b522f0fa" name="ID" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-d13a0b69" name="UniqueID"/>
+          <cl:datacolumn std:sid="d-column-8d37f938" name="Name"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-ff62e14c" id="MasterUserList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-6fb66ee3" name="ID" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-9d0ab5cc" name="UniqueID"/>
+          <cl:datacolumn std:sid="d-column-22e1d327" name="Name"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-6e0b38da" id="NormalUserList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-7060c7ea" name="ID" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-8cb53e2a" name="UniqueID"/>
+          <cl:datacolumn std:sid="d-column-087ef271" name="Name"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-501642d9" id="MasterShiftList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-2c380882" name="Code" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-880757ba" name="Name"/>
+          <cl:datacolumn std:sid="d-column-3579b44f" name="StartTime"/>
+          <cl:datacolumn std:sid="d-column-957a8c71" name="EndTime"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-61c73b6e" id="terminals">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-60cf1320" name="TerminalID" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-eb4d3142" id="SelectMasterShiftList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-0d407d32" name="Code" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-4316a475" name="Name"/>
+          <cl:datacolumn std:sid="d-column-842af9d1" name="StartTime"/>
+          <cl:datacolumn std:sid="d-column-58a2b9dd" name="EndTime"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-a33aca7f" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-dd2acc29" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-3f62bc52" id="MasterShiftTotal">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-abf653d6" name="Count" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-c17c18b6" id="UsersTotal">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-ae73d550" name="Count" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-dd26b39a" id="MasterShiftInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-2fc1b301" name="Code" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-a3af65fb" name="Name"/>
+          <cl:datacolumn std:sid="d-column-bc0be0da" name="StartTime"/>
+          <cl:datacolumn std:sid="d-column-313f96fa" name="EndTime"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-e906cac5" id="sms_getMasterShiftList" method="get" action="/v1/bnpcnp/mastershift">
+        <cl:listener std:sid="listener-f5c3bb52" name="submit-done" handler="onSms_getMasterShiftListSubmitDone"/>
+        <cl:listener std:sid="listener-d556fac5" name="submit-error" handler="onSms_getMasterShiftListSubmitError"/>
+        <cl:listener std:sid="listener-143e9244" name="submit-timeout" handler="onSms_getMasterShiftListSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="MasterShiftTotal"/>
+        <cl:responsedata dataid="MasterShiftList"/>
+        <cl:responsedata dataid="UsersTotal"/>
+        <cl:responsedata dataid="UserList"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-8280c4c4" id="sms_putMasterShiftDownloadToTerminal" method="put" action="/v1/bnpcnp/mastershift/download">
+        <cl:requestdata dataid="terminals"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-0aa0b193" id="sms_postMasterShiftInfo" action="/v1/bnpcnp/mastershift">
+        <cl:listener std:sid="listener-15c9d243" name="submit-done" handler="onSms_postMasterShiftInfoSubmitDone"/>
+        <cl:requestdata dataid="MasterShiftInfo"/>
+        <cl:requestdata dataid="MasterUserList" payload="all"/>
+        <cl:requestdata dataid="NormalUserList" payload="all"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-c6a3882d" id="sms_getMasterShiftInfo" method="get">
+        <cl:listener std:sid="listener-3ce598b6" name="submit-done" handler="onSms_getMasterShiftInfoSubmitDone"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="MasterShiftInfo"/>
+        <cl:responsedata dataid="MasterUserList"/>
+        <cl:responsedata dataid="NormalUserList"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-8198e020" id="sms_deleteMasterShiftInfo" method="delete">
+        <cl:listener std:sid="listener-51a6a43d" name="submit-done" handler="onSms_deleteMasterShiftInfoSubmitDone"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-b7cbe449" id="sms_putSelectMasterShiftDownloadToTerminal" method="put" action="/v1/bnpcnp/mastershift/downloadToTerminal">
+        <cl:requestdata dataid="SelectMasterShiftList" payload="all"/>
+        <cl:requestdata dataid="terminals" payload="all"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-7d5b107c" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-8863531a" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-2af55cdd" style="padding-top:10px; padding-left:10px; padding-bottom:10px; padding-right:10px;">
+      <cl:xylayoutdata std:sid="xyl-data-51227396" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-ee58d2d8">
+        <cl:formdata std:sid="f-data-ab0ff550" row="0" col="0"/>
+        <cl:button std:sid="button-ad71ef45" id="WDINS_btnSendtoTerminal" class="userInfo_btn">
+          <cl:listener std:sid="listener-e925c4d7" name="click" handler="onWDINS_btnSendtoTerminalClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_DownloadToTerminal"/>
+          <cl:formdata std:sid="f-data-ff21b1a8" row="0" col="0" rowspan="1" colspan="2"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-0f751597" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-009f54b0" id="MSHIFT_grpMSInfo">
+        <cl:formdata std:sid="f-data-e1480717" row="0" col="1"/>
+        <cl:output std:sid="output-5d700f0b" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:2px; font-weight:700.0; border-left-color:#c5c5c5; font-size:14px; border-right-color:#c5c5c5; border-left-width:1px; border-top-style:solid; background-color:#f0f0f0; border-left-style:solid; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; text-align:center;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Code"/>
+          <cl:formdata std:sid="f-data-72cd5db0" row="0" col="1"/>
+        </cl:output>
+        <cl:inputbox std:sid="i-box-659271c8" id="MSHIFT_lpbCode" style="text-align:center;" maxlength="4">
+          <cl:datamapbind property="value" datacontrolid="MasterShiftInfo" columnname="Code"/>
+          <cl:formdata std:sid="f-data-3c749153" row="0" col="2"/>
+        </cl:inputbox>
+        <cl:output std:sid="output-498a8e92" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:2px; font-weight:700.0; border-left-color:#c5c5c5; font-size:14px; border-right-color:#c5c5c5; border-left-width:1px; border-top-style:solid; background-color:#f0f0f0; border-left-style:solid; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; text-align:center;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Name"/>
+          <cl:formdata std:sid="f-data-c04668f9" row="0" col="3"/>
+        </cl:output>
+        <cl:inputbox std:sid="i-box-728240f0" id="MSHIFT_lpbName" style="text-align:center;" maxlength="20">
+          <cl:datamapbind property="value" datacontrolid="MasterShiftInfo" columnname="Name"/>
+          <cl:formdata std:sid="f-data-6a9fc3ee" row="0" col="4"/>
+        </cl:inputbox>
+        <cl:button std:sid="button-8d64dca0" id="btnTmSave" class="userInfo_btn">
+          <cl:listener std:sid="listener-0205fbac" name="click" handler="onBtnTmSaveClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Save"/>
+          <cl:formdata std:sid="f-data-d5ae9787" row="0" col="6"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-9bcab2f7" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+          <cl:columns length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="120" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-f13e98d1">
+        <cl:formdata std:sid="f-data-f7eaad41" row="1" col="1"/>
+        <cl:group std:sid="group-ed9860f0" id="MSHIFT_grpMSInfoTime">
+          <cl:formdata std:sid="f-data-db7ba1d4" row="0" col="0"/>
+          <cl:output std:sid="output-63917624" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:2px; font-weight:700.0; border-left-color:#c5c5c5; font-size:14px; border-right-color:#c5c5c5; border-left-width:1px; border-top-style:solid; background-color:#f0f0f0; border-left-style:solid; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; text-align:center;">
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_TimeFrame"/>
+            <cl:formdata std:sid="f-data-37c8e34c" row="0" col="1"/>
+          </cl:output>
+          <cl:dateinput std:sid="d-input-34eb422d" id="MSSCM_dtiStartTime" style="text-align:center;" hidebutton="true" mask="HH:mm" format="HH:mm" autoselect="false">
+            <cl:datamapbind property="value" datacontrolid="MasterShiftInfo" columnname="StartTime"/>
+            <cl:formdata std:sid="f-data-5b3abd31" row="0" col="2"/>
+          </cl:dateinput>
+          <cl:dateinput std:sid="d-input-1924a18d" id="dti1" style="text-align:center;" hidebutton="true" mask="HH:mm" format="HH:mm" autoselect="false">
+            <cl:datamapbind property="value" datacontrolid="MasterShiftInfo" columnname="EndTime"/>
+            <cl:formdata std:sid="f-data-d7982813" row="0" col="4"/>
+          </cl:dateinput>
+          <cl:formlayout std:sid="f-layout-977a8045" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+            <cl:rows length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+            <cl:columns length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="120" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="1" unit="FRACTION"/>
+            <cl:columns length="100" unit="PIXEL"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:group std:sid="group-380abaf4">
+          <cl:formdata std:sid="f-data-77d86f6d" row="1" col="0"/>
+          <cl:group std:sid="group-7e1e0bd2">
+            <cl:formdata std:sid="f-data-cab1130a" row="0" col="0"/>
+            <cl:output std:sid="output-9692f15e" style="text-align:center;" class="common-titlelabel" value="Master">
+              <cl:formdata std:sid="f-data-d3f3510a" row="0" col="0"/>
+            </cl:output>
+            <cl:output std:sid="output-fa9f352c" style="text-align:center;" class="common-titlelabel" value="User">
+              <cl:formdata std:sid="f-data-c6d4c754" row="2" col="0"/>
+            </cl:output>
+            <cl:group std:sid="group-724cb278">
+              <cl:formdata std:sid="f-data-836a976e" row="1" col="1"/>
+              <cl:button std:sid="button-f265bbe0" id="MSHIFT_btnMasterAdd" style="background-color:transparent; background-repeat:no-repeat; background-image:url('../../../theme/images/arrow_icon/rewind.png'); background-position:center;">
+                <cl:listener std:sid="listener-a1880183" name="click" handler="onMSHIFT_btnMasterAddClick"/>
+                <cl:xylayoutdata std:sid="xyl-data-a849c50f" top="61px" bottom="107px" width="26px" horizontalAnchor="CENTER" verticalAnchor="BOTH"/>
+              </cl:button>
+              <cl:button std:sid="button-47a22727" id="MSHIFT_btnMasterRemove" style="background-color:transparent; background-repeat:no-repeat; background-size:auto; background-image:url('../../../theme/images/arrow_icon/foward.png'); background-position:center;">
+                <cl:listener std:sid="listener-095ccea9" name="click" handler="onMSHIFT_btnMasterRemoveClick"/>
+                <cl:xylayoutdata std:sid="xyl-data-fd99e3d0" top="94px" bottom="74px" width="26px" horizontalAnchor="CENTER" verticalAnchor="BOTH"/>
+              </cl:button>
+              <cl:xylayout std:sid="xylayout-51b79fad"/>
+            </cl:group>
+            <cl:group std:sid="group-5885f1bc">
+              <cl:formdata std:sid="f-data-9045d944" row="3" col="1"/>
+              <cl:button std:sid="button-e8124e59" id="MSHIFT_btnUserRemove" style="background-color:transparent; background-repeat:no-repeat; background-size:auto; background-image:url('../../../theme/images/arrow_icon/foward.png'); background-position:center;">
+                <cl:listener std:sid="listener-a68bd616" name="click" handler="onMSHIFT_btnUserRemoveClick"/>
+                <cl:xylayoutdata std:sid="xyl-data-59cdb6f7" top="184px" bottom="194px" width="26px" horizontalAnchor="CENTER" verticalAnchor="BOTH"/>
+              </cl:button>
+              <cl:button std:sid="button-bc7738b2" id="MSHIFT_btnUserAdd" style="background-color:transparent; background-repeat:no-repeat; background-image:url('../../../theme/images/arrow_icon/rewind.png'); background-position:center;">
+                <cl:listener std:sid="listener-4b9bccd8" name="click" handler="onMSHIFT_btnUserAddClick"/>
+                <cl:xylayoutdata std:sid="xyl-data-a05bf065" top="151px" bottom="227px" width="26px" horizontalAnchor="CENTER" verticalAnchor="BOTH"/>
+              </cl:button>
+              <cl:xylayout std:sid="xylayout-d637240c"/>
+            </cl:group>
+            <cl:group std:sid="group-366935e2">
+              <cl:formdata std:sid="f-data-be749cb7" row="1" col="0"/>
+              <cl:grid std:sid="grid-bf738668" id="MSHIFT_UserListMaster" readonly="true" datasetid="MasterUserList" resizablecolumns="all">
+                <cl:formdata std:sid="f-data-71ac5502" row="0" col="0" rowspan="1" colspan="1"/>
+                <cl:gridcolumn std:sid="g-column-0cd637cf" width="25px"/>
+                <cl:gridcolumn std:sid="g-column-9ccd28ab"/>
+                <cl:gridcolumn std:sid="g-column-b1103a9d"/>
+                <cl:gridheader std:sid="gh-band-efe26d34">
+                  <cl:gridrow std:sid="g-row-e77192e1"/>
+                  <cl:gridcell std:sid="gh-cell-0ea78a42" rowindex="0" colindex="0" sortable="false" filterable="false" columntype="checkbox"/>
+                  <cl:gridcell std:sid="gh-cell-38b8a2a7" rowindex="0" colindex="1" targetcolumnname="ID" sortable="false" filterable="false" text="ID">
+                    <cl:langbind property="text" category="PROPERTY" keypath="Str_UserID"/>
+                  </cl:gridcell>
+                  <cl:gridcell std:sid="gh-cell-36018cc7" rowindex="0" colindex="2" targetcolumnname="Name" sortable="false" filterable="false" text="Name">
+                    <cl:langbind property="text" category="PROPERTY" keypath="Str_UserName"/>
+                  </cl:gridcell>
+                </cl:gridheader>
+                <cl:griddetail std:sid="gd-band-5b76aaa8">
+                  <cl:gridrow std:sid="g-row-2e601d6f"/>
+                  <cl:gridcell std:sid="gd-cell-afa99163" rowindex="0" colindex="0" columntype="checkbox"/>
+                  <cl:gridcell std:sid="gd-cell-9b5101ab" rowindex="0" colindex="1" columnname="ID"/>
+                  <cl:gridcell std:sid="gd-cell-f5b5893f" rowindex="0" colindex="2" columnname="Name"/>
+                </cl:griddetail>
+              </cl:grid>
+              <cl:formlayout std:sid="f-layout-e9332962" hspace="4px" vspace="1px">
+                <cl:rows length="1" unit="FRACTION"/>
+                <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              </cl:formlayout>
+            </cl:group>
+            <cl:group std:sid="group-4e4ba5fe">
+              <cl:formdata std:sid="f-data-b8dda9bb" row="3" col="0" rowspan="1" colspan="1"/>
+              <cl:group std:sid="group-037cdda7">
+                <cl:formdata std:sid="f-data-d65faca8" row="0" col="0"/>
+                <cl:grid std:sid="grid-3a9e8e30" id="MSHIFT_UserListUser" readonly="true" datasetid="NormalUserList" resizablecolumns="all">
+                  <cl:formdata std:sid="f-data-e177abe7" row="0" col="0" rowspan="1" colspan="1"/>
+                  <cl:gridcolumn std:sid="g-column-6d7b7f99" width="25px"/>
+                  <cl:gridcolumn std:sid="g-column-1dbda0ae"/>
+                  <cl:gridcolumn std:sid="g-column-4e589506"/>
+                  <cl:gridheader std:sid="gh-band-9b6e8086">
+                    <cl:gridrow std:sid="g-row-9ab77fa7"/>
+                    <cl:gridcell std:sid="gh-cell-75a3cfc6" rowindex="0" colindex="0" sortable="false" filterable="false" columntype="checkbox"/>
+                    <cl:gridcell std:sid="gh-cell-af728f8f" rowindex="0" colindex="1" targetcolumnname="ID" sortable="false" filterable="false" text="ID">
+                      <cl:langbind property="text" category="PROPERTY" keypath="Str_UserID"/>
+                    </cl:gridcell>
+                    <cl:gridcell std:sid="gh-cell-9c772080" rowindex="0" colindex="2" targetcolumnname="Name" sortable="false" filterable="false" text="Name">
+                      <cl:langbind property="text" category="PROPERTY" keypath="Str_UserName"/>
+                    </cl:gridcell>
+                  </cl:gridheader>
+                  <cl:griddetail std:sid="gd-band-4e796fdf">
+                    <cl:gridrow std:sid="g-row-eb428976"/>
+                    <cl:gridcell std:sid="gd-cell-52a06170" rowindex="0" colindex="0" columntype="checkbox"/>
+                    <cl:gridcell std:sid="gd-cell-4cd2df72" rowindex="0" colindex="1" columnname="ID"/>
+                    <cl:gridcell std:sid="gd-cell-ced59220" rowindex="0" colindex="2" columnname="Name"/>
+                  </cl:griddetail>
+                </cl:grid>
+                <cl:formlayout std:sid="f-layout-c4bac5b5" hspace="4px" vspace="1px">
+                  <cl:rows length="1" unit="FRACTION"/>
+                  <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                </cl:formlayout>
+              </cl:group>
+              <cl:formlayout std:sid="f-layout-42fe1b1d" hspace="5px" vspace="5px">
+                <cl:rows length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+                <cl:columns length="1" unit="FRACTION"/>
+              </cl:formlayout>
+            </cl:group>
+            <cl:formlayout std:sid="f-layout-b9c217ed" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+              <cl:rows length="25" unit="PIXEL"/>
+              <cl:rows length="200" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:rows length="25" unit="PIXEL"/>
+              <cl:rows length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+              <cl:columns length="1" unit="FRACTION"/>
+              <cl:columns length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:group std:sid="group-ab4c70c3">
+            <cl:formdata std:sid="f-data-c61e4c92" row="0" col="1"/>
+            <cl:output std:sid="output-f772690b" style="font-size:14px;" class="common-titlelabel">
+              <cl:langbind property="value" category="PROPERTY" keypath="Str_RegistrationAvailableUsersList"/>
+              <cl:formdata std:sid="f-data-5b6b86df" row="0" col="0"/>
+            </cl:output>
+            <cl:group std:sid="group-54d05ca9" style="border-right-style:solid; border-top-width:1px; border-bottom-color:#cccccc; border-right-width:1px; border-left-color:#cccccc; border-right-color:#cccccc; border-left-width:1px; border-top-style:solid; background-color:#f6f6f6; border-radius:10px; border-left-style:solid; border-bottom-width:1px; border-top-color:#cccccc; border-bottom-style:solid;">
+              <cl:formdata std:sid="f-data-b9e1460c" row="1" col="0"/>
+              <cl:inputbox std:sid="i-box-7eb823c6" id="MSHIFT_ipbUserKeyword" style="background-color:#F6F6F6; border-right-style:solid; border-left-style:solid; border-right-width:1px; border-left-color:#cccccc; border-bottom-style:none; border-right-color:#cccccc; border-left-width:1px; border-top-style:none;">
+                <cl:langbind property="placeholder" category="PROPERTY" keypath="Str_SearchKeword"/>
+                <cl:formdata std:sid="f-data-25ec7441" row="0" col="1"/>
+              </cl:inputbox>
+              <cl:group std:sid="group-3ea2d891" id="MSHIFT_btnUserSearch" style="border-right-style:none; cursor:pointer; border-left-style:none; border-bottom-style:none; border-top-style:none;">
+                <cl:listener std:sid="listener-7cfb2a02" name="click" handler="onMSHIFT_btnUserSearchClick"/>
+                <cl:formdata std:sid="f-data-94dec0fe" row="0" col="2"/>
+                <cl:img std:sid="image-5ffd2e0e" src="/theme/images/common/common_text_field_btn_icons_search.png">
+                  <cl:xylayoutdata std:sid="xyl-data-1efc1fcd" top="1px" bottom="1px" width="26px" horizontalAnchor="CENTER" verticalAnchor="BOTH"/>
+                </cl:img>
+                <cl:xylayout std:sid="xylayout-55839f1e"/>
+              </cl:group>
+              <cl:combobox std:sid="c-box-0001cf20" id="MSHIFT_cmbUserCategory" style="background-color:#F6F6F6; border-right-style:none; border-left-style:none; border-bottom-style:none; border-top-style:none; text-align:center;" value="Name" preventinput="true">
+                <cl:formdata std:sid="f-data-710a9b13" row="0" col="0"/>
+                <cl:item std:sid="item-de373610" label="-----" value="0"/>
+                <cl:item std:sid="item-0c86d955" label="label1" value="id">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_UserID"/>
+                </cl:item>
+                <cl:item std:sid="item-388c2a78" label="label2" value="name">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_UserName"/>
+                </cl:item>
+              </cl:combobox>
+              <cl:formlayout std:sid="f-layout-95ff8fe1" hspace="0px" vspace="0px">
+                <cl:rows length="1" unit="FRACTION"/>
+                <cl:columns length="1" unit="FRACTION"/>
+                <cl:columns length="3" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+                <cl:columns length="1" unit="FRACTION"/>
+              </cl:formlayout>
+            </cl:group>
+            <cl:udc std:sid="ud-control-93e7f103" id="UDC_grdUserList" type="udc.grid.userList">
+              <cl:datarowcontext datacontrolid="UserList" rowindex="0"/>
+              <cl:formdata std:sid="f-data-c3ee4bf2" row="2" col="0"/>
+            </cl:udc>
+            <cl:formlayout std:sid="f-layout-6e7b7689" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+              <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:rows length="1" unit="FRACTION"/>
+              <cl:columns length="1" unit="FRACTION"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:formlayout std:sid="f-layout-f13d25a2" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-db942078" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="33" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-b447b5ee">
+        <cl:formdata std:sid="f-data-6c875daa" row="1" col="0"/>
+        <cl:grid std:sid="grid-69c422b5" id="MasterShiftGrd" readonly="true" datasetid="MasterShiftList" resizablecolumns="all" columnMovable="false">
+          <cl:listener std:sid="listener-5a297aaa" name="selection-change" handler="onMasterShiftGrdSelectionChange"/>
+          <cl:listener std:sid="listener-a1475bda" name="row-check" handler="onMasterShiftGrdRowCheck"/>
+          <cl:formdata std:sid="f-data-e3109376" row="1" col="0" rowspan="1" colspan="2"/>
+          <cl:gridcolumn std:sid="g-column-eeff1122" width="25px"/>
+          <cl:gridcolumn std:sid="g-column-03402caa"/>
+          <cl:gridcolumn std:sid="g-column-8cf7a54d"/>
+          <cl:gridcolumn std:sid="g-column-426fbc6c"/>
+          <cl:gridcolumn std:sid="g-column-5bb70301"/>
+          <cl:gridheader std:sid="gh-band-45d7ec72">
+            <cl:gridrow std:sid="g-row-f431bf58"/>
+            <cl:gridcell std:sid="gh-cell-7897f64c" rowindex="0" colindex="1" targetcolumnname="Code" sortable="false" filterable="false" text="Code"/>
+            <cl:gridcell std:sid="gh-cell-8b07d1f7" rowindex="0" colindex="2" targetcolumnname="Name" sortable="false" filterable="false" text="Name"/>
+            <cl:gridcell std:sid="gh-cell-69d98145" rowindex="0" colindex="0"/>
+            <cl:gridcell rowindex="0" colindex="3" targetcolumnname="StartTime" text="StartTime" visible="false"/>
+            <cl:gridcell rowindex="0" colindex="4" targetcolumnname="EndTime" text="EndTime" visible="false"/>
+          </cl:gridheader>
+          <cl:griddetail std:sid="gd-band-247cba33">
+            <cl:gridrow std:sid="g-row-f7ed61a8"/>
+            <cl:gridcell std:sid="gd-cell-72038a71" rowindex="0" colindex="1" columnname="Code"/>
+            <cl:gridcell std:sid="gd-cell-62f419ac" rowindex="0" colindex="2" columnname="Name"/>
+            <cl:gridcell std:sid="gd-cell-a00e16c6" rowindex="0" colindex="0" columntype="checkbox"/>
+            <cl:gridcell rowindex="0" colindex="3" columnname="StartTime"/>
+            <cl:gridcell rowindex="0" colindex="4" columnname="EndTime"/>
+          </cl:griddetail>
+        </cl:grid>
+        <cl:button std:sid="button-48d78642" id="btnRowAdd" class="userInfo_btn">
+          <cl:listener std:sid="listener-36bc13a1" name="click" handler="onBtnRowAddClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Add"/>
+          <cl:formdata std:sid="f-data-88972b13" row="0" col="0"/>
+        </cl:button>
+        <cl:button std:sid="button-e9a2a02f" id="btnRowDel" class="userInfo_btn">
+          <cl:listener std:sid="listener-d82de852" name="click" handler="onBtnRowDelClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Delete"/>
+          <cl:formdata std:sid="f-data-99fb8725" row="0" col="1"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-761423dc" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-1f722346" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="250" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-168953f4"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-f419e4b2" version="1.0.0.0">
+  <head std:sid="head-9192669d">
+    <title>terminalMCPPageNetwork</title>
+    <screen std:sid="screen-c4d0c160" id="default" height="768px" minwidth="1024px" name="default" width="1024px"/>
+    <screen std:sid="screen-48acb826" id="tablet" height="667px" maxwidth="1023px" minwidth="500px" name="tablet" width="500px"/>
+    <screen std:sid="screen-81f796e6" id="mobile" height="525px" maxwidth="499px" name="mobile" width="350px"/>
+    <cl:model std:sid="model-eb85f49a">
+      <cl:datamap std:sid="d-map-a26f438a" id="dmAcuNetworkOption">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-f9e4fbfe" datatype="number" name="NetType"/>
+          <cl:datacolumn std:sid="d-column-08b4b59f" name="IP"/>
+          <cl:datacolumn std:sid="d-column-7d84d879" name="Gateway"/>
+          <cl:datacolumn std:sid="d-column-8912538f" name="Subnet"/>
+          <cl:datacolumn std:sid="d-column-6b95c5d7" name="ServerIP"/>
+          <cl:datacolumn std:sid="d-column-7d751c88" datatype="number" name="ServerPort"/>
+          <cl:datacolumn std:sid="d-column-5b7ab9e7" name="DHCP_IP"/>
+          <cl:datacolumn std:sid="d-column-1115adf7" name="DHCP_Gateway"/>
+          <cl:datacolumn std:sid="d-column-75b51dbf" name="DHCP_Subnet"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-f6c406cc" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-54fae956" datatype="number" name="ResultCode"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-290dc74c" id="smsGetAcuNetworkOption" method="get" mediatype="application/x-www-form-urlencoded">
+        <cl:listener std:sid="listener-aea71e4f" handler="onSmsGetAcuNetworkOptionSubmitDone" name="submit-done"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="dmAcuNetworkOption"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-a5fb376f" id="smsPutAcuNetworkOption" method="put" mediatype="application/x-www-form-urlencoded">
+        <cl:listener std:sid="listener-8029d6b8" handler="onSmsPutAcuNetworkOptionSubmitDone" name="submit-done"/>
+        <cl:requestdata dataid="dmAcuNetworkOption"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-0b0bc121" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-bd8f200b" handler="onBodyLoad" name="load"/>
+    <cl:group std:sid="group-22d4bd2c" id="networkgrd" style="padding:10px; border-radius:2px;">
+      <cl:xylayoutdata std:sid="xyl-data-6b997d35" height="331px" horizontalAnchor="LEFT" left="10px" top="10px" verticalAnchor="TOP" width="700px"/>
+      <cl:group std:sid="group-7aeb7ba9">
+        <cl:formdata std:sid="f-data-8c2f4e54" col="0" row="0"/>
+        <cl:output std:sid="output-5eea1625" style="font-weight:bold; font-size:14px;">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_Network"/>
+          <cl:formdata std:sid="f-data-e9b80c8c" halign="LEFT" width="394" col="0" colspan="2" row="0" rowspan="1"/>
+        </cl:output>
+        <cl:output std:sid="output-dda12a73" style="border-right-style:solid; background-color:#f6f6f6; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-top-color:#c5c5c5; border-bottom-style:solid; border-right-color:#c5c5c5; border-top-style:solid; text-align:center;">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_IPAddress"/>
+          <cl:formdata std:sid="f-data-9d857e46" col="0" row="1"/>
+        </cl:output>
+        <cl:output std:sid="output-ca79c1c5" style="border-right-style:solid; background-color:#f6f6f6; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_TerminalIP"/>
+          <cl:formdata std:sid="f-data-d187aef3" col="0" row="2"/>
+        </cl:output>
+        <cl:output std:sid="output-9cac4c4d" style="border-right-style:solid; background-color:#f6f6f6; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_SubnetMask"/>
+          <cl:formdata std:sid="f-data-e1f9c38d" col="0" row="3"/>
+        </cl:output>
+        <cl:output std:sid="output-d373cf19" style="border-right-style:solid; background-color:#f6f6f6; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_GateWay"/>
+          <cl:formdata std:sid="f-data-a40f2ec8" col="0" row="4"/>
+        </cl:output>
+        <cl:radiobutton std:sid="r-button-42aa3d67" id="rdbDHCP" style="border-top-width:1px; font-size:14px; border-top-color:#c5c5c5; border-top-style:solid;" enabled="true" readonly="false" value="0">
+          <cl:listener std:sid="listener-cdc18d91" handler="onRdbDHCPSelectionChange" name="selection-change"/>
+          <cl:formdata std:sid="f-data-9ba612b5" col="1" row="1"/>
+          <cl:item std:sid="item-014f9a03" label="자동으로 IP주소 받기" value="0">
+            <cl:langbind category="PROPERTY" property="label" keypath="Str_AutoIPAddrAcquisition"/>
+          </cl:item>
+          <cl:item std:sid="item-09ed420d" label="다음Ip 주소 사용" value="1">
+            <cl:langbind category="PROPERTY" property="label" keypath="Str_FollowingIPAddrUsed"/>
+          </cl:item>
+        </cl:radiobutton>
+        <cl:group std:sid="group-633b9f66" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+          <cl:formdata std:sid="f-data-48112c5a" col="1" row="2"/>
+          <cl:inputbox std:sid="i-box-3996bddc" id="ipbIP" style="font-size:14px;" enabled="false" readonly="true">
+            <cl:xylayoutdata std:sid="xyl-data-22c0fb60" bottom="2px" horizontalAnchor="BOTH" left="4px" right="4px" top="2px" verticalAnchor="BOTH"/>
+          </cl:inputbox>
+          <cl:xylayout std:sid="xylayout-021429b2"/>
+        </cl:group>
+        <cl:group std:sid="group-f2516443" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+          <cl:formdata std:sid="f-data-761a7e51" col="1" row="3"/>
+          <cl:inputbox std:sid="i-box-29b597e1" id="ipbSubnet" style="font-size:14px;" enabled="false" readonly="true">
+            <cl:xylayoutdata std:sid="xyl-data-b5c8a9c6" bottom="2px" horizontalAnchor="BOTH" left="4px" right="4px" top="2px" verticalAnchor="BOTH"/>
+          </cl:inputbox>
+          <cl:xylayout std:sid="xylayout-9457f0ff"/>
+        </cl:group>
+        <cl:group std:sid="group-c9fe6958" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+          <cl:formdata std:sid="f-data-0f6ceefa" col="1" row="4"/>
+          <cl:inputbox std:sid="i-box-9b374e63" id="ipbGateway" style="font-size:14px;" enabled="false" readonly="true">
+            <cl:xylayoutdata std:sid="xyl-data-ba1068e4" bottom="2px" horizontalAnchor="BOTH" left="4px" right="4px" top="2px" verticalAnchor="BOTH"/>
+          </cl:inputbox>
+          <cl:xylayout std:sid="xylayout-d0a8efa5"/>
+        </cl:group>
+        <cl:output std:sid="output-d351c938" style="border-right-style:solid; background-color:#f6f6f6; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_ServerIp"/>
+          <cl:formdata std:sid="f-data-bd66e5d7" col="0" row="5"/>
+        </cl:output>
+        <cl:group std:sid="group-0124d76b" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+          <cl:formdata std:sid="f-data-99236ac3" col="1" row="5"/>
+          <cl:inputbox std:sid="i-box-0bfa2396" id="ipbServerIP" style="font-size:14px;" enabled="true" readonly="true">
+            <cl:xylayoutdata std:sid="xyl-data-25d51129" bottom="2px" horizontalAnchor="BOTH" left="4px" right="4px" top="2px" verticalAnchor="BOTH"/>
+          </cl:inputbox>
+          <cl:xylayout std:sid="xylayout-85ff1928"/>
+        </cl:group>
+        <cl:output std:sid="output-7828acf3" style="border-right-style:solid; background-color:#f6f6f6; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_ServerPort"/>
+          <cl:formdata std:sid="f-data-878cce31" col="0" row="6"/>
+        </cl:output>
+        <cl:group std:sid="group-f95433c4" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+          <cl:formdata std:sid="f-data-1cbf17ca" col="1" row="6"/>
+          <cl:inputbox std:sid="i-box-465746ed" id="ipbServerPort" style="font-size:14px;" enabled="true" readonly="true">
+            <cl:xylayoutdata std:sid="xyl-data-65840ede" bottom="2px" horizontalAnchor="BOTH" left="4px" right="4px" top="2px" verticalAnchor="BOTH"/>
+          </cl:inputbox>
+          <cl:xylayout std:sid="xylayout-7d3322f3"/>
+        </cl:group>
+        <cl:button std:sid="button-d7a27c54" id="btnSave" class="userInfo_btn">
+          <cl:listener std:sid="listener-45b7fb07" handler="onBtnSaveClick" name="click"/>
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_Apply"/>
+          <cl:formdata std:sid="f-data-9f427ca6" col="0" colspan="2" row="7" rowspan="1"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-f8cfa06f" hspace="0px" vspace="0px">
+          <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows length="30" shadecolor="transparent" shadetype="NONE"/>
+          <cl:rows length="30" shadecolor="transparent" shadetype="NONE"/>
+          <cl:rows length="30" shadecolor="transparent" shadetype="NONE"/>
+          <cl:rows length="30" shadecolor="transparent" shadetype="NONE"/>
+          <cl:rows length="30" shadecolor="transparent" shadetype="NONE"/>
+          <cl:rows length="30" shadecolor="transparent" shadetype="NONE"/>
+          <cl:rows length="30" shadecolor="transparent" shadetype="NONE"/>
+          <cl:columns autoSizing="false" length="100" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-d3d43849">
+        <cl:rows autoSizing="false" length="260" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-2fb4ddb8"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

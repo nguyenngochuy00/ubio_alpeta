@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-dc491b0d" version="1.0.0.0">
+  <head std:sid="head-e6ba9294">
+    <title>VisitApplicantForeignExcelArmyHQ</title>
+    <screen std:sid="screen-bc0fd20a" id="default" name="default" minwidth="1024px" width="1024px" height="768px" customHeight="600" customWidth="800"/>
+    <screen std:sid="screen-d3218d36" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-1412d710" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-3c0045e5">
+      <cl:dataset std:sid="d-set-b3501431" id="dsAccessApplicationInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-af95a634" name="Name"/>
+          <cl:datacolumn std:sid="d-column-9937271a" name="Birthday"/>
+          <cl:datacolumn std:sid="d-column-35344ddb" name="Mobile"/>
+          <cl:datacolumn std:sid="d-column-e63f479b" name="Address"/>
+          <cl:datacolumn std:sid="d-column-83cfcafa" name="UserClass"/>
+          <cl:datacolumn std:sid="d-column-e2d3bd9c" name="VisitPurpose"/>
+          <cl:datacolumn std:sid="d-column-b2e59b9f" name="CarNumber"/>
+          <cl:datacolumn std:sid="d-column-3dff1464" name="CarType"/>
+          <cl:datacolumn std:sid="d-column-9a9347a2" name="CarBlackbox" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-6c11901c" name="CarColor"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-c4082c72" id="ApproverList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-a5e6878c" name="ID" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-4f479d6a" name="Name"/>
+          <cl:datacolumn std:sid="d-column-f2196b60" name="GroupCode" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-f63d26b7" name="MinApproveLevel" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-844b8a3f" name="MaxApproveLevel" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-20898bcf" name="UniqueID"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-6ac8996e" id="UnitMember">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-c82f09ad" name="ID"/>
+          <cl:datacolumn std:sid="d-column-f0d6c441" name="Name"/>
+          <cl:datacolumn std:sid="d-column-7c377443" name="Position"/>
+          <cl:datacolumn std:sid="d-column-6f3ae125" name="Group"/>
+          <cl:datacolumn std:sid="d-column-793daed1" name="Department"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-a5923302" id="UserInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-4b12de03" name="ID"/>
+          <cl:datacolumn std:sid="d-column-aa62dc1f" name="UniqueID"/>
+          <cl:datacolumn std:sid="d-column-d6fcbb55" name="Name"/>
+          <cl:datacolumn std:sid="d-column-4c1e1cf3" name="AuthInfo" datatype="string" defaultvalue="0,0,0,0,0,0,0,0"/>
+          <cl:datacolumn std:sid="d-column-c877840d" name="Privilege" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-ae41a6d9" name="CreateDate"/>
+          <cl:datacolumn std:sid="d-column-aa29eb53" name="RegistDate"/>
+          <cl:datacolumn std:sid="d-column-36a88489" name="ExpireDate"/>
+          <cl:datacolumn std:sid="d-column-3f62fac5" name="GroupCode" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-1ae45816" name="UserType" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-aacc66b5" name="PositionCode" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-bb178ffa" name="Department" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-a884d5d2" name="Picture"/>
+          <cl:datacolumn std:sid="d-column-3317cd2c" name="Phone"/>
+          <cl:datacolumn std:sid="d-column-4547124f" name="AccessGroupCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-a33aca7f" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-8c91325a" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-51e4fc26" id="sms_getUserInfo" method="get" action="/v1/armyhq/users/{id}">
+        <cl:listener std:sid="listener-7502172d" name="submit-done" handler="onSms_getUserInfoSubmitDone"/>
+        <cl:listener std:sid="listener-eeb35f79" name="submit-error" handler="onSms_SubmitError"/>
+        <cl:listener std:sid="listener-707e9900" name="submit-timeout" handler="onSms_SubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="UserInfo"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-4e96b415" id="sms_getApproverList" method="get" action="/v1/approvers">
+        <cl:listener std:sid="listener-4dca410d" name="submit-done" handler="onSms_getApproverListSubmitDone"/>
+        <cl:listener std:sid="listener-3b95548c" name="submit-timeout" handler="onSms_SubmitTimeout"/>
+        <cl:listener std:sid="listener-32e0ab55" name="submit-error" handler="onSms_SubmitError"/>
+        <cl:requestparam name="minLevel" value="0"/>
+        <cl:requestparam name="maxLevel" value="0"/>
+        <cl:requestparam name="group" value="0"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="ApproverList"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-94942607" style="top:0px; left:0px; width:1200px; height:780px;">
+    <cl:listener std:sid="listener-33ca584f" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-0f12df2f" id="VAFEAMHQ_grpUserInfo" style="color:#010101;">
+      <cl:xylayoutdata std:sid="xyl-data-7381fea9" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:output std:sid="output-9f93ae55" class="section-title-amhq">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_ARMY_VisitApplicantInformation"/>
+        <cl:formdata std:sid="f-data-186a4c4d" row="0" col="0"/>
+      </cl:output>
+      <cl:group std:sid="group-1c692822" style="color:#010101;">
+        <cl:formdata std:sid="f-data-171b0f55" row="1" col="0"/>
+        <cl:output std:sid="output-3437b746" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; border-right-color:#c5c5c5; border-bottom-style:solid;" class="section-green-top-amhq" visible="true">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_ARMYHQ_BatchApplicationUpload"/>
+          <cl:formdata std:sid="f-data-9ba07b77" row="0" col="0"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-71c88786" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-4c0d5588" class="section-white-top-amhq">
+        <cl:formdata std:sid="f-data-12cf86e1" row="1" col="1" rowspan="1" colspan="3"/>
+        <cl:fileinput std:sid="f-input-1c1be75c" id="VAFEAMHQ_fiUserFile" class="fileinput-amhq" tabindex="-1">
+          <cl:listener std:sid="listener-11fee382" name="value-change" handler="onVAFEAMHQ_fiUserFileValueChange"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_DragFile"/>
+          <cl:xylayoutdata std:sid="xyl-data-b728d988" top="0px" bottom="0px" left="11px" width="270px" horizontalAnchor="LEFT" verticalAnchor="BOTH"/>
+        </cl:fileinput>
+        <cl:htmlsnippet std:sid="htmlsnippet-de8c4918" id="VAFEAMHQ_sniDownloadLink" class="htmlsnippet-amhq" value="">
+          <cl:xylayoutdata std:sid="xyl-data-02c1462e" top="0px" bottom="0px" left="290px" width="130px" horizontalAnchor="LEFT" verticalAnchor="BOTH"/>
+        </cl:htmlsnippet>
+        <cl:xylayout std:sid="xylayout-fe39967f" scrollable="false"/>
+      </cl:group>
+      <cl:output std:sid="output-b4fe70d6" class="section-title-amhq">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_ARMYHQ_VisitPeriod"/>
+        <cl:formdata std:sid="f-data-b24a0018" row="7" col="0"/>
+      </cl:output>
+      <cl:group std:sid="group-1159bf47" style="color:#010101;">
+        <cl:formdata std:sid="f-data-b6b2e52a" row="8" col="0"/>
+        <cl:output std:sid="output-c26d2a82" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; border-right-color:#c5c5c5; border-bottom-style:solid;" class="section-green-top-required-amhq" visible="true">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_ARMY_VisitStart"/>
+          <cl:formdata std:sid="f-data-d67a0b9d" row="0" col="0"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-7bbbe776" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-66ed3a3b" style="color:#010101;">
+        <cl:formdata std:sid="f-data-8d499e80" row="8" col="2"/>
+        <cl:output std:sid="output-c6904047" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; border-right-color:#c5c5c5; border-bottom-style:solid;" class="section-green-top-required-amhq" visible="true">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_ARMY_VisitEnd"/>
+          <cl:formdata std:sid="f-data-a904e69e" row="0" col="0"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-4b6c1cd1" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:output std:sid="output-680a624b" class="section-title-amhq">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_ARMY_VisitPersonInformation"/>
+        <cl:formdata std:sid="f-data-a0647b84" row="10" col="0"/>
+      </cl:output>
+      <cl:group std:sid="group-63104d31" style="color:#010101;">
+        <cl:formdata std:sid="f-data-a511adf6" row="11" col="0"/>
+        <cl:output std:sid="output-01cc2401" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; border-right-color:#c5c5c5; border-bottom-style:solid;" class="section-green-top-required-amhq" visible="true">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_ARMY_Name"/>
+          <cl:formdata std:sid="f-data-97bec94d" row="0" col="0"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-1a5f1cbb" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-17f4f4ec" class="section-white-top-amhq">
+        <cl:formdata std:sid="f-data-2eab5eff" row="11" col="1"/>
+        <cl:button std:sid="button-1f60d250" id="VAFEAMHQ_btnSelectUnitMember" style="padding-top:0px; padding-left:0px; padding-bottom:0px; padding-right:0px;" class="userInfo_btn" tabindex="3" value="...">
+          <cl:listener std:sid="listener-b10481df" name="click" handler="onVAFEAMHQ_btnSelectUnitMemberClick"/>
+          <cl:formdata std:sid="f-data-0ee59a0b" row="0" col="2"/>
+        </cl:button>
+        <cl:output std:sid="output-dc6bc3f7" id="VAFEAMHQ_opbUserName" class="outputbox-boxline-amhq">
+          <cl:datamapbind property="value" category="PROPERTY" datacontrolid="UnitMember" columnname="Name"/>
+          <cl:formdata std:sid="f-data-5f9b5405" row="0" col="0"/>
+        </cl:output>
+        <cl:output std:sid="output-4f9edaa4">
+          <cl:formdata std:sid="f-data-4ee1d305" row="0" col="1" rowspan="1" colspan="1"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-26fa7641" scrollable="false" hspace="2px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="150" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-e5419dc6" style="color:#010101;">
+        <cl:formdata std:sid="f-data-92274443" row="11" col="2"/>
+        <cl:output std:sid="output-370d1d35" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; border-right-color:#c5c5c5; border-bottom-style:solid;" class="section-green-top-required-amhq" visible="true">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_ARMY_Position"/>
+          <cl:formdata std:sid="f-data-05f63beb" row="0" col="0"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-0d291922" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-7c920e60" style="color:#010101;">
+        <cl:formdata std:sid="f-data-50f0c300" row="12" col="0"/>
+        <cl:output std:sid="output-627994dc" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; border-right-color:#c5c5c5; border-bottom-style:solid;" class="section-green-required-amhq" visible="true">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_ARMY_UserGroup"/>
+          <cl:formdata std:sid="f-data-1591443e" row="0" col="0"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-b419a5d9" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:output std:sid="output-cf836e8e" class="section-title-amhq">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_ARMY_AccessPrivInfo"/>
+        <cl:formdata std:sid="f-data-4c860e7b" row="14" col="0"/>
+      </cl:output>
+      <cl:group std:sid="group-1b12d23a" style="color:#010101;">
+        <cl:formdata std:sid="f-data-cebe9d01" row="15" col="0"/>
+        <cl:output std:sid="output-67df2ae2" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; border-right-color:#c5c5c5; border-bottom-style:solid;" class="section-green-top-required-amhq" visible="true">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_ARMY_AccessPriv"/>
+          <cl:formdata std:sid="f-data-e1bcdf6d" row="0" col="0"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-e9614ae0" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-9d659c75" style="color:#010101;">
+        <cl:formdata std:sid="f-data-dd46a6c9" row="15" col="2"/>
+        <cl:output std:sid="output-4b24670e" class="section-green-top-amhq" visible="true">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_ARMY_Predecessor"/>
+          <cl:formdata std:sid="f-data-701c14b7" row="0" col="0"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-3fe506e2" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-ff13d301" id="VAFEAMHQ_layout1stHeadApproval" style="color:#010101;">
+        <cl:formdata std:sid="f-data-ea410186" row="16" col="0"/>
+        <cl:output std:sid="output-79c73937" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; border-right-color:#c5c5c5; border-bottom-style:solid;" class="section-green-required-amhq" visible="true">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_ARMY_1stApproval"/>
+          <cl:formdata std:sid="f-data-c50cefe9" row="0" col="0"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-313cd032" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-828c1faf" id="VAFEAMHQ_layout1stApproval" class="section-white-amhq">
+        <cl:formdata std:sid="f-data-97aa0f6f" row="16" col="1"/>
+        <cl:button std:sid="button-80e0f2ab" id="VAFEAMHQ_btn1stApproval" style="padding-top:0px; padding-left:0px; padding-bottom:0px; padding-right:0px;" class="userInfo_btn" tabindex="5" value="...">
+          <cl:listener std:sid="listener-76de56b2" name="click" handler="onVAFEAMHQ_btn1stApprovalClick"/>
+          <cl:formdata std:sid="f-data-01b23616" row="0" col="3"/>
+        </cl:button>
+        <cl:inputbox std:sid="i-box-d335c945" id="VAFEAMHQ_ipb1stApprovalName" class="inputbox-amhq" readonly="true" tabindex="-1">
+          <cl:formdata std:sid="f-data-50afad61" row="0" col="0"/>
+        </cl:inputbox>
+        <cl:inputbox std:sid="i-box-654f385a" id="VAFEAMHQ_ipb1stApprovalGroup" class="inputbox-amhq" readonly="true" tabindex="-1">
+          <cl:formdata std:sid="f-data-6df99565" row="0" col="1"/>
+        </cl:inputbox>
+        <cl:output std:sid="output-c67b9f1e" id="VAFEAMHQ_opb1stApprovalID" visible="false" readonly="true">
+          <cl:formdata std:sid="f-data-77b968bf" row="0" col="2"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-3bfc3c0f" scrollable="false" hspace="2px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="150" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="150" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-caff3de8" id="VAFEAMHQ_layout2stHeadApproval" style="color:#010101;">
+        <cl:formdata std:sid="f-data-f38322a7" row="16" col="2"/>
+        <cl:output std:sid="output-ba391b13" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; border-right-color:#c5c5c5; border-bottom-style:solid;" class="section-green-required-amhq" visible="true">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_ARMY_2stApproval"/>
+          <cl:formdata std:sid="f-data-20f7ce5c" row="0" col="0"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-67222152" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-50df54a1" id="VAFEAMHQ_layout2stApproval" class="section-white-amhq">
+        <cl:formdata std:sid="f-data-a5162620" row="16" col="3"/>
+        <cl:button std:sid="button-62f33675" id="VAFEAMHQ_btn2stApproval" style="padding-top:0px; padding-left:0px; padding-bottom:0px; padding-right:0px;" class="userInfo_btn" tabindex="6" value="...">
+          <cl:listener std:sid="listener-87764f65" name="click" handler="onVAFEAMHQ_btn2stApprovalClick"/>
+          <cl:formdata std:sid="f-data-5f8fcf10" row="0" col="3"/>
+        </cl:button>
+        <cl:inputbox std:sid="i-box-512651b5" id="VAFEAMHQ_ipb2stApprovalName" class="inputbox-amhq" readonly="true" tabindex="-1">
+          <cl:formdata std:sid="f-data-6a137eb5" row="0" col="0"/>
+        </cl:inputbox>
+        <cl:inputbox std:sid="i-box-e39e4f5f" id="VAFEAMHQ_ipb2stApprovalGroup" class="inputbox-amhq" readonly="true" tabindex="-1">
+          <cl:formdata std:sid="f-data-e915a53f" row="0" col="1"/>
+        </cl:inputbox>
+        <cl:output std:sid="output-6a5f9ee7" id="VAFEAMHQ_opb2stApprovalID" visible="false" readonly="true">
+          <cl:formdata std:sid="f-data-a8bc15fd" row="0" col="2"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-52422f11" scrollable="false" hspace="2px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="150" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="150" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:grid std:sid="grid-4174248c" id="VAFEAMHQ_grdVisitorInfo" class="grid-amhq" datasetid="dsAccessApplicationInfo" selectionmulti="multi" resizablecolumns="all">
+        <cl:formdata std:sid="f-data-5ddefa1e" row="5" col="0" rowspan="1" colspan="4"/>
+        <cl:gridcolumn std:sid="g-column-1f1fc42d" width="25px"/>
+        <cl:gridcolumn std:sid="g-column-94581283"/>
+        <cl:gridcolumn std:sid="g-column-66f0244e"/>
+        <cl:gridcolumn std:sid="g-column-9cee972a"/>
+        <cl:gridcolumn std:sid="g-column-2735135a"/>
+        <cl:gridcolumn std:sid="g-column-77e4c3c0"/>
+        <cl:gridcolumn std:sid="g-column-6f9ab399"/>
+        <cl:gridcolumn std:sid="g-column-ffb20532"/>
+        <cl:gridcolumn std:sid="g-column-3bef7503"/>
+        <cl:gridcolumn std:sid="g-column-3dc9c48a"/>
+        <cl:gridcolumn std:sid="g-column-c9aee98e"/>
+        <cl:gridheader std:sid="gh-band-b72ef585">
+          <cl:gridrow std:sid="g-row-b5964ce5" height="50px"/>
+          <cl:gridcell std:sid="gh-cell-4d775dd4" rowindex="0" colindex="1" targetcolumnname="Name">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_ARMY_Name"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-840d4859" rowindex="0" colindex="2" targetcolumnname="Birthday">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_DateOfBirth"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-f03aaf0f" rowindex="0" colindex="3" targetcolumnname="Mobile">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_ARMY_Mobile"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-9efc4dfb" rowindex="0" colindex="4" targetcolumnname="Address">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_ARMY_CompanyAddress"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-843bc597" rowindex="0" colindex="5" targetcolumnname="UserClass">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_ARMY_JobUserClasses"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-62d856f5" rowindex="0" colindex="6" targetcolumnname="VisitPurpose">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_ARMY_PurposeOfVisit"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-9365f729" rowindex="0" colindex="7" targetcolumnname="CarNumber">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_CarNumber"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-7868ff2c" rowindex="0" colindex="8" targetcolumnname="CarType">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_ARMY_CarType"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-b2ae8006" rowindex="0" colindex="9" targetcolumnname="CarBlackbox">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_ARMY_CarBlackBox"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-fab4402b" rowindex="0" colindex="10" targetcolumnname="CarColor">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_ARMY_CarColor"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-be1e9ad4" rowindex="0" colindex="0" columntype="checkbox"/>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-f92c0213">
+          <cl:gridrow std:sid="g-row-5b92a4f4" height="32px"/>
+          <cl:gridcell std:sid="gd-cell-993bd238" rowindex="0" colindex="1" columnname="Name"/>
+          <cl:gridcell std:sid="gd-cell-35a58ce1" rowindex="0" colindex="2" columnname="Birthday"/>
+          <cl:gridcell std:sid="gd-cell-7f5c434d" rowindex="0" colindex="3" columnname="Mobile"/>
+          <cl:gridcell std:sid="gd-cell-3680e5ae" rowindex="0" colindex="4" columnname="Address"/>
+          <cl:gridcell std:sid="gd-cell-c7f0e666" rowindex="0" colindex="5" columnname="UserClass"/>
+          <cl:gridcell std:sid="gd-cell-33d5768d" rowindex="0" colindex="6" columnname="VisitPurpose"/>
+          <cl:gridcell std:sid="gd-cell-310caed6" rowindex="0" colindex="7" columnname="CarNumber"/>
+          <cl:gridcell std:sid="gd-cell-5d20ebe9" rowindex="0" colindex="8" columnname="CarType"/>
+          <cl:gridcell std:sid="gd-cell-76bb85f5" rowindex="0" colindex="9" columnname="CarBlackbox"/>
+          <cl:gridcell std:sid="gd-cell-4053107c" rowindex="0" colindex="10" columnname="CarColor"/>
+          <cl:gridcell std:sid="gd-cell-d1a6a951" rowindex="0" colindex="0" columntype="checkbox"/>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:group std:sid="group-890dd489" class="section-white-top-amhq">
+        <cl:formdata std:sid="f-data-96fb7190" row="8" col="1"/>
+        <cl:dateinput std:sid="d-input-176eed5d" id="VAFEAMHQ_dtiAccessStart" class="dateinput-amhq" tabindex="1" format="YYYY-MM-DD">
+          <cl:listener std:sid="listener-4e24737b" name="value-change" handler="onVAFEAMHQ_dtiAccessStartValueChange"/>
+          <cl:formdata std:sid="f-data-1dde8ffc" row="0" col="0"/>
+        </cl:dateinput>
+        <cl:formlayout std:sid="f-layout-d002a658" scrollable="false" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="150" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-45d2bb47" class="section-white-top-amhq">
+        <cl:formdata std:sid="f-data-74f67368" row="8" col="3"/>
+        <cl:dateinput std:sid="d-input-57112ee8" id="VAFEAMHQ_dtiAccessEnd" class="dateinput-amhq" tabindex="2" format="YYYY-MM-DD">
+          <cl:listener std:sid="listener-d82e4ec8" name="value-change" handler="onVAFEAMHQ_dtiAccessEndValueChange"/>
+          <cl:listener std:sid="listener-eec7c78a" name="before-value-change" handler="onVAFEAMHQ_dtiAccessEndBeforeValueChange"/>
+          <cl:formdata std:sid="f-data-4f80367e" row="0" col="0"/>
+        </cl:dateinput>
+        <cl:formlayout std:sid="f-layout-543b2717" scrollable="false" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="150" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-fad76401" class="section-white-top-amhq">
+        <cl:formdata std:sid="f-data-f0dc94f7" row="11" col="3"/>
+        <cl:combobox std:sid="c-box-e2ed2e19" id="VAFEAMHQ_cmbTargetUserPosition" class="inputbox-amhq" readonly="true" tabindex="-1" hidebutton="true">
+          <cl:datamapbind property="value" category="PROPERTY" datacontrolid="UnitMember" columnname="Position"/>
+          <cl:formdata std:sid="f-data-3f6c96f8" row="0" col="0"/>
+        </cl:combobox>
+        <cl:formlayout std:sid="f-layout-43676c62" scrollable="false" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="150" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-d48eca7b" class="section-white-amhq">
+        <cl:formdata std:sid="f-data-ee2a6dd9" row="12" col="1" rowspan="1" colspan="3"/>
+        <cl:combobox std:sid="c-box-ef6d9aba" id="VAFEAMHQ_cmbTargetUserGroup" class="inputbox-amhq" readonly="true" tabindex="-1" hidebutton="true">
+          <cl:datamapbind property="value" category="PROPERTY" datacontrolid="UnitMember" columnname="Group"/>
+          <cl:formdata std:sid="f-data-424d6ef7" row="0" col="0"/>
+        </cl:combobox>
+        <cl:formlayout std:sid="f-layout-8a312801" scrollable="false" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="150" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-2ec223f5" class="section-white-top-amhq">
+        <cl:formdata std:sid="f-data-49985e10" row="15" col="1"/>
+        <cl:combobox std:sid="c-box-81d7679c" id="VAFEAMHQ_cmbUserAccessGroup" class="combobox-amhq" tabindex="4">
+          <cl:formdata std:sid="f-data-3884ec99" row="0" col="0"/>
+        </cl:combobox>
+        <cl:button std:sid="button-cbeb9579" id="VAFEAMHQ_btnAcGroupSort" class="button-sort-desc-amhq" tabindex="-1">
+          <cl:listener std:sid="listener-f812ca74" name="click" handler="onVAFEAMHQ_btnAcGroupSortClick"/>
+          <cl:formdata std:sid="f-data-e93a2740" row="0" col="1"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-4315bd80" scrollable="false" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="150" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-964dcb63">
+        <cl:formdata std:sid="f-data-89fc4dc3" row="3" col="0"/>
+        <cl:button std:sid="button-dff11152" id="VAFEAMHQ_btnRowdelete" style="font-size:18px;" class="button-white-amhq" tabindex="-1" value="삭제">
+          <cl:listener std:sid="listener-f4e80230" name="click" handler="onVAFEAMHQ_btnRowdeleteClick"/>
+          <cl:formdata std:sid="f-data-041947f9" row="0" col="0"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-7952891a" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="85" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-13895c6a" class="section-white-top-amhq">
+        <cl:formdata std:sid="f-data-fe07513b" row="15" col="3"/>
+        <cl:output std:sid="output-b8b4e252" id="VAFEAMHQ_opdPredecessor" style="border-right-style:none; border-left-style:none; border-bottom-style:none; border-top-style:none;" class="inputbox-amhq">
+          <cl:formdata std:sid="f-data-24c2779c" row="0" col="0"/>
+        </cl:output>
+        <cl:radiobutton std:sid="r-button-b1c999cc" id="VAFEAMHQ_rdbPredecessor" class="radiobutton-amhq" visible="false">
+          <cl:listener std:sid="listener-83957c42" name="selection-change" handler="rdbPredecessorSelectionChange"/>
+          <cl:formdata std:sid="f-data-e5e5a9ec" row="0" col="1"/>
+        </cl:radiobutton>
+        <cl:formlayout std:sid="f-layout-e784dbbc" scrollable="false" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="150" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-60c0124b" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+        <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="5" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="5" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="200" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="200" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+        <cl:columns length="200" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-f8ef3c97"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

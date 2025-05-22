@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-c195cbee" version="1.0.0.0">
+  <head std:sid="head-a1f8366e">
+    <title>UserInfoCustomBH</title>
+    <screen std:sid="screen-edfde0e9" id="default" name="default" minwidth="1024px" width="1024px" height="768px" customHeight="600" customWidth="800"/>
+    <screen std:sid="screen-5601b5e3" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-3356a5b4" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-16c1956c">
+      <cl:datamap std:sid="d-map-7babca06" id="BHUser">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-b2e205f0" name="UserID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-6df6ab5e" name="PriNo" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-6522735e" name="Loginid"/>
+          <cl:datacolumn std:sid="d-column-f36c8daa" name="Codeid"/>
+          <cl:datacolumn std:sid="d-column-d4a7caec" name="Isdeleted"/>
+          <cl:datacolumn std:sid="d-column-eebfa075" name="Viewyn"/>
+          <cl:datacolumn std:sid="d-column-b6301569" name="UserUseInfo"/>
+          <cl:datacolumn std:sid="d-column-5bb5ee04" name="PID"/>
+          <cl:datacolumn std:sid="d-column-f27ede39" name="Empno"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-e3fdb0a6" id="ProcessInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-a5cc4234" name="EditMode"/>
+          <cl:datacolumn std:sid="d-column-5e03959e" name="UserID"/>
+          <cl:datacolumn std:sid="d-column-ed1f09e5" name="_OldPriNo"/>
+          <cl:datacolumn std:sid="d-column-fdf14526" info="None: 초기값, pass: 중복없음, ReDu : 중복" name="_ReDuplicationResult" defaultvalue="None"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-a33aca7f" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-80d61523" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-aa837f9d" id="smsPriNoCheckReq" method="get" action="/v1/bluehouse/users/Duplicate">
+        <cl:listener std:sid="listener-6318da11" name="submit-success" handler="onSmsPriNoCheckReqSubmitSuccess"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-53d44593" style="top:0px; left:0px; width:570px; height:270px;">
+    <cl:listener std:sid="listener-3cab9ae7" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-1ff39e44" id="grp_full" style="color:#010101;">
+      <cl:xylayoutdata std:sid="xyl-data-01573e5e" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:output std:sid="output-3a6a2030" style="border-right-style:solid; background-color:#f6f6f6; border-bottom-color:#c5c5c5; border-top-width:1px; color:#010101; border-right-width:2px; border-bottom-width:1px; border-top-color:#c5c5c5; border-right-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid; text-align:center;" class="userInfo_bold" value="고유 번호">
+        <cl:formdata std:sid="f-data-0e591a9f" row="0" col="0"/>
+      </cl:output>
+      <cl:group std:sid="group-8e688318" style="border-bottom-color:#c5c5c5; border-top-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid;" class="user_nav">
+        <cl:formdata std:sid="f-data-c6766597" row="0" col="1"/>
+        <cl:group std:sid="group-e0169811">
+          <cl:formdata std:sid="f-data-74a4e4d8" row="0" col="0"/>
+          <cl:inputbox std:sid="i-box-f47287fe" id="BH_ipbPriNo" style="padding-left:5px;" maxlength="40">
+            <cl:listener std:sid="listener-05d7a1e8" name="value-change" handler="onBH_ipbPriNoValueChange"/>
+            <cl:listener std:sid="listener-25174715" name="keyup" handler="onBH_ipbPriNoKeyup"/>
+            <cl:datamapbind property="value" datacontrolid="BHUser" columnname="PriNo"/>
+            <cl:xylayoutdata std:sid="xyl-data-d2e612ac" top="5px" right="8px" bottom="5px" left="8px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+          </cl:inputbox>
+          <cl:xylayout std:sid="xylayout-02218356"/>
+        </cl:group>
+        <cl:group std:sid="group-264e69d0">
+          <cl:formdata std:sid="f-data-831b4997" row="0" col="1"/>
+          <cl:button std:sid="button-0268ae14" id="BH_btnReduplication" class="userInfo_btn" value="중복 체크">
+            <cl:listener std:sid="listener-05cc0c53" name="click" handler="onBH_btnReduplicationClick"/>
+            <cl:xylayoutdata std:sid="xyl-data-af8c75b1" top="5px" right="8px" bottom="5px" left="8px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+          </cl:button>
+          <cl:xylayout std:sid="xylayout-fa183cf5"/>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-20576f58" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="3" unit="FRACTION" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-05baf2a8" hspace="0px" vspace="0px">
+        <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="130" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-3ad0173e"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

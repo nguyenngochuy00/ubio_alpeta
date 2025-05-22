@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-df733d88" version="1.0.0.0">
+  <head std:sid="head-32c30873">
+    <title>groupCtrl</title>
+    <screen std:sid="screen-915fe83d" id="default" customHeight="600" customWidth="800" height="768px" minwidth="1024px" name="default" width="1024px"/>
+    <screen std:sid="screen-8802e4a5" id="tablet" height="667px" maxwidth="1023px" minwidth="500px" name="tablet" width="500px"/>
+    <screen std:sid="screen-076a7b35" id="mobile" height="525px" maxwidth="499px" name="mobile" width="350px"/>
+    <cl:model std:sid="model-11893c61">
+      <cl:dataset std:sid="d-set-174ba88d" id="GroupList">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="GroupID"/>
+          <cl:datacolumn datatype="number" name="Parent"/>
+          <cl:datacolumn name="Name"/>
+          <cl:datacolumn name="Description"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-174ba88d" id="AccessGroupTree">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="string" name="TreeID"/>
+          <cl:datacolumn name="Name"/>
+          <cl:datacolumn datatype="number" name="Parent"/>
+          <cl:datacolumn datatype="number" name="ID"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+    </cl:model>
+    <cl:appspec>
+      <cl:event name="group-selection-change" type="cpr.events.CSelectionEvent"/>
+      <cl:event name="accessGroup-selection-change" type="cpr.events.CSelectionEvent"/>
+      <cl:event name="accessArea-selection-change" type="cpr.events.CSelectionEvent"/>
+    </cl:appspec>
+  </head>
+  <body std:sid="body-5790c2c9" style="top:0px; left:0px; width:160px; height:400px;">
+    <cl:group std:sid="group-b4749abb" class="un-form-border" style="padding:4px;">
+      <cl:xylayoutdata std:sid="xyl-data-152815bf" bottom="0px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="BOTH"/>
+      <cl:tabfolder std:sid="t-folder-04c05fad" id="tabGroups">
+        <cl:xylayoutdata std:sid="xyl-data-b661c574" bottom="0px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="BOTH"/>
+        <cl:tabitem std:sid="t-item-ce56edfe" selected="true" text="그룹">
+          <std:metadata>
+            <std:property key="is-active-item" value="true"/>
+          </std:metadata>
+          <cl:group std:sid="group-7c6821cc">
+            <std:metadata>
+              <std:property key="locked" value="true"/>
+            </std:metadata>
+            <cl:tree std:sid="tree-f673ca64" id="treeGroup">
+              <cl:listener std:sid="listener-c3ed72c0" handler="onTreeGroupSelectionChange" name="selection-change"/>
+              <cl:xylayoutdata std:sid="xyl-data-7c9c0c58" height="674px" horizontalAnchor="BOTH" left="0px" right="1px" top="0px" verticalAnchor="TOP"/>
+              <cl:treeitem label="전체" value="0"/>
+              <cl:treeitemset datasetid="GroupList" label="Name" value="GroupID" parent="Parent"/>
+            </cl:tree>
+            <cl:xylayout std:sid="xylayout-5ce6ef84"/>
+          </cl:group>
+        </cl:tabitem>
+        <cl:tabitem std:sid="t-item-5ac2c205" text="출입그룹">
+          <std:metadata>
+            <std:property key="is-active-item" value="true"/>
+          </std:metadata>
+          <cl:group std:sid="group-8b831e18">
+            <std:metadata>
+              <std:property key="locked" value="true"/>
+            </std:metadata>
+            <cl:tree std:sid="tree-2d24121b" id="treeAccessGroup">
+              <cl:listener std:sid="listener-da268f55" handler="onTreeAccessGroupSelectionChange" name="selection-change"/>
+              <cl:xylayoutdata std:sid="xyl-data-e744c18f" bottom="0px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="BOTH"/>
+              <cl:treeitemset datasetid="AccessGroupTree" label="Name" value="TreeID" parent="Parent"/>
+            </cl:tree>
+            <cl:xylayout std:sid="xylayout-05deb784"/>
+          </cl:group>
+        </cl:tabitem>
+      </cl:tabfolder>
+      <cl:xylayout std:sid="xylayout-90e2ca68"/>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-accefa5f"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

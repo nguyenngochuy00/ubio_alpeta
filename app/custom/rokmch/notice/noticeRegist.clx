@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-dc9a7fb0" version="1.0.0.0">
+  <head std:sid="head-9ec724a7">
+    <title>noticeRegist</title>
+    <screen std:sid="screen-9f675fab" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="500" customWidth="900"/>
+    <screen std:sid="screen-c11aeba5" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-0913f351" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-8ddb1993">
+      <cl:datamap std:sid="d-map-d197bc08" id="NoticeInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-5e7e0723" name="NoticeTitle"/>
+          <cl:datacolumn std:sid="d-column-38ac3e19" name="NoticeContent"/>
+          <cl:datacolumn std:sid="d-column-a00af2d0" name="FileName1"/>
+          <cl:datacolumn std:sid="d-column-4c18796a" name="FileName2"/>
+          <cl:datacolumn std:sid="d-column-cd88c667" name="FileName3"/>
+          <cl:datacolumn std:sid="d-column-2dd8fb67" name="FixedFlag" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-cedbe583" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-87513087" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-b2740bb8" id="sms_postSystemNotice" action="/v1/systemNotices" mediatype="multipart/form-data">
+        <cl:listener std:sid="listener-3b9e5c0a" name="submit-done" handler="onSms_postSystemNoticeSubmitDone"/>
+        <cl:listener std:sid="listener-471f574e" name="submit-error" handler="onSubmitError"/>
+        <cl:listener std:sid="listener-54251951" name="submit-timeout" handler="onSubmitTimeout"/>
+        <cl:requestdata dataid="NoticeInfo"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-5a8fd807" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-896b6881" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-b487b3ed" style="color:#010101;">
+      <cl:xylayoutdata std:sid="xyl-data-5ac52065" top="25px" bottom="0px" left="50px" width="820px" horizontalAnchor="LEFT" verticalAnchor="BOTH"/>
+      <cl:button std:sid="button-82ba7864" id="AMSNR_btnList" class="button-white-amhq" value="목록">
+        <cl:listener std:sid="listener-df0d2f36" name="click" handler="onAMSNR_btnListClick"/>
+        <cl:formdata std:sid="f-data-f92fbba0" row="8" col="4"/>
+      </cl:button>
+      <cl:button std:sid="button-b141b79f" id="AMSNR_btnRegist" class="button-green-amhq" value="등록">
+        <cl:listener std:sid="listener-b94a29ce" name="click" handler="onAMSNR_btnRegistClick"/>
+        <cl:formdata std:sid="f-data-1faca181" row="8" col="2"/>
+      </cl:button>
+      <cl:output std:sid="output-f6b76d23" class="section-green-top-amhq" visible="true" value="제목">
+        <cl:formdata std:sid="f-data-a70edb18" row="4" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-da049d84" class="section-green-amhq" visible="true" value="내용">
+        <cl:formdata std:sid="f-data-014bae21" row="5" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-faf6b997" class="section-green-amhq" visible="true" value="첨부파일">
+        <cl:formdata std:sid="f-data-8bcb9db1" row="6" col="0" rowspan="1" colspan="1"/>
+      </cl:output>
+      <cl:output std:sid="output-bb51907f" class="menu-title-amhq" value="공지사항">
+        <cl:formdata std:sid="f-data-12f7b3b8" halign="LEFT" width="200" row="0" col="0"/>
+      </cl:output>
+      <cl:group std:sid="group-bcdcec7b" class="section-white-top-amhq">
+        <cl:formdata std:sid="f-data-de9d6e8b" row="4" col="1" rowspan="1" colspan="4"/>
+        <cl:inputbox std:sid="i-box-e1040089" id="ipb1" style="color:#010101;" class="inputbox-amhq">
+          <cl:datamapbind property="value" datacontrolid="NoticeInfo" columnname="NoticeTitle"/>
+          <cl:formdata std:sid="f-data-77d4a70b" row="0" col="0"/>
+        </cl:inputbox>
+        <cl:formlayout std:sid="f-layout-630faca3" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-b015823f" class="section-white-amhq">
+        <cl:formdata std:sid="f-data-10692a3e" row="5" col="1" rowspan="1" colspan="4"/>
+        <cl:textarea std:sid="t-area-e7ca63ad" id="txa1" style="color:#010101;" class="inputbox-amhq">
+          <cl:datamapbind property="value" datacontrolid="NoticeInfo" columnname="NoticeContent"/>
+          <cl:formdata std:sid="f-data-905afa96" row="0" col="0"/>
+        </cl:textarea>
+        <cl:formlayout std:sid="f-layout-5074c3de" scrollable="false" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:output std:sid="output-49b34f86" id="ACAPAP_opbTitle" style="padding-bottom:0px;" class="section-title-amhq" value="공지사항 등록">
+        <cl:formdata std:sid="f-data-56b68de0" halign="LEFT" width="200" row="2" col="0"/>
+      </cl:output>
+      <cl:group std:sid="group-08eb4c84" class="section-white-amhq">
+        <cl:formdata std:sid="f-data-3afd5205" row="6" col="1" rowspan="1" colspan="4"/>
+        <cl:fileinput std:sid="f-input-416f5029" id="AMSNR_fiFile1" style="color:#010101; text-align:left;" class="fileinput-amhq" limitfileunit="mb" limitfilesize="50">
+          <cl:listener std:sid="listener-5c5be73e" name="value-change" handler="onAMSNR_fiFile1ValueChange"/>
+          <cl:listener std:sid="listener-afbffb5d" name="maxsize-exceed" handler="onAMSNR_fiFile1MaxsizeExceed"/>
+          <cl:formdata std:sid="f-data-f235102f" row="0" col="0" rowspan="1" colspan="2"/>
+        </cl:fileinput>
+        <cl:fileinput std:sid="f-input-7768b9a1" id="AMSNR_fiFile2" style="color:#010101; text-align:left;" class="fileinput-amhq" limitfileunit="mb" limitfilesize="50">
+          <cl:listener std:sid="listener-6100de97" name="value-change" handler="onAMSNR_fiFile2ValueChange"/>
+          <cl:listener std:sid="listener-ad2a5860" name="maxsize-exceed" handler="onAMSNR_fiFile2MaxsizeExceed"/>
+          <cl:formdata std:sid="f-data-0b0a779b" row="1" col="0" rowspan="1" colspan="2"/>
+        </cl:fileinput>
+        <cl:fileinput std:sid="f-input-367ed491" id="AMSNR_fiFile3" style="color:#010101; text-align:left;" class="fileinput-amhq" limitfileunit="mb" limitfilesize="50">
+          <cl:listener std:sid="listener-3722c0f8" name="value-change" handler="onAMSNR_fiFile3ValueChange"/>
+          <cl:listener std:sid="listener-44952785" name="maxsize-exceed" handler="onAMSNR_fiFile3MaxsizeExceed"/>
+          <cl:formdata std:sid="f-data-20a7d252" row="2" col="0" rowspan="1" colspan="2"/>
+        </cl:fileinput>
+        <cl:button std:sid="button-3649399a" class="button-amhq" value="선택">
+          <cl:listener std:sid="listener-0499a8a6" name="click" handler="onButtonClick"/>
+          <cl:formdata std:sid="f-data-638dd940" row="0" col="3"/>
+        </cl:button>
+        <cl:button std:sid="button-009ecc7f" class="button-amhq" value="선택">
+          <cl:listener std:sid="listener-4ad28bf7" name="click" handler="onButtonClick2"/>
+          <cl:formdata std:sid="f-data-0654a681" row="1" col="3"/>
+        </cl:button>
+        <cl:button std:sid="button-9a4cec75" class="button-amhq" value="선택">
+          <cl:listener std:sid="listener-1073d433" name="click" handler="onButtonClick3"/>
+          <cl:formdata std:sid="f-data-ac006d62" row="2" col="3"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-4f8cd991" scrollable="false" hspace="1px" vspace="3px">
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="120" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="5" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:checkbox std:sid="c-box-3cdbdae9" id="AMSNR_cbxFixedFlag" style="border-right-style:none; padding-top:8px; border-left-style:none; padding-left:8px; vertical-align:bottom; padding-bottom:0px; font-size:15px; border-bottom-style:none; border-top-style:none; padding-right:0px;" class="button-amhq" visible="true" truevalue="1" falsevalue="0" text="상단표시">
+        <cl:formdata std:sid="f-data-ff9187ce" row="2" col="4"/>
+      </cl:checkbox>
+      <cl:formlayout std:sid="f-layout-8ecf700b" scrollable="false" hspace="0px" vspace="1px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+        <cl:rows length="35" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="10" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="112" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="10" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+        <cl:columns length="120" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="5" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="120" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-9737f4bd" scrollable="false"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

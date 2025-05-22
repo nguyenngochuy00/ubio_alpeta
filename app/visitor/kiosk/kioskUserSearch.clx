@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-ae7cc69a" version="1.0.0.0">
+  <head std:sid="head-ff21bd28">
+    <title>userSearch</title>
+    <screen std:sid="screen-e84e076c" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="600" customWidth="600" active="true"/>
+    <screen std:sid="screen-6a8b9091" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px" active="false"/>
+    <screen std:sid="screen-64b407a5" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px" useCustomHeight="true" customHeight="510" customWidth="800" active="false"/>
+    <cl:model std:sid="model-8e93f551">
+      <cl:dataset std:sid="d-set-f4fca70f" id="UserList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-37cb338b" name="UserID"/>
+          <cl:datacolumn std:sid="d-column-11ac712d" name="Name"/>
+          <cl:datacolumn std:sid="d-column-f2c95d31" name="Group"/>
+          <cl:datacolumn std:sid="d-column-46c5ad19" name="Position"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-866f6864" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-75bf62ee" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-f1b5b983" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-7a1784ac" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-ac79fac2">
+      <cl:responsivexylayoutdata std:sid="rxyl-data-325f3282">
+        <cl:xylayoutdata std:sid="sxyl-data-34c8acb3" top="20px" right="20px" bottom="0px" left="20px" horizontalAnchor="BOTH" verticalAnchor="BOTH" screenid="default"/>
+      </cl:responsivexylayoutdata>
+      <cl:group std:sid="group-2a5bd9d1">
+        <cl:formdata std:sid="f-data-2c9a716b" row="3" col="0" rowspan="1" colspan="4"/>
+        <cl:grid std:sid="grid-5be8d27c" id="VMTUS_grdUserList" style="font-size:25px;" readonly="true" datasetid="UserList">
+          <cl:listener std:sid="listener-4eba82bd" name="cell-click" handler="onVMTUS_grdUserListCellClick"/>
+          <cl:responsivexylayoutdata std:sid="rxyl-data-ed811770">
+            <cl:xylayoutdata std:sid="sxyl-data-46ea48a0" top="52px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH" screenid="mobile"/>
+            <cl:xylayoutdata std:sid="sxyl-data-a5bd3385" top="43px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH" screenid="default"/>
+            <cl:xylayoutdata std:sid="sxyl-data-b318704e" top="43px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH" screenid="tablet"/>
+          </cl:responsivexylayoutdata>
+          <cl:headerstyle style="font-weight:600; font-size:20px;"/>
+          <cl:gridcolumn std:sid="g-column-c5be0f35"/>
+          <cl:gridcolumn std:sid="g-column-6fcf87fa" width="94px"/>
+          <cl:gridcolumn std:sid="g-column-5ecb270e"/>
+          <cl:gridheader std:sid="gh-band-fcda90fb">
+            <cl:gridrow std:sid="g-row-8288acd2" height="39px"/>
+            <cl:gridcell std:sid="gh-cell-86a1b769" rowindex="0" colindex="0" targetcolumnname="Name" sortable="true" filterable="false" text="Name">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_Name"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gh-cell-1a7e11b7" rowindex="0" colindex="2" targetcolumnname="Group" sortable="false" filterable="false" text="Group">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_Group"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gh-cell-ee48924e" rowindex="0" colindex="1" targetcolumnname="Position" text="Position">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_Position"/>
+            </cl:gridcell>
+          </cl:gridheader>
+          <cl:griddetail std:sid="gd-band-94a70c1f">
+            <cl:gridrow std:sid="g-row-a7cdd57e" height="65px"/>
+            <cl:gridcell std:sid="gd-cell-9012b264" rowindex="0" colindex="0" columnname="Name"/>
+            <cl:gridcell std:sid="gd-cell-edb7a1d5" rowindex="0" colindex="2" columnname="Group"/>
+            <cl:gridcell std:sid="gd-cell-2d593c30" rowindex="0" colindex="1" columnname="Position"/>
+          </cl:griddetail>
+        </cl:grid>
+        <cl:responsivexylayout std:sid="r-xylayout-02190ee5"/>
+      </cl:group>
+      <cl:group std:sid="group-12631924">
+        <cl:formdata std:sid="f-data-fe0198c1" row="2" col="0" rowspan="1" colspan="3"/>
+        <cl:inputbox std:sid="i-box-4ff884f7" id="VMTUS_ipbKeyword" style="border-right-style:solid; padding-top:0px; border-top-width:1px; border-bottom-color:#cccccc; border-right-width:1px; padding-left:10px; border-left-color:#cccccc; padding-bottom:0px; font-size:25px; border-right-color:#cccccc; background-position:0px; border-left-width:1px; border-top-style:solid; border-left-style:solid; border-bottom-width:1px; border-top-color:#cccccc; border-bottom-style:solid; padding-right:0px;">
+          <cl:listener std:sid="listener-a25d4660" name="keyup" handler="onVMTUS_ipbKeywordKeyup"/>
+          <cl:apppropbind property="value" category="PROPERTY" app-property="searchKeyword"/>
+          <cl:langbind property="placeholder" category="PROPERTY" keypath="Str_VisitUserSearchGuide"/>
+          <cl:xylayoutdata std:sid="xyl-data-d21d1c63" top="10px" right="10px" bottom="10px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+        </cl:inputbox>
+        <cl:xylayout std:sid="xylayout-1a3672e4"/>
+      </cl:group>
+      <cl:group std:sid="group-9d6b25c3">
+        <cl:formdata std:sid="f-data-13b12b10" row="0" col="0" rowspan="1" colspan="2"/>
+        <cl:output std:sid="output-7c352be3" style="font-weight:700; font-size:30px;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_VisitTargetSearch"/>
+          <cl:formdata std:sid="f-data-286e0257" row="0" col="0"/>
+        </cl:output>
+        <cl:group std:sid="group-f3a6eb72" style="border-bottom-color:#2446a4; border-bottom-width:1px; border-bottom-style:solid;">
+          <cl:formdata std:sid="f-data-dd5d3a1d" row="1" col="0"/>
+          <cl:xylayout std:sid="xylayout-3cbef76b"/>
+        </cl:group>
+        <cl:output std:sid="output-7cb493df" id="op_factoryName" style="font-weight:700; font-size:24px;" visible="false">
+          <cl:formdata std:sid="f-data-9f2f0161" row="0" col="1"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-aecdc16a" hspace="0px" vspace="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:rows length="9" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="250" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-41404b47">
+        <cl:listener std:sid="listener-e56ad4db" name="click" handler="onVMVAP_btnCancelClick"/>
+        <cl:formdata std:sid="f-data-c8c05e95" row="0" col="3"/>
+        <cl:button std:sid="button-e828a3d3" id="VMVAP_btnCancel" style="background-color:#d24c56; padding-top:0px; color:#ffffff; font-weight:600; padding-left:0px; font-size:25px; padding-bottom:0px; background-image:none; padding-right:0px;" class="userInfo_btn" value="X">
+          <cl:xylayoutdata std:sid="xyl-data-3c1ae717" top="10px" right="10px" bottom="10px" left="5px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+        </cl:button>
+        <cl:xylayout std:sid="xylayout-f774285f"/>
+      </cl:group>
+      <cl:group std:sid="group-b3d5447a" style="background-color:#ffffff;">
+        <cl:listener std:sid="listener-5a16aa91" name="click" handler="onGroupClick"/>
+        <cl:formdata std:sid="f-data-f848aa36" row="2" col="3"/>
+        <cl:button std:sid="button-8554a84c" id="VMVAS1_btnSearchTarget" style="background-color:#ffffff; border-right-style:none; border-radius:0px; background-repeat:no-repeat; background-size:contain; border-left-style:none; border-bottom-style:none; background-image:url('../../../theme/images/kioskVisit/button_2.png'); background-position:center; border-top-style:none;">
+          <cl:xylayoutdata std:sid="xyl-data-0773cab9" top="10px" right="10px" bottom="10px" left="10px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+          <cl:iconstyle style="background-size:auto;"/>
+        </cl:button>
+        <cl:xylayout std:sid="xylayout-4335d194"/>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-546f63a7" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+        <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="8" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="8" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="2" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="2" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="2" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:responsivexylayout std:sid="r-xylayout-18890c9f"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

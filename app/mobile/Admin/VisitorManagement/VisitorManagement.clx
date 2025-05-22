@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-5848086d" version="1.0.0.0">
+  <head std:sid="head-16c282eb">
+    <title>VisitorManagement</title>
+    <screen std:sid="screen-6586185a" id="default" name="default" minwidth="1024px" width="1024px" height="768px" active="false"/>
+    <screen std:sid="screen-19534ecc" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-985a65f0" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px" active="true"/>
+    <cl:model std:sid="model-a46ae083">
+      <cl:dataset std:sid="d-set-f38fcae8" id="VisitInfoList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-c68bdd6e" name="VisitIndex" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-f71a0a36" name="VisitTargetID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-d39a8c3b" name="VisitTargetUserName"/>
+          <cl:datacolumn std:sid="d-column-19b34302" name="VisitTargetPositionName"/>
+          <cl:datacolumn std:sid="d-column-a384f3c2" name="VisitTargetGroupName"/>
+          <cl:datacolumn std:sid="d-column-7d5e469c" name="Purpose"/>
+          <cl:datacolumn std:sid="d-column-1a2bc85a" name="Password"/>
+          <cl:datacolumn std:sid="d-column-05e5cdfb" name="StartAt"/>
+          <cl:datacolumn std:sid="d-column-e80072ce" name="EndAt"/>
+          <cl:datacolumn std:sid="d-column-c9ce7fc4" name="RegistAt"/>
+          <cl:datacolumn std:sid="d-column-0b943b65" name="Status" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-3c23cfaf" name="VisitStatus" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-8b73e2e9" name="VisitorFirstName" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-92ef7d3f" name="VisitorLastName"/>
+          <cl:datacolumn std:sid="d-column-9c558bd5" name="VisitorCompany"/>
+          <cl:datacolumn std:sid="d-column-52426d5c" name="VisitorCount" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-d65c7cee" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-efa9ede5" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-951b7cd6" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-e1d710fa" name="Count" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-a8787b59" id="smsVisitApplication" withCredentials="true" method="get" action="/visit/visitApplication?Status=-1">
+        <cl:listener std:sid="listener-af5b8f92" name="before-submit" handler="onSmsVisitApplicationBeforeSubmit"/>
+        <cl:listener std:sid="listener-9b65a719" name="receive" handler="onSmsVisitApplicationReceive"/>
+        <cl:listener std:sid="listener-6f3a2a55" name="submit-done" handler="onSmsVisitApplicationSubmitDone"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="VisitInfoList"/>
+        <cl:responsedata dataid="Total"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-e7d016f9" style="background-color:#f2f2f2; top:0px; left:0px; width:800px; background-image:none; height:600px;">
+    <cl:listener std:sid="listener-befa948f" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-c5984d1b" style="background-color:#006938;">
+      <cl:xylayoutdata std:sid="xyl-data-28dc0089" top="0px" right="0px" left="0px" height="198px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+      <cl:udc std:sid="ud-control-e03c0761" type="udc.MobileStatusBar">
+        <cl:xylayoutdata std:sid="xyl-data-611149fb" top="0px" right="0px" left="0px" height="20px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+      </cl:udc>
+      <cl:output std:sid="output-f7f02d2c" id="pageName" style="color:#FFFFFF; font-weight:lighter; font-size:45px; text-align:center;">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_SideMenu_VisitManagement"/>
+        <cl:xylayoutdata std:sid="xyl-data-12ef0e0d" right="0px" left="0px" height="104px" horizontalAnchor="BOTH" verticalAnchor="CENTER"/>
+      </cl:output>
+      <cl:udc std:sid="ud-control-18b29407" id="navigationBar" type="udc.NavigationBar">
+        <cl:xylayoutdata std:sid="xyl-data-afcb8553" top="20px" right="21px" left="21px" height="30px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+        <cl:property name="rightIconVisible" value="true" type="boolean"/>
+        <cl:property name="leftIcon" value="Back" type="string"/>
+        <cl:property name="leftBtnPath" value="app/mobile/MainPage" type="string"/>
+        <cl:property name="rightIcon" value="Search" type="string"/>
+        <cl:property name="rightBtnPath" value="app/mobile/Admin/VisitorManagement/VisitorSearch" type="string"/>
+      </cl:udc>
+      <cl:xylayout std:sid="xylayout-8a6c4473"/>
+    </cl:group>
+    <cl:group std:sid="group-ae8d0f4c" id="visitorList" style="padding-left:21px; padding-right:21px;">
+      <cl:listener std:sid="listener-724ccc60" name="scroll" handler="onVisitorListScroll"/>
+      <cl:xylayoutdata std:sid="xyl-data-77a8c73c" top="198px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:verticallayout std:sid="v-layout-2e56f3e2" topmargin="20" bottommargin="20"/>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-32df30e4"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

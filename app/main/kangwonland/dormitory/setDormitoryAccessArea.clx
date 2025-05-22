@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-aa60242c" version="1.0.0.0">
+  <head std:sid="head-0c8035d3">
+    <title>setDormitoryAccessArea</title>
+    <screen std:sid="screen-647cbca9" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="500" customWidth="450"/>
+    <screen std:sid="screen-cd6b37f1" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-f2cd66b3" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-975ebe52">
+      <cl:dataset std:sid="d-set-271fb2e9" id="KwlAccessAreaList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-cd96cd17" name="ID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-5a60f461" name="Name"/>
+          <cl:datacolumn std:sid="d-column-1d3814ff" name="Floor"/>
+          <cl:datacolumn std:sid="d-column-839d475c" name="Timezone" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-08424b2c" name="AreaType" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-1cba6d4e" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-6b2f9031" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-58dd3a38" id="KwlAccessAreaInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-1ab542e5" name="ID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-2efb1760" name="AreaType" datatype="number" defaultvalue=""/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-6a392563" id="sms_getAccessArea" method="get" action="/v1/kangwonland/dormitory/accessarea">
+        <cl:listener std:sid="listener-8c3e771c" name="submit-done" handler="onSms_getAccessAreaSubmitDone"/>
+        <cl:listener std:sid="listener-2bcb367e" name="submit-error" handler="onSms_getAccessAreaSubmitError"/>
+        <cl:listener std:sid="listener-24a04fbc" name="submit-timeout" handler="onSms_getAccessAreaSubmitTimeout"/>
+        <cl:responsedata dataid="Result" isadd="true"/>
+        <cl:responsedata dataid="KwlAccessAreaList" isadd="true"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-e36ea42c" id="sms_putAccessArea" method="put">
+        <cl:listener std:sid="listener-592b0426" name="submit-done" handler="onSms_putAccessAreaSubmitDone"/>
+        <cl:listener std:sid="listener-af84ad6a" name="submit-error" handler="onSms_putAccessAreaSubmitError"/>
+        <cl:listener std:sid="listener-611b9587" name="submit-timeout" handler="onSms_putAccessAreaSubmitTimeout"/>
+        <cl:requestdata dataid="KwlAccessAreaInfo"/>
+        <cl:responsedata dataid="KwlAccessAreaInfo"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-99319492" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-851aa003" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-ec7e3991">
+      <cl:xylayoutdata std:sid="xyl-data-223e1622" top="1px" right="1px" bottom="1px" left="1px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-cbe37b6e">
+        <cl:formdata std:sid="f-data-6d73817d" row="0" col="0"/>
+        <cl:button std:sid="button-4b7ada5c" id="KWLSDAA_btnAddAccessArea" style="background-color:white; font-size:14px;" class="userInfo_btn" value="기숙사 구역 지정">
+          <cl:listener std:sid="listener-df3b4b1a" name="click" handler="onKWLSDAA_btnAddAccessAreaClick"/>
+          <cl:formdata std:sid="f-data-4b49cc2e" row="0" col="2"/>
+        </cl:button>
+        <cl:button std:sid="button-d0f3f61f" id="KWLSDAA_btnClose" style="background-color:white; font-size:14px;" class="userInfo_btn" value="종료">
+          <cl:listener std:sid="listener-d48916d5" name="click" handler="onKWLSDAA_btnCloseClick"/>
+          <cl:formdata std:sid="f-data-e80bd8bd" row="0" col="3"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-6ff129d1" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="120" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:grid std:sid="grid-56294e12" id="KWLSDAA_grdAccessAreaList" readonly="true" datasetid="KwlAccessAreaList" resizablecolumns="all">
+        <cl:formdata std:sid="f-data-6cee2f54" row="1" col="0"/>
+        <cl:gridcolumn std:sid="g-column-af20000e" width="25px"/>
+        <cl:gridcolumn std:sid="g-column-136eab96"/>
+        <cl:gridcolumn std:sid="g-column-b13bafd4"/>
+        <cl:gridcolumn std:sid="g-column-c5b2de4a"/>
+        <cl:gridheader std:sid="gh-band-9e33f8e2">
+          <cl:gridrow std:sid="g-row-9b431144"/>
+          <cl:gridcell std:sid="gh-cell-dde607ba" rowindex="0" colindex="0" sortable="false" filterable="false" columntype="checkbox"/>
+          <cl:gridcell std:sid="gh-cell-ee1cdbf6" rowindex="0" colindex="1" targetcolumnname="ID" sortable="false" filterable="false" text="아이디"/>
+          <cl:gridcell std:sid="gh-cell-9dce7494" rowindex="0" colindex="2" targetcolumnname="Name" sortable="false" filterable="false" text="명칭"/>
+          <cl:gridcell std:sid="gh-cell-5dca4834" rowindex="0" colindex="3" targetcolumnname="AreaType" sortable="false" filterable="false" text="구역 타입"/>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-2935748e">
+          <cl:gridrow std:sid="g-row-98d59a47"/>
+          <cl:gridcell std:sid="gd-cell-6d274563" rowindex="0" colindex="0" columntype="checkbox"/>
+          <cl:gridcell std:sid="gd-cell-a2931ad1" rowindex="0" colindex="1" columnname="ID"/>
+          <cl:gridcell std:sid="gd-cell-9d59250f" rowindex="0" colindex="2" columnname="Name"/>
+          <cl:gridcell std:sid="gd-cell-16a3c965" rowindex="0" colindex="3" columnname="AreaType">
+            <cl:combobox std:sid="c-box-fa6b9645" id="cmb1" style="text-align:center;">
+              <cl:item std:sid="item-0fc6bd0b" label="일반" value="0"/>
+              <cl:item std:sid="item-3a50d3a7" label="기숙사" value="1"/>
+            </cl:combobox>
+          </cl:gridcell>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:formlayout std:sid="f-layout-b0d6256b" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+        <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-8b3b2281"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

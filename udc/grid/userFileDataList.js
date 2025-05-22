@@ -1,0 +1,528 @@
+/************************************************
+ * userFileDataList.js
+ * Created at 2020. 8. 4. 오전 9:46:34.
+ *
+ * @author joymrk
+ ************************************************/
+var dataManager = cpr.core.Module.require("lib/DataManager");
+var udcUserList_enablePageIndexer = true;
+
+
+/*
+ * 루트 컨테이너에서 load 이벤트 발생 시 호출.
+ * 앱이 최초 구성된후 최초 랜더링 직후에 발생하는 이벤트 입니다.
+ */
+function onBodyLoad(/* cpr.events.CEvent */ e){
+	dataManager = getDataManager();
+	udcUserList_enablePageIndexer = true;
+	
+	var privilegeList = dataManager.getPrivilegeList();	
+
+	if( privilegeList ){
+		
+		
+		var cmbPrivilege = app.lookup("UDC_grdUserList_cmbPrivilege");	
+		cmbPrivilege.deleteAllItems();
+	
+		var ItemAdmin = new cpr.controls.Item(dataManager.getString("Str_Admin"),1);
+		var ItemNormalUser = new cpr.controls.Item(dataManager.getString("Str_NormalUser"),2);
+		
+		ItemAdmin.bind("label").toLanguage("Str_Admin");
+		ItemNormalUser.bind("label").toLanguage("Str_NormalUser");
+		
+		cmbPrivilege.addItem(ItemAdmin);
+		cmbPrivilege.addItem(ItemNormalUser);
+
+		if ( dataManager.getOemVersion() == OEM_JAWOONDAE) {
+			cmbPrivilege.addItem(new cpr.controls.Item(dataManager.getString("Str_JwdOtherUnit"), Jwd_Other_Unit));
+			cmbPrivilege.addItem(new cpr.controls.Item(dataManager.getString("Str_JwdForeign"), Jwd_Foreign));
+			cmbPrivilege.addItem(new cpr.controls.Item(dataManager.getString("Str_JwdResident"), Jwd_Resident));
+			cmbPrivilege.addItem(new cpr.controls.Item(dataManager.getString("Str_JwdAlways"), Jwd_Always));
+			cmbPrivilege.addItem(new cpr.controls.Item(dataManager.getString("Str_JwdSoldier"), Jwd_Soldier));
+			cmbPrivilege.addItem(new cpr.controls.Item(dataManager.getString("Str_JwdFamily"), Jwd_Family));	
+		}
+		cmbPrivilege.addItem(new cpr.controls.Item(dataManager.getString("Str_Visitor"), 10));
+		
+		//TODO : cmbPrivilege.addItem(new cpr.controls.Item(dataManager.getString("Str_Visitor"), 10));
+						
+		var count = privilegeList.getRowCount();
+		for ( var i = 0; i < count; i++ ){			
+			var privilegeInfo = privilegeList.getRow(i);						
+			cmbPrivilege.addItem(new cpr.controls.Item(privilegeInfo.getValue("Name"),privilegeInfo.getValue("PrivilegeID")));
+		}
+
+		/*
+		cmbPrivilege.setItemSet(privilegeList, {
+			label: "Name",
+			value: "PrivilegeID",
+		});
+		console.log(cmbPrivilege.getItems());
+		* */
+	
+		// 안티패스백 구역 이름 가져오기
+		var smsArea = app.lookup("sms_getAreas");
+		smsArea.send();
+	}
+}
+
+
+/**
+ * UDC 컨트롤이 그리드의 뷰 모드에서 표시할 텍스트를 반환합니다.
+ */
+exports.getText = function(){
+	// TODO: 그리드의 뷰 모드에서 표시할 텍스트를 반환하는 하는 코드를 작성해야 합니다.	
+	return "";
+};
+
+exports.enablePageIndexer = function( enable ){
+	udcUserList_enablePageIndexer = enable;
+	var pageIndex = app.lookup("userListPageIndexer");
+	if( udcUserList_enablePageIndexer == true ){		
+		pageIndex.visible = false;		
+	}else {
+		pageIndex.visible = false;
+	}
+}
+
+exports.getCheckedRowIndices = function() {
+	var userList = app.lookup("UDC_grdUserList");
+	var indices = userList.getCheckRowIndices();
+	var result = [];
+	indices.forEach(function(idx){
+		if(userList.getRowState(idx) != cpr.data.tabledata.RowState.DELETED ){
+			result.push(idx);
+		} else {
+			userList.setCheckRowIndex(idx, false);
+		}
+	});
+	return result;
+}
+
+exports.getSelectedID = function() {
+	var grdUserList = app.lookup("UDC_grdUserList");
+	var row = grdUserList.getSelectedRow();
+	if(row){
+		return row.getValue("ID")
+	}
+	return null
+}
+
+exports.getSelectedRowData = function() {
+	var grdUserList = app.lookup("UDC_grdUserList");
+	var row = grdUserList.getSelectedRow();
+	if(row){
+		return row.getRowData();
+	}
+	return null
+}
+
+exports.deleteColumn = function(indices){
+	if (indices==undefined || indices == null ){
+		return;
+	}
+	var gridUserList = app.lookup("UDC_grdUserList");
+	indices.forEach(function(index){
+		gridUserList.deleteColumn(index);
+	});	
+};
+
+exports.deleteRow = function(checkRow) {
+	var userList = app.lookup("UDC_grdUserList");
+	if( checkRow >= userList.getRowCount()){
+		return;
+	}
+	userList.deleteRow(checkRow);
+	userList.setCheckRowIndex(checkRow, false);
+	return;
+}
+
+exports.realDeleteRow = function(index) {
+	var userList = app.lookup("UserList");	
+	userList.realDeleteRow(index);	
+	return;
+}
+
+exports.deleteUser = function(deleteID) {
+	var userList = app.lookup("UDC_grdUserList");
+	var getUserInfo = userList.findFirstRow("ID == "+ deleteID);
+	
+	if (getUserInfo) {
+		userList.deleteRow(getUserInfo.getIndex());	
+	} 
+	return;
+}
+exports.setUserList = function( /*cpr.data.DataSet*/userDataSet ){
+			
+	var userListSet = app.lookup("UserList");
+	userListSet.clear();	
+	userDataSet.copyToDataSet(userListSet);	
+	
+	userListSet.setRowStateAll(cpr.data.tabledata.RowState.UNCHANGED);
+	
+	var userList = app.lookup("UDC_grdUserList");	
+	userList.redraw();
+}
+
+exports.clearUserList = function(  ){
+			
+	var pageIndex = app.lookup("userListPageIndexer");
+	pageIndex.totalRowCount = 0;
+	pageIndex.visible = false;	
+	pageIndex.redraw();
+	
+	var userListSet = app.lookup("UserList");
+	userListSet.clear();
+				
+	var userList = app.lookup("UDC_grdUserList");	
+	userList.redraw();
+}
+
+exports.setUserListRows = function( /*cpr.data.RowConfigInfo[]*/userData ){
+			
+	var userListSet = app.lookup("UserList"); 
+	userListSet.clear();	
+	userListSet.build(userData);	
+	userListSet.setRowStateAll(cpr.data.tabledata.RowState.UNCHANGED);
+	
+	var userList = app.lookup("UDC_grdUserList");	
+	userList.redraw();	
+}
+
+exports.getUserID = function( index ){
+	
+	var userList = app.lookup("UDC_grdUserList");
+	var userID = userList.getRow(index).getString("ID");
+	return userID;
+}
+
+exports.getRowData = function( index ){
+	
+	var userList = app.lookup("UDC_grdUserList");
+	return userList.getRow(index).getRowData();	
+}
+
+exports.updateUserInfo = function( userInfoData ){
+	
+	var groupList = dataManager.getGroup();
+	if( groupList && groupList.getRowCount()>0){
+		var cmbGroup = app.lookup("userListGrid_cmbGroup");
+		var count = groupList.getRowCount();
+		for ( var i = 0; i < count; i++ ){			
+			var groupInfo = groupList.getRow(i);						
+			cmbGroup.addItem(new cpr.controls.Item(groupInfo.getValue("Name"),groupInfo.getValue("GroupID")));
+		}	
+	}
+	
+	var positionList = dataManager.getPositionList();
+	if( positionList && positionList.getRowCount()>0){
+		var cmbPosition = app.lookup("userListGrid_cmbPosition");
+		var count = positionList.getRowCount();
+		for ( var i = 0; i < count; i++ ){			
+			var positionInfo = positionList.getRow(i);						
+			cmbPosition.addItem(new cpr.controls.Item(positionInfo.getValue("Name"),positionInfo.getValue("PositionID")));
+		}	
+	}
+	
+	var accessGroupList = dataManager.getAccessGroup();
+	if( accessGroupList && accessGroupList.getRowCount()>0){
+		var cmbAccessGroup = app.lookup("userListGrid_cmbAccessGroup");
+		var count = accessGroupList.getRowCount();
+		for ( var i = 0; i < count; i++ ){			
+			var accessGroupInfo = accessGroupList.getRow(i);						
+			cmbAccessGroup.addItem(new cpr.controls.Item(accessGroupInfo.getValue("Name"),accessGroupInfo.getValue("ID")));
+		}
+	}
+	
+	
+	var dsUserList = app.lookup("UserList");
+	var userInfo = dsUserList.findFirstRow("ID == '"+userInfoData.ID+"'");
+	if(userInfo){
+		
+		userInfo.setRowData(userInfoData);
+		
+		var AuthType = userInfo.getValue("AuthInfo").split(',');
+				
+		var setCount = 0;
+		var andAuth = "";
+		for( var idx=0; idx < AuthType[7]; idx++ ){		
+			if(AuthType[idx]!="0"){
+				andAuth += getAuthTypeString( parseInt(AuthType[idx],10))+" ";
+				setCount++;
+			}	
+		}
+		var orAuth = "";	
+		for( var idx=AuthType[7]; idx< AuthType.length-1; idx++ ){		
+			if(AuthType[idx]!="0"){
+				orAuth += getAuthTypeString( parseInt(AuthType[idx],10))+" ";
+				setCount++;
+			}
+		}
+			
+		if( setCount > 1 ){
+			userInfo.setValue("AuthInfo",andAuth+"/ "+orAuth);
+		} else {
+			userInfo.setValue("AuthInfo",andAuth+orAuth);
+		}		
+	}	
+}
+
+exports.getRow = function( index ){
+	
+	var userList = app.lookup("UDC_grdUserList");
+	return userList.getRow(index);	
+}
+
+exports.getRowState = function( index ){
+	
+	var userList = app.lookup("UDC_grdUserList");
+	return userList.getRowState(index);	
+}
+
+exports.setRowState = function(index, state){
+	var dsUserList = app.lookup("UserList");
+	dsUserList.setRowState(index, state);
+}
+/*
+ * make bisangoo
+ */
+exports.setUnCheckAll = function(idx,checked){
+	var userList = app.lookup("UDC_grdUserList");
+	var indices = userList.getCheckRowIndices();
+	
+	indices.forEach(function(idx){
+		userList.setCheckRowIndex(idx, false);		
+	});
+} 
+
+exports.getAreaName = function(areaID){
+	var cmbAreaList = app.lookup("UDC_grdUserList_cmbApbArea");
+	var areaName = cmbAreaList.getItemByValue(areaID);
+	if (!areaName){
+		areaName = "";
+	}
+	return areaName.label;
+}
+
+/**
+ * 사용자 리스트 컨트롤의 페이징 정보를 설정합니다.
+ */
+exports.setPaging = function( totalCount, currentPageIndex, pageRowCount, viewPageCount ) {
+	var pageIndex = app.lookup("userListPageIndexer");
+	
+	pageIndex.totalRowCount = totalCount;//전체 데이터 수.
+	pageIndex.currentPageIndex = currentPageIndex;//현재 선택된 페이지의 인덱스
+	pageIndex.pageRowCount = pageRowCount;//한 페이지에 보여 줄 행의 수
+	pageIndex.viewPageCount = viewPageCount;// 보여지는 페이지 수(하단 부 인덱스 수)
+	
+	if( udcUserList_enablePageIndexer == true ){
+		if(totalCount == 0) {
+			pageIndex.visible = false;
+		} else {
+			pageIndex.visible = true;
+		}
+	}else {
+		pageIndex.visible = false;
+	}
+	
+	pageIndex.redraw();
+}
+
+exports.setPaging = function( totalCount, pageRowCount, viewPageCount ) {
+	var pageIndex = app.lookup("userListPageIndexer");
+	
+	pageIndex.totalRowCount = totalCount;//전체 데이터 수.
+	//pageIndex.currentPageIndex = currentPageIndex;//현재 선택된 페이지의 인덱스
+	pageIndex.pageRowCount = pageRowCount;//한 페이지에 보여 줄 행의 수
+	pageIndex.viewPageCount = viewPageCount;// 보여지는 페이지 수(하단 부 인덱스 수)
+		
+	if( udcUserList_enablePageIndexer == true ){
+		if(totalCount == 0) {
+			pageIndex.visible = false;
+		} else {
+			pageIndex.visible = true;
+		}
+	}else {
+		pageIndex.visible = false;
+	}
+	pageIndex.redraw();
+}
+
+exports.setTotalCount = function(totalCount) {
+	
+	var pageIndex = app.lookup("userListPageIndexer");
+	pageIndex.totalRowCount = totalCount
+	
+	if( udcUserList_enablePageIndexer == true ){
+		if(totalCount == 0) {
+			pageIndex.visible = false;
+		} else {
+			pageIndex.visible = true;
+		}
+	}else {
+		pageIndex.visible = false;
+	}
+	
+	pageIndex.redraw();
+}
+
+exports.getCurrentPageIndex = function() {	
+	var pageIndex = app.lookup("userListPageIndexer");
+	return pageIndex.currentPageIndex
+}
+
+exports.setCurrentPageIndex = function(index) {	
+	var pageIndex = app.lookup("userListPageIndexer");	
+	pageIndex.currentPageIndex = index;	
+}
+
+exports.setPageRowCount = function(count) {	
+	var pageIndex = app.lookup("userListPageIndexer");	
+	pageIndex.pageRowCount = count;	
+}
+
+exports.getPageRowCount = function() {	
+	var pageIndex = app.lookup("userListPageIndexer");	
+	return pageIndex.pageRowCount;	
+}
+
+exports.refreshUserList = function(idMap){
+	var dsUserList = app.lookup("UserList");
+	
+	var total = dsUserList.getRowCount();
+	for ( var i = 0; i < total; i++){		
+		var row = dsUserList.getRow(i);		
+		if (row){
+			var userID = row.getValue("ID");
+									
+			if( idMap.get(userID) != undefined ){
+				dsUserList.setRowState(i,cpr.data.tabledata.RowState.DELETED);	
+			} else {				
+				dsUserList.setRowState(i,cpr.data.tabledata.RowState.UNCHANGED);
+			}
+		} 
+	}
+	
+	var userList = app.lookup("UDC_grdUserList");
+	userList.redraw();
+}
+
+/*
+ * make bisangoo
+ */
+exports.getIsCheckedRow = function(rowIndex) {
+	var userList = app.lookup("UDC_grdUserList");
+	return userList.isCheckedRow(rowIndex);
+}
+
+/*
+ * make bisangoo
+ */
+exports.refreshCheckboxStatus = function(idMap) {
+	var userList = app.lookup("UDC_grdUserList");
+	var total = userList.getRowCount();
+	for(var i =0; i < total; i++) {
+		var row = userList.getRow(i);
+		if(row) {
+			var userID = row.getValue("ID");
+			if( idMap.get(userID) != undefined ){
+				userList.setCheckRowIndex(i, true);	
+			} else {				
+				userList.setCheckRowIndex(i, false);
+			}
+		}
+	}
+	userList.redraw();
+}
+
+/*
+ * 페이지 인덱서에서 before-selection-change 이벤트 발생 시 호출.
+ * Page index를 선택하여 선택된 페이지가 변경되기 전에 발생하는 이벤트. 다음 이벤트로 selection-change를 발생합니다.
+ */
+function onUserListPageIndexerBeforeSelectionChange(/* cpr.events.CSelectionEvent */ e){
+	/** 
+	 * @type cpr.controls.PageIndexer
+	 */
+	var userListPageIndexer = e.control;
+	
+	var selectionEvent = new cpr.events.CSelectionEvent("before-pagechange", {
+		oldSelection: e.oldSelection,
+		newSelection: e.newSelection
+	});
+	
+	app.dispatchEvent(selectionEvent);
+	
+	// 기본처리가 중단되었을 때 변경을 취소함.
+	if(selectionEvent.defaultPrevented == true) {
+		e.preventDefault();
+	}
+}
+
+
+/*
+ * 페이지 인덱서에서 selection-change 이벤트 발생 시 호출.
+ * Page index를 선택하여 선택된 페이지가 변경된 후에 발생하는 이벤트.
+ */
+function onUserListPageIndexerSelectionChange(/* cpr.events.CSelectionEvent */ e){
+	/** 
+	 * @type cpr.controls.PageIndexer
+	 */
+	var userListPageIndexer = e.control;
+	
+	var selectionEvent = new cpr.events.CSelectionEvent("pagechange", {
+		oldSelection: e.oldSelection,
+		newSelection: e.newSelection
+	});
+	
+	app.dispatchEvent(selectionEvent);
+	
+}
+
+
+/*
+ * 그리드에서 dblclick 이벤트 발생 시 호출.
+ * 사용자가 컨트롤을 더블 클릭할 때 발생하는 이벤트.
+ */
+function onUDC_grdUserListDblclick(/* cpr.events.CMouseEvent */ e){
+	
+	/** 
+	 * @type cpr.controls.Grid
+	 */
+	var uDC_grdUserList = e.control;
+	
+	var gridEvent = new cpr.events.CGridEvent("userListDblclick", {
+		 row:e.row
+	});
+	
+	app.dispatchEvent(gridEvent);
+}
+
+
+/*
+ * 그리드에서 selection-change 이벤트 발생 시 호출.
+ * detail의 cell 클릭하여 설정된 selectionunit에 해당되는 단위가 선택될 때 발생하는 이벤트.
+ */
+function onUDC_grdUserListSelectionChange(/* cpr.events.CSelectionEvent */ e){
+	/** 
+	 * @type cpr.controls.Grid
+	 */
+	var uDC_grdUserList = e.control;
+	var gridRow = uDC_grdUserList.getRow(e.newSelection[0]);
+	
+	var selectionEvent = new cpr.events.CSelectionEvent("userListClick", {		
+		oldSelection: e.oldSelection,
+		newSelection: gridRow
+	});
+		
+	app.dispatchEvent(selectionEvent);
+}
+
+function onSms_getAreasSubmitDone(/* cpr.events.CSubmissionEvent */ e){
+	var apbList = app.lookup("AreaList");
+	if (apbList.getRowCount() > 0) {
+		var cmbAPB = app.lookup("UDC_grdUserList_cmbApbArea");
+		cmbAPB.setItemSet(apbList, {
+			label: "Name",
+			value: "AreaID"
+		});
+	}
+}

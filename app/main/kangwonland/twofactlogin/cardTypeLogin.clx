@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-b197417f" version="1.0.0.0">
+  <head std:sid="head-d4ee3156">
+    <title>cardTypeLogin</title>
+    <screen std:sid="screen-91fc88ce" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="200" customWidth="400"/>
+    <screen std:sid="screen-f6afae9c" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-340f24c7" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-ca6d127b">
+      <cl:datamap std:sid="d-map-4685bbe0" id="CardTypeLoginInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-fdec05e6" name="UserID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-6901f2df" name="CardNum"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:dataset std:sid="d-set-5aebe324" id="dsCardLayoutData">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-4c41f539" name="Index" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-fad13739" name="Sector" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-75c5b5a4" name="Block" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-ab5f8204" name="Start" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-d0337204" name="Length" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-2f7f796c" name="KeyType" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-05e52b47" name="KeyValue"/>
+          <cl:datacolumn std:sid="d-column-a41b4f3a" name="AIDCode"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-3cc8aaae" id="dmCardLayoutInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-ef2c355c" info="지문 카드용량" name="CardSize" datatype="number" defaultvalue="1"/>
+          <cl:datacolumn std:sid="d-column-7860a5c6" info="카드종류" name="CardType" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-6f2ff262" info="카드 읽기 구분" name="ReadType" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-12bd32ff" info="지문 템플릿" name="TemplateSize" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-6c2cce17" info="지문 Template 개수" name="TemplateCount" datatype="number" defaultvalue="0"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-d839c4bc" id="sms_getCardInfo" method="get" action="/v1/cardLayout">
+        <cl:listener std:sid="listener-a02ef166" name="submit-done" handler="onSms_getCardInfoSubmitDone"/>
+        <cl:listener std:sid="listener-1cc25405" name="submit-error" handler="onSms_getCardInfoSubmitError"/>
+        <cl:listener std:sid="listener-0c0b90c0" name="submit-timeout" handler="onSms_getCardInfoSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="dmCardLayoutInfo"/>
+        <cl:responsedata dataid="dsCardLayoutData"/>
+      </cl:submission>
+      <cl:datamap std:sid="d-map-78a7689a" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-86939dff" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-a389992c" id="sms_postCardTypLogin" action="/v1/kangwonland/login/card">
+        <cl:listener std:sid="listener-c6d67844" name="submit-done" handler="onSms_postCardTypLoginSubmitDone"/>
+        <cl:listener std:sid="listener-959f9dca" name="submit-error" handler="onSms_postCardTypLoginSubmitError"/>
+        <cl:listener std:sid="listener-e36de171" name="submit-timeout" handler="onSms_postCardTypLoginSubmitTimeout"/>
+        <cl:requestdata dataid="CardTypeLoginInfo"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-4a164c8f" id="sms_logout" method="get" action="/v1/logout"/>
+    </cl:model>
+    <cl:appspec dev-comment="TFCLG"/>
+  </head>
+  <body std:sid="body-6f2662b5" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-4ee180bf" name="load" handler="onBodyLoad"/>
+    <cl:listener std:sid="listener-867f17c1" name="before-unload" handler="onBodyBeforeUnload"/>
+    <cl:listener std:sid="listener-a04b2474" name="dispose" handler="onBodyDispose"/>
+    <cl:group std:sid="group-42a6ae4c">
+      <cl:xylayoutdata std:sid="xyl-data-8cc1b763" top="1px" right="1px" bottom="1px" left="1px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-99ba44cb" id="TFCLG_grpTopMain">
+        <cl:formdata std:sid="f-data-bd072a8a" row="0" col="0"/>
+        <cl:output std:sid="output-a53f7c46" id="TFCLG_opbMessage" value="Output">
+          <cl:formdata std:sid="f-data-b271b870" row="0" col="0"/>
+        </cl:output>
+        <cl:htmlsnippet std:sid="htmlsnippet-e08e4344" id="TFCLG_sniDownloadLink" visible="false">
+          <cl:formdata std:sid="f-data-474fb194" row="1" col="0"/>
+        </cl:htmlsnippet>
+        <cl:htmlsnippet std:sid="htmlsnippet-bb8e855b" id="TFCLG_sniDownloadLink2" visible="false">
+          <cl:formdata std:sid="f-data-c228f9e8" row="2" col="0"/>
+        </cl:htmlsnippet>
+        <cl:formlayout std:sid="f-layout-5f8c1250" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-39fabb47">
+        <cl:formdata std:sid="f-data-9a3b80de" row="1" col="0"/>
+        <cl:output std:sid="output-fa24b3a5" style="padding-top:5px; font-weight:bold; padding-left:5px; padding-bottom:5px; font-size:15px; font-style:normal; text-align:center; padding-right:5px;" class="userInfo_bold" value="카드번호">
+          <cl:formdata std:sid="f-data-bd3e62b0" row="0" col="0"/>
+        </cl:output>
+        <cl:button std:sid="button-67310a26" id="TFCLG_btnScan" style="font-weight:bold; font-size:15px; font-style:normal; text-align:center;" class="userInfo_btn" value="스 캔">
+          <cl:listener std:sid="listener-56ebd261" name="click" handler="onTFCLG_btnScanClick"/>
+          <cl:formdata std:sid="f-data-2b4e996a" row="0" col="2"/>
+        </cl:button>
+        <cl:inputbox std:sid="i-box-aacb2992" id="TFCLG_ipbCardNum" style="font-weight:bold; font-size:15px; text-align:center;">
+          <cl:datamapbind property="value" datacontrolid="CardTypeLoginInfo" columnname="CardNum"/>
+          <cl:formdata std:sid="f-data-70be209c" row="0" col="1"/>
+        </cl:inputbox>
+        <cl:formlayout std:sid="f-layout-d5d5caac" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="2" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:button std:sid="button-4162a58b" style="font-weight:bold; text-align:center;" class="userInfo_btn" value="2차 인증 ">
+        <cl:listener std:sid="listener-10a739ca" name="click" handler="onButtonClick"/>
+        <cl:formdata std:sid="f-data-faee9db3" row="2" col="0"/>
+      </cl:button>
+      <cl:formlayout std:sid="f-layout-b922a206" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+        <cl:rows length="105" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-b6d2ac80"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

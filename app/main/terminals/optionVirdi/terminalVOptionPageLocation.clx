@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-b0796afb" version="1.0.0.0">
+  <head std:sid="head-c69f4814">
+    <title>terminalVOptionPageLocation</title>
+    <screen std:sid="screen-896ea17a" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="400" customWidth="700"/>
+    <screen std:sid="screen-af645375" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-ad941d98" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-045a0ebe">
+      <cl:datamap std:sid="d-map-f6c406cc" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-54fae956" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-739cb1e6" id="TerminalCustomHDHI">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-0a80e8b2" name="TerminalID" datatype="number"/>
+          <cl:datacolumn comment="소속 부서" std:sid="d-column-768ad397" name="GroupID" datatype="number"/>
+          <cl:datacolumn comment="소속 협력사" std:sid="d-column-3ca43435" name="PartnerID" datatype="string"/>
+          <cl:datacolumn comment="건물명" std:sid="d-column-f270ed49" name="BuildingName"/>
+          <cl:datacolumn comment="건물번호" std:sid="d-column-e70efaf8" name="BuildingNumber"/>
+          <cl:datacolumn comment="구분1" std:sid="d-column-7009b430" name="Part1"/>
+          <cl:datacolumn comment="구분2" std:sid="d-column-49d1986c" name="Part2"/>
+          <cl:datacolumn comment="구분3" std:sid="d-column-da45849f" name="Part3"/>
+          <cl:datacolumn comment="비고" std:sid="d-column-7e751758" name="Remark"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-08a239e7" id="sms_getTerminalCustomHI" method="get" action="/v1/hdhi/terminals/location/">
+        <cl:listener std:sid="listener-70c0b285" name="submit-done" handler="onSms_getTerminalCustomHISubmitDone"/>
+        <cl:listener std:sid="listener-55642d06" name="submit-error" handler="onSms_getTerminalCustomHISubmitError"/>
+        <cl:listener std:sid="listener-9e81f6ca" name="submit-timeout" handler="onSms_getTerminalCustomHISubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="TerminalCustomHDHI"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-32d591ae" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-4d38bab5" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-41529aa4" id="location_group" style="padding-top:10px; padding-left:10px; padding-bottom:10px; padding-right:10px;">
+      <cl:xylayoutdata std:sid="xyl-data-557a65b5" top="0px" left="0px" width="700px" height="400px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      <cl:group std:sid="group-dbe59ce2" style="border-top-width:1px; border-bottom-color:#c5c5c5; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid;">
+        <cl:formdata std:sid="f-data-5c136437" row="1" col="1"/>
+        <cl:combobox std:sid="c-box-a8da45a8" id="TMIL_cmbDepartment" style="font-size:14px; text-align:center;">
+          <cl:listener std:sid="listener-8c86f3d5" name="selection-change" handler="onValueChange"/>
+          <cl:datamapbind property="value" datacontrolid="TerminalCustomHDHI" columnname="GroupID"/>
+          <cl:xylayoutdata std:sid="xyl-data-ec26a5c2" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+        </cl:combobox>
+        <cl:xylayout std:sid="xylayout-f3ca40e8"/>
+      </cl:group>
+      <cl:output std:sid="output-db9f8757" style="font-weight:700; font-size:14px;">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_InstallationLocation"/>
+        <cl:formdata std:sid="f-data-25287e7b" row="0" col="0" rowspan="1" colspan="2"/>
+      </cl:output>
+      <cl:output std:sid="output-281ca90e" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-top-color:#c5c5c5; border-right-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid; text-align:center;">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_EXDB_PART"/>
+        <cl:formdata std:sid="f-data-5c28d6b2" row="1" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-8705c716" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-right-color:#c5c5c5; border-bottom-style:solid; border-top-style:none; text-align:center;">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_PartnerCompany"/>
+        <cl:formdata std:sid="f-data-1aa87719" row="2" col="0"/>
+      </cl:output>
+      <cl:group std:sid="group-8d030b57" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid; border-top-style:none;">
+        <cl:formdata std:sid="f-data-e7abe4dd" row="2" col="1"/>
+        <cl:combobox std:sid="c-box-81942d80" id="TMIL_cmbPatner" style="font-size:14px; text-align:center;">
+          <cl:listener std:sid="listener-4b3e1930" name="selection-change" handler="onValueChange"/>
+          <cl:datamapbind property="value" datacontrolid="TerminalCustomHDHI" columnname="PartnerID"/>
+          <cl:xylayoutdata std:sid="xyl-data-caacd543" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+        </cl:combobox>
+        <cl:xylayout std:sid="xylayout-a4454af1"/>
+      </cl:group>
+      <cl:output std:sid="output-456ba52e" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-right-color:#c5c5c5; border-bottom-style:solid; border-top-style:none; text-align:center;">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_BuildingName"/>
+        <cl:formdata std:sid="f-data-2492343d" row="3" col="0"/>
+      </cl:output>
+      <cl:group std:sid="group-43785a4d" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid; border-top-style:none;">
+        <cl:formdata std:sid="f-data-90977257" row="3" col="1"/>
+        <cl:inputbox std:sid="i-box-eabd5219" id="TMIL_ipbBuildingName" style="padding-left:3px; font-size:14px; text-align:center; padding-right:3px;" maxlength="30">
+          <cl:listener std:sid="listener-f333cc3d" name="value-change" handler="onValueChange"/>
+          <cl:datamapbind property="value" datacontrolid="TerminalCustomHDHI" columnname="BuildingName"/>
+          <cl:xylayoutdata std:sid="xyl-data-6bdc6aba" top="2px" right="4px" left="4px" height="24px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+        </cl:inputbox>
+        <cl:xylayout std:sid="xylayout-a1089de2"/>
+      </cl:group>
+      <cl:output std:sid="output-05aa4ace" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-right-color:#c5c5c5; border-bottom-style:solid; border-top-style:none; text-align:center;">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_BuildingNumber"/>
+        <cl:formdata std:sid="f-data-faefd078" row="4" col="0"/>
+      </cl:output>
+      <cl:group std:sid="group-dd54ed63" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid; border-top-style:none;">
+        <cl:formdata std:sid="f-data-a73f83f3" row="4" col="1"/>
+        <cl:inputbox std:sid="i-box-5dace3c8" id="TMIL_ipbBuildingNumber" style="padding-left:3px; font-size:14px; text-align:center; padding-right:3px;" maxlength="12">
+          <cl:listener std:sid="listener-48e2b42d" name="value-change" handler="onValueChange"/>
+          <cl:datamapbind property="value" datacontrolid="TerminalCustomHDHI" columnname="BuildingNumber"/>
+          <cl:xylayoutdata std:sid="xyl-data-d451af2e" top="2px" right="4px" left="4px" height="24px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+        </cl:inputbox>
+        <cl:xylayout std:sid="xylayout-7193b15e"/>
+      </cl:group>
+      <cl:output std:sid="output-e1b22667" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-right-color:#c5c5c5; border-bottom-style:solid; border-top-style:none; text-align:center;">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_Part1"/>
+        <cl:formdata std:sid="f-data-af68efc2" row="5" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-b0ac39f9" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-right-color:#c5c5c5; border-bottom-style:solid; border-top-style:none; text-align:center;">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_Part2"/>
+        <cl:formdata std:sid="f-data-476794d0" row="6" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-f9866314" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-right-color:#c5c5c5; border-bottom-style:solid; border-top-style:none; text-align:center;">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_Part3"/>
+        <cl:formdata std:sid="f-data-fe15e04c" row="7" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-e24ba009" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-right-color:#c5c5c5; border-bottom-style:solid; border-top-style:none; text-align:center;">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_Remarks"/>
+        <cl:formdata std:sid="f-data-0637b6f7" row="8" col="0"/>
+      </cl:output>
+      <cl:group std:sid="group-41d6dc9b" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid; border-top-style:none;">
+        <cl:formdata std:sid="f-data-b69a0d1a" row="5" col="1"/>
+        <cl:inputbox std:sid="i-box-8cc76062" id="TMIL_ipbPart1" style="padding-left:3px; font-size:14px; text-align:center; padding-right:3px;" maxlength="20">
+          <cl:listener std:sid="listener-459d39f1" name="value-change" handler="onValueChange"/>
+          <cl:datamapbind property="value" datacontrolid="TerminalCustomHDHI" columnname="Part1"/>
+          <cl:xylayoutdata std:sid="xyl-data-b5243573" top="2px" right="4px" left="4px" height="24px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+        </cl:inputbox>
+        <cl:xylayout std:sid="xylayout-e6cddaa9"/>
+      </cl:group>
+      <cl:group std:sid="group-4a1225ff" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid; border-top-style:none;">
+        <cl:formdata std:sid="f-data-56d9123a" row="6" col="1"/>
+        <cl:inputbox std:sid="i-box-a276dd03" id="TMIL_ipbPart2" style="padding-left:3px; font-size:14px; text-align:center; padding-right:3px;" maxlength="20">
+          <cl:listener std:sid="listener-d1c1b034" name="value-change" handler="onValueChange"/>
+          <cl:datamapbind property="value" datacontrolid="TerminalCustomHDHI" columnname="Part2"/>
+          <cl:xylayoutdata std:sid="xyl-data-50c3e9bb" top="2px" right="4px" left="4px" height="24px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+        </cl:inputbox>
+        <cl:xylayout std:sid="xylayout-60760dd0"/>
+      </cl:group>
+      <cl:group std:sid="group-08bcbd80" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid; border-top-style:none;">
+        <cl:formdata std:sid="f-data-ff579c0a" row="7" col="1"/>
+        <cl:inputbox std:sid="i-box-62912e04" id="TMIL_ipbPart3" style="padding-left:3px; font-size:14px; text-align:center; padding-right:3px;" maxlength="20">
+          <cl:listener std:sid="listener-22ea6a2d" name="value-change" handler="onValueChange"/>
+          <cl:datamapbind property="value" datacontrolid="TerminalCustomHDHI" columnname="Part3"/>
+          <cl:xylayoutdata std:sid="xyl-data-93e1fd7e" top="2px" right="4px" left="4px" height="24px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+        </cl:inputbox>
+        <cl:xylayout std:sid="xylayout-ae48c265"/>
+      </cl:group>
+      <cl:group std:sid="group-c3aaadca" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid; border-top-style:none;">
+        <cl:formdata std:sid="f-data-05e68093" row="8" col="1"/>
+        <cl:inputbox std:sid="i-box-57e64466" id="TMIL_ipbRemark" style="padding-left:3px; font-size:14px; text-align:center; padding-right:3px;" maxlength="80">
+          <cl:listener std:sid="listener-dc3e59dd" name="value-change" handler="onValueChange"/>
+          <cl:datamapbind property="value" datacontrolid="TerminalCustomHDHI" columnname="Remark"/>
+          <cl:xylayoutdata std:sid="xyl-data-e01e351d" top="2px" right="4px" left="4px" height="24px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+        </cl:inputbox>
+        <cl:xylayout std:sid="xylayout-dac9c4d1"/>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-6f58de95" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="3" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="5" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-8c069ca5"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

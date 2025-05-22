@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-ed4fa239" version="1.0.0.0">
+  <head std:sid="head-8b30aa18">
+    <title>positionManagement</title>
+    <screen std:sid="screen-376021e3" id="tablet" name="tablet" minwidth="500px" width="500px" height="667px" useCustomWidth="true" useCustomHeight="true" customHeight="400" customWidth="400"/>
+    <screen std:sid="screen-7d39379f" id="default" name="default" minwidth="400px" maxwidth="499px" width="400px" height="600px"/>
+    <screen std:sid="screen-dd007b15" id="mobile" name="mobile" maxwidth="399px" width="350px" height="525px"/>
+    <cl:model std:sid="model-7d974faa">
+      <cl:dataset std:sid="d-set-48fb901c" id="PositionList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-549971d5" name="PositionID"/>
+          <cl:datacolumn std:sid="d-column-a18270db" name="Name"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-e077c769" id="MenuList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-08063044" name="MenuID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-eabc0de2" name="ParentID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-a812dcaa" name="Name"/>
+          <cl:datacolumn std:sid="d-column-39ee863f" name="PosX" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-7c5664b9" name="PosY" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-adb232f7" name="Src"/>
+          <cl:datacolumn std:sid="d-column-3a6a20ca" name="Image"/>
+          <cl:datacolumn std:sid="d-column-714bed65" name="LicenseCode" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-cb113d7d" name="Description"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-1e66286b" id="Posioninfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-4568251b" info="" name="PositionID" datatype="number" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-211f359e" name="Name"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-7fcb2a91" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-911d7ad1" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-14c9ad4e" id="tmp">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-3dbed3fe" name="total" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-27898f49" id="sms_getPosition" method="get" action="/v1/positions">
+        <cl:responsedata dataid="PositionList"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-22d10b06" id="sms_delPosition" method="delete" action="/v1/positions/" mediatype="application/x-www-form-urlencoded">
+        <cl:listener std:sid="listener-5d9593ea" name="submit-done" handler="onSms_delPositionSubmitDone"/>
+        <cl:listener std:sid="listener-21008d3f" name="submit-error" handler="onSms_delPositionSubmitError"/>
+        <cl:listener std:sid="listener-0f2d929d" name="submit-timeout" handler="onSms_delPositionSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-77bc31b1" id="sms_postPosition" action="/v1/positions" mediatype="application/x-www-form-urlencoded" responsetype="text">
+        <cl:listener std:sid="listener-3003b1d4" name="submit-done" handler="onSms_postPositionSubmitDone"/>
+        <cl:listener std:sid="listener-df8f8a6f" name="submit-error" handler="onSms_postPositionSubmitError"/>
+        <cl:listener std:sid="listener-f983ab18" name="submit-timeout" handler="onSms_postPositionSubmitTimeout"/>
+        <cl:requestdata dataid="Posioninfo"/>
+        <cl:responsedata dataid="Result" isadd="true"/>
+        <cl:responsedata dataid="tmp"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-034b3540" id="sms_putPosition" method="put" action="/v1/positions" mediatype="application/x-www-form-urlencoded" responsetype="text">
+        <cl:listener std:sid="listener-9aec59da" name="submit-done" handler="onSms_putPositionSubmitDone"/>
+        <cl:listener std:sid="listener-797567b5" name="submit-error" handler="onSms_putPositionSubmitError"/>
+        <cl:listener std:sid="listener-3358f6a1" name="submit-timeout" handler="onSms_putPositionSubmitTimeout"/>
+        <cl:requestdata dataid="Posioninfo"/>
+        <cl:responsedata dataid="Result" isadd="true"/>
+        <cl:responsedata dataid="tmp"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec dev-comment=";./data/position.json -- json 테스트 용 (정상 작동)"/>
+  </head>
+  <body std:sid="body-c2d78616" style="padding:10px; top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-047bbc39" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-cfd60d25" style="padding:0px;">
+      <cl:xylayoutdata std:sid="xyl-data-31818763" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:grid std:sid="grid-b02d02fc" id="STMGR_grdPositionList" readonly="false" datasetid="PositionList" showdeletedrow="false" autofit="all" clickmode="edit" resizablecolumns="all" columnMovable="false">
+        <cl:listener std:sid="listener-24f276c1" name="click" handler="onSTMGR_grdPositionListClick"/>
+        <cl:formdata std:sid="f-data-081633af" row="1" col="0"/>
+        <cl:gridcolumn std:sid="g-column-3013ea2a" width="205px"/>
+        <cl:gridcolumn std:sid="g-column-9a115fce" width="75px"/>
+        <cl:gridcolumn std:sid="g-column-697955b7" width="75px"/>
+        <cl:gridheader std:sid="gh-band-e1851c79">
+          <cl:gridrow std:sid="g-row-bc7de842"/>
+          <cl:gridcell std:sid="gh-cell-1341f821" rowindex="0" colindex="0" targetcolumnname="Name" sortable="true" filterable="false" text="Name">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_PositionName"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-3a8f1b75" rowindex="0" colindex="1" rowspan="1" colspan="2"/>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-7104b52c">
+          <cl:gridrow std:sid="g-row-0f5973f0"/>
+          <cl:gridcell std:sid="gd-cell-3e8792da" rowindex="0" colindex="0" columnname="Name">
+            <cl:inputbox std:sid="i-box-4eeb85e5" id="ipb2" style="font-size:14px; text-align:center;" maxlength="32">
+              <cl:listener std:sid="listener-3676e1eb" name="keyup" handler="onIpb2Keyup"/>
+            </cl:inputbox>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-022e95ae" rowindex="0" colindex="2" columnname="">
+            <cl:button std:sid="button-b4aa835a" id="STMGR_btnDelete" style="border-radius:5px; padding:0px;" class="userInfo_btn">
+              <cl:listener std:sid="listener-1e0a1389" name="click" handler="onSTMGR_btnDeleteClick"/>
+              <cl:langbind property="value" category="PROPERTY" keypath="Str_Delete"/>
+            </cl:button>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-560ab3ec" rowindex="0" colindex="1" columnname="">
+            <cl:button std:sid="button-3d8ae75c" id="STMGR_btnApply" style="border-radius:5px; padding:0px;" class="userInfo_btn">
+              <cl:listener std:sid="listener-1b3716f1" name="click" handler="onSTMGR_btnApplyClick"/>
+              <cl:langbind property="value" category="PROPERTY" keypath="Str_Apply"/>
+            </cl:button>
+          </cl:gridcell>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:group std:sid="group-61f793bd" id="grp2">
+        <cl:formdata std:sid="f-data-9c00a3a2" row="0" col="0"/>
+        <cl:button std:sid="button-9fe9507d" id="STMGR_btnAdd" class="userInfo_btn">
+          <cl:listener std:sid="listener-f19f1b05" name="click" handler="onSTMGR_btnAddClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Add"/>
+          <cl:formdata std:sid="f-data-7d032376" valign="FILL" height="30" row="0" col="1"/>
+        </cl:button>
+        <cl:img std:sid="image-4122845e" id="STMGR_imgHelpPage" style="cursor:help;" visible="true" src="../../../theme/images/common/common_btn_window_top_q.png">
+          <cl:listener std:sid="listener-7f3338ed" name="click" handler="onSTMGR_imgHelpPageClick"/>
+          <cl:formdata std:sid="f-data-97914396" halign="CENTER" valign="CENTER" width="14" height="14" row="0" col="2"/>
+        </cl:img>
+        <cl:formlayout std:sid="f-layout-db912954">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="14" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-2240c2d3" hspace="0px" vspace="5px">
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-fb4686ee"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-390c4f8e" version="1.0.0.0">
+  <head std:sid="head-f0c23955">
+    <title>eventLogList</title>
+    <screen std:sid="screen-f26d89c0" id="default" name="default" minwidth="1024px" width="1024px" height="768px" customHeight="600" customWidth="800"/>
+    <screen std:sid="screen-b6c71565" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-47f3ec40" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-e80fe414">
+      <cl:dataset std:sid="d-set-89a970c7" id="EventLogList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-dd479e42" name="EventTime"/>
+          <cl:datacolumn std:sid="d-column-195c85a9" name="TerminalName"/>
+          <cl:datacolumn std:sid="d-column-40ecf3fd" name="TerminalID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-2e82971d" name="UserID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-7e3415a6" name="Category" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-bddee1c0" name="Content" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-640cfc38" name="Detail"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+    </cl:model>
+    <cl:appspec>
+      <cl:event name="pagechange" type="cpr.events.CSelectionEvent"/>
+      <cl:event name="before-pagechange" type="cpr.events.CSelectionEvent"/>
+    </cl:appspec>
+  </head>
+  <body std:sid="body-db0bfcfc" style="top:0px; left:0px; width:500px; height:400px;">
+    <cl:listener std:sid="listener-710fa115" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-a7af7847">
+      <cl:datarowcontext datacontrolid="EventLogList" rowindex="0"/>
+      <cl:xylayoutdata std:sid="xyl-data-34b65c79" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:pageindexer std:sid="p-indexer-811287cc" id="eventLogListPageIndexer" class="userList_paging">
+        <cl:listener std:sid="listener-50d98fd1" name="selection-change" handler="onEventLogListPageIndexerSelectionChange"/>
+        <cl:listener std:sid="listener-aed83dbe" name="before-selection-change" handler="onEventLogListPageIndexerBeforeSelectionChange"/>
+        <cl:formdata std:sid="f-data-2a812033" width="100" row="1" col="0"/>
+      </cl:pageindexer>
+      <cl:grid std:sid="grid-25d3f659" id="eventLogListGrid" readonly="true" datasetid="EventLogList" resizablecolumns="all" columnMovable="true">
+        <cl:formdata std:sid="f-data-516a94f0" row="0" col="0"/>
+        <cl:gridcolumn std:sid="g-column-20fedd5e"/>
+        <cl:gridcolumn std:sid="g-column-3ab87e80"/>
+        <cl:gridcolumn std:sid="g-column-4e68f16b"/>
+        <cl:gridcolumn std:sid="g-column-8832b09a"/>
+        <cl:gridcolumn std:sid="g-column-205cb9cc"/>
+        <cl:gridcolumn std:sid="g-column-a7327fb7"/>
+        <cl:gridcolumn std:sid="g-column-674c16dd"/>
+        <cl:gridheader std:sid="gh-band-581856ec">
+          <cl:gridrow std:sid="g-row-25f7b735"/>
+          <cl:gridcell std:sid="gh-cell-01637ebc" rowindex="0" colindex="0" targetcolumnname="EventTime" sortable="false" filterable="false" text="시간">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_Time3"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-fb81ef3f" rowindex="0" colindex="1" targetcolumnname="TerminalName" visible="false">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_TerminalName"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-b6d87d58" rowindex="0" colindex="2" targetcolumnname="TerminalID" sortable="false" filterable="false" text="단말기ID">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_TerminalID"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-585693ab" rowindex="0" colindex="3" targetcolumnname="UserID" sortable="false" filterable="false" text="사용자ID" visible="false">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_UserID"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-e3146f3d" rowindex="0" colindex="4" targetcolumnname="Category" sortable="false" filterable="false" text="항목">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_Category"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-13ecd3ce" rowindex="0" colindex="5" targetcolumnname="Content" sortable="false" filterable="false" text="내용">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_Content"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-43bcb8dc" rowindex="0" colindex="6" targetcolumnname="Detail" sortable="false" filterable="false" text="상세">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_Detail"/>
+          </cl:gridcell>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-ff50343e">
+          <cl:gridrow std:sid="g-row-4a6f54a8"/>
+          <cl:gridcell std:sid="gd-cell-c08260e3" rowindex="0" colindex="0" columnname="EventTime"/>
+          <cl:gridcell std:sid="gd-cell-d800f341" rowindex="0" colindex="1" columnname="TerminalName"/>
+          <cl:gridcell std:sid="gd-cell-9639877e" rowindex="0" colindex="2" columnname="TerminalID"/>
+          <cl:gridcell std:sid="gd-cell-25d58249" rowindex="0" colindex="3" columnname="UserID"/>
+          <cl:gridcell std:sid="gd-cell-0d616bf5" rowindex="0" colindex="4" columnname="Category">
+            <cl:combobox std:sid="c-box-5b361993" id="UDC_cmbEventCategory"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-05601106" rowindex="0" colindex="5" columnname="Content">
+            <cl:combobox std:sid="c-box-5d11eebe" id="UDC_cmbEventContent"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-8eaad8b3" rowindex="0" colindex="6" columnname="Detail"/>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:formlayout std:sid="f-layout-621247b1">
+        <cl:rows length="1" unit="FRACTION" shadetype="NONE" shadecolor="#000000"/>
+        <cl:rows length="40" unit="PIXEL" shadetype="NONE" shadecolor="#000000"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-8f6e3e93"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

@@ -1,0 +1,809 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-390b39a9" version="1.0.0.0">
+  <head std:sid="head-13508bf3">
+    <title>RemoteTerminalOptionPageTerminal</title>
+    <screen std:sid="screen-162f1a87" id="default" name="default" minwidth="1024px" width="1024px" height="768px"/>
+    <screen std:sid="screen-001b9021" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-75cc510f" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-af785d27">
+      <cl:datamap std:sid="d-map-b404803c" id="terminalOptionInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-2914eb8a" name="Sound_VoiceVolume" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-5d5a8b3a" name="Sound_BeepVolume" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-0c836dbf" name="Sound_SoundOpt" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-ca764988" name="Opt_CardForm" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-54a92fb0" name="Opt_LockTerminal" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-4e34720d" name="Opt_CardReader" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-27f8af37" name="Opt_BLErssi" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-c5cfd0e6" name="Opt_BLEtxpower" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-f408f98a" name="Input_M0" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-4fb6f058" name="Input_M1" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-54efc2a2" name="Input_M2" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-7dda660b" name="Input_IO" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-98bafe08" name="Input_WarnDoorOpen" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-b6527444" name="Input_TamperAlarm" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-7457c225" name="Lock_L1Opt" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-315dc41f" name="Lock_L2Opt" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-6781f75a" name="Lock_L1Duration" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-9d8ebdc7" name="Lock_L2Duration" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-75ececfd" name="ExtDev_RS232" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-4a412fb3" name="ExtDev_RS485" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-6b06392f" name="ExtDev_WiegSiteCode" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-9ec06401" name="ExtDev_WiegOut" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-74cdef5a" name="ExtDev_WiegIn" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-6a589c03" name="Reboot_Flag" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap comment="단말의 현재 옵션 확인용" std:sid="d-map-924649c4" id="RebootOptionInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-0a2ec1f2" name="Opt_CardReader" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-8231de66" name="ExtDev_RS232" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-ac2dc46d" name="ExtDev_RS485" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-f7a10783" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-281d3998" name="load" handler="onBodyLoad"/>
+    <cl:tabfolder std:sid="t-folder-1f5dc91c" id="tertab" style="padding-top:10px; padding-left:10px; padding-bottom:10px; padding-right:10px;" class="common-snbtab">
+      <cl:xylayoutdata std:sid="xyl-data-c0c651c9" top="0px" left="0px" width="700px" height="600px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      <cl:tabitem std:sid="t-item-8c68ae0b" selected="true" text="사운드">
+        <std:metadata>
+          <std:property key="is-active-item" value="true"/>
+        </std:metadata>
+        <cl:langbind property="text" category="PROPERTY" keypath="Str_Sound"/>
+        <cl:group std:sid="group-ab1ea3dc">
+          <std:metadata>
+            <std:property key="locked" value="true"/>
+          </std:metadata>
+          <cl:group std:sid="group-4fe150dc" style="padding:0px; border-radius:2px;">
+            <cl:formdata std:sid="f-data-a77f2c19" row="0" col="0"/>
+            <cl:output std:sid="output-c7d2bb7d" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-right-color:#c5c5c5; border-bottom-style:solid; text-align:center;">
+              <cl:langbind property="value" category="PROPERTY" keypath="Str_BuzzVolume"/>
+              <cl:formdata std:sid="f-data-7b10155f" row="1" col="0"/>
+            </cl:output>
+            <cl:group std:sid="group-a788074b" style="border-top-width:1px; border-bottom-color:#c5c5c5; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid;">
+              <cl:formdata std:sid="f-data-16ac32be" row="0" col="1"/>
+              <cl:combobox std:sid="c-box-6d761051" id="RTOPT_Sound_VoiceVolume" style="font-size:14px; text-align:center;" preventinput="true">
+                <cl:datamapbind property="value" datacontrolid="terminalOptionInfo" columnname="Sound_VoiceVolume"/>
+                <cl:xylayoutdata std:sid="xyl-data-118b721a" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+                <cl:item std:sid="item-a9f8ac7a" label="0" value="0"/>
+                <cl:item std:sid="item-0dff0402" label="1" value="1"/>
+                <cl:item std:sid="item-cd4c171f" label="2" value="2"/>
+                <cl:item std:sid="item-30f4cc78" label="3" value="3"/>
+                <cl:item std:sid="item-0a35914e" label="4" value="4"/>
+                <cl:item std:sid="item-0ff39be2" label="5" value="5"/>
+                <cl:item std:sid="item-542a177b" label="6" value="6"/>
+                <cl:item std:sid="item-53837ebd" label="7" value="7"/>
+                <cl:item std:sid="item-c56e5691" label="8" value="8"/>
+                <cl:item std:sid="item-f19f5410" label="9" value="9"/>
+                <cl:item std:sid="item-99837b9c" label="10" value="10"/>
+                <cl:item std:sid="item-f2ff5bc6" label="11" value="11"/>
+                <cl:item std:sid="item-4d10e5db" label="12" value="12"/>
+                <cl:item std:sid="item-7ea0e78c" label="13" value="13"/>
+                <cl:item std:sid="item-5be9d8b9" label="14" value="14"/>
+                <cl:item std:sid="item-b4e8d307" label="15" value="15"/>
+              </cl:combobox>
+              <cl:xylayout std:sid="xylayout-e6ffba2c"/>
+            </cl:group>
+            <cl:group std:sid="group-ea5fe34e" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+              <cl:formdata std:sid="f-data-0977b0e3" row="1" col="1"/>
+              <cl:combobox std:sid="c-box-09170ace" id="RTOPT_Sound_BeepVolume" style="font-size:14px; text-align:center;" preventinput="true">
+                <cl:datamapbind property="value" datacontrolid="terminalOptionInfo" columnname="Sound_BeepVolume"/>
+                <cl:xylayoutdata std:sid="xyl-data-ff0a2080" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+                <cl:item std:sid="item-cc53a4f3" label="0" value="0"/>
+                <cl:item std:sid="item-0d7f6f7b" label="1" value="1"/>
+                <cl:item std:sid="item-d5d5d6e5" label="2" value="2"/>
+                <cl:item std:sid="item-818c9ec9" label="3" value="3"/>
+              </cl:combobox>
+              <cl:xylayout std:sid="xylayout-bba70421"/>
+            </cl:group>
+            <cl:output std:sid="output-85c29245" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-top-color:#c5c5c5; border-right-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid; text-align:center;">
+              <cl:langbind property="value" category="PROPERTY" keypath="Str_VoiceVolume"/>
+              <cl:formdata std:sid="f-data-b17df545" row="0" col="0"/>
+            </cl:output>
+            <cl:output std:sid="output-7dc02593" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-right-color:#c5c5c5; border-bottom-style:solid; text-align:center;">
+              <cl:langbind property="value" category="PROPERTY" keypath="Str_Sound"/>
+              <cl:formdata std:sid="f-data-d674c830" row="2" col="0"/>
+            </cl:output>
+            <cl:group std:sid="group-5fd3379d" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+              <cl:formdata std:sid="f-data-077c00d5" row="2" col="1"/>
+              <cl:combobox std:sid="c-box-e2602b1f" id="RTOPT_Sound_SoundOpt" style="font-size:14px; text-align:center;" preventinput="true">
+                <cl:datamapbind property="value" datacontrolid="terminalOptionInfo" columnname="Sound_SoundOpt"/>
+                <cl:xylayoutdata std:sid="xyl-data-7017b34c" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+                <cl:item std:sid="item-004b6685" label="효과음" value="0">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_SoundEffect"/>
+                </cl:item>
+                <cl:item std:sid="item-8ab15104" label="사용자 음성" value="1">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_UserVoice"/>
+                </cl:item>
+                <cl:item std:sid="item-67db4050" label="저장된 음성" value="2">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_StoredVoice"/>
+                </cl:item>
+              </cl:combobox>
+              <cl:xylayout std:sid="xylayout-d1bc8423"/>
+            </cl:group>
+            <cl:formlayout std:sid="f-layout-7c70f17d" hspace="0px" vspace="0px">
+              <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+              <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+              <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+              <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+              <cl:columns length="3" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="5" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:formlayout std:sid="f-layout-0b3f3ddd" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+      </cl:tabitem>
+      <cl:tabitem std:sid="t-item-1752b2d0" text="단말기 옵션">
+        <cl:langbind property="text" category="PROPERTY" keypath="Str_TerminalOption"/>
+        <cl:group std:sid="group-2293713a">
+          <std:metadata>
+            <std:property key="locked" value="true"/>
+          </std:metadata>
+          <cl:group std:sid="group-75e0ff1b">
+            <cl:formdata std:sid="f-data-bac09a02" row="0" col="0"/>
+            <cl:output std:sid="output-3b919c2c" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-top-color:#c5c5c5; border-right-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid; text-align:center;">
+              <cl:langbind property="value" category="PROPERTY" keypath="Str_CardFormat"/>
+              <cl:formdata std:sid="f-data-e35fcafd" row="0" col="0"/>
+            </cl:output>
+            <cl:output std:sid="output-98e0eaa8" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-top-color:#c5c5c5; border-right-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid; text-align:center;">
+              <cl:langbind property="value" category="PROPERTY" keypath="Str_CardReader"/>
+              <cl:formdata std:sid="f-data-ca3378ba" row="2" col="0"/>
+            </cl:output>
+            <cl:group std:sid="group-5cef7dac" style="border-bottom-color:#c5c5c5; border-top-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid;">
+              <cl:formdata std:sid="f-data-273fa9ba" row="2" col="1"/>
+              <cl:combobox std:sid="c-box-39d66517" id="RTOPT_Opt_CardReader" style="font-size:14px; text-align:center;" preventinput="true">
+                <cl:listener std:sid="listener-cf87f507" name="selection-change" handler="cautionAlert"/>
+                <cl:datamapbind property="value" datacontrolid="terminalOptionInfo" columnname="Opt_CardReader"/>
+                <cl:xylayoutdata std:sid="xyl-data-1e155e2c" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+                <cl:item std:sid="item-dc02480d" label="Standard" value="0"/>
+                <cl:item std:sid="item-c3b3cb9b" label="HID-iCLASS" value="1"/>
+              </cl:combobox>
+              <cl:xylayout std:sid="xylayout-edfed035"/>
+            </cl:group>
+            <cl:group std:sid="group-883e571b" style="border-bottom-color:#c5c5c5; border-top-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid;">
+              <cl:formdata std:sid="f-data-0b4f9a27" row="0" col="1"/>
+              <cl:combobox std:sid="c-box-da666a4b" id="RTOPT_Opt_CardForm" style="font-size:14px; text-align:center;" preventinput="true">
+                <cl:datamapbind property="value" datacontrolid="terminalOptionInfo" columnname="Opt_CardForm"/>
+                <cl:xylayoutdata std:sid="xyl-data-a826cf3e" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+                <cl:item std:sid="item-8aa288f4" label="Standard" value="0"/>
+                <cl:item std:sid="item-96a9f98a" label="Hexadecimal" value="1"/>
+                <cl:item std:sid="item-abb92e90" label="10 Digit Decimal" value="2"/>
+                <cl:item std:sid="item-2455a0f0" label="3,5 Digit Decimal" value="3"/>
+                <cl:item std:sid="item-3552b198" label="6 HexaDecimal" value="4"/>
+              </cl:combobox>
+              <cl:xylayout std:sid="xylayout-62bf9684"/>
+            </cl:group>
+            <cl:group std:sid="group-a275ee8c">
+              <cl:formdata std:sid="f-data-36455ca0" row="1" col="0" rowspan="1" colspan="2"/>
+              <cl:checkbox std:sid="c-box-aae1a766" id="RTOPT_Opt_LockTerminal" style="padding-left:5px; font-size:14px;" truevalue="1" falsevalue="0">
+                <cl:datamapbind property="value" datacontrolid="terminalOptionInfo" columnname="Opt_LockTerminal"/>
+                <cl:langbind property="text" category="PROPERTY" keypath="Str_TerminalLockSet"/>
+                <cl:formdata std:sid="f-data-fa803ec6" row="0" col="0"/>
+              </cl:checkbox>
+              <cl:formlayout std:sid="f-layout-48656f7c" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+                <cl:rows length="1" unit="FRACTION"/>
+                <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="1" unit="FRACTION"/>
+              </cl:formlayout>
+            </cl:group>
+            <cl:output std:sid="output-32caa349" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-right-color:#c5c5c5; border-bottom-style:solid; text-align:center;">
+              <cl:langbind property="value" category="PROPERTY" keypath="Str_BLERSSI"/>
+              <cl:formdata std:sid="f-data-d495f538" row="3" col="0"/>
+            </cl:output>
+            <cl:output std:sid="output-89cde89f" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-right-color:#c5c5c5; border-bottom-style:solid; text-align:center;">
+              <cl:langbind property="value" category="PROPERTY" keypath="Str_BLETxPower"/>
+              <cl:formdata std:sid="f-data-c0e781e8" row="4" col="0"/>
+            </cl:output>
+            <cl:group std:sid="group-74aa771a" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+              <cl:formdata std:sid="f-data-40e1371a" row="3" col="1"/>
+              <cl:combobox std:sid="c-box-a2adbe6f" id="RTOPT_Opt_BLErssi" style="font-size:14px; text-align:center;" preventinput="true">
+                <cl:datamapbind property="value" datacontrolid="terminalOptionInfo" columnname="Opt_BLErssi"/>
+                <cl:xylayoutdata std:sid="xyl-data-56f3007d" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+                <cl:item std:sid="item-f48ef9ca" label="5" value="5"/>
+                <cl:item std:sid="item-d567e72b" label="6" value="6"/>
+                <cl:item std:sid="item-395cbc34" label="7" value="7"/>
+                <cl:item std:sid="item-23775bc6" label="8" value="8"/>
+                <cl:item std:sid="item-13fa724c" label="9" value="9"/>
+                <cl:item std:sid="item-8ae186a6" label="10" value="10"/>
+              </cl:combobox>
+              <cl:xylayout std:sid="xylayout-57e9a3b4"/>
+            </cl:group>
+            <cl:group std:sid="group-dbcb2669" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+              <cl:formdata std:sid="f-data-765bf426" row="4" col="1"/>
+              <cl:combobox std:sid="c-box-e4731261" id="RTOPT_Opt_BLEtxpower" style="font-size:14px; text-align:center;" preventinput="true">
+                <cl:datamapbind property="value" datacontrolid="terminalOptionInfo" columnname="Opt_BLEtxpower"/>
+                <cl:xylayoutdata std:sid="xyl-data-9c9340b9" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+                <cl:item std:sid="item-f26c1de8" label="1" value="1"/>
+                <cl:item std:sid="item-935069af" label="2" value="2"/>
+                <cl:item std:sid="item-8a834f1f" label="3" value="3"/>
+                <cl:item std:sid="item-cbfd3202" label="4" value="4"/>
+                <cl:item std:sid="item-0c173e6d" label="5" value="5"/>
+                <cl:item std:sid="item-e4801bce" label="6" value="6"/>
+                <cl:item std:sid="item-b6179986" label="7" value="7"/>
+                <cl:item std:sid="item-7da6f6c2" label="8" value="8"/>
+                <cl:item std:sid="item-43e9542c" label="9" value="9"/>
+                <cl:item std:sid="item-392cb61f" label="10" value="10"/>
+                <cl:item std:sid="item-ea372d49" label="11" value="11"/>
+                <cl:item std:sid="item-b1ed1598" label="12" value="12"/>
+                <cl:item std:sid="item-75f74be7" label="13" value="13"/>
+                <cl:item std:sid="item-5ddff548" label="14" value="14"/>
+                <cl:item std:sid="item-dd0647cc" label="15" value="15"/>
+                <cl:item std:sid="item-5d85c8ee" label="16" value="16"/>
+              </cl:combobox>
+              <cl:xylayout std:sid="xylayout-a970d43a"/>
+            </cl:group>
+            <cl:formlayout std:sid="f-layout-340ffd5a" hspace="0px" vspace="0px">
+              <cl:rows length="30" shadetype="NONE" shadecolor="transparent"/>
+              <cl:rows length="30" shadetype="NONE" shadecolor="transparent"/>
+              <cl:rows length="30" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
+              <cl:rows length="30" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
+              <cl:rows length="30" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
+              <cl:columns length="3" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="5" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:formlayout std:sid="f-layout-44c003a5" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+      </cl:tabitem>
+      <cl:tabitem std:sid="t-item-db5d5daf" text="Input  설정">
+        <cl:langbind property="text" category="PROPERTY" keypath="Str_InputSet"/>
+        <cl:group std:sid="group-6aee1057">
+          <std:metadata>
+            <std:property key="locked" value="true"/>
+          </std:metadata>
+          <cl:group std:sid="group-790d4d0e">
+            <cl:formdata std:sid="f-data-cd781dee" row="0" col="0"/>
+            <cl:output std:sid="output-5f0960ee" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-top-color:#c5c5c5; border-right-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid; text-align:center;" value="M0">
+              <cl:formdata std:sid="f-data-9b27d41e" row="0" col="0"/>
+            </cl:output>
+            <cl:output std:sid="output-aa41951a" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-right-color:#c5c5c5; border-bottom-style:solid; text-align:center;" value="M1">
+              <cl:formdata std:sid="f-data-a9a327e3" row="1" col="0" rowspan="1" colspan="1"/>
+            </cl:output>
+            <cl:group std:sid="group-f6c244d3" style="border-bottom-color:#c5c5c5; border-top-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid;">
+              <cl:formdata std:sid="f-data-78d00dc7" row="0" col="1"/>
+              <cl:combobox std:sid="c-box-9165d182" id="RTOPT_Input_M0" style="font-size:14px; text-align:center;" preventinput="true" usefallbackvalue="true" fallbackvalue="0">
+                <cl:listener std:sid="listener-dfa2f5fc" name="selection-change" handler="onRTOPT_Input_M0SelectionChange"/>
+                <cl:datamapbind property="value" datacontrolid="terminalOptionInfo" columnname="Input_M0"/>
+                <cl:xylayoutdata std:sid="xyl-data-c5413a20" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+                <cl:item std:sid="item-527ce310" label="none" value="0">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_NotUsed"/>
+                </cl:item>
+                <cl:item std:sid="item-2b852e9e" label="문열림상태 NO" value="1">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_DoorOpenStatusNO"/>
+                </cl:item>
+                <cl:item std:sid="item-9a3d8e5b" label="문열림상태 NC" value="2">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_DoorOpenStatusNC"/>
+                </cl:item>
+                <cl:item std:sid="item-e2a6819a" label="화재감지 NO" value="3">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_FireNO"/>
+                </cl:item>
+                <cl:item std:sid="item-48a56dc0" label="화재감지 NC" value="4">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_FireNC"/>
+                </cl:item>
+                <cl:item std:sid="item-4030d83e" label="패닉감지 NO" value="5">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_PanicNO"/>
+                </cl:item>
+                <cl:item std:sid="item-b8839fd5" label="화재감지 NC" value="6">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_PanicNC"/>
+                </cl:item>
+                <cl:item std:sid="item-692395ab" label="비상감지 NO" value="7">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_EmergencyNO"/>
+                </cl:item>
+                <cl:item std:sid="item-816a3fe4" label="비상감지 NC" value="8">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_EmergencyNC"/>
+                </cl:item>
+              </cl:combobox>
+              <cl:xylayout std:sid="xylayout-23124e79"/>
+            </cl:group>
+            <cl:group std:sid="group-d59f9fe0" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+              <cl:formdata std:sid="f-data-f4363ab9" row="1" col="1"/>
+              <cl:combobox std:sid="c-box-e277f3e8" id="RTOPT_Input_M1" style="font-size:14px; text-align:center;" preventinput="true" usefallbackvalue="true" fallbackvalue="0">
+                <cl:listener std:sid="listener-0648a450" name="selection-change" handler="onRTOPT_Input_M0SelectionChange"/>
+                <cl:datamapbind property="value" datacontrolid="terminalOptionInfo" columnname="Input_M1"/>
+                <cl:xylayoutdata std:sid="xyl-data-530ea9b9" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+                <cl:item std:sid="item-1bec5949" label="label1" value="0">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_NotUsed"/>
+                </cl:item>
+                <cl:item std:sid="item-57a3c73d" label="label2" value="1">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_LockStatNO"/>
+                </cl:item>
+                <cl:item std:sid="item-7b3b49fc" label="label3" value="2">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_LockStatNC"/>
+                </cl:item>
+                <cl:item std:sid="item-cb2af3bf" label="label4" value="3">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_FireNO"/>
+                </cl:item>
+                <cl:item std:sid="item-161053d9" label="label5" value="4">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_FireNC"/>
+                </cl:item>
+                <cl:item std:sid="item-125e06f4" label="label6" value="5">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_PanicNO"/>
+                </cl:item>
+                <cl:item std:sid="item-9a866b86" label="label7" value="6">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_PanicNC"/>
+                </cl:item>
+                <cl:item std:sid="item-43577ad0" label="label8" value="7">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_EmergencyNO"/>
+                </cl:item>
+                <cl:item std:sid="item-cc2b5716" label="label9" value="8">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_EmergencyNC"/>
+                </cl:item>
+              </cl:combobox>
+              <cl:xylayout std:sid="xylayout-8f7b65bc"/>
+            </cl:group>
+            <cl:output std:sid="output-ce41aa49" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-right-color:#c5c5c5; border-bottom-style:solid; text-align:center;" value="IO">
+              <cl:formdata std:sid="f-data-b41f3d03" row="3" col="0"/>
+            </cl:output>
+            <cl:group std:sid="group-50d37307" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+              <cl:formdata std:sid="f-data-8da7a869" row="3" col="1"/>
+              <cl:combobox std:sid="c-box-9f6dedf7" id="RTOPT_Input_IO" style="font-size:14px; text-align:center;" preventinput="true" usefallbackvalue="true" fallbackvalue="0">
+                <cl:listener std:sid="listener-d4a4cc92" name="selection-change" handler="onRTOPT_Input_M0SelectionChange"/>
+                <cl:datamapbind property="value" datacontrolid="terminalOptionInfo" columnname="Input_IO"/>
+                <cl:xylayoutdata std:sid="xyl-data-a1f71a4d" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+                <cl:item std:sid="item-93e7e812" label="label1" value="0">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_NotUsed"/>
+                </cl:item>
+                <cl:item std:sid="item-951b30dc" label="label2" value="1">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_InsideOpenNO"/>
+                </cl:item>
+                <cl:item std:sid="item-82f0f82d" label="label3" value="2">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_InsideOpenNC"/>
+                </cl:item>
+                <cl:item std:sid="item-9d4e7380" label="label4" value="3">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_FireNO"/>
+                </cl:item>
+                <cl:item std:sid="item-d0340ba5" label="label5" value="4">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_FireNC"/>
+                </cl:item>
+                <cl:item std:sid="item-b8f4189b" label="label6" value="5">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_PanicNO"/>
+                </cl:item>
+                <cl:item std:sid="item-0f13ddba" label="label7" value="6">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_PanicNC"/>
+                </cl:item>
+                <cl:item std:sid="item-31b14b7c" label="label8" value="7">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_EmergencyNO"/>
+                </cl:item>
+                <cl:item std:sid="item-caddaeb5" label="label9" value="8">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_EmergencyNC"/>
+                </cl:item>
+              </cl:combobox>
+              <cl:xylayout std:sid="xylayout-1e89393f"/>
+            </cl:group>
+            <cl:output std:sid="output-67667724" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-right-color:#c5c5c5; border-bottom-style:solid; text-align:center;">
+              <cl:langbind property="value" category="PROPERTY" keypath="Str_DoorOpenAlarm"/>
+              <cl:formdata std:sid="f-data-c3cba924" row="4" col="0"/>
+            </cl:output>
+            <cl:group std:sid="group-b74bb281" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+              <cl:formdata std:sid="f-data-189a57a5" row="4" col="1"/>
+              <cl:numbereditor std:sid="n-editor-4b63b6d6" id="RTOPT_Input_WarnDoorOpen" style="text-align:center;" min="0.0" max="60.0" spinbutton="false">
+                <cl:datamapbind property="value" datacontrolid="terminalOptionInfo" columnname="Input_WarnDoorOpen"/>
+                <cl:xylayoutdata std:sid="xyl-data-4cd96a62" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+              </cl:numbereditor>
+              <cl:xylayout std:sid="xylayout-23c10311"/>
+            </cl:group>
+            <cl:group std:sid="group-4f5edaae">
+              <cl:formdata std:sid="f-data-dca8f729" row="5" col="0" rowspan="1" colspan="2"/>
+              <cl:checkbox std:sid="c-box-42e35651" id="RTOPT_Input_TamperAlarm" style="padding-left:5px; font-size:14px;" truevalue="1" falsevalue="0">
+                <cl:datamapbind property="value" datacontrolid="terminalOptionInfo" columnname="Input_TamperAlarm"/>
+                <cl:langbind property="text" category="PROPERTY" keypath="Str_TerminalUnlockedAlarm"/>
+                <cl:formdata std:sid="f-data-974c936c" row="0" col="0"/>
+              </cl:checkbox>
+              <cl:formlayout std:sid="f-layout-a3af270c" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+                <cl:rows length="1" unit="FRACTION"/>
+                <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+              </cl:formlayout>
+            </cl:group>
+            <cl:output std:sid="output-c777580d" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-right-color:#c5c5c5; border-bottom-style:solid; text-align:center;" value="M2">
+              <cl:formdata std:sid="f-data-cdb1d258" row="2" col="0"/>
+            </cl:output>
+            <cl:group std:sid="group-7eff8ab8" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+              <cl:formdata std:sid="f-data-b1568292" row="2" col="1"/>
+              <cl:combobox std:sid="c-box-4abe2ff6" id="RTOPT_Input_M2" style="font-size:14px; text-align:center;" preventinput="true" usefallbackvalue="true" fallbackvalue="0">
+                <cl:listener std:sid="listener-1f26a2b5" name="selection-change" handler="onRTOPT_Input_M0SelectionChange"/>
+                <cl:datamapbind property="value" datacontrolid="terminalOptionInfo" columnname="Input_M2"/>
+                <cl:xylayoutdata std:sid="xyl-data-18b4959b" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+                <cl:item std:sid="item-82638608" label="label1" value="0">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_NotUsed"/>
+                </cl:item>
+                <cl:item std:sid="item-cb804072" label="label2" value="1">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_LockStatNO"/>
+                </cl:item>
+                <cl:item std:sid="item-42c143d9" label="label3" value="2">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_LockStatNC"/>
+                </cl:item>
+                <cl:item std:sid="item-676a07f7" label="label4" value="3">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_FireNO"/>
+                </cl:item>
+                <cl:item std:sid="item-f96608e7" label="label5" value="4">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_FireNC"/>
+                </cl:item>
+                <cl:item std:sid="item-0e8505c3" label="label6" value="5">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_PanicNO"/>
+                </cl:item>
+                <cl:item std:sid="item-50764042" label="label7" value="6">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_PanicNC"/>
+                </cl:item>
+                <cl:item std:sid="item-9ef50812" label="label8" value="7">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_EmergencyNO"/>
+                </cl:item>
+                <cl:item std:sid="item-200a174c" label="label9" value="8">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_EmergencyNC"/>
+                </cl:item>
+              </cl:combobox>
+              <cl:xylayout std:sid="xylayout-9f3e1c9f"/>
+            </cl:group>
+            <cl:formlayout std:sid="f-layout-a2981c59" hspace="0px" vspace="0px">
+              <cl:rows length="30" shadetype="NONE" shadecolor="transparent"/>
+              <cl:rows length="30" shadetype="NONE" shadecolor="transparent"/>
+              <cl:rows length="30" shadetype="NONE" shadecolor="transparent"/>
+              <cl:rows length="30" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
+              <cl:rows length="30" shadetype="NONE" shadecolor="transparent"/>
+              <cl:rows length="30" shadetype="NONE" shadecolor="transparent"/>
+              <cl:columns length="3" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="5" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:formlayout std:sid="f-layout-6369c557" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+      </cl:tabitem>
+      <cl:tabitem std:sid="t-item-566457e5" text="Lock 설정">
+        <cl:langbind property="text" category="PROPERTY" keypath="Str_LockSet"/>
+        <cl:group std:sid="group-77e286d3">
+          <std:metadata>
+            <std:property key="locked" value="true"/>
+          </std:metadata>
+          <cl:group std:sid="group-bca2ead5">
+            <cl:formdata std:sid="f-data-e54c498a" row="0" col="0"/>
+            <cl:output std:sid="output-bfc185bb" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-top-color:#c5c5c5; border-right-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid; text-align:center;">
+              <cl:langbind property="value" category="PROPERTY" keypath="Str_Lock1Option"/>
+              <cl:formdata std:sid="f-data-2ad76bc7" row="0" col="0"/>
+            </cl:output>
+            <cl:group std:sid="group-45f4e6b7" style="border-bottom-color:#c5c5c5; border-top-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid;">
+              <cl:formdata std:sid="f-data-36b8abee" row="0" col="1"/>
+              <cl:combobox std:sid="c-box-69d36fae" id="RTOPT_Lock_L1Opt" style="font-size:14px; text-align:center;" preventinput="true">
+                <cl:datamapbind property="value" datacontrolid="terminalOptionInfo" columnname="Lock_L1Opt"/>
+                <cl:xylayoutdata std:sid="xyl-data-46279a2a" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+                <cl:item std:sid="item-a4115b56" label="none" value="0">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_NotUsed"/>
+                </cl:item>
+                <cl:item std:sid="item-43194bce" label="Strike/Auto/인증성공알림" value="1">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_StrikeAutoAlarm"/>
+                </cl:item>
+                <cl:item std:sid="item-e01d9b14" label="모터락 1" value="2">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_MotorLock1"/>
+                </cl:item>
+                <cl:item std:sid="item-a2af1625" label="일정 알림" value="3">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_ScheduleAlarm"/>
+                </cl:item>
+                <cl:item std:sid="item-ee862c3e" label="협박상황 알림" value="4">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_DuressAlarm"/>
+                </cl:item>
+              </cl:combobox>
+              <cl:xylayout std:sid="xylayout-389c31c2"/>
+            </cl:group>
+            <cl:output std:sid="output-ccb8a2fd" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-right-color:#c5c5c5; border-bottom-style:solid; text-align:center;">
+              <cl:langbind property="value" category="PROPERTY" keypath="Str_Lock2Option"/>
+              <cl:formdata std:sid="f-data-d85b01a4" row="1" col="0"/>
+            </cl:output>
+            <cl:output std:sid="output-976051de" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-right-color:#c5c5c5; border-bottom-style:solid; text-align:center;">
+              <cl:langbind property="value" category="PROPERTY" keypath="Str_Lock1Time"/>
+              <cl:formdata std:sid="f-data-5bd76179" row="2" col="0"/>
+            </cl:output>
+            <cl:output std:sid="output-8c71a4e0" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-right-color:#c5c5c5; border-bottom-style:solid; text-align:center;">
+              <cl:langbind property="value" category="PROPERTY" keypath="Str_Lock2Time"/>
+              <cl:formdata std:sid="f-data-a9e8d093" row="3" col="0"/>
+            </cl:output>
+            <cl:group std:sid="group-81066db1" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+              <cl:formdata std:sid="f-data-2869c3af" row="1" col="1"/>
+              <cl:combobox std:sid="c-box-51f4a766" id="RTOPT_Lock_L2Opt" style="font-size:14px; text-align:center;" preventinput="true">
+                <cl:datamapbind property="value" datacontrolid="terminalOptionInfo" columnname="Lock_L2Opt"/>
+                <cl:xylayoutdata std:sid="xyl-data-22addf9e" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+                <cl:item std:sid="item-1f4de1c6" label="none" value="0">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_NotUsed"/>
+                </cl:item>
+                <cl:item std:sid="item-66ffc081" label="인증 실패 알림" value="1">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_AuthFailNotification"/>
+                </cl:item>
+                <cl:item std:sid="item-3d9b8999" label="모터락 2" value="2">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_MotorLock2"/>
+                </cl:item>
+                <cl:item std:sid="item-e1c565da" label="일정 알림" value="3">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_ScheduleAlarm"/>
+                </cl:item>
+                <cl:item std:sid="item-16248702" label="협박상황 알림" value="4">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_DuressAlarm"/>
+                </cl:item>
+              </cl:combobox>
+              <cl:xylayout std:sid="xylayout-ad80dadb"/>
+            </cl:group>
+            <cl:group std:sid="group-d83bdfae" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+              <cl:formdata std:sid="f-data-e2e0ec23" row="2" col="1"/>
+              <cl:numbereditor std:sid="n-editor-c69eb592" id="RTOPT_Lock_L1Duration" style="text-align:center;" min="0.0" max="300000.0" spinbutton="false">
+                <cl:datamapbind property="value" datacontrolid="terminalOptionInfo" columnname="Lock_L1Duration"/>
+                <cl:xylayoutdata std:sid="xyl-data-1124d184" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+              </cl:numbereditor>
+              <cl:xylayout std:sid="xylayout-aa5557c5"/>
+            </cl:group>
+            <cl:group std:sid="group-d4f11c4c" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+              <cl:formdata std:sid="f-data-7e6c9551" row="3" col="1"/>
+              <cl:numbereditor std:sid="n-editor-e1face74" id="RTOPT_Lock_L2Duration" style="text-align:center;" min="0.0" max="300000.0" spinbutton="false">
+                <cl:datamapbind property="value" datacontrolid="terminalOptionInfo" columnname="Lock_L2Duration"/>
+                <cl:xylayoutdata std:sid="xyl-data-65b3af05" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+              </cl:numbereditor>
+              <cl:xylayout std:sid="xylayout-5144db69"/>
+            </cl:group>
+            <cl:formlayout std:sid="f-layout-ead22344" hspace="0px" vspace="0px">
+              <cl:rows length="30" shadetype="NONE" shadecolor="transparent"/>
+              <cl:rows length="30" shadetype="NONE" shadecolor="transparent"/>
+              <cl:rows length="30" shadetype="NONE" shadecolor="transparent"/>
+              <cl:rows length="30" shadetype="NONE" shadecolor="transparent"/>
+              <cl:columns length="3" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="5" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:formlayout std:sid="f-layout-1d856860" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+      </cl:tabitem>
+      <cl:tabitem std:sid="t-item-d32cdff9" text="외부 장치 설정">
+        <cl:langbind property="text" category="PROPERTY" keypath="Str_ExternalDeviceSetting"/>
+        <cl:group std:sid="group-112eee91">
+          <std:metadata>
+            <std:property key="locked" value="true"/>
+          </std:metadata>
+          <cl:group std:sid="group-d6dafed7">
+            <cl:formdata std:sid="f-data-0e43f83f" row="0" col="0"/>
+            <cl:output std:sid="output-770b22ec" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-top-color:#c5c5c5; border-right-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid; text-align:center;" value="RS232">
+              <cl:formdata std:sid="f-data-e486c4b9" row="0" col="0"/>
+            </cl:output>
+            <cl:output std:sid="output-669d1470" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-right-color:#c5c5c5; border-bottom-style:solid; text-align:center;" value="RS485">
+              <cl:formdata std:sid="f-data-ea4dcf34" row="1" col="0" rowspan="1" colspan="1"/>
+            </cl:output>
+            <cl:group std:sid="group-c18bb1dd" style="border-bottom-color:#c5c5c5; border-top-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid;">
+              <cl:formdata std:sid="f-data-0437154b" row="0" col="1"/>
+              <cl:combobox std:sid="c-box-7079e97b" id="RTOPT_ExtDev_RS232" style="font-size:14px; text-align:center;" preventinput="true">
+                <cl:listener std:sid="listener-a5e0042f" name="selection-change" handler="cautionAlert"/>
+                <cl:datamapbind property="value" datacontrolid="terminalOptionInfo" columnname="ExtDev_RS232"/>
+                <cl:xylayoutdata std:sid="xyl-data-72123e7f" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+                <cl:item std:sid="item-f4e336b2" label="none" value="0">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_NotUsed"/>
+                </cl:item>
+                <cl:item std:sid="item-7ecafd0e" label="바코드리더" value="1">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_BarcodeReader"/>
+                </cl:item>
+                <cl:item std:sid="item-49e95c19" label="식수프린터" value="2">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_MealPrinter"/>
+                </cl:item>
+              </cl:combobox>
+              <cl:xylayout std:sid="xylayout-3438c0d7"/>
+            </cl:group>
+            <cl:group std:sid="group-9c10f524" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+              <cl:formdata std:sid="f-data-1ca6fc45" row="1" col="1"/>
+              <cl:combobox std:sid="c-box-bb5a7bfb" id="RTOPT_ExtDev_RS485" style="font-size:14px; text-align:center;" preventinput="true">
+                <cl:listener std:sid="listener-c7c114e5" name="selection-change" handler="cautionAlert"/>
+                <cl:datamapbind property="value" datacontrolid="terminalOptionInfo" columnname="ExtDev_RS485"/>
+                <cl:xylayoutdata std:sid="xyl-data-def3c40a" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+                <cl:item std:sid="item-716e2d7a" label="none" value="0">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_NotUsed"/>
+                </cl:item>
+                <cl:item std:sid="item-485a18b9" label="LC010" value="1"/>
+                <cl:item std:sid="item-303a467b" label="LC015" value="2"/>
+              </cl:combobox>
+              <cl:xylayout std:sid="xylayout-cf358041"/>
+            </cl:group>
+            <cl:output std:sid="output-06539917" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-right-color:#c5c5c5; border-bottom-style:solid; text-align:center;" value="wiegand Output">
+              <cl:formdata std:sid="f-data-3ca45148" row="5" col="0"/>
+            </cl:output>
+            <cl:group std:sid="group-50a3ed78" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+              <cl:formdata std:sid="f-data-9e583dfb" row="5" col="1"/>
+              <cl:combobox std:sid="c-box-7e9bcd61" id="RTOPT_ExtDev_WiegOut" style="font-size:14px; text-align:center;" preventinput="true">
+                <cl:datamapbind property="value" datacontrolid="terminalOptionInfo" columnname="ExtDev_WiegOut"/>
+                <cl:xylayoutdata std:sid="xyl-data-d72f5fec" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+                <cl:item std:sid="item-a16c648e" label="none" value="0">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_NotUsed"/>
+                </cl:item>
+                <cl:item std:sid="item-e890d319" label="26bit" value="129"/>
+                <cl:item std:sid="item-9c1124bc" label="34bit" value="130"/>
+                <cl:item std:sid="item-c9325f8f" label="Custom" value="3">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_UserDefine"/>
+                </cl:item>
+              </cl:combobox>
+              <cl:xylayout std:sid="xylayout-01a61bbb"/>
+            </cl:group>
+            <cl:output std:sid="output-a87d0e75" style="font-weight:bold; font-size:14px;">
+              <cl:langbind property="value" category="PROPERTY" keypath="Str_AuditCategoryWiegand"/>
+              <cl:formdata std:sid="f-data-b1baf08c" row="3" col="0" rowspan="1" colspan="2"/>
+            </cl:output>
+            <cl:output std:sid="output-97d35c3f" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-right-color:#c5c5c5; border-bottom-style:solid; text-align:center;" value="wiegand Input">
+              <cl:formdata std:sid="f-data-96ad7467" row="6" col="0"/>
+            </cl:output>
+            <cl:group std:sid="group-3a3a863c" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+              <cl:formdata std:sid="f-data-f0401565" row="6" col="1"/>
+              <cl:combobox std:sid="c-box-9425bdb4" id="RTOPT_ExtDev_WiegIn" style="font-size:14px; text-align:center;" preventinput="true">
+                <cl:datamapbind property="value" datacontrolid="terminalOptionInfo" columnname="ExtDev_WiegIn"/>
+                <cl:xylayoutdata std:sid="xyl-data-d3a035bc" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+                <cl:item std:sid="item-818dda41" label="label1" value="0">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_NotUsed"/>
+                </cl:item>
+                <cl:item std:sid="item-1bb9787a" label="26bit" value="129"/>
+                <cl:item std:sid="item-3d091563" label="36bit" value="130"/>
+                <cl:item std:sid="item-3b0c99f3" label="label4" value="3">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_UserDefine"/>
+                </cl:item>
+              </cl:combobox>
+              <cl:xylayout std:sid="xylayout-174ee8e7"/>
+            </cl:group>
+            <cl:group std:sid="group-04648fd5" style="border-bottom-color:#c5c5c5; border-top-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid;">
+              <cl:formdata std:sid="f-data-de470e11" row="4" col="1"/>
+              <cl:numbereditor std:sid="n-editor-3f54bac0" id="RTOPT_ExtDev_WiegSiteCode" style="text-align:center;" min="0.0" max="99999.0" spinbutton="false">
+                <cl:datamapbind property="value" datacontrolid="terminalOptionInfo" columnname="ExtDev_WiegSiteCode"/>
+                <cl:xylayoutdata std:sid="xyl-data-69e1e8bd" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+              </cl:numbereditor>
+              <cl:xylayout std:sid="xylayout-7cad23c3"/>
+            </cl:group>
+            <cl:output std:sid="output-0a7592be" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-top-color:#c5c5c5; border-right-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid; text-align:center;">
+              <cl:langbind property="value" category="PROPERTY" keypath="Str_SiteCode"/>
+              <cl:formdata std:sid="f-data-4bde4505" row="4" col="0"/>
+            </cl:output>
+            <cl:formlayout std:sid="f-layout-81a4fcd1" hspace="0px" vspace="0px">
+              <cl:rows length="30" shadetype="NONE" shadecolor="transparent"/>
+              <cl:rows length="30" shadetype="NONE" shadecolor="transparent"/>
+              <cl:rows length="30" shadetype="NONE" shadecolor="transparent"/>
+              <cl:rows length="30" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
+              <cl:rows length="30" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
+              <cl:rows length="30" shadetype="NONE" shadecolor="transparent"/>
+              <cl:rows length="30" shadetype="NONE" shadecolor="transparent"/>
+              <cl:columns length="3" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="5" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:formlayout std:sid="f-layout-1ec087df" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+      </cl:tabitem>
+      <cl:tabitem std:sid="t-item-e8190d5d" text="ETC(열화상)" visible="false" enabled="false">
+        <cl:group std:sid="group-f90ab580">
+          <std:metadata>
+            <std:property key="locked" value="true"/>
+          </std:metadata>
+          <cl:group std:sid="group-9b4fea14">
+            <cl:formdata std:sid="f-data-a554d69d" row="0" col="0"/>
+            <cl:output std:sid="output-015e6ca8" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-top-color:#c5c5c5; border-right-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid; text-align:center;" value="열화상 카메라 사용">
+              <cl:formdata std:sid="f-data-c376f7ad" row="0" col="0" rowspan="2" colspan="1"/>
+            </cl:output>
+            <cl:group std:sid="group-d79a96b1" style="border-bottom-color:#c5c5c5; border-top-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid;">
+              <cl:formdata std:sid="f-data-2d2a1c32" row="1" col="1"/>
+              <cl:combobox std:sid="c-box-d070f16b" id="cmb10" style="font-size:14px; text-align:center;" readonly="true" preventinput="true">
+                <cl:xylayoutdata std:sid="xyl-data-69e875eb" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+              </cl:combobox>
+              <cl:xylayout std:sid="xylayout-6df6c530"/>
+            </cl:group>
+            <cl:output std:sid="output-68caedf4" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-right-color:#c5c5c5; border-bottom-style:solid; text-align:center;" value="동작모드">
+              <cl:formdata std:sid="f-data-42c1d9f6" row="2" col="0"/>
+            </cl:output>
+            <cl:output std:sid="output-36634485" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-right-color:#c5c5c5; border-bottom-style:solid; text-align:center;" value="표시방법">
+              <cl:formdata std:sid="f-data-9110cb5f" row="3" col="0"/>
+            </cl:output>
+            <cl:group std:sid="group-c9c8885c" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+              <cl:formdata std:sid="f-data-c54dc971" row="2" col="1"/>
+              <cl:combobox std:sid="c-box-e3dec5eb" id="cmb16" style="font-size:14px; text-align:center;" readonly="true" preventinput="true">
+                <cl:xylayoutdata std:sid="xyl-data-6417f28e" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+              </cl:combobox>
+              <cl:xylayout std:sid="xylayout-1d0eadb1"/>
+            </cl:group>
+            <cl:group std:sid="group-a3a69a2e" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+              <cl:formdata std:sid="f-data-17c1dd11" row="3" col="1"/>
+              <cl:combobox std:sid="c-box-aa916c4c" id="cmb20" style="font-size:14px; text-align:center;" readonly="true" preventinput="true">
+                <cl:xylayoutdata std:sid="xyl-data-eb8b6aa1" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+              </cl:combobox>
+              <cl:xylayout std:sid="xylayout-b7afca04"/>
+            </cl:group>
+            <cl:output std:sid="output-6c8cc33f" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-right-color:#c5c5c5; border-bottom-style:solid; text-align:center;" value="주변온도보정">
+              <cl:formdata std:sid="f-data-799f131a" row="4" col="0"/>
+            </cl:output>
+            <cl:output std:sid="output-b0b2f0e7" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-right-color:#c5c5c5; border-bottom-style:solid; text-align:center;" value="발열온도">
+              <cl:formdata std:sid="f-data-3ddc6b7d" row="5" col="0"/>
+            </cl:output>
+            <cl:output std:sid="output-f998ca34" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-right-color:#c5c5c5; border-bottom-style:solid; text-align:center;" value="측정모드">
+              <cl:formdata std:sid="f-data-750e15cc" row="6" col="0"/>
+            </cl:output>
+            <cl:group std:sid="group-12052529" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+              <cl:formdata std:sid="f-data-4913eee6" row="4" col="1"/>
+              <cl:combobox std:sid="c-box-f7e60395" id="cmb15" style="font-size:14px; text-align:center;" readonly="true" preventinput="true">
+                <cl:xylayoutdata std:sid="xyl-data-eaabfbb0" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+              </cl:combobox>
+              <cl:xylayout std:sid="xylayout-871e86c3"/>
+            </cl:group>
+            <cl:group std:sid="group-3018c04d" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+              <cl:formdata std:sid="f-data-89669a85" row="5" col="1"/>
+              <cl:combobox std:sid="c-box-9dd26a40" id="cmb22" style="font-size:14px; text-align:center;" readonly="true" preventinput="true">
+                <cl:xylayoutdata std:sid="xyl-data-1f782f49" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+              </cl:combobox>
+              <cl:xylayout std:sid="xylayout-fe07f29d"/>
+            </cl:group>
+            <cl:group std:sid="group-85889a37" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+              <cl:formdata std:sid="f-data-3e90f53f" row="6" col="1"/>
+              <cl:combobox std:sid="c-box-af2e3e66" id="cmb23" style="font-size:14px; text-align:center;" readonly="true" preventinput="true">
+                <cl:xylayoutdata std:sid="xyl-data-62b31da5" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+              </cl:combobox>
+              <cl:xylayout std:sid="xylayout-76eb2b5d"/>
+            </cl:group>
+            <cl:output std:sid="output-13a1845e" style="font-weight:bold; font-size:14px;" value="동작설정">
+              <cl:formdata std:sid="f-data-b394c601" row="8" col="0" rowspan="1" colspan="2"/>
+            </cl:output>
+            <cl:output std:sid="output-8d71b1d9" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-top-color:#c5c5c5; border-right-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid; text-align:center;" value="가이드.On">
+              <cl:formdata std:sid="f-data-198f51fb" row="9" col="0"/>
+            </cl:output>
+            <cl:output std:sid="output-9bd63be2" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-right-color:#c5c5c5; border-bottom-style:solid; text-align:center;" value="Preview.Off">
+              <cl:formdata std:sid="f-data-82c33cae" row="10" col="0"/>
+            </cl:output>
+            <cl:group std:sid="group-c99c59c1" style="border-bottom-color:#c5c5c5; border-top-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid;">
+              <cl:formdata std:sid="f-data-a54d4a50" row="9" col="1"/>
+              <cl:navigationbar std:sid="n-bar-43642f1f" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+                <cl:xylayoutdata std:sid="xyl-data-795aa669" top="2px" right="100px" bottom="2px" left="100px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+                <cl:menuitem std:sid="m-item-e9532097" label="On" value="1"/>
+                <cl:menuitem std:sid="m-item-0327c32b" label="Off" value="0"/>
+              </cl:navigationbar>
+              <cl:xylayout std:sid="xylayout-fab22f84"/>
+            </cl:group>
+            <cl:group std:sid="group-f198fa0d" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+              <cl:formdata std:sid="f-data-86b5d66b" row="10" col="1"/>
+              <cl:navigationbar std:sid="n-bar-697ad39d" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+                <cl:xylayoutdata std:sid="xyl-data-0df64165" top="2px" right="100px" bottom="2px" left="100px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+                <cl:menuitem std:sid="m-item-163405e3" label="On" value="1"/>
+                <cl:menuitem std:sid="m-item-bfd6bec6" label="Off" value="0"/>
+              </cl:navigationbar>
+              <cl:xylayout std:sid="xylayout-97a0df9e"/>
+            </cl:group>
+            <cl:checkbox std:sid="c-box-753da18b" id="cbx3" style="border-top-width:1px; border-bottom-color:#c5c5c5; padding-left:5px; border-bottom-width:1px; font-size:14px; border-top-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid;" value="1" truevalue="1" falsevalue="0" text="열화상 카메라 사용">
+              <cl:formdata std:sid="f-data-e3f15cae" row="0" col="1"/>
+            </cl:checkbox>
+            <cl:formlayout std:sid="f-layout-0cdc9f16" hspace="0px" vspace="0px">
+              <cl:rows length="30" shadetype="NONE" shadecolor="transparent"/>
+              <cl:rows length="30" shadetype="NONE" shadecolor="transparent"/>
+              <cl:rows length="30" shadetype="NONE" shadecolor="transparent"/>
+              <cl:rows length="30" shadetype="NONE" shadecolor="transparent"/>
+              <cl:rows length="30" shadetype="NONE" shadecolor="transparent"/>
+              <cl:rows length="30" shadetype="NONE" shadecolor="transparent"/>
+              <cl:rows length="30" shadetype="NONE" shadecolor="transparent"/>
+              <cl:rows length="30" shadetype="NONE" shadecolor="transparent"/>
+              <cl:rows length="30" shadetype="NONE" shadecolor="transparent"/>
+              <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="3" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="5" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:formlayout std:sid="f-layout-aa1dc708" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+      </cl:tabitem>
+      <cl:item-style style="cursor:pointer;"/>
+    </cl:tabfolder>
+    <cl:xylayout std:sid="xylayout-7e5c815d"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

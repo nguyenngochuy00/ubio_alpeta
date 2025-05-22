@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-4defb341" version="1.0.0.0">
+  <head std:sid="head-9d88c6f0">
+    <title>musteringTerminalList</title>
+    <screen std:sid="screen-c8e3c6aa" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="600" customWidth="400"/>
+    <screen std:sid="screen-86814ff4" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-ea4cfcb6" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-ec41fa1c">
+      <cl:dataset std:sid="d-set-34395cfb" id="TerminalList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-8dee079b" name="TerminalID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-920feef8" name="Name"/>
+        </cl:datacolumnlist>
+        <cl:datarowlist/>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-0d6f4ebf" id="TerminalSelectedList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-61efa988" name="TerminalID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-6a5a421d" name="InOut" datatype="number"/>
+        </cl:datacolumnlist>
+        <cl:datarowlist/>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-5ff300e0" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-cd80a037" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-6b621639" id="sms_getMusteringTerminalList" method="get" action="/v1/rollcalls/terminals">
+        <cl:listener std:sid="listener-b122193c" name="submit-done" handler="onSms_getMusteringTerminalListSubmitDone"/>
+        <cl:listener std:sid="listener-ac4f6a8d" name="submit-error" handler="onSms_getMusteringTerminalListSubmitError"/>
+        <cl:listener std:sid="listener-8a55942e" name="submit-timeout" handler="onSms_getMusteringTerminalListSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="TerminalList"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-fe0d3425" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-2997be9b" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-8482ce0d">
+      <cl:xylayoutdata std:sid="xyl-data-69cc45b9" top="4px" right="4px" bottom="4px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:grid std:sid="grid-b7b1733a" id="MMZTS_grdTerminalList" datasetid="TerminalList">
+        <cl:formdata std:sid="f-data-cdc5e870" row="1" col="0" rowspan="1" colspan="3"/>
+        <cl:gridcolumn std:sid="g-column-e6eda4f0" width="25px"/>
+        <cl:gridcolumn std:sid="g-column-40c9a97b"/>
+        <cl:gridcolumn std:sid="g-column-6de61f43" width="200px"/>
+        <cl:gridheader std:sid="gh-band-085f09ee">
+          <cl:gridrow std:sid="g-row-5e56eded"/>
+          <cl:gridcell std:sid="gh-cell-4dee52b6" rowindex="0" colindex="0" sortable="false" filterable="false" columntype="checkbox"/>
+          <cl:gridcell std:sid="gh-cell-ac094f18" rowindex="0" colindex="1" targetcolumnname="TerminalID" sortable="false" filterable="false" text="TerminalID"/>
+          <cl:gridcell std:sid="gh-cell-ab03c35f" rowindex="0" colindex="2" targetcolumnname="Name" sortable="false" filterable="false" text="Name"/>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-44bf9673">
+          <cl:gridrow std:sid="g-row-96a01f1a"/>
+          <cl:gridcell std:sid="gd-cell-33fa0536" rowindex="0" colindex="0" columntype="checkbox"/>
+          <cl:gridcell std:sid="gd-cell-51563720" rowindex="0" colindex="1" columnname="TerminalID"/>
+          <cl:gridcell std:sid="gd-cell-e444d2f0" rowindex="0" colindex="2" columnname="Name"/>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:button std:sid="button-311c1d65" id="MMZTS_btnApply" class="userInfo_btn">
+        <cl:listener std:sid="listener-b7f54858" name="click" handler="onMMZTS_btnApplyClick"/>
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_Apply"/>
+        <cl:formdata std:sid="f-data-b8ba5110" row="0" col="1"/>
+      </cl:button>
+      <cl:button std:sid="button-9292704d" id="MMZTS_btnCancel" class="userInfo_btn">
+        <cl:listener std:sid="listener-279e8727" name="click" handler="onMMZTS_btnCancelClick"/>
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_Cancel"/>
+        <cl:formdata std:sid="f-data-36443722" row="0" col="2"/>
+      </cl:button>
+      <cl:formlayout std:sid="f-layout-d4d54265">
+        <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="80" unit="PIXEL" autoSizing="false" minlength="0"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-1f84198a"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

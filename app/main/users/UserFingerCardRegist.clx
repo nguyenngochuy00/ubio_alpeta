@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-994820c6" version="1.0.0.0">
+  <head std:sid="head-b7c776c8">
+    <title>UserFingerCardRegist</title>
+    <screen std:sid="screen-bdf1460f" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="500" customWidth="700"/>
+    <screen std:sid="screen-2f90b4be" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-78b83289" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-7f9f5728">
+      <cl:dataset std:sid="d-set-a7351d38" id="UserFPInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-22574dcc" name="FingerID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-b7d1bd00" name="MinConvType" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-865086bb" name="TemplateIndex" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-aebc322a" name="TemplateData"/>
+          <cl:datacolumn std:sid="d-column-954d9481" name="Duress" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-905e1c47" id="UserCardInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-62cdd1b2" name="CardNum"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-e14c941e" id="dsFingerRegistMenu">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-aca4fd8d" name="label"/>
+          <cl:datacolumn std:sid="d-column-299e954e" name="value"/>
+          <cl:datacolumn std:sid="d-column-d8f56766" name="parent"/>
+        </cl:datacolumnlist>
+        <cl:datarowlist>
+          <cl:datarow>
+            <cl:datavalue columnname="label">지문등록</cl:datavalue>
+            <cl:datavalue columnname="value">regist</cl:datavalue>
+            <cl:datavalue columnname="parent"/>
+          </cl:datarow>
+        </cl:datarowlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-69ae6104" id="dsFingerModifyMenu">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-5967a51f" name="label"/>
+          <cl:datacolumn std:sid="d-column-355996b6" name="value"/>
+          <cl:datacolumn std:sid="d-column-2a939d06" name="parent"/>
+        </cl:datacolumnlist>
+        <cl:datarowlist>
+          <cl:datarow>
+            <cl:datavalue columnname="label">지문재등록</cl:datavalue>
+            <cl:datavalue columnname="value">regist</cl:datavalue>
+            <cl:datavalue columnname="parent"/>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="label">지문삭제</cl:datavalue>
+            <cl:datavalue columnname="value">delete</cl:datavalue>
+            <cl:datavalue columnname="parent"/>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="label">협박지문등록</cl:datavalue>
+            <cl:datavalue columnname="value">duressOn</cl:datavalue>
+            <cl:datavalue columnname="parent"/>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="label">협박지문삭제</cl:datavalue>
+            <cl:datavalue columnname="value">duressOff</cl:datavalue>
+            <cl:datavalue columnname="parent"/>
+          </cl:datarow>
+        </cl:datarowlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-5aebe324" id="dsCardLayoutData">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-4c41f539" name="Index" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-fad13739" name="Sector" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-75c5b5a4" name="Block" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-ab5f8204" name="Start" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-d0337204" name="Length" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-2f7f796c" name="KeyType" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-05e52b47" name="KeyValue"/>
+          <cl:datacolumn std:sid="d-column-a41b4f3a" name="AIDCode"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-a5923302" id="UserInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-4b12de03" name="ID"/>
+          <cl:datacolumn std:sid="d-column-4c1e1cf3" name="AuthInfo" datatype="string" defaultvalue="0,0,0,0,0,0,0,0"/>
+          <cl:datacolumn std:sid="d-column-6cd86985" name="UsePeriodFlag" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-aa29eb53" name="RegistDate"/>
+          <cl:datacolumn std:sid="d-column-36a88489" name="ExpireDate"/>
+          <cl:datacolumn std:sid="d-column-1a623d89" name="Password" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-879072b9" name="AccessGroupCode" datatype="number" defaultvalue="0"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-866f6864" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-6b0a42cc" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-b5bf4ffe" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-03aa1e67" name="Count" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-fda74626" id="dm_FPInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-22b92a25" name="UserID" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-45a1f49c" name="FingerID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-7e33198f" name="Template1"/>
+          <cl:datacolumn std:sid="d-column-3dadf1d2" name="Template2"/>
+          <cl:datacolumn std:sid="d-column-0d4002e9" name="templateFormat" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-0bd36952" id="dmFPImage">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-cb105baa" name="UserID"/>
+          <cl:datacolumn std:sid="d-column-779499c9" name="FingerID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-cd3e70f6" name="TotalSize" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-b1c86540" name="Template1" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-34ddf7d6" name="Template2"/>
+          <cl:datacolumn std:sid="d-column-f3ec264a" name="ConvImage1"/>
+          <cl:datacolumn std:sid="d-column-38ff8316" name="ConvImage2"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-3cc8aaae" id="dmCardLayoutInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-ef2c355c" info="지문 카드용량" name="CardSize" datatype="number" defaultvalue="1"/>
+          <cl:datacolumn std:sid="d-column-7860a5c6" info="카드종류" name="CardType" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-6f2ff262" info="카드 읽기 구분" name="ReadType" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-12bd32ff" info="지문 템플릿" name="TemplateSize" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-6c2cce17" info="지문 Template 개수" name="TemplateCount" datatype="number" defaultvalue="0"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-5e36c039" id="UserPassword">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-8915c30b" name="Password"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-bb39e02c" id="sms_getUserFPInfo" method="get">
+        <cl:listener std:sid="listener-ffb954a8" name="submit-done" handler="onSms_getUserFPInfoSubmitDone"/>
+        <cl:listener std:sid="listener-a7628173" name="submit-error" handler="onSms_SubmitError"/>
+        <cl:listener std:sid="listener-f94f56ad" name="submit-timeout" handler="onSms_SubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="UserFPInfo"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-d839c4bc" id="sms_getCardLayoutInfo" method="get" action="/v1/cardLayout">
+        <cl:listener std:sid="listener-e847e86a" name="submit-done" handler="onSms_getCardLayoutInfoSubmitDone"/>
+        <cl:listener std:sid="listener-fc09fdf8" name="submit-error" handler="onSms_SubmitError"/>
+        <cl:listener std:sid="listener-b3ed8990" name="submit-timeout" handler="onSms_SubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="dmCardLayoutInfo"/>
+        <cl:responsedata dataid="dsCardLayoutData"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-b75df4c4" id="sms_getUserPassword" method="get" action="/v1/users/password/">
+        <cl:listener std:sid="listener-9c45e0bd" name="submit-error" handler="onSms_SubmitError"/>
+        <cl:listener std:sid="listener-85fb475f" name="submit-timeout" handler="onSms_SubmitTimeout"/>
+        <cl:listener std:sid="listener-347d8c57" name="submit-done" handler="onSms_getUserPasswordSubmitDone"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="UserPassword"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec dev-comment="&#xD;&#xA;&#xD;&#xA;//1. 사용자 아이디 기준으로 사용자 기본정보, 지문, 카드 정보 가지고 온다."/>
+  </head>
+  <body std:sid="body-0e79644c" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-aba263fc" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-ac7221ec">
+      <cl:xylayoutdata std:sid="xyl-data-cdd1408a" top="1px" right="1px" bottom="1px" left="1px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-4637e7ba" style="padding-top:10px; padding-left:10px; padding-bottom:10px; padding-right:10px;">
+        <cl:formdata std:sid="f-data-bf0059a4" row="1" col="0"/>
+        <cl:group std:sid="group-d1f25634">
+          <cl:formdata std:sid="f-data-972ec750" row="0" col="1"/>
+          <cl:output std:sid="output-fd382b30" style="font-weight:700; font-size:14px;">
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_EnrollFingerPrint"/>
+            <cl:formdata std:sid="f-data-3a452da6" row="0" col="0"/>
+          </cl:output>
+          <cl:group std:sid="group-26f6fe6a">
+            <cl:formdata std:sid="f-data-3a9ebacf" row="1" col="0"/>
+            <cl:group std:sid="group-220ad4a0">
+              <cl:formdata std:sid="f-data-6cd2daeb" row="0" col="0"/>
+              <cl:img std:sid="image-3a40bcb9" src="../../../theme/images/fingerRegistration/user_fingerprint_img_hand_left.png">
+                <cl:xylayoutdata std:sid="xyl-data-8732a8d7" top="4px" width="120px" height="160px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
+              </cl:img>
+              <cl:img std:sid="image-6d4aa452" id="USFCR_imgfinger_6" src="../../../theme/images/common/common_check_box_normal.png">
+                <cl:listener std:sid="listener-7def6647" name="click" handler="onImageContextmenu"/>
+                <cl:xylayoutdata std:sid="xyl-data-54e6d26d" top="76px" left="116px" width="16px" height="16px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+              </cl:img>
+              <cl:img std:sid="image-51fc3d09" id="USFCR_imgfinger_7" src="../../../theme/images/common/common_check_box_normal.png">
+                <cl:listener std:sid="listener-f21b2df2" name="click" handler="onImageContextmenu"/>
+                <cl:xylayoutdata std:sid="xyl-data-205a8534" top="24px" left="87px" width="16px" height="16px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+              </cl:img>
+              <cl:img std:sid="image-0e86406d" id="USFCR_imgfinger_8" src="../../../theme/images/common/common_check_box_normal.png">
+                <cl:listener std:sid="listener-970e15ba" name="click" handler="onImageContextmenu"/>
+                <cl:xylayoutdata std:sid="xyl-data-67b1b1f6" top="9px" left="68px" width="16px" height="16px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+              </cl:img>
+              <cl:img std:sid="image-4398a458" id="USFCR_imgfinger_9" src="../../../theme/images/common/common_check_box_normal.png">
+                <cl:listener std:sid="listener-823e35f3" name="click" handler="onImageContextmenu"/>
+                <cl:xylayoutdata std:sid="xyl-data-86aa694f" top="20px" left="50px" width="16px" height="16px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+              </cl:img>
+              <cl:img std:sid="image-99815aa9" id="USFCR_imgfinger_10" src="../../../theme/images/common/common_check_box_normal.png">
+                <cl:listener std:sid="listener-7e1680e3" name="click" handler="onImageContextmenu"/>
+                <cl:xylayoutdata std:sid="xyl-data-4cc583a8" top="48px" left="30px" width="16px" height="16px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+              </cl:img>
+              <cl:xylayout std:sid="xylayout-883282bd"/>
+            </cl:group>
+            <cl:group std:sid="group-60ff5144">
+              <cl:formdata std:sid="f-data-3a875022" row="0" col="1"/>
+              <cl:img std:sid="image-904c4341" src="../../../theme/images/fingerRegistration/user_fingerprint_img_hand_right.png">
+                <cl:xylayoutdata std:sid="xyl-data-ec35a950" top="4px" width="120px" height="160px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
+              </cl:img>
+              <cl:img std:sid="image-7f906cc4" id="USFCR_imgfinger_5" src="../../../theme/images/common/common_check_box_normal.png">
+                <cl:listener std:sid="listener-99756998" name="click" handler="onImageContextmenu"/>
+                <cl:xylayoutdata std:sid="xyl-data-dda7726e" top="48px" left="118px" width="16px" height="16px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+              </cl:img>
+              <cl:img std:sid="image-37caf3a0" id="USFCR_imgfinger_4" src="../../../theme/images/common/common_check_box_normal.png">
+                <cl:listener std:sid="listener-b68b95af" name="click" handler="onImageContextmenu"/>
+                <cl:xylayoutdata std:sid="xyl-data-7971eb6a" top="20px" left="101px" width="16px" height="16px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+              </cl:img>
+              <cl:img std:sid="image-604a1a3c" id="USFCR_imgfinger_3" src="../../../theme/images/common/common_check_box_normal.png">
+                <cl:listener std:sid="listener-5d378940" name="click" handler="onImageContextmenu"/>
+                <cl:xylayoutdata std:sid="xyl-data-04444df1" top="8px" left="82px" width="16px" height="16px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+              </cl:img>
+              <cl:img std:sid="image-16c20888" id="USFCR_imgfinger_2" src="../../../theme/images/common/common_check_box_normal.png">
+                <cl:listener std:sid="listener-00928ee0" name="click" handler="onImageContextmenu"/>
+                <cl:xylayoutdata std:sid="xyl-data-171e3f0e" top="24px" left="63px" width="16px" height="16px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+              </cl:img>
+              <cl:img std:sid="image-a23af037" id="USFCR_imgfinger_1" src="../../../theme/images/common/common_check_box_normal.png">
+                <cl:listener std:sid="listener-679dcb75" name="click" handler="onImageContextmenu"/>
+                <cl:xylayoutdata std:sid="xyl-data-4120816f" top="76px" left="30px" width="16px" height="16px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+              </cl:img>
+              <cl:xylayout std:sid="xylayout-3e4428a3"/>
+            </cl:group>
+            <cl:group std:sid="group-d308f0a6">
+              <cl:formdata std:sid="f-data-3f7d7900" row="1" col="0" rowspan="1" colspan="2"/>
+              <cl:output std:sid="output-12a8fae2" id="USFCR_opbInfoMsg" style="text-align:center;">
+                <cl:xylayoutdata std:sid="xyl-data-8ca88bc8" top="4px" bottom="4px" left="4px" width="163px" horizontalAnchor="LEFT" verticalAnchor="BOTH"/>
+              </cl:output>
+              <cl:button std:sid="button-2feaddf1" id="USFCR_btnRegist" class="userInfo_btn" visible="false">
+                <cl:listener std:sid="listener-3a8fdc04" name="click" handler="onUSFCR_btnRegistClick"/>
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_Enrollment"/>
+                <cl:xylayoutdata std:sid="xyl-data-9e8f848a" top="4px" right="4px" bottom="4px" width="80px" horizontalAnchor="RIGHT" verticalAnchor="BOTH"/>
+              </cl:button>
+              <cl:xylayout std:sid="xylayout-eee5ad8d"/>
+            </cl:group>
+            <cl:group std:sid="group-390e7980">
+              <cl:formdata std:sid="f-data-c9beec3b" row="2" col="0"/>
+              <cl:img std:sid="image-2fb23494" id="USFCR_imgFPDisplay_1">
+                <cl:xylayoutdata std:sid="xyl-data-f9771550" top="4px" right="4px" bottom="4px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+              </cl:img>
+              <cl:xylayout std:sid="xylayout-fdbbabc6"/>
+            </cl:group>
+            <cl:group std:sid="group-315e2dcf">
+              <cl:formdata std:sid="f-data-56fc2708" row="2" col="1"/>
+              <cl:img std:sid="image-cb981b3e" id="USFCR_imgFPDisplay_2">
+                <cl:xylayoutdata std:sid="xyl-data-04b79a0e" top="4px" right="4px" bottom="4px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+              </cl:img>
+              <cl:xylayout std:sid="xylayout-cfb46aaa"/>
+            </cl:group>
+            <cl:formlayout std:sid="f-layout-7a7962a4" hspace="0px" vspace="0px">
+              <cl:rows length="168" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+              <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:rows length="168" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+              <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+              <cl:columns length="1" unit="FRACTION"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:formlayout std:sid="f-layout-85812f6c">
+            <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:group std:sid="group-4ce6f2df">
+          <cl:formdata std:sid="f-data-7710ceae" row="0" col="0"/>
+          <cl:htmlsnippet std:sid="htmlsnippet-e25c31a6" id="USFCR_sniDownloadLink" visible="false">
+            <cl:formdata std:sid="f-data-f9d2ab9f" row="2" col="0"/>
+          </cl:htmlsnippet>
+          <cl:output std:sid="output-14704462" id="USFCR_opbMessage">
+            <cl:formdata std:sid="f-data-af68a7b6" row="1" col="0"/>
+          </cl:output>
+          <cl:group std:sid="group-444ee0fa">
+            <cl:formdata std:sid="f-data-5adff437" row="0" col="0"/>
+            <cl:button std:sid="button-85c26962" id="USFCR_btnSmartCardIssue" class="userInfo_btn">
+              <cl:listener std:sid="listener-979ae4e9" name="click" handler="onUSFCR_btnSmartCardIssueClick"/>
+              <cl:langbind property="value" category="PROPERTY" keypath="Str_CardLayoutFormatSetting"/>
+              <cl:formdata std:sid="f-data-a2bd6971" row="0" col="1"/>
+            </cl:button>
+            <cl:inputbox std:sid="i-box-a7b7c323" id="USFCR_ipbCardNum">
+              <cl:formdata std:sid="f-data-975035a4" row="0" col="0"/>
+            </cl:inputbox>
+            <cl:formlayout std:sid="f-layout-00143b64" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+              <cl:rows length="1" unit="FRACTION"/>
+              <cl:columns length="1" unit="FRACTION"/>
+              <cl:columns length="140" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:formlayout std:sid="f-layout-94952429" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+            <cl:rows length="35" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:rows length="30" unit="PIXEL"/>
+            <cl:rows length="30" unit="PIXEL"/>
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-00d7ef60" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-ea7e8448">
+        <cl:formdata std:sid="f-data-9c6f9b6f" row="0" col="0"/>
+        <cl:output std:sid="output-8a51dee4" class="userInfo_bold">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_FPCardRegist"/>
+          <cl:formdata std:sid="f-data-e9f402f4" row="0" col="0"/>
+        </cl:output>
+        <cl:button std:sid="button-f281ef90" id="USFCR_btnClose" class="userInfo_btn">
+          <cl:listener std:sid="listener-9e1b4de3" name="click" handler="onUSFCR_btnCloseClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Finish"/>
+          <cl:formdata std:sid="f-data-ecbe6e60" row="0" col="2"/>
+        </cl:button>
+        <cl:button std:sid="button-3f6e664e" id="USFCR_btnApply" class="userInfo_btn">
+          <cl:listener std:sid="listener-acf76b07" name="click" handler="onUSFCR_btnApplyClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Apply"/>
+          <cl:formdata std:sid="f-data-eb3a55ad" row="0" col="1"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-44c163a2" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="2" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" minlength="0"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-936a1759" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+        <cl:rows length="35" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-02849ea2"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

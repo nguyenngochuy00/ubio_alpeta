@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-9e6a744d" version="1.0.0.0">
+  <head std:sid="head-aee262a0">
+    <title>ContentSelector</title>
+    <screen std:sid="screen-0dccc65a" id="default" height="768px" minwidth="1024px" name="default" width="1024px"/>
+    <screen std:sid="screen-25fe64ef" id="tablet" height="667px" maxwidth="1023px" minwidth="500px" name="tablet" width="500px"/>
+    <screen std:sid="screen-cf51314a" id="mobile" height="525px" maxwidth="499px" name="mobile" width="350px"/>
+    <cl:model std:sid="model-cfd9c684">
+      <cl:dataset std:sid="d-set-8c7cf4d8" id="dsSelectContents">
+        <cl:datacolumnlist>
+          <cl:datacolumn name="SourceName"/>
+          <cl:datacolumn name="ColumnName"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-d1206b60" id="dsImportContents">
+        <cl:datacolumnlist>
+          <cl:datacolumn name="ColumnName"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-ceebba4c" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-46bef6ff" handler="onBodyLoad" name="load"/>
+    <cl:group std:sid="group-da7b0c68" style="padding:10px;">
+      <cl:xylayoutdata std:sid="xyl-data-8d8f2469" height="447px" horizontalAnchor="LEFT" left="5px" top="6px" verticalAnchor="TOP" width="460px"/>
+      <cl:grid std:sid="grid-1b8cbf75" id="USIMS_grdSelectedContents" columnMovable="false" columnResizable="false" datasetid="dsSelectContents" readonly="false">
+        <cl:listener std:sid="listener-76902607" handler="onUSIMS_grdSelectedContentsMousedown" name="mousedown"/>
+        <cl:listener std:sid="listener-234e7c86" handler="onUSIMS_grdSelectedContentsMouseup" name="mouseup"/>
+        <cl:listener std:sid="listener-1bb01159" handler="onUSIMS_grdSelectedContentsDblclick" name="dblclick"/>
+        <cl:formdata std:sid="f-data-a3485bdf" col="0" row="0"/>
+        <cl:gridcolumn std:sid="g-column-961b7a4a"/>
+        <cl:gridcolumn std:sid="g-column-ad3e058b"/>
+        <cl:gridheader std:sid="gh-band-2aecc739">
+          <cl:gridrow std:sid="g-row-186fdb26"/>
+          <cl:gridcell std:sid="gh-cell-75eb9b04" colindex="0" rowindex="0" style="font-weight:200; font-size:14px;" filterable="false" sortable="false" targetcolumnname="SourceName" text="기준 항목">
+            <cl:langbind category="PROPERTY" property="text" keypath="Str_BaseCategory"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-d3e505a2" colindex="1" rowindex="0" style="font-weight:200; font-size:14px;" filterable="false" sortable="false" targetcolumnname="ColumnName" text="매칭 항목">
+            <cl:langbind category="PROPERTY" property="text" keypath="Str_MatchingCategory"/>
+          </cl:gridcell>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-e371dc88">
+          <cl:gridrow std:sid="g-row-202a2e91"/>
+          <cl:gridcell std:sid="gd-cell-14dd760b" colindex="0" rowindex="0" style="font-size:14px;" columnname="SourceName"/>
+          <cl:gridcell std:sid="gd-cell-e5a654d1" colindex="1" rowindex="0" style="font-size:14px;" columnname="ColumnName"/>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:grid std:sid="grid-ac0137ec" id="USIMS_grdImportContents" style="text-align:left;" columnMovable="false" columnResizable="false" datasetid="dsImportContents" readonly="false">
+        <cl:listener std:sid="listener-592e51d5" handler="onUSIMS_grdImportContentsMouseup" name="mouseup"/>
+        <cl:listener std:sid="listener-0d9e8020" handler="onUSIMS_grdImportContentsMousedown" name="mousedown"/>
+        <cl:formdata std:sid="f-data-7e55dd05" col="2" row="0"/>
+        <cl:gridcolumn std:sid="g-column-c9881ac9"/>
+        <cl:gridheader std:sid="gh-band-29edb965">
+          <cl:gridrow std:sid="g-row-911718d3"/>
+          <cl:gridcell std:sid="gh-cell-eafa82b6" colindex="0" rowindex="0" style="font-weight:200; font-size:14px;" filterable="false" sortable="false" targetcolumnname="ColumnName" text="파일 항목">
+            <cl:langbind category="PROPERTY" property="text" keypath="Str_FileCategory"/>
+          </cl:gridcell>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-0992453b">
+          <cl:gridrow std:sid="g-row-50c9226e"/>
+          <cl:gridcell std:sid="gd-cell-f3354345" colindex="0" rowindex="0" style="font-size:14px;" columnname="ColumnName"/>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:button std:sid="button-e344b137" id="USIMS_btnApply" class="userInfo_btn">
+        <cl:listener std:sid="listener-d5845858" handler="onUSIMS_btnApplyClick" name="click"/>
+        <cl:langbind category="PROPERTY" property="value" keypath="Str_Apply"/>
+        <cl:formdata std:sid="f-data-9d39939b" col="2" halign="RIGHT" row="1" valign="FILL"/>
+      </cl:button>
+      <cl:group std:sid="group-a418feb4">
+        <cl:formdata std:sid="f-data-bb1e7d36" col="1" row="0"/>
+        <cl:xylayout std:sid="xylayout-e2ea9d7f"/>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-17e65ef7">
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:columns autoSizing="false" length="5" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+        <cl:columns autoSizing="false" length="40" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:columns autoSizing="false" length="3" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-4a5f7f01"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

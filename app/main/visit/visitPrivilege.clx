@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-5d0905b4" version="1.0.0.0">
+  <head std:sid="head-df491e00">
+    <title>visitManagementPrivilege</title>
+    <screen std:sid="screen-fa84885c" id="default" customHeight="600" customWidth="800" height="768px" minwidth="1024px" name="default" useCustomHeight="true" useCustomWidth="true" width="1024px"/>
+    <screen std:sid="screen-09a3121f" id="tablet" height="667px" maxwidth="1023px" minwidth="500px" name="tablet" width="500px"/>
+    <screen std:sid="screen-8fb5e686" id="mobile" height="525px" maxwidth="499px" name="mobile" width="350px"/>
+    <cl:model std:sid="model-87c699f8">
+      <cl:dataset std:sid="d-set-5583c8a8" id="VisitPrivilegeList">
+        <cl:datacolumnlist>
+          <cl:datacolumn name="userID"/>
+          <cl:datacolumn name="userName"/>
+          <cl:datacolumn datatype="number" name="View"/>
+          <cl:datacolumn datatype="number" name="Approval"/>
+          <cl:datacolumn datatype="number" name="VisitorRegist"/>
+        </cl:datacolumnlist>
+        <cl:datarowlist/>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-8a381b6c" id="VisitPrivilege">
+        <cl:datacolumnlist>
+          <cl:datacolumn name="userID"/>
+          <cl:datacolumn name="userName"/>
+          <cl:datacolumn datatype="number" defaultvalue="0" name="View"/>
+          <cl:datacolumn datatype="number" defaultvalue="0" name="Approval"/>
+          <cl:datacolumn datatype="number" defaultvalue="0" name="VisitorRegist"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-503c48c4" id="sms_postVisitPrivilege" action="v1/VisitPrivilege">
+        <cl:listener std:sid="listener-bc7d8938" handler="onSms_postVisitPrivilegeSubmitError" name="submit-error"/>
+        <cl:listener std:sid="listener-4d7985ae" handler="onSms_postVisitPrivilegeSubmitTimeout" name="submit-timeout"/>
+        <cl:listener std:sid="listener-ea39a6cf" handler="onSms_postVisitPrivilegeSubmitDone" name="submit-done"/>
+        <cl:requestdata dataid="VisitPrivilege"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:datamap std:sid="d-map-866f6864" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="ResultCode"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-2af5ec46" id="sms_getVisitPrivilege" action="v1/VisitPrivilege" method="get">
+        <cl:listener std:sid="listener-96ca7c38" handler="onSms_getVisitPrivilegeSubmitError" name="submit-error"/>
+        <cl:listener std:sid="listener-a2e499a9" handler="onSms_getVisitPrivilegeSubmitTimeout" name="submit-timeout"/>
+        <cl:listener std:sid="listener-f8ac06ef" handler="onSms_getVisitPrivilegeSubmitDone" name="submit-done"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total"/>
+        <cl:responsedata dataid="VisitPrivilegeList"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-0573ae03" id="sms_putVisitPrivilege" action="v1/VisitPrivilege/" method="put">
+        <cl:listener std:sid="listener-894ebd59" handler="onSms_putVisitPrivilegeSubmitError" name="submit-error"/>
+        <cl:listener std:sid="listener-c5401ce7" handler="onSms_putVisitPrivilegeSubmitTimeout" name="submit-timeout"/>
+        <cl:listener std:sid="listener-2a83cb31" handler="onSms_putVisitPrivilegeSubmitDone" name="submit-done"/>
+        <cl:requestdata dataid="VisitPrivilege"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-81e8115d" id="sms_deleteVisitPrivilege" action="v1/VisitPrivilege/" method="delete">
+        <cl:listener std:sid="listener-9bdb6691" handler="onSms_deleteVisitPrivilegeSubmitError" name="submit-error"/>
+        <cl:listener std:sid="listener-e8d169a5" handler="onSms_deleteVisitPrivilegeSubmitTimeout" name="submit-timeout"/>
+        <cl:listener std:sid="listener-9791dd16" handler="onSms_deleteVisitPrivilegeSubmitDone" name="submit-done"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:dataset std:sid="d-set-ab9c534d" id="dsDeleteList">
+        <cl:datacolumnlist>
+          <cl:datacolumn name="userID"/>
+          <cl:datacolumn datatype="number" name="rowIndex"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-87aada55" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="Count"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-d7c6018a" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-d0416768" handler="onBodyLoad" name="load"/>
+    <cl:group std:sid="group-7b66213d">
+      <cl:responsivexylayoutdata std:sid="rxyl-data-7db17e4c">
+        <cl:xylayoutdata std:sid="sxyl-data-853ef1fb" bottom="10px" horizontalAnchor="BOTH" left="10px" right="10px" top="10px" verticalAnchor="BOTH" screenid="default"/>
+      </cl:responsivexylayoutdata>
+      <cl:group std:sid="group-c34f8bd7">
+        <cl:formdata std:sid="f-data-cb2139db" col="0" colspan="1" row="0" rowspan="1"/>
+        <cl:output std:sid="output-a3e12b01" style="font-size:12px;" value="방문객 관리 권한 리스트">
+          <cl:xylayoutdata std:sid="xyl-data-dad078f1" height="30px" horizontalAnchor="LEFT" left="0px" top="0px" verticalAnchor="TOP" width="245px"/>
+        </cl:output>
+        <cl:xylayout std:sid="xylayout-53e25259"/>
+      </cl:group>
+      <cl:grid std:sid="grid-b74fb8c8" id="grd_VisitPrivilegeList" datasetid="VisitPrivilegeList">
+        <cl:listener std:sid="listener-2e2dea69" handler="onGrd_VisitPrivilegeListSelectionChange" name="selection-change"/>
+        <cl:formdata std:sid="f-data-0979cfbd" halign="FILL" col="0" row="2"/>
+        <cl:gridcolumn std:sid="g-column-7f6f1260" width="25px"/>
+        <cl:gridcolumn std:sid="g-column-b6a28dad"/>
+        <cl:gridcolumn std:sid="g-column-b8dc3a1c"/>
+        <cl:gridcolumn std:sid="g-column-37ba01fb"/>
+        <cl:gridcolumn std:sid="g-column-92d8cd8b"/>
+        <cl:gridcolumn std:sid="g-column-0abeeb6b"/>
+        <cl:gridheader std:sid="gh-band-c7e801bd">
+          <cl:gridrow std:sid="g-row-923a0358"/>
+          <cl:gridcell std:sid="gh-cell-1751d54a" colindex="0" rowindex="0" columntype="checkbox" filterable="false" sortable="false"/>
+          <cl:gridcell std:sid="gh-cell-09153792" colindex="1" rowindex="0" filterable="false" sortable="false" targetcolumnname="userID" text="userID"/>
+          <cl:gridcell std:sid="gh-cell-b90459f8" colindex="2" rowindex="0" filterable="false" sortable="false" targetcolumnname="userName" text="userName"/>
+          <cl:gridcell std:sid="gh-cell-f5d05a27" colindex="3" rowindex="0" filterable="false" sortable="false" targetcolumnname="View" text="View"/>
+          <cl:gridcell std:sid="gh-cell-b3437f7e" colindex="4" rowindex="0" filterable="false" sortable="false" targetcolumnname="Approval" text="Approval"/>
+          <cl:gridcell std:sid="gh-cell-c8dc61f2" colindex="5" rowindex="0" filterable="false" sortable="false" targetcolumnname="VisitorRegist" text="VisitorRegist"/>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-e4076c6f">
+          <cl:gridrow std:sid="g-row-9c517ec1"/>
+          <cl:gridcell std:sid="gd-cell-a038cc50" colindex="0" rowindex="0" columntype="checkbox"/>
+          <cl:gridcell std:sid="gd-cell-e81c90c1" colindex="1" rowindex="0" columnname="userID"/>
+          <cl:gridcell std:sid="gd-cell-85cac485" colindex="2" rowindex="0" columnname="userName"/>
+          <cl:gridcell std:sid="gd-cell-be598f8b" colindex="3" rowindex="0" columnname="View"/>
+          <cl:gridcell std:sid="gd-cell-cef27388" colindex="4" rowindex="0" columnname="Approval"/>
+          <cl:gridcell std:sid="gd-cell-ac1554bf" colindex="5" rowindex="0" columnname="VisitorRegist"/>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:group std:sid="group-13127ff0">
+        <cl:formdata std:sid="f-data-a9c1d5db" col="0" row="1"/>
+        <cl:button std:sid="button-d2d1b108" id="BTN_VisitPrivilegeDelete" class="userInfo_btn">
+          <cl:listener std:sid="listener-7dd9f09f" handler="onBTN_VisitPrivilegeDeleteClick" name="click"/>
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_Delete"/>
+          <cl:formdata std:sid="f-data-79cd9ead" col="4" row="0"/>
+        </cl:button>
+        <cl:button std:sid="button-00d9d35f" id="BTN_VisitPrivilegeUpdate" class="userInfo_btn" value="수정">
+          <cl:listener std:sid="listener-99540e1d" handler="onBTN_VisitPrivilegeUpdateClick" name="click"/>
+          <cl:formdata std:sid="f-data-e3098497" col="3" row="0"/>
+        </cl:button>
+        <cl:button std:sid="button-c1a8c258" id="BTN_VisitPrivilegeAdd" class="userInfo_btn" value="추가">
+          <cl:listener std:sid="listener-3f0c7836" handler="onBTN_VisitPrivilegeAddClick" name="click"/>
+          <cl:formdata std:sid="f-data-633bd18c" col="2" row="0"/>
+        </cl:button>
+        <cl:group std:sid="group-041eb974">
+          <cl:formdata std:sid="f-data-ec66c3ec" col="1" row="0"/>
+          <cl:checkbox std:sid="c-box-a5e271e3" id="CBX_Privilege_View" style="border-bottom-color:#c7c7c7; border-left-style:solid; border-left-color:#c7c7c7; border-bottom-width:1px; border-bottom-style:solid; border-left-width:1px; text-align:center;" value="">
+            <cl:formdata std:sid="f-data-1c07828e" col="0" row="1"/>
+          </cl:checkbox>
+          <cl:checkbox std:sid="c-box-64229a11" id="CBX_Privilege_Approval" style="border-bottom-color:#c7c7c7; border-left-style:solid; border-left-color:#c7c7c7; border-bottom-width:1px; border-bottom-style:solid; border-left-width:1px; text-align:center;" value="">
+            <cl:formdata std:sid="f-data-611f3f6a" col="1" row="1"/>
+          </cl:checkbox>
+          <cl:checkbox std:sid="c-box-b8cb5ce9" id="CBX_Privilege_VisitorRegist" style="border-right-style:solid; border-bottom-color:#c7c7c7; border-right-width:1px; border-left-color:#c7c7c7; border-right-color:#c7c7c7; border-left-width:1px; border-left-style:solid; border-bottom-width:1px; border-bottom-style:solid; text-align:center;" value="">
+            <cl:formdata std:sid="f-data-f7070f18" col="2" row="1"/>
+          </cl:checkbox>
+          <cl:output std:sid="output-ec9303c1" style="border-bottom-color:#c7c7c7; border-top-width:1px; border-left-color:#c7c7c7; border-left-width:1px; border-top-style:solid; background-color:#F6F6F6; border-left-style:solid; border-bottom-width:1px; border-top-color:#c7c7c7; border-bottom-style:solid; text-align:center;" value="조회">
+            <cl:formdata std:sid="f-data-c0249765" col="0" row="0"/>
+          </cl:output>
+          <cl:output std:sid="output-3b900e6e" style="border-bottom-color:#c7c7c7; border-top-width:1px; border-left-color:#c7c7c7; border-left-width:1px; border-top-style:solid; background-color:#F6F6F6; border-left-style:solid; border-bottom-width:1px; border-top-color:#c7c7c7; border-bottom-style:solid; text-align:center;" value="승인">
+            <cl:formdata std:sid="f-data-ff4cc825" col="1" row="0"/>
+          </cl:output>
+          <cl:output std:sid="output-3c4f73f4" style="border-right-style:solid; border-bottom-color:#c7c7c7; border-top-width:1px; border-right-width:1px; border-left-color:#c7c7c7; border-right-color:#c7c7c7; border-left-width:1px; border-top-style:solid; background-color:#F6F6F6; border-left-style:solid; border-bottom-width:1px; border-top-color:#c7c7c7; border-bottom-style:solid; text-align:center;" value="방문객 등록">
+            <cl:formdata std:sid="f-data-cbc0c818" col="2" row="0"/>
+          </cl:output>
+          <cl:formlayout std:sid="f-layout-13f35811" hspace="0px" vspace="0px">
+            <cl:rows length="25" unit="PIXEL"/>
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:group std:sid="group-fdd393c6">
+          <cl:formdata std:sid="f-data-6107cf5c" col="0" row="0"/>
+          <cl:output std:sid="output-72290ba5" id="OTP_VisitUserID" style="border-bottom-color:#c7c7c7; border-left-style:solid; border-bottom-width:1px; border-left-color:#c7c7c7; border-bottom-style:solid; border-left-width:1px; text-align:center;">
+            <cl:formdata std:sid="f-data-f732c537" col="0" row="1"/>
+          </cl:output>
+          <cl:output std:sid="output-03ea8bd2" id="OTP_VisitUserName" style="border-right-style:solid; border-bottom-color:#c7c7c7; border-left-style:solid; border-right-width:1px; border-bottom-width:1px; border-left-color:#c7c7c7; border-bottom-style:solid; border-right-color:#c7c7c7; border-left-width:1px; text-align:center;">
+            <cl:formdata std:sid="f-data-a5473359" col="1" row="1"/>
+          </cl:output>
+          <cl:button std:sid="button-953e4cde" id="VMVTR_btnFAWUserSelect" style="background-color:transparent; border-right-style:none; background-repeat:no-repeat; border-left-style:none; border-bottom-style:none; background-image:url('../../../theme/images/common/common_text_field_btn_icons_search.png'); background-position:center; border-top-style:none;" enabled="true">
+            <cl:listener std:sid="listener-ad4c543e" handler="onVMVTR_btnFAWUserSelectClick" name="click"/>
+            <cl:formdata std:sid="f-data-94255ad7" col="2" row="1"/>
+          </cl:button>
+          <cl:output std:sid="output-586d1dd8" style="border-top-width:1px; border-bottom-color:#c7c7c7; border-left-color:#c7c7c7; border-left-width:1px; border-top-style:solid; background-color:#F6F6F6; border-left-style:solid; border-bottom-width:1px; border-top-color:#c7c7c7; border-bottom-style:solid; text-align:center;" value="아이디">
+            <cl:formdata std:sid="f-data-ba643df0" col="0" row="0"/>
+          </cl:output>
+          <cl:output std:sid="output-1190e746" style="border-right-style:solid; border-top-width:1px; border-bottom-color:#c7c7c7; border-right-width:1px; border-left-color:#c7c7c7; border-right-color:#c7c7c7; border-left-width:1px; border-top-style:solid; background-color:#F6F6F6; border-left-style:solid; border-bottom-width:1px; border-top-color:#c7c7c7; border-bottom-style:solid; text-align:center;" value="이름">
+            <cl:formdata std:sid="f-data-d9ab4def" col="1" row="0"/>
+          </cl:output>
+          <cl:formlayout std:sid="f-layout-54dc7d2d" hspace="0px" vspace="0px">
+            <cl:rows length="25" unit="PIXEL"/>
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+            <cl:columns autoSizing="false" length="30" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-be3fe5d7">
+          <cl:rows length="1" shadecolor="transparent" shadetype="NONE" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns autoSizing="false" length="80" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="80" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="80" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:pageindexer std:sid="p-indexer-7c8429dd" id="VPList_pageIndexer" class="userList_paging">
+        <cl:formdata std:sid="f-data-03553726" col="0" row="3"/>
+      </cl:pageindexer>
+      <cl:formlayout std:sid="f-layout-469b6914">
+        <cl:rows autoSizing="false" length="30" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:rows autoSizing="false" length="60" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:rows autoSizing="false" length="50" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:columns autoSizing="false" length="1" minlength="0" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:responsivexylayout std:sid="r-xylayout-c6caff7b"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

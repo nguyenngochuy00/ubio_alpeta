@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-37b993de" version="1.0.0.0">
+  <head std:sid="head-e0aba2ea">
+    <title>mealClsCode</title>
+    <screen std:sid="screen-fe004d56" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="550" customWidth="450"/>
+    <screen std:sid="screen-9fc8f7f9" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-e0fb6ce2" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-1eeb8f30">
+      <cl:dataset std:sid="d-set-9a390d17" id="MealClsCodeList" info="강원랜드 식수대상회사구분코드">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-3b276515" name="ClsCode"/>
+          <cl:datacolumn std:sid="d-column-c038b192" name="ClsName"/>
+        </cl:datacolumnlist>
+        <cl:datarowlist>
+          <cl:datarow>
+            <cl:datavalue columnname="ClsCode">ClsCode1</cl:datavalue>
+            <cl:datavalue columnname="ClsName">ClsName1</cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="ClsCode">ClsCode2</cl:datavalue>
+            <cl:datavalue columnname="ClsName">ClsName2</cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="ClsCode">ClsCode3</cl:datavalue>
+            <cl:datavalue columnname="ClsName">ClsName3</cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="ClsCode">ClsCode4</cl:datavalue>
+            <cl:datavalue columnname="ClsName">ClsName4</cl:datavalue>
+          </cl:datarow>
+        </cl:datarowlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-71f76a43" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-9e948ef1" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-1804400d" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-251eeb54" name="Count" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-82cd2aef" id="sms_getMealClsCodetList" method="get" action="/v1/kangwonland/meal/clsCode">
+        <cl:listener std:sid="listener-2551c8f4" name="submit-done" handler="onSms_getMealClsCodetListSubmitDone"/>
+        <cl:listener std:sid="listener-0f8f3677" name="submit-error" handler="onSms_getMealClsCodetListSubmitError"/>
+        <cl:listener std:sid="listener-3df329e7" name="submit-timeout" handler="onSms_getMealClsCodetListSubmitTimeout"/>
+        <cl:requestparam name="limit" value="50"/>
+        <cl:requestparam name="offset" value="0"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total"/>
+        <cl:responsedata dataid="MealClsCodeList"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-b20f17e6" id="sms_postMealClsCode" action="/v1/kangwonland/meal/clsCode/">
+        <cl:listener std:sid="listener-e9b1e016" name="submit-done" handler="onSms_postMealClsCodeSubmitDone"/>
+        <cl:listener std:sid="listener-13b4e7de" name="submit-timeout" handler="onSms_postMealClsCodeSubmitTimeout"/>
+        <cl:listener std:sid="listener-a8a373b5" name="submit-error" handler="onSms_postMealClsCodeSubmitError"/>
+        <cl:requestdata dataid="MealClsCodeInfo"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:datamap std:sid="d-map-7b720c80" id="MealClsCodeInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-e1a3d2ba" name="ClsCode"/>
+          <cl:datacolumn std:sid="d-column-f1666090" name="ClsName"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-c1d3ac88" id="sms_DeleteMealClsCode" method="delete" action="/v1/kangwonland/meal/clsCode">
+        <cl:listener std:sid="listener-ab8c08cc" name="submit-done" handler="onSms_DeleteMealClsCodeSubmitDone"/>
+        <cl:listener std:sid="listener-b55448c7" name="submit-error" handler="onSms_DeleteMealClsCodeSubmitError"/>
+        <cl:listener std:sid="listener-8633506e" name="submit-timeout" handler="onSms_DeleteMealClsCodeSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec dev-comment="식수 대상회사구분&#xD;&#xA;&#xD;&#xA;MTCCG"/>
+  </head>
+  <body std:sid="body-c6366081" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-30be6d3d" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-d09821f5" id="MTCCG_grdMain">
+      <cl:xylayoutdata std:sid="xyl-data-4c1c4b77" top="1px" right="1px" bottom="1px" left="1px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-e5aeb91f">
+        <cl:formdata std:sid="f-data-e5c97f62" row="0" col="0"/>
+        <cl:button std:sid="button-6d47aa6c" id="MTCCG_btnAdd" class="userInfo_btn">
+          <cl:listener std:sid="listener-24fc9047" name="click" handler="onMTCCG_btnAddClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Add"/>
+          <cl:formdata std:sid="f-data-7fb7ae40" row="0" col="2"/>
+        </cl:button>
+        <cl:button std:sid="button-d57c7e37" id="MTCCG_btnDelete" class="userInfo_btn">
+          <cl:listener std:sid="listener-ddaf0bbe" name="click" handler="onMTCCG_btnDeleteClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Delete"/>
+          <cl:formdata std:sid="f-data-12d0bfa8" row="0" col="3"/>
+        </cl:button>
+        <cl:button std:sid="button-74688305" id="MTCCG_btnClear" class="userInfo_btn" value="초기화">
+          <cl:listener std:sid="listener-0656d044" name="click" handler="onMTCCG_btnClearClick"/>
+          <cl:formdata std:sid="f-data-1fd69d21" row="0" col="0"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-25be0171" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-9185f2ae">
+        <cl:formdata std:sid="f-data-af476a12" row="1" col="0"/>
+        <cl:output std:sid="output-e136c6c3" style="background-color:#f6f6f6; font-weight:bold; font-size:14px; background-image:none; text-align:center;" class="userInfo_bold" value="회사코드">
+          <cl:formdata std:sid="f-data-0ccf6a6f" row="0" col="0"/>
+        </cl:output>
+        <cl:output std:sid="output-b2c54e4f" style="background-color:#f6f6f6; font-weight:bold; font-size:14px; background-image:none; text-align:center;" class="userInfo_bold" value="명칭">
+          <cl:formdata std:sid="f-data-a45c0945" row="0" col="2"/>
+        </cl:output>
+        <cl:inputbox std:sid="i-box-c1b79264" id="MTCCG_ipbClsCode" style="font-size:12px; text-align:center;">
+          <cl:formdata std:sid="f-data-8baf1972" row="0" col="1"/>
+        </cl:inputbox>
+        <cl:inputbox std:sid="i-box-5bf20a96" id="MTCCG_ipbClsName" style="font-size:12px; text-align:center;">
+          <cl:formdata std:sid="f-data-d14b159f" row="0" col="3"/>
+        </cl:inputbox>
+        <cl:formlayout std:sid="f-layout-858b7f30" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:grid std:sid="grid-415388c7" id="MTCCG_grdMealClsCodeList" readonly="true" datasetid="MealClsCodeList">
+        <cl:listener std:sid="listener-9b5d080b" name="selection-change" handler="onMTCCG_grdMealClsCodeListSelectionChange"/>
+        <cl:listener std:sid="listener-1b5c2b21" name="selection-change" handler="onMTCCG_grdMealClsCodeListSelectionChange"/>
+        <cl:listener std:sid="listener-2622b964" name="selection-change" handler="onMTCCG_grdMealClsCodeListSelectionChange2"/>
+        <cl:formdata std:sid="f-data-b818a9d5" row="2" col="0"/>
+        <cl:gridcolumn std:sid="g-column-805be4e7"/>
+        <cl:gridcolumn std:sid="g-column-0dc9dc28"/>
+        <cl:gridheader std:sid="gh-band-9a2cf381">
+          <cl:gridrow std:sid="g-row-07355032"/>
+          <cl:gridcell std:sid="gh-cell-ac6bc0ee" rowindex="0" colindex="0" targetcolumnname="ClsCode" sortable="false" filterable="false" text="ClsCode"/>
+          <cl:gridcell std:sid="gh-cell-7f224825" rowindex="0" colindex="1" targetcolumnname="ClsName" sortable="false" filterable="false" text="ClsName"/>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-37841c57">
+          <cl:gridrow std:sid="g-row-8b4bac86"/>
+          <cl:gridcell std:sid="gd-cell-3c4cb074" rowindex="0" colindex="0" columnname="ClsCode"/>
+          <cl:gridcell std:sid="gd-cell-b7aab09c" rowindex="0" colindex="1" columnname="ClsName"/>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:formlayout std:sid="f-layout-9d3ad1de" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+        <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-e9e41eb9"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler>
+      <std:guide position="264"/>
+    </std:hruler>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

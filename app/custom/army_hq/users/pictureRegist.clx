@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-cdaeb7c8" version="1.0.0.0">
+  <head std:sid="head-aad65d94">
+    <title>pictureRegist</title>
+    <screen std:sid="screen-e829180a" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="500" customWidth="780"/>
+    <screen std:sid="screen-341efd46" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-daed8c2a" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-de706320">
+      <cl:dataset std:sid="d-set-e95a985b" id="TerminalList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-9cb9cf0d" name="ID"/>
+          <cl:datacolumn std:sid="d-column-a0509a00" name="Name"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-43de5b16" id="UserFaceWTInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-ff189d73" name="UserID"/>
+          <cl:datacolumn std:sid="d-column-953e4bae" name="TemplateSize" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-46e98cd4" name="TemplateData"/>
+          <cl:datacolumn std:sid="d-column-e4c517b3" name="TemplateType" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-78a7689a" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-89bf4ef7" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-b5bf4ffe" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-0ffc1d56" name="Count" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-12e33e33" id="dmUserFaceWTInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-9f9b4714" name="TemplateSize" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-bb4666a9" name="TemplateData"/>
+          <cl:datacolumn std:sid="d-column-6116ad6e" name="TemplateType" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-dfc1ce31" id="sms_getConnectedTerminalList" method="get" action="/v1/terminals">
+        <cl:listener std:sid="listener-fe232312" name="submit-done" handler="onSms_getConnectedTerminalListSubmitDone"/>
+        <cl:listener std:sid="listener-6132e28f" name="submit-error" handler="onSms_SubmitError"/>
+        <cl:listener std:sid="listener-d8e00d8f" name="submit-timeout" handler="onSms_SubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total"/>
+        <cl:responsedata dataid="TerminalList"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-05e98e5a" id="sms_getUserFaceFromTerminal" method="get" action="/v1/terminals/">
+        <cl:listener std:sid="listener-fd8dcc55" name="submit-timeout" handler="onSms_SubmitTimeout"/>
+        <cl:listener std:sid="listener-e4e8ac4b" name="submit-error" handler="onSms_SubmitError"/>
+        <cl:listener std:sid="listener-4be09059" name="submit-done" handler="onSms_getUserFaceFromTerminalSubmitDone"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="UserFaceWTInfo"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec dev-comment="PRAMHQ"/>
+  </head>
+  <body std:sid="body-1e0eca6b" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-35e5813f" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-21140c79" style="padding:10px 10px 10px 0px;">
+      <cl:xylayoutdata std:sid="xyl-data-cb27624c" top="1px" right="1px" bottom="1px" left="1px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-002cfa7f">
+        <cl:formdata std:sid="f-data-ed08f931" row="0" col="1"/>
+        <cl:button std:sid="button-149e4eb0" id="PRAMHQ_btnCapture" class="button-amhq" visible="true">
+          <cl:listener std:sid="listener-e25b27bd" name="click" handler="onPRAMHQ_btnCaptureClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Capture"/>
+          <cl:formdata std:sid="f-data-4053463a" row="0" col="1"/>
+        </cl:button>
+        <cl:button std:sid="button-ef1e96f7" id="PRAMHQ_btnComplete" class="button-amhq">
+          <cl:listener std:sid="listener-115ff6e9" name="click" handler="onPRAMHQ_btnCompleteClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Complete"/>
+          <cl:formdata std:sid="f-data-f8c6dca1" row="0" col="2"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-d471be34">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false"/>
+          <cl:columns length="90" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="90" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-be149749">
+        <cl:formdata std:sid="f-data-b1dbaa40" row="1" col="0"/>
+        <cl:img std:sid="image-40fad99c" id="PRAMHQ_imgPhoto" style="border-right-style:solid; border-top-width:1px; border-bottom-color:#f2f2f2; border-left-style:solid; border-right-width:1px; border-bottom-width:1px; border-left-color:#f2f2f2; border-top-color:#f2f2f2; border-bottom-style:solid; border-right-color:#f2f2f2; border-left-width:1px; border-top-style:solid;">
+          <cl:xylayoutdata std:sid="xyl-data-12e8e02b" top="38px" width="360px" height="360px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
+        </cl:img>
+        <cl:output std:sid="output-f67b2d6c" style="padding-left:0px;" class="outputbox-amhq">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_UserPicture"/>
+          <cl:xylayoutdata std:sid="xyl-data-32232356" top="1px" left="8px" width="276px" height="34px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+        </cl:output>
+        <cl:xylayout std:sid="xylayout-13b5b1db"/>
+      </cl:group>
+      <cl:group std:sid="group-0dc364a8">
+        <cl:formdata std:sid="f-data-0e0bebdb" row="1" col="1"/>
+        <cl:udc std:sid="ud-control-d2d4e302" id="PRAMHQ_udcTerminalList" type="udc.custom.terminalListArmyHQ">
+          <cl:listener std:sid="listener-d4bb4ae5" name="pagechange" handler="onPRAMHQ_udcTerminalListPagechange"/>
+          <cl:datarowcontext datacontrolid="TerminalList"/>
+          <cl:formdata std:sid="f-data-8bf6be75" row="1" col="0"/>
+        </cl:udc>
+        <cl:udc std:sid="ud-control-dad91a4c" id="PRAMHQ_udcSearchTerminal" type="udc.custom.searchTerminalArmyHQ">
+          <cl:listener std:sid="listener-ff117048" name="search" handler="onPRAMHQ_udcSearchTerminalSearch"/>
+          <cl:formdata std:sid="f-data-8ae687d8" row="0" col="0"/>
+        </cl:udc>
+        <cl:formlayout std:sid="f-layout-e8fe0513">
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-a7d7cba0">
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+        <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-bc164249"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

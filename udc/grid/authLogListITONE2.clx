@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-da4ca8e3" version="1.0.0.0">
+  <head std:sid="head-7c473ef9">
+    <title>authLogListITONE</title>
+    <screen std:sid="screen-b64e9334" id="default" name="default" minwidth="1024px" width="1024px" height="768px" customHeight="600" customWidth="800"/>
+    <screen std:sid="screen-16f42499" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-ab7ef030" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-ae384827">
+      <cl:dataset std:sid="d-set-e00abf19" id="AuthLogListCustomITONE">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-0ebb3e51" name="FieldCd" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-ae6006dd" name="WorkerId" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-33ee0252" name="EventDate"/>
+          <cl:datacolumn std:sid="d-column-534af5cb" name="PartnerCd"/>
+          <cl:datacolumn std:sid="d-column-8d2e7010" name="DevId"/>
+          <cl:datacolumn std:sid="d-column-fadd80e0" name="InOut"/>
+          <cl:datacolumn std:sid="d-column-752d1d8b" name="WorkerTemp"/>
+          <cl:datacolumn std:sid="d-column-7d3d9a4d" name="AppYn"/>
+          <cl:datacolumn std:sid="d-column-6f356874" name="WageChk"/>
+          <cl:datacolumn std:sid="d-column-8ae4adf4" name="AlcYn"/>
+          <cl:datacolumn std:sid="d-column-3e0536eb" name="AlcVal"/>
+          <cl:datacolumn std:sid="d-column-467580a8" name="IsFailed" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+    </cl:model>
+    <cl:appspec>
+      <cl:event name="pagechange" type="cpr.events.CSelectionEvent"/>
+      <cl:event name="before-pagechange" type="cpr.events.CSelectionEvent"/>
+      <cl:event name="dbclick" type="cpr.events.CSelectionEvent"/>
+    </cl:appspec>
+  </head>
+  <body std:sid="body-d7015397" style="top:0px; left:0px; width:500px; height:400px;">
+    <cl:listener std:sid="listener-d79d8d77" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-3bc6869c">
+      <cl:xylayoutdata std:sid="xyl-data-27a1b5d4" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:pageindexer std:sid="p-indexer-7378f086" id="authLogListPageIndexer" class="userList_paging">
+        <cl:listener std:sid="listener-5256b501" name="selection-change" handler="onAuthLogListPageIndexerSelectionChange"/>
+        <cl:listener std:sid="listener-ac1faef2" name="before-selection-change" handler="onAuthLogListPageIndexerBeforeSelectionChange"/>
+        <cl:formdata std:sid="f-data-66b514dd" width="100" row="1" col="0"/>
+      </cl:pageindexer>
+      <cl:grid std:sid="grid-3e93ff73" id="authLogListGrid" readonly="true" datasetid="AuthLogListCustomITONE" resizablecolumns="all" columnMovable="true">
+        <cl:formdata std:sid="f-data-890f5710" row="0" col="0"/>
+        <cl:gridcolumn std:sid="g-column-75d2e751"/>
+        <cl:gridcolumn std:sid="g-column-5b400571"/>
+        <cl:gridcolumn std:sid="g-column-d2e1d1ca"/>
+        <cl:gridcolumn std:sid="g-column-f7d3b336"/>
+        <cl:gridcolumn std:sid="g-column-0144be0f"/>
+        <cl:gridcolumn std:sid="g-column-d1489d6a"/>
+        <cl:gridcolumn std:sid="g-column-4eca3c3a"/>
+        <cl:gridcolumn std:sid="g-column-db19c4e9"/>
+        <cl:gridcolumn std:sid="g-column-447743a0"/>
+        <cl:gridcolumn std:sid="g-column-e62b546b"/>
+        <cl:gridcolumn std:sid="g-column-0f7b2504"/>
+        <cl:gridcolumn std:sid="g-column-f359a1f9"/>
+        <cl:gridheader std:sid="gh-band-28cf7de4">
+          <cl:gridrow std:sid="g-row-5e1b84dd"/>
+          <cl:gridcell std:sid="gh-cell-acd03f9c" rowindex="0" colindex="0" targetcolumnname="FieldCd" sortable="false" filterable="false" text="현장코드"/>
+          <cl:gridcell std:sid="gh-cell-583ee18d" rowindex="0" colindex="1" targetcolumnname="WorkerId" sortable="false" filterable="false" text="근로자ID"/>
+          <cl:gridcell std:sid="gh-cell-f2ba0147" rowindex="0" colindex="2" targetcolumnname="EventDate" sortable="false" filterable="false" text="인식시간"/>
+          <cl:gridcell std:sid="gh-cell-d2613c5c" rowindex="0" colindex="3" targetcolumnname="PartnerCd" sortable="false" filterable="false" text="협력사코드"/>
+          <cl:gridcell std:sid="gh-cell-71e8317a" rowindex="0" colindex="4" targetcolumnname="DevId" sortable="false" filterable="false" text="기기ID"/>
+          <cl:gridcell std:sid="gh-cell-63aac4f5" rowindex="0" colindex="5" targetcolumnname="InOut" sortable="false" filterable="false" text="IN/OUT/CHK"/>
+          <cl:gridcell std:sid="gh-cell-31e4e549" rowindex="0" colindex="6" targetcolumnname="WorkerTemp" sortable="false" filterable="false" text="열화상온도"/>
+          <cl:gridcell std:sid="gh-cell-ed64eff1" rowindex="0" colindex="7" targetcolumnname="AppYn" sortable="false" filterable="false" text="건강상태"/>
+          <cl:gridcell std:sid="gh-cell-a9f70441" rowindex="0" colindex="8" targetcolumnname="WageChk" sortable="false" filterable="false" text="임금체불여부"/>
+          <cl:gridcell std:sid="gh-cell-eb0b2901" rowindex="0" colindex="9" targetcolumnname="AlcYn" sortable="false" filterable="false" text="음주여부"/>
+          <cl:gridcell std:sid="gh-cell-9985fd39" rowindex="0" colindex="10" targetcolumnname="AlcVal" sortable="false" filterable="false" text="음주수치"/>
+          <cl:gridcell std:sid="gh-cell-e445bf86" rowindex="0" colindex="11" targetcolumnname="IsFailed" sortable="false" filterable="false" text="전송실패여부"/>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-2ccb1623">
+          <cl:gridrow std:sid="g-row-d81eb890"/>
+          <cl:gridcell std:sid="gd-cell-49c55943" rowindex="0" colindex="0" columnname="FieldCd">
+            <cl:expbind property="color" category="STYLER" expression="switch ( IsFailed ) {&#xD;&#xA;&#x9;case 0: &quot;green&quot;&#xD;&#xA;&#x9;default: &quot;red&quot;&#xD;&#xA;}"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-d0cbfc96" rowindex="0" colindex="1" columnname="WorkerId">
+            <cl:expbind property="color" category="STYLER" expression="switch ( IsFailed ) {&#xD;&#xA;&#x9;case 0: &quot;green&quot;&#xD;&#xA;&#x9;default: &quot;red&quot;&#xD;&#xA;}"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-d6062c83" rowindex="0" colindex="2" columnname="EventDate">
+            <cl:expbind property="color" category="STYLER" expression="switch ( IsFailed ) {&#xD;&#xA;&#x9;case 0: &quot;green&quot;&#xD;&#xA;&#x9;default: &quot;red&quot;&#xD;&#xA;}"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-9a313467" rowindex="0" colindex="3" columnname="PartnerCd">
+            <cl:expbind property="color" category="STYLER" expression="switch ( IsFailed ) {&#xD;&#xA;&#x9;case 0: &quot;green&quot;&#xD;&#xA;&#x9;default: &quot;red&quot;&#xD;&#xA;}"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-3e6053ad" rowindex="0" colindex="4" columnname="DevId">
+            <cl:expbind property="color" category="STYLER" expression="switch ( IsFailed ) {&#xD;&#xA;&#x9;case 0: &quot;green&quot;&#xD;&#xA;&#x9;default: &quot;red&quot;&#xD;&#xA;}"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-7d70e823" rowindex="0" colindex="5" columnname="InOut">
+            <cl:expbind property="color" category="STYLER" expression="switch ( IsFailed ) {&#xD;&#xA;&#x9;case 0: &quot;green&quot;&#xD;&#xA;&#x9;default: &quot;red&quot;&#xD;&#xA;}"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-0e028cdb" rowindex="0" colindex="6" columnname="WorkerTemp">
+            <cl:expbind property="color" category="STYLER" expression="switch ( IsFailed ) {&#xD;&#xA;&#x9;case 0: &quot;green&quot;&#xD;&#xA;&#x9;default: &quot;red&quot;&#xD;&#xA;}"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-ee33e443" rowindex="0" colindex="7" columnname="AppYn">
+            <cl:expbind property="color" category="STYLER" expression="switch ( IsFailed ) {&#xD;&#xA;&#x9;case 0: &quot;green&quot;&#xD;&#xA;&#x9;default: &quot;red&quot;&#xD;&#xA;}"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-0d19ae5d" rowindex="0" colindex="8" columnname="WageChk">
+            <cl:expbind property="color" category="STYLER" expression="switch ( IsFailed ) {&#xD;&#xA;&#x9;case 0: &quot;green&quot;&#xD;&#xA;&#x9;default: &quot;red&quot;&#xD;&#xA;}"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-e34fdbed" rowindex="0" colindex="9" columnname="AlcYn">
+            <cl:expbind property="color" category="STYLER" expression="switch ( IsFailed ) {&#xD;&#xA;&#x9;case 0: &quot;green&quot;&#xD;&#xA;&#x9;default: &quot;red&quot;&#xD;&#xA;}"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-28763fdf" rowindex="0" colindex="10" columnname="AlcVal">
+            <cl:expbind property="color" category="STYLER" expression="switch ( IsFailed ) {&#xD;&#xA;&#x9;case 0: &quot;green&quot;&#xD;&#xA;&#x9;default: &quot;red&quot;&#xD;&#xA;}"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-f5c38530" rowindex="0" colindex="11" columnname="IsFailed">
+            <cl:combobox std:sid="c-box-466452e0" id="cmb1" style="text-align:center;">
+              <cl:item std:sid="item-8964e2e2" label="-" value="0"/>
+              <cl:item std:sid="item-f46e491b" label="실패" value="1"/>
+            </cl:combobox>
+            <cl:expbind property="color" category="STYLER" expression="switch ( IsFailed ) {&#xD;&#xA;&#x9;case 0: &quot;green&quot;&#xD;&#xA;&#x9;default: &quot;red&quot;&#xD;&#xA;}"/>
+          </cl:gridcell>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:formlayout std:sid="f-layout-b67178ca">
+        <cl:rows length="1" unit="FRACTION" shadetype="NONE" shadecolor="#000000"/>
+        <cl:rows length="40" unit="PIXEL" shadetype="NONE" shadecolor="#000000"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-29f84825"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

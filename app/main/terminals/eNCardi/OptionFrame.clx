@@ -1,0 +1,500 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-45dc6601" version="1.0.0.0">
+  <head std:sid="head-cf56a305">
+    <title>terminalInfoFrame</title>
+    <screen std:sid="screen-3d4fd91a" id="default" height="768px" minwidth="1024px" name="default" width="1024px"/>
+    <screen std:sid="screen-79749a96" id="tablet" height="667px" maxwidth="1023px" minwidth="500px" name="tablet" width="500px"/>
+    <screen std:sid="screen-97359184" id="mobile" height="525px" maxwidth="499px" name="mobile" width="350px"/>
+    <cl:model std:sid="model-3cb71689">
+      <cl:datamap std:sid="d-map-4356e742" id="TerminalInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="ID"/>
+          <cl:datacolumn name="Name"/>
+          <cl:datacolumn datatype="number" name="GroupID"/>
+          <cl:datacolumn datatype="number" name="State"/>
+          <cl:datacolumn datatype="number" name="Type"/>
+          <cl:datacolumn datatype="number" defaultvalue="0" name="FuncType"/>
+          <cl:datacolumn name="IPAddress"/>
+          <cl:datacolumn name="MacAdress"/>
+          <cl:datacolumn name="Version"/>
+          <cl:datacolumn datatype="number" defaultvalue="0" name="RemoteDoor"/>
+          <cl:datacolumn datatype="number" name="UTCIndex"/>
+          <cl:datacolumn datatype="number" name="GroupCode"/>
+          <cl:datacolumn name="Description"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-91b44239" id="sms_get_terminal_info" action="/v1/terminals" method="get">
+        <cl:listener std:sid="listener-25cd4348" handler="onSms_get_terminal_infoSubmitSuccess" name="submit-success"/>
+        <cl:listener std:sid="listener-e2a69dbb" handler="onSms_get_terminal_infoSubmitDone" name="submit-done"/>
+        <cl:listener std:sid="listener-c64e0f84" handler="onSms_get_terminal_infoSubmitError" name="submit-error"/>
+        <cl:listener std:sid="listener-4ee75483" handler="onSms_get_terminal_infoSubmitTimeout" name="submit-timeout"/>
+        <cl:responsedata dataid="TerminalInfo"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:datamap std:sid="d-map-eb5c42fa" id="DisplayInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="Language"/>
+          <cl:datacolumn datatype="number" name="ShowID"/>
+          <cl:datacolumn datatype="number" name="Background"/>
+          <cl:datacolumn datatype="number" name="DisplayTime"/>
+          <cl:datacolumn datatype="number" name="ScreenSaver"/>
+          <cl:datacolumn datatype="number" name="DisplayPhoto"/>
+          <cl:datacolumn datatype="number" name="SavePhoto"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-60a69441" id="NetworkInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="EnableDHCP"/>
+          <cl:datacolumn datatype="string" name="IP"/>
+          <cl:datacolumn name="Subnet"/>
+          <cl:datacolumn name="Gateway"/>
+          <cl:datacolumn name="ServerIP"/>
+          <cl:datacolumn name="ServerIP_2"/>
+          <cl:datacolumn datatype="number" name="ServerPort"/>
+          <cl:datacolumn datatype="number" name="ServerPort_2"/>
+          <cl:datacolumn name="Dns1"/>
+          <cl:datacolumn name="Dns2"/>
+          <cl:datacolumn name="HostName"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-e9a2f75c" id="SettingInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="VoiceVolume"/>
+          <cl:datacolumn datatype="number" name="UserVoice"/>
+          <cl:datacolumn datatype="number" name="BeepVolume"/>
+          <cl:datacolumn datatype="number" name="CardReader"/>
+          <cl:datacolumn datatype="number" name="CardFormat"/>
+          <cl:datacolumn datatype="number" name="Locking"/>
+          <cl:datacolumn datatype="number" name="Lock1"/>
+          <cl:datacolumn datatype="number" name="Lock2"/>
+          <cl:datacolumn datatype="number" name="LockTime1"/>
+          <cl:datacolumn datatype="number" name="LockTime2"/>
+          <cl:datacolumn datatype="number" name="DoorOpenAlarm"/>
+          <cl:datacolumn datatype="number" name="DoorMonitorM0"/>
+          <cl:datacolumn datatype="number" name="DoorMonitorM1"/>
+          <cl:datacolumn datatype="number" name="DoorMonitorM2"/>
+          <cl:datacolumn datatype="number" name="DoorMonitorIO"/>
+          <cl:datacolumn datatype="number" name="TamperAlarm"/>
+          <cl:datacolumn datatype="number" name="M232Device"/>
+          <cl:datacolumn datatype="number" name="M485Device"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-e2e913a4" id="SystemInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="UIDLength"/>
+          <cl:datacolumn datatype="number" name="MandatoryItem"/>
+          <cl:datacolumn datatype="number" name="ConnectMode"/>
+          <cl:datacolumn datatype="number" name="FPNum"/>
+          <cl:datacolumn datatype="number" name="FP1to1Level"/>
+          <cl:datacolumn datatype="number" name="FP1toNLevel"/>
+          <cl:datacolumn datatype="number" name="LFDLevel"/>
+          <cl:datacolumn datatype="number" name="FPTemplateFormat"/>
+          <cl:datacolumn datatype="number" name="CheckSameFP"/>
+          <cl:datacolumn datatype="number" name="MultiVerify"/>
+          <cl:datacolumn datatype="number" name="Enable1toN"/>
+          <cl:datacolumn datatype="number" name="FaceMatchingLevel"/>
+          <cl:datacolumn datatype="number" name="FaceTemplateSize"/>
+          <cl:datacolumn datatype="number" name="FaceExposure"/>
+          <cl:datacolumn datatype="number" name="FaceCameraAngle"/>
+          <cl:datacolumn datatype="number" name="FaceFastmode"/>
+          <cl:datacolumn datatype="number" name="FaceDetectionAngle"/>
+          <cl:datacolumn datatype="number" name="FaceFirst"/>
+          <cl:datacolumn datatype="number" name="NormalQualityThreshold"/>
+          <cl:datacolumn datatype="number" name="IRQualityThreshold"/>
+          <cl:datacolumn datatype="number" name="TimeSync"/>
+          <cl:datacolumn datatype="number" name="DateFormat"/>
+          <cl:datacolumn datatype="number" name="UseGroupID"/>
+          <cl:datacolumn datatype="number" name="AuthType"/>
+          <cl:datacolumn datatype="number" name="TOC"/>
+          <cl:datacolumn name="Reserved"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-87e2dc8c" id="InitNetworkInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="EnableDHCP"/>
+          <cl:datacolumn datatype="string" name="IP"/>
+          <cl:datacolumn name="Subnet"/>
+          <cl:datacolumn name="Gateway"/>
+          <cl:datacolumn name="ServerIP"/>
+          <cl:datacolumn name="ServerIP_2"/>
+          <cl:datacolumn datatype="number" name="ServerPort"/>
+          <cl:datacolumn datatype="number" name="ServerPort_2"/>
+          <cl:datacolumn name="Dns1"/>
+          <cl:datacolumn name="Dns2"/>
+          <cl:datacolumn name="HostName"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-81adcc72" id="InitDisplayInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="Language"/>
+          <cl:datacolumn datatype="number" name="ShowID"/>
+          <cl:datacolumn datatype="number" name="Background"/>
+          <cl:datacolumn datatype="number" name="DisplayTime"/>
+          <cl:datacolumn datatype="number" name="ScreenSaver"/>
+          <cl:datacolumn datatype="number" name="DisplayPhoto"/>
+          <cl:datacolumn datatype="number" name="SavePhoto"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-0556f915" id="InitSystemInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="UIDLength"/>
+          <cl:datacolumn datatype="number" name="MandatoryItem"/>
+          <cl:datacolumn datatype="number" name="ConnectMode"/>
+          <cl:datacolumn datatype="number" name="FPNum"/>
+          <cl:datacolumn datatype="number" name="FP1to1Level"/>
+          <cl:datacolumn datatype="number" name="FP1toNLevel"/>
+          <cl:datacolumn datatype="number" name="LFDLevel"/>
+          <cl:datacolumn datatype="number" name="FPTemplateFormat"/>
+          <cl:datacolumn datatype="number" name="CheckSameFP"/>
+          <cl:datacolumn datatype="number" name="MultiVerify"/>
+          <cl:datacolumn datatype="number" name="Enable1toN"/>
+          <cl:datacolumn datatype="number" name="FaceMatchingLevel"/>
+          <cl:datacolumn datatype="number" name="FaceTemplateSize"/>
+          <cl:datacolumn datatype="number" name="FaceExposure"/>
+          <cl:datacolumn datatype="number" name="FaceCameraAngle"/>
+          <cl:datacolumn datatype="number" name="FaceFastmode"/>
+          <cl:datacolumn datatype="number" name="FaceDetectionAngle"/>
+          <cl:datacolumn datatype="number" name="FaceFirst"/>
+          <cl:datacolumn datatype="number" name="NormalQualityThreshold"/>
+          <cl:datacolumn datatype="number" name="IRQualityThreshold"/>
+          <cl:datacolumn datatype="number" name="TimeSync"/>
+          <cl:datacolumn datatype="number" name="DateFormat"/>
+          <cl:datacolumn datatype="number" name="UseGroupID"/>
+          <cl:datacolumn datatype="number" name="AuthType"/>
+          <cl:datacolumn datatype="number" name="TOC"/>
+          <cl:datacolumn name="Reserved"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-d41971b5" id="InitSettingInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="VoiceVolume"/>
+          <cl:datacolumn datatype="number" name="UserVoice"/>
+          <cl:datacolumn datatype="number" name="BeepVolume"/>
+          <cl:datacolumn datatype="number" name="CardReader"/>
+          <cl:datacolumn datatype="number" name="CardFormat"/>
+          <cl:datacolumn datatype="number" name="Locking"/>
+          <cl:datacolumn datatype="number" name="Lock1"/>
+          <cl:datacolumn datatype="number" name="Lock2"/>
+          <cl:datacolumn datatype="number" name="LockTime1"/>
+          <cl:datacolumn datatype="number" name="LockTime2"/>
+          <cl:datacolumn datatype="number" name="DoorOpenAlarm"/>
+          <cl:datacolumn datatype="number" name="DoorMonitorM0"/>
+          <cl:datacolumn datatype="number" name="DoorMonitorM1"/>
+          <cl:datacolumn datatype="number" name="DoorMonitorM2"/>
+          <cl:datacolumn datatype="number" name="DoorMonitorIO"/>
+          <cl:datacolumn datatype="number" name="TamperAlarm"/>
+          <cl:datacolumn datatype="number" name="M232Device"/>
+          <cl:datacolumn datatype="number" name="M485Device"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-4059dbde" id="sms_set_terminal_info" action="" mediatype="application/x-www-form-urlencoded" method="put">
+        <cl:listener std:sid="listener-c057a2d5" handler="onSms_set_terminal_infoSubmitDone" name="submit-done"/>
+        <cl:listener std:sid="listener-088becb8" handler="onSms_set_terminal_infoSubmitError" name="submit-error"/>
+        <cl:listener std:sid="listener-766fc1e4" handler="onSms_set_terminal_infoSubmitTimeout" name="submit-timeout"/>
+        <cl:requestdata dataid="TerminalInfo"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-5eae8470" id="sms_set_terminal_option_system_config" action="/option/system" mediatype="application/x-www-form-urlencoded" method="put">
+        <cl:listener std:sid="listener-64e5ba1e" handler="onSms_set_terminal_option_system_configSubmitDone" name="submit-done"/>
+        <cl:listener std:sid="listener-52213e64" handler="onSms_set_terminal_option_system_configSubmitError" name="submit-error"/>
+        <cl:listener std:sid="listener-53ccefcb" handler="onSms_set_terminal_option_system_configSubmitTimeout" name="submit-timeout"/>
+        <cl:requestdata dataid="SystemInfo"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-d54e1868" id="sms_set_terminal_option_display_config" action="/option/display" mediatype="application/x-www-form-urlencoded" method="put">
+        <cl:listener std:sid="listener-6a2c9125" handler="onSms_set_terminal_option_display_configSubmitDone" name="submit-done"/>
+        <cl:listener std:sid="listener-49700cf9" handler="onSms_set_terminal_option_display_configSubmitError" name="submit-error"/>
+        <cl:listener std:sid="listener-74005ebb" handler="onSms_set_terminal_option_display_configSubmitTimeout" name="submit-timeout"/>
+        <cl:requestdata dataid="DisplayInfo"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-d68c312b" id="sms_set_terminal_option_setting_config" action="/option/setting" mediatype="application/x-www-form-urlencoded" method="put">
+        <cl:listener std:sid="listener-8053bee2" handler="onSms_set_terminal_option_setting_configSubmitDone" name="submit-done"/>
+        <cl:listener std:sid="listener-01924d3f" handler="onSms_set_terminal_option_setting_configSubmitError" name="submit-error"/>
+        <cl:listener std:sid="listener-b1a4f39f" handler="onSms_set_terminal_option_setting_configSubmitTimeout" name="submit-timeout"/>
+        <cl:requestdata dataid="SettingInfo"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-180f99e7" id="sms_set_terminal_option_network" action="/option/network" mediatype="application/x-www-form-urlencoded" method="put">
+        <cl:listener std:sid="listener-76446a9f" handler="onSms_set_terminal_option_networkSubmitDone" name="submit-done"/>
+        <cl:listener std:sid="listener-140b8d68" handler="onSms_set_terminal_option_networkSubmitError" name="submit-error"/>
+        <cl:listener std:sid="listener-14f73521" handler="onSms_set_terminal_option_networkSubmitTimeout" name="submit-timeout"/>
+        <cl:requestdata dataid="NetworkInfo"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-976ad157" id="sms_deleteTerminal" method="delete">
+        <cl:listener std:sid="listener-2c141eb7" handler="onSms_deleteTerminalSubmitDone" name="submit-done"/>
+        <cl:listener std:sid="listener-8172c419" handler="onSms_deleteTerminalSubmitError" name="submit-error"/>
+        <cl:listener std:sid="listener-996bd04a" handler="onSms_deleteTerminalSubmitTimeout" name="submit-timeout"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:datamap std:sid="d-map-d049e2ae" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="ResultCode"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-c3ca4a7c" id="WiegandOutInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="Bits"/>
+          <cl:datacolumn datatype="number" name="Port"/>
+          <cl:datacolumn datatype="number" name="ParityCount"/>
+          <cl:datacolumn datatype="number" name="SendFail"/>
+          <cl:datacolumn datatype="number" name="SendData"/>
+          <cl:datacolumn datatype="number" name="PulseInterval"/>
+          <cl:datacolumn datatype="number" name="PulseWidth"/>
+          <cl:datacolumn datatype="number" name="SiteCode"/>
+          <cl:datacolumn datatype="number" name="FailID"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-1d727713" id="WiegandInInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="Bits"/>
+          <cl:datacolumn datatype="number" name="Port"/>
+          <cl:datacolumn datatype="number" name="ParityCount"/>
+          <cl:datacolumn datatype="number" name="PulseInterval"/>
+          <cl:datacolumn datatype="number" name="PulseWidth"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-f73c6cb9" id="InitTerminalInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="ID"/>
+          <cl:datacolumn name="Name"/>
+          <cl:datacolumn datatype="number" name="GroupID"/>
+          <cl:datacolumn datatype="number" name="State"/>
+          <cl:datacolumn datatype="number" name="Type"/>
+          <cl:datacolumn datatype="number" name="FuncType"/>
+          <cl:datacolumn name="IPAddress"/>
+          <cl:datacolumn name="MacAdress"/>
+          <cl:datacolumn name="Version"/>
+          <cl:datacolumn datatype="number" name="RemoteDoor"/>
+          <cl:datacolumn datatype="number" name="UTCIndex"/>
+          <cl:datacolumn datatype="number" name="GroupCode"/>
+          <cl:datacolumn name="Description"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+    </cl:model>
+    <cl:appspec dev-comment="pageID: TMSNC&#xD;&#xA;"/>
+  </head>
+  <body std:sid="body-5b138544" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-a81e8452" handler="onBodyLoad" name="load"/>
+    <cl:group std:sid="group-81d746ce" id="grpTerminalInfo" style="background-color:#F2F1EF; padding:10px 0px 10px 10px;">
+      <cl:xylayoutdata std:sid="xyl-data-bc6c92cf" height="734px" horizontalAnchor="LEFT" left="0px" top="0px" verticalAnchor="TOP" width="260px"/>
+      <cl:img std:sid="image-63f5c1c4" src="../../../../theme/images/terminal.jpg">
+        <cl:formdata std:sid="f-data-ce5141f0" col="0" colspan="1" halign="CENTER" height="0" row="0" rowspan="1"/>
+      </cl:img>
+      <cl:group std:sid="group-915806d6">
+        <cl:formdata std:sid="f-data-bd88c28c" col="0" row="3"/>
+        <cl:output std:sid="output-c5d39415" style="font-weight:700; font-size:14px;">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_Type"/>
+          <cl:formdata std:sid="f-data-c6256375" col="0" row="0"/>
+        </cl:output>
+        <cl:output std:sid="output-15a29dac" id="TMSNC_Type" style="font-size:14px;" value="0">
+          <cl:formdata std:sid="f-data-3e15911c" col="1" row="0"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-ee20959d">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-4a0abce8">
+        <cl:formdata std:sid="f-data-a4149e22" col="0" row="4"/>
+        <cl:output std:sid="output-9e1763d8" style="font-weight:700; font-size:14px;">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_FuncType"/>
+          <cl:formdata std:sid="f-data-d6ad90d8" col="0" row="0"/>
+        </cl:output>
+        <cl:combobox std:sid="c-box-4592b600" id="TMSNC_cmbfunctionType" preventinput="true">
+          <cl:datamapbind category="PROPERTY" property="value" columnname="FuncType" datacontrolid="TerminalInfo"/>
+          <cl:formdata std:sid="f-data-3d7e90f3" col="1" row="0"/>
+          <cl:item label="출입관리" value="0"/>
+          <cl:item label="근태관리" value="1"/>
+          <cl:item label="식수관리" value="2"/>
+        </cl:combobox>
+        <cl:formlayout std:sid="f-layout-d29b2ea3">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-6586045a">
+        <cl:formdata std:sid="f-data-7a32a3b1" col="0" row="5"/>
+        <cl:output std:sid="output-7afaaade" style="font-weight:700; font-size:14px;">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_RemoteDoor"/>
+          <cl:formdata std:sid="f-data-773b8513" col="0" row="0"/>
+        </cl:output>
+        <cl:combobox std:sid="c-box-e7eaac9f" id="cmb1">
+          <cl:datamapbind property="value" columnname="RemoteDoor" datacontrolid="TerminalInfo"/>
+          <cl:formdata std:sid="f-data-e467fed0" col="1" row="0"/>
+          <cl:item label="모든 기능 사용 허용" value="0"/>
+          <cl:item label="모든 기능 사용 막음" value="1"/>
+          <cl:item label="출입문 개방만 허용함" value="2"/>
+        </cl:combobox>
+        <cl:formlayout std:sid="f-layout-478d1899">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-bc0a8c66">
+        <cl:formdata std:sid="f-data-80b390c7" col="0" row="1"/>
+        <cl:output std:sid="output-466b1f24" style="font-weight:700; font-size:14px;">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_ID"/>
+          <cl:formdata std:sid="f-data-2dfa296d" col="0" row="0"/>
+        </cl:output>
+        <cl:output std:sid="output-d7b5584e" id="TMSNC_ipbTerminalID" style="font-size:14px;" value="1">
+          <cl:datamapbind property="value" columnname="ID" datacontrolid="TerminalInfo"/>
+          <cl:formdata std:sid="f-data-7dc8ed5d" col="1" row="0"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-90cf30e4">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-7d1e701c">
+        <cl:formdata std:sid="f-data-2cc5c439" col="0" row="2"/>
+        <cl:output std:sid="output-86801429" style="font-weight:700; font-size:14px;">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_Name"/>
+          <cl:formdata std:sid="f-data-0b3b3c7d" col="0" row="0"/>
+        </cl:output>
+        <cl:inputbox std:sid="i-box-10037908" id="TMSNC_ipbName">
+          <cl:datamapbind category="PROPERTY" property="value" columnname="Name" datacontrolid="TerminalInfo"/>
+          <cl:formdata std:sid="f-data-63398c66" col="1" row="0"/>
+        </cl:inputbox>
+        <cl:formlayout std:sid="f-layout-f268b44b">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-e42e9a70">
+        <cl:formdata std:sid="f-data-46fc4754" col="0" row="6"/>
+        <cl:output std:sid="output-24f3c6f9" style="font-weight:700; font-size:14px;" value="UTCIndex">
+          <cl:formdata std:sid="f-data-2fa99984" col="0" row="0"/>
+        </cl:output>
+        <cl:output std:sid="output-22cb4284" style="font-size:14px;" value="0">
+          <cl:datamapbind property="value" columnname="UTCIndex" datacontrolid="TerminalInfo"/>
+          <cl:formdata std:sid="f-data-bd35de04" col="1" row="0"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-f6a6db1d">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-df1475c1">
+        <cl:formdata std:sid="f-data-6952e2f4" col="0" row="7"/>
+        <cl:output std:sid="output-337deacd" style="font-weight:700; font-size:14px;" value="SoftPassback">
+          <cl:formdata std:sid="f-data-2dfb6cbb" col="0" row="0"/>
+        </cl:output>
+        <cl:combobox std:sid="c-box-644e5ad3" id="TMSNC_cmbSoftpassback" value="0">
+          <cl:formdata std:sid="f-data-cdfbb43f" col="1" row="0"/>
+          <cl:item label="미사용" value="0"/>
+          <cl:item label="사용" value="1"/>
+        </cl:combobox>
+        <cl:formlayout std:sid="f-layout-13879bdb">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-3b6a1674">
+        <cl:formdata std:sid="f-data-f3ccc4ef" col="0" row="8"/>
+        <cl:output std:sid="output-7323bd80" style="font-weight:700; font-size:14px;">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_Description"/>
+          <cl:formdata std:sid="f-data-f89cbe68" col="0" row="0"/>
+        </cl:output>
+        <cl:output std:sid="output-ab8c6150" style="font-size:14px;" value="">
+          <cl:datamapbind property="value" columnname="Description" datacontrolid="TerminalInfo"/>
+          <cl:formdata std:sid="f-data-a2e861c6" col="1" row="0"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-21671766">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-1c51c206" hmargin="0px" hseparatortype="NONE" hseparatorwidth="0" hspace="0px" vmargin="0px" vseparatortype="NONE" vseparatorwidth="0" vspace="0px">
+        <cl:rows autoSizing="false" length="200" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:group std:sid="group-b70ed4c0" id="TM_IN_grpButtons" style="padding:10px 0px 0px 0px;">
+      <cl:xylayoutdata std:sid="xyl-data-1635b58d" height="40px" horizontalAnchor="LEFT" left="260px" top="40px" verticalAnchor="TOP" width="764px"/>
+      <cl:button std:sid="button-ab605a82" class="terminal_btn" style="border-radius:0px;">
+        <cl:listener std:sid="listener-1ed3531a" handler="onGrpButtonsClick" name="click"/>
+        <cl:attribute name="src" value="app/main/terminals/eNCardi/OptionPageNetwork"/>
+        <cl:langbind category="PROPERTY" property="value" keypath="Str_Network"/>
+        <cl:formdata std:sid="f-data-47ac7154" col="0" row="0"/>
+      </cl:button>
+      <cl:button std:sid="button-0c6c5047" class="terminal_btn" style="border-radius:0px;">
+        <cl:listener std:sid="listener-9ef568f6" handler="onGrpButtonsClick" name="click"/>
+        <cl:attribute name="src" value="app/main/terminals/eNCardi/OptionPageSystemConfig"/>
+        <cl:langbind category="PROPERTY" property="value" keypath="Str_System"/>
+        <cl:formdata std:sid="f-data-965cc855" col="1" row="0"/>
+      </cl:button>
+      <cl:button std:sid="button-edbba450" class="terminal_btn" style="border-radius:0px;">
+        <cl:listener std:sid="listener-7d7b6b1b" handler="onGrpButtonsClick" name="click"/>
+        <cl:attribute name="src" value="app/main/terminals/eNCardi/OptionPageSettingConfig"/>
+        <cl:langbind category="PROPERTY" property="value" keypath="Str_Terminal"/>
+        <cl:formdata std:sid="f-data-18916a37" col="2" row="0"/>
+      </cl:button>
+      <cl:button std:sid="button-6a346085" id="watergrid2" class="terminal_btn" style="border-radius:0px;">
+        <cl:listener std:sid="listener-17e36250" handler="onGrpButtonsClick" name="click"/>
+        <cl:attribute name="src" value="app/main/terminals/eNCardi/OptionPageDisplayConfig"/>
+        <cl:langbind category="PROPERTY" property="value" keypath="Str_WindowsSet"/>
+        <cl:formdata std:sid="f-data-94e8de23" col="3" row="0"/>
+      </cl:button>
+      <cl:button std:sid="button-61f3ea8e" id="voipgrid2" class="terminal_btn" style="border-radius:0px;" visible="false">
+        <cl:listener std:sid="listener-5e970a6e" handler="onGrpButtonsClick" name="click"/>
+        <cl:attribute name="src" value="app/sample/side/popup_voip"/>
+        <cl:langbind category="PROPERTY" property="value" keypath="Str_Timezone"/>
+        <cl:formdata std:sid="f-data-d4de29c9" col="4" colspan="1" row="0" rowspan="1"/>
+      </cl:button>
+      <cl:formlayout std:sid="f-layout-a3551d15" hspace="0px" vseparatorwidth="0" vspace="0px">
+        <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:columns length="1" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:embeddedapp std:sid="e-app-ccf6b483" id="TM_INN_embPage">
+      <cl:xylayoutdata std:sid="xyl-data-e1598206" bottom="34px" horizontalAnchor="BOTH" left="260px" right="0px" top="80px" verticalAnchor="BOTH"/>
+    </cl:embeddedapp>
+    <cl:group std:sid="group-107186bc" style="padding:10px 10px 0px 0px;">
+      <cl:xylayoutdata std:sid="xyl-data-a8aff245" height="40px" horizontalAnchor="BOTH" left="260px" right="0px" top="0px" verticalAnchor="TOP"/>
+      <cl:button std:sid="button-de2eb28e" id="TMSNC_btnSave" class="userInfo_btn">
+        <cl:listener std:sid="listener-662013f6" handler="onTMSNC_btnSaveClick" name="click"/>
+        <cl:langbind category="PROPERTY" property="value" keypath="Str_Save"/>
+        <cl:formdata std:sid="f-data-05bc7bf7" col="1" row="0"/>
+      </cl:button>
+      <cl:button std:sid="button-07a8fb80" id="TMSNC_btnDelete" class="userInfo_btn">
+        <cl:listener std:sid="listener-2f622aa7" handler="onTMSNC_btnDeleteClick" name="click"/>
+        <cl:langbind category="PROPERTY" property="value" keypath="Str_Delete"/>
+        <cl:formdata std:sid="f-data-e3d79665" col="2" row="0"/>
+      </cl:button>
+      <cl:formlayout std:sid="f-layout-61bc4c00">
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION"/>
+        <cl:columns autoSizing="false" length="80" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:columns autoSizing="false" length="80" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-871e6ce0"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

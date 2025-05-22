@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-9e875b58" version="1.0.0.0">
+  <head std:sid="head-7188e497">
+    <title>help_dialog</title>
+    <screen std:sid="screen-c51c4d7d" id="default" height="768px" minwidth="1024px" name="default" width="1024px"/>
+    <screen std:sid="screen-a5ef25e8" id="tablet" height="667px" maxwidth="1023px" minwidth="500px" name="tablet" width="500px"/>
+    <screen std:sid="screen-28cc7ce1" id="mobile" height="525px" maxwidth="499px" name="mobile" width="350px"/>
+    <cl:model std:sid="model-9ee9effd">
+      <cl:dataset std:sid="d-set-a3f838db" id="side_context">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-703e809a" datatype="string" name="label"/>
+          <cl:datacolumn std:sid="d-column-b46005dd" name="value"/>
+          <cl:datacolumn std:sid="d-column-1079a35f" name="parent"/>
+        </cl:datacolumnlist>
+        <cl:datarowlist>
+          <cl:datarow>
+            <cl:datavalue columnname="label"><![CDATA[a]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[b]]></cl:datavalue>
+            <cl:datavalue columnname="parent"><![CDATA[c]]></cl:datavalue>
+          </cl:datarow>
+        </cl:datarowlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-acd38bb1" id="pageInfo_">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-e7fd799d" name="menu_id"/>
+          <cl:datacolumn std:sid="d-column-c9f6b5da" name="src"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-f3c2ba0a" id="getHelpPage" action="data/main/pageinfoLang.json" method="get">
+        <cl:listener std:sid="listener-02817d2d" handler="onGetHelpPageSubmitDone" name="submit-done"/>
+        <cl:listener std:sid="listener-fdce0829" handler="onGetHelpPageSubmitError" name="submit-error"/>
+        <cl:listener std:sid="listener-7621548e" handler="onGetHelpPageSubmitTimeout" name="submit-timeout"/>
+        <cl:responsedata dataid="pageInfoLang"/>
+      </cl:submission>
+      <cl:dataset std:sid="d-set-3158afde" id="pageInfoLang">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-3e3ea1cd" name="menu_id"/>
+          <cl:datacolumn std:sid="d-column-9f11c73e" name="src"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-7627cae1" id="dsMenuList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-6e4607d3" datatype="number" name="MenuID"/>
+          <cl:datacolumn std:sid="d-column-6dc60f3c" name="Name"/>
+          <cl:datacolumn std:sid="d-column-d3c233d8" datatype="number" name="ParentID"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-7fcb2a91" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-32aca8e8" datatype="number" name="ResultCode"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+    </cl:model>
+    <cl:appspec dev-comment="HLMAN&#xD;&#xA;monitor&#xD;&#xA;&#xD;&#xA;//&#x9;var tree = app.lookup(&quot;HLMAN_treeAllmenu&quot;);&#xD;&#xA;//&#x9;var target = HLMAN_menu_id;&#xD;&#xA;//&#x9;var treeItem = tree.getItemByValue(target);&#xD;&#xA;//&#x9;if (treeItem) {&#xD;&#xA;//&#x9;&#x9;var treeParent = tree.getItemByValue(target).parentValue;&#xD;&#xA;//&#x9;&#x9;tree.expandItem(tree.getItemByValue(treeParent));&#xD;&#xA;//&#x9;&#x9;tree.selectItemByValue(target);&#xD;&#xA;//&#x9;&#x9;&#xD;&#xA;//&#x9;&#x9;var obj_help = app.lookup(&quot;obj_help&quot;);&#xD;&#xA;//&#x9;&#x9;if (target != null)&#xD;&#xA;//&#x9;&#x9;&#x9;obj_help.data = page_info.findFirstRow(&quot;menu_id=='&quot; + target + &quot;'&quot;).getValue(&quot;src&quot;);&#xD;&#xA;//&#xD;&#xA;//&#x9;}"/>
+  </head>
+  <body std:sid="body-dd681058" style="padding:0px; top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-6db704e2" handler="onBodyLoad" name="load"/>
+    <cl:group std:sid="group-26919192" id="HLMAN_grp">
+      <cl:xylayoutdata std:sid="xyl-data-15c5286c" bottom="0px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-bd5045c6" id="grp2" style="background-color:#f0f0f0; padding:10px;">
+        <cl:formdata std:sid="f-data-f44a0e2a" col="0" row="0"/>
+        <cl:output std:sid="output-96e07127" style="font-weight:700; font-size:14px; text-align:left;">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_FuncList"/>
+          <cl:formdata std:sid="f-data-b81e62d9" col="0" row="0"/>
+        </cl:output>
+        <cl:tree std:sid="tree-a080763c" id="HLMAN_treeAllmenu" class="user_list" style="background-color:transparent; padding:0px 0px 0px 10px;" autoOpen="1">
+          <cl:listener std:sid="listener-43abb951" handler="onHLMAN_treeAllmenuSelectionChange" name="selection-change"/>
+          <cl:formdata std:sid="f-data-f0bc15c9" col="0" row="1"/>
+          <cl:treeitemset datasetid="dsMenuList" label="Name" value="MenuID" parent="ParentID"/>
+        </cl:tree>
+        <cl:formlayout std:sid="f-layout-2f35a6fd">
+          <cl:rows autoSizing="false" length="30" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-74e8b24a" id="grp3" style="padding:10px;">
+        <cl:formdata std:sid="f-data-98e01452" col="1" row="0"/>
+        <cl:group std:sid="group-dfcce1dd" id="grp4">
+          <cl:formdata std:sid="f-data-6738fbe0" col="0" row="0"/>
+          <cl:udc std:sid="ud-control-645ea3de" id="search_form" style="background-color:transparent; background-image:none; background-position:center;" type="udc.searchform1" visible="false">
+            <cl:listener std:sid="listener-33f94e26" handler="onSearchform1Search" name="search"/>
+            <cl:formdata std:sid="f-data-1a93507b" col="1" row="0"/>
+          </cl:udc>
+          <cl:formlayout std:sid="f-layout-53e57dc0">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns autoSizing="false" length="1" minlength="0" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+            <cl:columns autoSizing="false" length="370" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:group std:sid="group-9fa9b8c1" id="grp1">
+          <cl:formdata std:sid="f-data-76a2b113" col="0" row="1"/>
+          <cl:htmlobject std:sid="htmlobject-3bae3d32" id="HLMAN_obHelpPage">
+            <cl:xylayoutdata std:sid="xyl-data-5fe10ee6" bottom="0px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="BOTH"/>
+            <cl:attr name="type" value="text/html"/>
+          </cl:htmlobject>
+          <cl:xylayout std:sid="xylayout-496a54f5"/>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-6b07de99">
+          <cl:rows autoSizing="false" length="30" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-7dc6abd3">
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns autoSizing="false" length="250" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-8119935a"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

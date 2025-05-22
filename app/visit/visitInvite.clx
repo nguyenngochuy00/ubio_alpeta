@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-38f1c709" version="1.0.0.0">
+  <head std:sid="head-4048ba2f">
+    <title>visitInvite</title>
+    <screen std:sid="screen-f32e2ca1" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="600" customWidth="800" active="false"/>
+    <screen std:sid="screen-ca359a55" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-2c2838fe" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px" active="true"/>
+    <cl:model std:sid="model-cd39b977">
+      <cl:datamap std:sid="d-map-364f43f2" id="VisitInviteInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-a8d9e985" name="InviteType" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-f3eab31f" name="VisitIndex" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-bcf4cb90" name="VisitorIndex" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-47b63348" name="Email"/>
+          <cl:datacolumn std:sid="d-column-3539d20c" name="Title"/>
+          <cl:datacolumn std:sid="d-column-df1e903a" name="Message"/>
+          <cl:datacolumn std:sid="d-column-387301ec" name="AccessGroup" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-866f6864" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-ed68626e" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-f2f390ec" id="sms_postVisitInvite" action="/v1/visit/visitInvite">
+        <cl:listener std:sid="listener-ee7eb8fb" name="submit-done" handler="onSms_postVisitInviteSubmitDone"/>
+        <cl:listener std:sid="listener-563eecfb" name="submit-error" handler="onSms_postVisitInviteSubmitError"/>
+        <cl:listener std:sid="listener-865d008a" name="submit-timeout" handler="onSms_postVisitInviteSubmitTimeout"/>
+        <cl:requestdata dataid="VisitInviteInfo"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-771897c4" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-3f288c2e" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-aed7a597">
+      <cl:responsivexylayoutdata std:sid="rxyl-data-836e1a78">
+        <cl:xylayoutdata std:sid="sxyl-data-6373762d" width="480px" height="300px" horizontalAnchor="CENTER" verticalAnchor="CENTER" screenid="default"/>
+        <cl:xylayoutdata std:sid="sxyl-data-d44cc4ce" width="350px" height="525px" horizontalAnchor="CENTER" verticalAnchor="CENTER" screenid="mobile"/>
+      </cl:responsivexylayoutdata>
+      <cl:group std:sid="group-c5bd71c3">
+        <cl:responsivexylayoutdata std:sid="rxyl-data-8a732fdf">
+          <cl:xylayoutdata std:sid="sxyl-data-c922ab7a" right="10px" left="10px" height="280px" horizontalAnchor="BOTH" verticalAnchor="CENTER" screenid="default"/>
+          <cl:xylayoutdata std:sid="sxyl-data-06b252a7" right="3px" left="3px" height="280px" horizontalAnchor="BOTH" verticalAnchor="CENTER" screenid="mobile"/>
+        </cl:responsivexylayoutdata>
+        <cl:output std:sid="output-586d1dd8" style="background-color:#F6F6F6; border-right-style:solid; border-bottom-color:#f2f2f2; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#f2f2f2; text-align:center;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_VisitEmailTitle"/>
+          <cl:formdata std:sid="f-data-8b5c1b26" row="2" col="0"/>
+        </cl:output>
+        <cl:output std:sid="output-31c3fe12" style="background-color:#F6F6F6; border-right-style:solid; border-bottom-color:#f2f2f2; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#f2f2f2; text-align:center;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_VisitEmailMessage"/>
+          <cl:formdata std:sid="f-data-1f9e5c0e" row="3" col="0"/>
+        </cl:output>
+        <cl:group std:sid="group-cb3945d1">
+          <cl:formdata std:sid="f-data-d4326d61" row="4" col="0" rowspan="1" colspan="2"/>
+          <cl:button std:sid="button-5c388797" id="VMVIP_btnSend" style="padding:2px;" class="userInfo_btn" tabindex="4">
+            <cl:listener std:sid="listener-e88cd7a9" name="click" handler="onVMVIP_btnSendClick"/>
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_VisitLinkSend"/>
+            <cl:formdata std:sid="f-data-e1697a75" row="0" col="1"/>
+          </cl:button>
+          <cl:button std:sid="button-6d82617c" id="VMVIP_btnCancel" style="padding:2px;" class="userInfo_btn" tabindex="5">
+            <cl:listener std:sid="listener-c5e7d155" name="click" handler="onVMVIP_btnCancelClick"/>
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_Cancel"/>
+            <cl:formdata std:sid="f-data-4b1b821a" row="0" col="2"/>
+          </cl:button>
+          <cl:formlayout std:sid="f-layout-495b6621">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION" autoSizing="false" minlength="0"/>
+            <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="2" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:output std:sid="output-c30e34f2" id="VMVIP_opbLinkInfo" style="padding:4px; font-size:14px;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_VisitApplicationLinkInfo"/>
+          <cl:formdata std:sid="f-data-d462ac43" row="0" col="0" rowspan="1" colspan="2"/>
+        </cl:output>
+        <cl:output std:sid="output-bb158cf1" style="background-color:#F6F6F6; border-right-style:solid; border-bottom-color:#f2f2f2; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#f2f2f2; text-align:center;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_VisitorEmail"/>
+          <cl:formdata std:sid="f-data-4fef5b5b" row="1" col="0"/>
+        </cl:output>
+        <cl:group std:sid="group-8be7ccb5">
+          <cl:formdata std:sid="f-data-5862619f" row="1" col="1"/>
+          <cl:inputbox std:sid="i-box-c97d3a0c" id="VMVIP_ipbEmail" style="border-right-style:none; border-bottom-color:#cccccc; border-left-style:none; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-top-style:none;" tabindex="1" maxlength="100">
+            <cl:datamapbind property="value" datacontrolid="VisitInviteInfo" columnname="Email"/>
+            <cl:xylayoutdata std:sid="xyl-data-cba91b4f" right="10px" left="10px" height="25px" horizontalAnchor="BOTH" verticalAnchor="CENTER"/>
+          </cl:inputbox>
+          <cl:xylayout std:sid="xylayout-87fc5489"/>
+        </cl:group>
+        <cl:group std:sid="group-7b7edefa">
+          <cl:formdata std:sid="f-data-3310f655" row="2" col="1"/>
+          <cl:inputbox std:sid="i-box-cda0fbc9" id="VMVIP_ipbTitle" style="border-right-style:none; border-bottom-color:#cccccc; border-left-style:none; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-top-style:none;" tabindex="2" maxlength="100">
+            <cl:datamapbind property="value" datacontrolid="VisitInviteInfo" columnname="Title"/>
+            <cl:xylayoutdata std:sid="xyl-data-e0be138f" right="10px" left="10px" height="25px" horizontalAnchor="BOTH" verticalAnchor="CENTER"/>
+          </cl:inputbox>
+          <cl:xylayout std:sid="xylayout-172badd3"/>
+        </cl:group>
+        <cl:group std:sid="group-da6917ef">
+          <cl:formdata std:sid="f-data-1582a791" row="3" col="1"/>
+          <cl:textarea std:sid="t-area-b2420562" id="VMVIP_txaMessage" style="font-size:14px;" tabindex="3" maxlength="500">
+            <cl:datamapbind property="value" datacontrolid="VisitInviteInfo" columnname="Message"/>
+            <cl:xylayoutdata std:sid="xyl-data-319a31f8" right="10px" left="10px" height="58px" horizontalAnchor="BOTH" verticalAnchor="CENTER"/>
+          </cl:textarea>
+          <cl:xylayout std:sid="xylayout-327079f8"/>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-35ce3ba6">
+          <cl:rows length="60" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="100" unit="PIXEL"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:responsivexylayout std:sid="r-xylayout-47df3e20"/>
+    </cl:group>
+    <cl:responsivexylayout std:sid="r-xylayout-def549cb"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

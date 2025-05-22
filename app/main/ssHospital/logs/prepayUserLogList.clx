@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-ab4b8913" version="1.0.0.0">
+  <head std:sid="head-ba1deb21">
+    <title>prepayUserLogList</title>
+    <screen std:sid="screen-a548c738" id="default" name="default" minwidth="1024px" width="1024px" height="768px"/>
+    <screen std:sid="screen-129ba1de" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-d5bd86d6" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-9cbc7a80">
+      <cl:dataset std:sid="d-set-0632dfb8" id="PrepayUserLogList">
+        <cl:datacolumnlist>
+          <cl:datacolumn comment="발생일자" std:sid="d-column-3ee37891" name="EventTime"/>
+          <cl:datacolumn std:sid="d-column-6437eacc" name="TerminalID" datatype="number"/>
+          <cl:datacolumn comment="대상자 ID" std:sid="d-column-b7223cfd" name="ID"/>
+          <cl:datacolumn comment="이름" std:sid="d-column-c9c044a7" name="Name"/>
+          <cl:datacolumn comment="유니크 아이디" std:sid="d-column-a3584fa2" name="UniqueID" datatype="string"/>
+          <cl:datacolumn comment="모드" std:sid="d-column-558a7156" name="PMode" datatype="number"/>
+          <cl:datacolumn comment="식수타입" std:sid="d-column-3c8480b8" name="MealType" datatype="number"/>
+          <cl:datacolumn comment="식수금액" std:sid="d-column-730a59ba" name="MealPay" datatype="number"/>
+          <cl:datacolumn comment="카드번호" std:sid="d-column-809ecb06" name="CardNum"/>
+          <cl:datacolumn std:sid="d-column-86a20146" name="TerminalName"/>
+          <cl:datacolumn std:sid="d-column-34f77821" name="PIndex" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-cf4fcb60" id="ExportPrepayUserList">
+        <cl:datacolumnlist>
+          <cl:datacolumn comment="발생일자" std:sid="d-column-98301e9f" name="EventTime"/>
+          <cl:datacolumn std:sid="d-column-bc9e63a9" name="TerminalName"/>
+          <cl:datacolumn comment="이름" std:sid="d-column-2b2e7e0a" name="Name"/>
+          <cl:datacolumn comment="유니크 아이디" std:sid="d-column-f5094a6d" name="UniqueID" datatype="string"/>
+          <cl:datacolumn comment="모드" std:sid="d-column-68f88cbc" name="PMode" datatype="string"/>
+          <cl:datacolumn comment="식수타입" std:sid="d-column-784ad251" name="MealType" datatype="string"/>
+          <cl:datacolumn comment="식수금액" std:sid="d-column-20433c64" name="MealPay" datatype="number"/>
+          <cl:datacolumn comment="카드번호" std:sid="d-column-7836d0d5" name="CardNum"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-ab9c534d" id="refundList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-2c940d51" name="PIndex" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-c40b5157" name="rowIndex" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-c2bd18fc" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-bf01545e" name="Count" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-a33aca7f" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-278d86a9" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-cc517011" id="dm_ExportParam">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-d83b48dd" name="offset" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-fc1a603e" name="total" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-bbc173f9" name="mode"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-c10be559" id="reFundInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-9027893f" name="EventTime"/>
+          <cl:datacolumn std:sid="d-column-35b2b2b0" name="TerminalID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-2d2665d4" name="UserID"/>
+          <cl:datacolumn std:sid="d-column-e34c2649" name="PIndex" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-ea24cc76" name="PMode" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-8d1b8fcd" name="MealPay" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-25533c19" id="sms_getPrepayUserLogList" method="get" action="/v1/ssh/logs/prepay">
+        <cl:listener std:sid="listener-1dabad87" name="submit-done" handler="onSms_getPrepayUserLogListSubmitDone"/>
+        <cl:listener std:sid="listener-17d55287" name="submit-error" handler="onSms_getPrepayUserLogListSubmitError"/>
+        <cl:listener std:sid="listener-6c63207b" name="submit-timeout" handler="onSms_getPrepayUserLogListSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total"/>
+        <cl:responsedata dataid="PrepayUserLogList"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-2df2e5fa" id="sms_postPrepayUserLogList" action="/v1/ssh/logs/auth/refund">
+        <cl:listener std:sid="listener-7e145918" name="submit-done" handler="onSms_postPrepayUserLogListSubmitDone"/>
+        <cl:listener std:sid="listener-801e02b9" name="submit-error" handler="onSms_postPrepayUserLogListSubmitError"/>
+        <cl:listener std:sid="listener-f45af56f" name="submit-timeout" handler="onSms_postPrepayUserLogListSubmitTimeout"/>
+        <cl:requestdata dataid="reFundInfo"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec dev-comment="SSHPUL_&#xD;&#xA;prepayUserLogList"/>
+  </head>
+  <body std:sid="body-113578cb" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-18ca6311" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-e21d6d69">
+      <cl:xylayoutdata std:sid="xyl-data-703f64ad" top="1px" right="1px" bottom="1px" left="1px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-357fcee9">
+        <cl:formdata std:sid="f-data-2dd64211" row="0" col="0"/>
+        <cl:group std:sid="group-d3c195e3">
+          <cl:formdata std:sid="f-data-c3e9ef0c" row="0" col="4"/>
+          <cl:output std:sid="output-ed0c8de0" style="font-weight:bold; vertical-align:middle; text-align:right;" value="~">
+            <cl:formdata std:sid="f-data-c54bf05f" row="0" col="1"/>
+          </cl:output>
+          <cl:dateinput std:sid="d-input-48acdebf" id="SSHPUL_dtStart" value="2018-11-23" format="YYYY-MM-DD" autoselect="false">
+            <cl:formdata std:sid="f-data-b8e3f87c" row="0" col="0"/>
+          </cl:dateinput>
+          <cl:dateinput std:sid="d-input-71da1be8" id="SSHPUL_dtEnd" value="2018-11-23" format="YYYY-MM-DD" autoselect="false">
+            <cl:formdata std:sid="f-data-2e479486" row="0" col="2"/>
+          </cl:dateinput>
+          <cl:formlayout std:sid="f-layout-c4f8f76f" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+            <cl:columns length="10" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:group std:sid="group-a84f9729" style="border-right-style:solid; color:#6b6b6b; border-top-width:1px; border-bottom-color:#cccccc; border-right-width:1px; border-left-color:#cccccc; border-right-color:#cccccc; border-left-width:1px; border-top-style:solid; background-color:#F6F6F6; border-radius:10px; border-left-style:solid; border-bottom-width:1px; border-top-color:#cccccc; border-bottom-style:solid;">
+          <cl:formdata std:sid="f-data-8e581b3f" row="0" col="5"/>
+          <cl:combobox std:sid="c-box-6107e546" id="SSHPUL_cmbCategory" style="background-color:#F6F6F6; border-right-style:none; border-left-style:none; border-bottom-style:none; border-top-style:none;" preventinput="true">
+            <cl:apppropbind property="value" category="PROPERTY" app-property="searchCategory"/>
+            <cl:formdata std:sid="f-data-8adb84bb" row="0" col="0"/>
+            <cl:item std:sid="item-4608f046" label="사용자 아이디" value="id"/>
+            <cl:item std:sid="item-e863c61d" label="이름" value="name"/>
+            <cl:item std:sid="item-9e16ae0c" label="Q-ID" value="uniqueid"/>
+          </cl:combobox>
+          <cl:inputbox std:sid="i-box-c326c7b5" id="SSHPUL_ipbKeyword" style="background-color:#F6F6F6; padding:0px 0px 0px 10px; border-bottom-color:#cccccc; border-left-color:#cccccc; border-top-color:#cccccc; border-bottom-style:none; border-right-color:#cccccc; border-top-style:none;">
+            <cl:langbind property="placeholder" category="PROPERTY" keypath="Str_SearchKeword"/>
+            <cl:apppropbind property="value" category="PROPERTY" app-property="searchKeyword"/>
+            <cl:formdata std:sid="f-data-378afdbf" row="0" col="1"/>
+          </cl:inputbox>
+          <cl:group std:sid="group-94b972ce" id="SSHPUL_btnSearch" style="border-right-style:none; cursor:pointer; background-color:transparent; background-repeat:no-repeat; border-left-style:none; border-bottom-style:none; background-image:url('../../../../theme/images/common/common_text_field_btn_icons_search.png'); background-position:center; border-top-style:none;">
+            <cl:listener std:sid="listener-43b89579" name="click" handler="onSSHPUL_btnSearchClick"/>
+            <cl:formdata std:sid="f-data-838eccbc" height="29" row="0" col="2"/>
+            <cl:xylayout std:sid="xylayout-3b76f87f"/>
+          </cl:group>
+          <cl:formlayout std:sid="f-layout-409a1d5f" hspace="0px" vspace="0px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+            <cl:columns length="3" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:output std:sid="output-e053a255" style="padding:4px; text-align:right;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_All"/>
+          <cl:formdata std:sid="f-data-427c19ea" row="0" col="1"/>
+        </cl:output>
+        <cl:output std:sid="output-5a63dfa3" id="SSHPUL_opbTotal" value="">
+          <cl:formdata std:sid="f-data-154bcf46" row="0" col="2"/>
+        </cl:output>
+        <cl:button std:sid="button-07a00c2d" id="SSHPUL_btnExport" class="userInfo_btn" value="내보내기">
+          <cl:listener std:sid="listener-f96661e9" name="click" handler="onSSHPUL_btnExportClick"/>
+          <cl:formdata std:sid="f-data-4fd9e955" row="0" col="8"/>
+        </cl:button>
+        <cl:button std:sid="button-420dc1b3" id="SSHPUL_btnRefund" class="userInfo_btn" value="환급처리">
+          <cl:listener std:sid="listener-f0a57e40" name="click" handler="onSSHPUL_btnRefundClick"/>
+          <cl:formdata std:sid="f-data-c2bc289b" row="0" col="7"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-89dabd7a" hspace="5px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="50" unit="PIXEL" autoSizing="false" minlength="0"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="220" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="2" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:grid std:sid="grid-85b28fce" id="SSHPUL_grdPrepayUserLogList" readonly="true" datasetid="PrepayUserLogList" resizablecolumns="all" columnMovable="true">
+        <cl:formdata std:sid="f-data-5b1003b5" row="2" col="0"/>
+        <cl:gridcolumn std:sid="g-column-0d4f3005" width="25px"/>
+        <cl:gridcolumn std:sid="g-column-2c7f7e14"/>
+        <cl:gridcolumn std:sid="g-column-4bac3c86"/>
+        <cl:gridcolumn std:sid="g-column-4f3e16e2"/>
+        <cl:gridcolumn std:sid="g-column-6068acf7"/>
+        <cl:gridcolumn std:sid="g-column-93dbaf05"/>
+        <cl:gridcolumn std:sid="g-column-5f44c2f6"/>
+        <cl:gridcolumn std:sid="g-column-cb77269f"/>
+        <cl:gridcolumn std:sid="g-column-a68b9b33"/>
+        <cl:gridcolumn std:sid="g-column-7dc14a11"/>
+        <cl:gridheader std:sid="gh-band-cf722e01">
+          <cl:gridrow std:sid="g-row-19709b88"/>
+          <cl:gridcell std:sid="gh-cell-6869bd95" rowindex="0" colindex="1" targetcolumnname="EventTime" sortable="false" filterable="false" text="발생일자"/>
+          <cl:gridcell std:sid="gh-cell-5f6f101a" rowindex="0" colindex="2" text="단말기 명칭"/>
+          <cl:gridcell std:sid="gh-cell-db5eb06f" rowindex="0" colindex="3" targetcolumnname="ID" sortable="false" filterable="false" text="아이디" visible="false"/>
+          <cl:gridcell std:sid="gh-cell-8c143528" rowindex="0" colindex="4" targetcolumnname="Name" sortable="false" filterable="false" text="이름"/>
+          <cl:gridcell std:sid="gh-cell-ae55f54b" rowindex="0" colindex="5" targetcolumnname="UniqueID" sortable="false" filterable="false" text="Q-ID"/>
+          <cl:gridcell std:sid="gh-cell-4e2278cc" rowindex="0" colindex="6" targetcolumnname="PMode" sortable="false" filterable="false" text="모드"/>
+          <cl:gridcell std:sid="gh-cell-2a998ca5" rowindex="0" colindex="7" targetcolumnname="MealType" sortable="false" filterable="false" text="식수타입"/>
+          <cl:gridcell std:sid="gh-cell-906d8183" rowindex="0" colindex="8" targetcolumnname="MealPay" sortable="false" filterable="false" text="식수금액"/>
+          <cl:gridcell std:sid="gh-cell-f830f1f1" rowindex="0" colindex="9" targetcolumnname="CardNum" sortable="false" filterable="false" text="카드번호" visible="false"/>
+          <cl:gridcell std:sid="gh-cell-16f1c646" rowindex="0" colindex="0" columntype="checkbox"/>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-5f07a051">
+          <cl:gridrow std:sid="g-row-ea86b791"/>
+          <cl:gridcell std:sid="gd-cell-7f7bf466" rowindex="0" colindex="1" columnname="EventTime"/>
+          <cl:gridcell std:sid="gd-cell-37b547ca" rowindex="0" colindex="2" columnname="TerminalName"/>
+          <cl:gridcell std:sid="gd-cell-be8caf66" rowindex="0" colindex="3" columnname="ID"/>
+          <cl:gridcell std:sid="gd-cell-14df5396" rowindex="0" colindex="4" columnname="Name"/>
+          <cl:gridcell std:sid="gd-cell-ff221f8c" rowindex="0" colindex="5" columnname="UniqueID"/>
+          <cl:gridcell std:sid="gd-cell-a02069af" rowindex="0" colindex="6" columnname="PMode">
+            <cl:combobox std:sid="c-box-f0166925" id="SSHPUL_grdCmbPmode" style="text-align:center;">
+              <cl:item std:sid="item-55b813d0" label="충전" value="1"/>
+              <cl:item std:sid="item-039a741f" label="환불" value="2"/>
+              <cl:item std:sid="item-dcb9b45c" label="사용" value="3"/>
+            </cl:combobox>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-356ae138" rowindex="0" colindex="7" columnname="MealType">
+            <cl:combobox std:sid="c-box-4281a2c6" id="SSHPUL_grdCmbMealType" style="text-align:center;">
+              <cl:item std:sid="item-3c111988" label="결제" value="0"/>
+              <cl:item std:sid="item-ee5f8933" label="조식" value="1"/>
+              <cl:item std:sid="item-6525a0ed" label="중식" value="2"/>
+              <cl:item std:sid="item-1895a422" label="석식" value="3"/>
+              <cl:item std:sid="item-8af13305" label="간식" value="4"/>
+              <cl:item std:sid="item-ba5f7dc2" label="야식" value="5"/>
+            </cl:combobox>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-4549fa7b" rowindex="0" colindex="8" columnname="MealPay"/>
+          <cl:gridcell std:sid="gd-cell-057b7dcc" rowindex="0" colindex="9" columnname="CardNum"/>
+          <cl:gridcell std:sid="gd-cell-45816198" rowindex="0" colindex="0" columntype="checkbox"/>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:pageindexer std:sid="p-indexer-700b4b78" id="prepayUserLogListPageIndexer" class="userList_paging">
+        <cl:listener std:sid="listener-421119cd" name="selection-change" handler="onPrepayUserLogListPageIndexerSelectionChange"/>
+        <cl:formdata std:sid="f-data-15c646f2" row="3" col="0"/>
+      </cl:pageindexer>
+      <cl:group std:sid="group-5746f73e">
+        <cl:formdata std:sid="f-data-15b9914b" row="1" col="0"/>
+        <cl:radiobutton std:sid="r-button-246541fd" id="SSHPUL_rdbPrepayMode" value="3">
+          <cl:listener std:sid="listener-82beed2a" name="selection-change" handler="onSSHPUL_rdbPrepayModeSelectionChange"/>
+          <cl:formdata std:sid="f-data-73a64b32" row="0" col="1"/>
+          <cl:item std:sid="item-1e96ba86" label="전체" value="0"/>
+          <cl:item std:sid="item-10d61142" label="충전" value="1"/>
+          <cl:item std:sid="item-edaeb0bd" label="환불" value="2"/>
+          <cl:item std:sid="item-dce3f493" label="식수기록" value="3"/>
+        </cl:radiobutton>
+        <cl:combobox std:sid="c-box-0715156d" id="SSHPUL_cmbMealType" style="text-align:center;" value="0">
+          <cl:formdata std:sid="f-data-eaccb154" row="0" col="3"/>
+          <cl:item std:sid="item-84658bd1" label="전체" value="0"/>
+          <cl:item std:sid="item-887508c5" label="조식" value="1"/>
+          <cl:item std:sid="item-fd3802ae" label="중식" value="2"/>
+          <cl:item std:sid="item-dc48b44c" label="석식" value="3"/>
+          <cl:item std:sid="item-f2f7b067" label="간식" value="4"/>
+          <cl:item std:sid="item-3cd71877" label="야식" value="5"/>
+        </cl:combobox>
+        <cl:output std:sid="output-86e0ac21" style="background-color:#f6f6f6; background-image:none; text-align:center;" class="userInfo_bold" value="모드">
+          <cl:formdata std:sid="f-data-f0063365" row="0" col="0"/>
+        </cl:output>
+        <cl:output std:sid="output-930e2760" style="background-color:#f6f6f6; background-image:none; text-align:center;" class="userInfo_bold" value="식수타입">
+          <cl:formdata std:sid="f-data-c6520dc4" row="0" col="2"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-72037e50" hspace="5px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="transparent" minlength="0"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-05ff282a" hspace="5px" vspace="5px" top-margin="5px" right-margin="5px" bottom-margin="5px" left-margin="5px">
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-e5b1caf7"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

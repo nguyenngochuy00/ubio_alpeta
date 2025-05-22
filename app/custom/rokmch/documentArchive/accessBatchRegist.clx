@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-1200a0d9" version="1.0.0.0">
+  <head std:sid="head-a429d423">
+    <title>accessBatchRegist</title>
+    <screen std:sid="screen-64f68597" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="800" customWidth="1500"/>
+    <screen std:sid="screen-b2505e77" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-5caf1e33" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-116ba5e1">
+      <cl:dataset comment="문서고 출입자 리스트" std:sid="d-set-d0f32da2" id="AccessorList">
+        <cl:datacolumnlist>
+          <cl:datacolumn comment="인덱스" std:sid="d-column-542579f9" name="AccessorIndex" datatype="number"/>
+          <cl:datacolumn comment="*인원구분" std:sid="d-column-b9b98c10" name="UserType" datatype="number"/>
+          <cl:datacolumn comment="문서번호" std:sid="d-column-0ad21d87" name="DocumentNumber" datatype="string"/>
+          <cl:datacolumn comment="소속/부대" std:sid="d-column-03f22580" name="UserGroup" datatype="string"/>
+          <cl:datacolumn comment="계(직)급" std:sid="d-column-a50b9fdb" name="UserPosition"/>
+          <cl:datacolumn comment="*성명" std:sid="d-column-af900e79" name="UserName"/>
+          <cl:datacolumn comment="*생년월일" std:sid="d-column-a56f72a7" name="Birthday" datatype="string"/>
+          <cl:datacolumn comment="*비취인가/싱원조사연번" std:sid="d-column-af882d61" name="SecureNumber" datatype="string"/>
+          <cl:datacolumn comment="휴대폰번호" std:sid="d-column-b3784309" name="Phone"/>
+          <cl:datacolumn comment="차량번호" std:sid="d-column-21026e23" name="CarNumber" datatype="string"/>
+          <cl:datacolumn comment="차량종류" std:sid="d-column-69d8fb18" name="CarType"/>
+          <cl:datacolumn comment="*출입시작일" std:sid="d-column-21732136" name="AccessStart"/>
+          <cl:datacolumn comment="*출입종료일" std:sid="d-column-4afb3d1f" name="AccessEnd"/>
+          <cl:datacolumn comment="출입목적" std:sid="d-column-1b3af645" name="AccessPurpose"/>
+          <cl:datacolumn comment="출입권한상태" std:sid="d-column-f96f06fe" name="AccessPrivilege" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-e5f5057d" name="CardNumber"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-39a75790" id="ResultInfoList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-8234e83d" name="TargetID"/>
+          <cl:datacolumn std:sid="d-column-f8195803" name="ErrorCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-cedbe583" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-87513087" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-023ad152" id="sms_postAccessorImport" action="/v1/armyhq/accessor/import">
+        <cl:listener std:sid="listener-fae113c7" name="submit-done" handler="onSms_postAccessorRegistSubmitDone"/>
+        <cl:listener std:sid="listener-e5b4f379" name="submit-error" handler="onSms_postAccessorRegistSubmitError"/>
+        <cl:listener std:sid="listener-7fe5ba38" name="submit-timeout" handler="onSms_postAccessorRegistSubmitTimeout"/>
+        <cl:requestdata dataid="AccessorList" payload="all"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="ResultInfoList"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-a61c9fe5" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-d7e35bb1" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-47248555">
+      <cl:xylayoutdata std:sid="xyl-data-345bbe64" top="25px" right="10px" bottom="0px" left="50px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-a3316b6e">
+        <cl:formdata std:sid="f-data-adf7496e" row="0" col="0"/>
+        <cl:output std:sid="output-d304fa2a" id="ACAPAP_opbTitle" class="menu-title-amhq" value="출입자 일괄등록">
+          <cl:xylayoutdata std:sid="xyl-data-d572322e" top="0px" bottom="0px" left="0px" width="300px" horizontalAnchor="LEFT" verticalAnchor="BOTH"/>
+        </cl:output>
+        <cl:xylayout std:sid="xylayout-1cec15c4" scrollable="false"/>
+      </cl:group>
+      <cl:grid std:sid="grid-9803307a" id="DAABR_grdAccessorList" class="grid-amhq" readonly="true" datasetid="AccessorList" resizablecolumns="all" columnMovable="true">
+        <cl:formdata std:sid="f-data-9b9fafb1" row="4" col="0"/>
+        <cl:gridcolumn std:sid="g-column-043a5f07" width="40px"/>
+        <cl:gridcolumn std:sid="g-column-4e51e53d" width="73px"/>
+        <cl:gridcolumn std:sid="g-column-2ee64a04"/>
+        <cl:gridcolumn std:sid="g-column-57c25418" width="80px"/>
+        <cl:gridcolumn std:sid="g-column-a06dbb10" width="60px"/>
+        <cl:gridcolumn std:sid="g-column-131df46e" width="70px"/>
+        <cl:gridcolumn std:sid="g-column-80cb61e3" width="80px"/>
+        <cl:gridcolumn std:sid="g-column-36dc7461" width="130px"/>
+        <cl:gridcolumn std:sid="g-column-a8a32c6c"/>
+        <cl:gridcolumn std:sid="g-column-fd4e06c2" width="96px"/>
+        <cl:gridcolumn std:sid="g-column-b348b7e1" width="90px"/>
+        <cl:gridcolumn std:sid="g-column-822d91ff" width="85px"/>
+        <cl:gridcolumn std:sid="g-column-fa96c9cd" width="85px"/>
+        <cl:gridcolumn std:sid="g-column-0ce76bef"/>
+        <cl:gridheader std:sid="gh-band-ff482ce5">
+          <cl:gridrow std:sid="g-row-607965f2" height="50px"/>
+          <cl:gridcell std:sid="gh-cell-a8bb8411" rowindex="0" colindex="1" targetcolumnname="UserType" sortable="false" filterable="false" text="인원구분"/>
+          <cl:gridcell std:sid="gh-cell-5a775f33" rowindex="0" colindex="2" targetcolumnname="DocumentNumber" sortable="false" filterable="false" text="문서번호"/>
+          <cl:gridcell std:sid="gh-cell-73952011" rowindex="0" colindex="3" targetcolumnname="UserGroup" sortable="false" filterable="false" text="소속/부대"/>
+          <cl:gridcell std:sid="gh-cell-78eb555a" rowindex="0" colindex="4" targetcolumnname="UserPosition" sortable="false" filterable="false" text="계(직)급"/>
+          <cl:gridcell std:sid="gh-cell-9d9d69cd" rowindex="0" colindex="5" targetcolumnname="UserName" sortable="false" filterable="false" text="성명"/>
+          <cl:gridcell std:sid="gh-cell-a07ddee7" rowindex="0" colindex="6" targetcolumnname="Birthday" sortable="false" filterable="false" text="생년월일"/>
+          <cl:gridcell std:sid="gh-cell-3cdfd1a4" rowindex="0" colindex="7" targetcolumnname="SecureNumber" sortable="false" filterable="false" text="비취인가/신원조사연번"/>
+          <cl:gridcell std:sid="gh-cell-8ab570b0" rowindex="0" colindex="8" targetcolumnname="Phone" sortable="false" filterable="false" text="휴대폰"/>
+          <cl:gridcell std:sid="gh-cell-e0083f6a" rowindex="0" colindex="9" targetcolumnname="CarNumber" sortable="false" filterable="false" text="차량번호"/>
+          <cl:gridcell std:sid="gh-cell-22c7dfb5" rowindex="0" colindex="10" targetcolumnname="CarType" sortable="false" filterable="false" text="차량종류"/>
+          <cl:gridcell std:sid="gh-cell-e189df85" rowindex="0" colindex="11" targetcolumnname="AccessStart" sortable="false" filterable="false" text="출입시작일"/>
+          <cl:gridcell std:sid="gh-cell-0cc060fc" rowindex="0" colindex="12" targetcolumnname="AccessEnd" sortable="false" filterable="false" text="출입종료일"/>
+          <cl:gridcell std:sid="gh-cell-6037fefe" rowindex="0" colindex="13" targetcolumnname="AccessPurpose" sortable="false" filterable="false" text="출입목적"/>
+          <cl:gridcell std:sid="gh-cell-94511319" rowindex="0" colindex="0" text="번호"/>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-5bf71348">
+          <cl:gridrow std:sid="g-row-f754b89b" height="30px"/>
+          <cl:gridcell std:sid="gd-cell-9f14dc43" rowindex="0" colindex="1" columnname="UserType">
+            <cl:combobox std:sid="c-box-2f06943c" id="cmb1" style="text-align:center;">
+              <cl:item std:sid="item-ef563404" label="----" value="0"/>
+              <cl:item std:sid="item-9ee201f1" label="타부대원" value="901"/>
+              <cl:item std:sid="item-6c17521e" label="민간인" value="902"/>
+            </cl:combobox>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-e44b2ec2" rowindex="0" colindex="2" columnname="DocumentNumber"/>
+          <cl:gridcell std:sid="gd-cell-ffb8a171" rowindex="0" colindex="3" columnname="UserGroup"/>
+          <cl:gridcell std:sid="gd-cell-2428c6ce" rowindex="0" colindex="4" columnname="UserPosition"/>
+          <cl:gridcell std:sid="gd-cell-a41ce645" rowindex="0" colindex="5" columnname="UserName"/>
+          <cl:gridcell std:sid="gd-cell-482e4619" rowindex="0" colindex="6" columnname="Birthday"/>
+          <cl:gridcell std:sid="gd-cell-1b7b9c8e" rowindex="0" colindex="7" columnname="SecureNumber"/>
+          <cl:gridcell std:sid="gd-cell-ac72f409" rowindex="0" colindex="8" columnname="Phone"/>
+          <cl:gridcell std:sid="gd-cell-abcbfb90" rowindex="0" colindex="9" columnname="CarNumber"/>
+          <cl:gridcell std:sid="gd-cell-70133c5c" rowindex="0" colindex="10" columnname="CarType"/>
+          <cl:gridcell std:sid="gd-cell-031eafaa" rowindex="0" colindex="11" columnname="AccessStart"/>
+          <cl:gridcell std:sid="gd-cell-711679d9" rowindex="0" colindex="12" columnname="AccessEnd"/>
+          <cl:gridcell std:sid="gd-cell-85e630d8" rowindex="0" colindex="13" columnname="AccessPurpose"/>
+          <cl:gridcell std:sid="gd-cell-8a83af19" rowindex="0" colindex="0" columntype="rowindex"/>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:group std:sid="group-329f0fcf">
+        <cl:formdata std:sid="f-data-7cd006a3" row="6" col="0"/>
+        <cl:button std:sid="button-0a62087c" id="DAABR_btnAccessorUpload" class="button-green-amhq" value="등록">
+          <cl:listener std:sid="listener-7b432867" name="click" handler="onDAABR_btnAccessorUploadClick"/>
+          <cl:formdata std:sid="f-data-a2e3649f" row="0" col="1"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-f394e3f7" scrollable="false" hspace="1px" vspace="1px" top-margin="1px" right-margin="1px" bottom-margin="1px" left-margin="1px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="120" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-1eb48b3c">
+        <cl:formdata std:sid="f-data-98a7658c" row="2" col="0"/>
+        <cl:group std:sid="group-ab13c983" class="section-white-top-amhq">
+          <cl:formdata std:sid="f-data-f847b350" row="0" col="1"/>
+          <cl:fileinput std:sid="f-input-6b63cef1" id="DAABR_fiExcel" style="color:#000000;" class="fileinput-amhq">
+            <cl:listener std:sid="listener-06ba63d0" name="value-change" handler="onDAABR_fiExcelValueChange"/>
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_DragFile"/>
+            <cl:formdata std:sid="f-data-6b0abfae" row="0" col="0"/>
+          </cl:fileinput>
+          <cl:htmlsnippet std:sid="htmlsnippet-de8c4918" id="DAABR_sniDownloadLink" style="color:#000000;" class="htmlsnippet-amhq" value="">
+            <cl:formdata std:sid="f-data-62a0cb1b" row="0" col="2"/>
+          </cl:htmlsnippet>
+          <cl:formlayout std:sid="f-layout-7bde6685" scrollable="false" hspace="1px" vspace="1px" top-margin="1px" right-margin="1px" bottom-margin="1px" left-margin="1px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="270" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="5" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="150" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:output std:sid="output-3437b746" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; border-right-color:#c5c5c5; border-bottom-style:solid;" class="section-green-top-amhq" visible="true" value="출입자 일괄 업로드">
+          <cl:formdata std:sid="f-data-96e8b887" row="0" col="0"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-837ae540" scrollable="false" hspace="0px" vspace="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="170" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-d507218d" scrollable="false" hspace="1px" vspace="1px" top-margin="1px" right-margin="1px" bottom-margin="1px" left-margin="1px">
+        <cl:rows length="35" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="10" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-c9fee84e"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-49bd4d3c" version="1.0.0.0">
+  <head std:sid="head-7f82bc93">
+    <title>authlogReport</title>
+    <screen std:sid="screen-b08651f8" id="default" name="default" minwidth="1024px" width="1024px" height="768px"/>
+    <screen std:sid="screen-77fc8204" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-5e956f6c" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-7606692d">
+      <cl:dataset std:sid="d-set-4c1e86ed" id="AuthLogList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-efe54c10" name="IndexKey" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-16f2076b" name="TerminalID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-8e6504bb" name="UserID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-af54dec5" name="GroupCode"/>
+          <cl:datacolumn std:sid="d-column-236b148b" name="UserName"/>
+          <cl:datacolumn std:sid="d-column-9575c83b" name="EventTime"/>
+          <cl:datacolumn std:sid="d-column-2f8f2aeb" name="ServerRecordTime"/>
+          <cl:datacolumn std:sid="d-column-504c59d4" name="AuthType"/>
+          <cl:datacolumn std:sid="d-column-8df55e0e" name="AuthResult"/>
+          <cl:datacolumn std:sid="d-column-a2f1837b" name="Func" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-fe6d2783" name="FuncType"/>
+          <cl:datacolumn std:sid="d-column-6922a230" name="Card"/>
+          <cl:datacolumn std:sid="d-column-c020ff80" name="UserType" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-41aff720" name="IsPicture" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-f129a56c" name="Property"/>
+          <cl:datacolumn std:sid="d-column-a03eb041" name="GroupName"/>
+          <cl:datacolumn std:sid="d-column-86a8a8b4" name="PositionName"/>
+          <cl:datacolumn std:sid="d-column-f6e07f35" name="UniqueID"/>
+          <cl:datacolumn std:sid="d-column-463e82f4" name="TerminalName"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-9045a3c5" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-dbb13c74" name="Count" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-bd262d67" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-9a1d1cef" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-c28429ef" id="signedSet">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-8a4a9811" name="title" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-8acdf9f5" name="fontsize" datatype="number" defaultvalue="15"/>
+          <cl:datacolumn std:sid="d-column-486b2e96" name="fontweight" datatype="number" defaultvalue="400"/>
+          <cl:datacolumn std:sid="d-column-128811a7" name="signedColumnFlag" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-eb7acfcb" name="SignedColumn1" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-bea3a636" name="SignedColumn2" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-369b2e66" name="SignedColumn3" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-eb97b58d" name="SignedColumn4" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-8348daee" name="SignedColumn5" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-aed50e10" name="SignedColumn6" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-19fb2964" name="SignedColumn7" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-034d23cd" name="SignedColumn8" defaultvalue=""/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-e1b1380d" id="sms_getAuthLogList" method="get" action="/v1/authLogs">
+        <cl:listener std:sid="listener-c4f2be2c" name="submit-success" handler="onSms_getAuthLogListSubmitSuccess"/>
+        <cl:listener std:sid="listener-1b762530" name="submit-done" handler="onSms_getAuthLogListSubmitDone"/>
+        <cl:listener std:sid="listener-82834a3f" name="submit-error" handler="onSms_getAuthLogListSubmitError"/>
+        <cl:listener std:sid="listener-8981bfd8" name="submit-timeout" handler="onSms_getAuthLogListSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total"/>
+        <cl:responsedata dataid="AuthLogList"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec dev-comment="ITGAM&#xD;&#xA;ITGAM_dtiUserStart"/>
+  </head>
+  <body std:sid="body-11ec3e0e" style="top:0px; left:0px; width:800px; height:600px; text-align:center;">
+    <cl:listener std:sid="listener-77bd266b" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-c725c40d">
+      <cl:xylayoutdata std:sid="xyl-data-be435865" top="1px" right="1px" bottom="1px" left="1px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-8c73f326" id="ITGAM_grpMain">
+        <cl:formdata std:sid="f-data-53deb2b6" row="0" col="0"/>
+        <cl:group std:sid="group-44c2a801">
+          <cl:formdata std:sid="f-data-1a9862ec" row="0" col="0"/>
+          <cl:group std:sid="group-9a4205ad">
+            <cl:formdata std:sid="f-data-48319943" row="1" col="0"/>
+            <cl:button std:sid="button-5b3740ef" id="ITGAM_btnPDF" class="userInfo_btn">
+              <cl:listener std:sid="listener-178d1d4f" name="click" handler="onITGAM_btnPDFClick"/>
+              <cl:langbind property="value" category="PROPERTY" keypath="Str_PDFSave"/>
+              <cl:formdata std:sid="f-data-b0cfb4f1" row="0" col="2"/>
+            </cl:button>
+            <cl:combobox std:sid="c-box-de13f2ba" id="ITGAM_cmbResult" style="text-align:center;" value="99" preventinput="true">
+              <cl:formdata std:sid="f-data-2c754bef" row="0" col="1"/>
+              <cl:item std:sid="item-9a5dc069" label="전체" value="0">
+                <cl:langbind property="label" category="PROPERTY" keypath="Str_All"/>
+              </cl:item>
+              <cl:item std:sid="item-454f9154" label="성공" value="1">
+                <cl:langbind property="label" category="PROPERTY" keypath="Str_Success"/>
+              </cl:item>
+              <cl:item std:sid="item-e00fe1ef" label="실패" value="2">
+                <cl:langbind property="label" category="PROPERTY" keypath="Str_Fail"/>
+              </cl:item>
+            </cl:combobox>
+            <cl:img std:sid="image-12e0f80f" id="ACARM_imgHelp" style="cursor:help;" src="../../../theme/images/common/common_btn_window_top_q.png">
+              <cl:listener std:sid="listener-bd050e1d" name="click" handler="onACARM_imgHelpClick2"/>
+              <cl:formdata std:sid="f-data-c3e7aca8" halign="CENTER" valign="CENTER" width="14" height="14" row="0" col="3"/>
+            </cl:img>
+            <cl:formlayout std:sid="f-layout-328970c2">
+              <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:group std:sid="group-51e9cb7c" style="padding:5px;">
+            <cl:formdata std:sid="f-data-7587bbf6" row="0" col="0"/>
+            <cl:output std:sid="output-8bb1a55d" style="padding:4px; text-align:right;">
+              <cl:langbind property="value" category="PROPERTY" keypath="Str_Total"/>
+              <cl:formdata std:sid="f-data-5695df63" row="0" col="0"/>
+            </cl:output>
+            <cl:output std:sid="output-a9a54268" id="ITGAM_opbTotal" datatype="number" format="s#,###">
+              <cl:datamapbind property="value" datacontrolid="Total" columnname="Count"/>
+              <cl:formdata std:sid="f-data-cc730091" row="0" col="1"/>
+            </cl:output>
+            <cl:dateinput std:sid="d-input-e456a67c" id="ITGAM_dtiStart">
+              <cl:formdata std:sid="f-data-0637a197" row="0" col="3"/>
+            </cl:dateinput>
+            <cl:output std:sid="output-dff85281" style="text-align:center;" value="~">
+              <cl:formdata std:sid="f-data-aa0fddf2" row="0" col="4"/>
+            </cl:output>
+            <cl:dateinput std:sid="d-input-96c1be71" id="ITGAM_dtiEnd">
+              <cl:formdata std:sid="f-data-34471a3d" row="0" col="5"/>
+            </cl:dateinput>
+            <cl:group std:sid="group-e591aabf" style="border-right-style:solid; color:#6b6b6b; border-top-width:1px; border-bottom-color:#cccccc; border-right-width:1px; border-left-color:#cccccc; border-right-color:#cccccc; border-left-width:1px; border-top-style:solid; background-color:#F6F6F6; border-radius:10px; border-left-style:solid; border-bottom-width:1px; border-top-color:#cccccc; border-bottom-style:solid;">
+              <cl:formdata std:sid="f-data-18245e20" row="0" col="7"/>
+              <cl:combobox std:sid="c-box-873104ca" id="ITGAM_cmbCategory" style="background-color:#F6F6F6; border-right-style:none; border-left-style:none; border-bottom-style:none; border-top-style:none;" preventinput="true">
+                <cl:formdata std:sid="f-data-38410a1d" row="0" col="0"/>
+                <cl:item std:sid="item-2c084794" label="사용자 ID" value="user_id">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_UserID"/>
+                </cl:item>
+                <cl:item std:sid="item-ec5c50c9" label="사용자 이름" value="user_name">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_UserName"/>
+                </cl:item>
+                <cl:item std:sid="item-881be26c" label="유니크아이디" value="unique_id">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_UniqueID"/>
+                </cl:item>
+              </cl:combobox>
+              <cl:inputbox std:sid="i-box-e19bd333" id="ITGAM_ipbKeyword" style="background-color:#F6F6F6; padding:0px 0px 0px 10px; border-bottom-color:#cccccc; border-left-color:#cccccc; border-top-color:#cccccc; border-bottom-style:none; border-right-color:#cccccc; border-top-style:none;">
+                <cl:langbind property="placeholder" category="PROPERTY" keypath="Str_SearchKeword"/>
+                <cl:formdata std:sid="f-data-33acff5b" row="0" col="1"/>
+              </cl:inputbox>
+              <cl:group std:sid="group-326172cd" id="ITGAM_btnSeach" style="border-right-style:none; cursor:pointer; background-repeat:no-repeat; border-left-style:none; border-bottom-style:none; background-image:url('../../../theme/images/common/common_text_field_btn_icons_search.png'); background-position:center; border-top-style:none;">
+                <cl:listener std:sid="listener-8adccb61" name="click" handler="onITGAM_btnSeachClick"/>
+                <cl:formdata std:sid="f-data-14dcc1f7" height="29" row="0" col="2"/>
+                <cl:xylayout std:sid="xylayout-151b2f9f"/>
+              </cl:group>
+              <cl:formlayout std:sid="f-layout-1918e133" hspace="0px" vspace="0px">
+                <cl:rows length="1" unit="FRACTION"/>
+                <cl:columns length="2" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="4" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="1" unit="FRACTION"/>
+              </cl:formlayout>
+            </cl:group>
+            <cl:formlayout std:sid="f-layout-b406f796">
+              <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="90" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="10" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="90" unit="PIXEL" autoSizing="false" minlength="0"/>
+              <cl:columns length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="60" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:formlayout std:sid="f-layout-858d55f8">
+            <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:grid std:sid="grid-40d180c8" id="ITGAM_grdAuthLogList" readonly="true" datasetid="AuthLogList">
+          <cl:formdata std:sid="f-data-19748f87" row="1" col="0"/>
+          <cl:gridcolumn std:sid="g-column-bb0a9a21"/>
+          <cl:gridcolumn std:sid="g-column-316ca486"/>
+          <cl:gridcolumn std:sid="g-column-68db1361"/>
+          <cl:gridcolumn std:sid="g-column-8a30d026"/>
+          <cl:gridcolumn std:sid="g-column-ecc28dbb"/>
+          <cl:gridcolumn std:sid="g-column-e2e4c232"/>
+          <cl:gridcolumn std:sid="g-column-4f4f134a" width="140px"/>
+          <cl:gridcolumn std:sid="g-column-a49728d0"/>
+          <cl:gridcolumn std:sid="g-column-4250c7e1"/>
+          <cl:gridcolumn std:sid="g-column-f9291c4d"/>
+          <cl:gridcolumn std:sid="g-column-5ab7112a"/>
+          <cl:gridcolumn std:sid="g-column-ec92517d"/>
+          <cl:gridcolumn std:sid="g-column-4f73330c"/>
+          <cl:gridcolumn std:sid="g-column-193d652b"/>
+          <cl:gridcolumn std:sid="g-column-6d827802"/>
+          <cl:gridcolumn std:sid="g-column-7e214328"/>
+          <cl:gridcolumn std:sid="g-column-5308294b"/>
+          <cl:gridcolumn std:sid="g-column-955f02c1"/>
+          <cl:gridcolumn std:sid="g-column-f362411e" width="120px"/>
+          <cl:gridheader std:sid="gh-band-77ac5ca5">
+            <cl:gridrow std:sid="g-row-17a9db9d"/>
+            <cl:gridcell std:sid="gh-cell-c9b87142" rowindex="0" colindex="0" targetcolumnname="IndexKey" sortable="false" filterable="false" text="IndexKey" visible="false"/>
+            <cl:gridcell std:sid="gh-cell-50676156" rowindex="0" colindex="1" targetcolumnname="TerminalID" sortable="false" filterable="false" text="TerminalID">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_TerminalID"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gh-cell-5e63e2be" rowindex="0" colindex="2" targetcolumnname="UserID" sortable="false" filterable="false" text="UserID">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_UserID"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gh-cell-c807d14c" rowindex="0" colindex="3" targetcolumnname="GroupCode" sortable="false" filterable="false" text="GroupCode">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_GroupCode"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gh-cell-98d58775" rowindex="0" colindex="4" targetcolumnname="UserName" sortable="false" filterable="false" text="UserName">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_UserName"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gh-cell-36f43d7a" rowindex="0" colindex="5" targetcolumnname="EventTime" sortable="false" filterable="false" text="EventTime">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_AuthEventTime"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gh-cell-b47a04f7" rowindex="0" colindex="6" targetcolumnname="ServerRecordTime" sortable="false" filterable="false" text="ServerRecordTime">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_ServerRecordTime"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gh-cell-7e76905f" rowindex="0" colindex="7" targetcolumnname="AuthType" sortable="false" filterable="false" text="AuthType">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_AuthType"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gh-cell-97fcb7c6" rowindex="0" colindex="8" targetcolumnname="AuthResult" sortable="false" filterable="false" text="AuthResult">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_AuthResult"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gh-cell-60761937" rowindex="0" colindex="9" targetcolumnname="Func" sortable="false" filterable="false" text="Func">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_Func"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gh-cell-c3e120db" rowindex="0" colindex="10" targetcolumnname="FuncType" sortable="false" filterable="false" text="FuncType">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_FuncType"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gh-cell-ad93550f" rowindex="0" colindex="11" targetcolumnname="Card" sortable="false" filterable="false" text="Card">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_CardNum"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gh-cell-fa13cb3c" rowindex="0" colindex="12" targetcolumnname="UserType" sortable="false" filterable="false" text="UserType">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_UserType"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gh-cell-ef945086" rowindex="0" colindex="13" targetcolumnname="IsPicture" sortable="false" filterable="false" text="IsPicture">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_IsPicture"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gh-cell-0b0c6dd7" rowindex="0" colindex="14" targetcolumnname="Property" sortable="false" filterable="false" text="Property">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_Property"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gh-cell-78b61733" rowindex="0" colindex="15" targetcolumnname="GroupName" sortable="false" filterable="false" text="GroupName">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_GroupName"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gh-cell-043c4e05" rowindex="0" colindex="16" targetcolumnname="PositionName" sortable="false" filterable="false" text="PositionName">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_PositionName"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gh-cell-8c598104" rowindex="0" colindex="17" targetcolumnname="UniqueID" sortable="false" filterable="false" text="UniqueID">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_UniqueID"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gh-cell-54a9c15c" rowindex="0" colindex="18" targetcolumnname="TerminalName" sortable="false" filterable="false" text="TerminalName">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_TerminalName"/>
+            </cl:gridcell>
+          </cl:gridheader>
+          <cl:griddetail std:sid="gd-band-e4d62bcb">
+            <cl:gridrow std:sid="g-row-ffb51b19"/>
+            <cl:gridcell std:sid="gd-cell-5fa6b1be" rowindex="0" colindex="0" columnname="IndexKey"/>
+            <cl:gridcell std:sid="gd-cell-7a9238e5" rowindex="0" colindex="1" columnname="TerminalID"/>
+            <cl:gridcell std:sid="gd-cell-301144c2" rowindex="0" colindex="2" columnname="UserID"/>
+            <cl:gridcell std:sid="gd-cell-6a103b99" rowindex="0" colindex="3" columnname="GroupCode"/>
+            <cl:gridcell std:sid="gd-cell-61fecff0" rowindex="0" colindex="4" columnname="UserName"/>
+            <cl:gridcell std:sid="gd-cell-b6f32128" rowindex="0" colindex="5" columnname="EventTime"/>
+            <cl:gridcell std:sid="gd-cell-a4602568" rowindex="0" colindex="6" columnname="ServerRecordTime"/>
+            <cl:gridcell std:sid="gd-cell-bcbe4166" rowindex="0" colindex="7" columnname="AuthType">
+              <cl:combobox std:sid="c-box-ebbf90dd" id="cmb_AuthLogType"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gd-cell-7d3b170c" rowindex="0" colindex="8" columnname="AuthResult">
+              <cl:combobox std:sid="c-box-fecba31f" id="cmb_AuthLogResult"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gd-cell-4ea7dba7" rowindex="0" colindex="9" columnname="Func">
+              <cl:combobox std:sid="c-box-fc53ba7d" id="cmb_AuthFuncKey"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gd-cell-23d8e8c2" rowindex="0" colindex="10" columnname="FuncType">
+              <cl:combobox std:sid="c-box-4dac20c8" id="cmb_AuthLogFuncType"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gd-cell-ac810dc6" rowindex="0" colindex="11" columnname="Card"/>
+            <cl:gridcell std:sid="gd-cell-25c62bc3" rowindex="0" colindex="12" columnname="UserType"/>
+            <cl:gridcell std:sid="gd-cell-4de3a963" rowindex="0" colindex="13" columnname="IsPicture"/>
+            <cl:gridcell std:sid="gd-cell-bf961b3b" rowindex="0" colindex="14" columnname="Property"/>
+            <cl:gridcell std:sid="gd-cell-d66b2686" rowindex="0" colindex="15" columnname="GroupName"/>
+            <cl:gridcell std:sid="gd-cell-6d240824" rowindex="0" colindex="16" columnname="PositionName"/>
+            <cl:gridcell std:sid="gd-cell-3dafd023" rowindex="0" colindex="17" columnname="UniqueID"/>
+            <cl:gridcell std:sid="gd-cell-a2d12a6a" rowindex="0" colindex="18" columnname="TerminalName"/>
+          </cl:griddetail>
+        </cl:grid>
+        <cl:pageindexer std:sid="p-indexer-0812fa71" id="authLogListPageIndexer" style="color:#404040;" class="userList_paging">
+          <cl:listener std:sid="listener-f77591b4" name="selection-change" handler="onAuthLogListPageIndexerSelectionChange"/>
+          <cl:formdata std:sid="f-data-c1e6396b" row="2" col="0"/>
+        </cl:pageindexer>
+        <cl:formlayout std:sid="f-layout-00fb1d93">
+          <cl:rows length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-d2486ac7">
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-ac37f3b6"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

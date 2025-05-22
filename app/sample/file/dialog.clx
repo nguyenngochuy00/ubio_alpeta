@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-788f0e76" version="1.0.0.0">
+  <head std:sid="head-40570346">
+    <title>dialog</title>
+    <screen std:sid="screen-1c892818" id="default" height="768px" minwidth="1024px" name="default" width="1024px"/>
+    <screen std:sid="screen-9cabab30" id="tablet" height="667px" maxwidth="1023px" minwidth="500px" name="tablet" width="500px"/>
+    <screen std:sid="screen-c652fe43" id="mobile" height="525px" maxwidth="499px" name="mobile" width="350px"/>
+    <cl:model std:sid="model-f0fe5211">
+      <cl:dataset std:sid="d-set-e63036ea" id="group_member_data">
+        <cl:datacolumnlist>
+          <cl:datacolumn name="ID"/>
+          <cl:datacolumn name="UNIQUEID"/>
+          <cl:datacolumn name="PASSWORD"/>
+          <cl:datacolumn name="PRIVILEGE"/>
+          <cl:datacolumn datatype="string" name="GROUP_NAME"/>
+          <cl:datacolumn name="GROUP_CODE"/>
+          <cl:datacolumn name="FP"/>
+          <cl:datacolumn name="TIMEZONE"/>
+          <cl:datacolumn name="REGIST"/>
+          <cl:datacolumn name="BLACKLIST"/>
+          <cl:datacolumn name="NAME"/>
+          <cl:datacolumn name="AUTHINFO"/>
+          <cl:datacolumn name="ACGROUP"/>
+          <cl:datacolumn name="FACE"/>
+          <cl:datacolumn name="APBZONE"/>
+          <cl:datacolumn name="EXPIRED"/>
+          <cl:datacolumn name="PERIOD"/>
+          <cl:datacolumn name="TYPE"/>
+          <cl:datacolumn name="FINGERPRINT"/>
+          <cl:datacolumn name="DESCRIPT"/>
+          <cl:datacolumn name="USER_IMAGE"/>
+        </cl:datacolumnlist>
+        <cl:datarowlist>
+          <cl:datarow>
+            <cl:datavalue columnname="ID"><![CDATA[0001]]></cl:datavalue>
+            <cl:datavalue columnname="UNIQUEID"><![CDATA[dhwon]]></cl:datavalue>
+            <cl:datavalue columnname="PASSWORD"><![CDATA[dhwon12]]></cl:datavalue>
+            <cl:datavalue columnname="PRIVILEGE"><![CDATA[1]]></cl:datavalue>
+            <cl:datavalue columnname="GROUP_NAME"><![CDATA[subGroup]]></cl:datavalue>
+            <cl:datavalue columnname="GROUP_CODE"><![CDATA[0001]]></cl:datavalue>
+            <cl:datavalue columnname="FP"><![CDATA[1]]></cl:datavalue>
+            <cl:datavalue columnname="TIMEZONE"><![CDATA[1]]></cl:datavalue>
+            <cl:datavalue columnname="REGIST"><![CDATA[2018-10-18]]></cl:datavalue>
+            <cl:datavalue columnname="BLACKLIST"><![CDATA[1]]></cl:datavalue>
+            <cl:datavalue columnname="NAME"><![CDATA[Donghee Won]]></cl:datavalue>
+            <cl:datavalue columnname="AUTHINFO"><![CDATA[1]]></cl:datavalue>
+            <cl:datavalue columnname="ACGROUP"><![CDATA[0001]]></cl:datavalue>
+            <cl:datavalue columnname="FACE"><![CDATA[1]]></cl:datavalue>
+            <cl:datavalue columnname="APBZONE"><![CDATA[1]]></cl:datavalue>
+            <cl:datavalue columnname="EXPIRED"><![CDATA[1]]></cl:datavalue>
+            <cl:datavalue columnname="PERIOD"><![CDATA[1]]></cl:datavalue>
+            <cl:datavalue columnname="TYPE"><![CDATA[1]]></cl:datavalue>
+            <cl:datavalue columnname="FINGERPRINT"><![CDATA[0110010001]]></cl:datavalue>
+            <cl:datavalue columnname="DESCRIPT">DESCRIPT1</cl:datavalue>
+          </cl:datarow>
+        </cl:datarowlist>
+      </cl:dataset>
+      <cl:submission std:sid="submission-e9a779ce" id="fileUpload" action="/example/crud/fileSave.do" mediatype="multipart/form-data" responsetype="text">
+        <cl:listener std:sid="listener-b6d5c6f8" handler="onFileUploadSubmitSuccess" name="submit-success"/>
+        <cl:requestdata dataid="request_map"/>
+        <cl:responsedata dataid="response_map" isadd="true"/>
+      </cl:submission>
+      <cl:datamap std:sid="d-map-31f45221" id="response_map">
+        <cl:datacolumnlist>
+          <cl:datacolumn name="result_message"/>
+          <cl:datacolumn name="file_name"/>
+          <cl:datacolumn name="file_url"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-31f45221" id="request_map">
+        <cl:datacolumnlist>
+          <cl:datacolumn name="file_name"/>
+          <cl:datacolumn name="file_url"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-28b2a74c" id="fildDownload" action="/example/crud/fileDown.do" responsetype="filedownload">
+        <cl:listener std:sid="listener-efced53e" handler="onFildDownloadSubmitDone" name="submit-done"/>
+        <cl:requestdata dataid="request_map"/>
+        <cl:responsedata dataid="response_map"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-575322d4" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:group std:sid="group-8ca69e23">
+      <cl:xylayoutdata std:sid="xyl-data-2c5242a3" bottom="0px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-a565072a" style="padding:10px;">
+        <cl:formdata std:sid="f-data-3e3bfde7" col="1" row="0"/>
+        <cl:output std:sid="output-c614fad0" value="Output">
+          <cl:datasetbind property="value" columnname="NAME" datacontrolid="group_member_data" rowindex="0"/>
+          <cl:formdata std:sid="f-data-c9a9d74b" col="0" colspan="2" row="1" rowspan="1"/>
+        </cl:output>
+        <cl:output std:sid="output-4e754b4b" value="Output">
+          <cl:datasetbind property="value" columnname="GROUP_CODE" datacontrolid="group_member_data" rowindex="0"/>
+          <cl:formdata std:sid="f-data-91e5308f" col="0" colspan="2" row="2" rowspan="1"/>
+        </cl:output>
+        <cl:output std:sid="output-563fca12" value="Output">
+          <cl:datasetbind property="value" columnname="UNIQUEID" datacontrolid="group_member_data" rowindex="0"/>
+          <cl:formdata std:sid="f-data-f6ed8eff" col="0" colspan="2" row="3" rowspan="1"/>
+        </cl:output>
+        <cl:button std:sid="button-945f3875" value="저장">
+          <cl:formdata std:sid="f-data-a8a8b5a3" col="2" halign="FILL" row="1" valign="CENTER" width="80"/>
+        </cl:button>
+        <cl:button std:sid="button-e1169f35" value="삭제">
+          <cl:formdata std:sid="f-data-377f0ff8" col="3" halign="FILL" row="1" valign="CENTER" width="80"/>
+        </cl:button>
+        <cl:button std:sid="button-0fb04ed9" value="단말목록">
+          <cl:formdata std:sid="f-data-c39a6023" col="2" colspan="2" halign="FILL" row="2" rowspan="1" valign="CENTER"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-1da064a4">
+          <cl:rows length="1" shadecolor="transparent" shadetype="NONE" unit="FRACTION"/>
+          <cl:rows length="1" shadecolor="transparent" shadetype="NONE" unit="FRACTION"/>
+          <cl:rows length="1" shadecolor="transparent" shadetype="NONE" unit="FRACTION"/>
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="2" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+          <cl:columns length="2" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+          <cl:columns length="1" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-65f9fdf5" style="padding:10px;">
+        <cl:formdata std:sid="f-data-c32a5f55" col="1" colspan="1" row="1" rowspan="2"/>
+        <cl:tabfolder std:sid="t-folder-f63a53e0" style="border-right-style:solid; padding:5px; border-top-width:2px; border-bottom-color:#e9e9e9; border-right-width:2px; border-left-color:#e9e9e9; border-right-color:#e9e9e9; border-left-width:2px; border-top-style:solid; background-color:#e9e9e9; border-left-style:solid; border-bottom-width:2px; border-top-color:#e9e9e9; border-bottom-style:solid;">
+          <cl:listener std:sid="listener-a5983b6e" handler="onTabFolderSelectionChange" name="selection-change"/>
+          <cl:xylayoutdata std:sid="xyl-data-eb1d3fd9" bottom="0px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="BOTH"/>
+          <cl:tabitem std:sid="t-item-c8a4c048" selected="true" text="Basic">
+            <cl:group std:sid="group-358e5bf6">
+              <std:metadata>
+                <std:property key="locked" value="true"/>
+              </std:metadata>
+              <cl:embeddedapp std:sid="e-app-07d7fb44" src="./subPage/user_popup_basic">
+                <cl:xylayoutdata std:sid="xyl-data-3869eb71" bottom="0px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="BOTH"/>
+              </cl:embeddedapp>
+              <cl:xylayout std:sid="xylayout-093d33de"/>
+            </cl:group>
+          </cl:tabitem>
+          <cl:tabitem std:sid="t-item-153e3c32" text="Auth">
+            <cl:group std:sid="group-241bad47">
+              <std:metadata>
+                <std:property key="locked" value="true"/>
+              </std:metadata>
+              <cl:embeddedapp std:sid="e-app-dc2d30cf" src="./subPage/user_popup_auth">
+                <cl:xylayoutdata std:sid="xyl-data-c13edfe3" bottom="0px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="BOTH"/>
+              </cl:embeddedapp>
+              <cl:xylayout std:sid="xylayout-43c23d83"/>
+            </cl:group>
+          </cl:tabitem>
+          <cl:tabitem std:sid="t-item-97aa7757" text="Access">
+            <cl:group std:sid="group-8bdd1871">
+              <std:metadata>
+                <std:property key="locked" value="true"/>
+              </std:metadata>
+              <cl:embeddedapp std:sid="e-app-153abeb0" src="./subPage/user_popup_access">
+                <cl:xylayoutdata std:sid="xyl-data-3ee39736" bottom="0px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="BOTH"/>
+              </cl:embeddedapp>
+              <cl:xylayout std:sid="xylayout-e29c833e"/>
+            </cl:group>
+          </cl:tabitem>
+          <cl:tabitem std:sid="t-item-f1d10979" text="Management">
+            <cl:group std:sid="group-85fa0e43">
+              <std:metadata>
+                <std:property key="locked" value="true"/>
+              </std:metadata>
+              <cl:embeddedapp std:sid="e-app-49ef1083" src="./subPage/user_popup_management">
+                <cl:xylayoutdata std:sid="xyl-data-bc5a6648" bottom="0px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="BOTH"/>
+              </cl:embeddedapp>
+              <cl:xylayout std:sid="xylayout-8d6073b1"/>
+            </cl:group>
+          </cl:tabitem>
+          <cl:tabitem std:sid="t-item-6da5eff8" text="Etc">
+            <std:metadata>
+              <std:property key="is-active-item" value="true"/>
+            </std:metadata>
+            <cl:group std:sid="group-aa16f4ea">
+              <std:metadata>
+                <std:property key="locked" value="true"/>
+              </std:metadata>
+              <cl:embeddedapp std:sid="e-app-d7d25597" src="./subPage/user_popup_etc">
+                <cl:xylayoutdata std:sid="xyl-data-9db3e9ba" bottom="0px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="BOTH"/>
+              </cl:embeddedapp>
+              <cl:xylayout std:sid="xylayout-5854bc12"/>
+            </cl:group>
+          </cl:tabitem>
+        </cl:tabfolder>
+        <cl:xylayout std:sid="xylayout-34d3242a"/>
+      </cl:group>
+      <cl:group std:sid="group-e1935c35" style="padding:10px;">
+        <cl:formdata std:sid="f-data-f26e72bb" col="0" colspan="1" row="0" rowspan="2"/>
+        <cl:group std:sid="group-c4c173a8" style="border-right-style:solid; padding:10px; border-top-width:2px; border-bottom-color:#41719c; border-right-width:2px; border-left-color:#41719c; border-right-color:#41719c; border-left-width:2px; border-top-style:solid; border-radius:5px; border-left-style:solid; border-bottom-width:2px; border-top-color:#41719c; border-bottom-style:solid;">
+          <cl:xylayoutdata std:sid="xyl-data-f14be04f" bottom="0px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="BOTH"/>
+          <cl:button std:sid="button-ab731977" id="btnWebCab" value="웹캠">
+            <cl:formdata std:sid="f-data-eea168d8" col="0" row="1"/>
+          </cl:button>
+          <cl:button std:sid="button-41254a97" id="btnApply" value="다운로드">
+            <cl:listener std:sid="listener-40f47b27" handler="onBtnApplyClick" name="click"/>
+            <cl:formdata std:sid="f-data-b5e8a7a1" col="2" row="1"/>
+          </cl:button>
+          <cl:img std:sid="image-af70e8fc" id="user_image">
+            <cl:formdata std:sid="f-data-24ac09f6" col="0" colspan="3" row="0" rowspan="1"/>
+          </cl:img>
+          <cl:udc std:sid="ud-control-6f81a607" type="udc.FileUploadButton">
+            <cl:listener std:sid="listener-5d07247f" handler="onFileUploadButtonFileUploadEvent" name="fileUploadEvent"/>
+            <cl:formdata std:sid="f-data-23eb5acb" col="1" row="1"/>
+            <cl:property name="value" type="string" value="사진 등록"/>
+          </cl:udc>
+          <cl:formlayout std:sid="f-layout-7e99fd43">
+            <cl:rows length="5" shadecolor="transparent" shadetype="NONE" unit="FRACTION"/>
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+            <cl:columns length="1" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:xylayout std:sid="xylayout-5da08cb9"/>
+      </cl:group>
+      <cl:group std:sid="group-67cc8eed" style="padding:10px;">
+        <cl:formdata std:sid="f-data-b73c69ff" col="0" row="2"/>
+        <cl:group std:sid="group-c691ea5a" style="border-right-style:solid; padding:10px; border-top-width:2px; border-bottom-color:#41719c; border-right-width:2px; border-left-color:#41719c; border-right-color:#41719c; border-left-width:2px; border-top-style:solid; border-radius:2px; border-left-style:solid; border-bottom-width:2px; border-top-color:#41719c; border-bottom-style:solid;">
+          <cl:xylayoutdata std:sid="xyl-data-664379ca" bottom="0px" horizontalAnchor="BOTH" left="0px" right="0px" top="15px" verticalAnchor="BOTH"/>
+          <cl:output std:sid="output-e1e0bdde" value="권한">
+            <cl:formdata std:sid="f-data-d8a70923" col="0" row="1"/>
+          </cl:output>
+          <cl:output std:sid="output-01e6529f" value="인증 방식">
+            <cl:formdata std:sid="f-data-b87d7e88" col="0" row="2"/>
+          </cl:output>
+          <cl:output std:sid="output-11ef48d1" value="그룹">
+            <cl:formdata std:sid="f-data-9b2f45f5" col="0" row="3"/>
+          </cl:output>
+          <cl:output std:sid="output-e0794b9d" value="출근그룹">
+            <cl:formdata std:sid="f-data-4317b413" col="0" row="4"/>
+          </cl:output>
+          <cl:output std:sid="output-fc968496" value="타임존">
+            <cl:formdata std:sid="f-data-0755c399" col="0" row="5"/>
+          </cl:output>
+          <cl:output std:sid="output-a116cdb8" value="Description">
+            <cl:formdata std:sid="f-data-477ba235" col="0" row="6"/>
+          </cl:output>
+          <cl:output std:sid="output-809cbcf4" value="Output">
+            <cl:datasetbind property="value" columnname="PRIVILEGE" datacontrolid="group_member_data" rowindex="0"/>
+            <cl:formdata std:sid="f-data-c79c8d02" col="1" row="1"/>
+          </cl:output>
+          <cl:output std:sid="output-d94f3cd5" value="Output">
+            <cl:datasetbind property="value" columnname="FP" datacontrolid="group_member_data" rowindex="0"/>
+            <cl:formdata std:sid="f-data-0304cfd1" col="1" row="2"/>
+          </cl:output>
+          <cl:output std:sid="output-3ca357cd" value="Output">
+            <cl:datasetbind property="value" columnname="GROUP_NAME" datacontrolid="group_member_data" rowindex="0"/>
+            <cl:formdata std:sid="f-data-23f65fd2" col="1" row="3"/>
+          </cl:output>
+          <cl:output std:sid="output-9d6db81e" value="Output">
+            <cl:datasetbind property="value" columnname="ACGROUP" datacontrolid="group_member_data" rowindex="0"/>
+            <cl:formdata std:sid="f-data-7f3ad15c" col="1" row="4"/>
+          </cl:output>
+          <cl:output std:sid="output-4bcb3482" value="Output">
+            <cl:datasetbind property="value" columnname="TIMEZONE" datacontrolid="group_member_data" rowindex="0"/>
+            <cl:formdata std:sid="f-data-a9a721ea" col="1" row="5"/>
+          </cl:output>
+          <cl:output std:sid="output-611d2202" value="Output">
+            <cl:datasetbind property="value" columnname="DESCRIPT" datacontrolid="group_member_data" rowindex="0"/>
+            <cl:formdata std:sid="f-data-58f94a8a" col="1" row="6"/>
+          </cl:output>
+          <cl:formlayout std:sid="f-layout-ad351d95">
+            <cl:rows length="1" shadecolor="transparent" shadetype="NONE" unit="FRACTION"/>
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:output std:sid="output-1716c0e9" style="border-right-style:solid; border-top-width:2px; border-bottom-color:#bdd7ee; border-right-width:2px; border-left-color:#bdd7ee; border-right-color:#bdd7ee; border-left-width:2px; border-top-style:solid; background-color:#FFFFFF; border-radius:1px; border-left-style:solid; border-bottom-width:2px; border-top-color:#bdd7ee; border-bottom-style:solid;" value="요약정보">
+          <cl:xylayoutdata std:sid="xyl-data-94df1cc9" height="30px" horizontalAnchor="LEFT" left="20px" top="0px" verticalAnchor="TOP" width="80px"/>
+        </cl:output>
+        <cl:xylayout std:sid="xylayout-aa62b6dc"/>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-107cb9e4">
+        <cl:rows length="2" shadecolor="transparent" shadetype="NONE" unit="FRACTION"/>
+        <cl:rows length="1" shadecolor="transparent" shadetype="NONE" unit="FRACTION"/>
+        <cl:rows length="2" shadecolor="transparent" shadetype="NONE" unit="FRACTION"/>
+        <cl:columns length="2" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+        <cl:columns length="3" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-977f82ab"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-3019049c" version="1.0.0.0">
+  <head std:sid="head-5e0e465c">
+    <title>idteckAcuMonitoring</title>
+    <screen std:sid="screen-a56c6c0b" id="default" name="default" minwidth="1024px" width="1024px" height="768px"/>
+    <screen std:sid="screen-e42d7cd0" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-8b960297" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-59b5e263">
+      <cl:dataset std:sid="d-set-e82740b2" id="AcuDeviceList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-34df5a09" name="BoardID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-181a00c0" name="DeviceName"/>
+          <cl:datacolumn std:sid="d-column-0f456a5f" name="IpAddress"/>
+          <cl:datacolumn std:sid="d-column-72cacdba" name="Status" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-1c6d9451" id="GrdAcuDeviceList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-215a445f" name="BoardID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-31dce30b" name="DeviceName"/>
+          <cl:datacolumn std:sid="d-column-813bc825" name="IpAddress"/>
+          <cl:datacolumn std:sid="d-column-6ddafc6c" name="Status" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-a737d3fa" id="AcuLiveInfoList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-d04a3852" name="BoardID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-2a7f662c" name="IpAddress"/>
+          <cl:datacolumn std:sid="d-column-d7b3b049" name="Status" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-ba70f5e5" id="AcuEventLogList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-34451056" name="BoardID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-ac1c4e47" name="DeviceName"/>
+          <cl:datacolumn std:sid="d-column-0054ca91" name="InoutPortNo" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-d93618e1" name="EventTime" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-fd706be6" name="Category" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-6a417a9e" name="Content" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-85094d22" name="Detail"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-6b611a25" id="SubAcuDeviceList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-70e88f23" name="BoardID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-c6cbbd8b" name="InoutPortNo" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-27a2a818" name="InputStatus" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-04aeec7e" name="OutputStatus"/>
+          <cl:datacolumn std:sid="d-column-e9f5c113" name="LowDeviceName"/>
+          <cl:datacolumn std:sid="d-column-593e627d" name="InoutPortSatus" datatype="expression" expression="switch(InputStatus || OutputStatus) {&#xD;&#xA;&#x9;case 1:&#x9;1&#xD;&#xA;&#x9;default: 0&#xD;&#xA;}"/>
+          <cl:datacolumn std:sid="d-column-be503dd8" name="DoorID" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-b896a962" id="LowAcuDeviceList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-c6a80098" name="BoardID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-d914f009" name="InoutPortNo"/>
+          <cl:datacolumn std:sid="d-column-88056889" name="LowDeviceType" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-bcbaaaa2" name="LowDeviceName"/>
+          <cl:datacolumn std:sid="d-column-51dedc61" name="DoorID" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-b5bf4ffe" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-f3592a27" name="Count" datatype="number" defaultvalue="0"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-78a7689a" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-d9e8f259" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-ef1cabb2" id="sms_getAcuDeviceList" method="get" action="/v1/bosk/acus">
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total"/>
+        <cl:responsedata dataid="AcuDeviceList"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-d3f9e25f" id="sms_getIdTeckAcuDeviceLiveInfo" method="get" action="/v1/bosk/acus/liveInfo">
+        <cl:listener std:sid="listener-06ad305b" name="submit-timeout" handler="onSms_getSubmitTimeout"/>
+        <cl:listener std:sid="listener-bb4f8afa" name="submit-error" handler="onSms_getSubmitError"/>
+        <cl:listener std:sid="listener-968ec428" name="submit-done" handler="onSms_getIdTeckAcuDeviceLiveInfoSubmitDone"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total"/>
+        <cl:responsedata dataid="AcuLiveInfoList"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-4cebae2b" id="sms_getLowAcuDeviceList" method="get" action="/v1/bosk/acus/LowDevice">
+        <cl:listener std:sid="listener-919d9885" name="submit-timeout" handler="onSms_getSubmitTimeout"/>
+        <cl:listener std:sid="listener-ab4de09c" name="submit-error" handler="onSms_getSubmitError"/>
+        <cl:listener std:sid="listener-4a5cde17" name="submit-done" handler="onSms_getLowAcuDeviceListSubmitDone"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total"/>
+        <cl:responsedata dataid="LowAcuDeviceList"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec dev-comment="IAMEN&#xD;&#xA;IAMEN_cmd_deviceStatus&#xD;&#xA;&#xD;&#xA;switch(Status) {&#xD;&#xA;case 1:&#xD;&#xA;defualt:&#xD;&#xA;}"/>
+  </head>
+  <body std:sid="body-60c86924" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-f4709e9d" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-614f66fe" style="padding-top:5px; padding-left:5px; padding-bottom:5px; padding-right:5px;">
+      <cl:xylayoutdata std:sid="xyl-data-3ac1f99c" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-530c35f6" style="padding-top:5px; padding-left:5px; padding-bottom:5px; padding-right:5px;">
+        <cl:formdata std:sid="f-data-6ff140b2" row="0" col="0"/>
+        <cl:output std:sid="output-f7ff0091" value="ACU Device Status">
+          <cl:formdata std:sid="f-data-05c80949" row="0" col="0"/>
+        </cl:output>
+        <cl:grid std:sid="grid-c208b361" id="IAMEN_grd_deviceList" readonly="true" datasetid="GrdAcuDeviceList" autofit="1, 2">
+          <cl:listener std:sid="listener-dddf2bb4" name="selection-change" handler="onIAMEN_grd_deviceListSelectionChange"/>
+          <cl:formdata std:sid="f-data-0f414207" row="1" col="0"/>
+          <cl:gridcolumn std:sid="g-column-3d36b97d" width="25px"/>
+          <cl:gridcolumn std:sid="g-column-59782012"/>
+          <cl:gridcolumn std:sid="g-column-dbda679e"/>
+          <cl:gridheader std:sid="gh-band-c6747b66">
+            <cl:gridrow std:sid="g-row-a5883814"/>
+            <cl:gridcell std:sid="gh-cell-7af86640" rowindex="0" colindex="0" targetcolumnname="Status" sortable="false" filterable="false" text=""/>
+            <cl:gridcell std:sid="gh-cell-a92ffbb1" rowindex="0" colindex="1" targetcolumnname="BoardID" sortable="false" filterable="false" text="BoardID"/>
+            <cl:gridcell std:sid="gh-cell-6a382784" rowindex="0" colindex="2" targetcolumnname="DeviceName" sortable="false" filterable="false" text="DeviceName"/>
+          </cl:gridheader>
+          <cl:griddetail std:sid="gd-band-9654163e">
+            <cl:gridrow std:sid="g-row-ff098ea0"/>
+            <cl:gridcell std:sid="gd-cell-68632d5b" rowindex="0" colindex="0" columnname="Status">
+              <cl:img std:sid="image-de413537" id="IAMEN_imgStatus" readonly="true">
+                <cl:expbind property="src" category="PROPERTY" expression="switch(Status) {&#xD;&#xA;&#x9;case 1: &quot;../../../theme/images/monitoring/green.png&quot;&#xD;&#xA;&#x9;default: &quot;../../../theme/images/monitoring/red.png&quot;&#xD;&#xA;}"/>
+              </cl:img>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gd-cell-7f05c487" rowindex="0" colindex="1" columnname="BoardID"/>
+            <cl:gridcell std:sid="gd-cell-320be4d5" rowindex="0" colindex="2" columnname="DeviceName"/>
+          </cl:griddetail>
+        </cl:grid>
+        <cl:formlayout std:sid="f-layout-9ae51f0a" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-48d0c88e">
+        <cl:formdata std:sid="f-data-75bb4d9b" row="0" col="1"/>
+        <cl:group std:sid="group-19a20542" style="padding-top:5px; padding-left:5px; padding-bottom:5px; padding-right:5px;">
+          <cl:formdata std:sid="f-data-42a229c2" row="0" col="0"/>
+          <cl:grid std:sid="grid-9a0fc351" id="IAMEN_grd_subDeviceList" readonly="true" datasetid="SubAcuDeviceList" resizablecolumns="all" columnMovable="true">
+            <cl:formdata std:sid="f-data-28684ecb" row="1" col="0"/>
+            <cl:gridcolumn std:sid="g-column-fcd3b392"/>
+            <cl:gridcolumn std:sid="g-column-8e204ce0"/>
+            <cl:gridcolumn std:sid="g-column-c4c2803e"/>
+            <cl:gridcolumn std:sid="g-column-799434cc"/>
+            <cl:gridcolumn std:sid="g-column-80dbb850"/>
+            <cl:gridheader std:sid="gh-band-45065413">
+              <cl:gridrow std:sid="g-row-52938818"/>
+              <cl:gridcell std:sid="gh-cell-9da4b32e" rowindex="0" colindex="0" targetcolumnname="BoardID" sortable="false" filterable="false" text="BoardID"/>
+              <cl:gridcell std:sid="gh-cell-5e3efaf7" rowindex="0" colindex="2" targetcolumnname="InoutPortNo" sortable="false" filterable="false" text="InoutPortNo"/>
+              <cl:gridcell std:sid="gh-cell-a8c223e5" rowindex="0" colindex="3" targetcolumnname="InputStatus" sortable="false" filterable="false" text="InputStatus"/>
+              <cl:gridcell std:sid="gh-cell-f2408187" rowindex="0" colindex="4" targetcolumnname="OutputStatus" sortable="false" filterable="false" text="OutputStatus"/>
+              <cl:gridcell std:sid="gh-cell-697d2138" rowindex="0" colindex="1" text="DeviceName"/>
+            </cl:gridheader>
+            <cl:griddetail std:sid="gd-band-9484ae03">
+              <cl:gridrow std:sid="g-row-45deb619"/>
+              <cl:gridcell std:sid="gd-cell-7e23304c" rowindex="0" colindex="0" columnname="BoardID"/>
+              <cl:gridcell std:sid="gd-cell-f8240622" rowindex="0" colindex="2" columnname="InoutPortNo"/>
+              <cl:gridcell std:sid="gd-cell-2e61ce9c" rowindex="0" colindex="3" columnname="InputStatus">
+                <cl:combobox std:sid="c-box-f81761ae" id="IAMEN_cmd_inStatus" hidebutton="true" preventinput="true"/>
+              </cl:gridcell>
+              <cl:gridcell std:sid="gd-cell-56b55936" rowindex="0" colindex="4" columnname="OutputStatus">
+                <cl:combobox std:sid="c-box-9578981a" id="IAMEN_cmd_outStatus" hidebutton="true" preventinput="true"/>
+              </cl:gridcell>
+              <cl:gridcell std:sid="gd-cell-2994001d" rowindex="0" colindex="1" columnname="LowDeviceName"/>
+            </cl:griddetail>
+          </cl:grid>
+          <cl:output std:sid="output-089cee6c" value="Low Acu Device Status">
+            <cl:formdata std:sid="f-data-ce1bb9db" row="0" col="0"/>
+          </cl:output>
+          <cl:formlayout std:sid="f-layout-ec65a291" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+            <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:group std:sid="group-cfa8da46">
+          <cl:formdata std:sid="f-data-039db2f6" row="1" col="0"/>
+          <cl:output std:sid="output-33e4251e" value="IDTECK ACU DEVICE EVENTLOG">
+            <cl:formdata std:sid="f-data-c24d844b" row="0" col="0"/>
+          </cl:output>
+          <cl:grid std:sid="grid-b0b571a9" id="grd2" readonly="true" datasetid="AcuEventLogList" resizablecolumns="all" columnMovable="true">
+            <cl:formdata std:sid="f-data-adea9939" row="1" col="0"/>
+            <cl:gridcolumn std:sid="g-column-667b1379"/>
+            <cl:gridcolumn std:sid="g-column-bcc83517"/>
+            <cl:gridcolumn std:sid="g-column-e2b092b3"/>
+            <cl:gridcolumn std:sid="g-column-d3199e99"/>
+            <cl:gridcolumn std:sid="g-column-4639f898"/>
+            <cl:gridcolumn std:sid="g-column-fbae57ed"/>
+            <cl:gridheader std:sid="gh-band-b3e8b3c9">
+              <cl:gridrow std:sid="g-row-c6f3870e"/>
+              <cl:gridcell std:sid="gh-cell-21487d03" rowindex="0" colindex="0" targetcolumnname="EventTime" sortable="false" filterable="false" text="EventTime"/>
+              <cl:gridcell std:sid="gh-cell-460419b9" rowindex="0" colindex="1" targetcolumnname="BoardID" sortable="false" filterable="false" text="BoardID"/>
+              <cl:gridcell std:sid="gh-cell-f3b5e39c" rowindex="0" colindex="2" targetcolumnname="InoutPortNo" sortable="false" filterable="false" text="InoutPortNo"/>
+              <cl:gridcell std:sid="gh-cell-057c95aa" rowindex="0" colindex="3" targetcolumnname="DeviceName" sortable="false" filterable="false" text="DeviceName"/>
+              <cl:gridcell std:sid="gh-cell-7bc3d85e" rowindex="0" colindex="4" targetcolumnname="Category" sortable="false" filterable="false" text="Category"/>
+              <cl:gridcell std:sid="gh-cell-170eec5a" rowindex="0" colindex="5" targetcolumnname="Content" sortable="false" filterable="false" text="Content"/>
+            </cl:gridheader>
+            <cl:griddetail std:sid="gd-band-c785d6ec">
+              <cl:gridrow std:sid="g-row-bf97c383"/>
+              <cl:gridcell std:sid="gd-cell-15f69768" rowindex="0" colindex="0" columnname="EventTime"/>
+              <cl:gridcell std:sid="gd-cell-24435bff" rowindex="0" colindex="1" columnname="BoardID"/>
+              <cl:gridcell std:sid="gd-cell-64b4e98c" rowindex="0" colindex="2" columnname="InoutPortNo"/>
+              <cl:gridcell std:sid="gd-cell-aa8208df" rowindex="0" colindex="3" columnname="DeviceName"/>
+              <cl:gridcell std:sid="gd-cell-87ee137a" rowindex="0" colindex="4" columnname="Category"/>
+              <cl:gridcell std:sid="gd-cell-f299f5b7" rowindex="0" colindex="5" columnname="Content">
+                <cl:combobox std:sid="c-box-c5bd3fb0" id="IAMEN_cmbContent" hidebutton="true"/>
+              </cl:gridcell>
+            </cl:griddetail>
+          </cl:grid>
+          <cl:formlayout std:sid="f-layout-f7bf49f7" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+            <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-b9577558" user-resizing-mode="standard" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-cc9006b1" user-resizing-mode="standard" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION"/>
+        <cl:columns length="2" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-fd1a6391"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

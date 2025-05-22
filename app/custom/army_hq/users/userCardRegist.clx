@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-cf6a0e64" version="1.0.0.0">
+  <head std:sid="head-760ea3d2">
+    <title>userCardRegist</title>
+    <screen std:sid="screen-b53804ed" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="400" customWidth="600"/>
+    <screen std:sid="screen-8df7a160" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-608b8aa9" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-c9ddad42">
+      <cl:dataset std:sid="d-set-f7c3fe12" id="UserCardInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-1742c86f" name="CardNum"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-4946b658" id="TerminalList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-5b9418d5" name="ID"/>
+          <cl:datacolumn std:sid="d-column-56756e3e" name="Name"/>
+          <cl:datacolumn std:sid="d-column-a3deeb7a" name="Status" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-eaa349d0" name="RegisterFlag" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-5aebe324" id="dsCardLayoutData">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-4c41f539" name="Index" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-fad13739" name="Sector" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-75c5b5a4" name="Block" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-ab5f8204" name="Start" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-d0337204" name="Length" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-2f7f796c" name="KeyType" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-05e52b47" name="KeyValue"/>
+          <cl:datacolumn std:sid="d-column-a41b4f3a" name="AIDCode"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-b382aad6" id="TerminalLiveInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-89150067" name="ID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-06754123" name="Status" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-b2ea4837" name="Type" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-78a7689a" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-86939dff" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-b5bf4ffe" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-cde9bd86" name="Count" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-35a4085e" id="CardData">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-6b010c2e" name="CardNum"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-3cc8aaae" id="dmCardLayoutInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-ef2c355c" info="지문 카드용량" name="CardSize" datatype="number" defaultvalue="1"/>
+          <cl:datacolumn std:sid="d-column-7860a5c6" info="카드종류" name="CardType" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-6f2ff262" info="카드 읽기 구분" name="ReadType" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-12bd32ff" info="지문 템플릿" name="TemplateSize" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-6c2cce17" info="지문 Template 개수" name="TemplateCount" datatype="number" defaultvalue="0"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-a5923302" id="UserInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-4b12de03" name="ID"/>
+          <cl:datacolumn std:sid="d-column-aa62dc1f" name="UniqueID"/>
+          <cl:datacolumn std:sid="d-column-d6fcbb55" name="Name"/>
+          <cl:datacolumn std:sid="d-column-4c1e1cf3" name="AuthInfo" datatype="string" defaultvalue="0,0,0,0,0,0,0,0"/>
+          <cl:datacolumn std:sid="d-column-c877840d" name="Privilege" datatype="number" defaultvalue="2"/>
+          <cl:datacolumn std:sid="d-column-ae41a6d9" name="CreateDate"/>
+          <cl:datacolumn std:sid="d-column-6cd86985" name="UsePeriodFlag" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-aa29eb53" name="RegistDate"/>
+          <cl:datacolumn std:sid="d-column-36a88489" name="ExpireDate"/>
+          <cl:datacolumn std:sid="d-column-1a623d89" name="Password" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-3f62fac5" name="GroupCode" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-879072b9" name="AccessGroupCode" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-1ae45816" name="UserType" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-b2aa2649" name="TimezoneCode" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-06ef9fc2" name="BlackList" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-81a23b39" name="FPIdentify" datatype="number" defaultvalue="1"/>
+          <cl:datacolumn std:sid="d-column-3e2a3fa2" name="FaceIdentify" datatype="number" defaultvalue="1"/>
+          <cl:datacolumn std:sid="d-column-0bad7e05" name="DuressFinger" defaultvalue="0,0,0,0,0,0,0,0"/>
+          <cl:datacolumn std:sid="d-column-f00ebfc2" name="Partition" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-4ea7d53b" name="APBExcept" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-00ced30b" name="APBZone" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-50470c4e" name="WorkCode" datatype="string" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-7e8ee1e8" name="MealCode" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-3988436d" name="MoneyCode" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-c8785609" name="MessageCode" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-c47d406c" name="VerifyLevel" datatype="number" defaultvalue="5"/>
+          <cl:datacolumn std:sid="d-column-aacc66b5" name="PositionCode" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-bb178ffa" name="Department" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-8490f74a" name="LoginPW" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-3c116bb9" name="LoginAllowed" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-a884d5d2" name="Picture"/>
+          <cl:datacolumn std:sid="d-column-a29d00fb" name="EmployeeNum"/>
+          <cl:datacolumn std:sid="d-column-757b5dde" name="Email"/>
+          <cl:datacolumn std:sid="d-column-3317cd2c" name="Phone"/>
+          <cl:datacolumn std:sid="d-column-ee8bd752" name="IrisIdentify" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-3dc9835a" name="VoipUse" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-436f4bd3" name="VoipDoorOpen" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-2347352e" name="VoipAutoAnswer" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-00d2c338" name="Gender" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-fe14b597" name="Mobile"/>
+          <cl:datacolumn std:sid="d-column-29876b47" name="Birthday" datatype="string"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-711222da" id="sms_getUserCardInfo"/>
+      <cl:submission std:sid="submission-9b216112" id="sms_getConnectedTerminalList" method="get" action="/v1/terminals">
+        <cl:listener std:sid="listener-9f095575" name="submit-done" handler="onSms_getConnectedTerminalListSubmitDone"/>
+        <cl:listener std:sid="listener-a6913537" name="submit-error" handler="onSms_getConnectedTerminalListSubmitError"/>
+        <cl:listener std:sid="listener-3757caa2" name="submit-timeout" handler="onSms_getConnectedTerminalListSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total"/>
+        <cl:responsedata dataid="TerminalList"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-4af50bfc" id="sms_getUserCardInfoToTerminal" method="get">
+        <cl:listener std:sid="listener-d16ce22c" name="submit-done" handler="onSms_getUserCardInfoToTerminalSubmitDone"/>
+        <cl:listener std:sid="listener-4e2a856c" name="submit-error" handler="onSms_getUserCardInfoToTerminalSubmitError"/>
+        <cl:listener std:sid="listener-10e4a4c8" name="submit-timeout" handler="onSms_getUserCardInfoToTerminalSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="CardData"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-d839c4bc" id="sms_getCardInfo" method="get" action="/v1/cardLayout">
+        <cl:listener std:sid="listener-dd0a6c62" name="submit-done" handler="onSms_getCardInfoSubmitDone"/>
+        <cl:listener std:sid="listener-dd49e96d" name="submit-error" handler="onSms_getCardInfoSubmitError"/>
+        <cl:listener std:sid="listener-856e2eb3" name="submit-timeout" handler="onSms_getCardInfoSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="dmCardLayoutInfo"/>
+        <cl:responsedata dataid="dsCardLayoutData"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-112bf3b9" id="sms_deleteUserCDInfo" method="delete" action="/v1/users/{id}/card">
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-aac2bd40" id="sms_getTerminalLiveInfo" method="get" action="/v1/monitoring/terminals">
+        <cl:listener std:sid="listener-7faa61b5" name="submit-done" handler="onSms_getTerminalLiveInfoSubmitDone"/>
+        <cl:listener std:sid="listener-700bd9b1" name="submit-error" handler="onSms_getTerminalLiveInfoSubmitError"/>
+        <cl:listener std:sid="listener-3992f022" name="submit-timeout" handler="onSms_getTerminalLiveInfoSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total"/>
+        <cl:responsedata dataid="TerminalLiveInfo"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec dev-comment="USCAR"/>
+  </head>
+  <body std:sid="body-7c3afa23" style="top:0px; left:0px; width:800px; height:600px;" class="un-form-user-amhq">
+    <cl:listener std:sid="listener-e35772d8" name="load" handler="onBodyLoad"/>
+    <cl:listener std:sid="listener-8eed3f85" name="before-unload" handler="onBodyBeforeUnload"/>
+    <cl:group std:sid="group-12e52dcf">
+      <cl:xylayoutdata std:sid="xyl-data-2f5d86e6" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-1cd2a153" style="padding:4px;">
+        <cl:formdata std:sid="f-data-995417cb" row="0" col="0"/>
+        <cl:group std:sid="group-42b58193">
+          <cl:formdata std:sid="f-data-d5a22758" row="1" col="0"/>
+          <cl:grid std:sid="grid-67bb1ac7" id="USCDR_grdCardList" readonly="false" datasetid="UserCardInfo" resizablecolumns="none" columnMovable="false">
+            <cl:xylayoutdata std:sid="xyl-data-4b661717" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+            <cl:gridcolumn std:sid="g-column-cff05d46" width="25px"/>
+            <cl:gridcolumn std:sid="g-column-ace1b616"/>
+            <cl:gridheader std:sid="gh-band-1cf11a4a">
+              <cl:gridrow std:sid="g-row-587946cb"/>
+              <cl:gridcell std:sid="gh-cell-53834bb0" rowindex="0" colindex="0" sortable="false" filterable="false" columntype="checkbox"/>
+              <cl:gridcell std:sid="gh-cell-767879b0" rowindex="0" colindex="1" targetcolumnname="CardNum" sortable="false" filterable="false" text="CardNum">
+                <cl:langbind property="text" category="PROPERTY" keypath="Str_CardNum"/>
+              </cl:gridcell>
+            </cl:gridheader>
+            <cl:griddetail std:sid="gd-band-49496688">
+              <cl:gridrow std:sid="g-row-2527e274" height="30px"/>
+              <cl:gridcell std:sid="gd-cell-85dda648" rowindex="0" colindex="0" columntype="checkbox"/>
+              <cl:gridcell std:sid="gd-cell-9dfbd468" rowindex="0" colindex="1" columnname="CardNum"/>
+            </cl:griddetail>
+          </cl:grid>
+          <cl:xylayout std:sid="xylayout-030311dc"/>
+        </cl:group>
+        <cl:group std:sid="group-5334993f">
+          <cl:formdata std:sid="f-data-12b7441c" row="0" col="0"/>
+          <cl:output std:sid="output-99e69a9d">
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_CardList"/>
+            <cl:formdata std:sid="f-data-e2c4319c" row="0" col="0"/>
+          </cl:output>
+          <cl:button std:sid="button-4f64737f" id="USCDR_btnCardCapture" class="userInfo_btn">
+            <cl:listener std:sid="listener-08a80d8e" name="click" handler="onUSCDR_btnCardCaptureClick"/>
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_Capture"/>
+            <cl:formdata std:sid="f-data-7d0fec2d" row="0" col="1"/>
+          </cl:button>
+          <cl:button std:sid="button-5e48ec89" id="USCDR_btnCardDelete" class="userInfo_btn">
+            <cl:listener std:sid="listener-475d22cf" name="click" handler="onUSCDR_btnCardDeleteClick"/>
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_Delete"/>
+            <cl:formdata std:sid="f-data-72c0b7e6" row="0" col="2"/>
+          </cl:button>
+          <cl:formlayout std:sid="f-layout-b89d7b64">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+            <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-ab800dfa">
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-a6ba0272" style="padding:4px;">
+        <cl:formdata std:sid="f-data-b9a4a70a" row="0" col="1"/>
+        <cl:group std:sid="group-2191b6e4">
+          <cl:formdata std:sid="f-data-771fc0c7" row="0" col="0"/>
+          <cl:output std:sid="output-f4e30283">
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_SelectEnrollDevice"/>
+            <cl:formdata std:sid="f-data-3e8e1c79" row="0" col="0"/>
+          </cl:output>
+          <cl:button std:sid="button-d968d97e" id="USCDR_btnApply" class="userInfo_btn">
+            <cl:listener std:sid="listener-06424307" name="click" handler="onUSCDR_btnApplyClick"/>
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_Apply"/>
+            <cl:formdata std:sid="f-data-7f79dfb3" row="0" col="1" rowspan="1" colspan="2"/>
+          </cl:button>
+          <cl:formlayout std:sid="f-layout-2339741a" right-margin="4px" left-margin="4px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+            <cl:columns length="60" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="14" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:tabfolder std:sid="t-folder-ed4bec8d" id="USCDR_tabDeviceType" class="un-form-user-amhq">
+          <cl:formdata std:sid="f-data-592e6e6d" row="1" col="0"/>
+          <cl:tabitem std:sid="t-item-4fe28aab" selected="true">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_Terminal"/>
+            <cl:group std:sid="group-fbe02b52">
+              <std:metadata>
+                <std:property key="locked" value="true"/>
+              </std:metadata>
+              <cl:group std:sid="group-329ca651">
+                <cl:xylayoutdata std:sid="xyl-data-5e73a14c" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+                <cl:group std:sid="group-1b703f57">
+                  <cl:formdata std:sid="f-data-0151c4cc" row="1" col="0"/>
+                  <cl:udc std:sid="ud-control-146c9ea0" id="USCDR_udcSearchTerminal" type="udc.search.searchTerminal">
+                    <cl:listener std:sid="listener-dea88cf7" name="search" handler="onUSCDR_udcSearchTerminalSearch"/>
+                    <cl:xylayoutdata std:sid="xyl-data-b4fd15f9" top="0px" right="2px" bottom="0px" left="2px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+                  </cl:udc>
+                  <cl:xylayout std:sid="xylayout-d20ce5f0"/>
+                </cl:group>
+                <cl:udc std:sid="ud-control-253454bf" id="USCDR_udcTerminalList" type="udc.grid.terminalList">
+                  <cl:listener std:sid="listener-5bee54f9" name="pagechange" handler="onUSCDR_udcTerminalListPagechange"/>
+                  <cl:datarowcontext datacontrolid="TerminalList" rowindex="0"/>
+                  <cl:formdata std:sid="f-data-f90596d6" row="2" col="0"/>
+                </cl:udc>
+                <cl:formlayout std:sid="f-layout-b048a584">
+                  <cl:rows length="1" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:rows length="1" unit="FRACTION"/>
+                  <cl:columns length="1" unit="FRACTION"/>
+                </cl:formlayout>
+              </cl:group>
+              <cl:xylayout std:sid="xylayout-6cc21df0"/>
+            </cl:group>
+          </cl:tabitem>
+          <cl:tabitem std:sid="t-item-dccd70fc">
+            <std:metadata>
+              <std:property key="is-active-item" value="true"/>
+            </std:metadata>
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_Hamster"/>
+            <cl:group std:sid="group-965cdebe">
+              <std:metadata>
+                <std:property key="locked" value="true"/>
+              </std:metadata>
+              <cl:group std:sid="group-0c06d651">
+                <cl:xylayoutdata std:sid="xyl-data-b7d2e07d" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+                <cl:output std:sid="output-3f71f812" id="USCDR_opbMessage" value="Output">
+                  <cl:formdata std:sid="f-data-4fe810ae" row="0" col="0"/>
+                </cl:output>
+                <cl:htmlsnippet std:sid="htmlsnippet-d86789c2" id="USCDR_sniDownloadLink" visible="false">
+                  <cl:formdata std:sid="f-data-dd22b42c" row="1" col="0"/>
+                </cl:htmlsnippet>
+                <cl:formlayout std:sid="f-layout-c9237cde">
+                  <cl:rows length="25" unit="PIXEL"/>
+                  <cl:rows length="25" unit="PIXEL"/>
+                  <cl:rows length="1" unit="FRACTION"/>
+                  <cl:columns length="1" unit="FRACTION"/>
+                </cl:formlayout>
+              </cl:group>
+              <cl:xylayout std:sid="xylayout-7d69e893"/>
+            </cl:group>
+          </cl:tabitem>
+          <cl:item-style style="background-color:#528443;"/>
+        </cl:tabfolder>
+        <cl:formlayout std:sid="f-layout-7ea5555b">
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-d18f29bd" hspace="5px">
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="300"/>
+        <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="300"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-551467dc"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

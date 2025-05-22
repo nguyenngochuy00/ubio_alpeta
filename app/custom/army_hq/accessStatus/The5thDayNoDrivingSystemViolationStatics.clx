@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-406f80e7" version="1.0.0.0">
+  <head std:sid="head-258a8935">
+    <title>The5thDayNoDrivingSystemViolationStatics</title>
+    <screen std:sid="screen-6bff146b" id="default" name="default" minwidth="1024px" width="1024px" height="768px"/>
+    <screen std:sid="screen-4c6c5aca" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-7792c407" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-a6eac4aa">
+      <cl:dataset std:sid="d-set-9a1b7ed5" id="AuthLogList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-967ac7da" name="IndexKey" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-b2809b4f" name="TerminalID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-857d2e3d" name="UserID" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-ba63b9d0" name="GroupCode" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-c66478d1" name="UserName"/>
+          <cl:datacolumn std:sid="d-column-bf2e3371" name="EventTime"/>
+          <cl:datacolumn std:sid="d-column-c92efe5c" name="ServerRecordTime"/>
+          <cl:datacolumn std:sid="d-column-5a08cf90" name="AuthType" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-3350051d" name="AuthResult" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-78f62268" name="Func" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-511533e3" name="FuncType" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-24da079a" name="Card"/>
+          <cl:datacolumn std:sid="d-column-65890aa7" name="UserType" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-29000130" name="IsPicture" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-ff4825bd" name="Property"/>
+          <cl:datacolumn std:sid="d-column-627a8336" name="GroupName"/>
+          <cl:datacolumn std:sid="d-column-0135e717" name="PositionName"/>
+          <cl:datacolumn std:sid="d-column-3998c721" name="UniqueID"/>
+          <cl:datacolumn std:sid="d-column-c32e5331" name="TerminalName"/>
+          <cl:datacolumn std:sid="d-column-12077876" name="ReserveType" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-e01e79a5" name="ReserveData"/>
+          <cl:datacolumn std:sid="d-column-bc127951" name="Detail"/>
+          <cl:datacolumn std:sid="d-column-0d344112" name="Latitude" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-6e921640" name="Longitude" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset comment="부대별 차량 5부제 위반 통계" std:sid="d-set-9a113c46" id="Statics">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-78c5992c" name="group"/>
+          <cl:datacolumn std:sid="d-column-4b89ebac" name="count"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-c2bd18fc" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-f3c8a79a" name="Count" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-a33aca7f" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-c3f70b9a" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-3d8d063a" id="sms_getAuthLogList" method="get" action="/v1/authLogs">
+        <cl:listener std:sid="listener-f0d860f8" name="submit-done" handler="onSms_getAuthLogListSubmitDone"/>
+        <cl:listener std:sid="listener-ce8afafd" name="submit-error" handler="onSubmitError"/>
+        <cl:listener std:sid="listener-e608852d" name="submit-timeout" handler="onSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total"/>
+        <cl:responsedata dataid="AuthLogList"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-c09c6750" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-f88198e3" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-1a26a1e3" style="border-right-style:none; border-left-style:none; border-bottom-style:none; border-top-style:none;" class="cl-form-group">
+      <cl:xylayoutdata std:sid="xyl-data-a82d5668" top="5px" left="5px" width="500px" height="600px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      <cl:grid std:sid="grid-d91e90b7" id="staticsGrid" class="grid-amhq" readonly="true" datasetid="Statics" resizablecolumns="all" columnMovable="true">
+        <cl:formdata std:sid="f-data-35818503" row="1" col="0"/>
+        <cl:gridcolumn std:sid="g-column-231bbba2"/>
+        <cl:gridcolumn std:sid="g-column-17a035f1"/>
+        <cl:gridheader std:sid="gh-band-01bed2b6">
+          <cl:gridrow std:sid="g-row-c6774f93" height="50px"/>
+          <cl:gridcell std:sid="gh-cell-cbfbad7a" rowindex="0" colindex="0" targetcolumnname="group">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_ARMY_UnitName"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-65b96c4f" rowindex="0" colindex="1" targetcolumnname="count">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_Statistics"/>
+          </cl:gridcell>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-7e960ad4">
+          <cl:gridrow std:sid="g-row-6a158dea"/>
+          <cl:gridcell std:sid="gd-cell-12a96f00" rowindex="0" colindex="0" columnname="group"/>
+          <cl:gridcell std:sid="gd-cell-9e7571c0" rowindex="0" colindex="1" columnname="count"/>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:group std:sid="group-9e15b8bf" class="cl-form-group">
+        <cl:formdata std:sid="f-data-87eae431" row="0" col="0"/>
+        <cl:button std:sid="button-6c10507a" id="AMACI_btnPersonnelListSearch" class="button-search-amhq" icon="../../../../theme/custom/armyhq/btn_search.PNG" iconalign="right">
+          <cl:listener std:sid="listener-f36696a6" name="click" handler="onAMACI_btnPersonnelListSearchClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Search"/>
+          <cl:formdata std:sid="f-data-e03543d0" row="0" col="6"/>
+          <cl:iconstyle style="width:30px; height:30px;"/>
+        </cl:button>
+        <cl:output std:sid="output-621deaca" style="text-align:center;" class="common-titlelabel">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Period"/>
+          <cl:formdata std:sid="f-data-1b2cba10" row="0" col="0"/>
+        </cl:output>
+        <cl:dateinput std:sid="d-input-48acdebf" id="ALMGR_dtStart" class="dateinput-amhq" value="2018-11-23" format="YYYY-MM-DD" autoselect="false">
+          <cl:formdata std:sid="f-data-d01f0567" row="0" col="2"/>
+        </cl:dateinput>
+        <cl:dateinput std:sid="d-input-71da1be8" id="ALMGR_dtEnd" class="dateinput-amhq" value="2018-11-23" format="YYYY-MM-DD" autoselect="false">
+          <cl:formdata std:sid="f-data-122aff45" row="0" col="4"/>
+        </cl:dateinput>
+        <cl:output std:sid="output-ed0c8de0" style="text-align:center;" value="~">
+          <cl:formdata std:sid="f-data-f7dcdf04" row="0" col="3"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-3c816dd4" hspace="10px" vspace="10px" top-margin="5px" right-margin="5px" bottom-margin="5px" left-margin="5px" hseparatorwidth="1" vseparatorwidth="1">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="BY_CLASS" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="5" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="120" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="120" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-c424fa30" hspace="10px" vspace="10px" top-margin="5px" right-margin="5px" bottom-margin="5px" left-margin="5px" hseparatorwidth="1" vseparatorwidth="1">
+        <cl:rows length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-7e75d518"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-ebc395c8" version="1.0.0.0">
+  <head std:sid="head-b007869b">
+    <title>userBackupList</title>
+    <screen std:sid="screen-3f83279d" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="600" customWidth="800"/>
+    <screen std:sid="screen-03bf21d5" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-6f6361f4" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-88bab8f1">
+      <cl:dataset std:sid="d-set-76064535" id="UserBackupList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-db7be1bf" name="UserID" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-c914a490" name="UniqueID"/>
+          <cl:datacolumn std:sid="d-column-ea7cc2fa" name="Name"/>
+          <cl:datacolumn std:sid="d-column-afe9f892" name="Privilege"/>
+          <cl:datacolumn std:sid="d-column-196e3a91" name="CreateAt"/>
+          <cl:datacolumn std:sid="d-column-49be9f78" name="RegistAt"/>
+          <cl:datacolumn std:sid="d-column-a9412f8d" name="ExpireAt"/>
+          <cl:datacolumn std:sid="d-column-101b9890" name="Group"/>
+          <cl:datacolumn std:sid="d-column-ba6ff6c7" name="AccessGroup"/>
+          <cl:datacolumn std:sid="d-column-a9a01047" name="EmployeeNum"/>
+          <cl:datacolumn std:sid="d-column-52187f4c" name="Position"/>
+          <cl:datacolumn std:sid="d-column-96dc6ed1" name="Department"/>
+          <cl:datacolumn std:sid="d-column-a0a08fec" name="Email"/>
+          <cl:datacolumn std:sid="d-column-b679f194" name="Phone"/>
+          <cl:datacolumn std:sid="d-column-00867ef1" name="Flag" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-d192b7bd" name="Gender" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-b115c84f" name="Mobile"/>
+          <cl:datacolumn std:sid="d-column-6bc8a49c" name="Birthday"/>
+          <cl:datacolumn std:sid="d-column-2d58dc98" name="DeleteAt"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-ab9c534d" id="dsDeleteList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-2c940d51" name="UserID"/>
+          <cl:datacolumn std:sid="d-column-c40b5157" name="rowIndex" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-c2bd18fc" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-b184ff7d" name="Count" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-a33aca7f" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-8c91325a" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-81231b5a" id="sms_getUserBackupList" method="get" action="/v1/custom/userBackups">
+        <cl:listener std:sid="listener-34601dfc" name="submit-done" handler="onSms_getUserBackupListSubmitDone"/>
+        <cl:listener std:sid="listener-efb40b3b" name="submit-error" handler="onSms_getUserBackupListSubmitError"/>
+        <cl:listener std:sid="listener-75536112" name="submit-timeout" handler="onSms_getUserBackupListSubmitTimeout"/>
+        <cl:requestparam name="searchCategory"/>
+        <cl:requestparam name="searchKeyword" value=""/>
+        <cl:requestparam name="offset" value="0"/>
+        <cl:requestparam name="limit" value="50"/>
+        <cl:requestparam name="picture" value="false"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total" isadd="false"/>
+        <cl:responsedata dataid="UserBackupList" isadd="false"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-203e17a7" id="sms_deleteUser" method="delete" action="/v1/users">
+        <cl:listener std:sid="listener-c0fbaa33" name="submit-done" handler="onSms_deleteUserSubmitDone"/>
+        <cl:listener std:sid="listener-adf0e5df" name="submit-error" handler="onSms_deleteUserSubmitError"/>
+        <cl:listener std:sid="listener-537f47d4" name="submit-timeout" handler="onSms_deleteUserSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-162cbfa5" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-00a9b603" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-1e6a10b6" style="border-right-style:none; padding:10px; border-left-style:none; border-bottom-style:none; border-top-style:none;" class="un-form-border">
+      <cl:xylayoutdata std:sid="xyl-data-382273cd" top="10px" right="10px" bottom="10px" left="10px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-ecd6adbb">
+        <cl:formdata std:sid="f-data-81bb40d6" row="0" col="0"/>
+        <cl:button std:sid="button-f25e20fd" id="UBL_btnDeleteUser" style="background-color:white; font-size:14px;" class="userInfo_btn">
+          <cl:listener std:sid="listener-b91a67a6" name="click" handler="onUBL_btnDeleteUserClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Delete"/>
+          <cl:formdata std:sid="f-data-3d16d532" row="0" col="10"/>
+        </cl:button>
+        <cl:output std:sid="output-9cc0e59b" style="text-align:left;" class="common-titlelabel">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_UsrCount"/>
+          <cl:formdata std:sid="f-data-2a1b29b5" row="0" col="1"/>
+        </cl:output>
+        <cl:output std:sid="output-a241e38e" id="opt_tot" style="padding-top:2px; vertical-align:middle; font-size:14px; text-align:right;" datatype="number" format="s#,###">
+          <cl:datamapbind property="value" datacontrolid="Total" columnname="Count"/>
+          <cl:formdata std:sid="f-data-01970c61" row="0" col="0"/>
+        </cl:output>
+        <cl:udc std:sid="ud-control-5289e431" id="UBL_udcSearchUser" type="udc.search.searchUser">
+          <cl:listener std:sid="listener-3db29508" name="search" handler="onUBL_udcSearchUserSearch"/>
+          <cl:listener std:sid="listener-8ab3c34a" name="searchKeydown" handler="onUBL_udcSearchUserSearchKeydown"/>
+          <cl:formdata std:sid="f-data-071de2ab" row="0" col="8"/>
+        </cl:udc>
+        <cl:output std:sid="output-621deaca" style="text-align:center;" class="common-titlelabel">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_DeletePeriod"/>
+          <cl:formdata std:sid="f-data-e8f987e8" row="0" col="3"/>
+        </cl:output>
+        <cl:dateinput std:sid="d-input-48acdebf" id="UBL_dtStart" value="2018-11-23" format="YYYY-MM-DD" autoselect="false">
+          <cl:formdata std:sid="f-data-eb2606e9" row="0" col="4"/>
+        </cl:dateinput>
+        <cl:output std:sid="output-ed0c8de0" style="font-weight:bold; vertical-align:middle; text-align:right;" value="~">
+          <cl:formdata std:sid="f-data-e7c41c86" row="0" col="5"/>
+        </cl:output>
+        <cl:dateinput std:sid="d-input-71da1be8" id="UBL_dtEnd" value="2018-11-23" format="YYYY-MM-DD" autoselect="false">
+          <cl:formdata std:sid="f-data-d7cdab2d" row="0" col="6"/>
+        </cl:dateinput>
+        <cl:formlayout std:sid="f-layout-0886cf82" hspace="5px" vspace="5px">
+          <cl:rows length="30" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
+          <cl:columns length="70" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="70" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="47" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="90" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="10" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="90" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="250" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:grid std:sid="grid-f35c1ec9" id="UBL_grdUserBackupList" readonly="true" datasetid="UserBackupList" resizablecolumns="all" columnMovable="true">
+        <cl:formdata std:sid="f-data-6c8fabf7" row="1" col="0"/>
+        <cl:gridcolumn std:sid="g-column-3f6566bb" width="25px"/>
+        <cl:gridcolumn std:sid="g-column-7d09e0a4"/>
+        <cl:gridcolumn std:sid="g-column-1224d9e1"/>
+        <cl:gridcolumn std:sid="g-column-09daf386"/>
+        <cl:gridcolumn std:sid="g-column-eb3adda6"/>
+        <cl:gridcolumn std:sid="g-column-0b3dbe99"/>
+        <cl:gridcolumn std:sid="g-column-280a23f9"/>
+        <cl:gridcolumn std:sid="g-column-e0eec7e7"/>
+        <cl:gridcolumn std:sid="g-column-db27ce6b" width="120px"/>
+        <cl:gridcolumn std:sid="g-column-5b955dfb" width="120px"/>
+        <cl:gridcolumn std:sid="g-column-858ddff2" width="120px"/>
+        <cl:gridcolumn std:sid="g-column-76f4c446"/>
+        <cl:gridcolumn std:sid="g-column-cb781922"/>
+        <cl:gridheader std:sid="gh-band-8326594f">
+          <cl:gridrow std:sid="g-row-eea1e672"/>
+          <cl:gridcell std:sid="gh-cell-ea0e108a" rowindex="0" colindex="0" sortable="false" filterable="false" columntype="checkbox"/>
+          <cl:gridcell std:sid="gh-cell-bb5316e7" rowindex="0" colindex="1" targetcolumnname="UserID" sortable="false" filterable="false" text="UserID">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_ID"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-7adb201c" rowindex="0" colindex="2" targetcolumnname="Name" sortable="false" filterable="false" text="Name">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_Name"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-6747d851" rowindex="0" colindex="3" targetcolumnname="UniqueID" sortable="false" filterable="false" text="UniqueID">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_UniqueID"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-acd0f24b" rowindex="0" colindex="4" targetcolumnname="Privilege" sortable="false" filterable="false" text="Privilege">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_Privilege"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-cab902e9" rowindex="0" colindex="5" targetcolumnname="Group" sortable="false" filterable="false" text="Group">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_GroupName"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-f0b664b1" rowindex="0" colindex="6" targetcolumnname="AccessGroup" sortable="false" filterable="false" text="AccessGroup">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_AccessGroup"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-2cd564f4" rowindex="0" colindex="7" targetcolumnname="Position" sortable="false" filterable="false" text="Position">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_Position"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-cb66c69f" rowindex="0" colindex="9" targetcolumnname="RegistAt" sortable="false" filterable="false" text="RegistAt">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_RegistDate"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-9ac42e57" rowindex="0" colindex="10" targetcolumnname="ExpireAt" sortable="false" filterable="false" text="ExpireAt">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_ExpireDate"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-6d1e67b1" rowindex="0" colindex="11" targetcolumnname="Email" sortable="false" filterable="false" text="Email">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_Mail"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-1bad29aa" rowindex="0" colindex="12" targetcolumnname="Mobile" sortable="false" filterable="false" text="Mobile">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_MobileNum"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-999fefb8" rowindex="0" colindex="8">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_DeleteDate"/>
+          </cl:gridcell>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-298b39d0">
+          <cl:gridrow std:sid="g-row-f34ea577"/>
+          <cl:gridcell std:sid="gd-cell-08a205e0" rowindex="0" colindex="0" columntype="checkbox"/>
+          <cl:gridcell std:sid="gd-cell-7aa8a069" rowindex="0" colindex="1" columnname="UserID"/>
+          <cl:gridcell std:sid="gd-cell-09685018" rowindex="0" colindex="2" columnname="Name"/>
+          <cl:gridcell std:sid="gd-cell-f5310f4e" rowindex="0" colindex="3" columnname="UniqueID"/>
+          <cl:gridcell std:sid="gd-cell-5a44a782" rowindex="0" colindex="4" columnname="Privilege"/>
+          <cl:gridcell std:sid="gd-cell-efe896f8" rowindex="0" colindex="5" columnname="Group"/>
+          <cl:gridcell std:sid="gd-cell-f47174c5" rowindex="0" colindex="6" columnname="AccessGroup"/>
+          <cl:gridcell std:sid="gd-cell-ef1d1d34" rowindex="0" colindex="7" columnname="Position"/>
+          <cl:gridcell std:sid="gd-cell-d01980ce" rowindex="0" colindex="9" columnname="RegistAt"/>
+          <cl:gridcell std:sid="gd-cell-d873c182" rowindex="0" colindex="10" columnname="ExpireAt"/>
+          <cl:gridcell std:sid="gd-cell-3f9aba36" rowindex="0" colindex="11" columnname="Email"/>
+          <cl:gridcell std:sid="gd-cell-c28b0dce" rowindex="0" colindex="12" columnname="Mobile"/>
+          <cl:gridcell std:sid="gd-cell-8904f9b8" rowindex="0" colindex="8" columnname="DeleteAt"/>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:pageindexer std:sid="p-indexer-28d1fcdc" id="UBL_piUserList" class="userList_paging">
+        <cl:listener std:sid="listener-6a0bef98" name="selection-change" handler="onUBL_piUserListSelectionChange"/>
+        <cl:formdata std:sid="f-data-019fef1f" row="2" col="0"/>
+      </cl:pageindexer>
+      <cl:formlayout std:sid="f-layout-934c0ac9">
+        <cl:rows length="30" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
+        <cl:rows length="1" unit="FRACTION" shadetype="NONE" shadecolor="#000000"/>
+        <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-132d0fa0"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

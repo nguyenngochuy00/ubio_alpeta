@@ -1,0 +1,593 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-6acb6f4e" version="1.0.0.0">
+  <head std:sid="head-750ca8b9">
+    <title>idteckLowDeviceManagement</title>
+    <screen std:sid="screen-a30f0952" id="default" name="default" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="700" customWidth="800" active="true"/>
+    <screen std:sid="screen-301a95bd" id="tablet" name="tablet" width="500px" height="667px" useCustomWidth="true" useCustomHeight="true" customHeight="600" customWidth="800"/>
+    <screen std:sid="screen-890b64a7" id="mobile" name="mobile" width="350px" height="525px"/>
+    <cl:model std:sid="model-d00411df">
+      <cl:dataset std:sid="d-set-e82740b2" id="LowAcuDeviceList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-34df5a09" name="BoardID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-181a00c0" name="InoutPortNo"/>
+          <cl:datacolumn std:sid="d-column-88056889" name="LowDeviceType" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-bcbaaaa2" name="LowDevcieName"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-b5bf4ffe" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-f3592a27" name="Count" datatype="number" defaultvalue="0"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-78a7689a" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-d9e8f259" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-ef1cabb2" id="sms_getLowAcuDeviceList" method="get" action="/v1/bosk/acus/LowDevice">
+        <cl:listener std:sid="listener-08320600" name="submit-timeout" handler="onSms_getSubmitTimeout"/>
+        <cl:listener std:sid="listener-1485c45a" name="submit-error" handler="onSms_getSubmitError"/>
+        <cl:listener std:sid="listener-ef81bdf4" name="submit-done" handler="onSms_getLowAcuDeviceListSubmitDone"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total"/>
+        <cl:responsedata dataid="LowAcuDeviceList"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-9de08aa7" id="sms_postLowAcuDeviceList" action="/v1/bosk/acus/LowDevice">
+        <cl:listener std:sid="listener-3437ad98" name="submit-error" handler="onSms_getSubmitError"/>
+        <cl:listener std:sid="listener-9b286ffd" name="submit-timeout" handler="onSms_getSubmitTimeout"/>
+        <cl:listener std:sid="listener-bf9ea7b1" name="submit-done" handler="onSms_postLowAcuDeviceListSubmitDone"/>
+        <cl:requestdata dataid="LowAcuDeviceList"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec dev-comment="ILDM&#xD;&#xA;&#xD;&#xA;ILDM_ipb_LowDevcieName1&#xD;&#xA;ILDM_ipb_LowDevcieName1"/>
+  </head>
+  <body std:sid="body-addda07f" style="padding-top:5px; top:0px; left:0px; padding-left:5px; width:800px; padding-bottom:5px; height:600px; padding-right:5px;">
+    <cl:listener std:sid="listener-a9792cad" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-1aae0612" id="ILDM_grp_main">
+      <cl:formdata std:sid="f-data-c3743ecf" row="0" col="0"/>
+      <cl:group std:sid="group-50ec8c3a">
+        <cl:formdata std:sid="f-data-14e58cf0" row="0" col="0"/>
+        <cl:output std:sid="output-2168c119" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="BoardID">
+          <cl:formdata std:sid="f-data-33b40896" row="0" col="0"/>
+        </cl:output>
+        <cl:numbereditor std:sid="n-editor-9dbb3b44" id="ILDM_nbe_boardID" enabled="false" min="0.0" max="255.0" spinbutton="false" placeholder="1 ~ 255" format="999">
+          <cl:formdata std:sid="f-data-c7157c99" row="0" col="1"/>
+        </cl:numbereditor>
+        <cl:formlayout std:sid="f-layout-975c31b9" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-1878ecec">
+        <cl:formdata std:sid="f-data-9b5ed505" row="1" col="0"/>
+        <cl:output std:sid="output-7815aba6" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="InoutPortNo">
+          <cl:formdata std:sid="f-data-7d49a0a4" row="0" col="0"/>
+        </cl:output>
+        <cl:output std:sid="output-9c4d61b4" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="LowDeviceName">
+          <cl:formdata std:sid="f-data-e7a615ea" row="0" col="2"/>
+        </cl:output>
+        <cl:output std:sid="output-9a397bc8" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="LowDeviceType">
+          <cl:formdata std:sid="f-data-e2a32471" row="0" col="4"/>
+        </cl:output>
+        <cl:inputbox std:sid="i-box-b6d94019" id="ILDM_ipb_PortNo1" enabled="false">
+          <cl:formdata std:sid="f-data-37627c08" row="0" col="1"/>
+        </cl:inputbox>
+        <cl:inputbox std:sid="i-box-536badb3" id="ILDM_ipb_LowDevcieName1">
+          <cl:formdata std:sid="f-data-55675db0" row="0" col="3"/>
+        </cl:inputbox>
+        <cl:combobox std:sid="c-box-45c545f0" id="ILDM_cmb_LowDevcieType1">
+          <cl:formdata std:sid="f-data-01234b19" row="0" col="5"/>
+        </cl:combobox>
+        <cl:formlayout std:sid="f-layout-5801a11a" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="140" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="130" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-5290deef">
+        <cl:formdata std:sid="f-data-5683a92e" row="2" col="0"/>
+        <cl:output std:sid="output-9096a8fc" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="InoutPortNo">
+          <cl:formdata std:sid="f-data-541b6b32" row="0" col="0"/>
+        </cl:output>
+        <cl:output std:sid="output-9a2dd505" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="LowDeviceName">
+          <cl:formdata std:sid="f-data-3cffcadd" row="0" col="2"/>
+        </cl:output>
+        <cl:output std:sid="output-ada8b116" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="LowDeviceType">
+          <cl:formdata std:sid="f-data-025debe1" row="0" col="4"/>
+        </cl:output>
+        <cl:inputbox std:sid="i-box-194520e3" id="ILDM_ipb_PortNo2" enabled="false">
+          <cl:formdata std:sid="f-data-b98d3556" row="0" col="1"/>
+        </cl:inputbox>
+        <cl:inputbox std:sid="i-box-465f834d" id="ILDM_ipb_LowDevcieName2">
+          <cl:formdata std:sid="f-data-00f8154f" row="0" col="3"/>
+        </cl:inputbox>
+        <cl:combobox std:sid="c-box-a0860409" id="ILDM_cmb_LowDevcieType2">
+          <cl:formdata std:sid="f-data-c420121c" row="0" col="5"/>
+        </cl:combobox>
+        <cl:formlayout std:sid="f-layout-303190ce" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="140" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="130" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-de6192e4">
+        <cl:formdata std:sid="f-data-b2847c55" row="3" col="0"/>
+        <cl:output std:sid="output-1b632c21" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="InoutPortNo">
+          <cl:formdata std:sid="f-data-cb5750ad" row="0" col="0"/>
+        </cl:output>
+        <cl:output std:sid="output-2ce4a3b6" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="LowDeviceName">
+          <cl:formdata std:sid="f-data-48f2da3e" row="0" col="2"/>
+        </cl:output>
+        <cl:output std:sid="output-e3dcb9bb" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="LowDeviceType">
+          <cl:formdata std:sid="f-data-8c1651e4" row="0" col="4"/>
+        </cl:output>
+        <cl:inputbox std:sid="i-box-7d745e3c" id="ILDM_ipb_PortNo3" enabled="false">
+          <cl:formdata std:sid="f-data-73d6d2c4" row="0" col="1"/>
+        </cl:inputbox>
+        <cl:inputbox std:sid="i-box-dbf52972" id="ILDM_ipb_LowDevcieName3">
+          <cl:formdata std:sid="f-data-e91ce99b" row="0" col="3"/>
+        </cl:inputbox>
+        <cl:combobox std:sid="c-box-d9f6fb46" id="ILDM_cmb_LowDevcieType3">
+          <cl:formdata std:sid="f-data-0c3c1b09" row="0" col="5"/>
+        </cl:combobox>
+        <cl:formlayout std:sid="f-layout-16dd681b" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="140" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="130" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-c4f401a9">
+        <cl:formdata std:sid="f-data-55d92eaa" row="4" col="0"/>
+        <cl:output std:sid="output-0f0e8799" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="InoutPortNo">
+          <cl:formdata std:sid="f-data-314af425" row="0" col="0"/>
+        </cl:output>
+        <cl:output std:sid="output-84e0cb5a" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="LowDeviceName">
+          <cl:formdata std:sid="f-data-7e004055" row="0" col="2"/>
+        </cl:output>
+        <cl:output std:sid="output-fbd5c631" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="LowDeviceType">
+          <cl:formdata std:sid="f-data-fb915232" row="0" col="4"/>
+        </cl:output>
+        <cl:inputbox std:sid="i-box-2ce85a72" id="ILDM_ipb_PortNo4" enabled="false">
+          <cl:formdata std:sid="f-data-962eddc2" row="0" col="1"/>
+        </cl:inputbox>
+        <cl:inputbox std:sid="i-box-67be1a5e" id="ILDM_ipb_LowDevcieName4">
+          <cl:formdata std:sid="f-data-0d05b6e9" row="0" col="3"/>
+        </cl:inputbox>
+        <cl:combobox std:sid="c-box-13436c72" id="ILDM_cmb_LowDevcieType4">
+          <cl:formdata std:sid="f-data-fe21d12c" row="0" col="5"/>
+        </cl:combobox>
+        <cl:formlayout std:sid="f-layout-a75dc063" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="140" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="130" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-4612fa0a">
+        <cl:formdata std:sid="f-data-6eae0abe" row="5" col="0"/>
+        <cl:output std:sid="output-64309923" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="InoutPortNo">
+          <cl:formdata std:sid="f-data-4fb31a5f" row="0" col="0"/>
+        </cl:output>
+        <cl:output std:sid="output-ee3126c2" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="LowDeviceName">
+          <cl:formdata std:sid="f-data-54f9a12d" row="0" col="2"/>
+        </cl:output>
+        <cl:output std:sid="output-59171086" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="LowDeviceType">
+          <cl:formdata std:sid="f-data-97f60baf" row="0" col="4"/>
+        </cl:output>
+        <cl:inputbox std:sid="i-box-6a553d3f" id="ILDM_ipb_PortNo5" enabled="false">
+          <cl:formdata std:sid="f-data-c6e10c7a" row="0" col="1"/>
+        </cl:inputbox>
+        <cl:inputbox std:sid="i-box-28db9c39" id="ILDM_ipb_LowDevcieName5">
+          <cl:formdata std:sid="f-data-ba992690" row="0" col="3"/>
+        </cl:inputbox>
+        <cl:combobox std:sid="c-box-e4a2f987" id="ILDM_cmb_LowDevcieType5">
+          <cl:formdata std:sid="f-data-c8e9101b" row="0" col="5"/>
+        </cl:combobox>
+        <cl:formlayout std:sid="f-layout-33fe0015" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="140" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="130" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-ea7d9009">
+        <cl:formdata std:sid="f-data-9ca6bfa0" row="6" col="0"/>
+        <cl:output std:sid="output-d7018bf7" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="InoutPortNo">
+          <cl:formdata std:sid="f-data-428a0f20" row="0" col="0"/>
+        </cl:output>
+        <cl:output std:sid="output-0426be07" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="LowDeviceName">
+          <cl:formdata std:sid="f-data-eb62ac65" row="0" col="2"/>
+        </cl:output>
+        <cl:output std:sid="output-64aeb68e" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="LowDeviceType">
+          <cl:formdata std:sid="f-data-6ca8aafd" row="0" col="4"/>
+        </cl:output>
+        <cl:inputbox std:sid="i-box-efe973c9" id="ILDM_ipb_PortNo6" enabled="false">
+          <cl:formdata std:sid="f-data-86405d20" row="0" col="1"/>
+        </cl:inputbox>
+        <cl:inputbox std:sid="i-box-edaa89f5" id="ILDM_ipb_LowDevcieName6">
+          <cl:formdata std:sid="f-data-2efcc6a6" row="0" col="3"/>
+        </cl:inputbox>
+        <cl:combobox std:sid="c-box-73e3a07e" id="ILDM_cmb_LowDevcieType6">
+          <cl:formdata std:sid="f-data-34d39a5a" row="0" col="5"/>
+        </cl:combobox>
+        <cl:formlayout std:sid="f-layout-90c17d1f" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="140" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="130" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-6bc16057">
+        <cl:formdata std:sid="f-data-99452955" row="7" col="0"/>
+        <cl:output std:sid="output-2a68a16b" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="InoutPortNo">
+          <cl:formdata std:sid="f-data-b4eb0d5d" row="0" col="0"/>
+        </cl:output>
+        <cl:output std:sid="output-ff78a6cd" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="LowDeviceName">
+          <cl:formdata std:sid="f-data-e22abed2" row="0" col="2"/>
+        </cl:output>
+        <cl:output std:sid="output-e09b62ba" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="LowDeviceType">
+          <cl:formdata std:sid="f-data-19a2dc27" row="0" col="4"/>
+        </cl:output>
+        <cl:inputbox std:sid="i-box-304bbdb0" id="ILDM_ipb_PortNo7" enabled="false">
+          <cl:formdata std:sid="f-data-22fe2dd0" row="0" col="1"/>
+        </cl:inputbox>
+        <cl:inputbox std:sid="i-box-becb9d52" id="ILDM_ipb_LowDevcieName7">
+          <cl:formdata std:sid="f-data-388f651c" row="0" col="3"/>
+        </cl:inputbox>
+        <cl:combobox std:sid="c-box-4d3dd54c" id="ILDM_cmb_LowDevcieType7">
+          <cl:formdata std:sid="f-data-7449bb86" row="0" col="5"/>
+        </cl:combobox>
+        <cl:formlayout std:sid="f-layout-d87e9fae" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="140" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="130" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-c3cf9047">
+        <cl:formdata std:sid="f-data-4d08dd0f" row="8" col="0"/>
+        <cl:output std:sid="output-89d4853c" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="InoutPortNo">
+          <cl:formdata std:sid="f-data-88dbc1d7" row="0" col="0"/>
+        </cl:output>
+        <cl:output std:sid="output-9218a4a3" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="LowDeviceName">
+          <cl:formdata std:sid="f-data-91c2bc0f" row="0" col="2"/>
+        </cl:output>
+        <cl:output std:sid="output-7fdffb41" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="LowDeviceType">
+          <cl:formdata std:sid="f-data-3eadecb0" row="0" col="4"/>
+        </cl:output>
+        <cl:inputbox std:sid="i-box-74625ee0" id="ILDM_ipb_PortNo8" enabled="false">
+          <cl:formdata std:sid="f-data-e1a25dd2" row="0" col="1"/>
+        </cl:inputbox>
+        <cl:inputbox std:sid="i-box-9120df56" id="ILDM_ipb_LowDevcieName8">
+          <cl:formdata std:sid="f-data-e825c290" row="0" col="3"/>
+        </cl:inputbox>
+        <cl:combobox std:sid="c-box-48773067" id="ILDM_cmb_LowDevcieType8">
+          <cl:formdata std:sid="f-data-095cdbb3" row="0" col="5"/>
+        </cl:combobox>
+        <cl:formlayout std:sid="f-layout-c7df454b" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="140" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="130" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-343ab5ae">
+        <cl:formdata std:sid="f-data-eac15fd3" row="17" col="0"/>
+        <cl:button std:sid="button-17745729" id="ILDM_btn_Add" class="userInfo_btn" value="SAVE">
+          <cl:listener std:sid="listener-2fc73143" name="click" handler="onILDM_btn_AddClick"/>
+          <cl:formdata std:sid="f-data-f17628f8" row="0" col="1"/>
+        </cl:button>
+        <cl:button std:sid="button-d4e78f73" id="ILDM_btn_Close" class="userInfo_btn" value="CLOSE">
+          <cl:formdata std:sid="f-data-ff17ef26" row="0" col="2"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-7adc3144" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="90"/>
+          <cl:columns length="90"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-2154e13b">
+        <cl:formdata std:sid="f-data-e46d7214" row="9" col="0"/>
+        <cl:output std:sid="output-36cf62f0" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="InoutPortNo">
+          <cl:formdata std:sid="f-data-38bba0f3" row="0" col="0"/>
+        </cl:output>
+        <cl:output std:sid="output-ef38a1f7" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="LowDeviceName">
+          <cl:formdata std:sid="f-data-c5bff69a" row="0" col="2"/>
+        </cl:output>
+        <cl:output std:sid="output-1acf43cd" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="LowDeviceType">
+          <cl:formdata std:sid="f-data-0f7a7954" row="0" col="4"/>
+        </cl:output>
+        <cl:inputbox std:sid="i-box-44e1c4a8" id="ILDM_ipb_PortNo9" enabled="false">
+          <cl:formdata std:sid="f-data-e958a763" row="0" col="1"/>
+        </cl:inputbox>
+        <cl:inputbox std:sid="i-box-f0d065a2" id="ILDM_ipb_LowDevcieName9">
+          <cl:formdata std:sid="f-data-e29737a8" row="0" col="3"/>
+        </cl:inputbox>
+        <cl:combobox std:sid="c-box-a171813d" id="ILDM_cmb_LowDevcieType9">
+          <cl:formdata std:sid="f-data-4a3cfdf4" row="0" col="5"/>
+        </cl:combobox>
+        <cl:formlayout std:sid="f-layout-81b17e10" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="140" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="130" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-49a9630c">
+        <cl:formdata std:sid="f-data-d4b410a4" row="10" col="0"/>
+        <cl:output std:sid="output-21d000db" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="InoutPortNo">
+          <cl:formdata std:sid="f-data-9bf6b8ba" row="0" col="0"/>
+        </cl:output>
+        <cl:output std:sid="output-c841ad7d" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="LowDeviceName">
+          <cl:formdata std:sid="f-data-002733a0" row="0" col="2"/>
+        </cl:output>
+        <cl:output std:sid="output-582c23f2" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="LowDeviceType">
+          <cl:formdata std:sid="f-data-603b4c39" row="0" col="4"/>
+        </cl:output>
+        <cl:inputbox std:sid="i-box-4f0997c1" id="ILDM_ipb_PortNo10" enabled="false">
+          <cl:formdata std:sid="f-data-cce1d2df" row="0" col="1"/>
+        </cl:inputbox>
+        <cl:inputbox std:sid="i-box-7c0468e0" id="ILDM_ipb_LowDevcieName10">
+          <cl:formdata std:sid="f-data-80f2ea52" row="0" col="3"/>
+        </cl:inputbox>
+        <cl:combobox std:sid="c-box-b3deef87" id="ILDM_cmb_LowDevcieType10">
+          <cl:formdata std:sid="f-data-c3cd0c4b" row="0" col="5"/>
+        </cl:combobox>
+        <cl:formlayout std:sid="f-layout-b65883e5" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="140" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="130" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-bbd57f6b">
+        <cl:formdata std:sid="f-data-49a68bcd" row="11" col="0"/>
+        <cl:output std:sid="output-abd0419f" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="InoutPortNo">
+          <cl:formdata std:sid="f-data-40c008d5" row="0" col="0"/>
+        </cl:output>
+        <cl:output std:sid="output-ba02f539" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="LowDeviceName">
+          <cl:formdata std:sid="f-data-0663eb81" row="0" col="2"/>
+        </cl:output>
+        <cl:output std:sid="output-7196fc3e" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="LowDeviceType">
+          <cl:formdata std:sid="f-data-becce464" row="0" col="4"/>
+        </cl:output>
+        <cl:inputbox std:sid="i-box-5a93ecbe" id="ILDM_ipb_PortNo11" enabled="false">
+          <cl:formdata std:sid="f-data-4ed99a6b" row="0" col="1"/>
+        </cl:inputbox>
+        <cl:inputbox std:sid="i-box-afb0ba3f" id="ILDM_ipb_LowDevcieName11">
+          <cl:formdata std:sid="f-data-2c45a5a5" row="0" col="3"/>
+        </cl:inputbox>
+        <cl:combobox std:sid="c-box-bd27a372" id="ILDM_cmb_LowDevcieType11">
+          <cl:formdata std:sid="f-data-54d08049" row="0" col="5"/>
+        </cl:combobox>
+        <cl:formlayout std:sid="f-layout-1137f8cc" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="140" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="130" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-4efc5bcc">
+        <cl:formdata std:sid="f-data-2e4e77c0" row="12" col="0"/>
+        <cl:output std:sid="output-26627e3b" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="InoutPortNo">
+          <cl:formdata std:sid="f-data-ae2f0fac" row="0" col="0"/>
+        </cl:output>
+        <cl:output std:sid="output-3c0f0c3b" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="LowDeviceName">
+          <cl:formdata std:sid="f-data-11b3c0b3" row="0" col="2"/>
+        </cl:output>
+        <cl:output std:sid="output-eb86fe61" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="LowDeviceType">
+          <cl:formdata std:sid="f-data-2c96b21d" row="0" col="4"/>
+        </cl:output>
+        <cl:inputbox std:sid="i-box-41ab04bb" id="ILDM_ipb_PortNo12" enabled="false">
+          <cl:formdata std:sid="f-data-b4e0ecf1" row="0" col="1"/>
+        </cl:inputbox>
+        <cl:inputbox std:sid="i-box-11e659c2" id="ILDM_ipb_LowDevcieName12">
+          <cl:formdata std:sid="f-data-fd2b28e7" row="0" col="3"/>
+        </cl:inputbox>
+        <cl:combobox std:sid="c-box-a83c8e09" id="ILDM_cmb_LowDevcieType12">
+          <cl:formdata std:sid="f-data-749f1ce7" row="0" col="5"/>
+        </cl:combobox>
+        <cl:formlayout std:sid="f-layout-27e3386f" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="140" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="130" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-e3f299ad">
+        <cl:formdata std:sid="f-data-4488c295" row="13" col="0"/>
+        <cl:output std:sid="output-1d9bac45" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="InoutPortNo">
+          <cl:formdata std:sid="f-data-25174fe7" row="0" col="0"/>
+        </cl:output>
+        <cl:output std:sid="output-2497ef85" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="LowDeviceName">
+          <cl:formdata std:sid="f-data-c7c78d85" row="0" col="2"/>
+        </cl:output>
+        <cl:output std:sid="output-f2475ead" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="LowDeviceType">
+          <cl:formdata std:sid="f-data-ba7323bd" row="0" col="4"/>
+        </cl:output>
+        <cl:inputbox std:sid="i-box-f63338cb" id="ILDM_ipb_PortNo13" enabled="false">
+          <cl:formdata std:sid="f-data-67b015ff" row="0" col="1"/>
+        </cl:inputbox>
+        <cl:inputbox std:sid="i-box-3b2f23a6" id="ILDM_ipb_LowDevcieName13">
+          <cl:formdata std:sid="f-data-c506ac78" row="0" col="3"/>
+        </cl:inputbox>
+        <cl:combobox std:sid="c-box-3ad98e32" id="ILDM_cmb_LowDevcieType13">
+          <cl:formdata std:sid="f-data-aeca1aa8" row="0" col="5"/>
+        </cl:combobox>
+        <cl:formlayout std:sid="f-layout-e788a5d6" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="140" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="130" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-0e7308b9">
+        <cl:formdata std:sid="f-data-1a5bd71b" row="14" col="0"/>
+        <cl:output std:sid="output-997b0167" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="InoutPortNo">
+          <cl:formdata std:sid="f-data-289c1970" row="0" col="0"/>
+        </cl:output>
+        <cl:output std:sid="output-73639ca3" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="LowDeviceName">
+          <cl:formdata std:sid="f-data-de3cff29" row="0" col="2"/>
+        </cl:output>
+        <cl:output std:sid="output-2e6d9f6d" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="LowDeviceType">
+          <cl:formdata std:sid="f-data-6f57fdea" row="0" col="4"/>
+        </cl:output>
+        <cl:inputbox std:sid="i-box-456f4376" id="ILDM_ipb_PortNo14" enabled="false">
+          <cl:formdata std:sid="f-data-ec5d7114" row="0" col="1"/>
+        </cl:inputbox>
+        <cl:inputbox std:sid="i-box-5d5ffd79" id="ILDM_ipb_LowDevcieName14">
+          <cl:formdata std:sid="f-data-0ef2c6f3" row="0" col="3"/>
+        </cl:inputbox>
+        <cl:combobox std:sid="c-box-20a8777d" id="ILDM_cmb_LowDevcieType14">
+          <cl:formdata std:sid="f-data-b762eabe" row="0" col="5"/>
+        </cl:combobox>
+        <cl:formlayout std:sid="f-layout-7e529c58" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="140" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="130" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-4ffef613">
+        <cl:formdata std:sid="f-data-228e981b" row="15" col="0"/>
+        <cl:output std:sid="output-cc6ab0bf" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="InoutPortNo">
+          <cl:formdata std:sid="f-data-302a8a51" row="0" col="0"/>
+        </cl:output>
+        <cl:output std:sid="output-0c77f4ac" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="LowDeviceName">
+          <cl:formdata std:sid="f-data-e4c0f814" row="0" col="2"/>
+        </cl:output>
+        <cl:output std:sid="output-8a85286c" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="LowDeviceType">
+          <cl:formdata std:sid="f-data-9bd5c7df" row="0" col="4"/>
+        </cl:output>
+        <cl:inputbox std:sid="i-box-4ca79b33" id="ILDM_ipb_PortNo15" enabled="false">
+          <cl:formdata std:sid="f-data-5411f63d" row="0" col="1"/>
+        </cl:inputbox>
+        <cl:inputbox std:sid="i-box-8b95afde" id="ILDM_ipb_LowDevcieName15">
+          <cl:formdata std:sid="f-data-e608c1ee" row="0" col="3"/>
+        </cl:inputbox>
+        <cl:combobox std:sid="c-box-539d0361" id="ILDM_cmb_LowDevcieType15">
+          <cl:formdata std:sid="f-data-515c064e" row="0" col="5"/>
+        </cl:combobox>
+        <cl:formlayout std:sid="f-layout-a4b47800" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="140" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="130" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-6f99955d">
+        <cl:formdata std:sid="f-data-eb4ef0f6" row="16" col="0"/>
+        <cl:output std:sid="output-35d537da" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="InoutPortNo">
+          <cl:formdata std:sid="f-data-057ad673" row="0" col="0"/>
+        </cl:output>
+        <cl:output std:sid="output-8efff14a" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="LowDeviceName">
+          <cl:formdata std:sid="f-data-88b34021" row="0" col="2"/>
+        </cl:output>
+        <cl:output std:sid="output-ba670ee7" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="LowDeviceType">
+          <cl:formdata std:sid="f-data-a56f748d" row="0" col="4"/>
+        </cl:output>
+        <cl:inputbox std:sid="i-box-2952b3c8" id="ILDM_ipb_PortNo16" enabled="false">
+          <cl:formdata std:sid="f-data-d8745624" row="0" col="1"/>
+        </cl:inputbox>
+        <cl:inputbox std:sid="i-box-f352d1c1" id="ILDM_ipb_LowDevcieName16">
+          <cl:formdata std:sid="f-data-9e57eaa5" row="0" col="3"/>
+        </cl:inputbox>
+        <cl:combobox std:sid="c-box-93361dcf" id="ILDM_cmb_LowDevcieType16">
+          <cl:formdata std:sid="f-data-03fa7837" row="0" col="5"/>
+        </cl:combobox>
+        <cl:formlayout std:sid="f-layout-eb6c600b" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="140" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="130" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-cbaf7227" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:formlayout std:sid="f-layout-e7f41f2c" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+      <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      <cl:columns length="1" unit="FRACTION"/>
+    </cl:formlayout>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

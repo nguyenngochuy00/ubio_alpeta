@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-52add9e7" version="1.0.0.0">
+  <head std:sid="head-c88a11de">
+    <title>tabletManagement</title>
+    <screen std:sid="screen-265dbd95" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="false" useCustomHeight="false" customHeight="500" customWidth="800"/>
+    <screen std:sid="screen-45e0a40a" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-4bed303e" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-49eb1fd8">
+      <cl:dataset std:sid="d-set-b43852e8" id="TabletInfoList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-a44136bb" name="ID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-db66a88f" name="Name"/>
+          <cl:datacolumn std:sid="d-column-c6b7407d" name="UniqueKey" datatype="string"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-7e45eb88" id="DelTabletList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-bd86f1f5" name="TabletID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-3ab19900" name="RowIndex" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-71f76a43" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-2afe3c12" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-1804400d" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-28001652" name="Count" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-6bcabcef" id="sms_getTabletInfoList" method="get" action="/v1/armyhq/tablet">
+        <cl:listener std:sid="listener-c071de80" name="submit-error" handler="onSms_getTabletInfoListSubmitError"/>
+        <cl:listener std:sid="listener-82919f46" name="submit-timeout" handler="onSms_getTabletInfoListSubmitTimeout"/>
+        <cl:listener std:sid="listener-e15afb51" name="submit-done" handler="onSms_getTabletInfoListSubmitDone"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total"/>
+        <cl:responsedata dataid="TabletInfoList"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-21cbd1db" id="sms_deleteTablet" method="delete" action="/v1/armyhq/tablet/">
+        <cl:listener std:sid="listener-1a936ebe" name="submit-error" handler="onSms_deleteTabletSubmitError"/>
+        <cl:listener std:sid="listener-52da1559" name="submit-timeout" handler="onSms_deleteTabletSubmitTimeout"/>
+        <cl:listener std:sid="listener-3f368e34" name="submit-done" handler="onSms_deleteTabletSubmitDone"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-3b7d27b2" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-c3815a8f" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-b95d8854" id="AMTM_grpMain" style="color:#010101;">
+      <cl:xylayoutdata std:sid="xyl-data-cb136ff9" top="25px" left="50px" width="1148px" height="1011px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      <cl:group std:sid="group-d4e32acd" style="color:#010101;">
+        <cl:formdata std:sid="f-data-9a39e54d" row="3" col="0"/>
+        <cl:output std:sid="output-7409bdbc" style="color:#000000; text-align:center;" class="section-title-amhq">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Total"/>
+          <cl:formdata std:sid="f-data-0e750e7d" row="0" col="0"/>
+        </cl:output>
+        <cl:output std:sid="output-9f61ca9b" id="AMTM_optTotal" style="color:#000000; text-align:center;" class="section-title-amhq">
+          <cl:datamapbind property="value" datacontrolid="Total" columnname="Count"/>
+          <cl:formdata std:sid="f-data-e61175c1" row="0" col="1"/>
+        </cl:output>
+        <cl:button std:sid="button-d57c7e37" id="AMTM_btnDelete" class="button-amhq">
+          <cl:listener std:sid="listener-2fea27d7" name="click" handler="onAMTM_btnDeleteClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Delete"/>
+          <cl:formdata std:sid="f-data-530a40d6" row="0" col="5"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-d07f5031" scrollable="false" hspace="0px" vspace="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="45" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="5" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-15edaca2">
+        <cl:formdata std:sid="f-data-b0ba6bf0" row="5" col="0"/>
+        <cl:grid std:sid="grid-c741f0de" id="AMTM_grdTabletList" style="color:#010101;" class="grid-amhq" readonly="true" datasetid="TabletInfoList">
+          <cl:formdata std:sid="f-data-9298da3a" row="0" col="0"/>
+          <cl:gridcolumn std:sid="g-column-78e3a60b" width="25px"/>
+          <cl:gridcolumn std:sid="g-column-26f720ef" width="88px"/>
+          <cl:gridcolumn std:sid="g-column-46678d9e" width="121px"/>
+          <cl:gridcolumn std:sid="g-column-582313c5" width="151px"/>
+          <cl:gridheader std:sid="gh-band-cc508daf">
+            <cl:gridrow std:sid="g-row-09f9ee47" height="50px"/>
+            <cl:gridcell std:sid="gh-cell-968666a9" rowindex="0" colindex="0" sortable="false" filterable="false" columntype="checkbox"/>
+            <cl:gridcell std:sid="gh-cell-e4f2e5c3" rowindex="0" colindex="1" targetcolumnname="ID" sortable="false" filterable="false" text="장비번호"/>
+            <cl:gridcell std:sid="gh-cell-2906a31c" rowindex="0" colindex="2" targetcolumnname="Name" sortable="false" filterable="false" text="이름"/>
+            <cl:gridcell std:sid="gh-cell-6a91af02" rowindex="0" colindex="3" sortable="false" filterable="false" text="고유 식별자"/>
+          </cl:gridheader>
+          <cl:griddetail std:sid="gd-band-a06f5098">
+            <cl:gridrow std:sid="g-row-4a301bc9" height="30px"/>
+            <cl:gridcell std:sid="gd-cell-e014151e" rowindex="0" colindex="0" columntype="checkbox"/>
+            <cl:gridcell std:sid="gd-cell-126ce661" rowindex="0" colindex="1" columnname="ID"/>
+            <cl:gridcell std:sid="gd-cell-ca1e0de6" rowindex="0" colindex="2" columnname="Name"/>
+            <cl:gridcell std:sid="gd-cell-fbafc14a" rowindex="0" colindex="3" columnname="UniqueKey"/>
+          </cl:griddetail>
+        </cl:grid>
+        <cl:group std:sid="group-c6fd5c91">
+          <cl:formdata std:sid="f-data-3dc04a2b" row="1" col="0"/>
+          <cl:formlayout std:sid="f-layout-bbbe7a94" hspace="1px" vspace="1px" top-margin="1px" right-margin="1px" bottom-margin="1px" left-margin="1px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="90" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="155" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-d34d5761" scrollable="false">
+          <cl:rows length="323" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-dd320bfb" style="color:#010101;">
+        <cl:formdata std:sid="f-data-858f7ee9" row="2" col="0"/>
+        <cl:output std:sid="output-1c95afc9" class="section-title-amhq" value="태블릿 장비 관리">
+          <cl:formdata std:sid="f-data-32a320e3" row="0" col="0"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-6faada69" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="240" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:output std:sid="output-49b34f86" id="ACAPAP_opbTitle" class="menu-title-amhq" value="태블릿 관리">
+        <cl:formdata std:sid="f-data-fd495755" halign="LEFT" width="160" row="0" col="0"/>
+      </cl:output>
+      <cl:formlayout std:sid="f-layout-19fb7df5" scrollable="false" hspace="0px" vspace="0px">
+        <cl:rows length="35" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="10" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="600" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-f234b77d"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

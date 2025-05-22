@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-ae2736d4" version="1.0.0.0">
+  <head std:sid="head-c871299f">
+    <title>UserManagement</title>
+    <screen std:sid="screen-642abed3" id="default" height="768px" minwidth="1024px" name="default" width="1024px"/>
+    <screen std:sid="screen-0e7527e9" id="tablet" height="667px" maxwidth="1023px" minwidth="500px" name="tablet" width="500px"/>
+    <screen std:sid="screen-7b1be591" id="mobile" height="525px" maxwidth="499px" name="mobile" width="350px"/>
+    <cl:model std:sid="model-fab34df5">
+      <cl:datamap std:sid="d-map-cc517011" id="dm_SearchParam">
+        <cl:datacolumnlist>
+          <cl:datacolumn name="clssCd"/>
+          <cl:datacolumn name="keyword"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:dataset std:sid="d-set-174ba88d" id="GroupList">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="GroupID"/>
+          <cl:datacolumn datatype="number" name="Parent"/>
+          <cl:datacolumn name="Name"/>
+          <cl:datacolumn name="Description"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:submission std:sid="submission-81231b5a" id="sms_getUserList" action="/v1/users" method="get">
+        <cl:listener std:sid="listener-f219fe9b" handler="onSms_getUserListSubmitSuccess" name="submit-success"/>
+        <cl:listener std:sid="listener-49c16de9" handler="onSms_getUserListSubmitDone" name="submit-done"/>
+        <cl:listener std:sid="listener-edb64543" handler="onSms_getUserListSubmitError" name="submit-error"/>
+        <cl:listener std:sid="listener-14453d03" handler="onSms_getUserListSubmitTimeout" name="submit-timeout"/>
+        <cl:requestparam name="searchCategory"/>
+        <cl:requestparam name="searchKeyword" value=""/>
+        <cl:requestparam name="offset" value="0"/>
+        <cl:requestparam name="limit" value="50"/>
+        <cl:requestparam name="picture" value="false"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total" isadd="false"/>
+        <cl:responsedata dataid="UserList" isadd="false"/>
+      </cl:submission>
+      <cl:dataset std:sid="d-set-a1e53e49" id="UserList">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="string" name="ID"/>
+          <cl:datacolumn name="UniqueID"/>
+          <cl:datacolumn datatype="string" name="Name"/>
+          <cl:datacolumn name="AuthInfo"/>
+          <cl:datacolumn datatype="number" name="Privilege"/>
+          <cl:datacolumn name="RegistDate"/>
+          <cl:datacolumn name="ExpireDate"/>
+          <cl:datacolumn datatype="number" name="GroupCode"/>
+          <cl:datacolumn datatype="number" name="AccessGroupCode"/>
+          <cl:datacolumn datatype="number" name="TimezoneCode"/>
+          <cl:datacolumn datatype="number" name="BlackList"/>
+          <cl:datacolumn datatype="number" name="FPIdentify"/>
+          <cl:datacolumn datatype="number" name="FaceIdentify"/>
+          <cl:datacolumn datatype="number" name="APBZone"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-c2bd18fc" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="Count"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-a33aca7f" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="ResultCode"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-203e17a7" id="sms_deleteUser" action="/v1/users" method="delete">
+        <cl:listener std:sid="listener-4529ef83" handler="onSms_deleteUserSubmitDone" name="submit-done"/>
+        <cl:listener std:sid="listener-d8a66632" handler="onSms_deleteUserSubmitError" name="submit-error"/>
+        <cl:listener std:sid="listener-0525e2bf" handler="onSms_deleteUserSubmitTimeout" name="submit-timeout"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:dataset std:sid="d-set-ab9c534d" id="dsDeleteList">
+        <cl:datacolumnlist>
+          <cl:datacolumn name="UserID"/>
+          <cl:datacolumn datatype="number" name="rowIndex"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:submission std:sid="submission-dceae837" id="sms_getNewUserID" action="/v1/users/initUserInfo" method="get">
+        <cl:listener std:sid="listener-0c6ad5e4" handler="onSms_getNewUserIDSubmitSuccess" name="submit-success"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="dmUserInfo"/>
+      </cl:submission>
+      <cl:datamap std:sid="d-map-8119d3f8" id="dmUserInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn name="ID"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-8541c1d3" id="smsUserInfoReq" action="/v1/users" method="get">
+        <cl:listener std:sid="listener-f0e8efea" handler="onSmsUserInfoReqSubmitDone" name="submit-done"/>
+        <cl:listener std:sid="listener-23c63f49" handler="onSmsUserInfoReqSubmitError" name="submit-error"/>
+        <cl:listener std:sid="listener-83cf0a05" handler="onSmsUserInfoReqSubmitTimeout" name="submit-timeout"/>
+        <cl:requestparam name="fingerprint" value="true"/>
+        <cl:requestparam name="face" value="true"/>
+        <cl:requestparam name="picture" value="true"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="UserCardInfo" isadd="true"/>
+      </cl:submission>
+      <cl:dataset std:sid="d-set-905e1c47" id="UserCardInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn name="CardNum"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-d9fc29f6" id="dm_IssuedUserInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn name="ID"/>
+          <cl:datacolumn name="UniqueID"/>
+          <cl:datacolumn name="Name"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-66bd7c7f" style="padding:0px; top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-a41ea218" handler="onBodyLoad" name="load"/>
+    <cl:group std:sid="group-7d38c4de">
+      <cl:xylayoutdata std:sid="xyl-data-8d2d5a8c" height="350px" horizontalAnchor="LEFT" left="5px" top="5px" verticalAnchor="TOP" width="740px"/>
+      <cl:group std:sid="group-2558c907" class="un-form-border" style="border-right-style:none; padding:10px; border-left-style:none; border-bottom-style:none; border-top-style:none;">
+        <cl:formdata std:sid="f-data-0a1fde78" col="1" row="0"/>
+        <cl:group std:sid="group-443024b9">
+          <cl:formdata std:sid="f-data-694de61d" col="0" row="1"/>
+          <cl:udc std:sid="ud-control-226a5e38" id="USMAG_udcSearchUser" type="udc.search.searchUser">
+            <cl:listener std:sid="listener-76050b1e" handler="onUSMAG_udcSearchUserSearch" name="search"/>
+            <cl:formdata std:sid="f-data-79aef0eb" col="2" row="0"/>
+          </cl:udc>
+          <cl:output std:sid="output-3ed919ff" class="common-titlelabel" style="text-align:center;">
+            <cl:langbind category="PROPERTY" property="value" keypath="Str_Total"/>
+            <cl:formdata std:sid="f-data-174f4fa1" col="0" row="0"/>
+          </cl:output>
+          <cl:output std:sid="output-4ebc575d" id="opt_tot" style="vertical-align:middle; text-align:left;" datatype="number" format="s#,###">
+            <cl:datamapbind property="value" columnname="Count" datacontrolid="Total"/>
+            <cl:formdata std:sid="f-data-056f9056" col="1" row="0"/>
+          </cl:output>
+          <cl:formlayout std:sid="f-layout-15441885" hspace="5px" vspace="5px">
+            <cl:rows length="30" shadecolor="transparent" shadetype="NONE" unit="PIXEL"/>
+            <cl:columns autoSizing="false" length="40" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+            <cl:columns autoSizing="false" length="70" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+            <cl:columns autoSizing="false" length="300" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+            <cl:columns autoSizing="false" length="80" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+            <cl:columns autoSizing="false" length="14" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:udc std:sid="ud-control-62803683" id="USMAG_udcUserList" class="user_allList" readonly="true" type="udc.grid.userList">
+          <cl:listener std:sid="listener-333580dd" handler="onUSMAG_udcUserListUserListDblclick" name="userListDblclick"/>
+          <cl:formdata std:sid="f-data-ee3441e0" col="0" row="2"/>
+        </cl:udc>
+        <cl:formlayout std:sid="f-layout-7a7f5eb5">
+          <cl:rows length="30" shadecolor="transparent" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows length="30" shadecolor="transparent" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows length="1" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-81dd8d93" class="common-snbarea" style="border-right-style:none; padding:0px; border-left-style:none; border-bottom-style:none; border-top-style:none;">
+        <cl:formdata std:sid="f-data-6a798888" col="0" row="0"/>
+        <cl:tabfolder std:sid="t-folder-9bbbbb66" class="common-snbtab" style="padding:10px;">
+          <cl:xylayoutdata std:sid="xyl-data-0d050276" bottom="-178px" horizontalAnchor="BOTH" left="0px" right="-10px" top="0px" verticalAnchor="BOTH"/>
+          <cl:tabitem std:sid="t-item-0e006378" selected="true" text="그룹">
+            <std:metadata>
+              <std:property key="is-active-item" value="true"/>
+            </std:metadata>
+            <cl:langbind category="PROPERTY" property="text" keypath="Str_GroupList"/>
+            <cl:group std:sid="group-45fb022d" style="background-color:#F2F1EF; border-right-style:none; border-left-style:none; border-bottom-style:none; border-top-style:none;">
+              <cl:tree std:sid="tree-638327bf" id="USMAG_treeGroup" class="user_list" style="border-right-style:none; padding:0px 0px 0px 10px; border-left-style:none; border-bottom-style:none; border-top-style:none;">
+                <cl:listener std:sid="listener-e285fabd" handler="onUSMGR_treeGroupSelectionChange" name="selection-change"/>
+                <cl:xylayoutdata std:sid="xyl-data-6d53c204" bottom="0px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="BOTH"/>
+                <cl:treeitemset datasetid="GroupList" label="Name" value="GroupID" parent="Parent"/>
+              </cl:tree>
+              <cl:xylayout std:sid="xylayout-8f6cb59f"/>
+            </cl:group>
+          </cl:tabitem>
+        </cl:tabfolder>
+        <cl:xylayout std:sid="xylayout-0ae7356e"/>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-802eea57">
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns autoSizing="false" length="200" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-9fb9d556"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler>
+      <std:guide position="1026"/>
+    </std:hruler>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

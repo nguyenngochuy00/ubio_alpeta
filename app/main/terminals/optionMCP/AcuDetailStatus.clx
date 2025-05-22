@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-71056ddb" version="1.0.0.0">
+  <head std:sid="head-bd3b95d9">
+    <title>AcuDetailStatus</title>
+    <screen std:sid="screen-15879ccd" id="default" height="768px" minwidth="1024px" name="default" width="1024px"/>
+    <screen std:sid="screen-4ee98411" id="tablet" height="667px" maxwidth="1023px" minwidth="500px" name="tablet" width="500px"/>
+    <screen std:sid="screen-6063d904" id="mobile" height="525px" maxwidth="499px" name="mobile" width="350px"/>
+    <cl:model std:sid="model-5d188bef">
+      <cl:submission std:sid="submission-cec78853" id="smsGetAcuStatus" action="" method="get">
+        <cl:listener std:sid="listener-f4c67799" handler="onSmsGetAcuStatusSubmitDone" name="submit-done"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="dmAcuStatus"/>
+      </cl:submission>
+      <cl:datamap std:sid="d-map-a7913e84" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-0d272d08" datatype="number" name="Resultcode"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-2b9acd96" id="dmAcuStatus">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-567cce84" datatype="number" name="TerminalID"/>
+          <cl:datacolumn std:sid="d-column-4af62021" datatype="string" name="Partition"/>
+          <cl:datacolumn std:sid="d-column-8a492a5a" datatype="string" name="Zone"/>
+          <cl:datacolumn std:sid="d-column-e225ea49" datatype="string" name="Lock"/>
+          <cl:datacolumn std:sid="d-column-81348ae1" datatype="string" name="Reader"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-1cfeb16b" id="TerminalInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-7abb0b0c" datatype="number" defaultvalue="0" name="ID"/>
+          <cl:datacolumn std:sid="d-column-c11f8c29" defaultvalue="" name="Name"/>
+          <cl:datacolumn std:sid="d-column-dc893ef2" datatype="number" defaultvalue="0" name="GroupID"/>
+          <cl:datacolumn std:sid="d-column-452a48ea" datatype="number" defaultvalue="0" name="State"/>
+          <cl:datacolumn std:sid="d-column-d54f7297" datatype="number" defaultvalue="0" name="Type"/>
+          <cl:datacolumn std:sid="d-column-593ff859" datatype="number" defaultvalue="0" name="FuncType"/>
+          <cl:datacolumn std:sid="d-column-a2ed15ee" defaultvalue="" name="IPAddress"/>
+          <cl:datacolumn std:sid="d-column-2a95525f" defaultvalue="" name="MacAddress"/>
+          <cl:datacolumn std:sid="d-column-2b1b83b0" defaultvalue="" name="Version"/>
+          <cl:datacolumn std:sid="d-column-71a3299b" datatype="number" defaultvalue="0" name="RemoteDoor"/>
+          <cl:datacolumn std:sid="d-column-1a0298c0" datatype="number" defaultvalue="0" name="UTCIndex"/>
+          <cl:datacolumn std:sid="d-column-c9dfaf60" datatype="number" defaultvalue="0" name="GroupCode"/>
+          <cl:datacolumn std:sid="d-column-75b0c51d" defaultvalue="" name="Description"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-ef6eff9e" id="TerminalApbAreaInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-b4e4422d" datatype="number" defaultvalue="0" name="ID"/>
+          <cl:datacolumn std:sid="d-column-c4d38a04" datatype="number" defaultvalue="0" name="AreaIn"/>
+          <cl:datacolumn std:sid="d-column-58589084" defaultvalue="" name="AreaInName"/>
+          <cl:datacolumn std:sid="d-column-b7a76d07" datatype="number" defaultvalue="0" name="AreaOut"/>
+          <cl:datacolumn std:sid="d-column-a180f5bf" defaultvalue="" name="AreaOutName"/>
+          <cl:datacolumn std:sid="d-column-4c4dd69d" datatype="number" defaultvalue="0" name="SoftPassback"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-a6ac9298" id="sms_get_terminal_info" action="/v1/terminals" method="get">
+        <cl:listener std:sid="listener-9c2cf434" handler="onSms_get_terminal_infoSubmitDone" name="submit-done"/>
+        <cl:responsedata dataid="TerminalInfo"/>
+        <cl:responsedata dataid="TerminalApbAreaInfo"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-9bb5b510" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-7f81d584" handler="onBodyLoad" name="load"/>
+    <cl:group std:sid="group-5a1e6d82" id="basicgrd" style="border-radius:2px; padding:10px;">
+      <cl:xylayoutdata std:sid="xyl-data-77b9d211" height="500px" horizontalAnchor="LEFT" left="10px" top="10px" verticalAnchor="TOP" width="932px"/>
+      <cl:group std:sid="group-878d6771" style="padding:0px; border-radius:2px;">
+        <cl:formdata std:sid="f-data-56094e1d" col="0" row="0"/>
+        <cl:output std:sid="output-db9f8757" style="font-weight:700; font-size:14px; text-align:center;" visible="false">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_Name"/>
+          <cl:formdata std:sid="f-data-bc82390c" col="0" colspan="3" row="0" rowspan="1"/>
+        </cl:output>
+        <cl:button std:sid="button-d7a27c54" id="btnReaderInfoSave" class="userInfo_btn" style="background-color:#70b8fa; color:#000207;" enabled="false" readonly="true" value="1">
+          <cl:formdata std:sid="f-data-4746fc99" col="2" row="2"/>
+        </cl:button>
+        <cl:button std:sid="button-bf81f889" class="userInfo_btn" style="background-color:#70b8fa; color:#000207;" enabled="false" readonly="true" value="2">
+          <cl:formdata std:sid="f-data-98f7c0a4" col="4" row="2"/>
+        </cl:button>
+        <cl:button std:sid="button-b0ef6463" class="userInfo_btn" style="background-color:#70b8fa; color:#000207;" enabled="false" readonly="true" value="3">
+          <cl:formdata std:sid="f-data-f6bbd0d2" col="6" row="2"/>
+        </cl:button>
+        <cl:button std:sid="button-7c346a0c" class="userInfo_btn" style="background-color:#70b8fa; color:#000207;" enabled="false" readonly="true" value="4">
+          <cl:formdata std:sid="f-data-609f9d49" col="8" row="2"/>
+        </cl:button>
+        <cl:button std:sid="button-43a9bbf0" class="userInfo_btn" style="background-color:#70b8fa; color:#000207;" enabled="false" readonly="true" value="5">
+          <cl:formdata std:sid="f-data-620a10e8" col="10" row="2"/>
+        </cl:button>
+        <cl:button std:sid="button-9487807a" class="userInfo_btn" style="background-color:#70b8fa; color:#000207;" enabled="false" readonly="true" value="6">
+          <cl:formdata std:sid="f-data-714f2fb6" col="12" row="2"/>
+        </cl:button>
+        <cl:button std:sid="button-318bde16" class="userInfo_btn" style="background-color:#70b8fa; color:#000207;" enabled="false" readonly="true" value="7">
+          <cl:formdata std:sid="f-data-a63f4fae" col="14" row="2"/>
+        </cl:button>
+        <cl:button std:sid="button-494e6877" class="userInfo_btn" style="background-color:#70b8fa; color:#000207;" enabled="false" readonly="true" value="8">
+          <cl:formdata std:sid="f-data-14b96d54" col="16" row="2"/>
+        </cl:button>
+        <cl:button std:sid="button-1c730d42" class="userInfo_btn" style="background-color:#70b8fa; color:#000207;" enabled="false" readonly="true">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_Partition"/>
+          <cl:formdata std:sid="f-data-10f8bbfe" col="0" row="4"/>
+        </cl:button>
+        <cl:button std:sid="button-b6d28bda" id="btnPartition1" class="userInfo_btn" style="background-color:#c8d4e0; color:#000207;" enabled="false" readonly="true" value="Set Off">
+          <cl:formdata std:sid="f-data-d1413deb" col="2" row="4"/>
+        </cl:button>
+        <cl:button std:sid="button-29324b32" id="btnPartition2" class="userInfo_btn" style="background-color:#c8d4e0; color:#000207;" enabled="false" readonly="true" value="Set Off">
+          <cl:formdata std:sid="f-data-1ffb9a9f" col="4" row="4"/>
+        </cl:button>
+        <cl:button std:sid="button-8ba2e7f3" id="btnPartition3" class="userInfo_btn" style="background-color:#c8d4e0; color:#000207;" enabled="false" readonly="true" value="Set Off">
+          <cl:formdata std:sid="f-data-a8e872d0" col="6" row="4"/>
+        </cl:button>
+        <cl:button std:sid="button-deac8554" id="btnPartition4" class="userInfo_btn" style="background-color:#c8d4e0; color:#000207;" enabled="false" readonly="true" value="Set Off">
+          <cl:formdata std:sid="f-data-52c2d659" col="8" row="4"/>
+        </cl:button>
+        <cl:button std:sid="button-3a9bba5c" class="userInfo_btn" style="background-color:#70b8fa; color:#000207;" enabled="false" readonly="true">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_Zone"/>
+          <cl:formdata std:sid="f-data-7c69373a" col="0" row="6"/>
+        </cl:button>
+        <cl:button std:sid="button-cdefed21" id="btnZone1" class="userInfo_btn" style="background-color:#c8d4e0; color:#000207;" enabled="false" readonly="true" value="Open">
+          <cl:formdata std:sid="f-data-61d25400" col="2" row="6"/>
+        </cl:button>
+        <cl:button std:sid="button-909fc03d" id="btnZone2" class="userInfo_btn" style="background-color:#c8d4e0; color:#000207;" enabled="false" readonly="true" value="Open">
+          <cl:formdata std:sid="f-data-7e73049b" col="4" row="6"/>
+        </cl:button>
+        <cl:button std:sid="button-56be6f6b" id="btnZone3" class="userInfo_btn" style="background-color:#c8d4e0; color:#000207;" enabled="false" readonly="true" value="Open">
+          <cl:formdata std:sid="f-data-4f21c7b1" col="6" row="6"/>
+        </cl:button>
+        <cl:button std:sid="button-0c876d2a" id="btnZone4" class="userInfo_btn" style="background-color:#c8d4e0; color:#000207;" enabled="false" readonly="true" value="Open">
+          <cl:formdata std:sid="f-data-840fedc7" col="8" row="6"/>
+        </cl:button>
+        <cl:button std:sid="button-b4cfd594" id="btnZone5" class="userInfo_btn" style="background-color:#c8d4e0; color:#000207;" enabled="false" readonly="true" value="Unused">
+          <cl:formdata std:sid="f-data-2f432c0b" col="10" row="6"/>
+        </cl:button>
+        <cl:button std:sid="button-3b96fa4a" id="btnZone6" class="userInfo_btn" style="background-color:#c8d4e0; color:#000207;" enabled="false" readonly="true" value="Unused">
+          <cl:formdata std:sid="f-data-92ca87a1" col="12" row="6"/>
+        </cl:button>
+        <cl:button std:sid="button-0932b6a6" id="btnZone7" class="userInfo_btn" style="background-color:#c8d4e0; color:#000207;" enabled="false" readonly="true" value="Unused">
+          <cl:formdata std:sid="f-data-4b9feb20" col="14" row="6"/>
+        </cl:button>
+        <cl:button std:sid="button-8f1440d7" id="btnZone8" class="userInfo_btn" style="background-color:#c8d4e0; color:#000207;" enabled="false" readonly="true" value="Unused">
+          <cl:formdata std:sid="f-data-8461742f" col="16" row="6"/>
+        </cl:button>
+        <cl:button std:sid="button-5fd8d39a" class="userInfo_btn" style="background-color:#70b8fa; color:#000207;" enabled="false" readonly="true">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_Lock"/>
+          <cl:formdata std:sid="f-data-6a163d5d" col="0" row="8"/>
+        </cl:button>
+        <cl:button std:sid="button-a1cca5a8" id="btnLock1" class="userInfo_btn" style="background-color:#c8d4e0; color:#000207;" enabled="false" readonly="true" value="Closed">
+          <cl:formdata std:sid="f-data-76e3a8a2" col="2" row="8"/>
+        </cl:button>
+        <cl:button std:sid="button-d6387f0d" id="btnLock2" class="userInfo_btn" style="background-color:#c8d4e0; color:#000207;" enabled="false" readonly="true" value="Closed">
+          <cl:formdata std:sid="f-data-f4ce0933" col="4" row="8"/>
+        </cl:button>
+        <cl:button std:sid="button-d1d5aa0b" id="btnLock3" class="userInfo_btn" style="background-color:#c8d4e0; color:#000207;" enabled="false" readonly="true" value="Closed">
+          <cl:formdata std:sid="f-data-a13c8f93" col="6" row="8"/>
+        </cl:button>
+        <cl:button std:sid="button-90704c33" id="btnLock4" class="userInfo_btn" style="background-color:#c8d4e0; color:#000207;" enabled="false" readonly="true" value="Closed">
+          <cl:formdata std:sid="f-data-4a8998fa" col="8" row="8"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-d02aee26" hspace="0px" vspace="0px">
+          <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows autoSizing="false" length="5" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows autoSizing="false" length="15" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows autoSizing="false" length="15" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows autoSizing="false" length="15" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="1" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+          <cl:columns autoSizing="false" length="10" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns autoSizing="false" length="10" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns autoSizing="false" length="10" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns autoSizing="false" length="10" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns autoSizing="false" length="10" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns autoSizing="false" length="10" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns autoSizing="false" length="10" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns autoSizing="false" length="10" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-46b14b11" style="padding:0px; border-radius:2px;">
+        <cl:formdata std:sid="f-data-c8433451" col="0" row="1"/>
+        <cl:button std:sid="button-a2a7a049" class="userInfo_btn" style="background-color:#70b8fa; color:#000207;" enabled="false" readonly="true" value="0">
+          <cl:formdata std:sid="f-data-e56d30f0" col="2" row="2"/>
+        </cl:button>
+        <cl:button std:sid="button-4c78355d" class="userInfo_btn" style="background-color:#70b8fa; color:#000207;" enabled="false" readonly="true" value="1">
+          <cl:formdata std:sid="f-data-ddabbbbf" col="4" row="2"/>
+        </cl:button>
+        <cl:button std:sid="button-92e54c83" class="userInfo_btn" style="background-color:#70b8fa; color:#000207;" enabled="false" readonly="true" value="2">
+          <cl:formdata std:sid="f-data-5b757ccb" col="6" row="2"/>
+        </cl:button>
+        <cl:button std:sid="button-b3546a1c" class="userInfo_btn" style="background-color:#70b8fa; color:#000207;" enabled="false" readonly="true" value="3">
+          <cl:formdata std:sid="f-data-54e96ce5" col="8" row="2"/>
+        </cl:button>
+        <cl:button std:sid="button-b8332d97" class="userInfo_btn" style="background-color:#70b8fa; color:#000207;" enabled="false" readonly="true" value="4">
+          <cl:formdata std:sid="f-data-e2896e19" col="10" row="2"/>
+        </cl:button>
+        <cl:button std:sid="button-260e2886" class="userInfo_btn" style="background-color:#70b8fa; color:#000207;" enabled="false" readonly="true" value="5">
+          <cl:formdata std:sid="f-data-7634e77b" col="12" row="2"/>
+        </cl:button>
+        <cl:button std:sid="button-12524c77" class="userInfo_btn" style="background-color:#70b8fa; color:#000207;" enabled="false" readonly="true" value="6">
+          <cl:formdata std:sid="f-data-bc54904a" col="14" row="2"/>
+        </cl:button>
+        <cl:button std:sid="button-31491154" class="userInfo_btn" style="background-color:#70b8fa; color:#000207;" enabled="false" readonly="true" value="7">
+          <cl:formdata std:sid="f-data-5dec4a43" col="16" row="2"/>
+        </cl:button>
+        <cl:button std:sid="button-63c04c94" class="userInfo_btn" style="background-color:#70b8fa; color:#000207;" enabled="false" readonly="true">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_Reader"/>
+          <cl:formdata std:sid="f-data-af80a412" col="0" row="4"/>
+        </cl:button>
+        <cl:button std:sid="button-53651187" id="btnReader0" class="userInfo_btn" style="background-color:#c8d4e0; color:#000207;" enabled="false" readonly="true" value="Unused">
+          <cl:formdata std:sid="f-data-7c3e1845" col="2" row="4"/>
+        </cl:button>
+        <cl:button std:sid="button-5848ed7f" id="btnReader1" class="userInfo_btn" style="background-color:#c8d4e0; color:#000207;" enabled="false" readonly="true" value="Unused">
+          <cl:formdata std:sid="f-data-e9532a37" col="4" row="4"/>
+        </cl:button>
+        <cl:button std:sid="button-6abcf6ac" id="btnReader2" class="userInfo_btn" style="background-color:#c8d4e0; color:#000207;" enabled="false" readonly="true" value="Unused">
+          <cl:formdata std:sid="f-data-65b371bf" col="6" row="4"/>
+        </cl:button>
+        <cl:button std:sid="button-97fb82d3" id="btnReader3" class="userInfo_btn" style="background-color:#c8d4e0; color:#000207;" enabled="false" readonly="true" value="Unused">
+          <cl:formdata std:sid="f-data-d81847ab" col="8" row="4"/>
+        </cl:button>
+        <cl:button std:sid="button-7246cc7d" id="btnReader4" class="userInfo_btn" style="background-color:#c8d4e0; color:#000207;" enabled="false" readonly="true" value="Unused">
+          <cl:formdata std:sid="f-data-ad977a30" col="10" row="4"/>
+        </cl:button>
+        <cl:button std:sid="button-d2f32776" id="btnReader5" class="userInfo_btn" style="background-color:#c8d4e0; color:#000207;" enabled="false" readonly="true" value="Unused">
+          <cl:formdata std:sid="f-data-5c1a1f5e" col="12" row="4"/>
+        </cl:button>
+        <cl:button std:sid="button-c1dbbb36" id="btnReader7" class="userInfo_btn" style="background-color:#c8d4e0; color:#000207;" enabled="false" readonly="true" value="Unused">
+          <cl:formdata std:sid="f-data-42c8dab0" col="16" row="4"/>
+        </cl:button>
+        <cl:button std:sid="button-2da7f314" id="btnReader6" class="userInfo_btn" style="background-color:#c8d4e0; color:#000207;" enabled="false" readonly="true" value="Unused">
+          <cl:formdata std:sid="f-data-cb395245" col="14" row="4"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-3a101040" hspace="0px" vspace="0px">
+          <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows autoSizing="false" length="5" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows autoSizing="false" length="15" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows autoSizing="false" length="15" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows autoSizing="false" length="15" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="1" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+          <cl:columns autoSizing="false" length="10" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns autoSizing="false" length="10" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns autoSizing="false" length="10" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns autoSizing="false" length="10" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns autoSizing="false" length="10" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns autoSizing="false" length="10" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns autoSizing="false" length="10" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns autoSizing="false" length="10" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:button std:sid="button-56607821" class="userInfo_btn" style="background-color:#503da0; color:#f4f6fa;" value="Acu Web Setting ">
+        <cl:listener std:sid="listener-bf5e906f" handler="onButtonClick" name="click"/>
+        <cl:formdata std:sid="f-data-f93a5599" col="0" row="2"/>
+      </cl:button>
+      <cl:formlayout std:sid="f-layout-dcd2fe65" hspace="0px" vspace="0px">
+        <cl:rows autoSizing="false" length="220" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:rows autoSizing="false" length="160" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:rows autoSizing="false" length="30" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-7cdeda96"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

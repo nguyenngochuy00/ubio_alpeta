@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-837a8986" version="1.0.0.0">
+  <head std:sid="head-a0465804">
+    <title>AccessAreaManagement</title>
+    <screen std:sid="screen-a4ecb81e" id="default" customHeight="400" customWidth="800" height="768px" minwidth="1024px" name="default" useCustomHeight="true" useCustomWidth="true" width="1024px"/>
+    <screen std:sid="screen-ca482e4b" id="tablet" height="667px" maxwidth="1023px" minwidth="500px" name="tablet" width="500px"/>
+    <screen std:sid="screen-cea8283c" id="mobile" height="525px" maxwidth="499px" name="mobile" width="350px"/>
+    <cl:model std:sid="model-2e979f2f">
+      <cl:dataset std:sid="d-set-271fb2e9" id="AccessAreaList">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="ID"/>
+          <cl:datacolumn name="Name"/>
+          <cl:datacolumn datatype="number" name="Timezone"/>
+          <cl:datacolumn name="Floor"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-961436a4" id="dsTreeContextMenu">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="string" name="label"/>
+          <cl:datacolumn datatype="number" name="value"/>
+          <cl:datacolumn name="parent"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-1e7a9ce3" id="TerminalList">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="ID"/>
+          <cl:datacolumn name="Name"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:submission std:sid="submission-25b3e7f4" id="sms_getTerminalList" action="/v1/terminals" method="get">
+        <cl:listener std:sid="listener-dfb5a7e3" handler="onSms_getTerminalListSubmitDone" name="submit-done"/>
+        <cl:listener std:sid="listener-ec2cd4f2" handler="onSms_getTerminalListSubmitSuccess" name="submit-success"/>
+        <cl:listener std:sid="listener-6d4ebb4d" handler="onSms_getTerminalListSubmitTimeout" name="submit-timeout"/>
+        <cl:listener std:sid="listener-e945a70f" handler="onSms_getTerminalListSubmitTimeout2" name="submit-timeout"/>
+        <cl:listener std:sid="listener-4d9f9a26" handler="onSms_getTerminalListSubmitError" name="submit-error"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total"/>
+        <cl:responsedata dataid="TerminalList"/>
+      </cl:submission>
+      <cl:datamap std:sid="d-map-ac2d0aca" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="Count"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-c30ddf49" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="ResultCode"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:dataset std:sid="d-set-fbd71a41" id="TerminalInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="ID"/>
+          <cl:datacolumn name="Name"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:submission std:sid="submission-450d577b" id="sms_addAccessArea">
+        <cl:listener std:sid="listener-34146a0c" handler="onSms_addAccessAreaSubmitDone" name="submit-done"/>
+        <cl:listener std:sid="listener-3e44bb3d" handler="onSms_addAccessAreaSubmitSuccess" name="submit-success"/>
+        <cl:listener std:sid="listener-c84ec23d" handler="onSms_addAccessAreaSubmitError" name="submit-error"/>
+        <cl:listener std:sid="listener-e5901815" handler="onSms_addAccessAreaSubmitTimeout" name="submit-timeout"/>
+        <cl:requestdata dataid="AccessArea"/>
+        <cl:requestdata dataid="TerminalIDs"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:datamap std:sid="d-map-ccc8e221" id="AccessArea">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="ID"/>
+          <cl:datacolumn name="Name"/>
+          <cl:datacolumn datatype="number" name="Timezone"/>
+          <cl:datacolumn name="Floor"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-c29132fd" id="sms_getAccessAreaInfo" method="get">
+        <cl:listener std:sid="listener-bc9c2b92" handler="onSms_getAccessAreaInfoSubmitDone" name="submit-done"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="AccessArea"/>
+        <cl:responsedata dataid="TerminalInfo" isadd="false"/>
+      </cl:submission>
+      <cl:dataset std:sid="d-set-525d32fb" id="TerminalIDs">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="ID"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:submission std:sid="submission-ffbbfe4d" id="sms_deleteAccessArea" method="delete">
+        <cl:listener std:sid="listener-68840191" handler="onSms_deleteAccessAreaSubmitDone" name="submit-done"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-ee25afa6" style="padding:0px; top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-fd9e2050" handler="onBodyLoad" name="load"/>
+    <cl:group std:sid="group-9e7c6191" style="background-color:#F2F1EF; padding:0px;">
+      <cl:formdata std:sid="f-data-1782982e" col="0" row="0"/>
+      <cl:tree std:sid="tree-7343b79f" id="ACARM_treeAccessArea" class="user_list" style="background-color:#F2F1EF;">
+        <cl:listener std:sid="listener-c1ba63b8" handler="onACARM_treeAccessAreaSelectionChange" name="selection-change"/>
+        <cl:listener std:sid="listener-83586707" handler="onACARM_treeAccessAreaContextmenu" name="contextmenu"/>
+        <cl:listener std:sid="listener-9ab80608" handler="onACARM_treeAccessAreaBeforeSelectionChange" name="before-selection-change"/>
+        <cl:formdata std:sid="f-data-13560efd" col="0" row="1"/>
+        <cl:treeitemset datasetid="AccessAreaList" label="Name" value="ID"/>
+      </cl:tree>
+      <cl:formlayout std:sid="f-layout-e8ab098a" hspace="0px" vspace="0px">
+        <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns autoSizing="false" length="1" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:group std:sid="group-6d0b0f00" style="padding:10px;">
+      <cl:formdata std:sid="f-data-2f242f0f" col="1" row="0"/>
+      <cl:group std:sid="group-9288137d">
+        <cl:formdata std:sid="f-data-ca2623b1" col="0" row="2"/>
+        <cl:udc std:sid="ud-control-4de49d3d" id="ACARM_udcRegistTerminalList" type="udc.grid.terminalList">
+          <cl:listener std:sid="listener-7322a15e" handler="onACARM_udcRegistTerminalListPagechange" name="pagechange"/>
+          <cl:formdata std:sid="f-data-55468ec3" col="0" row="1"/>
+        </cl:udc>
+        <cl:udc std:sid="ud-control-33ce90a8" id="ACARM_udcUnregistTerminalList" type="udc.grid.terminalList">
+          <cl:listener std:sid="listener-a4bbcfa4" handler="onACARM_udcUnregistTerminalListPagechange" name="pagechange"/>
+          <cl:formdata std:sid="f-data-0d2bf800" col="2" row="1"/>
+        </cl:udc>
+        <cl:group std:sid="group-c7084087">
+          <cl:formdata std:sid="f-data-defab77e" col="1" row="1"/>
+          <cl:button std:sid="button-ef09385f" id="ACARM_btnTerminalUnregist" value=">">
+            <cl:listener std:sid="listener-a3424696" handler="onACARM_btnTerminalUnregistClick" name="click"/>
+            <cl:xylayoutdata std:sid="xyl-data-ff5b2c51" height="20px" horizontalAnchor="BOTH" left="0px" right="0px" top="67px" verticalAnchor="TOP"/>
+          </cl:button>
+          <cl:button std:sid="button-5a08da07" id="ACARM_btnTerminalRegist" value="&lt;">
+            <cl:listener std:sid="listener-45fab25b" handler="onACARM_btnTerminalRegistClick" name="click"/>
+            <cl:xylayoutdata std:sid="xyl-data-6eedcf3c" height="20px" horizontalAnchor="BOTH" left="0px" right="0px" top="97px" verticalAnchor="TOP"/>
+          </cl:button>
+          <cl:button std:sid="button-ad060bb1" id="ACARM_btnTerminalUnregistAll" value=">>">
+            <cl:listener std:sid="listener-547d9ad2" handler="onACARM_btnTerminalUnregistAllClick" name="click"/>
+            <cl:xylayoutdata std:sid="xyl-data-36dc5973" height="20px" horizontalAnchor="BOTH" left="0px" right="0px" top="138px" verticalAnchor="TOP"/>
+          </cl:button>
+          <cl:button std:sid="button-c616389c" id="ACARM_btnTerminalRegistAll" value="&lt;&lt;">
+            <cl:listener std:sid="listener-92507ba8" handler="onACARM_btnTerminalRegistAllClick" name="click"/>
+            <cl:xylayoutdata std:sid="xyl-data-95480c2d" height="20px" horizontalAnchor="BOTH" left="0px" right="0px" top="168px" verticalAnchor="TOP"/>
+          </cl:button>
+          <cl:xylayout std:sid="xylayout-d48f2c76"/>
+        </cl:group>
+        <cl:output std:sid="output-95bcfe74" class="userInfo_btn">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_EnrollmentTerminal"/>
+          <cl:formdata std:sid="f-data-60b2b28c" col="0" row="0"/>
+        </cl:output>
+        <cl:output std:sid="output-682b588d" class="userInfo_btn">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_AdditionalTerminal"/>
+          <cl:formdata std:sid="f-data-f5a923a9" col="2" row="0"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-069dcc6c">
+          <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-34319b06">
+        <cl:formdata std:sid="f-data-26316421" col="0" row="0"/>
+        <cl:output std:sid="output-11d9b418" style="font-weight:700; font-size:14px;">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_AccessAreaDetail"/>
+          <cl:formdata std:sid="f-data-78bfad50" col="0" row="0"/>
+        </cl:output>
+        <cl:button std:sid="button-e4e17894" id="ACARM_btnAreaSave" class="userInfo_btn">
+          <cl:listener std:sid="listener-ead90d47" handler="onACARM_btnAreaSaveClick" name="click"/>
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_Save"/>
+          <cl:formdata std:sid="f-data-1bd50e56" col="4" row="0"/>
+        </cl:button>
+        <cl:button std:sid="button-d7875736" id="ACARM_btnAreaDelete" class="userInfo_btn">
+          <cl:listener std:sid="listener-f8c13a42" handler="onACARM_btnAreaDeleteClick" name="click"/>
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_Delete"/>
+          <cl:formdata std:sid="f-data-2ec2537b" col="5" row="0"/>
+        </cl:button>
+        <cl:button std:sid="button-37297be1" id="ACARM_btnTimezoneView" class="userInfo_btn">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_TimezoneView"/>
+          <cl:formdata std:sid="f-data-94b8c049" col="3" row="0"/>
+        </cl:button>
+        <cl:output std:sid="output-261c79c0" style="font-size:14px; text-align:center;">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_Timezone"/>
+          <cl:formdata std:sid="f-data-9cac51b5" col="1" row="0"/>
+        </cl:output>
+        <cl:combobox std:sid="c-box-e8262002" id="ACARM_cmbTimezone" style="font-size:14px;" value="0">
+          <cl:formdata std:sid="f-data-450f15f4" col="2" row="0"/>
+          <cl:item label="None" value="0"/>
+        </cl:combobox>
+        <cl:formlayout std:sid="f-layout-2633c128">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns autoSizing="false" length="1" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+          <cl:columns autoSizing="false" length="80" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="80" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="100" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="80" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="80" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-471a8cc0">
+        <cl:formdata std:sid="f-data-b462edef" col="0" row="1"/>
+        <cl:output std:sid="output-a8ee72a0" style="font-weight:700; font-size:14px; text-align:center;">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_AccessAreaID"/>
+          <cl:formdata std:sid="f-data-055d769c" col="0" row="0"/>
+        </cl:output>
+        <cl:output std:sid="output-d9355202" style="font-weight:700; font-size:14px; text-align:center;">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_AccessAreaName"/>
+          <cl:formdata std:sid="f-data-fd13ef56" col="2" row="0"/>
+        </cl:output>
+        <cl:inputbox std:sid="i-box-e8c4b9cf" id="ACARM_ipbAreaName" style="font-size:14px;" value="">
+          <cl:formdata std:sid="f-data-179e79ca" col="3" halign="FILL" row="0" width="200"/>
+        </cl:inputbox>
+        <cl:output std:sid="output-3b9c4930" style="font-size:14px; text-align:center;">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_Floor"/>
+          <cl:formdata std:sid="f-data-f806363b" col="4" row="0"/>
+        </cl:output>
+        <cl:numbereditor std:sid="n-editor-dd8e0f7d" id="ACARM_nbeAreaID" style="font-size:14px;" format="00000000" max="9.9999999E7" min="1.0" value="">
+          <cl:formdata std:sid="f-data-ca21a93c" col="1" row="0"/>
+        </cl:numbereditor>
+        <cl:inputbox std:sid="i-box-40dfd1d5" id="ACARM_ipbFloor" style="font-size:14px;" value="">
+          <cl:formdata std:sid="f-data-23565775" col="5" row="0"/>
+        </cl:inputbox>
+        <cl:formlayout std:sid="f-layout-3eebc23c">
+          <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns length="100" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="80" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="100" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="1" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+          <cl:columns autoSizing="false" length="50" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="50" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-f80f76bf">
+        <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:formlayout std:sid="f-layout-e91e0ef4">
+      <cl:rows length="1" shadecolor="transparent" shadetype="NONE" unit="FRACTION"/>
+      <cl:columns autoSizing="false" length="160" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+      <cl:columns length="1" unit="FRACTION"/>
+    </cl:formlayout>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

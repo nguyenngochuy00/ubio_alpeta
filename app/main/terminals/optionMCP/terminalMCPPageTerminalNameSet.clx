@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-2bba763d" version="1.0.0.0">
+  <head std:sid="head-1a0383cb">
+    <title>terminalMCPPageTerminalNameSet</title>
+    <screen std:sid="screen-69c48913" id="default" name="default" minwidth="1024px" width="1024px" height="768px"/>
+    <screen std:sid="screen-ae0202cc" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-cf874238" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-7c6bce94">
+      <cl:datamap std:sid="d-map-a33aca7f" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-4044f067" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-4a7b8ea1" id="MCPReaderInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-ba7b158b" name="TerminalID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-3484444d" name="ReaderName0" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-3c680f4f" name="ReaderName1"/>
+          <cl:datacolumn std:sid="d-column-c4ed2eb4" name="ReaderName2"/>
+          <cl:datacolumn std:sid="d-column-2b56e45e" name="ReaderName3"/>
+          <cl:datacolumn std:sid="d-column-b902f272" name="ReaderName4"/>
+          <cl:datacolumn std:sid="d-column-19cd6436" name="ReaderName5"/>
+          <cl:datacolumn std:sid="d-column-27dbcffe" name="ReaderName6"/>
+          <cl:datacolumn std:sid="d-column-9f9566cd" name="ReaderName7"/>
+          <cl:datacolumn std:sid="d-column-5bc0f74a" name="WiegandName1"/>
+          <cl:datacolumn std:sid="d-column-91f3a0c0" name="WiegandName2"/>
+          <cl:datacolumn std:sid="d-column-87544e03" name="WiegandName3"/>
+          <cl:datacolumn std:sid="d-column-cfc4f7e9" name="WiegandName4"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-438cdefa" id="sms_postMCPReaderInfo" action="">
+        <cl:listener std:sid="listener-f7f150bd" name="submit-error" handler="onSms_SubmitError"/>
+        <cl:listener std:sid="listener-cd3de80b" name="submit-timeout" handler="onSms_SubmitTimeout"/>
+        <cl:listener std:sid="listener-3dd92fdc" name="submit-done" handler="onSms_postMCPReaderInfoSubmitDone"/>
+        <cl:requestdata dataid="MCPReaderInfo"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-45f9a01e" id="sms_getMCPReaderInfo" method="get" action="/v1/terminals/">
+        <cl:listener std:sid="listener-d64ad92b" name="submit-error" handler="onSms_SubmitError"/>
+        <cl:listener std:sid="listener-e6e5f99c" name="submit-timeout" handler="onSms_SubmitTimeout"/>
+        <cl:listener std:sid="listener-ba153b0f" name="submit-done" handler="onSms_getMCPReaderInfoSubmitDone"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="MCPReaderInfo"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-05a52947" id="sms_putMCPReaderInfo" method="put">
+        <cl:listener std:sid="listener-69bafd1a" name="submit-timeout" handler="onSms_SubmitTimeout"/>
+        <cl:listener std:sid="listener-234b3dc6" name="submit-error" handler="onSms_SubmitError"/>
+        <cl:listener std:sid="listener-3ad0c016" name="submit-done" handler="onSms_putMCPReaderInfoSubmitDone"/>
+        <cl:requestdata dataid="MCPReaderInfo"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec dev-comment="컨트롤 ID : TMPNS_ : Terminal MCP Page Name Set"/>
+  </head>
+  <body std:sid="body-d98ed7bb" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-8f5c2987" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-0bf9b137" id="TMPNS_grp1" style="padding-top:10px; padding-left:10px; padding-bottom:10px; padding-right:10px;">
+      <cl:xylayoutdata std:sid="xyl-data-8eaaaf58" top="5px" right="5px" bottom="20px" left="5px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-e69e88e7" id="TMPNS_btngrp1">
+        <cl:formdata std:sid="f-data-f4ee37db" row="10" col="0" rowspan="1" colspan="5"/>
+        <cl:button std:sid="button-1c6d0349" id="TMPNS_btnCardReaderRegist" class="userInfo_btn">
+          <cl:listener std:sid="listener-2057b738" name="click" handler="onTMPNS_btnCardReaderRegistClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Enrollment"/>
+          <cl:formdata std:sid="f-data-f754247a" row="0" col="1"/>
+        </cl:button>
+        <cl:button std:sid="button-db846d6d" id="TMPNS_btnCancel" class="userInfo_btn">
+          <cl:listener std:sid="listener-6de37d58" name="click" handler="onTMPNS_btnCancelClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Cancel"/>
+          <cl:formdata std:sid="f-data-390d19f9" row="0" col="3"/>
+        </cl:button>
+        <cl:button std:sid="button-e7f6a176" id="TMPNS_btnClear" class="userInfo_btn">
+          <cl:listener std:sid="listener-ec2c41c0" name="click" handler="onTMPNS_btnClearClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Clear"/>
+          <cl:formdata std:sid="f-data-e78ba42d" row="0" col="5"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-3f6e7486" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="10" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="10" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-ad81460a">
+        <cl:formdata std:sid="f-data-475de7d0" row="0" col="0" rowspan="1" colspan="2"/>
+        <cl:output std:sid="output-ce40892b" id="TMPNS_optReaderName" class="userInfo_bold">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_ReaderName"/>
+          <cl:formdata std:sid="f-data-f6fb091a" row="0" col="0" rowspan="1" colspan="1"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-cf282842" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-19a3ff35">
+        <cl:formdata std:sid="f-data-09ef5178" row="1" col="0" rowspan="1" colspan="2"/>
+        <cl:output std:sid="output-9de8460c" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-left-color:#c5c5c5; font-size:14px; border-right-color:#c5c5c5; border-left-width:1px; border-top-style:solid; background-color:#f6f6f6; border-left-style:solid; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; text-align:center;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Reader0"/>
+          <cl:formdata std:sid="f-data-a12aa319" row="0" col="0"/>
+        </cl:output>
+        <cl:group std:sid="group-3c9096ac">
+          <cl:formdata std:sid="f-data-e6aa03cd" row="0" col="1"/>
+          <cl:inputbox std:sid="i-box-353f1220" id="TMPNS_ipb1" maxlength="15">
+            <cl:datamapbind property="value" datacontrolid="MCPReaderInfo" columnname="ReaderName0"/>
+            <cl:formdata std:sid="f-data-b7e38990" row="0" col="0"/>
+          </cl:inputbox>
+          <cl:formlayout std:sid="f-layout-da03cfc2" hspace="0px" vspace="0px" top-margin="2px" right-margin="4px" bottom-margin="2px" left-margin="4px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-e5bafd29" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-51d9d7c2">
+        <cl:formdata std:sid="f-data-e21c7c99" row="2" col="0" rowspan="1" colspan="2"/>
+        <cl:output std:sid="output-92f49182" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-left-color:#c5c5c5; font-size:14px; border-right-color:#c5c5c5; border-left-width:1px; border-top-style:solid; background-color:#f6f6f6; border-left-style:solid; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; text-align:center;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Reader1"/>
+          <cl:formdata std:sid="f-data-2fddc0c1" row="0" col="0"/>
+        </cl:output>
+        <cl:group std:sid="group-ed3245e5">
+          <cl:formdata std:sid="f-data-a8acef17" row="0" col="1"/>
+          <cl:inputbox std:sid="i-box-345453c8" id="TMPNS_ipb2" maxlength="15">
+            <cl:datamapbind property="value" datacontrolid="MCPReaderInfo" columnname="ReaderName1"/>
+            <cl:formdata std:sid="f-data-2ad52e84" row="0" col="0"/>
+          </cl:inputbox>
+          <cl:formlayout std:sid="f-layout-4e1c4b64" hspace="0px" vspace="0px" top-margin="2px" right-margin="4px" bottom-margin="2px" left-margin="4px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-db8b1c55" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-b684009e">
+        <cl:formdata std:sid="f-data-5e18da91" row="3" col="0" rowspan="1" colspan="2"/>
+        <cl:output std:sid="output-a41f49c3" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-left-color:#c5c5c5; font-size:14px; border-right-color:#c5c5c5; border-left-width:1px; border-top-style:solid; background-color:#f6f6f6; border-left-style:solid; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; text-align:center;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Reader2"/>
+          <cl:formdata std:sid="f-data-558cfbd3" row="0" col="0"/>
+        </cl:output>
+        <cl:group std:sid="group-3975c278">
+          <cl:formdata std:sid="f-data-4fc32302" row="0" col="1"/>
+          <cl:inputbox std:sid="i-box-c19ec2d4" id="TMPNS_ipb3" maxlength="15">
+            <cl:datamapbind property="value" datacontrolid="MCPReaderInfo" columnname="ReaderName2"/>
+            <cl:formdata std:sid="f-data-5c36a8d9" row="0" col="0"/>
+          </cl:inputbox>
+          <cl:formlayout std:sid="f-layout-ba87f14e" hspace="0px" vspace="0px" top-margin="2px" right-margin="4px" bottom-margin="2px" left-margin="4px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-15465a91" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-00b7d754">
+        <cl:formdata std:sid="f-data-c888e31e" row="4" col="0" rowspan="1" colspan="2"/>
+        <cl:output std:sid="output-7ca7a47d" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-left-color:#c5c5c5; font-size:14px; border-right-color:#c5c5c5; border-left-width:1px; border-top-style:solid; background-color:#f6f6f6; border-left-style:solid; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; text-align:center;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Reader3"/>
+          <cl:formdata std:sid="f-data-742cb5d0" row="0" col="0"/>
+        </cl:output>
+        <cl:group std:sid="group-a60c7377">
+          <cl:formdata std:sid="f-data-26abe20b" row="0" col="1"/>
+          <cl:inputbox std:sid="i-box-5acf3bdb" id="TMPNS_ipb4" maxlength="15">
+            <cl:datamapbind property="value" datacontrolid="MCPReaderInfo" columnname="ReaderName3"/>
+            <cl:formdata std:sid="f-data-de798123" row="0" col="0"/>
+          </cl:inputbox>
+          <cl:formlayout std:sid="f-layout-a7a2f156" hspace="0px" vspace="0px" top-margin="2px" right-margin="4px" bottom-margin="2px" left-margin="4px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-39463474" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-1b9012e9">
+        <cl:formdata std:sid="f-data-b8c66d1a" row="5" col="0" rowspan="1" colspan="2"/>
+        <cl:output std:sid="output-d23bd09c" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-left-color:#c5c5c5; font-size:14px; border-right-color:#c5c5c5; border-left-width:1px; border-top-style:solid; background-color:#f6f6f6; border-left-style:solid; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; text-align:center;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Reader4"/>
+          <cl:formdata std:sid="f-data-c2577a72" row="0" col="0"/>
+        </cl:output>
+        <cl:group std:sid="group-d1995599">
+          <cl:formdata std:sid="f-data-0edddd9c" row="0" col="1"/>
+          <cl:inputbox std:sid="i-box-9c009cbc" id="TMPNS_ipb5" maxlength="15">
+            <cl:datamapbind property="value" datacontrolid="MCPReaderInfo" columnname="ReaderName4"/>
+            <cl:formdata std:sid="f-data-6a5e3252" row="0" col="0"/>
+          </cl:inputbox>
+          <cl:formlayout std:sid="f-layout-f2f56205" hspace="0px" vspace="0px" top-margin="2px" right-margin="4px" bottom-margin="2px" left-margin="4px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-e9e1510f" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-25a01f86">
+        <cl:formdata std:sid="f-data-61d71beb" row="6" col="0" rowspan="1" colspan="2"/>
+        <cl:output std:sid="output-6012f22e" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-left-color:#c5c5c5; font-size:14px; border-right-color:#c5c5c5; border-left-width:1px; border-top-style:solid; background-color:#f6f6f6; border-left-style:solid; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; text-align:center;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Reader5"/>
+          <cl:formdata std:sid="f-data-db80cfb6" row="0" col="0"/>
+        </cl:output>
+        <cl:group std:sid="group-01aac5c2">
+          <cl:formdata std:sid="f-data-e946e10b" row="0" col="1"/>
+          <cl:inputbox std:sid="i-box-a1b271ac" id="TMPNS_ipb6" maxlength="15">
+            <cl:datamapbind property="value" datacontrolid="MCPReaderInfo" columnname="ReaderName5"/>
+            <cl:formdata std:sid="f-data-1dcdb011" row="0" col="0"/>
+          </cl:inputbox>
+          <cl:formlayout std:sid="f-layout-b8f0b2a1" hspace="0px" vspace="0px" top-margin="2px" right-margin="4px" bottom-margin="2px" left-margin="4px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-6f0d1ec5" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-6bcb8af2">
+        <cl:formdata std:sid="f-data-f3f55951" row="7" col="0" rowspan="1" colspan="2"/>
+        <cl:output std:sid="output-88cb87cd" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-left-color:#c5c5c5; font-size:14px; border-right-color:#c5c5c5; border-left-width:1px; border-top-style:solid; background-color:#f6f6f6; border-left-style:solid; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; text-align:center;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Reader6"/>
+          <cl:formdata std:sid="f-data-5e3309a9" row="0" col="0"/>
+        </cl:output>
+        <cl:group std:sid="group-d8a54006">
+          <cl:formdata std:sid="f-data-8914ba4c" row="0" col="1"/>
+          <cl:inputbox std:sid="i-box-d458d5c6" id="TMPNS_ipb7" maxlength="15">
+            <cl:datamapbind property="value" datacontrolid="MCPReaderInfo" columnname="ReaderName6"/>
+            <cl:formdata std:sid="f-data-259d5a49" row="0" col="0"/>
+          </cl:inputbox>
+          <cl:formlayout std:sid="f-layout-6ad94541" hspace="0px" vspace="0px" top-margin="2px" right-margin="4px" bottom-margin="2px" left-margin="4px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-87039c50" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-4e766d22">
+        <cl:formdata std:sid="f-data-a1b4a8b2" row="8" col="0" rowspan="1" colspan="2"/>
+        <cl:output std:sid="output-79a53d3c" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-left-color:#c5c5c5; font-size:14px; border-right-color:#c5c5c5; border-left-width:1px; border-top-style:solid; background-color:#f6f6f6; border-left-style:solid; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; text-align:center;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Reader7"/>
+          <cl:formdata std:sid="f-data-6dcd0856" row="0" col="0"/>
+        </cl:output>
+        <cl:group std:sid="group-6df3da38">
+          <cl:formdata std:sid="f-data-73666dca" row="0" col="1"/>
+          <cl:inputbox std:sid="i-box-9480d6e5" id="TMPNS_ipb8" maxlength="15">
+            <cl:datamapbind property="value" datacontrolid="MCPReaderInfo" columnname="ReaderName7"/>
+            <cl:formdata std:sid="f-data-b89cd386" row="0" col="0"/>
+          </cl:inputbox>
+          <cl:formlayout std:sid="f-layout-1a1d8129" hspace="0px" vspace="0px" top-margin="2px" right-margin="4px" bottom-margin="2px" left-margin="4px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-5a1352f1" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-d7f229f1">
+        <cl:formdata std:sid="f-data-2aea5dae" row="0" col="3" rowspan="1" colspan="2"/>
+        <cl:output std:sid="output-835e4771" id="TMPNS_optWiegandName" class="userInfo_bold">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_ReaderWiegandName"/>
+          <cl:formdata std:sid="f-data-263c9a8f" row="0" col="0"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-778a39ef" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="110" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-aa236e72">
+        <cl:formdata std:sid="f-data-1c25ab11" row="1" col="3" rowspan="1" colspan="2"/>
+        <cl:output std:sid="output-a662b3a3" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-left-color:#c5c5c5; font-size:14px; border-right-color:#c5c5c5; border-left-width:1px; border-top-style:solid; background-color:#f6f6f6; border-left-style:solid; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; text-align:center;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_ReaderWiegand1"/>
+          <cl:formdata std:sid="f-data-f128a463" row="0" col="0"/>
+        </cl:output>
+        <cl:group std:sid="group-7900104d">
+          <cl:formdata std:sid="f-data-dcb296a5" row="0" col="1"/>
+          <cl:inputbox std:sid="i-box-a660330d" id="TMPNS_ipb9" maxlength="15">
+            <cl:datamapbind property="value" datacontrolid="MCPReaderInfo" columnname="WiegandName1"/>
+            <cl:formdata std:sid="f-data-66aed942" row="0" col="0"/>
+          </cl:inputbox>
+          <cl:formlayout std:sid="f-layout-104e5ac0" hspace="0px" vspace="0px" top-margin="2px" right-margin="4px" bottom-margin="2px" left-margin="4px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-c5d397f3" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-a6ff1e8c">
+        <cl:formdata std:sid="f-data-5c6c7909" row="3" col="3" rowspan="1" colspan="2"/>
+        <cl:output std:sid="output-b37746c9" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-left-color:#c5c5c5; font-size:14px; border-right-color:#c5c5c5; border-left-width:1px; border-top-style:solid; background-color:#f6f6f6; border-left-style:solid; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; text-align:center;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_ReaderWiegand3"/>
+          <cl:formdata std:sid="f-data-d0b0abde" row="0" col="0"/>
+        </cl:output>
+        <cl:group std:sid="group-fb173d01">
+          <cl:formdata std:sid="f-data-9c8ac59f" row="0" col="1"/>
+          <cl:inputbox std:sid="i-box-02b2257f" id="TMPNS_ipb11" maxlength="15">
+            <cl:datamapbind property="value" datacontrolid="MCPReaderInfo" columnname="WiegandName3"/>
+            <cl:formdata std:sid="f-data-aa8275c3" row="0" col="0"/>
+          </cl:inputbox>
+          <cl:formlayout std:sid="f-layout-33412073" hspace="0px" vspace="0px" top-margin="2px" right-margin="4px" bottom-margin="2px" left-margin="4px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-cef07d01" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-6d37a3a7">
+        <cl:formdata std:sid="f-data-e40ca1c9" row="2" col="3" rowspan="1" colspan="2"/>
+        <cl:output std:sid="output-61f6421a" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-left-color:#c5c5c5; font-size:14px; border-right-color:#c5c5c5; border-left-width:1px; border-top-style:solid; background-color:#f6f6f6; border-left-style:solid; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; text-align:center;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_ReaderWiegand2"/>
+          <cl:formdata std:sid="f-data-28f7c682" row="0" col="0"/>
+        </cl:output>
+        <cl:group std:sid="group-3014dcf4">
+          <cl:formdata std:sid="f-data-da63efe6" row="0" col="1"/>
+          <cl:inputbox std:sid="i-box-964bd5ac" id="TMPNS_ipb10" maxlength="15">
+            <cl:datamapbind property="value" datacontrolid="MCPReaderInfo" columnname="WiegandName2"/>
+            <cl:formdata std:sid="f-data-ab592872" row="0" col="0"/>
+          </cl:inputbox>
+          <cl:formlayout std:sid="f-layout-0c78b0ad" hspace="0px" vspace="0px" top-margin="2px" right-margin="4px" bottom-margin="2px" left-margin="4px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-482a91b5" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-6dd041f6">
+        <cl:formdata std:sid="f-data-5949be35" row="4" col="3" rowspan="1" colspan="2"/>
+        <cl:output std:sid="output-1afeed05" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-left-color:#c5c5c5; font-size:14px; border-right-color:#c5c5c5; border-left-width:1px; border-top-style:solid; background-color:#f6f6f6; border-left-style:solid; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; text-align:center;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_ReaderWiegand4"/>
+          <cl:formdata std:sid="f-data-08fe6548" row="0" col="0"/>
+        </cl:output>
+        <cl:group std:sid="group-3dc4a19b">
+          <cl:formdata std:sid="f-data-2b9ac93d" row="0" col="1"/>
+          <cl:inputbox std:sid="i-box-59ab87e0" id="TMPNS_ipb12" maxlength="15">
+            <cl:datamapbind property="value" datacontrolid="MCPReaderInfo" columnname="WiegandName4"/>
+            <cl:formdata std:sid="f-data-51bbe068" row="0" col="0"/>
+          </cl:inputbox>
+          <cl:formlayout std:sid="f-layout-4cdeb307" hspace="0px" vspace="0px" top-margin="2px" right-margin="4px" bottom-margin="2px" left-margin="4px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-2b36360a" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-7acafa0f" hspace="0px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="100" unit="PIXEL"/>
+        <cl:columns length="1" unit="FRACTION"/>
+        <cl:columns length="10" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="100" unit="PIXEL"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-41b0bdc9"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

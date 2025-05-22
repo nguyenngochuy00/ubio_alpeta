@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-ae2736d4" version="1.0.0.0">
+  <head std:sid="head-c871299f">
+    <title>UserManagement</title>
+    <screen std:sid="screen-642abed3" id="default" height="768px" minwidth="1024px" name="default" width="1024px"/>
+    <screen std:sid="screen-0e7527e9" id="tablet" height="667px" maxwidth="1023px" minwidth="500px" name="tablet" width="500px"/>
+    <screen std:sid="screen-7b1be591" id="mobile" height="525px" maxwidth="499px" name="mobile" width="350px"/>
+    <cl:model std:sid="model-fab34df5">
+      <cl:dataset std:sid="d-set-7968fb9c" id="resList">
+        <cl:datacolumnlist>
+          <cl:datacolumn name="column1"/>
+          <cl:datacolumn name="column2"/>
+          <cl:datacolumn name="column3"/>
+          <cl:datacolumn name="column4"/>
+          <cl:datacolumn name="column5"/>
+          <cl:datacolumn name="column6"/>
+          <cl:datacolumn name="column7"/>
+          <cl:datacolumn name="column8"/>
+          <cl:datacolumn name="column9"/>
+          <cl:datacolumn name="column10"/>
+        </cl:datacolumnlist>
+        <cl:datarowlist/>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-a1e53e49" id="userlist">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="id"/>
+          <cl:datacolumn name="uid"/>
+          <cl:datacolumn datatype="string" name="reg"/>
+          <cl:datacolumn name="exp"/>
+          <cl:datacolumn name="name"/>
+          <cl:datacolumn name="grp"/>
+          <cl:datacolumn name="acgrp"/>
+          <cl:datacolumn name="fp"/>
+          <cl:datacolumn datatype="string" name="timezone"/>
+          <cl:datacolumn name="black"/>
+          <cl:datacolumn name="authinfo"/>
+          <cl:datacolumn name="face"/>
+          <cl:datacolumn name="apbz"/>
+          <cl:datacolumn name="priv"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-a1e53e49" id="userlist1">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="id"/>
+          <cl:datacolumn name="uid"/>
+          <cl:datacolumn datatype="string" name="reg"/>
+          <cl:datacolumn name="exp"/>
+          <cl:datacolumn name="name"/>
+          <cl:datacolumn name="grp"/>
+          <cl:datacolumn name="acgrp"/>
+          <cl:datacolumn name="fp"/>
+          <cl:datacolumn datatype="string" name="timezone"/>
+          <cl:datacolumn name="black"/>
+          <cl:datacolumn name="authinfo"/>
+          <cl:datacolumn name="face"/>
+          <cl:datacolumn name="apbz"/>
+          <cl:datacolumn name="priv"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-a1e53e49" id="userlist2">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="id"/>
+          <cl:datacolumn name="uid"/>
+          <cl:datacolumn datatype="string" name="reg"/>
+          <cl:datacolumn name="exp"/>
+          <cl:datacolumn name="name"/>
+          <cl:datacolumn name="grp"/>
+          <cl:datacolumn name="acgrp"/>
+          <cl:datacolumn name="fp"/>
+          <cl:datacolumn datatype="string" name="timezone"/>
+          <cl:datacolumn name="black"/>
+          <cl:datacolumn name="authinfo"/>
+          <cl:datacolumn name="face"/>
+          <cl:datacolumn name="apbz"/>
+          <cl:datacolumn name="priv"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-beaeea89" id="resPage">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" defaultvalue="0" name="totCnt"/>
+          <cl:datacolumn datatype="number" defaultvalue="0" name="pageSize"/>
+          <cl:datacolumn datatype="number" defaultvalue="0" name="rowSize"/>
+          <cl:datacolumn datatype="number" defaultvalue="1" name="pageIdx"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-56ea5ae5" id="reqKey">
+        <cl:datacolumnlist>
+          <cl:datacolumn name="column1"/>
+          <cl:datacolumn name="column2"/>
+          <cl:datacolumn name="column3"/>
+          <cl:datacolumn name="column4"/>
+          <cl:datacolumn name="column5"/>
+          <cl:datacolumn name="column6"/>
+          <cl:datacolumn name="column7"/>
+          <cl:datacolumn name="column8"/>
+          <cl:datacolumn name="column9"/>
+          <cl:datacolumn name="column10"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-e19fabd8" id="getList" action="../../template/onegridpaging/getMainList.do" mediatype="application/x-www-form-urlencoded">
+        <cl:listener std:sid="listener-2e5c815a" handler="onGetListSubmitSuccess" name="submit-success"/>
+        <cl:requestdata dataid="reqKey"/>
+        <cl:requestdata dataid="resPage"/>
+        <cl:responsedata dataid="resList"/>
+        <cl:responsedata dataid="resPage"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-d28ac014" id="userserv" action="./data/user.json" mediatype="application/json">
+        <cl:listener std:sid="listener-e2f324dc" handler="onUserservSubmitSuccess" name="submit-success"/>
+        <cl:responsedata dataid="userlist"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-66bd7c7f" style="padding:20px; top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-a41ea218" handler="onBodyLoad" name="load"/>
+    <cl:group std:sid="group-7dffadde" class="un-form-border">
+      <cl:xylayoutdata std:sid="xyl-data-a48512c8" height="728px" horizontalAnchor="LEFT" left="0px" top="0px" verticalAnchor="TOP" width="200px"/>
+      <cl:mdifolder std:sid="mdifolder-80938835" id="mdi1">
+        <cl:listener std:sid="listener-91929cd8" handler="onMdi1TabheaderClick" name="tabheader-click"/>
+        <cl:xylayoutdata std:sid="xyl-data-0e90b93b" height="704px" horizontalAnchor="LEFT" left="10px" top="10px" verticalAnchor="TOP" width="176px"/>
+        <cl:tabitem std:sid="t-item-0a7e4d8d" selected="true" text="그룹">
+          <std:metadata>
+            <std:property key="is-active-item" value="true"/>
+          </std:metadata>
+          <cl:group std:sid="group-6dc40a07">
+            <std:metadata>
+              <std:property key="locked" value="true"/>
+            </std:metadata>
+            <cl:tree std:sid="tree-f31feb18" id="tre1">
+              <cl:listener std:sid="listener-ce30d5cc" handler="onTre1ItemClick" name="item-click"/>
+              <cl:listener std:sid="listener-27a58046" handler="onTre1SelectionChange" name="selection-change"/>
+              <cl:xylayoutdata std:sid="xyl-data-4db2be7e" bottom="0px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="BOTH"/>
+              <cl:treeitem label="group0001" value="0"/>
+              <cl:treeitem label="group0002" value="1"/>
+              <cl:treeitemset datasetid="userlist1" label="name" value="uid" parent="grp"/>
+            </cl:tree>
+            <cl:xylayout std:sid="xylayout-f2541c07"/>
+          </cl:group>
+        </cl:tabitem>
+        <cl:tabitem std:sid="t-item-5ebf13e9" text="출입그룹">
+          <cl:group std:sid="group-52cad37d">
+            <std:metadata>
+              <std:property key="locked" value="true"/>
+            </std:metadata>
+            <cl:xylayout std:sid="xylayout-9e386f98"/>
+          </cl:group>
+        </cl:tabitem>
+      </cl:mdifolder>
+      <cl:xylayout std:sid="xylayout-b9c4f157"/>
+    </cl:group>
+    <cl:group std:sid="group-5eda5b54" class="un-form-border">
+      <cl:xylayoutdata std:sid="xyl-data-31e3431f" height="728px" horizontalAnchor="LEFT" left="210px" top="0px" verticalAnchor="TOP" width="790px"/>
+      <cl:group std:sid="group-a7e2500a">
+        <cl:xylayoutdata std:sid="xyl-data-064abf04" height="30px" horizontalAnchor="LEFT" left="10px" top="10px" verticalAnchor="TOP" width="670px"/>
+        <cl:combobox std:sid="c-box-73f5b6fa" id="cmb1">
+          <cl:formdata std:sid="f-data-6cf5cfdf" col="0" row="0"/>
+        </cl:combobox>
+        <cl:output std:sid="output-e01d783d" value="Total :">
+          <cl:formdata std:sid="f-data-9fd3dddc" col="2" row="0"/>
+        </cl:output>
+        <cl:button std:sid="button-66af1947" value="삭제">
+          <cl:formdata std:sid="f-data-769f241c" col="4" row="0"/>
+        </cl:button>
+        <cl:button std:sid="button-c29c1960" value="추가">
+          <cl:formdata std:sid="f-data-787c220a" col="5" row="0"/>
+        </cl:button>
+        <cl:udc std:sid="ud-control-97fc99ba" type="udc.search_type1">
+          <cl:listener std:sid="listener-a1021fff" handler="onSearch_type1Search" name="search"/>
+          <cl:formdata std:sid="f-data-8215bfa4" col="1" colspan="1" row="0" rowspan="1"/>
+        </cl:udc>
+        <cl:output std:sid="output-92a3d693" id="opt_tot" value="0">
+          <cl:formdata std:sid="f-data-22625cd7" col="3" row="0"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-7235b1c8">
+          <cl:rows length="30" shadecolor="transparent" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns length="2" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+          <cl:columns length="3" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="60" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns length="60" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:grid std:sid="grid-ac698e5b" id="grd1" columnMovable="false" columnResizable="false" datasetid="userlist" readonly="false">
+        <cl:xylayoutdata std:sid="xyl-data-b6533791" height="629px" horizontalAnchor="LEFT" left="10px" top="45px" verticalAnchor="TOP" width="766px"/>
+        <cl:gridcolumn std:sid="g-column-c39f2ba9"/>
+        <cl:gridcolumn std:sid="g-column-f92e359c"/>
+        <cl:gridcolumn std:sid="g-column-6459889c"/>
+        <cl:gridcolumn std:sid="g-column-49bc9738"/>
+        <cl:gridcolumn std:sid="g-column-fa7087db"/>
+        <cl:gridcolumn std:sid="g-column-394300ae"/>
+        <cl:gridcolumn std:sid="g-column-c1c96fe4"/>
+        <cl:gridcolumn std:sid="g-column-a01e8fe9"/>
+        <cl:gridcolumn std:sid="g-column-34348f71"/>
+        <cl:gridheader std:sid="gh-band-531098bb">
+          <cl:gridrow std:sid="g-row-c7e4a15a"/>
+          <cl:gridrow std:sid="g-row-6093a842"/>
+          <cl:gridcell std:sid="gh-cell-b702fc25" colindex="0" colspan="1" rowindex="0" rowspan="2" style="background-color:white; border-right-style:solid; border-top-width:0px; border-bottom-color:#29547f; border-left-style:solid; border-right-width:0px; border-bottom-width:2px; border-bottom-style:solid; border-left-width:0px; border-top-style:solid;" columntype="normal" filterable="false" sortable="false" visible="true"/>
+          <cl:gridcell std:sid="gh-cell-dd347ffe" colindex="1" rowindex="0" style="border-right-style:solid; color:#4c70aa; border-top-width:0px; border-bottom-color:#29547f; border-left-style:solid; border-right-width:0px; border-bottom-width:2px; border-bottom-style:solid; border-left-width:0px; border-top-style:solid;" filterable="false" sortable="false" targetcolumnname="uid" text="ID"/>
+          <cl:gridcell std:sid="gh-cell-f9db911d" colindex="2" rowindex="0" style="border-right-style:solid; color:#4c70aa; border-top-width:0px; border-bottom-color:#29547f; border-left-style:solid; border-right-width:0px; border-bottom-width:2px; border-bottom-style:solid; border-left-width:0px; border-top-style:solid;" filterable="false" sortable="false" targetcolumnname="reg" text="UniqueID"/>
+          <cl:gridcell std:sid="gh-cell-1b9c1a1f" colindex="3" rowindex="0" style="border-right-style:solid; color:#4c70aa; border-top-width:0px; border-bottom-color:#29547f; border-left-style:solid; border-right-width:0px; border-bottom-width:2px; border-bottom-style:solid; border-left-width:0px; border-top-style:solid;" filterable="false" sortable="false" targetcolumnname="exp" text="Privilege"/>
+          <cl:gridcell std:sid="gh-cell-d2bfd7ef" colindex="4" rowindex="0" style="border-right-style:solid; color:#4c70aa; border-top-width:0px; border-bottom-color:#29547f; border-left-style:solid; border-right-width:0px; border-bottom-width:2px; border-bottom-style:solid; border-left-width:0px; border-top-style:solid;" filterable="false" sortable="false" targetcolumnname="name" text="Group"/>
+          <cl:gridcell std:sid="gh-cell-113c6369" colindex="5" rowindex="0" style="border-right-style:solid; color:#4c70aa; border-top-width:0px; border-bottom-color:#29547f; border-left-style:solid; border-right-width:0px; border-bottom-width:2px; border-bottom-style:solid; border-left-width:0px; border-top-style:solid;" filterable="false" sortable="false" targetcolumnname="grp" text="FP 1:N"/>
+          <cl:gridcell std:sid="gh-cell-2410125b" colindex="6" rowindex="0" style="border-right-style:solid; color:#4c70aa; border-top-width:0px; border-bottom-color:#29547f; border-left-style:solid; border-right-width:0px; border-bottom-width:2px; border-bottom-style:solid; border-left-width:0px; border-top-style:solid;" filterable="false" sortable="false" targetcolumnname="acgrp" text="Timezone"/>
+          <cl:gridcell std:sid="gh-cell-5fc611d1" colindex="7" rowindex="0" style="border-right-style:solid; color:#4c70aa; border-top-width:0px; border-bottom-color:#29547f; border-left-style:solid; border-right-width:0px; border-bottom-width:2px; border-bottom-style:solid; border-left-width:0px; border-top-style:solid;" filterable="false" sortable="false" targetcolumnname="fp" text="Regist"/>
+          <cl:gridcell std:sid="gh-cell-e62e1ab2" colindex="8" rowindex="0" style="border-right-style:solid; color:#4c70aa; border-top-width:0px; border-bottom-color:#29547f; border-left-style:solid; border-right-width:0px; border-bottom-width:2px; border-bottom-style:solid; border-left-width:0px; border-top-style:solid;" filterable="false" sortable="false" targetcolumnname="timezone" text="BlackList"/>
+          <cl:gridcell std:sid="gh-cell-9d4933a3" colindex="1" colspan="2" rowindex="1" rowspan="1" style="border-right-style:solid; color:#4c70aa; border-top-width:0px; border-bottom-color:#29547f; border-left-style:solid; border-right-width:0px; border-bottom-width:2px; border-bottom-style:solid; border-left-width:0px; border-top-style:solid;" columntype="normal" filterable="false" sortable="false" text="Name" visible="true"/>
+          <cl:gridcell std:sid="gh-cell-31e32333" colindex="3" rowindex="1" style="border-right-style:solid; color:#4c70aa; border-top-width:0px; border-bottom-color:#29547f; border-left-style:solid; border-right-width:0px; border-bottom-width:2px; border-bottom-style:solid; border-left-width:0px; border-top-style:solid;" columntype="normal" filterable="false" sortable="false" text="AuthInfo" visible="true"/>
+          <cl:gridcell std:sid="gh-cell-32e746eb" colindex="4" rowindex="1" style="border-right-style:solid; color:#4c70aa; border-top-width:0px; border-bottom-color:#29547f; border-left-style:solid; border-right-width:0px; border-bottom-width:2px; border-bottom-style:solid; border-left-width:0px; border-top-style:solid;" columntype="normal" filterable="false" sortable="false" text="ACGroup" visible="true"/>
+          <cl:gridcell std:sid="gh-cell-5554f217" colindex="5" rowindex="1" style="border-right-style:solid; color:#4c70aa; border-top-width:0px; border-bottom-color:#29547f; border-left-style:solid; border-right-width:0px; border-bottom-width:2px; border-bottom-style:solid; border-left-width:0px; border-top-style:solid;" columntype="normal" filterable="false" sortable="false" text="Face 1:N" visible="true"/>
+          <cl:gridcell std:sid="gh-cell-c6be5d3c" colindex="6" rowindex="1" style="border-right-style:solid; color:#4c70aa; border-top-width:0px; border-bottom-color:#29547f; border-left-style:solid; border-right-width:0px; border-bottom-width:2px; border-bottom-style:solid; border-left-width:0px; border-top-style:solid;" columntype="normal" filterable="false" sortable="false" text="APBZone" visible="true"/>
+          <cl:gridcell std:sid="gh-cell-a33a3baa" colindex="7" rowindex="1" style="border-right-style:solid; color:#4c70aa; border-top-width:0px; border-bottom-color:#29547f; border-left-style:solid; border-right-width:0px; border-bottom-width:2px; border-bottom-style:solid; border-left-width:0px; border-top-style:solid;" columntype="normal" filterable="false" sortable="false" text="Expired" visible="true"/>
+          <cl:gridcell std:sid="gh-cell-2819b349" colindex="8" rowindex="1" style="border-right-style:solid; border-top-width:0px; border-bottom-color:#29547f; border-left-style:solid; border-right-width:0px; border-bottom-width:2px; border-bottom-style:solid; border-left-width:0px; border-top-style:solid;"/>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-fcc5f88c">
+          <cl:gridrow std:sid="g-row-f86f976b"/>
+          <cl:gridrow std:sid="g-row-64f7a601"/>
+          <cl:gridcell std:sid="gd-cell-62d84c3d" colindex="0" colspan="1" rowindex="0" rowspan="2" columnname="image" columntype="normal" suppressible="false" suppressref="-1"/>
+          <cl:gridcell std:sid="gd-cell-b79ed155" colindex="1" rowindex="0" columnname="id" columntype="normal" suppressible="false" suppressref="-1"/>
+          <cl:gridcell std:sid="gd-cell-55c9dea1" colindex="2" rowindex="0" columnname="uid" columntype="normal" suppressible="false" suppressref="-1"/>
+          <cl:gridcell std:sid="gd-cell-598bbd2b" colindex="3" rowindex="0" columnname="priv" columntype="normal" suppressible="false" suppressref="-1"/>
+          <cl:gridcell std:sid="gd-cell-1ef8c7ee" colindex="4" rowindex="0" columnname="grp" columntype="normal" suppressible="false" suppressref="-1"/>
+          <cl:gridcell std:sid="gd-cell-82ef1973" colindex="5" rowindex="0" columnname="fp" columntype="normal" suppressible="false" suppressref="-1"/>
+          <cl:gridcell std:sid="gd-cell-504ed263" colindex="6" rowindex="0" columnname="timezone" columntype="normal" suppressible="false" suppressref="-1"/>
+          <cl:gridcell std:sid="gd-cell-770c1375" colindex="7" rowindex="0" columnname="reg" columntype="normal" suppressible="false" suppressref="-1"/>
+          <cl:gridcell std:sid="gd-cell-989097dd" colindex="8" rowindex="0" columnname="black" columntype="normal" suppressible="false" suppressref="-1"/>
+          <cl:gridcell std:sid="gd-cell-14db6b1c" colindex="1" colspan="2" rowindex="1" rowspan="1" columnname="name" columntype="normal" suppressible="false" suppressref="-1"/>
+          <cl:gridcell std:sid="gd-cell-ebe17dba" colindex="3" rowindex="1" columnname="authinfo" columntype="normal" suppressible="false" suppressref="-1"/>
+          <cl:gridcell std:sid="gd-cell-34870e4d" colindex="4" rowindex="1" columnname="acgrp" columntype="normal" suppressible="false" suppressref="-1"/>
+          <cl:gridcell std:sid="gd-cell-da28f915" colindex="5" rowindex="1" columnname="face" columntype="normal" suppressible="false" suppressref="-1"/>
+          <cl:gridcell std:sid="gd-cell-5929de5f" colindex="6" rowindex="1" columnname="apbz" columntype="normal" suppressible="false" suppressref="-1"/>
+          <cl:gridcell std:sid="gd-cell-6791cfdc" colindex="7" rowindex="1" columnname="exp" columntype="normal" suppressible="false" suppressref="-1"/>
+          <cl:gridcell std:sid="gd-cell-e28aadb9" colindex="8" rowindex="1"/>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:pageindexer std:sid="p-indexer-2a70094a" id="pgidx">
+        <cl:listener std:sid="listener-43631fbe" handler="onPageIndexerSelectionChange" name="selection-change"/>
+        <cl:xylayoutdata std:sid="xyl-data-7e3e4f3e" height="36px" horizontalAnchor="LEFT" left="10px" top="678px" verticalAnchor="TOP" width="766px"/>
+      </cl:pageindexer>
+      <cl:xylayout std:sid="xylayout-536dbace"/>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-9fb9d556"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

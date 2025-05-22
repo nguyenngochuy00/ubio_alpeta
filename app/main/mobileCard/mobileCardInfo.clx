@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-a4362460" version="1.0.0.0">
+  <head std:sid="head-ad4ff25b">
+    <title>mobileCardInfo</title>
+    <screen std:sid="screen-8344e4d6" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="470" customWidth="400"/>
+    <screen std:sid="screen-7332c475" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-e535bafe" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-b765a600">
+      <cl:datamap std:sid="d-map-9d04dca1" id="MobileCardInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-797dd3f9" name="CardNum"/>
+          <cl:datacolumn std:sid="d-column-23b38e96" name="Mobile"/>
+          <cl:datacolumn std:sid="d-column-a354c323" name="Email"/>
+          <cl:datacolumn std:sid="d-column-29bfc9e6" name="CardType" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-6f3c6ccb" name="IssueStatus" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-c3896c8d" name="IssueOrder" datatype="number"/>
+          <cl:datacolumn comment="1" std:sid="d-column-448d1fab" name="CardStatus" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-7cfd82ca" name="ExpireAt" defaultvalue="2999-12-31 23:59:59"/>
+          <cl:datacolumn std:sid="d-column-a189daa2" name="UpdateAt"/>
+          <cl:datacolumn std:sid="d-column-0fcb3a43" name="IssuerType" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-1c90e181" name="CertType" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-a33aca7f" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-80d61523" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-c2573c7c" id="sms_getMobileCardInfo" method="get" action="/v1/users/{id}/mobilecard">
+        <cl:listener std:sid="listener-8526db7c" name="submit-error" handler="onSms_SubmitError"/>
+        <cl:listener std:sid="listener-ffcc8618" name="submit-timeout" handler="onSms_SubmitTimeout"/>
+        <cl:listener std:sid="listener-c26e55f6" name="submit-done" handler="onSms_getMobileCardInfoSubmitDone"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="MobileCardInfo"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-89f72c5f" id="sms_postMobileCardInfo" action="/v1/users/{id}/mobilecard">
+        <cl:listener std:sid="listener-87b569e2" name="submit-done" handler="onSms_postMobileCardInfoSubmitDone"/>
+        <cl:listener std:sid="listener-c7f56343" name="submit-error" handler="onSms_SubmitError"/>
+        <cl:listener std:sid="listener-e6eaeb79" name="submit-timeout" handler="onSms_SubmitTimeout"/>
+        <cl:requestdata dataid="MobileCardInfo"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="MobileCardInfo"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-04eec8ff" id="sms_getMobileCertification" action="/v1/users/Certification">
+        <cl:listener std:sid="listener-01ebc125" name="submit-error" handler="onSms_getMobileCertificationSubmitError"/>
+        <cl:listener std:sid="listener-00aa33d5" name="submit-timeout" handler="onSms_getMobileCertificationSubmitTimeout"/>
+        <cl:listener std:sid="listener-7bc03a0a" name="submit-done" handler="onSms_getMobileCertificationSubmitDone"/>
+        <cl:requestdata dataid="MobileCardInfo"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-254861d7" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-5e8278ec" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-cf0cbcfd" id="MCISE_grpMobileCardInfo" style="padding-top:4px; padding-left:10px; padding-bottom:10px; padding-right:10px;">
+      <cl:xylayoutdata std:sid="xyl-data-d9c07258" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:output std:sid="output-0f5b55a1" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; border-right-color:#c5c5c5; border-bottom-style:solid; text-align:center;" class="userInfo_bold">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_CardNum"/>
+        <cl:formdata std:sid="f-data-24ede6f8" row="0" col="0"/>
+      </cl:output>
+      <cl:group std:sid="group-e25a4a45">
+        <cl:formdata std:sid="f-data-b0ffe4f2" row="12" col="0" rowspan="1" colspan="2"/>
+        <cl:button std:sid="button-d2695222" id="MCISE_btnSave" class="userInfo_btn">
+          <cl:listener std:sid="listener-a19ab557" name="click" handler="onMCISE_btnSaveClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Save"/>
+          <cl:formdata std:sid="f-data-6b8f13b5" bottomSpacing="0" row="0" col="2"/>
+        </cl:button>
+        <cl:button std:sid="button-b2f1e691" id="MCISE_btnCancel" class="userInfo_btn">
+          <cl:listener std:sid="listener-8720187d" name="click" handler="onMCISE_btnCancelClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Cancel"/>
+          <cl:formdata std:sid="f-data-8ff40c51" bottomSpacing="0" row="0" col="3"/>
+        </cl:button>
+        <cl:button std:sid="button-2fd9030e" id="MCISE_btnCertification" class="userInfo_btn" visible="false" value="인증번호 재요청">
+          <cl:listener std:sid="listener-ccd3535d" name="click" handler="onButtonClick"/>
+          <cl:formdata std:sid="f-data-1f04c68a" row="0" col="0"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-85b3faf2" hspace="6px" vspace="1px" top-margin="1px" right-margin="1px" bottom-margin="1px" left-margin="1px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:output std:sid="output-2e9ee183" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; border-right-color:#c5c5c5; border-bottom-style:solid; text-align:center;" class="userInfo_bold">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_MobileNum"/>
+        <cl:formdata std:sid="f-data-f320f919" row="1" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-36d0e161" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; border-right-color:#c5c5c5; border-bottom-style:solid; text-align:center;" class="userInfo_bold">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_EmailAddress"/>
+        <cl:formdata std:sid="f-data-02f57956" row="2" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-1fd7ef8c" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; border-right-color:#c5c5c5; border-bottom-style:solid; text-align:center;" class="userInfo_bold">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_MobileCardType"/>
+        <cl:formdata std:sid="f-data-8711861e" row="3" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-5214a4c9" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; border-right-color:#c5c5c5; border-bottom-style:solid; text-align:center;" class="userInfo_bold">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_IssuingStatus"/>
+        <cl:formdata std:sid="f-data-fc8f83bc" row="4" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-fc0e8087" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; border-right-color:#c5c5c5; border-bottom-style:solid; text-align:center;" class="userInfo_bold">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_IssueCount"/>
+        <cl:formdata std:sid="f-data-caff07b8" row="5" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-a51fd111" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; border-right-color:#c5c5c5; border-bottom-style:solid; text-align:center;" class="userInfo_bold">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_CardStatus"/>
+        <cl:formdata std:sid="f-data-b3628b9e" row="6" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-4135c61e" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; border-right-color:#c5c5c5; border-bottom-style:solid; text-align:center;" class="userInfo_bold">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_ExpireDate"/>
+        <cl:formdata std:sid="f-data-fdf5ead8" row="7" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-e95dd8d7" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; border-right-color:#c5c5c5; border-bottom-style:solid; text-align:center;" class="userInfo_bold">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_UpdateDate"/>
+        <cl:formdata std:sid="f-data-949e2de5" row="8" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-dec17f8b" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; border-right-color:#c5c5c5; border-bottom-style:solid; text-align:center;" class="userInfo_bold">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_UpdateSource"/>
+        <cl:formdata std:sid="f-data-a7302fa3" row="9" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-fd298fed" style="text-align:center;">
+        <cl:datamapbind property="value" datacontrolid="MobileCardInfo" columnname="CardNum"/>
+        <cl:formdata std:sid="f-data-a8a1415c" row="0" col="1"/>
+      </cl:output>
+      <cl:output std:sid="output-b3b97f87" style="text-align:center;">
+        <cl:datamapbind property="value" datacontrolid="MobileCardInfo" columnname="IssueOrder"/>
+        <cl:formdata std:sid="f-data-30fbe53d" row="5" col="1"/>
+      </cl:output>
+      <cl:inputbox std:sid="i-box-758d3c08" id="MCISE_ipbMobile" style="text-align:center;">
+        <cl:datamapbind property="value" datacontrolid="MobileCardInfo" columnname="Mobile"/>
+        <cl:formdata std:sid="f-data-e39170d0" row="1" col="1"/>
+      </cl:inputbox>
+      <cl:inputbox std:sid="i-box-24e982cb" id="MCISE_ipbEmail" style="text-align:center;">
+        <cl:datamapbind property="value" datacontrolid="MobileCardInfo" columnname="Email"/>
+        <cl:formdata std:sid="f-data-c61b7267" row="2" col="1"/>
+      </cl:inputbox>
+      <cl:combobox std:sid="c-box-0b49bb7d" id="MCISE_cmbCardType" style="text-align:center;">
+        <cl:datamapbind property="value" datacontrolid="MobileCardInfo" columnname="CardType"/>
+        <cl:formdata std:sid="f-data-c6b0d6ef" row="3" col="1"/>
+        <cl:item std:sid="item-206ec61b" label="----" value="0"/>
+        <cl:item std:sid="item-3bf6aa8e" label="label2" value="1">
+          <cl:langbind property="label" category="PROPERTY" keypath="Str_CardTypeEmployee"/>
+        </cl:item>
+        <cl:item std:sid="item-0f17489e" label="label3" value="2">
+          <cl:langbind property="label" category="PROPERTY" keypath="Str_CardTypeTemp"/>
+        </cl:item>
+        <cl:item std:sid="item-075bd508" label="label4" value="3">
+          <cl:langbind property="label" category="PROPERTY" keypath="Str_CardTypeVisit"/>
+        </cl:item>
+      </cl:combobox>
+      <cl:dateinput std:sid="d-input-5ae47d9d" id="MCISE__dtiExpire" style="text-align:center;" maxdate="2999-12-31" mask="YYYY-MM-DD HH:mm:ss" format="YYYY-MM-DD HH:mm:ss">
+        <cl:datamapbind property="value" datacontrolid="MobileCardInfo" columnname="ExpireAt"/>
+        <cl:formdata std:sid="f-data-94ff72f5" row="7" col="1"/>
+      </cl:dateinput>
+      <cl:combobox std:sid="c-box-278f92d2" id="MCISE_cmbCardIssueStatus" style="text-align:center;" readonly="true" hidebutton="true">
+        <cl:datamapbind property="value" datacontrolid="MobileCardInfo" columnname="IssueStatus"/>
+        <cl:formdata std:sid="f-data-d9e289c1" row="4" col="1"/>
+        <cl:item std:sid="item-9e882556" value="0">
+          <cl:langbind property="label" category="PROPERTY" keypath="Str_UnIssued"/>
+        </cl:item>
+        <cl:item std:sid="item-443c1474" label="label2" value="1">
+          <cl:langbind property="label" category="PROPERTY" keypath="Str_CardApplication"/>
+        </cl:item>
+        <cl:item std:sid="item-e23430b2" label="label3" value="2">
+          <cl:langbind property="label" category="PROPERTY" keypath="Str_CardIssue"/>
+        </cl:item>
+      </cl:combobox>
+      <cl:combobox std:sid="c-box-892beb52" id="MCISE_cmbCardStatus" style="text-align:center;" readonly="false" hidebutton="false">
+        <cl:datamapbind property="value" datacontrolid="MobileCardInfo" columnname="CardStatus"/>
+        <cl:formdata std:sid="f-data-66efc344" row="6" col="1"/>
+        <cl:item std:sid="item-10d46816" label="----" value="0"/>
+        <cl:item std:sid="item-0ddc1a80" label="label2" value="1">
+          <cl:langbind property="label" category="PROPERTY" keypath="Str_CardStatusNormal"/>
+        </cl:item>
+        <cl:item std:sid="item-a721dacd" label="label3" value="2">
+          <cl:langbind property="label" category="PROPERTY" keypath="Str_CardStatusLost"/>
+        </cl:item>
+        <cl:item std:sid="item-e27b94dd" label="label4" value="3">
+          <cl:langbind property="label" category="PROPERTY" keypath="Str_CardStatusTheft"/>
+        </cl:item>
+        <cl:item std:sid="item-bf507bd7" label="label5" value="4">
+          <cl:langbind property="label" category="PROPERTY" keypath="Str_CardStatusStop"/>
+        </cl:item>
+        <cl:item std:sid="item-320a0101" label="label6" value="5">
+          <cl:langbind property="label" category="PROPERTY" keypath="Str_CardStatusExpiration"/>
+        </cl:item>
+        <cl:item std:sid="item-26049921" label="label7" value="6">
+          <cl:langbind property="label" category="PROPERTY" keypath="Str_CardStatusCollection"/>
+        </cl:item>
+        <cl:item std:sid="item-30f417ea" label="label8" value="7">
+          <cl:langbind property="label" category="PROPERTY" keypath="Str_CardStatusDelete"/>
+        </cl:item>
+      </cl:combobox>
+      <cl:combobox std:sid="c-box-205b5daf" id="cmb4" style="text-align:center;" readonly="true" hidebutton="true">
+        <cl:datamapbind property="value" datacontrolid="MobileCardInfo" columnname="IssuerType"/>
+        <cl:formdata std:sid="f-data-35f4e4cd" row="9" col="1"/>
+        <cl:item std:sid="item-863c1b53" label="Alpeta" value="1"/>
+        <cl:item std:sid="item-e39c606f" label="Web" value="2"/>
+      </cl:combobox>
+      <cl:dateinput std:sid="d-input-6d427403" id="dti1" style="text-align:center;" readonly="true" hidebutton="true" mask="YYYY-MM-DD HH:mm:ss" format="YYYY-MM-DD HH:mm:ss">
+        <cl:datamapbind property="value" datacontrolid="MobileCardInfo" columnname="UpdateAt"/>
+        <cl:formdata std:sid="f-data-3f76799a" row="8" col="1"/>
+      </cl:dateinput>
+      <cl:output std:sid="output-b7bdf66a" id="op_issueMethod" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; border-right-color:#c5c5c5; border-bottom-style:solid; text-align:center;" class="userInfo_bold" visible="false" value="발급수단">
+        <cl:formdata std:sid="f-data-37b1c373" row="10" col="0"/>
+      </cl:output>
+      <cl:combobox std:sid="c-box-c94f90c6" id="cmb_issueMethod" style="text-align:center;" visible="false" readonly="false" hidebutton="false">
+        <cl:datamapbind property="value" datacontrolid="MobileCardInfo" columnname="CertType"/>
+        <cl:formdata std:sid="f-data-ded1db82" row="10" col="1"/>
+        <cl:item std:sid="item-68bd8017" label="E-mail" value="3"/>
+        <cl:item std:sid="item-2f36e981" label="SMS" value="2"/>
+      </cl:combobox>
+      <cl:formlayout std:sid="f-layout-78947cf2" hspace="1px" vspace="1px" top-margin="1px" right-margin="1px" bottom-margin="1px" left-margin="1px">
+        <cl:rows length="30" unit="PIXEL"/>
+        <cl:rows length="30" unit="PIXEL"/>
+        <cl:rows length="30" unit="PIXEL"/>
+        <cl:rows length="30" unit="PIXEL"/>
+        <cl:rows length="30" unit="PIXEL"/>
+        <cl:rows length="30" unit="PIXEL"/>
+        <cl:rows length="30" unit="PIXEL"/>
+        <cl:rows length="30" unit="PIXEL"/>
+        <cl:rows length="30" unit="PIXEL"/>
+        <cl:rows length="30" unit="PIXEL"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="160" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-6c63c48c"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

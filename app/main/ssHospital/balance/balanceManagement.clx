@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-860cc373" version="1.0.0.0">
+  <head std:sid="head-52e4bd20">
+    <title>balanceManagement</title>
+    <screen std:sid="screen-fd88c5f7" id="default" name="default" minwidth="1024px" width="1024px" height="768px"/>
+    <screen std:sid="screen-554255e2" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-8628e1bc" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-d2c56f53">
+      <cl:dataset std:sid="d-set-a3eb9433" id="BalanceInfoList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-83dbfd64" name="UserID"/>
+          <cl:datacolumn std:sid="d-column-1d084982" name="UniqueID"/>
+          <cl:datacolumn std:sid="d-column-3608435c" name="Name"/>
+          <cl:datacolumn std:sid="d-column-26f78b32" name="Balance" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-ddcf344f" name="LastEventDate" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-b694c553" name="BeforBalance" datatype="expression" expression="Balance + Price"/>
+          <cl:datacolumn std:sid="d-column-0a3cbe21" name="Price" datatype="number"/>
+        </cl:datacolumnlist>
+        <cl:datarowlist/>
+      </cl:dataset>
+      <cl:submission std:sid="submission-5c180521" id="sms_getBalanceList" method="get" action="/v1/ssh/balance">
+        <cl:listener std:sid="listener-606acb59" name="submit-done" handler="onSms_getBalanceListSubmitDone"/>
+        <cl:listener std:sid="listener-ea97cd0f" name="submit-error" handler="onSms_getBalanceListSubmitError"/>
+        <cl:listener std:sid="listener-af8b30f1" name="submit-timeout" handler="onSms_getBalanceListSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total"/>
+        <cl:responsedata dataid="BalanceInfoList"/>
+      </cl:submission>
+      <cl:datamap std:sid="d-map-c2bd18fc" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-bf01545e" name="Count" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-a33aca7f" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-278d86a9" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-a162b5f4" id="dmCardLayoutInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-45f2b391" info="지문 카드용량" name="CardSize" datatype="number" defaultvalue="1"/>
+          <cl:datacolumn std:sid="d-column-955d92cb" info="카드종류" name="CardType" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-853d17d3" info="카드 읽기 구분" name="ReadType" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-7d1c663b" info="지문 템플릿" name="TemplateSize" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-bf6627eb" info="지문 Template 개수" name="TemplateCount" datatype="number" defaultvalue="0"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-cc517011" id="dm_ExportParam">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-d83b48dd" name="offset" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-fc1a603e" name="total" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-bbc173f9" name="mode"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:dataset std:sid="d-set-952166fd" id="ExportBalanceInfoList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-d7ac9588" name="UserID"/>
+          <cl:datacolumn std:sid="d-column-7df6ea28" name="UniqueID"/>
+          <cl:datacolumn std:sid="d-column-07ecd407" name="Name"/>
+          <cl:datacolumn std:sid="d-column-f80d1406" name="Balance" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-c1c30360" name="LastEventDate" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-d9a6bc54" name="BeforBalance" datatype="expression" expression="Balance + Price"/>
+          <cl:datacolumn std:sid="d-column-ee4e4b82" name="Price" datatype="number"/>
+        </cl:datacolumnlist>
+        <cl:datarowlist/>
+      </cl:dataset>
+    </cl:model>
+    <cl:appspec dev-comment="SSHBM_&#xD;&#xA;&#xD;&#xA;사용자별 생성일자 기준으로 ssh_prepay 테이블을 조회하여 endTime 석식까지 계산하여 리턴&#xD;&#xA;&#xD;&#xA;"/>
+  </head>
+  <body std:sid="body-7fd12b1f" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-dfb777f0" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-e57a056b">
+      <cl:xylayoutdata std:sid="xyl-data-fd65baf4" top="1px" right="1px" bottom="1px" left="1px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-357fcee9">
+        <cl:formdata std:sid="f-data-566afb27" row="0" col="0"/>
+        <cl:group std:sid="group-a84f9729" style="border-right-style:solid; color:#6b6b6b; border-top-width:1px; border-bottom-color:#cccccc; border-right-width:1px; border-left-color:#cccccc; border-right-color:#cccccc; border-left-width:1px; border-top-style:solid; background-color:#F6F6F6; border-radius:10px; border-left-style:solid; border-bottom-width:1px; border-top-color:#cccccc; border-bottom-style:solid;">
+          <cl:formdata std:sid="f-data-8e581b3f" row="0" col="6"/>
+          <cl:combobox std:sid="c-box-6107e546" id="SSHBM_cmbCategory" style="background-color:#F6F6F6; border-right-style:none; border-left-style:none; border-bottom-style:none; border-top-style:none;" preventinput="true">
+            <cl:apppropbind property="value" category="PROPERTY" app-property="searchCategory"/>
+            <cl:formdata std:sid="f-data-8adb84bb" row="0" col="0"/>
+            <cl:item std:sid="item-4608f046" label="사용자 아이디" value="id"/>
+            <cl:item std:sid="item-e863c61d" label="이름" value="name"/>
+            <cl:item std:sid="item-9e16ae0c" label="유니크ID" value="uniqueid"/>
+            <cl:item std:sid="item-7e8c5c6b" label="카드번호" value="card"/>
+          </cl:combobox>
+          <cl:inputbox std:sid="i-box-c326c7b5" id="SSHBM_ipbKeyword" style="background-color:#F6F6F6; padding:0px 0px 0px 10px; border-bottom-color:#cccccc; border-left-color:#cccccc; border-top-color:#cccccc; border-bottom-style:none; border-right-color:#cccccc; border-top-style:none;">
+            <cl:langbind property="placeholder" category="PROPERTY" keypath="Str_SearchKeword"/>
+            <cl:apppropbind property="value" category="PROPERTY" app-property="searchKeyword"/>
+            <cl:formdata std:sid="f-data-378afdbf" row="0" col="1"/>
+          </cl:inputbox>
+          <cl:group std:sid="group-94b972ce" id="SSHBM_btnSearch" style="border-right-style:none; cursor:pointer; background-color:transparent; background-repeat:no-repeat; border-left-style:none; border-bottom-style:none; background-image:url('../../../../theme/images/common/common_text_field_btn_icons_search.png'); background-position:center; border-top-style:none;">
+            <cl:listener std:sid="listener-1a44345b" name="click" handler="onSSHBM_btnSearchClick"/>
+            <cl:formdata std:sid="f-data-838eccbc" height="29" row="0" col="2"/>
+            <cl:xylayout std:sid="xylayout-3b76f87f"/>
+          </cl:group>
+          <cl:formlayout std:sid="f-layout-409a1d5f" hspace="0px" vspace="0px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+            <cl:columns length="3" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:output std:sid="output-e053a255" style="padding:4px; text-align:right;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_All"/>
+          <cl:formdata std:sid="f-data-427c19ea" row="0" col="1"/>
+        </cl:output>
+        <cl:output std:sid="output-5a63dfa3" id="SSHBM_opbTotal" value="">
+          <cl:formdata std:sid="f-data-154bcf46" row="0" col="2"/>
+        </cl:output>
+        <cl:dateinput std:sid="d-input-48acdebf" id="SSHBM_dtMonth" style="text-align:center;" calendartype="yearmonth" mask="YYYY-MM" format="YYYYMMDD" autoselect="false">
+          <cl:formdata std:sid="f-data-e801a413" row="0" col="4"/>
+        </cl:dateinput>
+        <cl:button std:sid="button-f147c3c7" id="SSHBM_btnCardSearch" class="userInfo_btn" value="카드조회">
+          <cl:listener std:sid="listener-80fbef39" name="click" handler="onSSHBM_btnCardSearchClick"/>
+          <cl:formdata std:sid="f-data-cf79ff13" row="0" col="5"/>
+        </cl:button>
+        <cl:button std:sid="button-07a00c2d" id="SSHBM_btnExport" class="userInfo_btn" value="내보내기">
+          <cl:listener std:sid="listener-63e3c7ba" name="click" handler="onSSHBM_btnExportClick"/>
+          <cl:formdata std:sid="f-data-b5da9b6a" row="0" col="8"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-89dabd7a" hspace="5px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+          <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="50" unit="PIXEL" autoSizing="false" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="150" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="250" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:pageindexer std:sid="p-indexer-8376e66b" id="balanceListPageIndexer" class="userList_paging">
+        <cl:listener std:sid="listener-80accf9c" name="selection-change" handler="onBalanceListPageIndexerSelectionChange"/>
+        <cl:formdata std:sid="f-data-b8e21446" row="2" col="0"/>
+      </cl:pageindexer>
+      <cl:grid std:sid="grid-2e3525b7" id="SSHBM_grdBalanceList" datasetid="BalanceInfoList" columnResizable="true">
+        <cl:formdata std:sid="f-data-1cbef00b" row="1" col="0"/>
+        <cl:gridcolumn std:sid="g-column-ca330aae" width="50px"/>
+        <cl:gridcolumn std:sid="g-column-2d035dea"/>
+        <cl:gridcolumn std:sid="g-column-ef0ff6bb"/>
+        <cl:gridcolumn std:sid="g-column-ddd407ce"/>
+        <cl:gridcolumn std:sid="g-column-451c6f4d"/>
+        <cl:gridcolumn std:sid="g-column-2f10b5e4"/>
+        <cl:gridcolumn std:sid="g-column-d592c4dc"/>
+        <cl:gridcolumn std:sid="g-column-0707b2b3"/>
+        <cl:gridheader std:sid="gh-band-4fedeb65">
+          <cl:gridrow std:sid="g-row-79b5b58e"/>
+          <cl:gridcell std:sid="gh-cell-dc552052" rowindex="0" colindex="0" sortable="false" filterable="false"/>
+          <cl:gridcell std:sid="gh-cell-c7109f59" rowindex="0" colindex="1" targetcolumnname="UserID" sortable="false" filterable="false" text="아이디" visible="false"/>
+          <cl:gridcell std:sid="gh-cell-291c79ae" rowindex="0" colindex="2" targetcolumnname="UniqueID" sortable="false" filterable="false" text="Q-ID"/>
+          <cl:gridcell std:sid="gh-cell-b52bde57" rowindex="0" colindex="3" targetcolumnname="Name" sortable="false" filterable="false" text="이름"/>
+          <cl:gridcell std:sid="gh-cell-aeece87f" rowindex="0" colindex="4" targetcolumnname="LastEventDate" sortable="false" filterable="false" text="최근 거래일자"/>
+          <cl:gridcell std:sid="gh-cell-708a57a6" rowindex="0" colindex="5" targetcolumnname="BeforBalance" sortable="false" filterable="false" text="거래전 잔액"/>
+          <cl:gridcell std:sid="gh-cell-6cc2fca8" rowindex="0" colindex="6" targetcolumnname="Price" sortable="false" filterable="false" text="거래금액"/>
+          <cl:gridcell std:sid="gh-cell-ebf6a894" rowindex="0" colindex="7" targetcolumnname="Balance" sortable="false" filterable="false" text="잔액"/>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-b2904adb">
+          <cl:gridrow std:sid="g-row-e65cead2"/>
+          <cl:gridcell std:sid="gd-cell-c3087314" rowindex="0" colindex="0" columntype="rowindex"/>
+          <cl:gridcell std:sid="gd-cell-e7773f0c" rowindex="0" colindex="1" columnname="UserID"/>
+          <cl:gridcell std:sid="gd-cell-9ebed925" rowindex="0" colindex="2" columnname="UniqueID"/>
+          <cl:gridcell std:sid="gd-cell-3964ad71" rowindex="0" colindex="3" columnname="Name"/>
+          <cl:gridcell std:sid="gd-cell-e266550d" rowindex="0" colindex="4" columnname="LastEventDate"/>
+          <cl:gridcell std:sid="gd-cell-0a17659d" rowindex="0" colindex="5" columnname="BeforBalance"/>
+          <cl:gridcell std:sid="gd-cell-0f8818ad" rowindex="0" colindex="6" columnname="Price"/>
+          <cl:gridcell std:sid="gd-cell-db5a5034" rowindex="0" colindex="7" columnname="Balance"/>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:formlayout std:sid="f-layout-7fc8d13a" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-f8abfd48"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler>
+      <std:guide position="318"/>
+    </std:hruler>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

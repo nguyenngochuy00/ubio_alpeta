@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-cd8ba629" version="1.0.0.0">
+  <head std:sid="head-e845ce0d">
+    <title>OptionPageUser</title>
+    <screen std:sid="screen-366f7229" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="1200" customWidth="1080"/>
+    <screen std:sid="screen-341157ba" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-3e917a0b" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-f167ee14">
+      <cl:datamap std:sid="d-map-69a490b1" id="OptionUser">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-f8355b98" name="TerminalUserSync" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-1678ceaf" name="PasswordPeriod" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-effb42c8" name="AuthFailCount" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-12205546" name="PwChangeFirst" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-d1533e18" name="PwNotAllowOld" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-1ce7e3fd" name="PwNotAllowDuplicateChar" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-65f3d184" name="PwNotAllowSameID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-8b2f0720" name="PwRequiredUpper" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-c1fa90cf" name="PwRequiredLower" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-7db12204" name="PwRequiredNum" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-e7b7fb6d" name="PwRequiredSymbol" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-73dc3f1e" name="TerminalUserUploadOverwrite" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-bd008fa0" name="UserUniqueIDRequired" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-c2482da4" name="UserGroupRequired" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-bd51e032" name="UserAccessGroupRequired" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-d57e2711" name="UserPositionRequired" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-a9cda789" name="UserDepartmentRequired" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-9253346a" name="UserMobileRequired" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-33079ab0" name="UserEmailRequired" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-4b2c3ef2" name="UserScheduleCodeRequired" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-56fb1043" name="UserMealCodeRequired" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-fae818a8" name="UserSalaryCodeRequired" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-d6cac93f" name="AuthUnavailableTime" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-652abb0d" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-51599a2a" name="ResultCode"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap comment="아이티원 전용. 인사동기화 주기" std:sid="d-map-d7a625f4" id="OptionUserSyncCycle">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-a74b166b" name="SyncCycle" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-8444e148" id="sms_deleteUserAll" method="delete" action="/v1/users">
+        <cl:listener std:sid="listener-99f48074" name="submit-done" handler="onSms_deleteUserAllSubmitDone"/>
+        <cl:listener std:sid="listener-cd9f67d5" name="submit-error" handler="onSms_deleteUserAllSubmitError"/>
+        <cl:listener std:sid="listener-9e58db05" name="submit-timeout" handler="onSms_deleteUserAllSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-d5fda266" id="sms_deleteAuthTerminalUserAll" method="delete" action="/v1/rfaw/users/all">
+        <cl:listener std:sid="listener-f9d1af53" name="submit-done" handler="onSms_deleteAuthTerminalUserAllSubmitDone"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-7959957f" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-65672c06" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-5b9b54ef" id="SEUSR_grpMain">
+      <cl:xylayoutdata std:sid="xyl-data-deb89897" top="0px" right="0px" left="0px" height="1200px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+      <cl:output std:sid="output-a48fc03c" style="font-weight:700; font-size:16px;">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_OptionUserData"/>
+        <cl:formdata std:sid="f-data-3a109ff2" row="0" col="0"/>
+      </cl:output>
+      <cl:checkbox std:sid="c-box-7ce04f3b" id="cbx1" style="font-size:14px;" truevalue="1" falsevalue="0">
+        <cl:datamapbind property="value" datacontrolid="OptionUser" columnname="TerminalUserSync"/>
+        <cl:langbind property="text" category="PROPERTY" keypath="Str_OptionAutoUploadLogdatafromterminal"/>
+        <cl:formdata std:sid="f-data-15c0656a" row="1" col="0" rowspan="1" colspan="2"/>
+      </cl:checkbox>
+      <cl:output std:sid="output-66d9df03" style="font-weight:700; font-size:16px;">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_OptionPasswordUseOptions"/>
+        <cl:formdata std:sid="f-data-61102323" row="11" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-9795dadd" style="border-bottom-style:none;" class="common-controllabel">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_OptionPasswordExpirationPeriodSet"/>
+        <cl:formdata std:sid="f-data-55712e24" row="12" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-4e4a4fb9" style="border-bottom-style:none;" class="common-controllabel">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_OptionNoPasswordAttempts"/>
+        <cl:formdata std:sid="f-data-105010e9" row="13" col="0"/>
+      </cl:output>
+      <cl:checkbox std:sid="c-box-607f2f69" id="cbx2" style="font-size:14px;" truevalue="1" falsevalue="0">
+        <cl:datamapbind property="value" datacontrolid="OptionUser" columnname="PwChangeFirst"/>
+        <cl:langbind property="text" category="PROPERTY" keypath="Str_OptionFirstLoginPasswordChange"/>
+        <cl:formdata std:sid="f-data-a67503a9" row="15" col="0" rowspan="1" colspan="2"/>
+      </cl:checkbox>
+      <cl:output std:sid="output-f09bc7a0" style="font-weight:700; font-size:16px;">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_OptionPasswordGenerationOption"/>
+        <cl:formdata std:sid="f-data-f5c8faed" row="17" col="0"/>
+      </cl:output>
+      <cl:checkbox std:sid="c-box-1810f271" id="SEUSR_chkNotAllowOld" style="font-size:14px;" truevalue="1" falsevalue="0">
+        <cl:listener std:sid="listener-2b1d0c00" name="value-change" handler="onSEUSR_chkNotAllowOldValueChange"/>
+        <cl:datamapbind property="value" datacontrolid="OptionUser" columnname="PwNotAllowOld"/>
+        <cl:langbind property="text" category="PROPERTY" keypath="Str_OptionRepeatPasswordNotAllowed"/>
+        <cl:formdata std:sid="f-data-8cc0cc3d" row="18" col="0" rowspan="1" colspan="1"/>
+      </cl:checkbox>
+      <cl:checkbox std:sid="c-box-787710a2" id="cbx5" style="font-size:14px;" truevalue="1" falsevalue="0">
+        <cl:datamapbind property="value" datacontrolid="OptionUser" columnname="PwNotAllowDuplicateChar"/>
+        <cl:langbind property="text" category="PROPERTY" keypath="Str_OptionConsecutiveCharactersNotAllowed"/>
+        <cl:formdata std:sid="f-data-b0ec499e" row="19" col="0" rowspan="1" colspan="2"/>
+      </cl:checkbox>
+      <cl:checkbox std:sid="c-box-e484b2ce" id="cbx6" style="font-size:14px;" truevalue="1" falsevalue="0">
+        <cl:datamapbind property="value" datacontrolid="OptionUser" columnname="PwNotAllowSameID"/>
+        <cl:langbind property="text" category="PROPERTY" keypath="Str_OptionIdenticalIDPasswordNotAllowed"/>
+        <cl:formdata std:sid="f-data-a540bdef" row="20" col="0" rowspan="1" colspan="2"/>
+      </cl:checkbox>
+      <cl:checkbox std:sid="c-box-57fc7ef5" id="cbx7" style="font-size:14px;" truevalue="1" falsevalue="0">
+        <cl:datamapbind property="value" datacontrolid="OptionUser" columnname="PwRequiredUpper"/>
+        <cl:langbind property="text" category="PROPERTY" keypath="Str_OptionUppercaseRequired"/>
+        <cl:formdata std:sid="f-data-55fc9875" row="21" col="0" rowspan="1" colspan="2"/>
+      </cl:checkbox>
+      <cl:checkbox std:sid="c-box-cd572961" id="cbx8" style="font-size:14px;" truevalue="1" falsevalue="0">
+        <cl:datamapbind property="value" datacontrolid="OptionUser" columnname="PwRequiredLower"/>
+        <cl:langbind property="text" category="PROPERTY" keypath="Str_OptionLowercaseRequired"/>
+        <cl:formdata std:sid="f-data-9bf919db" row="22" col="0" rowspan="1" colspan="2"/>
+      </cl:checkbox>
+      <cl:checkbox std:sid="c-box-2edfbc58" id="cbx9" style="font-size:14px;" truevalue="1" falsevalue="0">
+        <cl:datamapbind property="value" datacontrolid="OptionUser" columnname="PwRequiredNum"/>
+        <cl:langbind property="text" category="PROPERTY" keypath="Str_OptionNumberRequired"/>
+        <cl:formdata std:sid="f-data-dfd28021" row="23" col="0" rowspan="1" colspan="2"/>
+      </cl:checkbox>
+      <cl:checkbox std:sid="c-box-0ea5e09b" id="cbx10" style="font-size:14px;" truevalue="1" falsevalue="0">
+        <cl:datamapbind property="value" datacontrolid="OptionUser" columnname="PwRequiredSymbol"/>
+        <cl:langbind property="text" category="PROPERTY" keypath="Str_OptionSpecialCharacterRequired"/>
+        <cl:formdata std:sid="f-data-7c191b1f" row="24" col="0" rowspan="1" colspan="2"/>
+      </cl:checkbox>
+      <cl:inputbox std:sid="i-box-b91e7bf4" id="SEUSR_inNotAllowOld" style="font-size:14px; text-align:center;" visible="false">
+        <cl:formdata std:sid="f-data-a0ab56ec" row="18" col="1"/>
+      </cl:inputbox>
+      <cl:checkbox std:sid="c-box-3314b70f" id="cbx3" style="font-size:14px;" truevalue="1" falsevalue="0">
+        <cl:datamapbind property="value" datacontrolid="OptionUser" columnname="TerminalUserUploadOverwrite"/>
+        <cl:langbind property="text" category="PROPERTY" keypath="Str_AllowTerminalToOverWriteUsers"/>
+        <cl:formdata std:sid="f-data-5f37bd37" row="2" col="0" rowspan="1" colspan="2"/>
+      </cl:checkbox>
+      <cl:output std:sid="output-2dc15dad" style="font-weight:700; font-size:16px;" visible="false">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_OptionPasswordGenerationOption"/>
+        <cl:formdata std:sid="f-data-82210de6" row="34" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-054450cf" class="common-controllabel" visible="false">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_OptionNoPasswordAttempts"/>
+        <cl:formdata std:sid="f-data-10349211" row="35" col="0"/>
+      </cl:output>
+      <cl:button std:sid="button-d4398a34" id="SEUSR_btnUserFaceWTSync" class="userInfo_btn" visible="false" value="Button">
+        <cl:listener std:sid="listener-ef7ea392" name="click" handler="onSEUSR_btnUserFaceWTSyncClick"/>
+        <cl:formdata std:sid="f-data-69b3bd9b" row="35" col="1"/>
+      </cl:button>
+      <cl:output std:sid="output-cf9ca228" id="delete_output" style="font-weight:700; font-size:16px;">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_OptionUserDataDelete"/>
+        <cl:formdata std:sid="f-data-a967b63f" row="30" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-d938ed39" style="font-weight:700; font-size:16px;">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_OptionRequiredUserData"/>
+        <cl:formdata std:sid="f-data-d2240e2f" row="4" col="0" rowspan="1" colspan="2"/>
+      </cl:output>
+      <cl:checkbox std:sid="c-box-3007a3fe" id="cbx11" style="font-size:14px;" truevalue="1" falsevalue="0">
+        <cl:datamapbind property="value" datacontrolid="OptionUser" columnname="UserUniqueIDRequired"/>
+        <cl:langbind property="text" category="PROPERTY" keypath="Str_UniqueID"/>
+        <cl:formdata std:sid="f-data-147d63dd" row="5" col="0"/>
+      </cl:checkbox>
+      <cl:checkbox std:sid="c-box-5a421d4b" id="cbx12" style="font-size:14px;" truevalue="1" falsevalue="0">
+        <cl:langbind property="text" category="PROPERTY" keypath="Str_Group"/>
+        <cl:datamapbind property="value" datacontrolid="OptionUser" columnname="UserGroupRequired"/>
+        <cl:formdata std:sid="f-data-9bda06c9" row="5" col="1"/>
+      </cl:checkbox>
+      <cl:checkbox std:sid="c-box-d388c251" id="cbx13" style="font-size:14px;" truevalue="1" falsevalue="0">
+        <cl:langbind property="text" category="PROPERTY" keypath="Str_AccessGroup"/>
+        <cl:datamapbind property="value" datacontrolid="OptionUser" columnname="UserAccessGroupRequired"/>
+        <cl:formdata std:sid="f-data-22b7d370" row="6" col="0"/>
+      </cl:checkbox>
+      <cl:checkbox std:sid="c-box-9a9fdde8" id="cbx15" style="font-size:14px;" truevalue="1" falsevalue="0">
+        <cl:langbind property="text" category="PROPERTY" keypath="Str_Title"/>
+        <cl:datamapbind property="value" datacontrolid="OptionUser" columnname="UserPositionRequired"/>
+        <cl:formdata std:sid="f-data-5c93ed36" row="6" col="1"/>
+      </cl:checkbox>
+      <cl:checkbox std:sid="c-box-de21de89" id="cbx14" style="font-size:14px;" truevalue="1" falsevalue="0">
+        <cl:langbind property="text" category="PROPERTY" keypath="Str_Department"/>
+        <cl:datamapbind property="value" datacontrolid="OptionUser" columnname="UserDepartmentRequired"/>
+        <cl:formdata std:sid="f-data-c21bf13b" row="7" col="0"/>
+      </cl:checkbox>
+      <cl:checkbox std:sid="c-box-d7779937" id="cbx18" style="font-size:14px;" truevalue="1" falsevalue="0">
+        <cl:langbind property="text" category="PROPERTY" keypath="Str_MobileNum"/>
+        <cl:datamapbind property="value" datacontrolid="OptionUser" columnname="UserMobileRequired"/>
+        <cl:formdata std:sid="f-data-8dbaf446" row="7" col="1"/>
+      </cl:checkbox>
+      <cl:checkbox std:sid="c-box-cd8bf02a" id="cbx19" style="font-size:14px;" truevalue="1" falsevalue="0">
+        <cl:langbind property="text" category="PROPERTY" keypath="Str_EmailAddress"/>
+        <cl:datamapbind property="value" datacontrolid="OptionUser" columnname="UserEmailRequired"/>
+        <cl:formdata std:sid="f-data-6945e591" row="8" col="0"/>
+      </cl:checkbox>
+      <cl:checkbox std:sid="c-box-dd1c65f6" id="cbx16" style="font-size:14px;" truevalue="1" falsevalue="0">
+        <cl:datamapbind property="value" datacontrolid="OptionUser" columnname="UserScheduleCodeRequired"/>
+        <cl:langbind property="text" category="PROPERTY" keypath="Str_Schedule3"/>
+        <cl:formdata std:sid="f-data-15454a87" row="8" col="1"/>
+      </cl:checkbox>
+      <cl:checkbox std:sid="c-box-0cfcfa90" id="cbx21" style="font-size:14px;" truevalue="1" falsevalue="0">
+        <cl:langbind property="text" category="PROPERTY" keypath="Str_MealCode"/>
+        <cl:datamapbind property="value" datacontrolid="OptionUser" columnname="UserMealCodeRequired"/>
+        <cl:formdata std:sid="f-data-8a4c1bfa" row="9" col="0"/>
+      </cl:checkbox>
+      <cl:checkbox std:sid="c-box-fce12fed" id="cbx22" style="font-size:14px;" truevalue="1" falsevalue="0">
+        <cl:langbind property="text" category="PROPERTY" keypath="Str_Salary2"/>
+        <cl:datamapbind property="value" datacontrolid="OptionUser" columnname="UserSalaryCodeRequired"/>
+        <cl:formdata std:sid="f-data-c1a68f61" row="9" col="1"/>
+      </cl:checkbox>
+      <cl:output std:sid="output-d61e582f" class="common-controllabel">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_OptionAuthUnavailableTime"/>
+        <cl:formdata std:sid="f-data-bcfd7c8d" row="14" col="0"/>
+      </cl:output>
+      <cl:combobox std:sid="c-box-8f8df65d" id="SEUSR_cmbauthUnaVailableTime" style="font-size:14px; text-align:center;" enabled="false">
+        <cl:datamapbind property="value" category="PROPERTY" datacontrolid="OptionUser" columnname="AuthUnavailableTime"/>
+        <cl:formdata std:sid="f-data-9621f7c4" row="14" col="1"/>
+        <cl:item std:sid="item-6c5d5a64" label="---" value="0"/>
+        <cl:item std:sid="item-cf2e1f5e" label="" value="10">
+          <cl:langbind property="label" category="PROPERTY" keypath="Str_10Minute"/>
+        </cl:item>
+        <cl:item std:sid="item-ef735125" label="" value="30">
+          <cl:langbind property="label" category="PROPERTY" keypath="Str_30Minute"/>
+        </cl:item>
+        <cl:item std:sid="item-1220ef6a" label="1시간" value="60">
+          <cl:langbind property="label" category="PROPERTY" keypath="Str_60Minute"/>
+        </cl:item>
+        <cl:item std:sid="item-b16defb4" label="1시간반" value="90">
+          <cl:langbind property="label" category="PROPERTY" keypath="Str_90Minute"/>
+        </cl:item>
+        <cl:item std:sid="item-7ed36923" label="2시간" value="120">
+          <cl:langbind property="label" category="PROPERTY" keypath="Str_120Minute"/>
+        </cl:item>
+        <cl:item std:sid="item-3a277e10" label="3시간" value="180">
+          <cl:langbind property="label" category="PROPERTY" keypath="Str_180Minute"/>
+        </cl:item>
+        <cl:item std:sid="item-d06dbd3a" label="6시간" value="360">
+          <cl:langbind property="label" category="PROPERTY" keypath="Str_360Minute"/>
+        </cl:item>
+        <cl:item std:sid="item-025b0670" label="12시간" value="720">
+          <cl:langbind property="label" category="PROPERTY" keypath="Str_720Minute"/>
+        </cl:item>
+        <cl:item std:sid="item-ca820095" label="24시간" value="1440">
+          <cl:langbind property="label" category="PROPERTY" keypath="Str_1440Minute"/>
+        </cl:item>
+      </cl:combobox>
+      <cl:group std:sid="group-13ed522e">
+        <cl:formdata std:sid="f-data-eae3a2f9" row="31" col="0" rowspan="2" colspan="2"/>
+        <cl:group std:sid="group-c8da3b3a" style="border-right-style:none; border-left-style:none; border-bottom-style:none; border-top-style:none;">
+          <cl:formdata std:sid="f-data-73a7ff61" row="0" col="0" rowspan="1" colspan="1"/>
+          <cl:button std:sid="button-9875f57c" id="AllDELETE_btnHidden" style="background-color:transparent; border-right-style:none; border-left-style:none; border-bottom-style:none; border-top-style:none;" visible="true" enabled="false">
+            <cl:listener std:sid="listener-f32f366e" name="click" handler="onAllDELETE_btnHiddenClick"/>
+            <cl:formdata std:sid="f-data-5f9ef708" width="25" height="20" row="0" col="2" rowspan="1" colspan="1"/>
+          </cl:button>
+          <cl:button std:sid="button-f8bc8e98" id="SEUSR_btnUserDeleteAll" class="userInfo_btn" visible="true">
+            <cl:listener std:sid="listener-8884da4f" name="click" handler="onSEUSR_btnUserDeleteAllClick"/>
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_UserDeleteAll"/>
+            <cl:formdata std:sid="f-data-f5a7cdda" row="0" col="0"/>
+          </cl:button>
+          <cl:formlayout std:sid="f-layout-46bed6eb" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px" hseparatorwidth="1" vseparatorwidth="1">
+            <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="300" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="1" unit="FRACTION" autoSizing="true" minlength="0"/>
+            <cl:columns length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-0dbcc2fe" hspace="0px" vspace="0px">
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-e0a0933b">
+        <cl:formdata std:sid="f-data-0045d36c" row="28" col="0" rowspan="1" colspan="2"/>
+        <cl:button std:sid="button-ab30874f" id="SEUSR_btnUserAuthUnavailableManagement" class="userInfo_btn" visible="true">
+          <cl:listener std:sid="listener-64d01d6b" name="click" handler="onSEUSR_btnUserAuthUnavailableTimeManagementClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_UserAuthUnavailableTimeManagement"/>
+          <cl:formdata std:sid="f-data-150ab75f" row="0" col="0"/>
+        </cl:button>
+        <cl:button std:sid="button-e201e068" id="SEUSR_btnAuthTermnialUserAllDel" class="userInfo_btn" visible="false" enabled="false">
+          <cl:listener std:sid="listener-b9be1560" name="click" handler="onSEUSR_btnAuthTermnialUserAllDelClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_UserDeleteAll"/>
+          <cl:formdata std:sid="f-data-f88ade82" row="0" col="2"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-8feaa49d" scrollable="false" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="300" unit="PIXEL" autoSizing="true"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="280" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:inputbox std:sid="i-box-faff5566" id="SEUSR_ipbPasswordPeriod" style="font-size:14px; text-align:center;" maxlength="9" inputfilter="^[0-9]*$">
+        <cl:datamapbind property="value" datacontrolid="OptionUser" columnname="PasswordPeriod"/>
+        <cl:formdata std:sid="f-data-d80c64f4" row="12" col="1"/>
+      </cl:inputbox>
+      <cl:inputbox std:sid="i-box-14f0f34f" id="SEUSR_ipbAuthFailCount" style="font-size:14px; text-align:center;" maxlength="9" inputfilter="^[0-9]*$">
+        <cl:listener std:sid="listener-925797c5" name="value-change" handler="onSEUSR_ipbAuthFailCountBlur"/>
+        <cl:datamapbind property="value" datacontrolid="OptionUser" columnname="AuthFailCount"/>
+        <cl:formdata std:sid="f-data-3bd3db95" row="13" col="1"/>
+      </cl:inputbox>
+      <cl:group std:sid="group-818d11ca" id="SEUSR_UserSyncGrp" visible="false">
+        <cl:formdata std:sid="f-data-76ab536b" row="37" col="0" rowspan="2" colspan="2"/>
+        <cl:output std:sid="output-4df2da18" style="font-weight:700; font-size:16px;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_SyncCycleSetting"/>
+          <cl:formdata std:sid="f-data-98d32666" row="0" col="0"/>
+        </cl:output>
+        <cl:output std:sid="output-019bfd2c" style="border-bottom-style:none;" class="common-controllabel">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_UserSyncCycle"/>
+          <cl:formdata std:sid="f-data-86d090d2" row="1" col="0"/>
+        </cl:output>
+        <cl:inputbox std:sid="i-box-75b0b81c" id="ipb_UserSyncCycle" style="font-size:14px; text-align:center;" tooltip="초단위로 입력합니다. 10~600" maxlength="3" inputfilter="^[0-9]*$">
+          <cl:datamapbind property="value" category="PROPERTY" datacontrolid="OptionUserSyncCycle" columnname="SyncCycle"/>
+          <cl:formdata std:sid="f-data-140f133e" row="1" col="1"/>
+        </cl:inputbox>
+        <cl:formlayout std:sid="f-layout-b305b199" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="315" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-b1506b56">
+        <cl:formdata std:sid="f-data-d5a040df" row="26" col="0" rowspan="1" colspan="2"/>
+        <cl:output std:sid="output-5e7f6fd8" style="font-weight:700; font-size:16px;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_UserAccountManagement"/>
+          <cl:formdata std:sid="f-data-24a13147" row="0" col="0"/>
+        </cl:output>
+        <cl:output std:sid="output-6a3e5b98" id="SEUSR_opbAuthTermnialUserAllDel" style="font-weight:700; font-size:16px;" visible="false">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_AuthTerminalUsersAllDelete"/>
+          <cl:formdata std:sid="f-data-2de22ef0" row="0" col="2"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-4b74e9ff" hspace="0px" vspace="0px">
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="315" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="90" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="315" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-b2c25821" hspace="0px" vspace="0px">
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="10" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="10" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="315" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-d65f53a6"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

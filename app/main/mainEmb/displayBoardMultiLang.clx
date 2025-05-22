@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-37dc540d" version="1.0.0.0">
+  <head std:sid="head-e807dd96">
+    <title>MultiLang</title>
+    <screen std:sid="screen-7beba86e" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="500" customWidth="500"/>
+    <screen std:sid="screen-38693fb5" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-7c560104" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-6650e33d">
+      <cl:datamap std:sid="d-map-25b9a277" id="fontSize">
+        <cl:datacolumnlist>
+          <cl:datacolumn comment="내용" std:sid="d-column-485456ec" info="" name="font1" datatype="string"/>
+          <cl:datacolumn comment="버튼" std:sid="d-column-1e65de80" name="font2" datatype="string"/>
+          <cl:datacolumn comment="제목" std:sid="d-column-f54b1588" name="font3" datatype="string"/>
+          <cl:datacolumn comment="리스트" std:sid="d-column-d3ebfd29" name="font4" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-d63ab9e2" name="messageData"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-6256efcd" id="returnValue">
+        <cl:datacolumnlist>
+          <cl:datacolumn comment="이미지 데이터" std:sid="d-column-99a7b9a3" name="image"/>
+          <cl:datacolumn comment="이름" std:sid="d-column-a38d67b6" name="name"/>
+          <cl:datacolumn comment="유효 시간" std:sid="d-column-37bb7300" name="count"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+    </cl:model>
+    <cl:appspec>
+      <cl:property name="language" type="string" bindable="true"/>
+    </cl:appspec>
+  </head>
+  <body std:sid="body-97ca496f" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-0697d986" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-44f858a6" id="DBML_group">
+      <cl:xylayoutdata std:sid="xyl-data-f44a9f74" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-4c6d5dd8">
+        <cl:formdata std:sid="f-data-7a5df45a" row="2" col="1"/>
+        <cl:button std:sid="button-17b34359" id="test2" class="userInfo_btn" visible="false">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Cancel"/>
+          <cl:formdata std:sid="f-data-9a855fc9" halign="CENTER" valign="FILL" row="0" col="2"/>
+        </cl:button>
+        <cl:combobox std:sid="c-box-518a2ac2" id="DBML_cmbLanguage" style="text-align:center;" hidebutton="true">
+          <cl:listener std:sid="listener-9ab1adcc" name="selection-change" handler="onCmb1SelectionChange"/>
+          <cl:listener std:sid="listener-e0f60499" name="click" handler="onDBML_cmbLanguageClick"/>
+          <cl:datamapbind property="font-size" category="STYLER" datacontrolid="fontSize" columnname="font1"/>
+          <cl:formdata std:sid="f-data-19fde876" row="0" col="1"/>
+          <cl:item std:sid="item-89f0cabf" label="한국어" value="ko" tooltip=""/>
+          <cl:item std:sid="item-b8f3397c" label="ENGLISH" value="en" tooltip=""/>
+          <cl:item std:sid="item-82f0f42d" label="日本語" value="ja"/>
+          <cl:item std:sid="item-870ceb4a" label="français" value="fr"/>
+          <cl:item std:sid="item-460a9fac" label="Español" value="es"/>
+          <cl:item std:sid="item-7227179f" label="Tiếng Việt" value="vi"/>
+          <cl:liststyle>
+            <cl:datamapbind property="font-size" category="STYLER" datacontrolid="fontSize" columnname="font4"/>
+          </cl:liststyle>
+        </cl:combobox>
+        <cl:output std:sid="output-70cdac5e" style="border-right-style:solid; border-top-width:1px; border-bottom-color:#c5c5c5; border-right-width:1px; border-left-color:#c5c5c5; border-right-color:#c5c5c5; border-left-width:1px; border-top-style:solid; background-color:#f6f6f6; border-left-style:solid; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; text-align:center;">
+          <cl:datamapbind property="font-size" category="STYLER" datacontrolid="fontSize" columnname="font1"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Language"/>
+          <cl:formdata std:sid="f-data-dfe62034" row="0" col="0"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-d065b6e7">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="2" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="5" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-2bc69ad7">
+        <cl:formdata std:sid="f-data-d2b0e4ab" row="7" col="1"/>
+        <cl:button std:sid="button-fdba9117" class="userInfo_btn">
+          <cl:listener std:sid="listener-bbd8754b" name="click" handler="onButtonClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_OK"/>
+          <cl:datamapbind property="font-size" category="STYLER" datacontrolid="fontSize" columnname="font2"/>
+          <cl:formdata std:sid="f-data-a91ea1d3" row="0" col="1"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-acceccf8" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="3" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-d7829e06" style="background-color:#325783;">
+        <cl:formdata std:sid="f-data-5bf484fc" row="0" col="0" rowspan="1" colspan="3"/>
+        <cl:output std:sid="output-f07adeab" style="background-color:#325783; color:#ffffff; font-weight:bolder;">
+          <cl:datamapbind property="font-size" category="STYLER" datacontrolid="fontSize" columnname="font3"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Setting"/>
+          <cl:formdata std:sid="f-data-70acc186" row="0" col="1"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-48fb778d" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="20" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-bdc275f9">
+        <cl:formdata std:sid="f-data-96724f11" row="3" col="1"/>
+        <cl:button std:sid="button-95413b62" class="userInfo_btn" visible="false">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Cancel"/>
+          <cl:formdata std:sid="f-data-02c22fd1" halign="CENTER" valign="FILL" row="0" col="2"/>
+        </cl:button>
+        <cl:output std:sid="output-80deb905" style="border-right-style:solid; border-top-width:1px; border-bottom-color:#c5c5c5; border-right-width:1px; border-left-color:#c5c5c5; border-right-color:#c5c5c5; border-left-width:1px; border-top-style:solid; background-color:#f6f6f6; border-left-style:solid; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; text-align:center;">
+          <cl:datamapbind property="font-size" category="STYLER" datacontrolid="fontSize" columnname="font1"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Logo"/>
+          <cl:formdata std:sid="f-data-57fee6ef" row="0" col="0"/>
+        </cl:output>
+        <cl:group std:sid="group-5ee26466">
+          <cl:formdata std:sid="f-data-813f9994" row="0" col="1"/>
+          <cl:group std:sid="group-328db4b0" style="background-color:#e6e6e6;">
+            <cl:listener std:sid="listener-0efc166f" name="click" handler="onGroupClick"/>
+            <cl:formdata std:sid="f-data-326f213e" row="0" col="0"/>
+            <cl:img std:sid="image-87343602" id="DBML_imgUserPicture">
+              <cl:datamapbind property="src" category="PROPERTY" datacontrolid="returnValue" columnname="image"/>
+              <cl:formdata std:sid="f-data-53b9a5c9" row="0" col="1"/>
+            </cl:img>
+            <cl:formlayout std:sid="f-layout-75ce154a" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+              <cl:rows length="1" unit="FRACTION"/>
+              <cl:columns length="3" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="2" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="3" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:img std:sid="image-520a36dc" src="../../../theme/images/mobile/common_top_btn_icon_close.png">
+            <cl:listener std:sid="listener-51d71e65" name="click" handler="onImageClick"/>
+            <cl:formdata std:sid="f-data-70768048" halign="FILL" valign="FILL" row="0" col="1"/>
+          </cl:img>
+          <cl:formlayout std:sid="f-layout-db39b22e" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="5" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-6e38557c">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="2" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="5" unit="FRACTION" autoSizing="false" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-bffc21ac">
+        <cl:formdata std:sid="f-data-edd26635" row="4" col="1"/>
+        <cl:button std:sid="button-2f78a8cc" class="userInfo_btn" visible="false">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Cancel"/>
+          <cl:formdata std:sid="f-data-e5688a8d" halign="CENTER" valign="FILL" row="0" col="2"/>
+        </cl:button>
+        <cl:output std:sid="output-0866080e" style="border-right-style:solid; border-top-width:1px; border-bottom-color:#c5c5c5; border-right-width:1px; border-left-color:#c5c5c5; border-right-color:#c5c5c5; border-left-width:1px; border-top-style:solid; background-color:#f6f6f6; border-left-style:solid; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; text-align:center;">
+          <cl:datamapbind property="font-size" category="STYLER" datacontrolid="fontSize" columnname="font1"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Name"/>
+          <cl:formdata std:sid="f-data-1205053d" row="0" col="0"/>
+        </cl:output>
+        <cl:inputbox std:sid="i-box-e1000779" id="ipb2">
+          <cl:datamapbind property="font-size" category="STYLER" datacontrolid="fontSize" columnname="font1"/>
+          <cl:datamapbind property="value" category="PROPERTY" datacontrolid="returnValue" columnname="name"/>
+          <cl:formdata std:sid="f-data-b9eec8b7" row="0" col="1"/>
+        </cl:inputbox>
+        <cl:formlayout std:sid="f-layout-4a0fa873">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="2" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="5" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-b4a7d2be">
+        <cl:formdata std:sid="f-data-dcc49f52" row="5" col="1"/>
+        <cl:button std:sid="button-a9c31fd0" class="userInfo_btn" visible="false">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Cancel"/>
+          <cl:formdata std:sid="f-data-c71e9bfa" halign="CENTER" valign="FILL" row="0" col="2"/>
+        </cl:button>
+        <cl:output std:sid="output-9d06555d" style="border-right-style:solid; border-top-width:1px; border-bottom-color:#c5c5c5; border-right-width:1px; border-left-color:#c5c5c5; border-right-color:#c5c5c5; border-left-width:1px; border-top-style:solid; background-color:#f6f6f6; border-left-style:solid; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; text-align:center;">
+          <cl:datamapbind property="font-size" category="STYLER" datacontrolid="fontSize" columnname="font1"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Duration"/>
+          <cl:formdata std:sid="f-data-46a4a237" row="0" col="0"/>
+        </cl:output>
+        <cl:numbereditor std:sid="n-editor-26553c85" id="nbe1" spinbutton="false" format="s100,000,000">
+          <cl:datamapbind property="font-size" category="STYLER" datacontrolid="fontSize" columnname="font1"/>
+          <cl:datamapbind property="value" category="PROPERTY" datacontrolid="returnValue" columnname="count"/>
+          <cl:formdata std:sid="f-data-23636570" row="0" col="1"/>
+        </cl:numbereditor>
+        <cl:formlayout std:sid="f-layout-15fb7ce7">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="2" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="5" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:fileinput std:sid="f-input-8dafe2c3" id="DBML_ImageFileInput" visible="false" placeholder="" acceptfile=".jpg,.png,.gif">
+        <cl:listener std:sid="listener-e5989a29" name="value-change" handler="onDBML_ImageFileInputValueChange"/>
+        <cl:formdata std:sid="f-data-d718e5d6" row="1" col="0"/>
+      </cl:fileinput>
+      <cl:formlayout std:sid="f-layout-168ffb0a">
+        <cl:rows length="2" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="2" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="2" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="2" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="2" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="2" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+        <cl:columns length="20" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-ff5b3a9e"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

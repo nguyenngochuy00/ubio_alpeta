@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-cae4a70f" version="1.0.0.0">
+  <head std:sid="head-17b61662">
+    <title>AccessStatistics</title>
+    <screen std:sid="screen-85e2fa14" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="false" customHeight="740" customWidth="2000"/>
+    <screen std:sid="screen-0b4d6fbd" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-c04377a7" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-12fa8609">
+      <cl:dataset std:sid="d-set-906fa6a9" id="dsAccessStatistics">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-c1cfeef2" name="MusteringName"/>
+          <cl:datacolumn std:sid="d-column-0e92fa8c" name="OnDuty" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-0a428f3e" name="MilitaryPersonnel" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-14cb5cc3" name="Soldier" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-d3c5ced9" name="Family" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-d4b13af5" name="Resident" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-91234d5d" name="Regular" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-7758e2c6" name="OtherUnit" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-b2147cdd" name="Foreign" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-f31c68ae" name="SumCount" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-a33aca7f" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-80d61523" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-0cd72287" id="sms_getAccessStatistics" method="get" action="/v1/armyhq/accessStatus/statistics">
+        <cl:listener std:sid="listener-4ad15890" name="submit-done" handler="onSms_getAccessStatisticsSubmitDone"/>
+        <cl:listener std:sid="listener-5a5dbafc" name="submit-error" handler="onSms_getAccessStatisticsSubmitError"/>
+        <cl:listener std:sid="listener-3a18c7c5" name="submit-timeout" handler="onSms_getAccessStatisticsSubmitTimeout"/>
+        <cl:responsedata dataid="dsAccessStatistics"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-3d1a3954" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-d577840c" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-449ccb1d">
+      <cl:xylayoutdata std:sid="xyl-data-3bf18c71" top="25px" right="10px" bottom="0px" left="50px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-9715fdcc">
+        <cl:formdata std:sid="f-data-0822af84" row="0" col="0"/>
+        <cl:output std:sid="output-d304fa2a" class="menu-title-amhq">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_ARMYHQ_AccessStatistics"/>
+          <cl:formdata std:sid="f-data-dbe6a843" row="0" col="0" rowspan="1" colspan="2"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-a714bd8a" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="400" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:grid std:sid="grid-836516b2" id="AMAS_grdAccessStatistics" style="color:#000000;" class="grid-amhq" datasetid="dsAccessStatistics">
+        <cl:formdata std:sid="f-data-2809694b" row="4" col="0"/>
+        <cl:gridcolumn std:sid="g-column-a44f3ba9" width="38px"/>
+        <cl:gridcolumn std:sid="g-column-98416c89"/>
+        <cl:gridcolumn std:sid="g-column-c9d436b5"/>
+        <cl:gridcolumn std:sid="g-column-0eeeb60e"/>
+        <cl:gridcolumn std:sid="g-column-914325af"/>
+        <cl:gridcolumn std:sid="g-column-7ed8a1fd"/>
+        <cl:gridcolumn std:sid="g-column-fe5e3f67"/>
+        <cl:gridcolumn std:sid="g-column-6a2871d3"/>
+        <cl:gridcolumn std:sid="g-column-e8f94a0c"/>
+        <cl:gridcolumn std:sid="g-column-03639bd7"/>
+        <cl:gridcolumn std:sid="g-column-7171f1d6"/>
+        <cl:gridheader std:sid="gh-band-7ce8810f">
+          <cl:gridrow std:sid="g-row-9cdd7363" height="50px"/>
+          <cl:gridcell std:sid="gh-cell-ec086d9c" rowindex="0" colindex="0" text="NO"/>
+          <cl:gridcell std:sid="gh-cell-bca701a9" rowindex="0" colindex="1" targetcolumnname="MusteringName">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_ARMY_AccessGroup"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-164d2c5b" rowindex="0" colindex="2" targetcolumnname="OnDuty">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_ARMY_OnDuty"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-c7389d03" rowindex="0" colindex="3" targetcolumnname="MilitaryPersonnel">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_ARMY_MilitaryPersonnel"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-84149653" rowindex="0" colindex="4" targetcolumnname="Soldier">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_ARMY_Soldier"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-c25484c5" rowindex="0" colindex="5" targetcolumnname="Family">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_ARMY_Family"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-0fb48eb4" rowindex="0" colindex="6" targetcolumnname="Resident">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_ARMY_Resident"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-a25cf205" rowindex="0" colindex="7" targetcolumnname="Regular">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_ARMY_Regular"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-1d187c5d" rowindex="0" colindex="8" targetcolumnname="OtherUnit">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_ARMY_OtherUnit"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-f7bf1c1f" rowindex="0" colindex="9" targetcolumnname="Foreign">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_ARMY_Foreign"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-604b13cb" rowindex="0" colindex="10" targetcolumnname="SumCount">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_ARMYHQ_Sum"/>
+          </cl:gridcell>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-2d417680">
+          <cl:gridrow std:sid="g-row-04196e1d" height="30px"/>
+          <cl:gridcell std:sid="gd-cell-d2f0e1e5" rowindex="0" colindex="0" columntype="rowindex"/>
+          <cl:gridcell std:sid="gd-cell-51af63d6" rowindex="0" colindex="1" columnname="MusteringName"/>
+          <cl:gridcell std:sid="gd-cell-692f196e" rowindex="0" colindex="2" columnname="OnDuty"/>
+          <cl:gridcell std:sid="gd-cell-8084578d" rowindex="0" colindex="3" columnname="MilitaryPersonnel"/>
+          <cl:gridcell std:sid="gd-cell-24d71db3" rowindex="0" colindex="4" columnname="Soldier"/>
+          <cl:gridcell std:sid="gd-cell-bd4092f0" rowindex="0" colindex="5" columnname="Family"/>
+          <cl:gridcell std:sid="gd-cell-3f7b9def" rowindex="0" colindex="6" columnname="Resident"/>
+          <cl:gridcell std:sid="gd-cell-6a86e64f" rowindex="0" colindex="7" columnname="Regular"/>
+          <cl:gridcell std:sid="gd-cell-49149730" rowindex="0" colindex="8" columnname="OtherUnit"/>
+          <cl:gridcell std:sid="gd-cell-6c08f230" rowindex="0" colindex="9" columnname="Foreign"/>
+          <cl:gridcell std:sid="gd-cell-879ecf83" rowindex="0" colindex="10" columnname="SumCount"/>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:group std:sid="group-8bcc1003">
+        <cl:formdata std:sid="f-data-081edb8e" row="2" col="0"/>
+        <cl:output std:sid="output-aea85aec" style="border-radius:0px;" class="section-green-top-amhq" value="출입통계 조회">
+          <cl:formdata std:sid="f-data-76bef4f6" row="0" col="0"/>
+        </cl:output>
+        <cl:group std:sid="group-ea92296e" class="section-white-top-amhq">
+          <cl:formdata std:sid="f-data-79a53e2f" row="0" col="1"/>
+          <cl:inputbox std:sid="i-box-4ff884f7" id="AMAS_ipbKeyword" class="inputbox-amhq">
+            <cl:listener std:sid="listener-79570c28" name="keydown" handler="onKeywordKeydown"/>
+            <cl:formdata std:sid="f-data-e9de3951" row="0" col="7"/>
+          </cl:inputbox>
+          <cl:combobox std:sid="c-box-d835f610" id="AMAS_cmbSearchCategory" style="text-align:center;" class="combobox-amhq" value="0">
+            <cl:formdata std:sid="f-data-6b52d795" row="0" col="5"/>
+            <cl:item std:sid="item-c127523c" label="----" value="0"/>
+            <cl:item std:sid="item-6812c1bd" label="출입장소" value="1"/>
+          </cl:combobox>
+          <cl:button std:sid="button-6c10507a" class="button-search-amhq" icon="../../../../theme/custom/armyhq/btn_search.PNG" iconalign="right">
+            <cl:listener std:sid="listener-d48a14e5" name="click" handler="onSearchButtonClick"/>
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_Search"/>
+            <cl:formdata std:sid="f-data-e8f02e75" row="0" col="9"/>
+            <cl:iconstyle style="width:30px; height:30px;"/>
+          </cl:button>
+          <cl:dateinput std:sid="d-input-246c40d6" id="AMAS_dtiEnd" class="dateinput-amhq">
+            <cl:formdata std:sid="f-data-2a266330" row="0" col="3"/>
+          </cl:dateinput>
+          <cl:output std:sid="output-8589e40d" style="color:#000000; text-align:center;" value="~">
+            <cl:formdata std:sid="f-data-1ba5a4cb" row="0" col="2"/>
+          </cl:output>
+          <cl:dateinput std:sid="d-input-b0e4796a" id="AMAS_dtiStart" class="dateinput-amhq">
+            <cl:formdata std:sid="f-data-48151170" row="0" col="1"/>
+          </cl:dateinput>
+          <cl:formlayout std:sid="f-layout-db60c302" scrollable="false" hspace="0px" vspace="0px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="120" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="120" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="5" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="150" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="5" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="90" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-f8ec1c43" scrollable="false" hspace="0px" vspace="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="170" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-4fb92e25" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+        <cl:rows length="35" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="10" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-516bcc1e"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

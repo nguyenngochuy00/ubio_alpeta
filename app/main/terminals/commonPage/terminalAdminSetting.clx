@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-382c5d47" version="1.0.0.0">
+  <head std:sid="head-53590879">
+    <title>terminalAdminSetting</title>
+    <screen std:sid="screen-3649b72f" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="false" useCustomHeight="false" customHeight="500" customWidth="900"/>
+    <screen std:sid="screen-eef8a901" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-55138354" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-fc8b9c13">
+      <cl:dataset std:sid="d-set-a1e53e49" id="TerminalAdmin">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-dab2decf" name="ID" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-88d3439a" name="Name" datatype="string"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-22840964" id="UserIDSendList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-48063119" name="ID" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-75c7a28e" id="TerminalList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-2c57cc22" name="ID"/>
+          <cl:datacolumn std:sid="d-column-e7594a3b" name="Name"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-9e6bad7d" id="AllTerminalList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-c362711c" name="ID"/>
+          <cl:datacolumn std:sid="d-column-da646141" name="Name"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-c495c473" id="TerminalIDPostSendList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-6339fa0f" name="ID" datatype="string"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-2f9c96ad" id="TerminalListSrc">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-f9ec623f" name="ID"/>
+          <cl:datacolumn std:sid="d-column-8c1aa02c" name="Name"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-04f82d84" id="TerminalIDDeleteSendList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-a7d8665e" name="ID" datatype="string"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-a33aca7f" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-49f88352" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-c2bd18fc" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-300c3b38" name="Count" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-064042de" id="dmMode">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-7eff9df2" name="Mode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-e79894bb" id="sms_getTerminalAdminList" method="get" action="/v1/terminalAdmins">
+        <cl:listener std:sid="listener-e13d9ab5" name="submit-done" handler="onSms_getUserListSubmitDone"/>
+        <cl:listener std:sid="listener-58a51cbb" name="submit-error" handler="onSms_getUserListSubmitError"/>
+        <cl:listener std:sid="listener-99d90e31" name="submit-timeout" handler="onSms_getUserListSubmitTimeout"/>
+        <cl:requestparam name="offset" value="0"/>
+        <cl:requestparam name="limit" value="50"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total"/>
+        <cl:responsedata dataid="TerminalAdmin"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-aed33c28" id="sms_postTerminalAdmin" method="post" action="/v1/terminalAdmins">
+        <cl:listener std:sid="listener-c8532169" name="submit-done" handler="onSms_postTerminalAdminSubmitDone"/>
+        <cl:listener std:sid="listener-f4e38694" name="submit-error" handler="onSms_postTerminalAdminSubmitError"/>
+        <cl:listener std:sid="listener-c574d7b3" name="submit-timeout" handler="onSms_postTerminalAdminSubmitTimeout"/>
+        <cl:requestdata dataid="UserIDSendList"/>
+        <cl:requestdata dataid="dmMode"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-17f31290" id="sms_getAdminTerminalList" method="get" action="/v1/terminalAdmins/{id}/terminals">
+        <cl:listener std:sid="listener-996b0069" name="submit-done" handler="onSms_getAdminTerminalListSubmitDone"/>
+        <cl:listener std:sid="listener-0670f84f" name="submit-error" handler="onSms_getAdminTerminalListSubmitError"/>
+        <cl:listener std:sid="listener-f257f8d4" name="submit-timeout" handler="onSms_getAdminTerminalListSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="TerminalList"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-67070f44" id="sms_postAdminTerminalList" action="/v1/terminalAdmins/{id}/terminals">
+        <cl:listener std:sid="listener-e2eb387d" name="submit-done" handler="onSms_postAdminTerminalSubmitDone"/>
+        <cl:listener std:sid="listener-395ceeaf" name="submit-error" handler="onSms_postAdminTerminalSubmitError"/>
+        <cl:listener std:sid="listener-8f2a5aa4" name="submit-timeout" handler="onSms_postAdminTerminalSubmitTimeout"/>
+        <cl:requestdata dataid="TerminalIDPostSendList" payload="all"/>
+        <cl:requestdata dataid="dmMode"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-12917899" id="sms_deleteAdminTerminalList" method="post" action="/v1/terminalAdmins/{id}/terminals">
+        <cl:listener std:sid="listener-61731f40" name="submit-done" handler="onSms_deleteAdminTerminalListSubmitDone"/>
+        <cl:listener std:sid="listener-bb8a2b5d" name="submit-error" handler="onSms_deleteAdminTerminalListSubmitError"/>
+        <cl:listener std:sid="listener-563b4eb1" name="submit-timeout" handler="onSms_deleteAdminTerminalListSubmitTimeout"/>
+        <cl:requestdata dataid="TerminalIDDeleteSendList" payload="all"/>
+        <cl:requestdata dataid="dmMode"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-aca7fc2c" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-8ceb4cec" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-2412554a" id="grp1">
+      <cl:xylayoutdata std:sid="xyl-data-b17f8a78" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-db73a214" id="grp2" style="padding:10px;">
+        <cl:formdata std:sid="f-data-caca988c" row="0" col="0"/>
+        <cl:group std:sid="group-4a01dd40" id="grp5">
+          <cl:formdata std:sid="f-data-6b734edf" row="1" col="0"/>
+          <cl:udc std:sid="ud-control-8635953c" id="TMMRS_udcSearchUser" type="udc.search.searchUser">
+            <cl:listener std:sid="listener-a1cd82ab" name="search" handler="onTMMRS_udcSearchUserSearch"/>
+            <cl:formdata std:sid="f-data-8b67ffda" row="0" col="1"/>
+          </cl:udc>
+          <cl:formlayout std:sid="f-layout-4c2f73a0">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+            <cl:columns length="370" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:group std:sid="group-5d32fcde" id="grp6">
+          <cl:formdata std:sid="f-data-afab5289" row="0" col="0"/>
+          <cl:button std:sid="button-3fb73c02" id="TMMRS_btnUserAdd" class="userInfo_btn">
+            <cl:listener std:sid="listener-dfb17b76" name="click" handler="onTMMRS_btnUserAddClick"/>
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_Add"/>
+            <cl:formdata std:sid="f-data-b7a33f48" row="0" col="2" rowspan="2" colspan="1"/>
+          </cl:button>
+          <cl:button std:sid="button-3995af9c" id="TMMRS_btnUserDelete" class="userInfo_btn">
+            <cl:listener std:sid="listener-9c8cad4b" name="click" handler="onTMMRS_btnUserDeleteClick"/>
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_Delete"/>
+            <cl:formdata std:sid="f-data-8455330d" row="0" col="3" rowspan="2" colspan="1"/>
+          </cl:button>
+          <cl:output std:sid="output-7fcfe1be" style="font-weight:700; font-size:14px;">
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_AdminList"/>
+            <cl:formdata std:sid="f-data-4da1b6dd" row="0" col="0" rowspan="2" colspan="1"/>
+          </cl:output>
+          <cl:formlayout std:sid="f-layout-3516c776">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:rows length="1" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="100" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="1" unit="FRACTION"/>
+            <cl:columns length="80" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="80" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:udc std:sid="ud-control-028f743f" id="TMMRS_udcUserList" type="udc.grid.userList">
+          <cl:listener std:sid="listener-334acc1e" name="pagechange" handler="onTMMRS_udcUserListPagechange"/>
+          <cl:listener std:sid="listener-292b5895" name="userListClick" handler="onTMMRS_udcUserListUserListClick"/>
+          <cl:formdata std:sid="f-data-c62ba219" row="2" col="0"/>
+        </cl:udc>
+        <cl:formlayout std:sid="f-layout-f333d1a8">
+          <cl:rows length="30" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-18dc13a7" id="grp3" style="padding:10px;">
+        <cl:formdata std:sid="f-data-294bf802" row="0" col="1"/>
+        <cl:group std:sid="group-1a51dab0" id="grp7">
+          <cl:formdata std:sid="f-data-6bbd1788" row="0" col="0"/>
+          <cl:button std:sid="button-cee2ae23" id="TMMRS_btnSave" class="userInfo_btn">
+            <cl:listener std:sid="listener-0b42df19" name="click" handler="onTMMRS_btnSaveClick"/>
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_Save"/>
+            <cl:formdata std:sid="f-data-d9c2a645" row="0" col="1"/>
+          </cl:button>
+          <cl:output std:sid="output-5b83093e" style="font-weight:700; font-size:14px;">
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_AssignedTerminal"/>
+            <cl:formdata std:sid="f-data-ae5794c6" row="0" col="0"/>
+          </cl:output>
+          <cl:formlayout std:sid="f-layout-78365963">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="80" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:grid std:sid="grid-55c90cdc" id="TMMRS_grdTerminalSelected" readonly="false" datasetid="TerminalList" resizablecolumns="none" columnMovable="false">
+          <cl:formdata std:sid="f-data-4c5abb02" row="1" col="0"/>
+          <cl:gridcolumn std:sid="g-column-41b16edb" width="25px"/>
+          <cl:gridcolumn std:sid="g-column-baebb44c"/>
+          <cl:gridcolumn std:sid="g-column-f1c3a1f2"/>
+          <cl:gridheader std:sid="gh-band-95d53862">
+            <cl:gridrow std:sid="g-row-b666a653"/>
+            <cl:gridcell std:sid="gh-cell-201bfd8e" rowindex="0" colindex="0" sortable="false" filterable="false" columntype="checkbox"/>
+            <cl:gridcell std:sid="gh-cell-28585f1f" rowindex="0" colindex="1" targetcolumnname="ID" sortable="false" filterable="false" text="ID">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_ID"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gh-cell-729fd45f" rowindex="0" colindex="2" targetcolumnname="Name" sortable="false" filterable="false" text="Name">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_Name"/>
+            </cl:gridcell>
+          </cl:gridheader>
+          <cl:griddetail std:sid="gd-band-c4f8c885">
+            <cl:gridrow std:sid="g-row-57689ca2"/>
+            <cl:gridcell std:sid="gd-cell-75dbfed7" rowindex="0" colindex="0" columntype="checkbox"/>
+            <cl:gridcell std:sid="gd-cell-7434512a" rowindex="0" colindex="1" style="font-size:14px;" columnname="ID"/>
+            <cl:gridcell std:sid="gd-cell-13f25c63" rowindex="0" colindex="2" style="font-size:14px;" columnname="Name"/>
+          </cl:griddetail>
+        </cl:grid>
+        <cl:formlayout std:sid="f-layout-52b95cfc">
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-b085b61e" id="grp4" style="padding:10px;">
+        <cl:formdata std:sid="f-data-51010c22" row="0" col="3"/>
+        <cl:group std:sid="group-d57bc2f9" id="grp8">
+          <cl:formdata std:sid="f-data-ee82cfd3" row="0" col="0"/>
+          <cl:output std:sid="output-e6f4635d" style="font-weight:700; font-size:14px;">
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_UnassignedTerminal"/>
+            <cl:formdata std:sid="f-data-cb823746" row="0" col="0"/>
+          </cl:output>
+          <cl:img std:sid="image-a9da4d14" id="TMMRS_imgHelpPage" style="cursor:help;" src="../../../../theme/images/common/common_btn_window_top_q.png">
+            <cl:listener std:sid="listener-c505db07" name="click" handler="onTMMRS_imgHelpPageClick"/>
+            <cl:formdata std:sid="f-data-0fc78480" halign="CENTER" valign="CENTER" width="14" height="14" row="0" col="1"/>
+          </cl:img>
+          <cl:formlayout std:sid="f-layout-8f83a4b3">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="14" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:grid std:sid="grid-20aee052" id="TMMRS_grdTerminalList" readonly="false" datasetid="AllTerminalList" resizablecolumns="none" columnMovable="false">
+          <cl:formdata std:sid="f-data-01f5b226" row="1" col="0"/>
+          <cl:gridcolumn std:sid="g-column-84d22a50" width="25px"/>
+          <cl:gridcolumn std:sid="g-column-892734f9"/>
+          <cl:gridcolumn std:sid="g-column-3ceba90c"/>
+          <cl:gridheader std:sid="gh-band-68190fa9">
+            <cl:gridrow std:sid="g-row-11951ca0"/>
+            <cl:gridcell std:sid="gh-cell-cccae8f7" rowindex="0" colindex="0" sortable="false" filterable="false" columntype="checkbox"/>
+            <cl:gridcell std:sid="gh-cell-a2ac11e3" rowindex="0" colindex="1" targetcolumnname="ID" sortable="false" filterable="false" text="ID">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_ID"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gh-cell-e362a40d" rowindex="0" colindex="2" targetcolumnname="Name" sortable="false" filterable="false" text="Name">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_Name"/>
+            </cl:gridcell>
+          </cl:gridheader>
+          <cl:griddetail std:sid="gd-band-f6e3d7fa">
+            <cl:gridrow std:sid="g-row-92428550"/>
+            <cl:gridcell std:sid="gd-cell-50470358" rowindex="0" colindex="0" columntype="checkbox"/>
+            <cl:gridcell std:sid="gd-cell-afaa7c9c" rowindex="0" colindex="1" style="font-size:14px;" columnname="ID"/>
+            <cl:gridcell std:sid="gd-cell-4f603478" rowindex="0" colindex="2" style="font-size:14px;" columnname="Name"/>
+          </cl:griddetail>
+        </cl:grid>
+        <cl:formlayout std:sid="f-layout-c3a051af">
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-5c41e18a" id="grp9">
+        <cl:formdata std:sid="f-data-8982b5ce" row="0" col="2"/>
+        <cl:group std:sid="group-4fcca2bd" id="grp10">
+          <cl:xylayoutdata std:sid="xyl-data-306ac3be" right="0px" left="0px" height="170px" horizontalAnchor="BOTH" verticalAnchor="CENTER"/>
+          <cl:button std:sid="button-5d90573f" id="TMMRS_btnRemoveTerminal" style="padding:5px;" class="userInfo_btn" value=">">
+            <cl:listener std:sid="listener-f4aee7c4" name="click" handler="onTMMRS_btnRemoveTerminalClick"/>
+            <cl:xylayoutdata std:sid="xyl-data-8956c2a4" top="0px" width="30px" height="30px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
+          </cl:button>
+          <cl:button std:sid="button-af125976" id="TMMRS_btnAddTerminal" style="padding:5px;" class="userInfo_btn" value="&lt;">
+            <cl:listener std:sid="listener-bd08818e" name="click" handler="onTMMRS_btnAddTerminalClick"/>
+            <cl:xylayoutdata std:sid="xyl-data-9ee69a2a" top="40px" width="30px" height="30px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
+          </cl:button>
+          <cl:button std:sid="button-2b1a2541" id="TMMRS_btnRemoveAllTerminal" style="padding:5px;" class="userInfo_btn" value=">>">
+            <cl:listener std:sid="listener-1bf81a3d" name="click" handler="onTMMRS_btnRemoveAllTerminalClick"/>
+            <cl:xylayoutdata std:sid="xyl-data-8f95b285" top="100px" width="30px" height="30px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
+          </cl:button>
+          <cl:button std:sid="button-55b32f32" id="TMMRS_btnAddAllTerminal" style="padding:5px;" class="userInfo_btn" value="&lt;&lt;">
+            <cl:listener std:sid="listener-47dcad50" name="click" handler="onTMMRS_btnAddAllTerminalClick"/>
+            <cl:xylayoutdata std:sid="xyl-data-38d3f74a" bottom="0px" width="30px" height="30px" horizontalAnchor="CENTER" verticalAnchor="BOTTOM"/>
+          </cl:button>
+          <cl:xylayout std:sid="xylayout-c9126104"/>
+        </cl:group>
+        <cl:xylayout std:sid="xylayout-37709cfe"/>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-62c262be">
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="400" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+        <cl:columns length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-b8d5a9f8"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

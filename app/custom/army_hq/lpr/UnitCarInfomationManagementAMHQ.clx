@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-8a57cc89" version="1.0.0.0">
+  <head std:sid="head-a97725f2">
+    <title>UnitCarInfomationManagementAMHQ</title>
+    <screen std:sid="screen-38b857d1" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="740" customWidth="900"/>
+    <screen std:sid="screen-e1899188" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-20698a4a" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-8c3a2a4b">
+      <cl:dataset std:sid="d-set-84a11291" id="UnitCarInfomationList">
+        <cl:datacolumnlist>
+          <cl:datacolumn comment="출입상태" std:sid="d-column-91e7ee61" name="CarAccessState" datatype="number"/>
+          <cl:datacolumn comment="등록구분" std:sid="d-column-0f31839d" name="RegistrationType" datatype="number"/>
+          <cl:datacolumn comment="차량번호" std:sid="d-column-2824135e" name="CarNumber"/>
+          <cl:datacolumn comment="차량용도" std:sid="d-column-e06b4eef" info="" name="CarType"/>
+          <cl:datacolumn comment="RFID 태그번호" std:sid="d-column-808879b1" info="" name="RFIDNumber"/>
+          <cl:datacolumn comment="차량용도" std:sid="d-column-e9197b98" name="CarUse"/>
+          <cl:datacolumn comment="관리부서 코드" std:sid="d-column-6e5b9f2a" name="ManagerGroupCode" datatype="number"/>
+          <cl:datacolumn comment="메모" std:sid="d-column-62c175be" name="CarMemo"/>
+          <cl:datacolumn comment="등록시간" std:sid="d-column-c8474dc0" name="RegDateTime"/>
+          <cl:datacolumn comment="등록자 이름&#x9;" std:sid="d-column-967f7f74" name="RegUserName"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-89864306" id="UnitCarInfomation">
+        <cl:datacolumnlist>
+          <cl:datacolumn comment="출입상태" std:sid="d-column-19966e12" name="CarAccessState" datatype="number"/>
+          <cl:datacolumn comment="등록구분" std:sid="d-column-9b2258cd" name="RegistrationType" datatype="number"/>
+          <cl:datacolumn comment="차량번호" std:sid="d-column-0ef72b29" name="CarNumber"/>
+          <cl:datacolumn comment="차량종류" std:sid="d-column-8299a9e8" name="CarType"/>
+          <cl:datacolumn comment="RFID 태그번호 " std:sid="d-column-55551d90" name="RFIDNumber"/>
+          <cl:datacolumn comment="차량용도" std:sid="d-column-40e12477" name="CarUse"/>
+          <cl:datacolumn comment="관리부서 코드" std:sid="d-column-d5f2cf0f" name="ManagerGroupCode" datatype="number"/>
+          <cl:datacolumn comment="메모" std:sid="d-column-58038020" name="CarMemo"/>
+          <cl:datacolumn comment="등록시간" std:sid="d-column-abb6345a" name="RegDateTime"/>
+          <cl:datacolumn comment="등록자 이름" std:sid="d-column-63957561" name="RegUserName"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-a33aca7f" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-80d61523" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-1804400d" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-251eeb54" name="Count" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-a222396f" id="sms_postUnitCar" action="/v1/armyhq/unitcar">
+        <cl:listener std:sid="listener-8ac0f78a" name="submit-done" handler="onSms_postUnitCarSubmitDone"/>
+        <cl:listener std:sid="listener-cbf071bc" name="submit-error" handler="onSms_postUnitCarSubmitError"/>
+        <cl:listener std:sid="listener-8da6e1f2" name="submit-timeout" handler="onSms_postUnitCarSubmitTimeout"/>
+        <cl:requestdata dataid="UnitCarInfomation"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-f6f24704" id="sms_putUnitCar" method="put" action="/v1/armyhq/unitcar">
+        <cl:listener std:sid="listener-4643b979" name="submit-done" handler="onSms_putUnitCarSubmitDone"/>
+        <cl:listener std:sid="listener-d98d8bc4" name="submit-error" handler="onSms_putUnitCarSubmitError"/>
+        <cl:listener std:sid="listener-6dd80943" name="submit-timeout" handler="onSms_putUnitCarSubmitTimeout"/>
+        <cl:requestdata dataid="UnitCarInfomation"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-452a6f1b" id="sms_getUnitCars" method="get" action="/v1/armyhq/unitcar">
+        <cl:listener std:sid="listener-a9dbb19b" name="submit-done" handler="onSms_getUnitCarsSubmitDone"/>
+        <cl:listener std:sid="listener-bdf508a8" name="submit-error" handler="onSms_getUnitCarsSubmitError"/>
+        <cl:listener std:sid="listener-fe4c7bee" name="submit-timeout" handler="onSms_getUnitCarsSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total"/>
+        <cl:responsedata dataid="UnitCarInfomationList"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-7e68df55" id="sms_deleteUnitCar" method="delete" action="">
+        <cl:listener std:sid="listener-e94ed9be" name="submit-done" handler="onSms_deleteUnitCarsSubmitDone"/>
+        <cl:listener std:sid="listener-33f2af4c" name="submit-error" handler="onSms_deleteUnitCarsSubmitError"/>
+        <cl:listener std:sid="listener-a8533cb6" name="submit-timeout" handler="onSms_deleteUnitCarsSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-b7b3eddf" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-05710652" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-43eb9360">
+      <cl:xylayoutdata std:sid="xyl-data-41f5d0e3" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:tabfolder std:sid="t-folder-f20a10ff" id="UCI_tapMenu" style="color:#010101;">
+        <cl:listener std:sid="listener-e237d85d" name="selection-change" handler="onUCI_tapMenuSelectionChange"/>
+        <cl:formdata std:sid="f-data-eea28bf4" row="0" col="0"/>
+        <cl:tabitem std:sid="t-item-69211b6f" selected="true" text="사전방문신청">
+          <cl:langbind property="text" category="PROPERTY" keypath="Str_ARMYHQ_UnitCarRegistration"/>
+          <cl:group std:sid="group-3b273c47">
+            <std:metadata>
+              <std:property key="locked" value="true"/>
+            </std:metadata>
+            <cl:group std:sid="group-1f910b6e">
+              <cl:xylayoutdata std:sid="xyl-data-758e6749" top="0px" right="2px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+              <cl:group std:sid="group-0dae5dba" id="UCIM_grpUdc1" style="color:#010101;">
+                <cl:verticaldata std:sid="v-data-08284249" width="900px" height="210px" autosize="width"/>
+                <cl:formlayout std:sid="f-layout-711a8033" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+                  <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="1" unit="FRACTION"/>
+                </cl:formlayout>
+              </cl:group>
+              <cl:group std:sid="group-a0af01a9">
+                <cl:verticaldata std:sid="v-data-6ca233aa" width="900px" height="40px" autosize="none"/>
+                <cl:group std:sid="group-f84fdcf7" style="color:#010101;">
+                  <cl:xylayoutdata std:sid="xyl-data-c81e8a8a" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+                  <cl:button std:sid="button-f309c3dc" id="UCI_bntClear" style="padding-top:0px; padding-left:0px; padding-bottom:0px; padding-right:0px;" class="userInfo_btn">
+                    <cl:listener std:sid="listener-7ebcad68" name="click" handler="onUCI_bntClearClick"/>
+                    <cl:langbind property="value" category="PROPERTY" keypath="Str_Clear"/>
+                    <cl:formdata std:sid="f-data-507e50e0" row="0" col="1"/>
+                  </cl:button>
+                  <cl:button std:sid="button-152d1fa3" id="UCI_btnRequest" style="padding-top:0px; padding-left:0px; padding-bottom:0px; padding-right:0px;" class="userInfo_btn">
+                    <cl:listener std:sid="listener-a80cf690" name="click" handler="onUCI_btnRequestClick"/>
+                    <cl:langbind property="value" category="PROPERTY" keypath="Str_Request"/>
+                    <cl:formdata std:sid="f-data-7ef63111" row="0" col="2" rowspan="1" colspan="1"/>
+                  </cl:button>
+                  <cl:formlayout std:sid="f-layout-f5b593bb" hspace="10px" vspace="10px" top-margin="5px" right-margin="5px" bottom-margin="5px" left-margin="5px">
+                    <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                    <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                    <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                    <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                    <cl:columns length="1" unit="FRACTION"/>
+                  </cl:formlayout>
+                </cl:group>
+                <cl:xylayout std:sid="xylayout-73a1a908"/>
+              </cl:group>
+              <cl:verticallayout std:sid="v-layout-aa4c1671" spacing="5"/>
+            </cl:group>
+            <cl:xylayout std:sid="xylayout-cc2f1bc2"/>
+          </cl:group>
+        </cl:tabitem>
+        <cl:tabitem std:sid="t-item-25e35d14" text="일괄방문신청">
+          <std:metadata>
+            <std:property key="is-active-item" value="true"/>
+          </std:metadata>
+          <cl:langbind property="text" category="PROPERTY" keypath="Str_ARMYHQ_UnitCarUpdate"/>
+          <cl:group std:sid="group-fd636040">
+            <std:metadata>
+              <std:property key="locked" value="true"/>
+            </std:metadata>
+            <cl:group std:sid="group-e7d643c5">
+              <cl:xylayoutdata std:sid="xyl-data-5b7eeacb" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+              <cl:group std:sid="group-874a71fe" style="color:#010101;">
+                <cl:formdata std:sid="f-data-1ea8a00d" row="0" col="0"/>
+                <cl:group std:sid="group-c4ebc253" style="color:#010101;">
+                  <cl:verticaldata std:sid="v-data-cbe3ca11" width="400px" height="300px"/>
+                  <cl:grid std:sid="grid-4527f2a0" id="UCIM_grdUnitCarList" style="color:#010101;" datasetid="UnitCarInfomationList">
+                    <cl:listener std:sid="listener-515b1b46" name="cell-click" handler="onUCIM_grdUnitCarListCellClick"/>
+                    <cl:formdata std:sid="f-data-23ead652" row="1" col="0"/>
+                    <cl:gridcolumn std:sid="g-column-1ab979ae"/>
+                    <cl:gridcolumn std:sid="g-column-915c95a6"/>
+                    <cl:gridcolumn std:sid="g-column-83e3c7ce"/>
+                    <cl:gridcolumn std:sid="g-column-e34a098c"/>
+                    <cl:gridcolumn std:sid="g-column-3525485a"/>
+                    <cl:gridheader std:sid="gh-band-1b1bf6f2">
+                      <cl:gridrow std:sid="g-row-9e592680"/>
+                      <cl:gridcell std:sid="gh-cell-c00a5d49" rowindex="0" colindex="0" targetcolumnname="RegDateTime">
+                        <cl:langbind property="text" category="PROPERTY" keypath="Str_ARMYHQ_RegistDate"/>
+                      </cl:gridcell>
+                      <cl:gridcell std:sid="gh-cell-71231669" rowindex="0" colindex="1" targetcolumnname="RegistrationType">
+                        <cl:langbind property="text" category="PROPERTY" keypath="Str_ARMY_CarRegistrationType"/>
+                      </cl:gridcell>
+                      <cl:gridcell std:sid="gh-cell-109edc80" rowindex="0" colindex="2" targetcolumnname="RFIDNumber">
+                        <cl:langbind property="text" category="PROPERTY" keypath="Str_CarNumber"/>
+                      </cl:gridcell>
+                      <cl:gridcell std:sid="gh-cell-35cc5320" rowindex="0" colindex="3" targetcolumnname="CarType">
+                        <cl:langbind property="text" category="PROPERTY" keypath="Str_CarType"/>
+                      </cl:gridcell>
+                      <cl:gridcell std:sid="gh-cell-94085d7c" rowindex="0" colindex="4" targetcolumnname="ManagerGroupCode">
+                        <cl:langbind property="text" category="PROPERTY" keypath="Str_ARMY_ManagementGroup"/>
+                      </cl:gridcell>
+                    </cl:gridheader>
+                    <cl:griddetail std:sid="gd-band-e37e9ff3">
+                      <cl:gridrow std:sid="g-row-263bb828"/>
+                      <cl:gridcell std:sid="gd-cell-5c11ed71" rowindex="0" colindex="0" columnname="RegDateTime"/>
+                      <cl:gridcell std:sid="gd-cell-b470aa9a" rowindex="0" colindex="1" columnname="RegistrationType">
+                        <cl:combobox std:sid="c-box-2a8daaeb" id="UCI_grdCarRegistrationType" style="text-align:center;" readonly="true"/>
+                      </cl:gridcell>
+                      <cl:gridcell std:sid="gd-cell-7242952d" rowindex="0" colindex="2" columnname="RFIDNumber"/>
+                      <cl:gridcell std:sid="gd-cell-a20666dc" rowindex="0" colindex="3" columnname="CarType"/>
+                      <cl:gridcell std:sid="gd-cell-1e91c4e7" rowindex="0" colindex="4" columnname="ManagerGroupCode">
+                        <cl:combobox std:sid="c-box-18ebea00" id="UCIM_grdCarManagementGroup" style="text-align:center;" readonly="true"/>
+                      </cl:gridcell>
+                    </cl:griddetail>
+                  </cl:grid>
+                  <cl:pageindexer std:sid="p-indexer-0812fa71" id="UCIM_listPageIndexer" style="color:#404040;" class="userList_paging">
+                    <cl:listener std:sid="listener-7bbf491a" name="selection-change" handler="onUCIM_listPageIndexerSelectionChange"/>
+                    <cl:formdata std:sid="f-data-4227d95b" row="2" col="0"/>
+                  </cl:pageindexer>
+                  <cl:group std:sid="group-5b0cd435" style="color:#010101;">
+                    <cl:formdata std:sid="f-data-10bc4d94" topSpacing="5" bottomSpacing="5" leftSpacing="5" rightSpacing="5" row="0" col="0"/>
+                    <cl:group std:sid="group-22f6cc98">
+                      <cl:formdata std:sid="f-data-601ffcfc" row="0" col="2"/>
+                      <cl:group std:sid="group-88c94c3c" style="border-right-style:solid; color:#6b6b6b; border-top-width:1px; border-bottom-color:#cccccc; border-right-width:1px; border-left-color:#cccccc; border-right-color:#cccccc; border-left-width:1px; border-top-style:solid; background-color:#F6F6F6; border-radius:10px; border-left-style:solid; border-bottom-width:1px; border-top-color:#cccccc; border-bottom-style:solid;">
+                        <cl:xylayoutdata std:sid="xyl-data-6c9299e8" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+                        <cl:combobox std:sid="c-box-d835f610" id="UCIM_cmbSearchCategory" style="background-color:#F6F6F6; border-right-style:none; color:#010101; border-left-style:none; border-bottom-style:none; border-top-style:none;" value="0">
+                          <cl:formdata std:sid="f-data-3cf08490" row="0" col="0"/>
+                          <cl:item std:sid="item-c127523c" label="----" value="0"/>
+                          <cl:item std:sid="item-6812c1bd" label="차량변호" value="1"/>
+                          <cl:item std:sid="item-1a087b0b" label="출입상태" value="2"/>
+                          <cl:item std:sid="item-c3063cbe" label="관리부서" value="3"/>
+                        </cl:combobox>
+                        <cl:inputbox std:sid="i-box-4ff884f7" id="UCIM_ipbKeyword" style="background-color:#F6F6F6; padding-top:0px; border-bottom-color:#cccccc; color:#010101; padding-left:10px; border-left-color:#cccccc; border-top-color:#cccccc; padding-bottom:0px; border-bottom-style:none; border-right-color:#cccccc; border-top-style:none; padding-right:0px;">
+                          <cl:formdata std:sid="f-data-2e1a4ee5" row="0" col="1"/>
+                        </cl:inputbox>
+                        <cl:group std:sid="group-a55e7b7d" style="border-right-style:none; cursor:pointer; background-color:transparent; background-repeat:no-repeat; color:#010101; border-left-style:none; border-bottom-style:none; background-image:url('../../../../theme/images/common/common_text_field_btn_icons_search.png'); background-position:center; border-top-style:none;">
+                          <cl:listener std:sid="listener-f4d9f5e1" name="click" handler="onGroupClick"/>
+                          <cl:formdata std:sid="f-data-3e74ca5f" height="29" row="0" col="2"/>
+                          <cl:xylayout std:sid="xylayout-83668f0b"/>
+                        </cl:group>
+                        <cl:formlayout std:sid="f-layout-8cd33f05" hspace="0px" vspace="0px">
+                          <cl:rows length="1" unit="FRACTION"/>
+                          <cl:columns length="1" unit="FRACTION"/>
+                          <cl:columns length="3" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+                          <cl:columns length="1" unit="FRACTION"/>
+                        </cl:formlayout>
+                      </cl:group>
+                      <cl:xylayout std:sid="xylayout-fea882a2"/>
+                    </cl:group>
+                    <cl:group std:sid="group-87abd72d">
+                      <cl:formdata std:sid="f-data-83c525de" row="0" col="0"/>
+                      <cl:output std:sid="output-e053a255" style="padding-top:4px; color:#010101; padding-left:4px; padding-bottom:4px; font-size:15px; text-align:right; padding-right:4px;">
+                        <cl:langbind property="value" category="PROPERTY" keypath="Str_All"/>
+                        <cl:formdata std:sid="f-data-62eef874" row="0" col="1"/>
+                      </cl:output>
+                      <cl:output std:sid="output-52824181" id="UCIM_opbTotal" style="padding-top:4px; color:#010101; padding-left:4px; font-size:13px; padding-bottom:4px; padding-right:4px;">
+                        <cl:formdata std:sid="f-data-752608fe" row="0" col="2"/>
+                      </cl:output>
+                      <cl:formlayout std:sid="f-layout-c6678b13" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+                        <cl:rows length="1" unit="FRACTION"/>
+                        <cl:columns length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                        <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                        <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                        <cl:columns length="1" unit="FRACTION"/>
+                      </cl:formlayout>
+                    </cl:group>
+                    <cl:formlayout std:sid="f-layout-5509e71b" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+                      <cl:rows length="1" unit="FRACTION"/>
+                      <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                      <cl:columns length="200" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                      <cl:columns length="300" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                    </cl:formlayout>
+                  </cl:group>
+                  <cl:formlayout std:sid="f-layout-5dc4c332" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+                    <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                    <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                    <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                    <cl:columns length="1" unit="FRACTION"/>
+                  </cl:formlayout>
+                </cl:group>
+                <cl:group std:sid="group-44b26b36" id="UCIM_grpUdc2" style="color:#010101;">
+                  <cl:verticaldata std:sid="v-data-2d34f33d" width="400px" height="210px"/>
+                  <cl:formlayout std:sid="f-layout-a4acf8d9" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+                    <cl:rows length="1" unit="FRACTION"/>
+                    <cl:columns length="1" unit="FRACTION"/>
+                  </cl:formlayout>
+                </cl:group>
+                <cl:group std:sid="group-287bbea8" style="color:#010101;">
+                  <cl:verticaldata std:sid="v-data-7ebec6cf" width="400px" height="40px" autosize="none"/>
+                  <cl:group std:sid="group-58b21e32" style="color:#010101;">
+                    <cl:xylayoutdata std:sid="xyl-data-9e6a0ac2" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+                    <cl:button std:sid="button-496671ff" style="padding-top:0px; padding-left:0px; padding-bottom:0px; padding-right:0px;" class="userInfo_btn">
+                      <cl:listener std:sid="listener-44e9b47e" name="click" handler="onDeleteButtonClick"/>
+                      <cl:langbind property="value" category="PROPERTY" keypath="Str_Delete"/>
+                      <cl:formdata std:sid="f-data-6e47774d" row="0" col="1"/>
+                    </cl:button>
+                    <cl:button std:sid="button-3d393e1b" style="padding-top:0px; padding-left:0px; padding-bottom:0px; padding-right:0px;" class="userInfo_btn">
+                      <cl:listener std:sid="listener-e727049d" name="click" handler="onUCI_btnRequestClick"/>
+                      <cl:langbind property="value" category="PROPERTY" keypath="Str_Modification"/>
+                      <cl:formdata std:sid="f-data-5f7d805b" row="0" col="2" rowspan="1" colspan="1"/>
+                    </cl:button>
+                    <cl:formlayout std:sid="f-layout-be7084dd" hspace="10px" vspace="10px" top-margin="5px" right-margin="5px" bottom-margin="5px" left-margin="5px">
+                      <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                      <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                      <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                      <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                      <cl:columns length="1" unit="FRACTION"/>
+                    </cl:formlayout>
+                  </cl:group>
+                  <cl:xylayout std:sid="xylayout-0c47b361"/>
+                </cl:group>
+                <cl:verticallayout std:sid="v-layout-bede1989"/>
+              </cl:group>
+              <cl:formlayout std:sid="f-layout-6f89a36b" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+                <cl:rows length="1" unit="FRACTION"/>
+                <cl:columns length="1" unit="FRACTION"/>
+              </cl:formlayout>
+            </cl:group>
+            <cl:xylayout std:sid="xylayout-424c555f"/>
+          </cl:group>
+        </cl:tabitem>
+      </cl:tabfolder>
+      <cl:formlayout std:sid="f-layout-d3003bf6" hspace="10px" vspace="10px" top-margin="5px" right-margin="5px" bottom-margin="5px" left-margin="5px">
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-103b7a2c"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

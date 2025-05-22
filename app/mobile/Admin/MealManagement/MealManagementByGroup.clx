@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-8a171780" version="1.0.0.0">
+  <head std:sid="head-79191852">
+    <title>MealManagementByGroup</title>
+    <screen std:sid="screen-f6b7a23e" id="default" active="false" height="768px" minwidth="1024px" name="default" width="1024px"/>
+    <screen std:sid="screen-6419ad10" id="tablet" height="667px" maxwidth="1023px" minwidth="500px" name="tablet" width="500px"/>
+    <screen std:sid="screen-206b79ba" id="ipplus" active="false" height="736px" maxwidth="499px" minwidth="414px" name="ipplus" width="414px"/>
+    <screen std:sid="screen-99cc89a7" id="ip678" active="false" height="667px" maxwidth="413px" minwidth="375px" name="ip678" width="375px"/>
+    <screen std:sid="screen-38910b40" id="mobile" height="525px" maxwidth="374px" minwidth="350px" name="mobile" width="350px"/>
+    <screen std:sid="screen-15877c85" id="test" active="true" height="585px" maxwidth="349px" name="ip5" width="320px"/>
+    <cl:model std:sid="model-f4b31ae5">
+      <cl:datamap std:sid="d-map-b7e35d64" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-798c002b" datatype="number" name="ResultCode"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-fabe5602" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-819e9a1e" datatype="number" name="Count"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:dataset std:sid="d-set-0e47fdea" id="UserCountByGroups">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-8fb83884" datatype="number" name="GroupID"/>
+          <cl:datacolumn std:sid="d-column-06199e0b" datatype="number" name="UserCount"/>
+          <cl:datacolumn std:sid="d-column-082cf32b" name="GroupName"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-c8f587bb" id="GroupList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-906f5402" datatype="number" name="GroupID"/>
+          <cl:datacolumn std:sid="d-column-ca74250d" datatype="number" name="Parent"/>
+          <cl:datacolumn std:sid="d-column-6e7764fb" datatype="string" name="Name"/>
+          <cl:datacolumn std:sid="d-column-cdfa59f0" datatype="string" name="Description"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:submission std:sid="submission-3dcd9de7" id="smsGetBacklist" action="/blacklists" method="get" withCredentials="true">
+        <cl:listener std:sid="listener-cc00ae57" handler="onSmsGetBacklistSubmitDone" name="submit-done"/>
+        <cl:listener std:sid="listener-ddea4990" handler="onSmsGetBacklistSubmitError" name="submit-error"/>
+        <cl:listener std:sid="listener-61f2eebf" handler="onSmsGetBacklistBeforeSubmit" name="before-submit"/>
+        <cl:listener std:sid="listener-d0c59d69" handler="onSmsGetBacklistReceive" name="receive"/>
+        <cl:requestparam name="limit" value="1"/>
+        <cl:requestparam name="offset" value="0"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-e11d2c5f" id="smsGetUserCountInGroup" action="/groups/user/count" async="false" method="get" withCredentials="true">
+        <cl:listener std:sid="listener-2f4f6e6c" handler="onSmsGetUserCountInGroupSubmitDone" name="submit-done"/>
+        <cl:listener std:sid="listener-bc9c215f" handler="onSmsGetUserCountInGroupSubmitError" name="submit-error"/>
+        <cl:listener std:sid="listener-dfae0ac9" handler="onSmsGetUserCountInGroupBeforeSubmit" name="before-submit"/>
+        <cl:listener std:sid="listener-2dfa1af1" handler="onSmsGetUserCountInGroupReceive" name="receive"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="UserCountByGroups"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-75dd69cb" id="smsGetGroups" action="/groups" async="false" method="get">
+        <cl:listener std:sid="listener-c44f364d" handler="onSmsGetGroupsSubmitError" name="submit-error"/>
+        <cl:listener std:sid="listener-99dfffe4" handler="onSmsGetGroupsSubmitDone" name="submit-done"/>
+        <cl:listener std:sid="listener-96165d85" handler="onSmsGetGroupsBeforeSubmit" name="before-submit"/>
+        <cl:listener std:sid="listener-009b3ec3" handler="onSmsGetGroupsReceive" name="receive"/>
+        <cl:requestparam name="id" value="0"/>
+        <cl:responsedata dataid="GroupList"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-d1ac6b2f" id="smsGetTotalUser" action="/users?offset=0&amp;limit=1&amp;" method="get" withCredentials="true">
+        <cl:listener std:sid="listener-368d3bfe" handler="onSmsGetTotalUserSubmitDone" name="submit-done"/>
+        <cl:listener std:sid="listener-ca6712de" handler="onSmsGetTotalUserSubmitError" name="submit-error"/>
+        <cl:listener std:sid="listener-7a016092" handler="onSmsGetTotalUserBeforeSubmit" name="before-submit"/>
+        <cl:listener std:sid="listener-7cf3a0f1" handler="onSmsGetTotalUserReceive" name="receive"/>
+        <cl:responsedata dataid="Total"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-7754aadb" style="background-color:#f2f2f2; top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-e87780ca" handler="onBodyLoad" name="load"/>
+    <cl:listener std:sid="listener-118d8e88" handler="onBodyInit" name="init"/>
+    <cl:udc std:sid="ud-control-6e764339" id="header" style="background-color:#006938;" type="udc.Header">
+      <cl:responsivexylayoutdata std:sid="rxyl-data-cb9bbef3">
+        <cl:xylayoutdata std:sid="sxyl-data-15d86c25" height="198px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="TOP" screenid="ip678"/>
+        <cl:xylayoutdata std:sid="sxyl-data-25c82323" height="198px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="TOP" screenid="ipplus"/>
+        <cl:xylayoutdata std:sid="sxyl-data-f1e9eed8" height="198px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="TOP" screenid="test"/>
+      </cl:responsivexylayoutdata>
+      <cl:property name="pageName" type="string" value="사용자 리스트"/>
+      <cl:property name="leftIcon" type="string" value="Back"/>
+      <cl:property name="rightIcon" type="string" value="Edit"/>
+      <cl:property name="rightIconVisible" type="boolean" value="false"/>
+      <cl:property name="leftBtnPath" type="string" value="app/mobile/Admin/MealManagement/MealManagementOverview"/>
+    </cl:udc>
+    <cl:group std:sid="group-7b9f2d64" id="userMangementBody" style="border-radius:30px; padding-left:10px; padding-right:10px;">
+      <cl:responsivexylayoutdata std:sid="rxyl-data-780e126c">
+        <cl:xylayoutdata std:sid="sxyl-data-cbab7d3d" bottom="0px" horizontalAnchor="BOTH" left="0px" right="1px" top="197px" verticalAnchor="BOTH" screenid="ip678"/>
+        <cl:xylayoutdata std:sid="sxyl-data-830b26f6" bottom="0px" horizontalAnchor="BOTH" left="0px" right="1px" top="197px" verticalAnchor="BOTH" screenid="ipplus"/>
+        <cl:xylayoutdata std:sid="sxyl-data-9b51caac" bottom="0px" horizontalAnchor="BOTH" left="0px" right="1px" top="197px" verticalAnchor="BOTH" screenid="test"/>
+      </cl:responsivexylayoutdata>
+      <cl:udc std:sid="ud-control-411299e7" type="udc.Common.MyInfoRow">
+        <cl:listener std:sid="listener-6b41f23f" handler="onMyInfoRowGroupRowClick" name="GroupRowClick"/>
+        <cl:verticaldata std:sid="v-data-716d0c58" autosize="none" height="86px" width="299px"/>
+        <cl:property name="btnStyle" type="string" value="/theme/images/mobile/common_cardview_btn_right_arrow_white.png"/>
+      </cl:udc>
+      <cl:udc std:sid="ud-control-f0c222c7" id="totalRow" type="udc.UserManagementRow">
+        <cl:listener std:sid="listener-fb019931" handler="onTotalRowGroupRowClick" name="GroupRowClick"/>
+        <cl:verticaldata std:sid="v-data-f88c080f" autosize="none" height="88px" width="299px"/>
+        <cl:property name="GroupName" type="string" value="전체"/>
+      </cl:udc>
+      <cl:verticallayout std:sid="v-layout-3f20427b" scrollable="true" topmargin="10"/>
+    </cl:group>
+    <cl:group std:sid="group-a379a470">
+      <cl:responsivexylayoutdata std:sid="rxyl-data-1c7ffc2f">
+        <cl:xylayoutdata std:sid="sxyl-data-b9d6f3ae" height="26px" horizontalAnchor="BOTH" left="0px" right="0px" top="165px" verticalAnchor="TOP" screenid="ip678"/>
+        <cl:xylayoutdata std:sid="sxyl-data-347f2b2c" height="26px" horizontalAnchor="BOTH" left="0px" right="0px" top="165px" verticalAnchor="TOP" screenid="ipplus"/>
+        <cl:xylayoutdata std:sid="sxyl-data-8929e879" height="26px" horizontalAnchor="BOTH" left="0px" right="0px" top="165px" verticalAnchor="TOP" screenid="test"/>
+      </cl:responsivexylayoutdata>
+      <cl:group std:sid="group-22e143ff" style="border-right-style:solid; border-right-width:1px; border-right-color:#679a83;">
+        <cl:flowlayoutdata std:sid="f-data-2e2f66a1" autosize="width" height="26px" width="118px"/>
+        <cl:output std:sid="output-93a8015e" style="color:#80E0A7; font-size:15px; text-align:left;">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_NumberGroup"/>
+          <cl:flowlayoutdata std:sid="f-data-ba41ee1b" autosize="width" height="20px" width="56px"/>
+        </cl:output>
+        <cl:output std:sid="output-33a2cd99" id="totalGroups" style="color:#FFFFFF; font-size:20px; text-align:left;" value="10개 ">
+          <cl:flowlayoutdata std:sid="f-data-66dbcb50" autosize="width" height="20px" width="51px"/>
+        </cl:output>
+        <cl:flowlayout std:sid="f-layout-0d971416" halign="center" spacing="2"/>
+      </cl:group>
+      <cl:group std:sid="group-3ab66e8b">
+        <cl:flowlayoutdata std:sid="f-data-0d07af53" autosize="width" height="26px" width="117px"/>
+        <cl:output std:sid="output-4afc9e2f" style="color:#80E0A7; font-size:15px; text-align:right;">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_NumberUser"/>
+          <cl:flowlayoutdata std:sid="f-data-8e0dce38" autosize="width" height="20px" width="56px"/>
+        </cl:output>
+        <cl:output std:sid="output-fc70d357" id="totalUsers" style="color:#FFFFFF; font-size:20px; text-align:right;" value="10개 ">
+          <cl:flowlayoutdata std:sid="f-data-961462f4" autosize="width" height="20px" width="46px"/>
+        </cl:output>
+        <cl:flowlayout std:sid="f-layout-700fca2b" halign="center" spacing="2"/>
+      </cl:group>
+      <cl:flowlayout std:sid="f-layout-7082e354" halign="center"/>
+    </cl:group>
+    <cl:responsivexylayout std:sid="r-xylayout-5b3342b9"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

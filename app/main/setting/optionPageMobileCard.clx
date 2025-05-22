@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-073911f6" version="1.0.0.0">
+  <head std:sid="head-4c444a13">
+    <title>optionPageMobileCard</title>
+    <screen std:sid="screen-5a13c5a0" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="500" customWidth="800"/>
+    <screen std:sid="screen-566beacb" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-8976302f" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-62be8f3b">
+      <cl:datamap std:sid="d-map-63ed0cf3" id="OptionMobileCard">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-c79482f4" name="EnableFlag" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-d0da6866" name="ServerAddress" datatype="string" defaultvalue="http://ubioxkey.unioncomm.co.kr"/>
+          <cl:datacolumn std:sid="d-column-5a28f2ea" name="ServerPort" datatype="number" defaultvalue="13000"/>
+          <cl:datacolumn std:sid="d-column-5f51242f" name="ServerPort2" datatype="number" defaultvalue="13000"/>
+          <cl:datacolumn std:sid="d-column-d28fca85" name="MasterKey"/>
+          <cl:datacolumn std:sid="d-column-672a749a" name="ContractNo"/>
+          <cl:datacolumn std:sid="d-column-fe06e37d" name="SyncPeriod" datatype="number" defaultvalue="1"/>
+          <cl:datacolumn std:sid="d-column-1528bcb2" name="ContractCode"/>
+          <cl:datacolumn std:sid="d-column-d8a79807" name="ModifiedFlag" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-28283d22" name="ExpiredDate"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-1cba6d4e" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-6b2f9031" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-da4b6f23" id="MasterKeyInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-87cfea50" name="MasterKey"/>
+          <cl:datacolumn std:sid="d-column-60de8503" name="Code" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-1f8aba32" name="Message"/>
+          <cl:datacolumn std:sid="d-column-35e1649a" name="ContractCode"/>
+          <cl:datacolumn std:sid="d-column-b4596969" name="ExpiredDate"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-42148fbd" id="ConnectTest">
+        <cl:datacolumnlist>
+          <cl:datacolumn comment="beforeData" std:sid="d-column-5da8267a" name="ContractCode" datatype="string" defaultvalue="0"/>
+          <cl:datacolumn comment="beforeData" std:sid="d-column-5b7afd57" name="ContractNo"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-c36c4865" id="sms_postMobileCardConnectionTest" action="/v1/mobileCards/masterKey">
+        <cl:listener std:sid="listener-85d96ee0" name="submit-done" handler="onSms_postMobileCardConnectionTestSubmitDone"/>
+        <cl:requestdata dataid="OptionMobileCard"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-089bf453" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-785c4121" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-4cb6e5ac" id="SEMCS_grpInfo">
+      <cl:formdata std:sid="f-data-79c7e7a6" row="0" col="0"/>
+      <cl:output std:sid="output-a48fc03c" style="font-weight:700; font-size:16px;">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_MobileCardSetting"/>
+        <cl:formdata std:sid="f-data-02d9b3e4" row="0" col="0" rowspan="1" colspan="4"/>
+      </cl:output>
+      <cl:checkbox std:sid="c-box-7ce04f3b" id="SEMCS_cbxMobileCardEnable" style="font-size:14px;" truevalue="1" falsevalue="0">
+        <cl:listener std:sid="listener-bd89a9da" name="value-change" handler="valueChange"/>
+        <cl:langbind property="text" category="PROPERTY" keypath="Str_MobileCardEnable"/>
+        <cl:datamapbind property="value" datacontrolid="OptionMobileCard" columnname="EnableFlag"/>
+        <cl:formdata std:sid="f-data-b1f2945d" row="1" col="0" rowspan="1" colspan="4"/>
+      </cl:checkbox>
+      <cl:output std:sid="output-9795dadd" class="common-controllabel">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_ServerAddress"/>
+        <cl:formdata std:sid="f-data-9bb3f19c" row="2" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-9b689a9b" class="common-controllabel">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_Port"/>
+        <cl:formdata std:sid="f-data-412ce809" row="3" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-e21583ad" class="common-controllabel">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_ContractNo"/>
+        <cl:formdata std:sid="f-data-331fb0fe" row="5" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-78c502e8" class="common-controllabel">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_KeyCode"/>
+        <cl:formdata std:sid="f-data-79b68d7c" row="6" col="0"/>
+      </cl:output>
+      <cl:inputbox std:sid="i-box-b386f5a1" id="SEMCS_ipbServerAddress" style="padding-left:4px; font-size:12px;" maxlength="64">
+        <cl:listener std:sid="listener-74ce1313" name="value-change" handler="valueChange"/>
+        <cl:datamapbind property="value" datacontrolid="OptionMobileCard" columnname="ServerAddress"/>
+        <cl:formdata std:sid="f-data-9e464255" row="2" col="1" rowspan="1" colspan="3"/>
+      </cl:inputbox>
+      <cl:numbereditor std:sid="n-editor-99ba5206" id="SEMCS_nbeServerPort" style="padding-left:4px; font-size:12px;" min="0.0" max="100000.0" step="1.0" spinbutton="false">
+        <cl:listener std:sid="listener-9e863195" name="value-change" handler="valueChange"/>
+        <cl:datamapbind property="value" datacontrolid="OptionMobileCard" columnname="ServerPort"/>
+        <cl:formdata std:sid="f-data-1ebd105c" row="3" col="1" rowspan="1" colspan="3"/>
+      </cl:numbereditor>
+      <cl:inputbox std:sid="i-box-9a2dbefc" id="SEMCS_ipbContractNo" maxlength="20">
+        <cl:listener std:sid="listener-d2f36121" name="value-change" handler="valueChange"/>
+        <cl:datamapbind property="value" datacontrolid="OptionMobileCard" columnname="ContractNo"/>
+        <cl:formdata std:sid="f-data-e4df3622" row="5" col="1"/>
+      </cl:inputbox>
+      <cl:output std:sid="output-9591315f" id="SEMCS_opbMasterKey" style="padding-left:4px; font-size:12px;" readonly="true">
+        <cl:datamapbind property="value" datacontrolid="OptionMobileCard" columnname="MasterKey"/>
+        <cl:formdata std:sid="f-data-5775a810" row="6" col="1" rowspan="1" colspan="3"/>
+      </cl:output>
+      <cl:button std:sid="button-0ae2fe53" id="SEMCS_btnConnect" class="userInfo_btn">
+        <cl:listener std:sid="listener-5afae5b8" name="click" handler="onSEMCS_btnConnectClick"/>
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_ConnectionTest"/>
+        <cl:formdata std:sid="f-data-25b8eb44" halign="RIGHT" width="160" row="9" col="3"/>
+      </cl:button>
+      <cl:output std:sid="output-b60fe156" class="common-controllabel">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_Sync"/>
+        <cl:formdata std:sid="f-data-b61b1087" row="7" col="0"/>
+      </cl:output>
+      <cl:group std:sid="group-aec129ed">
+        <cl:formdata std:sid="f-data-8b1589d5" row="7" col="1" rowspan="1" colspan="3"/>
+        <cl:numbereditor std:sid="n-editor-2c5aba69" id="SEMCS_nbeSyncPeriod" style="text-align:center;" min="30.0" max="89280.0" spinbutton="false" placeholder="1~1440">
+          <cl:datamapbind property="value" datacontrolid="OptionMobileCard" columnname="SyncPeriod"/>
+          <cl:formdata std:sid="f-data-30c90429" row="0" col="0"/>
+        </cl:numbereditor>
+        <cl:output std:sid="output-81bd7b72">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Second"/>
+          <cl:formdata std:sid="f-data-d936c936" row="0" col="1"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-a463d747" hspace="1px" vspace="1px" top-margin="1px" right-margin="1px" bottom-margin="1px" left-margin="1px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="60" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="60" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:output std:sid="output-891f8854" class="common-controllabel">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_DataPort"/>
+        <cl:formdata std:sid="f-data-014abb29" row="4" col="0"/>
+      </cl:output>
+      <cl:numbereditor std:sid="n-editor-013f2465" id="SEMCS_nbeServerPort2" style="padding-left:4px; font-size:12px;" min="0.0" max="100000.0" step="1.0" spinbutton="false">
+        <cl:listener std:sid="listener-b5ab198d" name="value-change" handler="valueChange"/>
+        <cl:datamapbind property="value" datacontrolid="OptionMobileCard" columnname="ServerPort2"/>
+        <cl:formdata std:sid="f-data-f0eac163" row="4" col="1" rowspan="1" colspan="3"/>
+      </cl:numbereditor>
+      <cl:output std:sid="output-1fdcc194" class="common-controllabel">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_ContractCode"/>
+        <cl:formdata std:sid="f-data-1dc0fa63" row="5" col="2"/>
+      </cl:output>
+      <cl:inputbox std:sid="i-box-ba4dae29" id="SEMCS_ipbContractCode" secret="false" maxlength="20">
+        <cl:listener std:sid="listener-ce317817" name="value-change" handler="valueChange"/>
+        <cl:datamapbind property="value" datacontrolid="OptionMobileCard" columnname="ContractCode"/>
+        <cl:formdata std:sid="f-data-65595bb3" row="5" col="3"/>
+      </cl:inputbox>
+      <cl:output std:sid="output-caa0924d" class="common-controllabel">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_ExpirationDate"/>
+        <cl:formdata std:sid="f-data-df889379" row="8" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-07218dde" id="SEMCS_opbExpiredDate" style="padding-left:4px; font-size:12px;" readonly="true">
+        <cl:datamapbind property="value" category="PROPERTY" datacontrolid="OptionMobileCard" columnname="ExpiredDate"/>
+        <cl:formdata std:sid="f-data-f419abce" row="8" col="1" rowspan="1" colspan="3"/>
+      </cl:output>
+      <cl:formlayout std:sid="f-layout-3257e507" hspace="1px" vspace="1px" top-margin="1px" right-margin="1px" bottom-margin="1px" left-margin="1px">
+        <cl:rows length="30" unit="PIXEL"/>
+        <cl:rows length="30" unit="PIXEL"/>
+        <cl:rows length="30" unit="PIXEL"/>
+        <cl:rows length="30" unit="PIXEL"/>
+        <cl:rows length="30" unit="PIXEL"/>
+        <cl:rows length="30" unit="PIXEL"/>
+        <cl:rows length="30" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
+        <cl:rows length="30" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
+        <cl:rows length="30" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="200" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+        <cl:columns length="200" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:formlayout std:sid="f-layout-64168d3c" hspace="1px" vspace="1px" top-margin="1px" right-margin="1px" bottom-margin="1px" left-margin="1px">
+      <cl:rows length="1" unit="FRACTION"/>
+      <cl:columns length="1" unit="FRACTION"/>
+    </cl:formlayout>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-867a0c42" version="1.0.0.0">
+  <head std:sid="head-6d933f9a">
+    <title>SendAccessGroupInfoToTerminal</title>
+    <screen std:sid="screen-aea43876" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="500" customWidth="400"/>
+    <screen std:sid="screen-5fa527bc" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-ad2b148a" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-308bc673">
+      <cl:dataset std:sid="d-set-bc2bca01" id="TerminalList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-2f21eb5a" name="ID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-03758ab9" name="Name"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:submission std:sid="submission-0b6fe641" id="sms_getTerminaList" method="get" action="/v1/terminals/tiny">
+        <cl:listener std:sid="listener-11205840" name="submit-done" handler="onSms_getTerminaListSubmitDone"/>
+        <cl:listener std:sid="listener-8f86a06c" name="submit-timeout" handler="onSms_getTerminaListSubmitTimeout"/>
+        <cl:listener std:sid="listener-c6938b82" name="submit-error" handler="onSms_getTerminaListSubmitError"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="TerminalList"/>
+      </cl:submission>
+      <cl:datamap std:sid="d-map-a33aca7f" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-9938c3e8" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-414b2bb1" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-8ce362a4" name="Count" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:dataset std:sid="d-set-6bdb0c55" id="dsTerminalIDList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-2af2ab8f" name="ID" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:submission std:sid="submission-9b6f5a03" id="sms_postTerminalIDList" action="/v1/terminals/accessgroupdownload">
+        <cl:listener std:sid="listener-7d9e2e7d" name="submit-done" handler="onSms_postTerminalIDListSubmitDone"/>
+        <cl:listener std:sid="listener-a2eefd52" name="submit-error" handler="onSms_postTerminalIDListSubmitError"/>
+        <cl:listener std:sid="listener-04f29c26" name="submit-timeout" handler="onSms_postTerminalIDListSubmitTimeout"/>
+        <cl:requestdata dataid="dsTerminalIDList"/>
+      </cl:submission>
+      <cl:dataset std:sid="d-set-5212955c" id="TerminalMcpList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-315ec5c2" name="TerminalID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-e7434574" name="AcuTerminalID1" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-322c546f" name="AcuTerminalID2" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-c3ba5d51" name="AcuTerminalID3" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-c2cdbe54" name="AcuTerminalID4" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-83f57e72" id="TerminalAcuList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-be4d91b3" name="TerminalID" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:submission std:sid="submission-34edde0f" id="sms_get_mcp_list" method="get" action="/v1/mcps">
+        <cl:listener std:sid="listener-b41ae1b5" name="submit-done" handler="onSms_get_mcp_listSubmitDone"/>
+        <cl:responsedata dataid="Total"/>
+        <cl:responsedata dataid="TerminalMcpList"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec dev-comment="SAGTT"/>
+  </head>
+  <body std:sid="body-e458b36d" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-b5857817" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-491ced46" id="SAGTT_grp" style="padding:10px;">
+      <cl:xylayoutdata std:sid="xyl-data-6bbf07b6" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-a8fcac05">
+        <cl:formdata std:sid="f-data-640df2ea" row="0" col="0"/>
+        <cl:button std:sid="button-92881eb3" id="SAGTT_btnSend" class="userInfo_btn">
+          <cl:listener std:sid="listener-b68ca066" name="click" handler="onSAGTT_btnSendClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Send"/>
+          <cl:formdata std:sid="f-data-fc654d90" row="0" col="2"/>
+        </cl:button>
+        <cl:button std:sid="button-d986aa17" id="SAGTT_btnClose" class="userInfo_btn">
+          <cl:listener std:sid="listener-d119e479" name="click" handler="onSAGTT_btnCloseClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Close"/>
+          <cl:formdata std:sid="f-data-8d8fa6c0" row="0" col="3"/>
+        </cl:button>
+        <cl:img std:sid="image-9c256106" id="SAGTT_imgHelp" style="cursor:help;" src="../../../theme/images/common/common_btn_window_top_q.png">
+          <cl:listener std:sid="listener-0dea147c" name="click" handler="onSAGTT_imgHelpClick"/>
+          <cl:formdata std:sid="f-data-d71980d2" halign="CENTER" valign="CENTER" width="14" height="14" row="0" col="4"/>
+        </cl:img>
+        <cl:formlayout std:sid="f-layout-6ecb865d">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="14" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-dc6bf6ef">
+        <cl:formdata std:sid="f-data-7a3437bd" row="1" col="0"/>
+        <cl:grid std:sid="grid-b393af73" id="SAGTT_grdTerminals" readonly="true" datasetid="TerminalList" columnResizable="false" columnMovable="false">
+          <cl:listener std:sid="listener-6e2f9710" name="selection-change" handler="onSAGTT_grdTerminalsSelectionChange"/>
+          <cl:listener std:sid="listener-3d8a3e00" name="row-check" handler="onSAGTT_grdTerminalsRowCheck"/>
+          <cl:formdata std:sid="f-data-2844e8dc" row="1" col="0"/>
+          <cl:gridcolumn std:sid="g-column-e65850c5" width="25px"/>
+          <cl:gridcolumn std:sid="g-column-eb3cfebc"/>
+          <cl:gridcolumn std:sid="g-column-9c6130a2"/>
+          <cl:gridheader std:sid="gh-band-0e082ca7">
+            <cl:gridrow std:sid="g-row-68f1df1a"/>
+            <cl:gridcell std:sid="gh-cell-cf16c475" rowindex="0" colindex="0" sortable="false" filterable="false" columntype="checkbox"/>
+            <cl:gridcell std:sid="gh-cell-c36a4bda" rowindex="0" colindex="1" targetcolumnname="ID" sortable="false" filterable="false" text="TerminalID">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_TerminalID"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gh-cell-2cd5d748" rowindex="0" colindex="2" targetcolumnname="Name" sortable="false" filterable="false" text="Name">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_Name"/>
+            </cl:gridcell>
+          </cl:gridheader>
+          <cl:griddetail std:sid="gd-band-4430d41b">
+            <cl:gridrow std:sid="g-row-8ab5a99f"/>
+            <cl:gridcell std:sid="gd-cell-8bba69ca" rowindex="0" colindex="0" columntype="checkbox"/>
+            <cl:gridcell std:sid="gd-cell-dea85c6c" rowindex="0" colindex="1" columnname="ID"/>
+            <cl:gridcell std:sid="gd-cell-14239a74" rowindex="0" colindex="2" columnname="Name"/>
+          </cl:griddetail>
+        </cl:grid>
+        <cl:udc std:sid="ud-control-bba2eac9" id="SAGTT_udcTerminalSearch" type="udc.search.searchTerminal">
+          <cl:listener std:sid="listener-2692bae4" name="search" handler="onSearchTerminalSearch"/>
+          <cl:formdata std:sid="f-data-cd5925a9" row="0" col="0"/>
+        </cl:udc>
+        <cl:formlayout std:sid="f-layout-2e3f5134">
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-efa58b75">
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+        <cl:rows length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-25e91cf1"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

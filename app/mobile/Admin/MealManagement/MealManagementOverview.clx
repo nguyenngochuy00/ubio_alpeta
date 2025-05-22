@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-30674e35" version="1.0.0.0">
+  <head std:sid="head-aaa5db0a">
+    <title>MealManagementOverview</title>
+    <screen std:sid="screen-927baf85" id="default" name="default" minwidth="1024px" width="1024px" height="768px" active="false"/>
+    <screen std:sid="screen-73b34489" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-8483f26d" id="IPPlus" name="IPPlus" minwidth="414px" maxwidth="499px" width="414px" height="736px" active="false"/>
+    <screen std:sid="screen-29409635" id="IP6/IPX" name="IP6/IPX" minwidth="375px" maxwidth="413px" width="375px" height="667px" active="false"/>
+    <screen std:sid="screen-3b54a235" id="mobile" name="mobile" minwidth="350px" maxwidth="374px" width="350px" height="525px" active="true"/>
+    <screen std:sid="screen-d3f29d2e" id="ip5/SE" name="ip5/SE" maxwidth="349px" width="320px" height="568px"/>
+    <cl:model std:sid="model-0b0ba997">
+      <cl:dataset std:sid="d-set-a7ac69da" id="MealStatisticsDay">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-1a295556" name="Day"/>
+          <cl:datacolumn std:sid="d-column-5d6f65ce" name="Type" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-51d853ca" name="Count" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-e11dfc0f" id="MealResult">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-a9b88e09" name="DateTime"/>
+          <cl:datacolumn std:sid="d-column-df3800d7" name="TerminalID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-3ae3f414" name="UserID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-dac84fab" name="Type" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-949b1d5b" name="Menu"/>
+          <cl:datacolumn std:sid="d-column-795bafba" name="Pay" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-98a6108e" name="Result" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-568ce6a9" name="UpMode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-9fcb9439" id="MealStatistics">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-f62f8162" name="totalMeal" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-e96e195d" name="mealType" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-cadfb0f0" name="totalMealPrice" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-6c384e57" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-eaa0e180" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-987bebea" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-10b6c24b" name="Count" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-d54c797f" id="mealResultSum">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-29b9b75a" name="MealSuccess" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-60554e18" name="MealFail" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-80485b4b" name="MealCount" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-a59941ee" name="MealTotalCost" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-0827f3ad" id="smsMealStatistics" async="false" withCredentials="true" method="get" action="/mealStatistics" mediatype="application/x-www-form-urlencoded">
+        <cl:listener std:sid="listener-8e89aa64" name="before-submit" handler="onSmsMealStatisticsBeforeSubmit"/>
+        <cl:listener std:sid="listener-56610de3" name="receive" handler="onSmsMealStatisticsReceive"/>
+        <cl:listener std:sid="listener-b4fe59f5" name="submit-done" handler="onSmsMealStatisticsSubmitDone"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="MealStatisticsDay"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-0ad7c632" id="smsMealResult" async="false" withCredentials="true" method="get" action="/mealResults" mediatype="application/x-www-form-urlencoded">
+        <cl:listener std:sid="listener-9577ef54" name="before-submit" handler="onSmsMealResultBeforeSubmit"/>
+        <cl:listener std:sid="listener-ea200f92" name="receive" handler="onSmsMealResultReceive"/>
+        <cl:listener std:sid="listener-d854eb0e" name="submit-done" handler="onSmsMealResultSubmitDone"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total"/>
+        <cl:responsedata dataid="MealResult"/>
+        <cl:responsedata dataid="mealResultSum"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec>
+      <cl:property name="prePage" type="string" default="app/mobile/MainPage"/>
+    </cl:appspec>
+  </head>
+  <body std:sid="body-967dfcd9" style="background-color:#f2f2f2; top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-05dd9fb6" name="load" handler="onBodyLoad"/>
+    <cl:listener std:sid="listener-ee08f0ad" name="init" handler="onBodyInit"/>
+    <cl:udc std:sid="ud-control-6e764339" id="header" style="background-color:#006938;" type="udc.Header">
+      <cl:listener std:sid="listener-24643899" name="rightBtnClick" handler="onHeaderRightBtnClick"/>
+      <cl:xylayoutdata std:sid="xyl-data-04614ea9" top="0px" right="0px" left="0px" height="198px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+      <cl:property name="leftIcon" value="Back" type="string"/>
+      <cl:property name="rightIcon" value="List" type="string"/>
+      <cl:property name="leftBtnPath" value="app/mobile/Admin/Dashboard" type="string"/>
+      <cl:property name="rightIconVisible" value="true" type="boolean"/>
+      <cl:property name="leftIconVisible" value="true" type="boolean"/>
+      <cl:property name="pageName" value="식수 관리" type="string"/>
+    </cl:udc>
+    <cl:group std:sid="group-7330dfcc">
+      <cl:xylayoutdata std:sid="xyl-data-8a4a4271" top="198px" right="0px" bottom="-164px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-0c96e602">
+        <cl:verticaldata std:sid="v-data-f4108883" width="308px" height="296px"/>
+        <cl:group std:sid="group-2d91da3a" style="vertical-align:middle; text-align:center;">
+          <cl:xylayoutdata std:sid="xyl-data-d7cd5800" top="25px" width="100px" height="20px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
+          <cl:img std:sid="image-28caa015" id="preMonth" src="/theme/images/mobile/common_day_btn_arrow_left@3x.png">
+            <cl:listener std:sid="listener-fd8b1f1e" name="click" handler="onPreMonthClick"/>
+            <cl:xylayoutdata std:sid="xyl-data-c89802da" top="4px" bottom="6px" left="5px" width="12px" horizontalAnchor="LEFT" verticalAnchor="BOTH"/>
+          </cl:img>
+          <cl:img std:sid="image-63dd4d2c" id="nextMonth" src="/theme/images/mobile/common_day_btn_arrow_right@3x.png">
+            <cl:listener std:sid="listener-b5eb772c" name="click" handler="onNextMonthClick"/>
+            <cl:xylayoutdata std:sid="xyl-data-2758979e" top="4px" right="5px" bottom="6px" width="11px" horizontalAnchor="RIGHT" verticalAnchor="BOTH"/>
+          </cl:img>
+          <cl:output std:sid="output-63990e09" id="currentMonth" style="color:#848484; text-align:center;">
+            <cl:xylayoutdata std:sid="xyl-data-2ca9ca85" width="62px" height="20px" horizontalAnchor="CENTER" verticalAnchor="CENTER"/>
+          </cl:output>
+          <cl:xylayout std:sid="xylayout-71d840ad"/>
+        </cl:group>
+        <cl:output std:sid="output-a17ac391" id="btnCurrentMonth" style="background-color:#00B7CC; border-radius:25px; color:#FFFFFF; font-size:13px; text-align:center;">
+          <cl:listener std:sid="listener-90d425f6" name="click" handler="onOutputClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Conmon_ThisMonth"/>
+          <cl:xylayoutdata std:sid="xyl-data-9f573810" top="35px" right="21px" width="70px" height="20px" horizontalAnchor="RIGHT" verticalAnchor="TOP"/>
+        </cl:output>
+        <cl:group std:sid="group-62a93134" style="background-color:#ffffff; border-radius:25px; padding-top:15px; padding-left:15px; padding-bottom:15px; background-image:none; padding-right:15px;">
+          <cl:xylayoutdata std:sid="xyl-data-1ad9487b" top="60px" right="20px" bottom="21px" left="22px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+          <cl:group std:sid="group-bbf799e7">
+            <cl:formdata std:sid="f-data-8a781822" row="0" col="0"/>
+            <cl:group std:sid="group-26d196ce">
+              <cl:formdata std:sid="f-data-3c027026" row="0" col="0"/>
+              <cl:img std:sid="image-5648d38f" src="/theme/images/mobile/deshboard_title_icon_meal.png">
+                <cl:xylayoutdata std:sid="xyl-data-4b729e1b" bottom="5px" left="5px" width="50px" height="50px" horizontalAnchor="LEFT" verticalAnchor="BOTTOM"/>
+              </cl:img>
+              <cl:output std:sid="output-d4fcec34" style="color:#404040; font-weight:bold; font-size:13px; text-align:left;">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_Meal_ShareMeal"/>
+                <cl:xylayoutdata std:sid="xyl-data-f7ed79e3" top="12px" right="0px" left="0px" height="22px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+              </cl:output>
+              <cl:xylayout std:sid="xylayout-02bb5c53"/>
+            </cl:group>
+            <cl:group std:sid="group-d0a19bfa">
+              <cl:formdata std:sid="f-data-8f9b18c7" row="0" col="1"/>
+              <cl:group std:sid="group-b7f0b575" style="border-bottom-color:#dfdfdf; border-bottom-width:1px; border-bottom-style:solid;">
+                <cl:formdata std:sid="f-data-b44bc4cb" row="0" col="0"/>
+                <cl:output std:sid="output-66e66fe2" id="totalPrice" style="color:#404040; vertical-align:bottom; font-size:35px; text-align:right;" value="12,200,000원" datatype="number" format="s#,###">
+                  <cl:formdata std:sid="f-data-bcf43106" row="1" col="0" rowspan="1" colspan="1"/>
+                </cl:output>
+                <cl:group std:sid="group-b07b8f3b" id="colorList">
+                  <cl:formdata std:sid="f-data-9ef80392" row="0" col="0"/>
+                  <cl:flowlayout std:sid="f-layout-96986788" halign="right" valign="bottom"/>
+                </cl:group>
+                <cl:output std:sid="output-d5c23d01" style="font-size:35px;" fieldLabel="원" value="원">
+                  <cl:formdata std:sid="f-data-81fcd56a" row="1" col="1"/>
+                </cl:output>
+                <cl:formlayout std:sid="f-layout-2f66f721" hspace="0px" vspace="0px">
+                  <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="1" unit="FRACTION"/>
+                  <cl:columns length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                </cl:formlayout>
+              </cl:group>
+              <cl:output std:sid="output-784cdd0b" id="totalMeal" style="color:#848484; font-size:13px; text-align:right;" value="1,230회">
+                <cl:formdata std:sid="f-data-2a63fecd" row="1" col="0"/>
+              </cl:output>
+              <cl:formlayout std:sid="f-layout-274ffbd1" hspace="0px" vspace="0px">
+                <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="1" unit="FRACTION"/>
+              </cl:formlayout>
+            </cl:group>
+            <cl:formlayout std:sid="f-layout-933b5625" hspace="0px" vspace="0px">
+              <cl:rows length="1" unit="FRACTION"/>
+              <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="1" unit="FRACTION"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:uicontrolshell std:sid="uic-shell-c805a446" id="chart" visible="true">
+            <cl:listener std:sid="listener-2788f99a" name="init" handler="onChartInit"/>
+            <cl:listener std:sid="listener-23e83ede" name="load" handler="onChartLoad"/>
+            <cl:formdata std:sid="f-data-fb22c8ca" valign="FILL" row="1" col="0"/>
+          </cl:uicontrolshell>
+          <cl:formlayout std:sid="f-layout-af1f313f" scrollable="false" hspace="0px" vspace="0px">
+            <cl:rows length="3" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:rows length="2" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:xylayout std:sid="xylayout-cffddc1b"/>
+      </cl:group>
+      <cl:udc std:sid="ud-control-72e897be" id="topMeal" visible="false" type="udc.MealManagement.MealList">
+        <cl:verticaldata std:sid="v-data-f0943cc6" width="350px" height="177px" autosize="height"/>
+      </cl:udc>
+      <cl:verticallayout std:sid="v-layout-5dadadba"/>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-dafa8614"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-518fe91e" version="1.0.0.0">
+  <head std:sid="head-582d14dc">
+    <title>alwaysTypeUserManagement</title>
+    <screen std:sid="screen-5c966162" id="default" customHeight="500" customWidth="800" height="768px" minwidth="1024px" name="default" useCustomHeight="true" useCustomWidth="true" width="1024px"/>
+    <screen std:sid="screen-641e68ff" id="tablet" height="667px" maxwidth="1023px" minwidth="500px" name="tablet" width="500px"/>
+    <screen std:sid="screen-3341d26c" id="mobile" height="525px" maxwidth="499px" name="mobile" width="350px"/>
+    <cl:model std:sid="model-7150226a">
+      <cl:dataset std:sid="d-set-a1e53e49" id="UserList">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="string" info="아이디" name="ID"/>
+          <cl:datacolumn info="군번" name="UniqueID"/>
+          <cl:datacolumn datatype="string" info="이름" name="Name"/>
+          <cl:datacolumn info="인증타입" name="AuthInfo"/>
+          <cl:datacolumn datatype="number" info="권한(상시" name="Privilege"/>
+          <cl:datacolumn info="시작일자" name="RegistDate"/>
+          <cl:datacolumn info="만기일자" name="ExpireDate"/>
+          <cl:datacolumn datatype="number" info="그룹" name="GroupCode"/>
+          <cl:datacolumn datatype="number" info="출입그룹" name="AccessGroupCode"/>
+          <cl:datacolumn datatype="number" info="블랙리스트" name="BlackList"/>
+          <cl:datacolumn datatype="number" info="출입카운트" name="AccessCount"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-c2bd18fc" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="Count"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-a33aca7f" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="ResultCode"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-bb2a2311" id="sms_getAlwaysTypeUserList" action="/v1/jawoondae/users/alwaysType" method="get">
+        <cl:listener std:sid="listener-486eaf3b" handler="onSms_getAlwaysTypeUserListSubmitDone" name="submit-done"/>
+        <cl:listener std:sid="listener-04ad6065" handler="onSms_getAlwaysTypeUserListSubmitError" name="submit-error"/>
+        <cl:listener std:sid="listener-f1f83b80" handler="onSms_getAlwaysTypeUserListSubmitTimeout" name="submit-timeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total"/>
+        <cl:responsedata dataid="UserList"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec dev-comment="&#xD;&#xA;.1 상시 타입 사용자 인증기록 카운팅 조회.&#xD;&#xA;&#xD;&#xA;JWDAT_grdUserList_cmbPrivilege&#xD;&#xA;"/>
+  </head>
+  <body std:sid="body-ff2853ac" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-82dc6a78" handler="onBodyLoad" name="load"/>
+    <cl:listener std:sid="listener-f721b404" handler="onBodyKeydown" name="keydown"/>
+    <cl:group std:sid="group-8bac128f" id="JWDAT_grpMain">
+      <cl:xylayoutdata std:sid="xyl-data-ed2d2ef9" bottom="1px" horizontalAnchor="BOTH" left="1px" right="1px" top="1px" verticalAnchor="BOTH"/>
+      <cl:pageindexer std:sid="p-indexer-d90538c3" id="alwaysTypeUserListPageIndexer">
+        <cl:listener std:sid="listener-8d8cc5ed" handler="onAlwaysTypeUserListPageIndexerSelectionChange" name="selection-change"/>
+        <cl:formdata std:sid="f-data-ab748d89" col="0" row="2"/>
+      </cl:pageindexer>
+      <cl:group std:sid="group-fce1fabc">
+        <cl:formdata std:sid="f-data-c8c814e5" col="0" row="0"/>
+        <cl:output std:sid="output-e053a255" style="padding:4px; text-align:right;">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_All"/>
+          <cl:formdata std:sid="f-data-9b370de7" col="0" row="0"/>
+        </cl:output>
+        <cl:output std:sid="output-5a63dfa3" id="JWDAT_opbTotal" value="">
+          <cl:formdata std:sid="f-data-31d6ef3b" col="1" row="0"/>
+        </cl:output>
+        <cl:output std:sid="output-753a5c60" style="padding:4px; text-align:right;">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_Period"/>
+          <cl:formdata std:sid="f-data-8b5b3ec8" col="2" row="0"/>
+        </cl:output>
+        <cl:dateinput std:sid="d-input-64444c3a" id="JWDAT_dtiStart">
+          <cl:formdata std:sid="f-data-f3616048" col="3" row="0"/>
+        </cl:dateinput>
+        <cl:output std:sid="output-a8dd97cd" style="text-align:center;" value="~">
+          <cl:formdata std:sid="f-data-6ffea206" col="4" row="0"/>
+        </cl:output>
+        <cl:dateinput std:sid="d-input-d0fd391c" id="JWDAT_dtiEnd">
+          <cl:formdata std:sid="f-data-2964c8b6" col="5" row="0"/>
+        </cl:dateinput>
+        <cl:group std:sid="group-a84f9729" style="border-right-style:solid; color:#6b6b6b; border-top-width:1px; border-bottom-color:#cccccc; border-right-width:1px; border-left-color:#cccccc; border-right-color:#cccccc; border-left-width:1px; border-top-style:solid; background-color:#F6F6F6; border-radius:10px; border-left-style:solid; border-bottom-width:1px; border-top-color:#cccccc; border-bottom-style:solid;">
+          <cl:formdata std:sid="f-data-3b4d4b92" col="6" row="0"/>
+          <cl:combobox std:sid="c-box-6107e546" id="JWDAT_cmbCategory" style="background-color:#F6F6F6; border-right-style:none; border-left-style:none; border-bottom-style:none; border-top-style:none;" preventinput="true">
+            <cl:apppropbind category="PROPERTY" property="value" app-property="searchCategory"/>
+            <cl:formdata std:sid="f-data-8adb84bb" col="0" row="0"/>
+            <cl:item label="ID" value="id">
+              <cl:langbind category="PROPERTY" property="label" keypath="Str_ID"/>
+            </cl:item>
+            <cl:item label="Name" value="name">
+              <cl:langbind category="PROPERTY" property="label" keypath="Str_Name"/>
+            </cl:item>
+            <cl:item label="UniqueID" value="uniqueid">
+              <cl:langbind category="PROPERTY" property="label" keypath="Str_UniqueID"/>
+            </cl:item>
+          </cl:combobox>
+          <cl:inputbox std:sid="i-box-c326c7b5" id="JWDAT_ipbKeyword" style="background-color:#F6F6F6; padding:0px 0px 0px 10px; border-bottom-color:#cccccc; border-left-color:#cccccc; border-top-color:#cccccc; border-bottom-style:none; border-right-color:#cccccc; border-top-style:none;">
+            <cl:langbind category="PROPERTY" property="placeholder" keypath="Str_SearchKeword"/>
+            <cl:apppropbind category="PROPERTY" property="value" app-property="searchKeyword"/>
+            <cl:formdata std:sid="f-data-87f7c575" col="1" row="0"/>
+          </cl:inputbox>
+          <cl:group std:sid="group-94b972ce" id="JWDAT_btnSearch" style="border-right-style:none; cursor:pointer; background-color:transparent; background-repeat:no-repeat; border-left-style:none; border-bottom-style:none; background-image:url('../../../../theme/images/common/common_text_field_btn_icons_search.png'); background-position:center; border-top-style:none;">
+            <cl:listener std:sid="listener-1bb12bbc" handler="onJWDAT_btnSearchClick" name="click"/>
+            <cl:formdata std:sid="f-data-838eccbc" height="29" col="2" row="0"/>
+            <cl:xylayout std:sid="xylayout-3b76f87f"/>
+          </cl:group>
+          <cl:formlayout std:sid="f-layout-409a1d5f" hspace="0px" vspace="0px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+            <cl:columns autoSizing="false" length="3" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:img std:sid="image-f50a0304" id="USMAG_imgHelpPage" style="cursor:help;" src="../../../../theme/images/common/common_btn_window_top_q.png">
+          <cl:listener std:sid="listener-72635ab3" handler="onUSMAG_imgHelpPageClick" name="click"/>
+          <cl:formdata std:sid="f-data-82e98c38" halign="CENTER" height="15" valign="CENTER" width="15" col="8" row="0"/>
+        </cl:img>
+        <cl:formlayout std:sid="f-layout-016dc211">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns autoSizing="false" length="50" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="50" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="50" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="90" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="10" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="90" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="1" minlength="0" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+          <cl:columns autoSizing="false" length="100" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="30" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:grid std:sid="grid-9f0dbce1" id="JWDAT_grdUserList" datasetid="UserList" readonly="true">
+        <cl:listener std:sid="listener-c7e177f5" handler="onJWDAT_grdUserListRowDblclick" name="row-dblclick"/>
+        <cl:listener std:sid="listener-bad5ca27" handler="onJWDAT_grdUserListRowDblclick" name="row-dblclick"/>
+        <cl:listener std:sid="listener-368dfdae" handler="onJWDAT_grdUserListRowDblclick2" name="row-dblclick"/>
+        <cl:formdata std:sid="f-data-74033b06" col="0" row="1"/>
+        <cl:gridcolumn std:sid="g-column-6025732b"/>
+        <cl:gridcolumn std:sid="g-column-99b83a95"/>
+        <cl:gridcolumn std:sid="g-column-0d47c85f"/>
+        <cl:gridcolumn std:sid="g-column-54595a11"/>
+        <cl:gridcolumn std:sid="g-column-c695e362"/>
+        <cl:gridcolumn std:sid="g-column-32bf2095"/>
+        <cl:gridcolumn std:sid="g-column-9be49690"/>
+        <cl:gridcolumn std:sid="g-column-e60d20c8"/>
+        <cl:gridcolumn std:sid="g-column-352b3fe7"/>
+        <cl:gridcolumn std:sid="g-column-d335c408"/>
+        <cl:gridheader std:sid="gh-band-dc54821d">
+          <cl:gridrow std:sid="g-row-e8163bab"/>
+          <cl:gridcell std:sid="gh-cell-e38c1bf5" colindex="0" rowindex="0" filterable="false" sortable="false" targetcolumnname="ID" text="아이디"/>
+          <cl:gridcell std:sid="gh-cell-d94e81d3" colindex="1" rowindex="0" filterable="false" sortable="false" targetcolumnname="UniqueID" text="유니크ID"/>
+          <cl:gridcell std:sid="gh-cell-ddce4e2a" colindex="2" rowindex="0" filterable="false" sortable="false" targetcolumnname="Name" text="이름"/>
+          <cl:gridcell std:sid="gh-cell-bb1b569a" colindex="3" rowindex="0" filterable="false" sortable="false" targetcolumnname="Privilege" text="권한"/>
+          <cl:gridcell std:sid="gh-cell-e38cfe69" colindex="4" rowindex="0" filterable="false" sortable="false" targetcolumnname="RegistDate" text="등록일자"/>
+          <cl:gridcell std:sid="gh-cell-9e1570e1" colindex="5" rowindex="0" filterable="false" sortable="false" targetcolumnname="ExpireDate" text="만기일자"/>
+          <cl:gridcell std:sid="gh-cell-2a87a8ca" colindex="6" rowindex="0" filterable="false" sortable="false" targetcolumnname="GroupCode" text="그룹"/>
+          <cl:gridcell std:sid="gh-cell-fbfd9d51" colindex="7" rowindex="0" filterable="false" sortable="false" targetcolumnname="AccessGroupCode" text="출입그룹"/>
+          <cl:gridcell std:sid="gh-cell-c1bf4ca9" colindex="8" rowindex="0" filterable="false" sortable="false" targetcolumnname="BlackList" text="블랙리스트"/>
+          <cl:gridcell std:sid="gh-cell-d760c352" colindex="9" rowindex="0" filterable="false" sortable="false" targetcolumnname="AccessCount" text="출입횟수"/>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-23a0fd16">
+          <cl:gridrow std:sid="g-row-1157ea62"/>
+          <cl:gridcell std:sid="gd-cell-51abd956" colindex="0" rowindex="0" columnname="ID"/>
+          <cl:gridcell std:sid="gd-cell-3e6a7926" colindex="1" rowindex="0" columnname="UniqueID"/>
+          <cl:gridcell std:sid="gd-cell-43e1d810" colindex="2" rowindex="0" columnname="Name"/>
+          <cl:gridcell std:sid="gd-cell-3d08ef68" colindex="3" rowindex="0" columnname="Privilege">
+            <cl:combobox std:sid="c-box-4e18a884" id="JWDAT_grdUserList_cmbPrivilege"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-a8660fb1" colindex="4" rowindex="0" columnname="RegistDate">
+            <cl:dateinput std:sid="d-input-544fabad" id="dti1">
+              <cl:formdata std:sid="f-data-91a6f172" col="5" row="0"/>
+            </cl:dateinput>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-09bf6f16" colindex="5" rowindex="0" columnname="ExpireDate">
+            <cl:dateinput std:sid="d-input-ff1c1630" id="dti2">
+              <cl:formdata std:sid="f-data-0fc09e7b" col="5" row="0"/>
+            </cl:dateinput>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-ef34b4e3" colindex="6" rowindex="0" columnname="GroupCode">
+            <cl:combobox std:sid="c-box-f27e060b" id="JWDAT_cmbTargetGroup">
+              <cl:item label="- - " value="0"/>
+            </cl:combobox>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-a2a4a42d" colindex="7" rowindex="0" columnname="AccessGroupCode">
+            <cl:combobox std:sid="c-box-cb23040e" id="JWDAT_cmbAccessGroup">
+              <cl:item label="- -" value="0"/>
+            </cl:combobox>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-87144840" colindex="8" rowindex="0" columnname="BlackList">
+            <cl:combobox std:sid="c-box-83f27885" id="cmb1">
+              <cl:item label="OFF" value="0"/>
+              <cl:item label="ON" value="1"/>
+            </cl:combobox>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-f061dfba" colindex="9" rowindex="0" columnname="AccessCount"/>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:formlayout std:sid="f-layout-43b5a0e7">
+        <cl:rows autoSizing="false" length="30" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:rows length="1" shadecolor="transparent" shadetype="NONE" unit="FRACTION"/>
+        <cl:rows autoSizing="false" length="40" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-845f8976"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

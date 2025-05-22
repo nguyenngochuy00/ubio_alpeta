@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-906fce94" version="1.0.0.0">
+  <head std:sid="head-99082f05">
+    <title>TerminalLogsDetail</title>
+    <screen std:sid="screen-7d32e476" id="default" active="false" height="768px" minwidth="1024px" name="default" width="1024px"/>
+    <screen std:sid="screen-12063027" id="tablet" height="667px" maxwidth="1023px" minwidth="500px" name="tablet" width="500px"/>
+    <screen std:sid="screen-8e89728c" id="IPPlus" height="736px" maxwidth="499px" minwidth="414px" name="IPPlus" width="414px"/>
+    <screen std:sid="screen-244ffb4b" id="IP6/IPX" height="667px" maxwidth="413px" minwidth="375px" name="IP6/IPX" width="375px"/>
+    <screen std:sid="screen-d946909f" id="mobile" active="true" height="525px" maxwidth="374px" minwidth="350px" name="mobile" width="350px"/>
+    <screen std:sid="screen-ab06b4db" id="ip5/SE" height="568px" maxwidth="349px" name="ip5/SE" width="320px"/>
+    <cl:model std:sid="model-9fdec171">
+      <cl:submission std:sid="submission-ce0fb92f" id="smsAuthLogsList" action="/authLogs?" method="get">
+        <cl:listener std:sid="listener-54949a2a" handler="onSmsAuthLogsListSubmitDone" name="submit-done"/>
+        <cl:listener std:sid="listener-7b4ac3fd" handler="onSmsAuthLogsListSubmitError" name="submit-error"/>
+        <cl:responsedata dataid="AuthLogList"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total"/>
+      </cl:submission>
+      <cl:datamap std:sid="d-map-d65c7cee" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-efa9ede5" datatype="number" name="ResultCode"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-951b7cd6" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-e1d710fa" datatype="number" name="Count"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:dataset std:sid="d-set-901db6eb" id="AuthLogList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-6f9b8a38" datatype="number" name="AuthResult"/>
+          <cl:datacolumn std:sid="d-column-d7474036" datatype="number" name="AuthType"/>
+          <cl:datacolumn std:sid="d-column-ec16f351" name="Card"/>
+          <cl:datacolumn std:sid="d-column-0ddacef7" name="EventTime"/>
+          <cl:datacolumn std:sid="d-column-88db0c5d" datatype="number" name="Func"/>
+          <cl:datacolumn std:sid="d-column-d29cab7d" datatype="number" name="FuncType"/>
+          <cl:datacolumn std:sid="d-column-f5177518" datatype="number" name="GroupCode"/>
+          <cl:datacolumn std:sid="d-column-8bf8d8b4" datatype="string" name="GroupName"/>
+          <cl:datacolumn std:sid="d-column-df918206" datatype="number" name="IndexKey"/>
+          <cl:datacolumn std:sid="d-column-cabc6635" datatype="number" name="IsPicture"/>
+          <cl:datacolumn std:sid="d-column-5eaadd50" datatype="number" name="Latitude"/>
+          <cl:datacolumn std:sid="d-column-3ef8d95b" datatype="string" name="LogImage"/>
+          <cl:datacolumn std:sid="d-column-f39e72d1" datatype="number" name="Longitude"/>
+          <cl:datacolumn std:sid="d-column-6af1396f" datatype="string" name="PositionName"/>
+          <cl:datacolumn std:sid="d-column-b65176a1" datatype="string" name="Property"/>
+          <cl:datacolumn std:sid="d-column-f1397e1d" name="ReserveData"/>
+          <cl:datacolumn std:sid="d-column-364ca7d7" datatype="number" name="ReserveType"/>
+          <cl:datacolumn std:sid="d-column-2637a4cc" datatype="string" name="ServerRecordTime"/>
+          <cl:datacolumn std:sid="d-column-41f02d5c" datatype="number" name="TerminalID"/>
+          <cl:datacolumn std:sid="d-column-0c16d89c" name="TerminalName"/>
+          <cl:datacolumn std:sid="d-column-c315a10d" name="UniqueID"/>
+          <cl:datacolumn std:sid="d-column-6e1eb20c" name="UserID"/>
+          <cl:datacolumn std:sid="d-column-c0119d77" datatype="number" name="UserType"/>
+          <cl:datacolumn std:sid="d-column-49e4ee9c" name="UserName"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:submission std:sid="submission-ea758803" id="smsEventLog" action="/logs/event_log?" method="get" withCredentials="true">
+        <cl:listener std:sid="listener-4d1ac0dc" handler="onSmsEventLogSubmitDone" name="submit-done"/>
+        <cl:responsedata dataid="EventLogList"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total"/>
+      </cl:submission>
+      <cl:dataset std:sid="d-set-2c767462" id="EventLogList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-e8bab4e3" datatype="number" name="Category"/>
+          <cl:datacolumn std:sid="d-column-4c1f8ff0" datatype="number" name="Content"/>
+          <cl:datacolumn std:sid="d-column-675c3b38" name="Detail"/>
+          <cl:datacolumn std:sid="d-column-fb2b8a57" name="EventTime"/>
+          <cl:datacolumn std:sid="d-column-7175628e" name="TerminalID"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+    </cl:model>
+    <cl:appspec>
+      <cl:property name="ID" type="number"/>
+      <cl:property name="Name" type="string"/>
+    </cl:appspec>
+  </head>
+  <body std:sid="body-eed196e6" style="background-color:#f2f2f2; top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-8e37f97d" handler="onBodyLoad" name="load"/>
+    <cl:udc std:sid="ud-control-6e764339" id="header" style="background-color:#006938;" type="udc.Header">
+      <cl:listener std:sid="listener-5f212c54" handler="onHeaderLeftBtnClick" name="leftBtnClick"/>
+      <cl:responsivexylayoutdata std:sid="rxyl-data-b856ba5b">
+        <cl:xylayoutdata std:sid="sxyl-data-041c59b7" height="198px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="TOP" screenid="mobile"/>
+      </cl:responsivexylayoutdata>
+      <cl:property name="pageName" type="string" value="Terminal 1"/>
+      <cl:property name="leftIcon" type="string" value="Back"/>
+      <cl:property name="rightIconVisible" type="boolean" value="false"/>
+    </cl:udc>
+    <cl:group std:sid="group-ae8d0f4c" id="logsResult" style="padding-left:21px; padding-right:21px;">
+      <cl:listener std:sid="listener-f3d28833" handler="onLogsResultScroll" name="scroll"/>
+      <cl:responsivexylayoutdata std:sid="rxyl-data-641919c4">
+        <cl:xylayoutdata std:sid="sxyl-data-fa8f7008" bottom="1px" horizontalAnchor="BOTH" left="0px" right="0px" top="198px" verticalAnchor="BOTH" screenid="mobile"/>
+      </cl:responsivexylayoutdata>
+      <cl:verticallayout std:sid="v-layout-2e56f3e2" topmargin="20"/>
+    </cl:group>
+    <cl:group std:sid="group-87fb5b1f" style="border-right-style:solid; border-top-width:1px; border-bottom-color:#ffffff; border-right-width:1px; border-left-color:#ffffff; border-right-color:#ffffff; border-left-width:1px; border-top-style:solid; border-radius:5px; border-left-style:solid; border-bottom-width:1px; border-top-color:#ffffff; border-bottom-style:solid;">
+      <cl:responsivexylayoutdata std:sid="rxyl-data-09fd099e">
+        <cl:xylayoutdata std:sid="sxyl-data-8d5389f1" height="26px" horizontalAnchor="BOTH" left="35px" right="35px" top="165px" verticalAnchor="TOP" screenid="mobile"/>
+      </cl:responsivexylayoutdata>
+      <cl:output std:sid="output-3c9c07e6" id="authLogTab" style="background-color:#ffffff; background-image:none; text-align:center;">
+        <cl:listener std:sid="listener-778f4407" handler="onAuthLogTabClick" name="click"/>
+        <cl:langbind category="PROPERTY" property="value" keypath="Str_AuthLog"/>
+        <cl:formdata std:sid="f-data-8f0599e4" col="0" row="0"/>
+      </cl:output>
+      <cl:output std:sid="output-ab6b35d3" id="eventLogTab" style="border-right-style:solid; color:#FFFFFF; border-right-width:1px; border-left-style:solid; border-left-color:#ffffff; border-right-color:#ffffff; border-left-width:1px; text-align:center;">
+        <cl:listener std:sid="listener-86eaf068" handler="onEventLogTabClick" name="click"/>
+        <cl:langbind category="PROPERTY" property="value" keypath="Str_EventLog"/>
+        <cl:formdata std:sid="f-data-8f9dca6d" col="1" row="0"/>
+      </cl:output>
+      <cl:formlayout std:sid="f-layout-96387b04" hspace="0px" vspace="0px">
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns autoSizing="false" length="1" minlength="0" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:responsivexylayout std:sid="r-xylayout-862c98ee"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

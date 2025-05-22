@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-e83345dc" version="1.0.0.0">
+  <head std:sid="head-9312c945">
+    <title>AccessStatusCar</title>
+    <screen std:sid="screen-1a4e1c0c" id="default" name="default" minwidth="1024px" width="1024px" height="768px"/>
+    <screen std:sid="screen-d103ed5d" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-9f8b2536" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-c602f55d">
+      <cl:dataset std:sid="d-set-b7fcf6bc" id="CarAccessStatusInfos">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-151c06ad" name="EventTime"/>
+          <cl:datacolumn std:sid="d-column-4e92875d" name="CarNumber"/>
+          <cl:datacolumn std:sid="d-column-1ea06e11" name="CarType"/>
+          <cl:datacolumn std:sid="d-column-b61693e6" name="CarDivision" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-1ea3604c" name="UserName"/>
+          <cl:datacolumn std:sid="d-column-39e6c9a8" name="UserGroup"/>
+          <cl:datacolumn std:sid="d-column-894d4565" name="UserPosition"/>
+          <cl:datacolumn std:sid="d-column-79ee08a8" name="CompanyAddress"/>
+          <cl:datacolumn std:sid="d-column-edb4e081" name="MusteringName"/>
+          <cl:datacolumn std:sid="d-column-a66ef8b0" name="AccessType" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-c2cd14a2" name="VisitPurpose"/>
+          <cl:datacolumn std:sid="d-column-866ce816" name="AuthResult" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-a33aca7f" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-80d61523" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-1804400d" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-251eeb54" name="Count" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-bdd6eaa3" id="sms_getCarAccessStatusInfos" method="get" action="/v1/armyhq/accessStatus/car">
+        <cl:listener std:sid="listener-7ec61819" name="submit-done" handler="onSms_getCarAccessStatusInfosSubmitDone"/>
+        <cl:listener std:sid="listener-a8c99e2e" name="submit-error" handler="onSms_getCarAccessStatusInfosSubmitError"/>
+        <cl:listener std:sid="listener-916c5ab1" name="submit-timeout" handler="onSms_getCarAccessStatusInfosSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total"/>
+        <cl:responsedata dataid="CarAccessStatusInfos"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-b2e7941c" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-e205cf0a" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-582eb988">
+      <cl:xylayoutdata std:sid="xyl-data-4b29317e" top="25px" right="10px" bottom="0px" left="50px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-9715fdcc">
+        <cl:formdata std:sid="f-data-e2b443ce" row="0" col="0"/>
+        <cl:output std:sid="output-d304fa2a" class="menu-title-amhq">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_ARMYHQ_CarAccessStatus"/>
+          <cl:formdata std:sid="f-data-4581e019" row="0" col="0" rowspan="1" colspan="1"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-a714bd8a" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="400" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-a5347f26">
+        <cl:formdata std:sid="f-data-0f9e4c3b" row="2" col="0"/>
+        <cl:output std:sid="output-e053a255" style="padding-top:4px; color:#000000; padding-left:4px; padding-bottom:4px; font-size:15px; text-align:right; padding-right:4px;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_All"/>
+          <cl:formdata std:sid="f-data-33ba425f" row="1" col="0"/>
+        </cl:output>
+        <cl:output std:sid="output-52824181" id="AMASC_opbTotal" style="padding-top:4px; color:#000000; padding-left:4px; font-size:13px; padding-bottom:4px; padding-right:4px;">
+          <cl:formdata std:sid="f-data-f9ec7cdb" row="1" col="1"/>
+        </cl:output>
+        <cl:dateinput std:sid="d-input-b0e4796a" id="AMASC_dtiStart" style="color:#000000;">
+          <cl:formdata std:sid="f-data-b61a1706" row="1" col="3"/>
+        </cl:dateinput>
+        <cl:output std:sid="output-8589e40d" style="color:#000000; text-align:center;" value="~">
+          <cl:formdata std:sid="f-data-ba35c7b1" row="1" col="4"/>
+        </cl:output>
+        <cl:dateinput std:sid="d-input-246c40d6" id="AMASC_dtiEnd" style="color:#000000;">
+          <cl:formdata std:sid="f-data-5d4cad6f" row="1" col="5"/>
+        </cl:dateinput>
+        <cl:group std:sid="group-88c94c3c" style="border-right-style:solid; color:#6b6b6b; border-top-width:1px; border-bottom-color:#cccccc; border-right-width:1px; border-left-color:#cccccc; border-right-color:#cccccc; border-left-width:1px; border-top-style:solid; background-color:#F6F6F6; border-radius:10px; border-left-style:solid; border-bottom-width:1px; border-top-color:#cccccc; border-bottom-style:solid;">
+          <cl:formdata std:sid="f-data-967e801b" row="1" col="7"/>
+          <cl:combobox std:sid="c-box-d835f610" id="AMASC_cmbSearchCategory" style="background-color:#F6F6F6; border-right-style:none; border-left-style:none; border-bottom-style:none; border-top-style:none;" value="0">
+            <cl:formdata std:sid="f-data-3cf08490" row="0" col="0"/>
+            <cl:item std:sid="item-c127523c" label="----" value="0"/>
+            <cl:item std:sid="item-4f65fc7e" label="출입구역" value="1"/>
+            <cl:item std:sid="item-47151f7b" label="출입자이름" value="2"/>
+          </cl:combobox>
+          <cl:inputbox std:sid="i-box-4ff884f7" id="AMASC_ipbKeyword" style="background-color:#F6F6F6; padding:0px 0px 0px 10px; border-bottom-color:#cccccc; border-left-color:#cccccc; border-top-color:#cccccc; border-bottom-style:none; border-right-color:#cccccc; border-top-style:none;">
+            <cl:formdata std:sid="f-data-22bd0bf6" row="0" col="1"/>
+          </cl:inputbox>
+          <cl:group std:sid="group-a55e7b7d" style="border-right-style:none; cursor:pointer; background-color:transparent; background-repeat:no-repeat; border-left-style:none; border-bottom-style:none; background-image:url('../../../../theme/images/common/common_text_field_btn_icons_search.png'); background-position:center; border-top-style:none;">
+            <cl:listener std:sid="listener-1f4a289d" name="click" handler="onGroupClick"/>
+            <cl:formdata std:sid="f-data-3e74ca5f" height="29" row="0" col="2"/>
+            <cl:xylayout std:sid="xylayout-83668f0b"/>
+          </cl:group>
+          <cl:formlayout std:sid="f-layout-8cd33f05" hspace="0px" vspace="0px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+            <cl:columns length="3" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-83827552" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="160" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="10" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="160" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="320" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:grid std:sid="grid-4676099c" id="grdCarAccessStatusInfos" style="color:#000000;" datasetid="CarAccessStatusInfos">
+        <cl:formdata std:sid="f-data-4839376c" row="4" col="0"/>
+        <cl:gridcolumn std:sid="g-column-56c7f35b"/>
+        <cl:gridcolumn std:sid="g-column-e9708cf9"/>
+        <cl:gridcolumn std:sid="g-column-ba2f1434"/>
+        <cl:gridcolumn std:sid="g-column-08502ed4"/>
+        <cl:gridcolumn std:sid="g-column-a3991864"/>
+        <cl:gridcolumn std:sid="g-column-92e3c5de"/>
+        <cl:gridcolumn std:sid="g-column-d80d7411"/>
+        <cl:gridcolumn std:sid="g-column-f7be0e16"/>
+        <cl:gridcolumn std:sid="g-column-fe3e2f68"/>
+        <cl:gridcolumn std:sid="g-column-9e4490f4"/>
+        <cl:gridcolumn std:sid="g-column-74e046c9"/>
+        <cl:gridcolumn std:sid="g-column-6f364323"/>
+        <cl:gridheader std:sid="gh-band-00072897">
+          <cl:gridrow std:sid="g-row-52547b1c"/>
+          <cl:gridcell std:sid="gh-cell-b591c526" rowindex="0" colindex="0" targetcolumnname="EventTime">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_ARMYHQ_AccessDateTime"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-97c79379" rowindex="0" colindex="1" targetcolumnname="CarNumber">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_CarNumber"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-855ece82" rowindex="0" colindex="2" targetcolumnname="CarType">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_ARMY_CarType"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-ec82b190" rowindex="0" colindex="3" targetcolumnname="CarDivision">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_ARMY_CarDivision"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-7d95dd7f" rowindex="0" colindex="4" targetcolumnname="UserName">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_ARMY_Name"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-e3b7be80" rowindex="0" colindex="5" targetcolumnname="UserGroup">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_ARMY_UserGroup1"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-122650f6" rowindex="0" colindex="6" targetcolumnname="UserPosition">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_ARMY_Position"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-69a5a881" rowindex="0" colindex="7" targetcolumnname="CompanyAddress">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_ARMY_CompanyAddress"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-3b06cd0c" rowindex="0" colindex="8" targetcolumnname="MusteringName">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_ARMY_AccessGroup"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-9a8304fb" rowindex="0" colindex="9" targetcolumnname="AccessType">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_ARMYHQ_AccessType"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-97a8f49e" rowindex="0" colindex="10" targetcolumnname="VisitPurpose">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_ARMYHQ_PurposeOfAccess"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-2e6be88b" rowindex="0" colindex="11" targetcolumnname="AuthResult">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_AuthResult"/>
+          </cl:gridcell>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-daac7c76">
+          <cl:gridrow std:sid="g-row-d9b70978"/>
+          <cl:gridcell std:sid="gd-cell-625cb061" rowindex="0" colindex="0" columnname="EventTime"/>
+          <cl:gridcell std:sid="gd-cell-4f832c16" rowindex="0" colindex="1" columnname="CarNumber"/>
+          <cl:gridcell std:sid="gd-cell-70dd945b" rowindex="0" colindex="2" columnname="CarType"/>
+          <cl:gridcell std:sid="gd-cell-b151606d" rowindex="0" colindex="3" columnname="CarDivision">
+            <cl:combobox std:sid="c-box-819d0bf2" id="cmb1">
+              <cl:item std:sid="item-2d20a77f" label="label1" value="9999">
+                <cl:langbind property="label" category="PROPERTY" keypath="Str_ARMYHQ_GeneralCar"/>
+              </cl:item>
+              <cl:item std:sid="item-f742433f" label="label2" value="9997">
+                <cl:langbind property="label" category="PROPERTY" keypath="Str_ARMYHQ_RFIDCar"/>
+              </cl:item>
+            </cl:combobox>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-431a111d" rowindex="0" colindex="4" columnname="UserName"/>
+          <cl:gridcell std:sid="gd-cell-3c7eaa1c" rowindex="0" colindex="5" columnname="UserGroup"/>
+          <cl:gridcell std:sid="gd-cell-e9b4324f" rowindex="0" colindex="6" columnname="UserPosition"/>
+          <cl:gridcell std:sid="gd-cell-c65d2ae9" rowindex="0" colindex="7" columnname="CompanyAddress"/>
+          <cl:gridcell std:sid="gd-cell-5a73c2af" rowindex="0" colindex="8" columnname="MusteringName"/>
+          <cl:gridcell std:sid="gd-cell-1aef6f8a" rowindex="0" colindex="9" columnname="AccessType">
+            <cl:combobox std:sid="c-box-a3016315" id="AMASC_cmbAccessType">
+              <cl:item std:sid="item-d4e8a4c1" label="label1" value="1">
+                <cl:langbind property="label" category="PROPERTY" keypath="Str_ARMYHQ_AccessIN"/>
+              </cl:item>
+              <cl:item std:sid="item-256de25a" label="label2" value="2">
+                <cl:langbind property="label" category="PROPERTY" keypath="Str_ARMYHQ_AccessOUT"/>
+              </cl:item>
+            </cl:combobox>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-b17acb08" rowindex="0" colindex="10" columnname="VisitPurpose"/>
+          <cl:gridcell std:sid="gd-cell-23e84403" rowindex="0" colindex="11" columnname="AuthResult">
+            <cl:combobox std:sid="c-box-7653964c" id="cmb_AuthLogResult" style="text-align:center;"/>
+          </cl:gridcell>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:pageindexer std:sid="p-indexer-0812fa71" id="AMASC_listPageIndexer" style="color:#404040;" class="userList_paging">
+        <cl:listener std:sid="listener-0d38bef6" name="selection-change" handler="onAMASC_listPageIndexerSelectionChange"/>
+        <cl:formdata std:sid="f-data-e26329ed" row="5" col="0"/>
+      </cl:pageindexer>
+      <cl:formlayout std:sid="f-layout-5cfd55fe" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+        <cl:rows length="35" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="60" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="4" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-607f0e1e"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

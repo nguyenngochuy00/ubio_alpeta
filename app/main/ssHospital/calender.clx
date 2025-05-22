@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-ff9eccae" version="1.0.0.0">
+  <head std:sid="head-5e243059">
+    <title>calender</title>
+    <screen std:sid="screen-cc513f9f" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="550" customWidth="700"/>
+    <screen std:sid="screen-ed4cd7b4" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-ad4b7edb" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-64eb2651">
+      <cl:dataset std:sid="d-set-9c50f387" id="MealHolidayList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-1e26399e" name="Holiday"/>
+          <cl:datacolumn std:sid="d-column-4d87aebc" name="Name"/>
+          <cl:datacolumn std:sid="d-column-4c8c9972" name="Type" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-c2bd18fc" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-bf01545e" name="Count" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-a33aca7f" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-278d86a9" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-c4ac1b43" id="sms_getMealHolidayList" method="get" action="/v1/ssh/holiday">
+        <cl:listener std:sid="listener-79cb717c" name="submit-done" handler="onSms_getMealHolidayListSubmitDone"/>
+        <cl:listener std:sid="listener-07b7f0ee" name="submit-error" handler="onSms_getMealHolidayListSubmitError"/>
+        <cl:listener std:sid="listener-ec3f3b43" name="submit-timeout" handler="onSms_getMealHolidayListSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total"/>
+        <cl:responsedata dataid="MealHolidayList"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-d365de8f" id="sms_postMealHolidayLIst" action="/v1/ssh/holiday">
+        <cl:listener std:sid="listener-f5e7e1fa" name="before-submit" handler="onSms_postMealHolidayLIstBeforeSubmit"/>
+        <cl:listener std:sid="listener-962c88a0" name="submit-done" handler="onSms_postMealHolidayLIstSubmitDone"/>
+        <cl:listener std:sid="listener-a81a2ea2" name="submit-error" handler="onSms_postMealHolidayLIstSubmitError"/>
+        <cl:listener std:sid="listener-f5226021" name="submit-timeout" handler="onSms_postMealHolidayLIstSubmitTimeout"/>
+        <cl:requestdata dataid="MealHolidayList" payload="all"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec dev-comment="1. 무조건 삭제하고 전체저장&#xD;&#xA;2. 더블클릭으로 날짜 지정&#xD;&#xA;3. 중복일자 체크&#xD;&#xA;4. &#xD;&#xA;SSHDM&#xD;&#xA;"/>
+  </head>
+  <body std:sid="body-6d26d44e" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-889c5417" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-b3939f7d">
+      <cl:xylayoutdata std:sid="xyl-data-57f4387e" top="1px" right="1px" bottom="1px" left="1px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-83c13f84">
+        <cl:formdata std:sid="f-data-6fdc2985" row="0" col="0"/>
+        <cl:button std:sid="button-fadf80f5" id="TMHDM_btnSave" class="userInfo_btn">
+          <cl:listener std:sid="listener-52e9aa97" name="click" handler="onTMHDM_btnSaveClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Save"/>
+          <cl:formdata std:sid="f-data-f1be62ca" row="0" col="3"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-397a7a6c">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="200" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="14" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-4b326b61">
+        <cl:formdata std:sid="f-data-3438e915" row="2" col="0"/>
+        <cl:group std:sid="group-d6435e41">
+          <cl:formdata std:sid="f-data-a8c4c593" row="0" col="1"/>
+          <cl:group std:sid="group-e2323f78">
+            <cl:formdata std:sid="f-data-e156c507" row="0" col="0"/>
+            <cl:button std:sid="button-4bc61975" id="SSHDM_btnDeleteDate" class="userInfo_btn" value="날짜 제거">
+              <cl:listener std:sid="listener-06c6f7e5" name="click" handler="onSSHDM_btnDeleteDateClick"/>
+              <cl:formdata std:sid="f-data-ea775b69" row="0" col="3"/>
+            </cl:button>
+            <cl:formlayout std:sid="f-layout-ff0f9c1e" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+              <cl:rows length="1" unit="FRACTION"/>
+              <cl:columns length="1" unit="FRACTION"/>
+              <cl:columns length="1" unit="FRACTION"/>
+              <cl:columns length="1" unit="FRACTION"/>
+              <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:grid std:sid="grid-1ff919bc" id="SSHDM_grdHolidayList" datasetid="MealHolidayList" showdeletedrow="false" columnResizable="true">
+            <cl:formdata std:sid="f-data-1a0a7b3e" row="1" col="0"/>
+            <cl:gridcolumn std:sid="g-column-aa56c422" width="25px"/>
+            <cl:gridcolumn std:sid="g-column-aa386c07"/>
+            <cl:gridcolumn std:sid="g-column-9a20f725"/>
+            <cl:gridcolumn std:sid="g-column-38c599b8"/>
+            <cl:gridheader std:sid="gh-band-79d98aa6">
+              <cl:gridrow std:sid="g-row-85c8d9e6"/>
+              <cl:gridcell std:sid="gh-cell-f8387df6" rowindex="0" colindex="0" sortable="false" filterable="false" columntype="checkbox"/>
+              <cl:gridcell std:sid="gh-cell-39440e7c" rowindex="0" colindex="1" targetcolumnname="Holiday" sortable="false" filterable="false" text="Holiday"/>
+              <cl:gridcell std:sid="gh-cell-c0acdcd1" rowindex="0" colindex="2" targetcolumnname="Name" sortable="false" filterable="false" text="Name"/>
+              <cl:gridcell std:sid="gh-cell-572a8a30" rowindex="0" colindex="3" targetcolumnname="Type" sortable="false" filterable="false" text="Type"/>
+            </cl:gridheader>
+            <cl:griddetail std:sid="gd-band-8959855c">
+              <cl:gridrow std:sid="g-row-f4fc480a"/>
+              <cl:gridcell std:sid="gd-cell-e8ea403b" rowindex="0" colindex="0" columntype="checkbox"/>
+              <cl:gridcell std:sid="gd-cell-4196f3d9" rowindex="0" colindex="1" columnname="Holiday"/>
+              <cl:gridcell std:sid="gd-cell-23375537" rowindex="0" colindex="2" style="text-align:center;" columnname="Name">
+                <cl:inputbox std:sid="i-box-60585e5d" id="ipb1" style="text-align:center;"/>
+              </cl:gridcell>
+              <cl:gridcell std:sid="gd-cell-2da30f84" rowindex="0" colindex="3" style="text-align:center;" columnname="Type">
+                <cl:combobox std:sid="c-box-72896761" id="cmbMealDataType" style="text-align:center;">
+                  <cl:item std:sid="item-4da7a476" label="전체" value="0"/>
+                </cl:combobox>
+              </cl:gridcell>
+            </cl:griddetail>
+          </cl:grid>
+          <cl:formlayout std:sid="f-layout-19c4e4eb" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+            <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:group std:sid="group-9179b6d2">
+          <cl:formdata std:sid="f-data-928c924f" row="0" col="0"/>
+          <cl:calendar std:sid="calendar-9718c16f" id="SSHDM_calender">
+            <cl:listener std:sid="listener-687aa65b" name="dblclick" handler="onSSHDM_calenderDblclick"/>
+            <cl:xylayoutdata std:sid="xyl-data-3452b76d" top="1px" right="1px" bottom="1px" left="1px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+          </cl:calendar>
+          <cl:xylayout std:sid="xylayout-b643d826"/>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-09fa1179" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:output std:sid="output-c8b228ea" id="SSHDM_opbMsg" style="background-color:#f6f6f6; background-image:none;" class="userInfo_bold" value="--">
+        <cl:formdata std:sid="f-data-d4bd2d6c" row="1" col="0"/>
+      </cl:output>
+      <cl:formlayout std:sid="f-layout-aa9eb472" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-769d9da8"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler>
+      <std:guide position="124"/>
+    </std:vruler>
+  </std:studiosetting>
+</html>

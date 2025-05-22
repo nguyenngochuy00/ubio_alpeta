@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-8a278fa4" version="1.0.0.0">
+  <head std:sid="head-059efc9d">
+    <title>idteckAcuDeviceManagement</title>
+    <screen std:sid="screen-4b47c851" id="default" name="default" minwidth="1024px" width="1024px" height="768px"/>
+    <screen std:sid="screen-a211bbd4" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-dccb754f" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-4422eff2">
+      <cl:dataset std:sid="d-set-e82740b2" id="AcuDeviceList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-34df5a09" name="BoardID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-181a00c0" name="DeviceName"/>
+          <cl:datacolumn std:sid="d-column-0f456a5f" name="IpAddress"/>
+          <cl:datacolumn std:sid="d-column-a577461c" name="MacAddress"/>
+          <cl:datacolumn std:sid="d-column-72cacdba" name="Status" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-30a30e8b" name="Port"/>
+          <cl:datacolumn std:sid="d-column-88056889" name="Description"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-4e159a8c" id="AcuDeviceIDList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-d7a4f746" name="BoardID" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-b5bf4ffe" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-f3592a27" name="Count" datatype="number" defaultvalue="0"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-78a7689a" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-d9e8f259" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-c12cff25" id="AcuIdteckDevice">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-49713ef8" name="BoardID" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-0457d379" name="DeviceName" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-01300c4b" name="IpAddress"/>
+          <cl:datacolumn std:sid="d-column-994a5a6b" name="Description"/>
+          <cl:datacolumn std:sid="d-column-5c4fcfdd" name="Port" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-dbaed6ae" id="FindAcuDevice">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-f3207c28" name="DeviceName"/>
+          <cl:datacolumn std:sid="d-column-a5084855" name="DeviceMacAddress"/>
+          <cl:datacolumn std:sid="d-column-a3d4be0b" name="DeviceBoardID"/>
+          <cl:datacolumn std:sid="d-column-5f67197d" name="DeviceIpAddress"/>
+          <cl:datacolumn std:sid="d-column-8bb96043" name="DeviceSubnetMask"/>
+          <cl:datacolumn std:sid="d-column-ac956a4e" name="DeviceGateway"/>
+          <cl:datacolumn std:sid="d-column-dde9149b" name="DeviceDns"/>
+          <cl:datacolumn std:sid="d-column-5666be0e" name="DevicePort"/>
+          <cl:datacolumn std:sid="d-column-3cfa9ca8" name="DeviceServerIP"/>
+          <cl:datacolumn std:sid="d-column-5e1fba34" name="DeviceServerPort"/>
+          <cl:datacolumn std:sid="d-column-81ae9a9b" name="DeviceUimUomPort"/>
+          <cl:datacolumn std:sid="d-column-e5edb24f" name="DeviceP2pPort"/>
+          <cl:datacolumn std:sid="d-column-1e3e7c51" name="DeviceSourceIP"/>
+          <cl:datacolumn std:sid="d-column-2311941b" name="DeviceSourcePort"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-ef1cabb2" id="sms_getAcuDeviceList" method="get" action="/v1/bosk/acus">
+        <cl:listener std:sid="listener-f2dadeaa" name="submit-timeout" handler="onSms_getSubmitTimeout"/>
+        <cl:listener std:sid="listener-da8047b4" name="submit-error" handler="onSms_getSubmitError"/>
+        <cl:listener std:sid="listener-ce21c71b" name="submit-done" handler="onSms_getAcuDeviceListSubmitDone"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total"/>
+        <cl:responsedata dataid="AcuDeviceList"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-9de08aa7" id="sms_postAcuIdteck" action="/v1/bosk/acus">
+        <cl:listener std:sid="listener-846efd33" name="submit-error" handler="onSms_getSubmitError"/>
+        <cl:listener std:sid="listener-abc1d20d" name="submit-timeout" handler="onSms_getSubmitTimeout"/>
+        <cl:listener std:sid="listener-a596b4c1" name="submit-done" handler="onSms_postAcuIdteckSubmitDone"/>
+        <cl:requestdata dataid="AcuIdteckDevice"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-7b1ab220" id="sms_putAcuDevice" method="put" action="/v1/bosk/acus">
+        <cl:listener std:sid="listener-71285bbe" name="submit-error" handler="onSms_getSubmitError"/>
+        <cl:listener std:sid="listener-06c8badf" name="submit-timeout" handler="onSms_getSubmitTimeout"/>
+        <cl:listener std:sid="listener-afb3d80b" name="submit-done" handler="onSms_putAcuDeviceSubmitDone"/>
+        <cl:requestdata dataid="AcuIdteckDevice"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec dev-comment="IADM"/>
+  </head>
+  <body std:sid="body-3b284a22" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-76101f54" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-23a546af" id="IADM_grp_main" style="padding-top:10px; padding-left:10px; padding-bottom:10px; padding-right:10px;">
+      <cl:xylayoutdata std:sid="xyl-data-f734e012" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-e39bc5bc" style="padding-top:5px; padding-left:5px; padding-bottom:5px; padding-right:5px;">
+        <cl:formdata std:sid="f-data-72a6420e" row="0" col="0"/>
+        <cl:group std:sid="group-e8c4de2d">
+          <cl:formdata std:sid="f-data-8cda8eca" row="0" col="0"/>
+          <cl:output std:sid="output-76bad930" style="font-weight:bold; font-size:14px; text-align:center;">
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_Total"/>
+            <cl:formdata std:sid="f-data-0b72c86a" row="0" col="0"/>
+          </cl:output>
+          <cl:output std:sid="output-625c6419" id="IADM_lbTotal" style="font-size:14px;" datatype="number" format="s#,###">
+            <cl:datamapbind property="value" datacontrolid="Total" columnname="Count"/>
+            <cl:formdata std:sid="f-data-fc4ef380" row="0" col="1"/>
+          </cl:output>
+          <cl:combobox std:sid="c-box-a7bbfd01" id="IADM_cmb_searchCategory" preventinput="true">
+            <cl:listener std:sid="listener-592d4daf" name="selection-change" handler="onIADM_cmb_searchCategorySelectionChange"/>
+            <cl:formdata std:sid="f-data-f06a90ce" row="0" col="3"/>
+          </cl:combobox>
+          <cl:button std:sid="button-e4bd9d5a" id="IADM_btn_searchBtn" class="userInfo_btn">
+            <cl:listener std:sid="listener-64dc5296" name="click" handler="onIADM_btn_searchBtnClick"/>
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_Search"/>
+            <cl:formdata std:sid="f-data-504d767a" row="0" col="5"/>
+          </cl:button>
+          <cl:inputbox std:sid="i-box-6562df7f" id="IADM_ipb_searchKeyword">
+            <cl:formdata std:sid="f-data-53a17e36" row="0" col="4"/>
+          </cl:inputbox>
+          <cl:formlayout std:sid="f-layout-1526416b" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="40" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="70" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+            <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="150" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:grid std:sid="grid-da169e02" id="IADM_grd_main" readonly="true" datasetid="AcuDeviceList">
+          <cl:listener std:sid="listener-e567e93b" name="selection-change" handler="onIADM_grd_mainSelectionChange"/>
+          <cl:listener std:sid="listener-bbd0ce62" name="row-dblclick" handler="onIADM_grd_mainRowDblclick"/>
+          <cl:formdata std:sid="f-data-40297d2d" row="1" col="0"/>
+          <cl:gridcolumn std:sid="g-column-d269305a" width="25px"/>
+          <cl:gridcolumn std:sid="g-column-d1ab62fa"/>
+          <cl:gridcolumn std:sid="g-column-072fce15"/>
+          <cl:gridcolumn std:sid="g-column-70a289a5"/>
+          <cl:gridcolumn std:sid="g-column-4ea01ea8"/>
+          <cl:gridcolumn std:sid="g-column-1cd5cc4e"/>
+          <cl:gridcolumn std:sid="g-column-12377a82"/>
+          <cl:gridcolumn std:sid="g-column-cfe771b8"/>
+          <cl:gridheader std:sid="gh-band-d1cbc6cd">
+            <cl:gridrow std:sid="g-row-a1c65446"/>
+            <cl:gridcell std:sid="gh-cell-2e0b3795" rowindex="0" colindex="0" sortable="false" filterable="false" columntype="checkbox"/>
+            <cl:gridcell std:sid="gh-cell-cbe1a0b5" rowindex="0" colindex="1" targetcolumnname="Status" sortable="false" filterable="false" text="Status" visible="false"/>
+            <cl:gridcell std:sid="gh-cell-58897462" rowindex="0" colindex="2" targetcolumnname="BoardID" sortable="false" filterable="false" text="BoardID"/>
+            <cl:gridcell std:sid="gh-cell-c668f131" rowindex="0" colindex="3" targetcolumnname="DeviceName" sortable="false" filterable="false" text="DeviceName"/>
+            <cl:gridcell std:sid="gh-cell-1133c81d" rowindex="0" colindex="4" targetcolumnname="IpAddress" sortable="false" filterable="false" text="IpAddress"/>
+            <cl:gridcell std:sid="gh-cell-fe47a825" rowindex="0" colindex="5" targetcolumnname="MacAddress" sortable="false" filterable="false" text="MacAddress"/>
+            <cl:gridcell std:sid="gh-cell-6d43797a" rowindex="0" colindex="6" targetcolumnname="Port" sortable="false" filterable="false" text="Port"/>
+            <cl:gridcell std:sid="gh-cell-000ce810" rowindex="0" colindex="7" targetcolumnname="Description" sortable="false" filterable="false" text="Description"/>
+          </cl:gridheader>
+          <cl:griddetail std:sid="gd-band-41ab1d59">
+            <cl:gridrow std:sid="g-row-6bfd31e3"/>
+            <cl:gridcell std:sid="gd-cell-5e4ba84d" rowindex="0" colindex="0" columntype="checkbox"/>
+            <cl:gridcell std:sid="gd-cell-3b31a933" rowindex="0" colindex="1" columnname="Status"/>
+            <cl:gridcell std:sid="gd-cell-e45660d3" rowindex="0" colindex="2" columnname="BoardID"/>
+            <cl:gridcell std:sid="gd-cell-da0b69d9" rowindex="0" colindex="3" columnname="DeviceName"/>
+            <cl:gridcell std:sid="gd-cell-21d98d10" rowindex="0" colindex="4" columnname="IpAddress"/>
+            <cl:gridcell std:sid="gd-cell-a6fcfb40" rowindex="0" colindex="5" columnname="MacAddress"/>
+            <cl:gridcell std:sid="gd-cell-45004fb5" rowindex="0" colindex="6" columnname="Port"/>
+            <cl:gridcell std:sid="gd-cell-02dfe36c" rowindex="0" colindex="7" columnname="Description"/>
+          </cl:griddetail>
+        </cl:grid>
+        <cl:pageindexer std:sid="p-indexer-4a4e4230" id="IADM_pageIndexer">
+          <cl:listener std:sid="listener-f2076f42" name="selection-change" handler="onIADM_pageIndexerSelectionChange"/>
+          <cl:formdata std:sid="f-data-d9b37eb0" row="2" col="0"/>
+        </cl:pageindexer>
+        <cl:formlayout std:sid="f-layout-871a11ac" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-77ca2e4d" id="IADM_grd_rightMain" style="padding-top:5px; padding-left:5px; padding-bottom:5px; padding-right:5px;">
+        <cl:formdata std:sid="f-data-8de4e470" row="0" col="1"/>
+        <cl:output std:sid="output-9de8460c" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-top-color:#c5c5c5; border-bottom-style:solid; border-right-color:#c5c5c5; border-top-style:solid; text-align:left;" value="Device Info.">
+          <cl:formdata std:sid="f-data-438abf72" row="0" col="0"/>
+        </cl:output>
+        <cl:group std:sid="group-b073edba" id="grp2">
+          <cl:formdata std:sid="f-data-01d8230d" row="1" col="0"/>
+          <cl:output std:sid="output-2fd53af0" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-top-color:#c5c5c5; border-bottom-style:solid; border-right-color:#c5c5c5; border-top-style:solid; text-align:center;" value="BoardID">
+            <cl:formdata std:sid="f-data-99333d71" halign="FILL" valign="FILL" width="90" row="0" col="0"/>
+          </cl:output>
+          <cl:group std:sid="group-f325aff5" id="grp3" style="border-bottom-color:#c5c5c5; border-top-width:1px; border-bottom-width:1px; font-size:14px; border-top-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid;">
+            <cl:formdata std:sid="f-data-5439497d" row="0" col="1"/>
+            <cl:numbereditor std:sid="n-editor-9dbb3b44" id="IADM_nbe_boardID" min="0.0" max="255.0" spinbutton="false" placeholder="1 ~ 255" format="999">
+              <cl:listener std:sid="listener-aaae7118" name="value-change" handler="onIADM_nbe_boardIDValueChange"/>
+              <cl:datamapbind property="value" datacontrolid="AcuIdteckDevice" columnname="BoardID"/>
+              <cl:formdata std:sid="f-data-7038181b" row="0" col="0"/>
+            </cl:numbereditor>
+            <cl:button std:sid="button-34b65eee" id="IADM_nbe_FindAcu" value="@">
+              <cl:listener std:sid="listener-ab119b25" name="click" handler="onIADM_nbe_FindAcuClick"/>
+              <cl:formdata std:sid="f-data-bb7b6950" row="0" col="1"/>
+            </cl:button>
+            <cl:formlayout std:sid="f-layout-f87e06f1" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+              <cl:rows length="1" unit="FRACTION"/>
+              <cl:columns length="1" unit="FRACTION"/>
+              <cl:columns length="25" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:formlayout std:sid="f-layout-7782f0e0" hspace="0px" vspace="0px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="100" unit="PIXEL"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:group std:sid="group-ec7ff5c3" id="grp4">
+          <cl:formdata std:sid="f-data-8dcbdaca" row="2" col="0"/>
+          <cl:output std:sid="output-96cff761" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="DeviceName">
+            <cl:formdata std:sid="f-data-3ed54671" halign="FILL" valign="FILL" width="90" row="0" col="0"/>
+          </cl:output>
+          <cl:group std:sid="group-ab5dcc45" id="grp5" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; font-size:14px; border-bottom-style:solid;">
+            <cl:formdata std:sid="f-data-780a31e7" row="0" col="1"/>
+            <cl:inputbox std:sid="i-box-0bc08c34" id="IADM_ipb_deviceName" maxlength="50">
+              <cl:datamapbind property="value" datacontrolid="AcuIdteckDevice" columnname="DeviceName"/>
+              <cl:xylayoutdata std:sid="xyl-data-74b283b3" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+            </cl:inputbox>
+            <cl:xylayout std:sid="xylayout-19449765"/>
+          </cl:group>
+          <cl:formlayout std:sid="f-layout-ceb3adbb" hspace="0px" vspace="0px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="100" unit="PIXEL"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:group std:sid="group-a3e9b1fc">
+          <cl:formdata std:sid="f-data-c1e4fffb" row="3" col="0"/>
+          <cl:output std:sid="output-9fd30188" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="IP">
+            <cl:formdata std:sid="f-data-781cd26d" halign="FILL" valign="FILL" width="90" row="0" col="0"/>
+          </cl:output>
+          <cl:group std:sid="group-89c4169c" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; font-size:14px; border-bottom-style:solid;">
+            <cl:formdata std:sid="f-data-0f31cf17" row="0" col="1"/>
+            <cl:inputbox std:sid="i-box-5139e8de" id="IADM_ipb_ipaddress" maxlength="30">
+              <cl:datamapbind property="value" datacontrolid="AcuIdteckDevice" columnname="IpAddress"/>
+              <cl:xylayoutdata std:sid="xyl-data-816ee0ea" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+            </cl:inputbox>
+            <cl:xylayout std:sid="xylayout-680ffdd8"/>
+          </cl:group>
+          <cl:formlayout std:sid="f-layout-9b51630f" hspace="0px" vspace="0px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="100" unit="PIXEL"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:group std:sid="group-b8358156" id="grp7">
+          <cl:formdata std:sid="f-data-ae618f25" row="4" col="0"/>
+          <cl:output std:sid="output-7815aba6" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="Port">
+            <cl:formdata std:sid="f-data-1ee89587" halign="FILL" valign="FILL" width="90" row="0" col="0"/>
+          </cl:output>
+          <cl:group std:sid="group-c8e02431" id="grp8" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; font-size:14px; border-bottom-style:solid;">
+            <cl:formdata std:sid="f-data-099dcfcb" row="0" col="1"/>
+            <cl:inputbox std:sid="i-box-ce520228" id="IADM_ipb_port" maxlength="4" inputfilter="[0-9]">
+              <cl:datamapbind property="value" datacontrolid="AcuIdteckDevice" columnname="Port"/>
+              <cl:xylayoutdata std:sid="xyl-data-7c443c0e" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+            </cl:inputbox>
+            <cl:xylayout std:sid="xylayout-e38d447e"/>
+          </cl:group>
+          <cl:formlayout std:sid="f-layout-3798de53" hspace="0px" vspace="0px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="100" unit="PIXEL"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:group std:sid="group-94a7c893">
+          <cl:formdata std:sid="f-data-add27b86" row="5" col="0"/>
+          <cl:output std:sid="output-f2d04ea3" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="Description">
+            <cl:formdata std:sid="f-data-a5fe3132" halign="FILL" valign="FILL" width="90" row="0" col="0"/>
+          </cl:output>
+          <cl:group std:sid="group-290af98e" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; font-size:14px; border-bottom-style:solid;">
+            <cl:formdata std:sid="f-data-c9234e1b" row="0" col="1"/>
+            <cl:inputbox std:sid="i-box-c939901e" id="IADM_ipb_description" maxlength="100">
+              <cl:datamapbind property="value" datacontrolid="AcuIdteckDevice" columnname="Description"/>
+              <cl:xylayoutdata std:sid="xyl-data-4e2f91bc" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+            </cl:inputbox>
+            <cl:xylayout std:sid="xylayout-00e2f88c"/>
+          </cl:group>
+          <cl:formlayout std:sid="f-layout-a2116303" hspace="0px" vspace="0px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="100" unit="PIXEL"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:group std:sid="group-9d9e94c7">
+          <cl:formdata std:sid="f-data-3b8c9c81" row="6" col="0"/>
+          <cl:button std:sid="button-782f35a6" id="IADM_btn_init" class="userInfo_btn">
+            <cl:listener std:sid="listener-4635647d" name="click" handler="onIADM_btn_initClick"/>
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_BOSK_ACUDEVICEINIT"/>
+            <cl:formdata std:sid="f-data-5927fafe" row="0" col="0"/>
+          </cl:button>
+          <cl:button std:sid="button-59c3525a" id="IADM_btn_add" class="userInfo_btn">
+            <cl:listener std:sid="listener-9265dd55" name="click" handler="onIADM_btn_addClick"/>
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_Add"/>
+            <cl:formdata std:sid="f-data-3589eaae" row="0" col="1"/>
+          </cl:button>
+          <cl:button std:sid="button-b2f07f0b" id="IADM_btn_modify" class="userInfo_btn">
+            <cl:listener std:sid="listener-b36e79ae" name="click" handler="onIADM_btn_modifyClick"/>
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_Modification"/>
+            <cl:formdata std:sid="f-data-38c40ea3" row="0" col="2"/>
+          </cl:button>
+          <cl:button std:sid="button-1bfa3f1b" id="IADM_btn_del" class="userInfo_btn">
+            <cl:listener std:sid="listener-ca2d01ce" name="click" handler="onIADM_btn_delClick"/>
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_Delete"/>
+            <cl:formdata std:sid="f-data-78eefb4f" row="0" col="3"/>
+          </cl:button>
+          <cl:formlayout std:sid="f-layout-4680cdd6" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:output std:sid="output-af2c77de" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-top-color:#c5c5c5; border-bottom-style:solid; border-right-color:#c5c5c5; border-top-style:solid; text-align:left;" value="Device Control">
+          <cl:formdata std:sid="f-data-28df19dd" row="8" col="0"/>
+        </cl:output>
+        <cl:group std:sid="group-937af489" style="padding-top:5px; padding-left:5px; padding-bottom:5px; padding-right:5px;">
+          <cl:formdata std:sid="f-data-a95bd011" row="9" col="0"/>
+          <cl:button std:sid="button-d97b30e6" id="IADM_btn_reset" class="userInfo_btn" value="Reset">
+            <cl:listener std:sid="listener-6ae660d5" name="click" handler="onIADM_btn_resetClick"/>
+            <cl:formdata std:sid="f-data-f4a24e1e" row="0" col="1"/>
+          </cl:button>
+          <cl:button std:sid="button-047adb31" id="IADM_btn_systemInit" class="userInfo_btn" value="SystemInit">
+            <cl:listener std:sid="listener-1ee2549a" name="click" handler="onIADM_btn_systemInitClick"/>
+            <cl:formdata std:sid="f-data-6bfb0750" row="0" col="2"/>
+          </cl:button>
+          <cl:button std:sid="button-ff4f40b5" id="IADM_btn_timeSync" class="userInfo_btn" value="TimeSync">
+            <cl:listener std:sid="listener-10df3062" name="click" handler="onIADM_btn_timeSyncClick"/>
+            <cl:formdata std:sid="f-data-27f47622" row="0" col="3"/>
+          </cl:button>
+          <cl:formlayout std:sid="f-layout-abe4bfe9" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+            <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="110" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="110" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:group std:sid="group-e64b9141" style="padding-top:5px; padding-left:5px; padding-bottom:5px; padding-right:5px;">
+          <cl:formdata std:sid="f-data-7eee4b45" row="10" col="0"/>
+          <cl:button std:sid="button-d768b425" id="IADM_btn_totalEventDataDel" class="userInfo_btn" value="Total EventData Delete">
+            <cl:listener std:sid="listener-ce0556fb" name="click" handler="onIADM_btn_totalEventDataDelClick"/>
+            <cl:formdata std:sid="f-data-856868f4" row="0" col="0"/>
+          </cl:button>
+          <cl:formlayout std:sid="f-layout-373a0d3b" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="200" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-6bb113e2" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="10" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="42" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="42" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-01e6f9cf" user-resizing-mode="standard" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="2" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="350" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-328be72e"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

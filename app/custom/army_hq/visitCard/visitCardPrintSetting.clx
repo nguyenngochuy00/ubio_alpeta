@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-31bec768" version="1.0.0.0">
+  <head std:sid="head-f8ae83f9">
+    <title>visitCardPrintSetting</title>
+    <screen std:sid="screen-df316bd3" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" customHeight="600" customWidth="1200"/>
+    <screen std:sid="screen-3f56d372" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-5bc929fd" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-64a90c64">
+      <cl:dataset std:sid="d-set-3280e7b0" id="AccessCardPrintInfoList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-8c649691" name="AccessCardType" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-019f58a6" name="GroupPrint" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-20181972" name="ServiceNumberPrint" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-c65b6818" name="NamePrint" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-9a513f15" name="PhotoPrint" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-ac170743" name="FamilyPrint" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-67b05b58" name="ImageFront"/>
+          <cl:datacolumn std:sid="d-column-7f45a8cd" name="ImageBack"/>
+          <cl:datacolumn std:sid="d-column-c4238a39" name="TextFrontTop"/>
+          <cl:datacolumn std:sid="d-column-d35eeed3" name="TextFrontCenterBox"/>
+          <cl:datacolumn std:sid="d-column-6ac9f411" name="TextFrontBottomBox"/>
+          <cl:datacolumn std:sid="d-column-b30bf9d8" name="TextFrontBottom"/>
+          <cl:datacolumn std:sid="d-column-1e725f3c" name="TextBackTop" datatype="string"/>
+        </cl:datacolumnlist>
+        <cl:datarowlist/>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-cedbe583" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-87513087" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-cf5da1f7" id="sms_getVisitCardPrintInfoList" method="get" action="/v1/armyhq/accessCardPrintInfo">
+        <cl:listener std:sid="listener-44f0c105" name="submit-done" handler="onSms_getVisitCardPrintInfoListSubmitDone"/>
+        <cl:listener std:sid="listener-0d664efc" name="submit-error" handler="onSms_getVisitCardPrintInfoListSubmitError"/>
+        <cl:listener std:sid="listener-0c9101fd" name="submit-timeout" handler="onSms_getVisitCardPrintInfoListSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="AccessCardPrintInfoList"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-a3642dfc" id="sms_putAccessCardPrintInfo" method="put" action="/v1/armyhq/accessCardPrintInfo">
+        <cl:listener std:sid="listener-ea3aa636" name="submit-done" handler="onSms_putAccessCardPrintInfoSubmitDone"/>
+        <cl:listener std:sid="listener-9cf06fdd" name="submit-error" handler="onSms_putAccessCardPrintInfoSubmitError"/>
+        <cl:listener std:sid="listener-516e865d" name="submit-timeout" handler="onSms_putAccessCardPrintInfoSubmitTimeout"/>
+        <cl:requestdata dataid="AccessCardPrintInfoList" payload="all"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-c15fba92" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-e9a2dae9" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-8be26bef" style="color:#010101;">
+      <cl:xylayoutdata std:sid="xyl-data-f8c2f2fa" top="25px" right="10px" bottom="0px" left="50px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-55dc6c4b">
+        <cl:formdata std:sid="f-data-d5440a2f" row="2" col="2"/>
+        <cl:output std:sid="output-bc98b835" class="section-green-amhq" visible="true">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_ARMYHQ_FrontImage"/>
+          <cl:formdata std:sid="f-data-68f4f987" row="2" col="0"/>
+        </cl:output>
+        <cl:output std:sid="output-eacbcf33" class="section-green-amhq" visible="true">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_ARMYHQ_BackImage"/>
+          <cl:formdata std:sid="f-data-0197486c" row="3" col="0"/>
+        </cl:output>
+        <cl:output std:sid="output-15e5ef10" class="section-green-top-amhq" visible="true" value="방문증 종류">
+          <cl:formdata std:sid="f-data-f0b5a705" row="1" col="0"/>
+        </cl:output>
+        <cl:output std:sid="output-18d97311" class="section-title-amhq" value="방문증 상세정보">
+          <cl:formdata std:sid="f-data-53d7b09d" row="0" col="0" rowspan="1" colspan="4"/>
+        </cl:output>
+        <cl:group std:sid="group-3e7be351" class="section-white-top-amhq">
+          <cl:formdata std:sid="f-data-11db9adf" row="1" col="1" rowspan="1" colspan="3"/>
+          <cl:combobox std:sid="c-box-1b5f861c" id="VMCPS_cmbCardType" class="combobox-center-amhq" hidebutton="true">
+            <cl:formdata std:sid="f-data-9b80fd90" row="0" col="0"/>
+            <cl:item std:sid="item-96030c1d" label="공사" value="6"/>
+            <cl:item std:sid="item-bd102046" label="방문" value="7"/>
+          </cl:combobox>
+          <cl:formlayout std:sid="f-layout-c12a852f" scrollable="false" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="150" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:group std:sid="group-d6f114cf" class="section-white-amhq">
+          <cl:formdata std:sid="f-data-a58c9249" row="2" col="1" rowspan="1" colspan="3"/>
+          <cl:fileinput std:sid="f-input-db3365b9" id="VMCPS_fiFrontImage" class="inputbox-amhq" acceptfile=".jpg,.png">
+            <cl:listener std:sid="listener-3c13d443" name="value-change" handler="onVMCPS_fiFrontImageValueChange"/>
+            <cl:formdata std:sid="f-data-82b77a4d" row="0" col="0"/>
+          </cl:fileinput>
+          <cl:button std:sid="button-5e3d285d" id="VMCPS_btnFrontImage" style="background-color:#FFFFFF; background-repeat:no-repeat; border-bottom-color:#f6f6f6; border-left-color:#f6f6f6; border-top-color:#f6f6f6; border-right-color:#f6f6f6; background-image:url('../../../../theme/custom/armyhq/btn_search.PNG'); background-position:center;">
+            <cl:listener std:sid="listener-5f97580f" name="click" handler="onVMCPS_btnFrontImageClick"/>
+            <cl:formdata std:sid="f-data-40d6d032" row="0" col="1"/>
+          </cl:button>
+          <cl:formlayout std:sid="f-layout-9a15a049" scrollable="false" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="200" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:group std:sid="group-4840c418" class="section-white-amhq">
+          <cl:formdata std:sid="f-data-cfc308a4" row="3" col="1" rowspan="1" colspan="3"/>
+          <cl:fileinput std:sid="f-input-24cb51a2" id="VMCPS_fiBacktImage" class="inputbox-amhq" acceptfile=".jpg,.png">
+            <cl:listener std:sid="listener-f16e6e74" name="value-change" handler="onVMCPS_fiBacktImageValueChange"/>
+            <cl:formdata std:sid="f-data-bf92169a" row="0" col="0"/>
+          </cl:fileinput>
+          <cl:button std:sid="button-a0d1330e" id="VMCPS_btnBackImage" style="background-color:#FFFFFF; background-repeat:no-repeat; border-bottom-color:#f6f6f6; border-left-color:#f6f6f6; border-top-color:#f6f6f6; border-right-color:#f6f6f6; background-image:url('../../../../theme/custom/armyhq/btn_search.PNG'); background-position:center;">
+            <cl:listener std:sid="listener-e4107851" name="click" handler="onVMCPS_btnBackImageClick"/>
+            <cl:formdata std:sid="f-data-22759d11" row="0" col="1"/>
+          </cl:button>
+          <cl:formlayout std:sid="f-layout-d35e270f" scrollable="false" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="200" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:group std:sid="group-42ef7c84">
+          <cl:formdata std:sid="f-data-ffe830f5" row="5" col="0" rowspan="1" colspan="4"/>
+          <cl:button std:sid="button-38f6c30f" id="VMCPS_btnSavePrintSetting" style="background-color:#528543; color:#ffffff;" class="button-green-amhq">
+            <cl:listener std:sid="listener-e04e09c4" name="click" handler="onVMCPS_btnSavePrintSettingClick"/>
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_Save"/>
+            <cl:formdata std:sid="f-data-c222e6b5" row="0" col="1"/>
+          </cl:button>
+          <cl:formlayout std:sid="f-layout-da439152" scrollable="false" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="120" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-515a77b6" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="120" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-38d93683">
+        <cl:formdata std:sid="f-data-62f1bc6e" row="2" col="0"/>
+        <cl:grid std:sid="grid-8428a8c2" id="VMCPS_grdVisitCardList" class="grid-amhq" datasetid="AccessCardPrintInfoList">
+          <cl:listener std:sid="listener-1a3f514b" name="selection-change" handler="onVMCPS_grdVisitCardListSelectionChange"/>
+          <cl:formdata std:sid="f-data-7906b755" row="1" col="0"/>
+          <cl:gridcolumn std:sid="g-column-15c5c369" width="30px"/>
+          <cl:gridcolumn std:sid="g-column-49153dd6"/>
+          <cl:gridcolumn std:sid="g-column-a66863a0"/>
+          <cl:gridcolumn std:sid="g-column-bcc76000"/>
+          <cl:gridcolumn std:sid="g-column-5c5ab1b0"/>
+          <cl:gridcolumn std:sid="g-column-49b10651"/>
+          <cl:gridheader std:sid="gh-band-90bc4ccf">
+            <cl:gridrow std:sid="g-row-b2e9ccb3" height="50px"/>
+            <cl:gridcell std:sid="gh-cell-3e9b12fc" rowindex="0" colindex="0" sortable="false" filterable="false"/>
+            <cl:gridcell std:sid="gh-cell-83a1d8c8" rowindex="0" colindex="1" targetcolumnname="AccessCardType" sortable="false" filterable="false" text="방문증 종류"/>
+            <cl:gridcell std:sid="gh-cell-305902b9" rowindex="0" colindex="4" targetcolumnname="ImageFront" sortable="false" filterable="false" text="ImageFront" visible="false"/>
+            <cl:gridcell std:sid="gh-cell-18c4fc6c" rowindex="0" colindex="5" targetcolumnname="ImageBack" sortable="false" filterable="false" text="ImageBack" visible="false"/>
+            <cl:gridcell std:sid="gh-cell-86b20979" rowindex="0" colindex="2" text="앞면 이미지"/>
+            <cl:gridcell std:sid="gh-cell-74076ce8" rowindex="0" colindex="3" text="뒷면 이미지"/>
+          </cl:gridheader>
+          <cl:griddetail std:sid="gd-band-d5844490">
+            <cl:gridrow std:sid="g-row-57176f25" height="30px"/>
+            <cl:gridcell std:sid="gd-cell-42a05cf8" rowindex="0" colindex="0" columntype="rowindex"/>
+            <cl:gridcell std:sid="gd-cell-bb4ce3de" rowindex="0" colindex="1" style="text-align:center;" columnname="AccessCardType">
+              <cl:combobox std:sid="c-box-3dd6a7d6" id="cmb10" style="text-align:center;">
+                <cl:item std:sid="item-dc132921" label="공사" value="6"/>
+                <cl:item std:sid="item-2e8b6250" label="방문" value="7"/>
+              </cl:combobox>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gd-cell-c7868154" rowindex="0" colindex="4" columnname="ImageFront"/>
+            <cl:gridcell std:sid="gd-cell-716cf015" rowindex="0" colindex="5" columnname="ImageBack"/>
+            <cl:gridcell std:sid="gd-cell-4a36cb99" rowindex="0" colindex="2" style="text-align:center;">
+              <cl:output std:sid="output-5f6b27d9" style="text-align:center;">
+                <cl:expbind property="value" category="PROPERTY" expression="switch( ImageFront.length){&#xD;&#xA;case 0: &quot;N&quot;&#xD;&#xA;default:&quot;Y&quot;&#xD;&#xA;}"/>
+              </cl:output>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gd-cell-554fab37" rowindex="0" colindex="3" style="text-align:center;">
+              <cl:output std:sid="output-9f24214c" style="text-align:center;">
+                <cl:expbind property="value" category="PROPERTY" expression="switch( ImageBack.length){&#xD;&#xA;case 0: &quot;N&quot;&#xD;&#xA;default:&quot;Y&quot;&#xD;&#xA;}"/>
+              </cl:output>
+            </cl:gridcell>
+          </cl:griddetail>
+        </cl:grid>
+        <cl:output std:sid="output-9f93ae55" class="section-title-amhq" value="방문증 목록">
+          <cl:formdata std:sid="f-data-0d0b1da8" row="0" col="0"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-25c16783" hspace="1px" vspace="1px" top-margin="1px" right-margin="1px" bottom-margin="1px" left-margin="1px">
+          <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-f56d7102" style="color:#010101;">
+        <cl:formdata std:sid="f-data-5f204ab1" row="4" col="0" rowspan="1" colspan="1"/>
+        <cl:group std:sid="group-2984f458" id="VMCPS_grpAccessCardBack" style="border-right-style:solid; border-top-width:1px; color:#010101; border-left-style:solid; border-right-width:1px; border-bottom-width:1px; border-bottom-style:solid; border-left-width:1px; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-36dc1414" halign="CENTER" valign="CENTER" width="220" height="340" row="0" col="2"/>
+          <cl:inputbox std:sid="i-box-04875efd" id="VMCPS_ipbPrintTextBackTop" style="background-color:transparent; color:#000000; font-weight:bold; font-family:Malgun Gothic;">
+            <cl:xylayoutdata std:sid="xyl-data-ad027563" top="85px" left="13px" width="104px" height="24px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+          </cl:inputbox>
+          <cl:xylayout std:sid="xylayout-3f0ef9c7"/>
+        </cl:group>
+        <cl:group std:sid="group-0eca9bbb" id="VMCPS_grpAccessCardFront" style="border-right-style:solid; border-top-width:1px; color:#010101; border-left-style:solid; border-right-width:1px; border-bottom-width:1px; border-bottom-style:solid; border-left-width:1px; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-641611af" halign="CENTER" valign="CENTER" width="220" height="340" row="0" col="1"/>
+          <cl:inputbox std:sid="i-box-24e83747" id="VMCPS_txaPrintTextFrontTop" style="background-color:transparent; color:#000000; font-weight:bold; font-size:14px; font-family:Malgun Gothic; text-align:center;">
+            <cl:xylayoutdata std:sid="xyl-data-7c2aa53e" top="50px" width="116px" height="26px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
+          </cl:inputbox>
+          <cl:inputbox std:sid="i-box-44f38f5e" id="VMCPS_txaPrintTextFrontCenterBox" style="background-color:transparent; color:#000000; font-weight:bold; font-size:26px; font-family:Malgun Gothic; text-align:center;">
+            <cl:xylayoutdata std:sid="xyl-data-41766b9d" top="82px" width="116px" height="136px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
+          </cl:inputbox>
+          <cl:inputbox std:sid="i-box-dd7efd06" id="VMCPS_txaPrintTextFrontBottomBox" style="background-color:transparent; color:#000000; font-weight:bold; font-size:13px; font-family:Malgun Gothic; text-align:center;">
+            <cl:xylayoutdata std:sid="xyl-data-1acfbaee" top="242px" width="116px" height="28px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
+          </cl:inputbox>
+          <cl:inputbox std:sid="i-box-6c79d2d0" id="VMCPS_txaPrintTextFrontBottom" style="background-color:transparent; color:#000000; font-weight:bold; font-size:10px; font-family:Malgun Gothic; text-align:center;">
+            <cl:xylayoutdata std:sid="xyl-data-36d3e560" top="280px" width="116px" height="20px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
+          </cl:inputbox>
+          <cl:xylayout std:sid="xylayout-6b2ff69e"/>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-1672a68a" scrollable="false" hspace="1px" vspace="1px" top-margin="1px" right-margin="1px" bottom-margin="1px" left-margin="1px">
+          <cl:rows length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" minlength="0"/>
+          <cl:columns length="240" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="240" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="210"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:output std:sid="output-7634935f" class="menu-title-amhq" value="방문증인쇄 환경설정">
+        <cl:formdata std:sid="f-data-64766ef7" halign="LEFT" width="200" row="0" col="0"/>
+      </cl:output>
+      <cl:formlayout std:sid="f-layout-eb52c1a9" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+        <cl:rows length="35" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="260" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="15" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="350" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-22d71edf"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-5b0fe671" version="1.0.0.0">
+  <head std:sid="head-f6e9768e">
+    <title>PassList</title>
+    <screen std:sid="screen-30822925" id="default" height="768px" minwidth="1024px" name="default" width="1024px"/>
+    <screen std:sid="screen-ef485b6a" id="tablet" height="667px" maxwidth="1023px" minwidth="500px" name="tablet" width="500px"/>
+    <screen std:sid="screen-384e78ad" id="mobile" height="525px" maxwidth="499px" name="mobile" width="350px"/>
+    <cl:model std:sid="model-dc7b8951">
+      <cl:dataset std:sid="d-set-4befefe6" id="CardInfoList">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="string" name="CardNum"/>
+          <cl:datacolumn datatype="number" name="CardType"/>
+          <cl:datacolumn datatype="number" name="IssueStatus"/>
+          <cl:datacolumn name="CardName"/>
+          <cl:datacolumn name="RegistDate"/>
+          <cl:datacolumn name="IssueUniqueid"/>
+          <cl:datacolumn name="IssueUserid"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+    </cl:model>
+    <cl:appspec>
+      <cl:event name="pagechange" type="cpr.events.CSelectionEvent"/>
+      <cl:event name="passListDblclick" type="cpr.events.CGridEvent"/>
+    </cl:appspec>
+  </head>
+  <body std:sid="body-04ec71ee" style="top:0px; left:0px; width:300px; height:300px;">
+    <cl:group std:sid="group-5ae406c1">
+      <cl:xylayoutdata bottom="1px" horizontalAnchor="BOTH" left="1px" right="1px" top="1px" verticalAnchor="BOTH"/>
+      <cl:grid std:sid="grid-58468a81" id="PassListGrid" columnMovable="false" columnResizable="false" datasetid="CardInfoList" readonly="false">
+        <cl:listener std:sid="listener-c6ddc1d9" handler="onPassListGridRowDblclick" name="row-dblclick"/>
+        <cl:formdata std:sid="f-data-bd42735b" col="0" colspan="1" row="0" rowspan="1"/>
+        <cl:gridcolumn std:sid="g-column-2f32809c"/>
+        <cl:gridcolumn std:sid="g-column-35948234"/>
+        <cl:gridcolumn std:sid="g-column-514fb58c"/>
+        <cl:gridcolumn std:sid="g-column-2548a607"/>
+        <cl:gridheader std:sid="gh-band-52a4f984">
+          <cl:gridrow std:sid="g-row-7d349d2a"/>
+          <cl:gridcell std:sid="gh-cell-3e51fed5" colindex="0" rowindex="0" filterable="false" sortable="false" targetcolumnname="CardNum" text="CardNum">
+            <cl:langbind category="PROPERTY" property="text" keypath="Str_PassNumber"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-5ba47f09" colindex="1" rowindex="0" filterable="false" sortable="false" targetcolumnname="CardType" text="CardType">
+            <cl:langbind category="PROPERTY" property="text" keypath="Str_PassKind"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-3e45c1e9" colindex="3" rowindex="0" filterable="false" sortable="false" targetcolumnname="IssueStatus" text="IssueStatus">
+            <cl:langbind category="PROPERTY" property="text" keypath="Str_IssuingStatus"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-7fa6b332" colindex="2" rowindex="0">
+            <cl:langbind category="PROPERTY" property="text" keypath="Str_CardName"/>
+          </cl:gridcell>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-cef8a950">
+          <cl:gridrow std:sid="g-row-edeaa4d2"/>
+          <cl:gridcell std:sid="gd-cell-90e7aaed" colindex="0" rowindex="0" columnname="CardNum"/>
+          <cl:gridcell std:sid="gd-cell-2c024bf7" colindex="1" rowindex="0" columnname="CardType">
+            <cl:combobox std:sid="c-box-919661e6" id="cmb2" style="text-align:center;" readonly="false">
+              <cl:item label="현역" value="0">
+                <cl:langbind category="PROPERTY" property="label" keypath="Str_ActiveDuty"/>
+              </cl:item>
+              <cl:item label="임시" value="1">
+                <cl:langbind category="PROPERTY" property="label" keypath="Str_Temporary"/>
+              </cl:item>
+              <cl:item label="교육" value="2">
+                <cl:langbind category="PROPERTY" property="label" keypath="Str_Education"/>
+              </cl:item>
+              <cl:item label="공무" value="3">
+                <cl:langbind category="PROPERTY" property="label" keypath="Str_PublicAffairs"/>
+              </cl:item>
+              <cl:item label="상주" value="4">
+                <cl:langbind category="PROPERTY" property="label" keypath="Str_Residence"/>
+              </cl:item>
+              <cl:item label="상시" value="5">
+                <cl:langbind category="PROPERTY" property="label" keypath="Str_OrdinaryTime"/>
+              </cl:item>
+              <cl:item label="병사" value="6">
+                <cl:langbind category="PROPERTY" property="label" keypath="Str_Soldier"/>
+              </cl:item>
+              <cl:item label="방문" value="7">
+                <cl:langbind category="PROPERTY" property="label" keypath="Str_Visit"/>
+              </cl:item>
+              <cl:item label="가족" value="8">
+                <cl:langbind category="PROPERTY" property="label" keypath="Str_Family"/>
+              </cl:item>
+            </cl:combobox>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-00d46427" colindex="3" rowindex="0" columnname="IssueStatus">
+            <cl:combobox std:sid="c-box-3d1aaab6" id="cmb1" style="text-align:center;" readonly="false">
+              <cl:item label="미발급" value="0">
+                <cl:langbind category="PROPERTY" property="label" keypath="Str_UnIssued"/>
+              </cl:item>
+              <cl:item label="발급" value="1">
+                <cl:langbind category="PROPERTY" property="label" keypath="Str_Issued"/>
+              </cl:item>
+              <cl:item label="회수" value="2">
+                <cl:langbind category="PROPERTY" property="label" keypath="Str_TakeBack"/>
+              </cl:item>
+            </cl:combobox>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-0cac2086" colindex="2" rowindex="0" columnname="CardName"/>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:pageindexer std:sid="p-indexer-a7e74e98" id="PassListIndexer" class="userList_paging">
+        <cl:listener std:sid="listener-122b2f87" handler="onPassListIndexerSelectionChange" name="selection-change"/>
+        <cl:listener std:sid="listener-fd92dbee" handler="onPassListIndexerBeforeSelectionChange" name="before-selection-change"/>
+        <cl:formdata std:sid="f-data-b69dfd50" col="0" row="1"/>
+      </cl:pageindexer>
+      <cl:formlayout std:sid="f-layout-0cb086a7">
+        <cl:rows autoSizing="false" length="1" minlength="0" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+        <cl:rows autoSizing="false" length="40" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-36227a5e"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

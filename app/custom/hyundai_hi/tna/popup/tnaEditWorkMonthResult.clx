@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-25e4698a" version="1.0.0.0">
+  <head std:sid="head-9f911d88">
+    <title>tnaEditWorkMonthResult</title>
+    <screen std:sid="screen-fef1be32" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="260" customWidth="300"/>
+    <screen std:sid="screen-7b11c018" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-43e60549" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-87f0f9b4">
+      <cl:dataset std:sid="d-set-f62e6396" id="tnaMonthResultList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-4264b466" name="WorkYear"/>
+          <cl:datacolumn std:sid="d-column-4bd3b283" name="WorkMonth"/>
+          <cl:datacolumn std:sid="d-column-f1d2a84b" name="UserID"/>
+          <cl:datacolumn std:sid="d-column-d131857a" name="UniqueID"/>
+          <cl:datacolumn std:sid="d-column-b1e6d09b" name="Name"/>
+          <cl:datacolumn std:sid="d-column-4dfc9011" name="WeekdayCnt" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-c4faae7e" name="HolidayCnt" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-84819f31" name="TotalDayCnt" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-42a1869b" name="WeekdayHours" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-70a9c597" name="HolidayHours" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-e6d23148" name="TotalHours" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-13ca89ec" name="Remark"/>
+          <cl:datacolumn std:sid="d-column-fd7b7459" name="GroupName" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-1431bab9" name="PartnerName"/>
+          <cl:datacolumn std:sid="d-column-1e0af056" name="PnTerMissMatchCnt" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-4e82c251" name="FaceAuthNotCnt" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-f5147419" name="BTimeCnt" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-79618535" name="LTimeCnt" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-2a239527" name="DTimeCnt" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-a33aca7f" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-c9768545" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-fef7f455" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-ce83804a" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-82ddf562" id="TNAEWR_grp1" style="padding:10px;">
+      <cl:xylayoutdata std:sid="xyl-data-09da13f8" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-63ec0927" id="grp6">
+        <cl:formdata std:sid="f-data-e28f5ef6" row="5" col="0"/>
+        <cl:button std:sid="button-1c6d0349" id="TEWMR_btnTnaEdit" class="userInfo_btn" tabindex="3">
+          <cl:listener std:sid="listener-72dee366" name="click" handler="onTNAEWR_btnTnaEditClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Save"/>
+          <cl:formdata std:sid="f-data-aa6a046b" valign="FILL" row="0" col="1"/>
+        </cl:button>
+        <cl:button std:sid="button-db846d6d" id="TEWMR_btnCancel" class="userInfo_btn" tabindex="4">
+          <cl:listener std:sid="listener-ef436a1d" name="click" handler="onTNAEWR_btnCancelClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Close"/>
+          <cl:formdata std:sid="f-data-1f56eb51" valign="FILL" row="0" col="3"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-756e17b2" hspace="0px" vspace="0px">
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="10" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-ec7ff5c3" id="grp4">
+        <cl:formdata std:sid="f-data-2a6e6dc6" row="2" col="0"/>
+        <cl:output std:sid="output-96cff761" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Name"/>
+          <cl:formdata std:sid="f-data-3ed54671" halign="FILL" valign="FILL" width="110" row="0" col="0"/>
+        </cl:output>
+        <cl:group std:sid="group-ab5dcc45" id="grp5" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; font-size:14px; border-bottom-style:solid;">
+          <cl:formdata std:sid="f-data-780a31e7" row="0" col="1"/>
+          <cl:output std:sid="output-82326001" id="TEWMR_opName">
+            <cl:formdata std:sid="f-data-95d2e7b6" row="0" col="0"/>
+          </cl:output>
+          <cl:formlayout std:sid="f-layout-16114161" hspace="10px" vspace="10px" top-margin="2px" right-margin="4px" bottom-margin="2px" left-margin="4px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-ceb3adbb" hspace="0px" vspace="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="110" unit="PIXEL" autoSizing="true"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-b073edba" id="grp2">
+        <cl:formdata std:sid="f-data-ce38f59b" row="1" col="0"/>
+        <cl:output std:sid="output-9de8460c" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_ID"/>
+          <cl:formdata std:sid="f-data-99333d71" halign="FILL" valign="FILL" width="110" row="0" col="0"/>
+        </cl:output>
+        <cl:group std:sid="group-087a35b2" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; font-size:14px; border-bottom-style:solid;">
+          <cl:formdata std:sid="f-data-0b720cce" row="0" col="1"/>
+          <cl:output std:sid="output-0abcd26e" id="TEWMR_opUserId">
+            <cl:formdata std:sid="f-data-2dab5c1e" row="0" col="0"/>
+          </cl:output>
+          <cl:formlayout std:sid="f-layout-aa734d65" hspace="10px" vspace="10px" top-margin="2px" right-margin="4px" bottom-margin="2px" left-margin="4px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-7782f0e0" hspace="0px" vspace="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="110" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-79307894">
+        <cl:formdata std:sid="f-data-86aaac9f" row="0" col="0"/>
+        <cl:output std:sid="output-b177c085" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-top-color:#c5c5c5; border-bottom-style:solid; border-right-color:#c5c5c5; border-top-style:solid; text-align:center;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_WorkDate"/>
+          <cl:formdata std:sid="f-data-d9736602" halign="FILL" valign="FILL" width="110" row="0" col="0"/>
+        </cl:output>
+        <cl:group std:sid="group-0e6d79f8" style="border-bottom-color:#c5c5c5; border-top-width:1px; border-bottom-width:1px; font-size:14px; border-top-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-49b2eba0" row="0" col="1"/>
+          <cl:output std:sid="output-1e03d30d" id="TEWMR_opWorkDate" value="">
+            <cl:formdata std:sid="f-data-7b777ce3" row="0" col="0"/>
+          </cl:output>
+          <cl:formlayout std:sid="f-layout-820b9de6" hspace="10px" vspace="10px" top-margin="2px" right-margin="4px" bottom-margin="2px" left-margin="4px">
+            <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-e6f41285" hspace="0px" vspace="0px">
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="110" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-e17eafdf" id="TNAEWR_grpRemark">
+        <cl:formdata std:sid="f-data-8027fb06" row="3" col="0"/>
+        <cl:output std:sid="output-4c76f4eb" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Remarks"/>
+          <cl:formdata std:sid="f-data-009371a9" width="110" row="0" col="0"/>
+        </cl:output>
+        <cl:group std:sid="group-c29e4e15" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; font-size:14px; border-bottom-style:solid;">
+          <cl:formdata std:sid="f-data-370050a1" row="0" col="1" rowspan="1" colspan="1"/>
+          <cl:inputbox std:sid="i-box-8bdfb0e9" id="TEWMR_ipbRemark" style="padding-left:5px; padding-right:5px;" maxlength="40">
+            <cl:responsivexylayoutdata std:sid="rxyl-data-3053d3c7">
+              <cl:xylayoutdata std:sid="sxyl-data-7ca4c6af" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH" screenid="default"/>
+            </cl:responsivexylayoutdata>
+          </cl:inputbox>
+          <cl:responsivexylayout std:sid="r-xylayout-0c37e30f"/>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-59792058" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="110" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-d7faf2c7" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+        <cl:rows length="30" unit="PIXEL"/>
+        <cl:rows length="30" unit="PIXEL"/>
+        <cl:rows length="30" unit="PIXEL"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-ab30c235"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

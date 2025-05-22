@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-43a32b0e" version="1.0.0.0">
+  <head std:sid="head-fe6f5b39">
+    <title>lprManagement</title>
+    <screen std:sid="screen-05f99b77" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="false" useCustomHeight="false" customHeight="500" customWidth="600"/>
+    <screen std:sid="screen-4070481d" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-5880903d" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-d445497d">
+      <cl:dataset std:sid="d-set-b43852e8" id="LprInfoList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-a44136bb" name="DeviceID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-c9639025" name="Password" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-db66a88f" name="Name"/>
+          <cl:datacolumn std:sid="d-column-21c29291" name="GateSet" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-c6b7407d" name="Status" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-f5fbdc9e" name="UseFlag" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-6f6df259" id="DeleteLprList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-c79f1bad" name="DeviceID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-3ab19900" name="rowIndex" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-8836d3c2" id="LPRStatusList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-e45df7f2" name="DeviceID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-22f64aa0" name="Status" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-650e077f" id="LprInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-595408d3" name="DeviceID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-5b9b959d" name="Password"/>
+          <cl:datacolumn std:sid="d-column-c54d6442" name="Name"/>
+          <cl:datacolumn std:sid="d-column-a6563d95" name="GateSet" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-0efd38fb" name="UseFlag" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-71f76a43" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-2afe3c12" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-1804400d" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-28001652" name="Count" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-5a079119" id="Options">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-8114e86b" name="LPRFivePartTimeSystem" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-b47d4749" id="WatchdogInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-e76ac531" name="Watchdog" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-6bcabcef" id="sms_getLprInfoList" method="get" action="/v1/jawoondae/lpr">
+        <cl:listener std:sid="listener-556099b1" name="submit-done" handler="onSms_getLprInfoListSubmitDone"/>
+        <cl:listener std:sid="listener-b485b4f7" name="submit-error" handler="onSms_getLprInfoListSubmitError"/>
+        <cl:listener std:sid="listener-a59fd17c" name="submit-timeout" handler="onSms_getLprInfoListSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total"/>
+        <cl:responsedata dataid="WatchdogInfo"/>
+        <cl:responsedata dataid="LprInfoList"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-b20f17e6" id="sms_postLprInfoList" action="/v1/jawoondae/lpr">
+        <cl:listener std:sid="listener-91e41948" name="submit-done" handler="onSms_postLprInfoListSubmitDone"/>
+        <cl:listener std:sid="listener-f8e41709" name="submit-error" handler="onSms_postLprInfoListSubmitError"/>
+        <cl:listener std:sid="listener-f1474e06" name="submit-timeout" handler="onSms_postLprInfoListSubmitTimeout"/>
+        <cl:requestdata dataid="LprInfo"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-c1d3ac88" id="sms_DeleteLprInfoList" method="delete" action="/v1/jawoondae/lpr">
+        <cl:listener std:sid="listener-6dbd4213" name="submit-done" handler="onSms_DeleteLprInfoListSubmitDone"/>
+        <cl:listener std:sid="listener-0ccc4edb" name="submit-error" handler="onSms_DeleteLprInfoListSubmitError"/>
+        <cl:listener std:sid="listener-2cd3abf7" name="submit-timeout" handler="onSms_DeleteLprInfoListSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-a25f1034" id="sms_putLprInfo" method="put">
+        <cl:listener std:sid="listener-eaea3593" name="submit-done" handler="onSms_putLprInfoSubmitDone"/>
+        <cl:listener std:sid="listener-62b3bbd5" name="submit-error" handler="onSms_putLprInfoSubmitError"/>
+        <cl:listener std:sid="listener-f3539ba1" name="submit-timeout" handler="onSms_putLprInfoSubmitTimeout"/>
+        <cl:requestdata dataid="LprInfo"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-44264900" id="sms_getOptionsAMHQ" method="get" action="/v1/armyhq/options">
+        <cl:listener std:sid="listener-d15ce6ab" name="submit-done" handler="onSms_getOptionsAMHQSubmitDone"/>
+        <cl:listener std:sid="listener-6898edd6" name="submit-error" handler="onSms_getOptionsAMHQSubmitError"/>
+        <cl:listener std:sid="listener-dcee4ff0" name="submit-timeout" handler="onSms_getOptionsAMHQSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Options"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-5bc787d6" id="sms_putOptionsAMHQ" method="put" action="/v1/armyhq/options">
+        <cl:listener std:sid="listener-de7efb1d" name="submit-done" handler="onSms_putOptionsAMHQSubmitDone"/>
+        <cl:listener std:sid="listener-75252502" name="submit-error" handler="onSms_putOptionsAMHQSubmitError"/>
+        <cl:listener std:sid="listener-bf635408" name="submit-timeout" handler="onSms_putOptionsAMHQSubmitTimeout"/>
+        <cl:requestdata dataid="Options"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-3a8e7781" id="sms_getLPRStatus" method="get" action="/v1/jawoondae/lpr/status">
+        <cl:listener std:sid="listener-9ff26740" name="submit-done" handler="onSms_getLPRStatusSubmitDone"/>
+        <cl:listener std:sid="listener-c93ddc95" name="submit-error" handler="onSms_getLPRStatusSubmitError"/>
+        <cl:listener std:sid="listener-37b0d575" name="submit-timeout" handler="onSms_getLPRStatusSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="LPRStatusList"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-7c3db744" id="sms_postLPRWatchdog"/>
+    </cl:model>
+    <cl:appspec dev-comment="JWDLM_&#xD;&#xA;"/>
+  </head>
+  <body std:sid="body-2890a193" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-cc2c9a9a" name="load" handler="onBodyLoad"/>
+    <cl:listener std:sid="listener-ebcb6081" name="unload" handler="onBodyUnload"/>
+    <cl:group std:sid="group-b95d8854" id="JWDLM_grpMain" style="color:#010101;">
+      <cl:xylayoutdata std:sid="xyl-data-d7c64f5d" top="25px" right="10px" bottom="0px" left="50px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-d4e32acd" style="color:#010101;">
+        <cl:formdata std:sid="f-data-9a39e54d" row="3" col="0"/>
+        <cl:output std:sid="output-7409bdbc" style="color:#000000; text-align:center;" class="section-title-amhq">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Total"/>
+          <cl:formdata std:sid="f-data-0e750e7d" row="0" col="0"/>
+        </cl:output>
+        <cl:output std:sid="output-9f61ca9b" id="JWDLM_optTotal" style="color:#000000; text-align:center;" class="section-title-amhq">
+          <cl:datamapbind property="value" datacontrolid="Total" columnname="Count"/>
+          <cl:formdata std:sid="f-data-e61175c1" row="0" col="1"/>
+        </cl:output>
+        <cl:button std:sid="button-6d47aa6c" id="JWDLM_btnAdd" style="font-size:16px;" class="button-search-green-amhq">
+          <cl:listener std:sid="listener-7b0613da" name="click" handler="onJWDLM_btnAddClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Add"/>
+          <cl:formdata std:sid="f-data-57e1d8d5" row="0" col="3"/>
+        </cl:button>
+        <cl:button std:sid="button-d57c7e37" id="JWDLM_btnDelete" class="button-amhq">
+          <cl:listener std:sid="listener-a2ea65a4" name="click" handler="onJWDLM_btnDeleteClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Delete"/>
+          <cl:formdata std:sid="f-data-530a40d6" row="0" col="5"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-d07f5031" scrollable="false" hspace="0px" vspace="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="45" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="5" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-15edaca2">
+        <cl:formdata std:sid="f-data-b0ba6bf0" row="5" col="0"/>
+        <cl:grid std:sid="grid-c741f0de" id="JWDLM_grdLprList" style="color:#010101;" class="grid-amhq" readonly="true" datasetid="LprInfoList">
+          <cl:listener std:sid="listener-8bf248d1" name="row-dblclick" handler="onJWDLM_grdLprListRowDblclick"/>
+          <cl:listener std:sid="listener-8b572ad0" name="row-dblclick" handler="onJWDLM_grdLprListRowDblclick"/>
+          <cl:listener std:sid="listener-7871c27b" name="row-dblclick" handler="onJWDLM_grdLprListRowDblclick2"/>
+          <cl:listener std:sid="listener-e65c643e" name="row-dblclick" handler="onJWDLM_grdLprListRowDblclick3"/>
+          <cl:formdata std:sid="f-data-9298da3a" row="0" col="0"/>
+          <cl:gridcolumn std:sid="g-column-78e3a60b" width="25px"/>
+          <cl:gridcolumn std:sid="g-column-26f720ef"/>
+          <cl:gridcolumn std:sid="g-column-46678d9e"/>
+          <cl:gridcolumn std:sid="g-column-582313c5"/>
+          <cl:gridcolumn std:sid="g-column-9e4fa991"/>
+          <cl:gridcolumn std:sid="g-column-b5c75efc"/>
+          <cl:gridheader std:sid="gh-band-cc508daf">
+            <cl:gridrow std:sid="g-row-09f9ee47" height="50px"/>
+            <cl:gridcell std:sid="gh-cell-968666a9" rowindex="0" colindex="0" sortable="false" filterable="false" columntype="checkbox"/>
+            <cl:gridcell std:sid="gh-cell-e4f2e5c3" rowindex="0" colindex="1" targetcolumnname="DeviceID" sortable="false" filterable="false" text="장비번호"/>
+            <cl:gridcell std:sid="gh-cell-2906a31c" rowindex="0" colindex="2" targetcolumnname="Name" sortable="false" filterable="false" text="이름"/>
+            <cl:gridcell std:sid="gh-cell-6a91af02" rowindex="0" colindex="3" targetcolumnname="GateSet" sortable="false" filterable="false" text="차단바 정책"/>
+            <cl:gridcell std:sid="gh-cell-7f2a13e5" rowindex="0" colindex="4" text="연결상태"/>
+            <cl:gridcell std:sid="gh-cell-818e4d04" rowindex="0" colindex="5" text="사용/미사용"/>
+          </cl:gridheader>
+          <cl:griddetail std:sid="gd-band-a06f5098">
+            <cl:gridrow std:sid="g-row-4a301bc9" height="30px"/>
+            <cl:gridcell std:sid="gd-cell-e014151e" rowindex="0" colindex="0" columntype="checkbox"/>
+            <cl:gridcell std:sid="gd-cell-126ce661" rowindex="0" colindex="1" columnname="DeviceID"/>
+            <cl:gridcell std:sid="gd-cell-ca1e0de6" rowindex="0" colindex="2" columnname="Name"/>
+            <cl:gridcell std:sid="gd-cell-fbafc14a" rowindex="0" colindex="3" columnname="GateSet">
+              <cl:combobox std:sid="c-box-906db5d4" id="cmb4" style="text-align:center;">
+                <cl:item std:sid="item-50554214" label="등록된 차량만" value="0"/>
+                <cl:item std:sid="item-232366de" label="자동통과" value="1"/>
+                <cl:item std:sid="item-6988f58f" label="수동설정" value="2"/>
+              </cl:combobox>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gd-cell-7764080e" rowindex="0" colindex="4" columnname="Status">
+              <cl:combobox std:sid="c-box-6e643d19" id="cmb1" style="text-align:center;">
+                <cl:item std:sid="item-20a5b2c5" label="정상" value="1"/>
+                <cl:item std:sid="item-379fcf77" label="연결끊김" value="2"/>
+                <cl:item std:sid="item-fde79291" label="연결끊김" value="0"/>
+              </cl:combobox>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gd-cell-56df7f55" rowindex="0" colindex="5" columnname="UseFlag">
+              <cl:combobox std:sid="c-box-b072dbf6" id="cmb2" style="text-align:center;">
+                <cl:item std:sid="item-f0cd6236" label="미사용" value="0"/>
+                <cl:item std:sid="item-44ef3708" label="사용" value="1"/>
+              </cl:combobox>
+            </cl:gridcell>
+          </cl:griddetail>
+        </cl:grid>
+        <cl:group std:sid="group-c6fd5c91">
+          <cl:formdata std:sid="f-data-3dc04a2b" row="1" col="0"/>
+          <cl:output std:sid="output-7128212e" style="font-size:12px; text-align:right; padding-right:5px;" value="와치독">
+            <cl:formdata std:sid="f-data-ed04b8d9" row="0" col="1"/>
+          </cl:output>
+          <cl:radiobutton std:sid="r-button-7145d2f8" id="JWDLM_rdbWatchdog" style="font-size:12px;">
+            <cl:listener std:sid="listener-80d2aaaa" name="selection-change" handler="onJWDLM_rdbWatchdogSelectionChange"/>
+            <cl:datamapbind property="value" datacontrolid="WatchdogInfo" columnname="Watchdog"/>
+            <cl:formdata std:sid="f-data-3f437950" row="0" col="2"/>
+            <cl:item std:sid="item-04e2ad0b" label="활성화" value="1"/>
+            <cl:item std:sid="item-c9eb0767" label="비활성화" value="0"/>
+          </cl:radiobutton>
+          <cl:formlayout std:sid="f-layout-bbbe7a94" hspace="1px" vspace="1px" top-margin="1px" right-margin="1px" bottom-margin="1px" left-margin="1px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="90" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="155" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-d34d5761" scrollable="false">
+          <cl:rows length="323" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-dd320bfb" style="color:#010101;">
+        <cl:formdata std:sid="f-data-858f7ee9" row="2" col="0"/>
+        <cl:output std:sid="output-1c95afc9" class="section-title-amhq" value="LPR 장비 관리">
+          <cl:formdata std:sid="f-data-32a320e3" row="0" col="0"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-6faada69" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="240" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:output std:sid="output-49b34f86" id="ACAPAP_opbTitle" class="menu-title-amhq" value="LPR 관리">
+        <cl:formdata std:sid="f-data-fd495755" halign="LEFT" width="160" row="0" col="0"/>
+      </cl:output>
+      <cl:formlayout std:sid="f-layout-19fb7df5" scrollable="false" hspace="0px" vspace="0px">
+        <cl:rows length="35" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="10" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="600" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-f8ad0e18"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

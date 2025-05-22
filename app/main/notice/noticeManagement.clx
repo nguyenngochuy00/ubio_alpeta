@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-2d2ffe77" version="1.0.0.0">
+  <head std:sid="head-d2058d46">
+    <title>noticeManagement</title>
+    <screen std:sid="screen-3440b1d1" id="default" customHeight="700" customWidth="600" height="768px" minwidth="1024px" name="default" useCustomHeight="true" useCustomWidth="true" width="1024px"/>
+    <screen std:sid="screen-2e143e81" id="tablet" height="667px" maxwidth="1023px" minwidth="500px" name="tablet" width="500px"/>
+    <screen std:sid="screen-c799c13b" id="mobile" height="525px" maxwidth="499px" name="mobile" width="350px"/>
+    <cl:model std:sid="model-2a10288f">
+      <cl:dataset std:sid="d-set-4393e8fa" id="NoticeList">
+        <cl:datacolumnlist>
+          <cl:datacolumn name="NoticeID"/>
+          <cl:datacolumn name="type"/>
+          <cl:datacolumn name="StartDate"/>
+          <cl:datacolumn name="EndDate"/>
+          <cl:datacolumn name="StartTime"/>
+          <cl:datacolumn name="EndTime"/>
+          <cl:datacolumn name="Message"/>
+        </cl:datacolumnlist>
+        <cl:datarowlist/>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-e98d519a" id="TerminalList">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="ID"/>
+          <cl:datacolumn name="Name"/>
+          <cl:datacolumn name="noticeStatus"/>
+          <cl:datacolumn name="ip"/>
+          <cl:datacolumn name="result"/>
+        </cl:datacolumnlist>
+        <cl:datarowlist/>
+      </cl:dataset>
+      <cl:submission std:sid="submission-fb74c361" id="sms_GetNotice" action="/v1/notices" method="get">
+        <cl:listener std:sid="listener-a1a800e5" handler="onSms_GetNoticeSubmitSuccess" name="submit-success"/>
+        <cl:responsedata dataid="NoticeList"/>
+      </cl:submission>
+      <cl:datamap std:sid="d-map-3abd5fc2" id="NoticeInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="string" name="NoticeID"/>
+          <cl:datacolumn datatype="number" name="Type"/>
+          <cl:datacolumn name="StartDate"/>
+          <cl:datacolumn name="EndDate"/>
+          <cl:datacolumn name="StartTime"/>
+          <cl:datacolumn name="EndTime"/>
+          <cl:datacolumn name="Message"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-1b7bb8ef" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="ResultCode"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-8271972f" id="sms_PostNotice" action="/v1/notices">
+        <cl:listener std:sid="listener-4703cb59" handler="onSms_PostNoticeSubmitDone" name="submit-done"/>
+        <cl:listener std:sid="listener-f94b670d" handler="onSms_PostNoticeSubmitError" name="submit-error"/>
+        <cl:listener std:sid="listener-44a3737e" handler="onSms_PostNoticeSubmitTimeout" name="submit-timeout"/>
+        <cl:requestdata dataid="NoticeInfo"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="NoticeInfo"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-90cfab30" id="sms_deleteNotice" action="/v1/notices" method="delete">
+        <cl:listener std:sid="listener-5990e794" handler="onSms_deleteNoticeSubmitDone" name="submit-done"/>
+        <cl:listener std:sid="listener-3e7218a4" handler="onSms_deleteNoticeSubmitError" name="submit-error"/>
+        <cl:listener std:sid="listener-16f87c17" handler="onSms_deleteNoticeSubmitTimeout" name="submit-timeout"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-262ce4c4" id="sms_PutNotice" action="/v1/notices" method="put">
+        <cl:listener std:sid="listener-494b9da1" handler="onSms_PutNoticeSubmitDone" name="submit-done"/>
+        <cl:listener std:sid="listener-873a9499" handler="onSms_PutNoticeSubmitError" name="submit-error"/>
+        <cl:listener std:sid="listener-f2445e76" handler="onSms_PutNoticeSubmitTimeout" name="submit-timeout"/>
+        <cl:requestdata dataid="NoticeInfo"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:dataset std:sid="d-set-d8f4efcf" id="TerminalIDList">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="TerminalID"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:submission std:sid="submission-f30d0204" id="sms_postTerminalNotice" action="/v1/terminals/notice">
+        <cl:listener std:sid="listener-93990333" handler="onSms_postTerminalNoticeSubmitDone" name="submit-done"/>
+        <cl:listener std:sid="listener-133cebba" handler="onSms_postTerminalNoticeSubmitError" name="submit-error"/>
+        <cl:listener std:sid="listener-a1b6fa93" handler="onSms_postTerminalNoticeSubmitTimeout" name="submit-timeout"/>
+        <cl:requestdata dataid="NoticeInfo"/>
+        <cl:requestdata dataid="TerminalIDList"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-58c01ac6" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-6e7a139e" handler="onBodyLoad" name="load"/>
+    <cl:group std:sid="group-462b5d8b" style="padding:10px;">
+      <cl:xylayoutdata std:sid="xyl-data-20539feb" bottom="0px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="BOTH"/>
+      <cl:grid std:sid="grid-a1ea2fc4" id="NTMGR_grdNoticeList" columnMovable="false" columnResizable="true" datasetid="NoticeList" readonly="true" showdeletedrow="false">
+        <cl:listener std:sid="listener-46e749ab" handler="onNTMGR_noticegrdSelectionChange" name="selection-change"/>
+        <cl:formdata std:sid="f-data-e12ce977" col="0" row="1"/>
+        <cl:gridcolumn std:sid="g-column-6eab493b" width="50px"/>
+        <cl:gridcolumn std:sid="g-column-c5ad1f43"/>
+        <cl:gridcolumn std:sid="g-column-79989c20"/>
+        <cl:gridcolumn std:sid="g-column-8525faa7" width="65px"/>
+        <cl:gridcolumn std:sid="g-column-5951b792" width="65px"/>
+        <cl:gridcolumn std:sid="g-column-699f1fbd"/>
+        <cl:gridheader std:sid="gh-band-657c9c34">
+          <cl:gridrow std:sid="g-row-39300f26"/>
+          <cl:gridcell std:sid="gh-cell-b57fb59a" colindex="0" rowindex="0" filterable="false" sortable="false" targetcolumnname="ID" text="ID"/>
+          <cl:gridcell std:sid="gh-cell-03c3c8d9" colindex="1" rowindex="0" filterable="false" sortable="false" targetcolumnname="sDate" text="sDate">
+            <cl:langbind category="PROPERTY" property="text" keypath="Str_StartDate"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-8162c39a" colindex="2" rowindex="0" filterable="false" sortable="false" targetcolumnname="eDate" text="eDate">
+            <cl:langbind category="PROPERTY" property="text" keypath="Str_EndDate"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-90bdc4dd" colindex="3" rowindex="0" filterable="false" sortable="false" targetcolumnname="sTime" text="sTime">
+            <cl:langbind category="PROPERTY" property="text" keypath="Str_StartTime"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-ebe88e85" colindex="4" rowindex="0" filterable="false" sortable="false" targetcolumnname="eTime" text="eTime">
+            <cl:langbind category="PROPERTY" property="text" keypath="Str_EndTime"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-8896ee07" colindex="5" rowindex="0" filterable="false" sortable="false" targetcolumnname="message" text="message">
+            <cl:langbind category="PROPERTY" property="text" keypath="Str_NoticeMessage"/>
+          </cl:gridcell>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-acac232d">
+          <cl:gridrow std:sid="g-row-556554dd"/>
+          <cl:gridcell std:sid="gd-cell-05104af4" colindex="0" rowindex="0" columnname="NoticeID">
+            <cl:inputbox std:sid="i-box-d0f38359" id="ipb2"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-1a81a85e" colindex="1" rowindex="0" columnname="StartDate">
+            <cl:dateinput std:sid="d-input-12e3f5cf" id="dti5" style="text-align:center;" autoselect="false" hidebutton="true" value="2018-11-23"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-3340af3e" colindex="2" rowindex="0" columnname="EndDate">
+            <cl:dateinput std:sid="d-input-671de620" id="dti6" style="text-align:center;" autoselect="false" hidebutton="true" value="2018-11-23"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-eda25dab" colindex="3" rowindex="0" columnname="StartTime">
+            <cl:dateinput std:sid="d-input-687919eb" id="dti7" style="text-align:center;" autoselect="false" format="HHmm" hidebutton="true" mask="HH:mm" value="00:00"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-ac8a3794" colindex="4" rowindex="0" columnname="EndTime">
+            <cl:dateinput std:sid="d-input-b30f8109" id="dti8" style="text-align:center;" autoselect="false" format="HHmm" hidebutton="true" mask="HH:mm" value="00:00"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-15a8accb" colindex="5" rowindex="0" columnname="Message">
+            <cl:inputbox std:sid="i-box-a1541a1d" id="ipb3"/>
+          </cl:gridcell>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:grid std:sid="grid-340b33fa" id="NTMGR_grdTerminalList" style="padding:0px;" columnMovable="false" columnResizable="false" datasetid="TerminalList" readonly="true">
+        <cl:formdata std:sid="f-data-34b067c4" col="0" row="2"/>
+        <cl:gridcolumn std:sid="g-column-f575c1d0" width="25px"/>
+        <cl:gridcolumn std:sid="g-column-80483776"/>
+        <cl:gridcolumn std:sid="g-column-d2d18005"/>
+        <cl:gridcolumn std:sid="g-column-65aec4b6"/>
+        <cl:gridheader std:sid="gh-band-2159dd1e">
+          <cl:gridrow std:sid="g-row-786ead13"/>
+          <cl:gridcell std:sid="gh-cell-5f5f7012" colindex="0" rowindex="0" columntype="checkbox" filterable="false" sortable="false"/>
+          <cl:gridcell std:sid="gh-cell-9727a84e" colindex="1" rowindex="0" filterable="false" sortable="false" targetcolumnname="terminalID" text="terminalID">
+            <cl:langbind category="PROPERTY" property="text" keypath="Str_TerminalID"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-270653bb" colindex="2" rowindex="0" filterable="false" sortable="false" targetcolumnname="Name" text="Name">
+            <cl:langbind category="PROPERTY" property="text" keypath="Str_Name"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-3d391850" colindex="3" rowindex="0" targetcolumnname="result" text="Result">
+            <cl:langbind category="PROPERTY" property="text" keypath="Str_Result"/>
+          </cl:gridcell>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-83fac11f">
+          <cl:gridrow std:sid="g-row-c5990915" height="25"/>
+          <cl:gridcell std:sid="gd-cell-b2fb18b2" colindex="0" rowindex="0" columntype="checkbox"/>
+          <cl:gridcell std:sid="gd-cell-9596095a" colindex="1" rowindex="0" columnname="ID">
+            <cl:output std:sid="output-83567fac"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-5fd547b7" colindex="2" rowindex="0" columnname="Name">
+            <cl:output std:sid="output-ef674ad1"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-90301488" colindex="3" rowindex="0" columnname="result"/>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:group std:sid="group-b6339e8d" id="grp1">
+        <cl:formdata std:sid="f-data-65aae9a1" col="0" row="3"/>
+        <cl:button std:sid="button-6c3cffe9" id="NTMGR_btnTerminalNoticeSet" class="userInfo_btn">
+          <cl:listener std:sid="listener-c9b811f9" handler="onNTMGR_btnTerminalNoticeSetClick" name="click"/>
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_Apply"/>
+          <cl:formdata std:sid="f-data-43153237" height="30" valign="CENTER" col="1" row="0"/>
+        </cl:button>
+        <cl:button std:sid="button-2327fbba" id="NTMGR_btnTerminalNoticeUnset" class="userInfo_btn">
+          <cl:listener std:sid="listener-91c2abb5" handler="onNTMGR_btnTerminalNoticeUnsetClick" name="click"/>
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_Release"/>
+          <cl:formdata std:sid="f-data-a606156b" height="30" valign="CENTER" col="2" row="0"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-339d85b3">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns autoSizing="false" length="80" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="80" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-3b06561d" id="grp2">
+        <cl:formdata std:sid="f-data-123af3d5" col="0" row="0"/>
+        <cl:group std:sid="group-ac6dc06d" id="grp3">
+          <cl:formdata std:sid="f-data-057d267f" col="0" row="0"/>
+          <cl:img std:sid="image-6d2b4a49" id="NTMGR_imgHelp" style="cursor:help;" src="../../../theme/images/common/common_btn_window_top_q.png">
+            <cl:listener std:sid="listener-51920157" handler="onNTMGR_imgHelpClick" name="click"/>
+            <cl:formdata std:sid="f-data-4a9b4a69" halign="CENTER" height="14" valign="CENTER" width="14" col="1" row="0"/>
+          </cl:img>
+          <cl:formlayout std:sid="f-layout-f1a3afe2">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns autoSizing="false" length="1" minlength="0" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+            <cl:columns autoSizing="false" length="14" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:group std:sid="group-aaa8246b" id="grp4">
+          <cl:formdata std:sid="f-data-94bc0de3" col="0" row="1"/>
+          <cl:group std:sid="group-5f44fa7f" id="grp5">
+            <cl:formdata std:sid="f-data-0380c0a5" col="0" row="0"/>
+            <cl:group std:sid="group-394dbf7b" id="grp7">
+              <cl:formdata std:sid="f-data-443427de" col="0" row="0"/>
+              <cl:output std:sid="output-f84d59c8" class="common-controllabel">
+                <cl:langbind category="PROPERTY" property="value" keypath="Str_Period"/>
+                <cl:formdata std:sid="f-data-1a017f82" col="0" row="0"/>
+              </cl:output>
+              <cl:group std:sid="group-4d2fb65f" id="grp9">
+                <cl:formdata std:sid="f-data-7976b795" col="1" row="0"/>
+                <cl:group std:sid="group-c05b7e83" id="grp10">
+                  <cl:formdata std:sid="f-data-65fc8e0a" col="0" row="0"/>
+                  <cl:dateinput std:sid="d-input-c0c03e80" id="NTMGR_sdate" autoselect="false">
+                    <cl:formdata std:sid="f-data-4fdab89f" col="0" row="0"/>
+                  </cl:dateinput>
+                  <cl:dateinput std:sid="d-input-786aa73a" id="NTMGR_edate" autoselect="false">
+                    <cl:formdata std:sid="f-data-7c1a01c1" col="2" row="0"/>
+                  </cl:dateinput>
+                  <cl:output std:sid="output-c5c4b52e" style="text-align:center;" value="~">
+                    <cl:formdata std:sid="f-data-ce2c4823" col="1" row="0"/>
+                  </cl:output>
+                  <cl:formlayout std:sid="f-layout-ae54f7bf">
+                    <cl:rows length="1" unit="FRACTION"/>
+                    <cl:columns length="1" unit="FRACTION"/>
+                    <cl:columns autoSizing="false" length="10" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+                    <cl:columns length="1" unit="FRACTION"/>
+                  </cl:formlayout>
+                </cl:group>
+                <cl:group std:sid="group-afebeb62" id="grp11">
+                  <cl:formdata std:sid="f-data-3da35c5f" col="1" row="0"/>
+                  <cl:dateinput std:sid="d-input-a1098b2b" id="NTMGR_stime" style="text-align:center;" autoselect="false" format="HHmm" hidebutton="true" mask="HH:mm" value="00:00">
+                    <cl:formdata std:sid="f-data-3cee942b" col="0" row="0"/>
+                  </cl:dateinput>
+                  <cl:dateinput std:sid="d-input-ae180497" id="NTMGR_etime" style="text-align:center;" autoselect="false" format="HHmm" hidebutton="true" mask="HH:mm" value="23:59">
+                    <cl:formdata std:sid="f-data-4e23a228" col="2" row="0"/>
+                  </cl:dateinput>
+                  <cl:output std:sid="output-29e9f063" style="text-align:center;" value="~">
+                    <cl:formdata std:sid="f-data-c358fdcd" col="1" row="0"/>
+                  </cl:output>
+                  <cl:formlayout std:sid="f-layout-b7840b90">
+                    <cl:rows length="1" unit="FRACTION"/>
+                    <cl:columns length="1" unit="FRACTION"/>
+                    <cl:columns autoSizing="false" length="10" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+                    <cl:columns length="1" unit="FRACTION"/>
+                  </cl:formlayout>
+                </cl:group>
+                <cl:formlayout std:sid="f-layout-d3d911b6">
+                  <cl:rows length="1" unit="FRACTION"/>
+                  <cl:columns autoSizing="false" length="3" minlength="0" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+                  <cl:columns autoSizing="false" length="2" minlength="0" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+                </cl:formlayout>
+              </cl:group>
+              <cl:formlayout std:sid="f-layout-f2011588" hspace="0px" vspace="0px">
+                <cl:rows length="1" unit="FRACTION"/>
+                <cl:columns autoSizing="false" length="120" minlength="0" shadecolor="#000000" shadetype="BY_CLASS" unit="PIXEL"/>
+                <cl:columns length="1" unit="FRACTION"/>
+              </cl:formlayout>
+            </cl:group>
+            <cl:group std:sid="group-24eb080d" id="grp8">
+              <cl:formdata std:sid="f-data-b670e0db" col="0" row="1"/>
+              <cl:output std:sid="output-a564b9e2" class="common-controllabel">
+                <cl:langbind category="PROPERTY" property="value" keypath="Str_NoticeMessage"/>
+                <cl:formdata std:sid="f-data-d0af112d" col="0" row="0"/>
+              </cl:output>
+              <cl:inputbox std:sid="i-box-c9a6e7c0" id="NTMGR_message" lengthunit="utf8" maxlength="64" value="">
+                <cl:listener std:sid="listener-3d2d35fb" handler="onNTMGR_messageKeyup" name="keyup"/>
+                <cl:formdata std:sid="f-data-d64ac91b" col="1" row="0"/>
+              </cl:inputbox>
+              <cl:formlayout std:sid="f-layout-9da995c6" hspace="0px" vspace="0px">
+                <cl:rows length="1" unit="FRACTION"/>
+                <cl:columns autoSizing="false" length="120" minlength="0" shadecolor="#000000" shadetype="BY_CLASS" unit="PIXEL"/>
+                <cl:columns length="1" unit="FRACTION"/>
+              </cl:formlayout>
+            </cl:group>
+            <cl:formlayout std:sid="f-layout-06087f6d" hspace="0px" vspace="0px">
+              <cl:rows autoSizing="false" length="30" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+              <cl:rows length="1" unit="FRACTION"/>
+              <cl:columns length="1" unit="FRACTION"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:group std:sid="group-8b3a992c" id="grp6">
+            <cl:formdata std:sid="f-data-303c611b" col="1" row="0"/>
+            <cl:button std:sid="button-b1fc601f" id="NTMGR_btnAdd" class="userInfo_btn">
+              <cl:listener std:sid="listener-be9d2be0" handler="onNTMGR_btnAddClick" name="click"/>
+              <cl:langbind category="PROPERTY" property="value" keypath="Str_Add"/>
+              <cl:formdata std:sid="f-data-8d5c1043" halign="FILL" height="30" valign="FILL" col="0" row="0"/>
+            </cl:button>
+            <cl:button std:sid="button-fde2c2e7" id="NTMGR_btnModi" class="userInfo_btn">
+              <cl:listener std:sid="listener-ed0355c0" handler="onNTMGR_btnModiClick" name="click"/>
+              <cl:langbind category="PROPERTY" property="value" keypath="Str_Modification"/>
+              <cl:formdata std:sid="f-data-a60a124d" halign="FILL" height="30" valign="FILL" col="0" row="1"/>
+            </cl:button>
+            <cl:button std:sid="button-09263cf9" id="NTMGR_btnDel" class="userInfo_btn">
+              <cl:listener std:sid="listener-4379d072" handler="onNTMGR_btnDelClick" name="click"/>
+              <cl:langbind category="PROPERTY" property="value" keypath="Str_Delete"/>
+              <cl:formdata std:sid="f-data-14e009da" halign="FILL" height="30" valign="FILL" col="0" row="2"/>
+            </cl:button>
+            <cl:formlayout std:sid="f-layout-4575276d">
+              <cl:rows autoSizing="false" length="30" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+              <cl:rows autoSizing="false" length="30" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+              <cl:rows autoSizing="false" length="30" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+              <cl:columns length="1" unit="FRACTION"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:formlayout std:sid="f-layout-33070256">
+            <cl:rows length="1" shadecolor="transparent" shadetype="NONE" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+            <cl:columns autoSizing="false" length="80" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-db356bac">
+          <cl:rows autoSizing="false" length="30" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-8073bdee" hspace="0px" vspace="5px">
+        <cl:rows autoSizing="false" length="150" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:rows autoSizing="false" length="40" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-6ec51e19"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

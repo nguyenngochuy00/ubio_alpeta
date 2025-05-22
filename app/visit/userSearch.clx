@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-ae7cc69a" version="1.0.0.0">
+  <head std:sid="head-ff21bd28">
+    <title>userSearch</title>
+    <screen std:sid="screen-e84e076c" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="600" customWidth="600" active="true"/>
+    <screen std:sid="screen-6a8b9091" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px" active="false"/>
+    <screen std:sid="screen-64b407a5" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px" useCustomHeight="true" customHeight="510" customWidth="800" active="false"/>
+    <cl:model std:sid="model-8e93f551">
+      <cl:dataset std:sid="d-set-f4fca70f" id="UserList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-37cb338b" name="UserID"/>
+          <cl:datacolumn std:sid="d-column-11ac712d" name="Name"/>
+          <cl:datacolumn std:sid="d-column-f2c95d31" name="Group"/>
+          <cl:datacolumn std:sid="d-column-46c5ad19" name="Position"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-866f6864" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-75bf62ee" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-f1b5b983" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-7a1784ac" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-85f00449">
+      <cl:responsivexylayoutdata std:sid="rxyl-data-ff8fb575">
+        <cl:xylayoutdata std:sid="sxyl-data-02667543" top="80px" width="330px" height="39px" horizontalAnchor="CENTER" verticalAnchor="TOP" screenid="mobile"/>
+        <cl:xylayoutdata std:sid="sxyl-data-3420f797" top="20px" width="580px" height="50px" horizontalAnchor="CENTER" verticalAnchor="TOP" screenid="default"/>
+        <cl:xylayoutdata std:sid="sxyl-data-8d2317e7" top="10px" right="10px" width="480px" height="39px" horizontalAnchor="RIGHT" verticalAnchor="TOP" screenid="tablet"/>
+      </cl:responsivexylayoutdata>
+      <cl:group std:sid="group-9d6b25c3">
+        <cl:formdata std:sid="f-data-6b9ec404" row="0" col="0"/>
+        <cl:output std:sid="output-7c352be3" style="font-weight:700; font-size:24px;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_VisitTargetSearch"/>
+          <cl:formdata std:sid="f-data-286e0257" row="0" col="0"/>
+        </cl:output>
+        <cl:group std:sid="group-f3a6eb72" style="border-bottom-color:#2446a4; border-bottom-width:1px; border-bottom-style:solid;">
+          <cl:formdata std:sid="f-data-dd5d3a1d" row="1" col="0"/>
+          <cl:xylayout std:sid="xylayout-3cbef76b"/>
+        </cl:group>
+        <cl:output std:sid="output-7cb493df" id="op_factoryName" style="font-weight:700; font-size:24px;" visible="false">
+          <cl:formdata std:sid="f-data-9f2f0161" row="0" col="1"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-aecdc16a" hspace="0px" vspace="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:rows length="9" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-b10fd6d8">
+        <cl:rows length="38" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:group std:sid="group-2a5bd9d1">
+      <cl:responsivexylayoutdata std:sid="rxyl-data-7209075d">
+        <cl:xylayoutdata std:sid="sxyl-data-1aac4673" top="140px" bottom="10px" width="330px" horizontalAnchor="CENTER" verticalAnchor="BOTH" screenid="mobile"/>
+        <cl:xylayoutdata std:sid="sxyl-data-121a1c27" top="90px" bottom="10px" width="580px" horizontalAnchor="CENTER" verticalAnchor="BOTH" screenid="default"/>
+        <cl:xylayoutdata std:sid="sxyl-data-d5425ae9" top="59px" width="480px" height="400px" horizontalAnchor="CENTER" verticalAnchor="TOP" screenid="tablet"/>
+      </cl:responsivexylayoutdata>
+      <cl:grid std:sid="grid-5be8d27c" id="VMTUS_grdUserList" readonly="true" datasetid="UserList">
+        <cl:listener std:sid="listener-acfb760e" name="row-dblclick" handler="onVMTUS_grdUserListRowDblclick"/>
+        <cl:listener std:sid="listener-51c14e9a" name="cell-click" handler="onVMTUS_grdUserListCellClick"/>
+        <cl:responsivexylayoutdata std:sid="rxyl-data-ed811770">
+          <cl:xylayoutdata std:sid="sxyl-data-46ea48a0" top="52px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH" screenid="mobile"/>
+          <cl:xylayoutdata std:sid="sxyl-data-a5bd3385" top="43px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH" screenid="default"/>
+          <cl:xylayoutdata std:sid="sxyl-data-b318704e" top="43px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH" screenid="tablet"/>
+        </cl:responsivexylayoutdata>
+        <cl:gridcolumn std:sid="g-column-c5be0f35"/>
+        <cl:gridcolumn std:sid="g-column-6fcf87fa" width="94px"/>
+        <cl:gridcolumn std:sid="g-column-5ecb270e"/>
+        <cl:gridheader std:sid="gh-band-fcda90fb">
+          <cl:gridrow std:sid="g-row-8288acd2"/>
+          <cl:gridcell std:sid="gh-cell-86a1b769" rowindex="0" colindex="0" targetcolumnname="Name" sortable="true" filterable="false" text="Name">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_Name"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-1a7e11b7" rowindex="0" colindex="2" targetcolumnname="Group" sortable="false" filterable="false" text="Group">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_Group"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-ee48924e" rowindex="0" colindex="1" targetcolumnname="Position" text="Position">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_Position"/>
+          </cl:gridcell>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-94a70c1f">
+          <cl:gridrow std:sid="g-row-a7cdd57e" height="50px"/>
+          <cl:gridcell std:sid="gd-cell-9012b264" rowindex="0" colindex="0" columnname="Name"/>
+          <cl:gridcell std:sid="gd-cell-edb7a1d5" rowindex="0" colindex="2" columnname="Group"/>
+          <cl:gridcell std:sid="gd-cell-2d593c30" rowindex="0" colindex="1" columnname="Position"/>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:inputbox std:sid="i-box-4ff884f7" id="VMTUS_ipbKeyword" style="border-right-style:solid; padding:0px 0px 0px 10px; border-top-width:1px; border-bottom-color:#cccccc; border-right-width:1px; border-left-color:#cccccc; border-right-color:#cccccc; background-position:0px; border-left-width:1px; border-top-style:solid; border-left-style:solid; border-bottom-width:1px; border-top-color:#cccccc; border-bottom-style:solid;">
+        <cl:listener std:sid="listener-1cae0486" name="keyup" handler="onVMTUS_ipbKeywordKeyup"/>
+        <cl:apppropbind property="value" category="PROPERTY" app-property="searchKeyword"/>
+        <cl:langbind property="placeholder" category="PROPERTY" keypath="Str_VisitUserSearchGuide"/>
+        <cl:responsivexylayoutdata std:sid="rxyl-data-dbb22910">
+          <cl:xylayoutdata std:sid="sxyl-data-709d8888" top="6px" left="0px" width="120px" height="40px" horizontalAnchor="LEFT" verticalAnchor="TOP" screenid="mobile"/>
+          <cl:xylayoutdata std:sid="sxyl-data-a614414e" top="3px" left="0px" width="164px" height="30px" horizontalAnchor="LEFT" verticalAnchor="TOP" screenid="default"/>
+          <cl:xylayoutdata std:sid="sxyl-data-c0d3e3ef" top="4px" left="0px" width="154px" height="30px" horizontalAnchor="LEFT" verticalAnchor="TOP" screenid="tablet"/>
+        </cl:responsivexylayoutdata>
+      </cl:inputbox>
+      <cl:group std:sid="group-a55e7b7d" id="VMTUS_btnUserSearch" style="border-right-style:none; cursor:pointer; background-color:transparent; background-repeat:no-repeat; background-size:contain; border-left-style:none; border-bottom-style:none; background-position:center; background-image:url('../../theme/images/visitor/btn_search.png'); border-top-style:none;">
+        <cl:listener std:sid="listener-e86547ed" name="click" handler="onVMTUS_btnUserSearchClick"/>
+        <cl:responsivexylayoutdata std:sid="rxyl-data-41ef4a89">
+          <cl:xylayoutdata std:sid="sxyl-data-f6690a55" top="10px" left="130px" width="32px" height="32px" horizontalAnchor="LEFT" verticalAnchor="TOP" screenid="mobile"/>
+          <cl:xylayoutdata std:sid="sxyl-data-cbfa7590" top="3px" left="163px" width="40px" height="30px" horizontalAnchor="LEFT" verticalAnchor="TOP" screenid="default"/>
+          <cl:xylayoutdata std:sid="sxyl-data-846a33ab" top="4px" left="153px" width="40px" height="30px" horizontalAnchor="LEFT" verticalAnchor="TOP" screenid="tablet"/>
+        </cl:responsivexylayoutdata>
+        <cl:xylayout std:sid="xylayout-83668f0b"/>
+      </cl:group>
+      <cl:button std:sid="button-ccea59ff" id="VMVAP_btnApply" style="padding:0px; font-weight:600; font-size:14px;" class="userInfo_btn">
+        <cl:listener std:sid="listener-1c7d4439" name="click" handler="onVMVAP_btnApplyClick"/>
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_Apply"/>
+        <cl:responsivexylayoutdata std:sid="rxyl-data-10870abc">
+          <cl:xylayoutdata std:sid="sxyl-data-06810e40" top="6px" right="80px" width="70px" height="40px" horizontalAnchor="RIGHT" verticalAnchor="TOP" screenid="mobile"/>
+          <cl:xylayoutdata std:sid="sxyl-data-2db39930" top="6px" right="80px" width="70px" height="25px" horizontalAnchor="RIGHT" verticalAnchor="TOP" screenid="default"/>
+          <cl:xylayoutdata std:sid="sxyl-data-509b5940" top="6px" right="0px" width="80px" height="25px" horizontalAnchor="RIGHT" verticalAnchor="TOP" screenid="tablet"/>
+        </cl:responsivexylayoutdata>
+      </cl:button>
+      <cl:button std:sid="button-e828a3d3" id="VMVAP_btnCancel" style="padding:0px; font-weight:600; font-size:14px;" class="userInfo_btn">
+        <cl:listener std:sid="listener-7d2cda67" name="click" handler="onVMVAP_btnCancelClick"/>
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_Cancel"/>
+        <cl:responsivexylayoutdata std:sid="rxyl-data-eeb1d444">
+          <cl:xylayoutdata std:sid="sxyl-data-d25a4ecd" top="6px" right="0px" width="70px" height="40px" horizontalAnchor="RIGHT" verticalAnchor="TOP" screenid="mobile"/>
+          <cl:xylayoutdata std:sid="sxyl-data-b423e96b" top="6px" right="0px" width="70px" height="25px" horizontalAnchor="RIGHT" verticalAnchor="TOP" screenid="default"/>
+          <cl:xylayoutdata std:sid="sxyl-data-7ee7c151" top="6px" right="0px" width="34px" height="25px" horizontalAnchor="RIGHT" verticalAnchor="TOP" screenid="tablet"/>
+        </cl:responsivexylayoutdata>
+      </cl:button>
+      <cl:responsivexylayout std:sid="r-xylayout-02190ee5"/>
+    </cl:group>
+    <cl:group std:sid="group-7b9618eb" style="background-image:url('../../theme/custom/nhedu_03/top_bg.png');">
+      <cl:responsivexylayoutdata std:sid="rxyl-data-3ccaed0b">
+        <cl:xylayoutdata std:sid="sxyl-data-6a6c64c5" top="10px" width="350px" height="40px" horizontalAnchor="CENTER" verticalAnchor="TOP" screenid="mobile"/>
+        <cl:xylayoutdata std:sid="sxyl-data-6bea2964" top="10px" width="0px" height="0px" horizontalAnchor="CENTER" verticalAnchor="TOP" screenid="default"/>
+        <cl:xylayoutdata std:sid="sxyl-data-64fe8427" top="10px" width="0px" height="0px" horizontalAnchor="CENTER" verticalAnchor="TOP" screenid="tablet"/>
+      </cl:responsivexylayoutdata>
+      <cl:output std:sid="output-c5eb21bd" id="VMVAP_opb1" style="color:#ffffff; font-weight:700; font-size:20px;">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_VisitApplication"/>
+        <cl:responsivexylayoutdata std:sid="rxyl-data-a5a02207">
+          <cl:xylayoutdata std:sid="sxyl-data-0c5e5f43" left="20px" width="277px" height="32px" horizontalAnchor="LEFT" verticalAnchor="CENTER" screenid="default"/>
+          <cl:xylayoutdata std:sid="sxyl-data-075c3345" left="20px" width="250px" height="32px" horizontalAnchor="LEFT" verticalAnchor="CENTER" screenid="mobile"/>
+          <cl:xylayoutdata std:sid="sxyl-data-c917436c" left="29px" width="357px" height="32px" horizontalAnchor="LEFT" verticalAnchor="CENTER" screenid="tablet"/>
+        </cl:responsivexylayoutdata>
+      </cl:output>
+      <cl:responsivexylayout std:sid="r-xylayout-df3efd81"/>
+    </cl:group>
+    <cl:responsivexylayout std:sid="r-xylayout-18890c9f"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

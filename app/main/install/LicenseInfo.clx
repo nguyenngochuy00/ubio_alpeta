@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-3e6e9425" version="1.0.0.0">
+  <head std:sid="head-0217cab7">
+    <title>LicenseInfo</title>
+    <screen std:sid="screen-caefc5d0" id="default" customHeight="200" customWidth="500" height="768px" minwidth="1024px" name="default" useCustomHeight="true" useCustomWidth="true" width="1024px"/>
+    <screen std:sid="screen-be45fd24" id="tablet" height="667px" maxwidth="1023px" minwidth="500px" name="tablet" width="500px"/>
+    <screen std:sid="screen-2ff37648" id="mobile" height="525px" maxwidth="499px" name="mobile" width="350px"/>
+    <cl:model std:sid="model-9261ae45">
+      <cl:datamap std:sid="d-map-a33aca7f" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-227082d2" datatype="number" name="ResultCode"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-d966f69d" id="LicenseInfoOld">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-2ee6fdd9" datatype="number" name="Level"/>
+          <cl:datacolumn std:sid="d-column-85ca7cdf" datatype="number" name="MaxUserCount"/>
+          <cl:datacolumn std:sid="d-column-e685f945" datatype="number" name="ServerCount"/>
+          <cl:datacolumn std:sid="d-column-d3cab95a" name="IssueDate"/>
+          <cl:datacolumn std:sid="d-column-6ce59c5f" name="StartDate"/>
+          <cl:datacolumn std:sid="d-column-0266f170" name="EndDate"/>
+          <cl:datacolumn std:sid="d-column-65770cce" datatype="number" name="Status"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-6044e91e" id="sms_postLicense" action="/v1/options/license" mediatype="application/x-www-form-urlencoded">
+        <cl:listener std:sid="listener-f4f310e8" handler="onSms_postLicenseSubmitDone" name="submit-done"/>
+        <cl:listener std:sid="listener-61a45e00" handler="onSms_postLicenseSubmitError" name="submit-error"/>
+        <cl:listener std:sid="listener-f4f0c1c1" handler="onSms_postLicenseSubmitTimeout" name="submit-timeout"/>
+        <cl:requestdata dataid="SerialInfo"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="LicenseInfo"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-f5b44fed" id="sms_getLicense" action="/v1/options/license" method="get">
+        <cl:listener std:sid="listener-4456ef46" handler="onSms_getLicenseSubmitDone" name="submit-done"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="LicenseInfo"/>
+      </cl:submission>
+      <cl:datamap std:sid="d-map-89d5fe70" id="LicenseInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-92bfdb49" datatype="number" name="RegisterVer"/>
+          <cl:datacolumn std:sid="d-column-38a06fce" datatype="number" name="Year"/>
+          <cl:datacolumn std:sid="d-column-5b331c53" datatype="number" name="Month"/>
+          <cl:datacolumn std:sid="d-column-cb3c1fdb" datatype="number" name="Day"/>
+          <cl:datacolumn std:sid="d-column-f68ac82a" datatype="number" name="Level"/>
+          <cl:datacolumn std:sid="d-column-de4f48aa" datatype="number" name="Status"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-447b1005" id="sms_getClientKey" action="/v1/options/clientKey" method="get">
+        <cl:listener std:sid="listener-dce93160" handler="onSms_getClientKeySubmitDone" name="submit-done"/>
+        <cl:listener std:sid="listener-7f20edd4" handler="onSms_getClientKeySubmitError" name="submit-error"/>
+        <cl:listener std:sid="listener-8f515ec2" handler="onSms_getClientKeySubmitTimeout" name="submit-timeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="ClientKeyInfo"/>
+      </cl:submission>
+      <cl:datamap std:sid="d-map-70e06935" id="ClientKeyInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-5b0a3579" name="ClientKey"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-59bbe078" id="SerialInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-61298447" name="LicenseKey"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-d42a2c04" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-d5dbd8cb" handler="onBodyLoad" name="load"/>
+    <cl:group std:sid="group-fb4b8168" id="LMVEW_grpLicenseInfo">
+      <cl:xylayoutdata std:sid="xyl-data-33b95edf" bottom="10px" horizontalAnchor="BOTH" left="10px" right="10px" top="10px" verticalAnchor="BOTH"/>
+      <cl:combobox std:sid="c-box-4f15fd9a" id="LMVEW_cmbLicenseLevel" style="color:#2012e7; font-weight:700; font-size:14px; text-align:center;" buttonimage="" hidebutton="true" preventinput="true" readonly="true">
+        <cl:datamapbind property="value" columnname="Level" datacontrolid="LicenseInfo"/>
+        <cl:formdata col="1" colspan="1" row="0" rowspan="1"/>
+      </cl:combobox>
+      <cl:output std:sid="output-38869969" style="font-weight:700; font-size:14px;">
+        <cl:langbind category="PROPERTY" property="value" keypath="Str_License"/>
+        <cl:formdata std:sid="f-data-294f3f1a" col="0" row="0"/>
+      </cl:output>
+      <cl:button std:sid="button-03821a09" id="LMVEW_btnRegist" class="userInfo_btn">
+        <cl:listener std:sid="listener-08b14632" handler="onLMVEW_btnRegistClick" name="click"/>
+        <cl:langbind category="PROPERTY" property="value" keypath="Str_Enrollment"/>
+        <cl:formdata std:sid="f-data-cda5c8cc" col="2" row="2"/>
+      </cl:button>
+      <cl:inputbox std:sid="i-box-8807b94b" id="ipb1">
+        <cl:datamapbind property="value" columnname="LicenseKey" datacontrolid="SerialInfo"/>
+        <cl:formdata std:sid="f-data-11c767f7" col="1" row="2"/>
+      </cl:inputbox>
+      <cl:output std:sid="output-165e1e8a" style="font-weight:700; font-size:14px;">
+        <cl:langbind category="PROPERTY" property="value" keypath="Str_LicenseKey"/>
+        <cl:formdata std:sid="f-data-507bb12f" col="0" row="2"/>
+      </cl:output>
+      <cl:output std:sid="output-161c2240" style="font-weight:700; font-size:14px;">
+        <cl:langbind category="PROPERTY" property="value" keypath="Str_ClientKey"/>
+        <cl:formdata std:sid="f-data-6a3800cd" col="0" row="4"/>
+      </cl:output>
+      <cl:inputbox std:sid="i-box-e695179b" id="LMVEW_ipbClientKey" readonly="true">
+        <cl:datamapbind property="value" columnname="ClientKey" datacontrolid="ClientKeyInfo"/>
+        <cl:formdata std:sid="f-data-74793075" col="1" row="4"/>
+      </cl:inputbox>
+      <cl:button std:sid="button-f51e4d05" id="LMVEW_btnCreate" class="userInfo_btn">
+        <cl:listener std:sid="listener-5acccc23" handler="onLMVEW_btnCreateClick" name="click"/>
+        <cl:langbind category="PROPERTY" property="value" keypath="Str_Create"/>
+        <cl:formdata std:sid="f-data-0717183c" col="2" row="4"/>
+      </cl:button>
+      <cl:output std:sid="output-87fdf38e">
+        <cl:langbind category="PROPERTY" property="value" keypath="Str_LicenseKeyGuide"/>
+        <cl:formdata col="0" colspan="3" row="1" rowspan="1"/>
+      </cl:output>
+      <cl:output std:sid="output-cb10f3f4">
+        <cl:langbind category="PROPERTY" property="value" keypath="Str_ClientKeyGuide"/>
+        <cl:formdata col="0" colspan="3" row="3" rowspan="1"/>
+      </cl:output>
+      <cl:combobox std:sid="c-box-b79cc3f9" id="LMVEW_cmbLicenceStatus" hidebutton="true" readonly="true">
+        <cl:datamapbind property="value" columnname="Status" datacontrolid="LicenseInfo"/>
+        <cl:formdata std:sid="f-data-aa111bf7" col="2" row="0"/>
+      </cl:combobox>
+      <cl:formlayout std:sid="f-layout-ab072ca3">
+        <cl:rows autoSizing="false" length="30" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:rows autoSizing="false" length="20" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:rows autoSizing="false" length="30" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:rows autoSizing="false" length="20" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:rows autoSizing="false" length="30" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="100" unit="PIXEL"/>
+        <cl:columns length="1" shadecolor="transparent" shadetype="NONE" unit="FRACTION"/>
+        <cl:columns autoSizing="false" length="80" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-12d395d3"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

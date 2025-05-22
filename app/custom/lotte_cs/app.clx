@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-6f6c589a" version="1.0.0.0">
+  <head std:sid="head-2c93b39d">
+    <title>app</title>
+    <link std:sid="link-ee6d3c67" href="../../../theme/app.less" rel="stylesheet" type="text/css"/>
+    <screen std:sid="screen-bc5dfd6a" id="new-screen" name="new-screen" minwidth="1920px" width="1920px" height="1080px" useCustomWidth="true" useCustomHeight="true" customHeight="800" customWidth="1050" active="true"/>
+    <screen std:sid="screen-4f7983d4" id="default" name="default" minwidth="1024px" maxwidth="1919px" width="1024px" height="768px" customHeight="600" customWidth="800" active="false"/>
+    <screen std:sid="screen-630cad20" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-515e010e" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-1f9fd9cf">
+      <cl:dataset std:sid="d-set-018ac910" id="LangList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-16943ee8" name="Locale" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-9cd8150c" name="Key"/>
+          <cl:datacolumn std:sid="d-column-eb599479" name="Value"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-98518997" id="dmLoginReq">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-48baae59" name="userId"/>
+          <cl:datacolumn std:sid="d-column-2023033c" name="password"/>
+          <cl:datacolumn std:sid="d-column-f4f1cc7d" name="userType" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-866f6864" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-8f36526e" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-3f6dd76f" id="AccountInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-d5f42c7e" name="UserID" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-737c6aaf" name="Uuid"/>
+          <cl:datacolumn std:sid="d-column-2678c9ea" name="Name"/>
+          <cl:datacolumn std:sid="d-column-43326d4a" name="Password"/>
+          <cl:datacolumn std:sid="d-column-a46146ef" name="Privilege"/>
+          <cl:datacolumn std:sid="d-column-bfbe2154" name="ServerID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-c651778f" name="Version"/>
+          <cl:datacolumn std:sid="d-column-ed0eb3da" name="LicenseLevel" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-e7e33f90" name="FirstLoginFlag" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-71ccc0f4" id="brandType">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-1b394da2" name="Type" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-ac80187c" id="SystemInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-e040a9d1" name="Version"/>
+          <cl:datacolumn std:sid="d-column-0692455a" name="LicenseLevel" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-aa0834b5" name="LicenseStatus" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-37be91bc" name="BrandType" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-3b9826fa" name="TimezoneVersion" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-8eb4b889" name="HTTPSFlag" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-12cfaef9" name="SiteName"/>
+          <cl:datacolumn std:sid="d-column-fdd4f96f" name="SiteLogo"/>
+          <cl:datacolumn std:sid="d-column-7ea506f4" name="SiteMessageWarning"/>
+          <cl:datacolumn std:sid="d-column-c2410b3e" name="ProductID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-5f5f8196" name="TerminalLimit" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-bb32cc01" name="McardLimit" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-3cff180f" name="McardExpireAt"/>
+          <cl:datacolumn comment="모바일 카드 OEM 버전" std:sid="d-column-478ee3a4" name="MobileCardVersion" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-5e733d3b" id="initOption">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-e0d194e0" name="userIDLength" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-6e68316e" id="LoginFailInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-c825e28e" name="RemindCount" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-5329f83c" id="sms_login" action="/v1/login">
+        <cl:listener std:sid="listener-0c85f60d" name="submit-success" handler="onSms_loginSubmitSuccess"/>
+        <cl:listener std:sid="listener-24eb7d55" name="submit-error" handler="onSms_loginSubmitError"/>
+        <cl:listener std:sid="listener-8e3937ef" name="submit-done" handler="onSms_loginSubmitDone"/>
+        <cl:listener std:sid="listener-53517ed9" name="submit-timeout" handler="onSms_loginSubmitTimeout"/>
+        <cl:requestparam name="test1" value="2"/>
+        <cl:requestparam name="test2" value="3"/>
+        <cl:requestdata dataid="dmLoginReq"/>
+        <cl:responsedata dataid="Result" isadd="true"/>
+        <cl:responsedata dataid="AccountInfo" isadd="true"/>
+        <cl:responsedata dataid="SystemInfo"/>
+        <cl:responsedata dataid="LoginFailInfo"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-1d1a48cd" id="sms_getInitOption" method="get" action="/v1/initOption">
+        <cl:listener std:sid="listener-bca6f0e1" name="submit-done" handler="onSms_getInitOptionSubmitDone"/>
+        <cl:listener std:sid="listener-c1d47899" name="submit-error" handler="onSms_getInitOptionSubmitError"/>
+        <cl:listener std:sid="listener-fd6775d1" name="submit-timeout" handler="onSms_getInitOptionSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="brandType"/>
+        <cl:responsedata dataid="initOption"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-27c986e0" id="sms_getLangList" method="get" action="data/lang/lang.json">
+        <cl:listener std:sid="listener-b7e52b13" name="submit-success" handler="onSms_getLangListSubmitSuccess"/>
+        <cl:responsedata dataid="LangList"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-be862117" id="sms_chkLogin" method="get" action="/v1/chkLogin">
+        <cl:listener std:sid="listener-0ccaa4ed" name="submit-done" handler="onSms_chkLoginSubmitDone"/>
+        <cl:listener std:sid="listener-2735c5a7" name="submit-error" handler="onSms_chkLoginSubmitError"/>
+        <cl:listener std:sid="listener-cb1d0e84" name="submit-timeout" handler="onSms_chkLoginSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="AccountInfo"/>
+        <cl:responsedata dataid="SystemInfo"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-4a164c8f" id="sms_logout" method="get" action="/v1/logout"/>
+    </cl:model>
+    <cl:appspec dev-comment="../theme/images/sign_img_logo_01.png"/>
+  </head>
+  <body std:sid="body-87c22231" style="background-repeat:no-repeat; background-size:100% 100%; top:0px; left:0px; width:800px; background-image:url('../../../theme/custom/lotte_cs/bg.jpg'); height:600px;">
+    <cl:listener std:sid="listener-0e2e2b25" name="load" handler="onBodyLoad"/>
+    <cl:listener std:sid="listener-3f07b454" name="init" handler="onBodyInit"/>
+    <cl:group std:sid="group-3dbda6ea" style="background-image:url('../../../theme/custom/lotte_cs/main_center_box_img.png');">
+      <cl:xylayoutdata std:sid="xyl-data-ec23d294" top="0px" bottom="0px" width="703px" horizontalAnchor="CENTER" verticalAnchor="BOTH"/>
+      <cl:inputbox std:sid="i-box-2d27aceb" id="LOGIN_ipbUserID" style="padding-top:0px; background-repeat:no-repeat; background-size:30px; color:#3c3c3c; padding-left:10px; vertical-align:middle; padding-bottom:0px; font-size:18px; background-position:10px 5px; padding-right:0px;" class="login-form" placeholder="user ID" maxlength="20" imemode="inactive">
+        <cl:formdata std:sid="f-data-26b6ded6" row="3" col="1"/>
+      </cl:inputbox>
+      <cl:inputbox std:sid="i-box-303ac5cf" id="LOGIN_ipbUserPW" style="padding-top:0px; background-repeat:no-repeat; background-size:30px; color:#3c3c3c; padding-left:10px; vertical-align:middle; padding-bottom:0px; font-size:18px; background-position:10px 5px; padding-right:0px;" class="login-form" secret="true" placeholder="Password" maxlength="30">
+        <cl:listener std:sid="listener-17e6e081" name="keyup" handler="onLOGIN_ipbUserPWKeyup"/>
+        <cl:formdata std:sid="f-data-ca2b8efd" row="5" col="1"/>
+      </cl:inputbox>
+      <cl:button std:sid="button-5596cbcd" id="LOGIN_btnSignIn" style="background-color:#3B81C9; border-radius:6px; padding:15px 0px 15px 0px; color:#ffffff; border-bottom-color:#3b81c9; font-weight:300; border-left-color:#3b81c9; font-size:24px; border-top-color:#3b81c9; border-right-color:#3b81c9;" class="signIn_btn" value="LOGIN">
+        <cl:listener std:sid="listener-e3323ca8" name="click" handler="onLOGIN_btnSignInClick"/>
+        <cl:formdata std:sid="f-data-1249db8d" row="11" col="1"/>
+      </cl:button>
+      <cl:group std:sid="group-b0b038d0">
+        <cl:formdata std:sid="f-data-2046f327" row="1" col="1"/>
+        <cl:group std:sid="group-dfcfb6db" style="background-repeat:no-repeat; background-image:url('../../../theme/custom/lotte_cs/lcsLogo.png');">
+          <cl:formdata std:sid="f-data-8fdaee3c" row="0" col="0"/>
+          <cl:xylayout std:sid="xylayout-4a5504bd"/>
+        </cl:group>
+        <cl:output std:sid="output-f7c44e4f" style="font-weight:600; font-size:22px; text-align:right;" value="출입관리시스템">
+          <cl:formdata std:sid="f-data-e0832e14" row="0" col="2"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-82a6ff82" hspace="1px" vspace="1px" top-margin="1px" right-margin="1px" bottom-margin="1px" left-margin="1px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="200" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="180" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-7d4778b7" hspace="1px" vspace="1px" top-margin="1px" right-margin="1px" bottom-margin="1px" left-margin="1px">
+        <cl:rows length="200" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="60" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="25" unit="PIXEL"/>
+        <cl:rows length="62" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="18" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="62" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="28" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="25" unit="PIXEL"/>
+        <cl:rows length="25" unit="PIXEL"/>
+        <cl:rows length="25" unit="PIXEL"/>
+        <cl:rows length="91" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="62" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="25" unit="PIXEL"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="77" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+        <cl:columns length="78" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-9650196d"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler>
+      <std:guide position="408"/>
+    </std:vruler>
+  </std:studiosetting>
+</html>

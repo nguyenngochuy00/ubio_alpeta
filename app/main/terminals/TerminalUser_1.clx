@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-43552609" version="1.0.0.0">
+  <head std:sid="head-26efbf57">
+    <title>TerminalUser</title>
+    <screen std:sid="screen-a4cd07e0" id="default" customHeight="700" customWidth="900" height="768px" minwidth="1024px" name="default" useCustomHeight="false" useCustomWidth="false" width="1024px"/>
+    <screen std:sid="screen-b0f880dd" id="tablet" height="667px" maxwidth="1023px" minwidth="500px" name="tablet" width="500px"/>
+    <screen std:sid="screen-43c3b69b" id="mobile" height="525px" maxwidth="499px" name="mobile" width="350px"/>
+    <cl:model std:sid="model-a52fcfbf">
+      <cl:dataset std:sid="d-set-9d7681d8" id="AccessGroupList">
+        <cl:datacolumnlist>
+          <cl:datacolumn name="ID"/>
+          <cl:datacolumn name="Name"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:submission std:sid="submission-7074d501" id="sms_getSelectedAccessGroupInfo" action="/v1/accessGroups/" method="get">
+        <cl:listener std:sid="listener-418decb5" handler="onSms_getSelectedAccessGroupinfoSubmitDone" name="submit-done"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="TerminalsTotal"/>
+        <cl:responsedata dataid="TerminalsInfo"/>
+        <cl:responsedata dataid="UsersTotal"/>
+        <cl:responsedata dataid="UsersInfo"/>
+      </cl:submission>
+      <cl:dataset std:sid="d-set-474a2218" id="TerminalsInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="ID"/>
+          <cl:datacolumn name="Name"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-a33aca7f" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="ResultCode"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-b5bf4ffe" id="TerminalsTotal">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="Count"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:dataset std:sid="d-set-865aceb5" id="UsersInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="ID"/>
+          <cl:datacolumn name="UniqueID"/>
+          <cl:datacolumn name="Name"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-3f62bc52" id="UsersTotal">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="Count"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-4daa46ac" id="sms_getTerminalsInAccessGroupInfo" action="/v1/accessGroups/" method="get">
+        <cl:listener std:sid="listener-4c132103" handler="onSms_getTerminalsInAccessGroupInfoSubmitDone" name="submit-done"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="TerminalsTotal"/>
+        <cl:responsedata dataid="TerminalsInfo"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-f4480cfa" id="sms_getUsersAccessGroupInfo" action="/v1/accessGroups/" method="get">
+        <cl:listener std:sid="listener-ce7850ad" handler="onSms_getUsersAccessGroupInfoSubmitDone" name="submit-done"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="UsersTotal"/>
+        <cl:responsedata alias="" dataid="UsersInfo"/>
+      </cl:submission>
+      <cl:dataset std:sid="d-set-e3da7019" id="Terminals">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="ID"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-9df89b61" id="Users">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="ID"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-af338181" id="ForceType">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="Type"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-87e6a33e" id="sms_postTerminalUsers" action="/v1/terminalUsers" mediatype="application/json">
+        <cl:listener std:sid="listener-1562e93c" handler="onSms_postTerminalUsersSubmitSuccess" name="submit-success"/>
+        <cl:requestdata dataid="Terminals"/>
+        <cl:requestdata dataid="Users"/>
+        <cl:requestdata dataid="ForceType"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-37fcd6f5" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-4f9ff980" handler="onBodyLoad" name="load"/>
+    <cl:group std:sid="group-a5d77a05" style="padding:0px;">
+      <cl:xylayoutdata std:sid="xyl-data-3d1a1254" bottom="0px" horizontalAnchor="BOTH" left="0px" right="10px" top="0px" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-61f75766" class="common-snbarea" style="border-radius:2px; padding:0px;">
+        <cl:formdata std:sid="f-data-5b24b23b" col="0" colspan="1" row="0" rowspan="2"/>
+        <cl:output std:sid="output-8c32c3e8" style="padding:10px 0px 0px 10px; font-weight:700; font-size:14px;">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_AccessGroup"/>
+          <cl:formdata std:sid="f-data-442176eb" col="1" colspan="1" row="0" rowspan="1"/>
+        </cl:output>
+        <cl:grid std:sid="grid-23467c2f" id="TMUSR_AccessGroupGrd" style="padding:0px;" autofit="1" columnMovable="false" columnResizable="false" datasetid="AccessGroupList" readonly="true">
+          <cl:listener std:sid="listener-b9535c65" handler="onTMUSR_AccessGroupGrdSelectionChange" name="selection-change"/>
+          <cl:listener std:sid="listener-ee97a141" handler="onTMUSR_AccessGroupGrdSelectionChange" name="selection-change"/>
+          <cl:listener std:sid="listener-d72fa373" handler="onTMUSR_AccessGroupGrdSelectionChange2" name="selection-change"/>
+          <cl:formdata std:sid="f-data-37955294" col="1" row="1"/>
+          <cl:gridcolumn std:sid="g-column-10b5f8ef" width="60px"/>
+          <cl:gridcolumn std:sid="g-column-8462b0cb"/>
+          <cl:gridheader std:sid="gh-band-762b16ff">
+            <cl:gridrow std:sid="g-row-b2e2b9fe"/>
+            <cl:gridcell std:sid="gh-cell-d84d06d5" colindex="0" rowindex="0" style="font-size:14px; text-align:center;" filterable="false" sortable="false" targetcolumnname="ID" text="ID"/>
+            <cl:gridcell std:sid="gh-cell-f4862c46" colindex="1" rowindex="0" style="font-size:14px; text-align:center;" filterable="false" sortable="false" targetcolumnname="Name" text="Name">
+              <cl:langbind category="PROPERTY" property="text" keypath="Str_Name"/>
+            </cl:gridcell>
+          </cl:gridheader>
+          <cl:griddetail std:sid="gd-band-2171150c">
+            <cl:gridrow std:sid="g-row-788a9e75"/>
+            <cl:gridcell std:sid="gd-cell-46a70189" colindex="0" rowindex="0" columnname="ID">
+              <cl:output std:sid="output-ce21a28e" style="font-size:14px; text-align:center;"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gd-cell-c4e4f30e" colindex="1" rowindex="0" columnname="Name">
+              <cl:output std:sid="output-813dee69" style="font-size:14px; text-align:center;"/>
+            </cl:gridcell>
+          </cl:griddetail>
+        </cl:grid>
+        <cl:formlayout std:sid="f-layout-10e59816" hspace="0px" vspace="5px">
+          <cl:rows autoSizing="false" length="40" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns autoSizing="false" length="10" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-91efe3fa" style="padding:5px;">
+        <cl:formdata std:sid="f-data-dca63c38" col="1" row="1"/>
+        <cl:group std:sid="group-fd45d260">
+          <cl:formdata std:sid="f-data-057f6b53" col="0" row="0"/>
+          <cl:output std:sid="output-8400ddb1" style="font-weight:700; font-size:14px;">
+            <cl:langbind category="PROPERTY" property="value" keypath="Str_AccessGroupTerminalList"/>
+            <cl:formdata std:sid="f-data-243bf7ad" col="0" row="0"/>
+          </cl:output>
+          <cl:udc std:sid="ud-control-213aeb3e" id="TMUSR_udbRegistTerminalList" type="udc.grid.terminalList">
+            <cl:listener std:sid="listener-bce62a52" handler="onTMUSR_udbRegistTerminalListPagechange" name="pagechange"/>
+            <cl:formdata std:sid="f-data-467e36c9" col="0" row="1"/>
+          </cl:udc>
+          <cl:formlayout std:sid="f-layout-a3d3d148" hspace="0px">
+            <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:group std:sid="group-57af3e77">
+          <cl:formdata std:sid="f-data-acb2b806" col="2" row="0"/>
+          <cl:output std:sid="output-cb9a4748" style="font-weight:700; font-size:14px;">
+            <cl:langbind category="PROPERTY" property="value" keypath="Str_AccessGroupUserList"/>
+            <cl:formdata std:sid="f-data-ab43ee5b" col="0" row="0"/>
+          </cl:output>
+          <cl:button std:sid="button-697a332b" class="userInfo_btn">
+            <cl:langbind category="PROPERTY" property="value" keypath="Str_UserAdd"/>
+            <cl:formdata std:sid="f-data-f7fa1be8" col="1" row="0"/>
+          </cl:button>
+          <cl:udc std:sid="ud-control-ee9aca86" id="TMUSR_udcRegistUserList" type="udc.grid.userList">
+            <cl:listener std:sid="listener-2540f4d8" handler="onTMUSR_udcRegistUserListPagechange" name="pagechange"/>
+            <cl:datarowcontext datacontrolid="UsersInfo" rowindex="0"/>
+            <cl:formdata std:sid="f-data-7250fb91" col="0" colspan="2" row="1" rowspan="1"/>
+          </cl:udc>
+          <cl:formlayout std:sid="f-layout-ff18307e" hspace="0px">
+            <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+            <cl:columns autoSizing="false" length="100" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-f4a552bb">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns autoSizing="false" length="350" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="10" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-3020ac4f">
+        <cl:formdata std:sid="f-data-447db233" col="1" row="0"/>
+        <cl:button std:sid="button-918658ed" id="TMUSR_TerminalSendBtn" class="userInfo_btn">
+          <cl:listener std:sid="listener-52761b62" handler="onTMUSR_TerminalSendBtnClick" name="click"/>
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_Submit"/>
+          <cl:formdata std:sid="f-data-59ae7c39" col="3" row="1"/>
+        </cl:button>
+        <cl:button std:sid="button-8180e98e" id="TMUSR_TerminalDeleteSend" class="userInfo_btn">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_Delete"/>
+          <cl:formdata std:sid="f-data-7f667e83" col="5" row="1"/>
+        </cl:button>
+        <cl:group std:sid="group-b1a8b57c" style="border-right-style:solid; border-top-width:1px; border-bottom-color:#cccccc; border-right-width:1px; border-left-color:#cccccc; border-right-color:#cccccc; border-left-width:1px; border-top-style:solid; background-color:#F6F6F6; border-radius:10px; border-left-style:solid; border-bottom-width:1px; border-top-color:#cccccc; border-bottom-style:solid;">
+          <cl:formdata std:sid="f-data-648460f7" col="1" row="1"/>
+          <cl:combobox std:sid="c-box-54e9bf50" id="TMUSR_SearchTypeCmb" style="background-color:#F6F6F6; border-right-style:none; border-left-style:none; border-bottom-style:none; border-top-style:none; text-align:center;" preventinput="true" value="0">
+            <cl:formdata std:sid="f-data-4a77174e" col="0" row="0"/>
+            <cl:item label="ID" value="0"/>
+            <cl:item label="NAME" value="1"/>
+            <cl:item label="UniqueID" value="2"/>
+          </cl:combobox>
+          <cl:inputbox std:sid="i-box-bb8e4645" id="TMUSR_SearchIpb" style="background-color:#F6F6F6; border-right-style:solid; border-left-style:solid; border-right-width:1px; border-left-color:#cccccc; border-bottom-style:none; border-right-color:#cccccc; border-left-width:1px; border-top-style:none;">
+            <cl:formdata std:sid="f-data-1829bd66" col="1" row="0"/>
+          </cl:inputbox>
+          <cl:group std:sid="group-d8f09c0a">
+            <cl:formdata std:sid="f-data-dae1a2be" col="2" row="0"/>
+            <cl:img std:sid="image-24a3c4c4" id="TMUSR_SearchBtn" style="cursor:pointer;" src="/theme/images/common/common_text_field_btn_icons_search.png">
+              <cl:xylayoutdata std:sid="xyl-data-3fb2c7e2" bottom="1px" horizontalAnchor="CENTER" top="1px" verticalAnchor="BOTH" width="26px"/>
+            </cl:img>
+            <cl:xylayout std:sid="xylayout-2ec6b58f"/>
+          </cl:group>
+          <cl:formlayout std:sid="f-layout-1328722f" hspace="0px" vspace="0px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+            <cl:columns autoSizing="false" length="3" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-a8ca8724" hspace="0px" vspace="0px">
+          <cl:rows autoSizing="false" length="10" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="100" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns autoSizing="false" length="50" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="100" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="10" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="100" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-52431cc7">
+        <cl:rows autoSizing="false" length="40" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns autoSizing="false" length="210" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:columns autoSizing="false" length="3" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-ab3829c7"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

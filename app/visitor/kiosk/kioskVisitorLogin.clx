@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-6f6c589a" version="1.0.0.0">
+  <head std:sid="head-2c93b39d">
+    <title>app</title>
+    <screen std:sid="screen-1db16ca2" id="kiosk" name="kiosk" minwidth="1080px" width="1080px" height="1920px" active="true"/>
+    <screen std:sid="screen-85130b46" id="default" name="default" minwidth="1024px" maxwidth="1079px" width="1024px" height="768px" customHeight="600" customWidth="800" active="false"/>
+    <screen std:sid="screen-8c8308fb" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px" active="false"/>
+    <screen std:sid="screen-b6b8a217" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px" active="false"/>
+    <cl:model std:sid="model-1f9fd9cf">
+      <cl:dataset std:sid="d-set-60992931" id="VisitInfoList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-7eb1968b" name="VisitIndex"/>
+          <cl:datacolumn std:sid="d-column-948d608d" name="RegistAt"/>
+          <cl:datacolumn std:sid="d-column-39d62bc3" name="StartAt"/>
+          <cl:datacolumn std:sid="d-column-e255fc81" name="EndAt"/>
+          <cl:datacolumn std:sid="d-column-9221f647" name="Purpose"/>
+          <cl:datacolumn std:sid="d-column-27096eac" name="VisitTargetID"/>
+          <cl:datacolumn std:sid="d-column-ffde7d3b" name="VisitTargetUserName"/>
+          <cl:datacolumn std:sid="d-column-880d6c93" name="VisitTargetGroupName"/>
+          <cl:datacolumn std:sid="d-column-99f1adac" name="Status" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-c3a304de" name="VisitStatus"/>
+          <cl:datacolumn std:sid="d-column-d7461168" name="VisitorFirstName"/>
+          <cl:datacolumn std:sid="d-column-325bbf70" name="VisitorLastName"/>
+          <cl:datacolumn std:sid="d-column-bc194c55" name="VisitorCount" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-018ac910" id="LangList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-4ec5ff10" name="Locale" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-0ad81824" name="Key"/>
+          <cl:datacolumn std:sid="d-column-3d27e721" name="Value"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-7af4152d" id="ApplicationInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-fe5b0ef0" name="FirstName" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-85a62911" name="LastName"/>
+          <cl:datacolumn std:sid="d-column-43ad0b68" name="Mobile"/>
+          <cl:datacolumn std:sid="d-column-f172c77e" name="Password"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-866f6864" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-ada23bed" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-c2bd18fc" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-47ee0623" name="Count" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-ac80187c" id="SystemInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-e040a9d1" name="Version"/>
+          <cl:datacolumn std:sid="d-column-0692455a" name="LicenseLevel" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-aa0834b5" name="LicenseStatus" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-37be91bc" name="BrandType" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-3b9826fa" name="TimezoneVersion" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-8eb4b889" name="HTTPSFlag" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-12cfaef9" name="SiteName"/>
+          <cl:datacolumn std:sid="d-column-fdd4f96f" name="SiteLogo"/>
+          <cl:datacolumn std:sid="d-column-7ea506f4" name="SiteMessageWarning"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-f8c50ddb" id="sms_getVisitorLogin" method="get" action="/v1/visitor/visitApplication">
+        <cl:listener std:sid="listener-ce9fac23" name="submit-done" handler="onSms_getVisitorLoginSubmitDone"/>
+        <cl:listener std:sid="listener-bbe94974" name="submit-error" handler="onSms_getVisitorLoginSubmitError"/>
+        <cl:listener std:sid="listener-3547bc57" name="submit-timeout" handler="onSms_getVisitorLoginSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total"/>
+        <cl:responsedata dataid="VisitInfoList"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-27c986e0" id="sms_getLangList" method="get" action="/data/lang/lang.json">
+        <cl:listener std:sid="listener-591a4941" name="submit-success" handler="onSms_getLangListSubmitSuccess"/>
+        <cl:responsedata dataid="LangList" isadd="true"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-be862117" id="sms_chkLogin" method="get" action="/v1/chkLogin">
+        <cl:listener std:sid="listener-2554cc06" name="submit-done" handler="onSms_chkLoginSubmitDone"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="SystemInfo"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-87c22231" style="background-repeat:no-repeat; background-size:cover; top:0px; color:#aeaeae; left:0px; width:800px; background-position:center; background-image:url('../../../theme/images/kioskVisit/background_full.png'); height:600px;">
+    <cl:listener std:sid="listener-10b282d7" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-20cc9c61">
+      <cl:responsivexylayoutdata std:sid="rxyl-data-ecda24f1">
+        <cl:xylayoutdata std:sid="sxyl-data-9c3f6505" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH" screenid="kiosk"/>
+      </cl:responsivexylayoutdata>
+      <cl:group std:sid="group-5658c5b0">
+        <cl:formdata std:sid="f-data-c860a065" row="2" col="0"/>
+        <cl:group std:sid="group-37a8e199" style="padding:0px 10px 0px 0px;">
+          <cl:responsivexylayoutdata std:sid="rxyl-data-9e041189">
+            <cl:xylayoutdata std:sid="sxyl-data-12fce8e8" top="0px" right="10px" bottom="0px" left="10px" horizontalAnchor="BOTH" verticalAnchor="BOTH" screenid="kiosk"/>
+          </cl:responsivexylayoutdata>
+          <cl:output std:sid="output-7d2ea19e" id="VISITOR_opbVMSTitle" style="padding-top:0px; color:#ffffff; font-weight:600; padding-left:0px; font-size:70px; padding-bottom:0px; text-align:center; padding-right:0px;">
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_VisitorManagementTitle"/>
+            <cl:formdata std:sid="f-data-e3e48481" row="1" col="0"/>
+          </cl:output>
+          <cl:group std:sid="group-d8da9396">
+            <cl:formdata std:sid="f-data-a570b1fe" row="0" col="0"/>
+            <cl:output std:sid="output-af5bd912" style="padding-top:0px; background-repeat:no-repeat; background-size:contain; color:#ffffff; font-weight:700; padding-left:0px; font-size:44px; padding-bottom:0px; background-image:url('../../../theme/images/kioskVisit/title.png'); background-position:center; text-align:center; padding-right:0px;">
+              <cl:responsivexylayoutdata std:sid="rxyl-data-146b7e11">
+                <cl:xylayoutdata std:sid="sxyl-data-970cf835" top="0px" right="100px" bottom="0px" left="100px" horizontalAnchor="BOTH" verticalAnchor="BOTH" screenid="kiosk"/>
+              </cl:responsivexylayoutdata>
+            </cl:output>
+            <cl:responsivexylayout std:sid="r-xylayout-cfa71219"/>
+          </cl:group>
+          <cl:formlayout std:sid="f-layout-c6c44886" vspace="0px">
+            <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:responsivexylayout std:sid="r-xylayout-744d5f0c"/>
+      </cl:group>
+      <cl:group std:sid="group-e3ed3b36" visible="false">
+        <cl:formdata std:sid="f-data-887f91a0" row="7" col="0"/>
+        <cl:group std:sid="group-9dae098e" style="padding:0px 0px 0px 0px;">
+          <cl:responsivexylayoutdata std:sid="rxyl-data-a191b0c0">
+            <cl:xylayoutdata std:sid="sxyl-data-7907a0f1" top="0px" right="100px" bottom="0px" left="100px" horizontalAnchor="BOTH" verticalAnchor="BOTH" screenid="kiosk"/>
+          </cl:responsivexylayoutdata>
+          <cl:group std:sid="group-0e991bd0" id="mobGroup" style="border-radius:15px; background-color:#ffffff;">
+            <cl:listener std:sid="listener-4aae2d13" name="focusin" handler="onGroupFocusin"/>
+            <cl:listener std:sid="listener-82dfabb0" name="focusout" handler="onGroupFocusout"/>
+            <cl:formdata std:sid="f-data-ef69f1bc" row="0" col="0"/>
+            <cl:inputbox std:sid="i-box-303ac5cf" id="VMLOG__ipbMobile" style="border-radius:0px; background-color:transparent; background-repeat:no-repeat; color:#aeaeae; font-weight:600; padding-left:0px; vertical-align:middle; font-size:40px; background-position:left center;" class="login-kiosk-form" secret="false">
+              <cl:datamapbind property="value" datacontrolid="ApplicationInfo" columnname="Mobile"/>
+              <cl:langbind property="placeholder" category="PROPERTY" keypath="Str_MobileInputRequest"/>
+              <cl:formdata std:sid="f-data-62458b3b" row="0" col="1"/>
+            </cl:inputbox>
+            <cl:group std:sid="group-f119fcae" style="border-radius:10px;">
+              <cl:formdata std:sid="f-data-a740034f" row="0" col="0"/>
+              <cl:output std:sid="output-b944e48f" id="VMLOG___opbMobile" style="background-repeat:no-repeat; background-size:auto; background-image:url('../../../theme/images/kioskVisit/mobileIcon_1-1.png'); background-position:center;">
+                <cl:responsivexylayoutdata std:sid="rxyl-data-4375638f">
+                  <cl:xylayoutdata std:sid="sxyl-data-9e50a6b1" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH" screenid="kiosk"/>
+                </cl:responsivexylayoutdata>
+              </cl:output>
+              <cl:responsivexylayout std:sid="r-xylayout-7931b8d3"/>
+            </cl:group>
+            <cl:formlayout std:sid="f-layout-2d6935f5" hspace="0px" vspace="0px">
+              <cl:rows length="1" unit="FRACTION"/>
+              <cl:columns length="2" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="12" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:group std:sid="group-4a7aeb23">
+            <cl:formdata std:sid="f-data-c94dc2c0" row="4" col="0"/>
+            <cl:button std:sid="button-134d8a0e" id="VISITOR_btnVisitSearch" style="padding-top:15px; background-size:auto; color:#ffffff; font-weight:600; padding-left:0px; font-size:45px; padding-bottom:15px; font-style:normal; background-position:center; border-radius:10px; background-color:#d24c56; background-repeat:no-repeat; padding-right:0px;" class="login-form">
+              <cl:listener std:sid="listener-0c57598a" name="click" handler="onVISITOR_btnVisitSearchClick"/>
+              <cl:langbind property="value" category="PROPERTY" keypath="Str_VisitSearch"/>
+              <cl:xylayoutdata std:sid="xyl-data-41c663d2" top="0px" right="10px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+            </cl:button>
+            <cl:xylayout std:sid="xylayout-a35e6695"/>
+          </cl:group>
+          <cl:group std:sid="group-d9e5ebac" id="pwGroup" style="border-radius:15px; background-color:#ffffff; background-image:none;">
+            <cl:listener std:sid="listener-59d1d8b6" name="focusin" handler="onPwGroupFocusin"/>
+            <cl:listener std:sid="listener-81b84a46" name="focusout" handler="onPwGroupFocusout"/>
+            <cl:formdata std:sid="f-data-e67c1af8" row="2" col="0"/>
+            <cl:inputbox std:sid="i-box-13a24fe7" id="VMLOG_ipbPassword" style="border-radius:0px; background-color:transparent; background-repeat:no-repeat; color:#aeaeae; font-weight:600; padding-left:0px; vertical-align:middle; font-size:40px; background-position:left center;" class="login-kiosk-form" secret="true">
+              <cl:langbind property="placeholder" category="PROPERTY" keypath="Str_TypePassword"/>
+              <cl:datamapbind property="value" datacontrolid="ApplicationInfo" columnname="Password"/>
+              <cl:formdata std:sid="f-data-1165cd45" row="0" col="1"/>
+            </cl:inputbox>
+            <cl:group std:sid="group-410b8124" style="background-repeat:no-repeat; background-position:center;">
+              <cl:formdata std:sid="f-data-dbeefc15" row="0" col="0"/>
+              <cl:output std:sid="output-a8b71d94" id="VMLOG___opbPw" style="background-color:transparent; background-repeat:no-repeat; background-image:url('../../../theme/images/kioskVisit/pwIcon_2.png'); background-position:center;">
+                <cl:responsivexylayoutdata std:sid="rxyl-data-9f487a21">
+                  <cl:xylayoutdata std:sid="sxyl-data-09431fbe" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH" screenid="kiosk"/>
+                </cl:responsivexylayoutdata>
+              </cl:output>
+              <cl:responsivexylayout std:sid="r-xylayout-aa9b0a6a"/>
+            </cl:group>
+            <cl:formlayout std:sid="f-layout-e6852ee4" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+              <cl:rows length="1" unit="FRACTION"/>
+              <cl:columns length="2" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="12" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:formlayout std:sid="f-layout-4b7bd4dd" hspace="0px" vspace="0px">
+            <cl:rows length="6" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:rows length="2" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:rows length="6" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:rows length="2" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:rows length="6" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:responsivexylayout std:sid="r-xylayout-6f0656ad"/>
+      </cl:group>
+      <cl:group std:sid="group-a99a1dfa">
+        <cl:formdata std:sid="f-data-a87f65d1" row="4" col="0"/>
+        <cl:button std:sid="button-5596cbcd" id="VISITOR_btnVisitRequest" style="padding-top:15px; background-size:cover; color:#ffffff; font-weight:600; padding-left:0px; font-size:85px; padding-bottom:15px; font-style:normal; background-position:center; background-color:#477aff; border-radius:10px; background-repeat:no-repeat; padding-right:0px;" class="login-form">
+          <cl:listener std:sid="listener-d2febeeb" name="click" handler="onVISITOR_btnVisitRequestClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_VisitApplication2"/>
+          <cl:responsivexylayoutdata std:sid="rxyl-data-b4d3d76b">
+            <cl:xylayoutdata std:sid="sxyl-data-99d5ed17" top="0px" right="100px" bottom="0px" left="100px" horizontalAnchor="BOTH" verticalAnchor="BOTH" screenid="kiosk"/>
+          </cl:responsivexylayoutdata>
+        </cl:button>
+        <cl:responsivexylayout std:sid="r-xylayout-4b4a9988"/>
+      </cl:group>
+      <cl:group std:sid="group-68838c96">
+        <cl:formdata std:sid="f-data-3ee0e477" row="9" col="0"/>
+        <cl:output std:sid="output-fc31dbba" id="VISITOR_opbInfo" style="color:#FFFFFF; font-size:25px; text-align:center;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_VisitRequestGuide"/>
+          <cl:responsivexylayoutdata std:sid="rxyl-data-63a49029">
+            <cl:xylayoutdata std:sid="sxyl-data-be53c2c3" top="0px" right="100px" bottom="0px" left="100px" horizontalAnchor="BOTH" verticalAnchor="BOTH" screenid="kiosk"/>
+          </cl:responsivexylayoutdata>
+        </cl:output>
+        <cl:responsivexylayout std:sid="r-xylayout-727f561a"/>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-37d1911f" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+        <cl:rows length="13" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="13" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="15" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="9" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="5" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="4" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="14" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="2" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="7" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="4" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:responsivexylayout std:sid="r-xylayout-88efeaad"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler>
+      <std:guide position="600"/>
+    </std:vruler>
+  </std:studiosetting>
+</html>

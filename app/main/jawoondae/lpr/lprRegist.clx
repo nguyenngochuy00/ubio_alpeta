@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-42d5c34c" version="1.0.0.0">
+  <head std:sid="head-3de8c7ea">
+    <title>lprRegist</title>
+    <screen std:sid="screen-96286f87" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="250" customWidth="400"/>
+    <screen std:sid="screen-f4496634" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-f0ea4d26" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-7303f6f8">
+      <cl:datamap std:sid="d-map-650e077f" id="LprInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-3d702040" name="DeviceID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-7a850f38" name="Password"/>
+          <cl:datacolumn std:sid="d-column-efe0d373" name="Name"/>
+          <cl:datacolumn std:sid="d-column-46c726d6" name="GateSet" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-d0da9404" name="UseFlag" datatype="number" defaultvalue="0"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-a33aca7f" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-741aee98" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-36a6c30c" id="Control">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-f3b31cd7" name="Command" datatype="number" defaultvalue="1"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-cb28eaec" id="Rule">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-b874232d" name="OpenRule" datatype="number" defaultvalue="0"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-bf40aed4" id="cardInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-ef0bda17" name="cardNum" defaultvalue="AAAAAAA"/>
+          <cl:datacolumn std:sid="d-column-37fb5372" name="picture" defaultvalue="true"/>
+          <cl:datacolumn std:sid="d-column-cb44a6d6" name="gio" defaultvalue="I"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-3e0c2adb" id="smsPutLprControl" method="put">
+        <cl:requestdata dataid="Control"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-63e4a507" id="smsPutLprControlSet" method="put">
+        <cl:requestdata dataid="Rule"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-97d66abc" id="smsPDAAUth" action="/v1/jawoondae/accessCard/authentication">
+        <cl:requestdata dataid="cardInfo"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec dev-comment="JWDLR"/>
+  </head>
+  <body std:sid="body-55699fd8" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-28bb8a28" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-226e210b" id="JWDLR_grpMain">
+      <cl:xylayoutdata std:sid="xyl-data-c9b880d1" top="1px" right="1px" bottom="1px" left="1px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-11ea9441">
+        <cl:formdata std:sid="f-data-fcffab7b" row="0" col="0"/>
+        <cl:output std:sid="output-0b01b30b" value="장비번호">
+          <cl:formdata std:sid="f-data-7764ddef" row="0" col="0"/>
+        </cl:output>
+        <cl:inputbox std:sid="i-box-50436f3e" id="JWDLR_ipbDeviceID">
+          <cl:datamapbind property="value" datacontrolid="LprInfo" columnname="DeviceID"/>
+          <cl:formdata std:sid="f-data-a4fa0343" row="0" col="1"/>
+        </cl:inputbox>
+        <cl:formlayout std:sid="f-layout-f55a2b64">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-90012d79">
+        <cl:formdata std:sid="f-data-5123575b" row="1" col="0"/>
+        <cl:output std:sid="output-b9afb4fb" value="비밀번호">
+          <cl:formdata std:sid="f-data-3d9d9b76" row="0" col="0"/>
+        </cl:output>
+        <cl:inputbox std:sid="i-box-af470743" id="JWDLR_ipbPassword" secret="true" maxlength="4">
+          <cl:datamapbind property="value" datacontrolid="LprInfo" columnname="Password"/>
+          <cl:formdata std:sid="f-data-b2db13f7" row="0" col="1"/>
+        </cl:inputbox>
+        <cl:formlayout std:sid="f-layout-d76a6cd7">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-89d4ff1f">
+        <cl:formdata std:sid="f-data-631b792d" row="2" col="0"/>
+        <cl:output std:sid="output-5fb3544f" value="명칭">
+          <cl:formdata std:sid="f-data-b31d97c1" row="0" col="0"/>
+        </cl:output>
+        <cl:inputbox std:sid="i-box-8c5d02c9" id="JWDLR_ipbName">
+          <cl:datamapbind property="value" datacontrolid="LprInfo" columnname="Name"/>
+          <cl:formdata std:sid="f-data-8bb73b43" row="0" col="1"/>
+        </cl:inputbox>
+        <cl:formlayout std:sid="f-layout-f1f2443c">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-6f441e45">
+        <cl:formdata std:sid="f-data-33d1b7f6" row="3" col="0"/>
+        <cl:output std:sid="output-e1393548" value="차단바 청책">
+          <cl:formdata std:sid="f-data-50827bcf" row="0" col="0"/>
+        </cl:output>
+        <cl:combobox std:sid="c-box-49318be8" id="JWDLR_cmbGate1Set">
+          <cl:datamapbind property="value" datacontrolid="LprInfo" columnname="GateSet"/>
+          <cl:formdata std:sid="f-data-3b42f750" row="0" col="1"/>
+          <cl:item std:sid="item-169243e4" label="등록된 차량만" value="0"/>
+          <cl:item std:sid="item-be0c4dda" label="자동통과" value="1"/>
+          <cl:item std:sid="item-7495a406" label="수동설정" value="2"/>
+        </cl:combobox>
+        <cl:formlayout std:sid="f-layout-cef7c613">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-88dbf35b">
+        <cl:formdata std:sid="f-data-150af168" row="6" col="0"/>
+        <cl:button std:sid="button-d0e4c03e" id="JWDLR_btnRegist" class="userInfo_btn" value="등록">
+          <cl:listener std:sid="listener-2c143441" name="click" handler="onJWDLR_btnRegistClick"/>
+          <cl:listener std:sid="listener-1c170cf2" name="click" handler="onJWDLR_btnRegistClick"/>
+          <cl:formdata std:sid="f-data-19da20ff" row="0" col="1"/>
+        </cl:button>
+        <cl:button std:sid="button-39395e5b" id="JWDLR_btnClose" class="userInfo_btn" value="취소">
+          <cl:listener std:sid="listener-4189cee1" name="click" handler="onJWDLR_btnCloseClick"/>
+          <cl:formdata std:sid="f-data-16e0dbef" row="0" col="3"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-c81b9631">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="10" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-5d0198a3">
+        <cl:formdata std:sid="f-data-5ecabd26" row="5" col="0"/>
+        <cl:button std:sid="button-69b5fdab" visible="false" value="개폐 오픈">
+          <cl:listener std:sid="listener-03d5c155" name="click" handler="onButtonClick"/>
+          <cl:xylayoutdata std:sid="xyl-data-2579b1d6" top="5px" left="10px" width="70px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+        </cl:button>
+        <cl:button std:sid="button-597bc367" visible="false" value="개폐 폐쇄">
+          <cl:listener std:sid="listener-aff71826" name="click" handler="onButtonClick2"/>
+          <cl:xylayoutdata std:sid="xyl-data-70c9ea5d" top="5px" left="90px" width="70px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+        </cl:button>
+        <cl:button std:sid="button-3fe06005" visible="false" value="오픈룰">
+          <cl:listener std:sid="listener-ab496a42" name="click" handler="onButtonClick3"/>
+          <cl:xylayoutdata std:sid="xyl-data-15042937" top="5px" left="170px" width="70px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+        </cl:button>
+        <cl:button std:sid="button-6d0a4243" visible="false" value="pdaCard인증">
+          <cl:listener std:sid="listener-402d5091" name="click" handler="onButtonClick4"/>
+          <cl:xylayoutdata std:sid="xyl-data-a4d2bedc" top="5px" left="250px" width="84px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+        </cl:button>
+        <cl:xylayout std:sid="xylayout-5fc1e11c"/>
+      </cl:group>
+      <cl:group std:sid="group-aabd6eec">
+        <cl:formdata std:sid="f-data-12a61826" row="4" col="0"/>
+        <cl:output std:sid="output-843563c5" value="사용옵션">
+          <cl:formdata std:sid="f-data-06bcd7ff" row="0" col="0"/>
+        </cl:output>
+        <cl:combobox std:sid="c-box-3db851be" id="cmb1">
+          <cl:datamapbind property="value" datacontrolid="LprInfo" columnname="UseFlag"/>
+          <cl:formdata std:sid="f-data-500fee38" row="0" col="1"/>
+          <cl:item std:sid="item-8d4a8341" label="미사용" value="0"/>
+          <cl:item std:sid="item-65f85c9a" label="사용" value="1"/>
+        </cl:combobox>
+        <cl:formlayout std:sid="f-layout-bb31d1d4">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-2c9a4281" top-margin="5px" right-margin="5px" bottom-margin="5px" left-margin="5px">
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-1cd8b522"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

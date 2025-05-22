@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-d0f6ee5f" version="1.0.0.0">
+  <head std:sid="head-1ee8db64">
+    <title>terminalMCPPageLock</title>
+    <screen std:sid="screen-5f224a4d" id="default" height="768px" minwidth="1024px" name="default" width="1024px"/>
+    <screen std:sid="screen-653f8261" id="tablet" height="667px" maxwidth="1023px" minwidth="500px" name="tablet" width="500px"/>
+    <screen std:sid="screen-514be0f3" id="mobile" height="525px" maxwidth="499px" name="mobile" width="350px"/>
+    <cl:model std:sid="model-37e29019">
+      <cl:submission std:sid="submission-6271205f" id="smsGetAcuLockOption" method="get">
+        <cl:listener std:sid="listener-523b6112" handler="onSmsGetAcuLockOptionSubmitDone" name="submit-done"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-d710d1b2" id="smsPutAcuLockOption" method="put" mediatype="application/json">
+        <cl:listener std:sid="listener-23c33c11" handler="onSmsPutAcuLockOptionSubmitDone" name="submit-done"/>
+      </cl:submission>
+      <cl:datamap std:sid="d-map-f6c406cc" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-54fae956" datatype="number" name="ResultCode"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:dataset std:sid="d-set-b9467b96" id="dsLockSchedule">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-8e5db37e" name="Week"/>
+          <cl:datacolumn std:sid="d-column-52f61fe4" name="Lock1"/>
+          <cl:datacolumn std:sid="d-column-f178456d" name="Lock2"/>
+          <cl:datacolumn std:sid="d-column-6bec6461" name="Lock3"/>
+          <cl:datacolumn std:sid="d-column-8f90abda" name="Open1"/>
+          <cl:datacolumn std:sid="d-column-17f63312" name="Open2"/>
+          <cl:datacolumn std:sid="d-column-ade3eb7f" name="Open3"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-0f185f40" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-fa1c56bd" handler="onBodyLoad" name="load"/>
+    <cl:group std:sid="group-5a1e6d82" id="basicgrd" style="border-radius:2px; padding:10px;">
+      <cl:xylayoutdata std:sid="xyl-data-10d4e7c3" height="500px" horizontalAnchor="LEFT" left="10px" top="10px" verticalAnchor="TOP" width="744px"/>
+      <cl:group std:sid="group-878d6771" style="padding:0px; border-radius:2px;">
+        <cl:formdata std:sid="f-data-9c690686" col="0" colspan="1" row="0" rowspan="1"/>
+        <cl:output std:sid="output-db9f8757" style="font-weight:700; font-size:14px;">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_Lock"/>
+          <cl:formdata std:sid="f-data-a00d7ac6" col="0" colspan="1" row="0" rowspan="1"/>
+        </cl:output>
+        <cl:output std:sid="output-cde4a98d" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-left-color:#c5c5c5; font-size:14px; border-right-color:#c5c5c5; border-left-width:1px; border-top-style:solid; background-color:#f6f6f6; border-left-style:solid; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; text-align:center;">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_Lock"/>
+          <cl:formdata std:sid="f-data-4faf8a58" col="0" row="2"/>
+        </cl:output>
+        <cl:output std:sid="output-0595e6e6" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-left-color:#c5c5c5; font-size:14px; border-right-color:#c5c5c5; border-left-width:1px; border-top-style:solid; background-color:#f6f6f6; border-left-style:solid; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; text-align:center;">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_Open"/>
+          <cl:formdata std:sid="f-data-68da0de3" col="0" row="4"/>
+        </cl:output>
+        <cl:group std:sid="group-ac28a9c7" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-right-color:#c5c5c5; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-b98e576d" col="1" colspan="1" row="2" rowspan="1"/>
+          <cl:combobox std:sid="c-box-bcffed65" id="cmbLockHourStart1" style="font-size:14px; text-align:center;" preventinput="true">
+            <cl:xylayoutdata std:sid="xyl-data-df25f17f" bottom="1px" horizontalAnchor="BOTH" left="1px" right="1px" top="1px" verticalAnchor="BOTH"/>
+          </cl:combobox>
+          <cl:xylayout std:sid="xylayout-202e9875"/>
+        </cl:group>
+        <cl:group std:sid="group-e50db24a">
+          <cl:formdata std:sid="f-data-b434c6b6" col="1" colspan="7" row="0" rowspan="1"/>
+          <cl:combobox std:sid="c-box-7bec1a2c" id="cmbSelectLock" style="font-size:14px; text-align:center;" preventinput="true">
+            <cl:listener std:sid="listener-dabbada3" handler="onCmbSelectLockSelectionChange" name="selection-change"/>
+            <cl:xylayoutdata std:sid="xyl-data-7668100f" bottom="2px" horizontalAnchor="LEFT" left="4px" top="2px" verticalAnchor="BOTH" width="190px"/>
+          </cl:combobox>
+          <cl:xylayout std:sid="xylayout-a982a0ef"/>
+        </cl:group>
+        <cl:group std:sid="group-f762d773" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-right-color:#c5c5c5; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-c48dd822" col="2" row="2"/>
+          <cl:output std:sid="output-c9219273" style="font-weight:bold; text-align:center;" value=":">
+            <cl:xylayoutdata std:sid="xyl-data-16ed4189" bottom="1px" horizontalAnchor="BOTH" left="1px" right="1px" top="1px" verticalAnchor="BOTH"/>
+          </cl:output>
+          <cl:xylayout std:sid="xylayout-2b64c731"/>
+        </cl:group>
+        <cl:group std:sid="group-2d503b5a" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-right-color:#c5c5c5; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-ff957e6d" col="3" row="2"/>
+          <cl:combobox std:sid="c-box-67b87d0a" id="cmbLockMinuteStart1" style="font-size:14px; text-align:center;" preventinput="true">
+            <cl:xylayoutdata std:sid="xyl-data-90e612d5" bottom="1px" horizontalAnchor="BOTH" left="1px" right="1px" top="1px" verticalAnchor="BOTH"/>
+          </cl:combobox>
+          <cl:xylayout std:sid="xylayout-0d3f8b2a"/>
+        </cl:group>
+        <cl:group std:sid="group-e9be0cd1" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-right-color:#c5c5c5; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-63bea662" col="4" row="2"/>
+          <cl:output std:sid="output-2967378e" style="font-weight:bold; text-align:center;" value="~">
+            <cl:xylayoutdata std:sid="xyl-data-bc5f8fe2" bottom="1px" horizontalAnchor="BOTH" left="1px" right="1px" top="1px" verticalAnchor="BOTH"/>
+          </cl:output>
+          <cl:xylayout std:sid="xylayout-fefb9085"/>
+        </cl:group>
+        <cl:group std:sid="group-65558ed7" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-right-color:#c5c5c5; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-e8ba3b89" col="5" row="2"/>
+          <cl:combobox std:sid="c-box-23c34b1f" id="cmbLockHourEnd1" style="font-size:14px; text-align:center;" preventinput="true">
+            <cl:xylayoutdata std:sid="xyl-data-30440fc9" bottom="1px" horizontalAnchor="BOTH" left="1px" right="1px" top="1px" verticalAnchor="BOTH"/>
+          </cl:combobox>
+          <cl:xylayout std:sid="xylayout-23388003"/>
+        </cl:group>
+        <cl:group std:sid="group-2c36604f" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-right-color:#c5c5c5; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-aeaeef5c" col="6" row="2"/>
+          <cl:output std:sid="output-1c1a7689" style="font-weight:bold; text-align:center;" value=":">
+            <cl:xylayoutdata std:sid="xyl-data-4948ebff" bottom="1px" horizontalAnchor="BOTH" left="1px" right="1px" top="1px" verticalAnchor="BOTH"/>
+          </cl:output>
+          <cl:xylayout std:sid="xylayout-d0b1166a"/>
+        </cl:group>
+        <cl:group std:sid="group-79366656" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-right-color:#c5c5c5; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-42e04988" col="7" row="2"/>
+          <cl:combobox std:sid="c-box-c7878c19" id="cmbLockMinuteEnd1" style="font-size:14px; text-align:center;" preventinput="true">
+            <cl:xylayoutdata std:sid="xyl-data-2c3830b4" bottom="1px" horizontalAnchor="BOTH" left="1px" right="1px" top="1px" verticalAnchor="BOTH"/>
+          </cl:combobox>
+          <cl:xylayout std:sid="xylayout-b3dfa961"/>
+        </cl:group>
+        <cl:group std:sid="group-d4b2575c" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-right-color:#c5c5c5; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-45c54154" col="9" row="2"/>
+          <cl:combobox std:sid="c-box-c5b0646d" id="cmbLockHourStart2" style="font-size:14px; text-align:center;" preventinput="true">
+            <cl:xylayoutdata std:sid="xyl-data-4ce96b9f" bottom="1px" horizontalAnchor="BOTH" left="1px" right="1px" top="1px" verticalAnchor="BOTH"/>
+          </cl:combobox>
+          <cl:xylayout std:sid="xylayout-c1d65ebb"/>
+        </cl:group>
+        <cl:group std:sid="group-835bf357" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-right-color:#c5c5c5; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-cdea6fda" col="10" row="2"/>
+          <cl:output std:sid="output-cb4a1486" style="font-weight:bold; text-align:center;" value=":">
+            <cl:xylayoutdata std:sid="xyl-data-204d931a" bottom="1px" horizontalAnchor="BOTH" left="1px" right="1px" top="1px" verticalAnchor="BOTH"/>
+          </cl:output>
+          <cl:xylayout std:sid="xylayout-afc0457d"/>
+        </cl:group>
+        <cl:group std:sid="group-8395ae6e" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-right-color:#c5c5c5; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-179e2b24" col="11" row="2"/>
+          <cl:combobox std:sid="c-box-3d26bba4" id="cmbLockMinuteStart2" style="font-size:14px; text-align:center;" preventinput="true">
+            <cl:xylayoutdata std:sid="xyl-data-192cdf78" bottom="1px" horizontalAnchor="BOTH" left="1px" right="1px" top="1px" verticalAnchor="BOTH"/>
+          </cl:combobox>
+          <cl:xylayout std:sid="xylayout-f1ecf67f"/>
+        </cl:group>
+        <cl:group std:sid="group-cdded822" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-right-color:#c5c5c5; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-47b2ab72" col="12" row="2"/>
+          <cl:output std:sid="output-74c37154" style="font-weight:bold; text-align:center;" value="~">
+            <cl:xylayoutdata std:sid="xyl-data-38715c08" bottom="1px" horizontalAnchor="BOTH" left="1px" right="1px" top="1px" verticalAnchor="BOTH"/>
+          </cl:output>
+          <cl:xylayout std:sid="xylayout-2d73614d"/>
+        </cl:group>
+        <cl:group std:sid="group-fbf1c941" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-right-color:#c5c5c5; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-090b3324" col="13" row="2"/>
+          <cl:combobox std:sid="c-box-2ca3e174" id="cmbLockHourEnd2" style="font-size:14px; text-align:center;" preventinput="true">
+            <cl:xylayoutdata std:sid="xyl-data-a58febe1" bottom="1px" horizontalAnchor="BOTH" left="1px" right="1px" top="1px" verticalAnchor="BOTH"/>
+          </cl:combobox>
+          <cl:xylayout std:sid="xylayout-9825de66"/>
+        </cl:group>
+        <cl:group std:sid="group-9de53ade" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-right-color:#c5c5c5; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-f068e1bc" col="14" row="2"/>
+          <cl:output std:sid="output-51479f09" style="font-weight:bold; text-align:center;" value=":">
+            <cl:xylayoutdata std:sid="xyl-data-453d60fe" bottom="1px" horizontalAnchor="BOTH" left="1px" right="1px" top="1px" verticalAnchor="BOTH"/>
+          </cl:output>
+          <cl:xylayout std:sid="xylayout-d6d5cc83"/>
+        </cl:group>
+        <cl:group std:sid="group-5a6f87b3" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-right-color:#c5c5c5; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-3a3feaa6" col="15" row="2"/>
+          <cl:combobox std:sid="c-box-c36cad69" id="cmbLockMinuteEnd2" style="font-size:14px; text-align:center;" preventinput="true">
+            <cl:xylayoutdata std:sid="xyl-data-e8d00883" bottom="1px" horizontalAnchor="BOTH" left="1px" right="1px" top="1px" verticalAnchor="BOTH"/>
+          </cl:combobox>
+          <cl:xylayout std:sid="xylayout-d8c8e6a0"/>
+        </cl:group>
+        <cl:group std:sid="group-938af64f" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-right-color:#c5c5c5; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-889ce2f8" col="17" row="2"/>
+          <cl:combobox std:sid="c-box-b7a39c5e" id="cmbLockHourStart3" style="font-size:14px; text-align:center;" preventinput="true">
+            <cl:xylayoutdata std:sid="xyl-data-947f880d" bottom="1px" horizontalAnchor="BOTH" left="1px" right="1px" top="1px" verticalAnchor="BOTH"/>
+          </cl:combobox>
+          <cl:xylayout std:sid="xylayout-a20b7c98"/>
+        </cl:group>
+        <cl:group std:sid="group-849f57e4" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-right-color:#c5c5c5; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-1702598e" col="18" row="2"/>
+          <cl:output std:sid="output-f8b982de" style="font-weight:bold; text-align:center;" value=":">
+            <cl:xylayoutdata std:sid="xyl-data-85249697" bottom="1px" horizontalAnchor="BOTH" left="1px" right="1px" top="1px" verticalAnchor="BOTH"/>
+          </cl:output>
+          <cl:xylayout std:sid="xylayout-9a8fd881"/>
+        </cl:group>
+        <cl:group std:sid="group-1a0dd6a3" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-right-color:#c5c5c5; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-95fc6fa4" col="19" row="2"/>
+          <cl:combobox std:sid="c-box-1d9c3ba3" id="cmbLockMinuteStart3" style="font-size:14px; text-align:center;" preventinput="true">
+            <cl:xylayoutdata std:sid="xyl-data-2ebf25b4" bottom="1px" horizontalAnchor="BOTH" left="1px" right="1px" top="1px" verticalAnchor="BOTH"/>
+          </cl:combobox>
+          <cl:xylayout std:sid="xylayout-58bb7eb0"/>
+        </cl:group>
+        <cl:group std:sid="group-7bcbce33" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-right-color:#c5c5c5; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-81bf795f" col="20" row="2"/>
+          <cl:output std:sid="output-402266a2" style="font-weight:bold; text-align:center;" value="~">
+            <cl:xylayoutdata std:sid="xyl-data-ce5fb2e5" bottom="1px" horizontalAnchor="BOTH" left="1px" right="1px" top="1px" verticalAnchor="BOTH"/>
+          </cl:output>
+          <cl:xylayout std:sid="xylayout-354fb071"/>
+        </cl:group>
+        <cl:group std:sid="group-a143a7f6" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-right-color:#c5c5c5; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-aadb81aa" col="21" row="2"/>
+          <cl:combobox std:sid="c-box-4696e27d" id="cmbLockHourEnd3" style="font-size:14px; text-align:center;" preventinput="true">
+            <cl:xylayoutdata std:sid="xyl-data-523abe70" bottom="1px" horizontalAnchor="BOTH" left="1px" right="1px" top="1px" verticalAnchor="BOTH"/>
+          </cl:combobox>
+          <cl:xylayout std:sid="xylayout-51501ea7"/>
+        </cl:group>
+        <cl:group std:sid="group-e2399094" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-right-color:#c5c5c5; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-2fcdbcda" col="22" row="2"/>
+          <cl:output std:sid="output-d903e7bf" style="font-weight:bold; text-align:center;" value=":">
+            <cl:xylayoutdata std:sid="xyl-data-15d02c83" bottom="1px" horizontalAnchor="BOTH" left="1px" right="1px" top="1px" verticalAnchor="BOTH"/>
+          </cl:output>
+          <cl:xylayout std:sid="xylayout-9acfe40a"/>
+        </cl:group>
+        <cl:group std:sid="group-7b17e1ed" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-right-color:#c5c5c5; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-cbf955fd" col="23" row="2"/>
+          <cl:combobox std:sid="c-box-c8e55975" id="cmbLockMinuteEnd3" style="font-size:14px; text-align:center;" preventinput="true">
+            <cl:xylayoutdata std:sid="xyl-data-24354a46" bottom="1px" horizontalAnchor="BOTH" left="1px" right="1px" top="1px" verticalAnchor="BOTH"/>
+          </cl:combobox>
+          <cl:xylayout std:sid="xylayout-f216b4db"/>
+        </cl:group>
+        <cl:group std:sid="group-84f774ae" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-right-color:#c5c5c5; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-284e3383" col="1" row="4"/>
+          <cl:combobox std:sid="c-box-2ce48d0c" id="cmbOpenHourStart1" style="font-size:14px; text-align:center;" preventinput="true">
+            <cl:xylayoutdata std:sid="xyl-data-03a834dd" bottom="1px" horizontalAnchor="BOTH" left="1px" right="1px" top="1px" verticalAnchor="BOTH"/>
+          </cl:combobox>
+          <cl:xylayout std:sid="xylayout-9ce82251"/>
+        </cl:group>
+        <cl:group std:sid="group-43162c52" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-right-color:#c5c5c5; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-24d25adb" col="2" row="4"/>
+          <cl:output std:sid="output-81300067" style="font-weight:bold; text-align:center;" value=":">
+            <cl:xylayoutdata std:sid="xyl-data-39db5eb1" bottom="1px" horizontalAnchor="BOTH" left="1px" right="1px" top="1px" verticalAnchor="BOTH"/>
+          </cl:output>
+          <cl:xylayout std:sid="xylayout-74274aef"/>
+        </cl:group>
+        <cl:group std:sid="group-abdc0f5f" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-right-color:#c5c5c5; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-8ecae68c" col="3" row="4"/>
+          <cl:combobox std:sid="c-box-69cc0a7b" id="cmbOpenMinuteStart1" style="font-size:14px; text-align:center;" preventinput="true">
+            <cl:xylayoutdata std:sid="xyl-data-c09eb5cc" bottom="1px" horizontalAnchor="BOTH" left="1px" right="1px" top="1px" verticalAnchor="BOTH"/>
+          </cl:combobox>
+          <cl:xylayout std:sid="xylayout-63760f29"/>
+        </cl:group>
+        <cl:group std:sid="group-32dfaaa0" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-right-color:#c5c5c5; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-e6388c10" col="4" row="4"/>
+          <cl:output std:sid="output-0f515908" style="font-weight:bold; text-align:center;" value="~">
+            <cl:xylayoutdata std:sid="xyl-data-fe37aaa1" bottom="1px" horizontalAnchor="BOTH" left="1px" right="1px" top="1px" verticalAnchor="BOTH"/>
+          </cl:output>
+          <cl:xylayout std:sid="xylayout-7385de1e"/>
+        </cl:group>
+        <cl:group std:sid="group-96e06d9c" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-right-color:#c5c5c5; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-41fe2cf2" col="5" row="4"/>
+          <cl:combobox std:sid="c-box-9f4dbc3a" id="cmbOpenHourEnd1" style="font-size:14px; text-align:center;" preventinput="true">
+            <cl:xylayoutdata std:sid="xyl-data-e465f4cc" bottom="1px" horizontalAnchor="BOTH" left="1px" right="1px" top="1px" verticalAnchor="BOTH"/>
+          </cl:combobox>
+          <cl:xylayout std:sid="xylayout-15754867"/>
+        </cl:group>
+        <cl:group std:sid="group-047fe0cf" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-right-color:#c5c5c5; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-16bc75e8" col="6" row="4"/>
+          <cl:output std:sid="output-6c43f71c" style="font-weight:bold; text-align:center;" value=":">
+            <cl:xylayoutdata std:sid="xyl-data-921e916a" bottom="1px" horizontalAnchor="BOTH" left="1px" right="1px" top="1px" verticalAnchor="BOTH"/>
+          </cl:output>
+          <cl:xylayout std:sid="xylayout-7327eddb"/>
+        </cl:group>
+        <cl:group std:sid="group-88ec11ce" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-right-color:#c5c5c5; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-009876d5" col="7" row="4"/>
+          <cl:combobox std:sid="c-box-de951b25" id="cmbOpenMinuteEnd1" style="font-size:14px; text-align:center;" preventinput="true">
+            <cl:xylayoutdata std:sid="xyl-data-1389568d" bottom="1px" horizontalAnchor="BOTH" left="1px" right="1px" top="1px" verticalAnchor="BOTH"/>
+          </cl:combobox>
+          <cl:xylayout std:sid="xylayout-cf835a3c"/>
+        </cl:group>
+        <cl:group std:sid="group-25b1a9f2" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-right-color:#c5c5c5; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-3c9460af" col="9" row="4"/>
+          <cl:combobox std:sid="c-box-1299961f" id="cmbOpenHourStart2" style="font-size:14px; text-align:center;" preventinput="true">
+            <cl:xylayoutdata std:sid="xyl-data-ca4e3cd8" bottom="1px" horizontalAnchor="BOTH" left="1px" right="1px" top="1px" verticalAnchor="BOTH"/>
+          </cl:combobox>
+          <cl:xylayout std:sid="xylayout-5510cfca"/>
+        </cl:group>
+        <cl:group std:sid="group-51acee0e" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-right-color:#c5c5c5; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-2472844d" col="10" row="4"/>
+          <cl:output std:sid="output-c81ddd1a" style="font-weight:bold; text-align:center;" value=":">
+            <cl:xylayoutdata std:sid="xyl-data-90564470" bottom="1px" horizontalAnchor="BOTH" left="1px" right="1px" top="1px" verticalAnchor="BOTH"/>
+          </cl:output>
+          <cl:xylayout std:sid="xylayout-676479c8"/>
+        </cl:group>
+        <cl:group std:sid="group-9568315c" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-right-color:#c5c5c5; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-bc72d9fd" col="11" row="4"/>
+          <cl:combobox std:sid="c-box-8f50e65c" id="cmbOpenMinuteStart2" style="font-size:14px; text-align:center;" preventinput="true">
+            <cl:xylayoutdata std:sid="xyl-data-c84583ba" bottom="1px" horizontalAnchor="BOTH" left="1px" right="1px" top="1px" verticalAnchor="BOTH"/>
+          </cl:combobox>
+          <cl:xylayout std:sid="xylayout-35d1fe5d"/>
+        </cl:group>
+        <cl:group std:sid="group-a699baf3" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-right-color:#c5c5c5; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-39ebb24a" col="12" row="4"/>
+          <cl:output std:sid="output-92498d27" style="font-weight:bold; text-align:center;" value="~">
+            <cl:xylayoutdata std:sid="xyl-data-6a1675b2" bottom="1px" horizontalAnchor="BOTH" left="1px" right="1px" top="1px" verticalAnchor="BOTH"/>
+          </cl:output>
+          <cl:xylayout std:sid="xylayout-1cecb818"/>
+        </cl:group>
+        <cl:group std:sid="group-b4feb962" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-right-color:#c5c5c5; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-0a263e13" col="13" row="4"/>
+          <cl:combobox std:sid="c-box-337da7d1" id="cmbOpenHourEnd2" style="font-size:14px; text-align:center;" preventinput="true">
+            <cl:xylayoutdata std:sid="xyl-data-8a6d51aa" bottom="1px" horizontalAnchor="BOTH" left="1px" right="1px" top="1px" verticalAnchor="BOTH"/>
+          </cl:combobox>
+          <cl:xylayout std:sid="xylayout-d1b6d598"/>
+        </cl:group>
+        <cl:group std:sid="group-3ab70bd2" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-right-color:#c5c5c5; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-e4461048" col="14" row="4"/>
+          <cl:output std:sid="output-391b6ab9" style="font-weight:bold; text-align:center;" value=":">
+            <cl:xylayoutdata std:sid="xyl-data-6c99c055" bottom="1px" horizontalAnchor="BOTH" left="1px" right="1px" top="1px" verticalAnchor="BOTH"/>
+          </cl:output>
+          <cl:xylayout std:sid="xylayout-2d4234db"/>
+        </cl:group>
+        <cl:group std:sid="group-0eb44700" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-right-color:#c5c5c5; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-9796db1a" col="15" row="4"/>
+          <cl:combobox std:sid="c-box-61626f57" id="cmbOpenMinuteEnd2" style="font-size:14px; text-align:center;" preventinput="true">
+            <cl:xylayoutdata std:sid="xyl-data-13f125e1" bottom="1px" horizontalAnchor="BOTH" left="1px" right="1px" top="1px" verticalAnchor="BOTH"/>
+          </cl:combobox>
+          <cl:xylayout std:sid="xylayout-4b9601c5"/>
+        </cl:group>
+        <cl:group std:sid="group-4ff3aca1" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-right-color:#c5c5c5; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-764bdbd4" col="17" row="4"/>
+          <cl:combobox std:sid="c-box-74c19c24" id="cmbOpenHourStart3" style="font-size:14px; text-align:center;" preventinput="true">
+            <cl:xylayoutdata std:sid="xyl-data-a5352a05" bottom="1px" horizontalAnchor="BOTH" left="1px" right="1px" top="1px" verticalAnchor="BOTH"/>
+          </cl:combobox>
+          <cl:xylayout std:sid="xylayout-3f78778e"/>
+        </cl:group>
+        <cl:group std:sid="group-b21e97e5" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-right-color:#c5c5c5; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-71b61903" col="18" row="4"/>
+          <cl:output std:sid="output-c0400ad7" style="font-weight:bold; text-align:center;" value=":">
+            <cl:xylayoutdata std:sid="xyl-data-5e819247" bottom="1px" horizontalAnchor="BOTH" left="1px" right="1px" top="1px" verticalAnchor="BOTH"/>
+          </cl:output>
+          <cl:xylayout std:sid="xylayout-46b7d622"/>
+        </cl:group>
+        <cl:group std:sid="group-38617ad6" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-right-color:#c5c5c5; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-80f7db3f" col="19" row="4"/>
+          <cl:combobox std:sid="c-box-543b0847" id="cmbOpenMinuteStart3" style="font-size:14px; text-align:center;" preventinput="true">
+            <cl:xylayoutdata std:sid="xyl-data-cc06c789" bottom="1px" horizontalAnchor="BOTH" left="1px" right="1px" top="1px" verticalAnchor="BOTH"/>
+          </cl:combobox>
+          <cl:xylayout std:sid="xylayout-0852cefa"/>
+        </cl:group>
+        <cl:group std:sid="group-a84728b0" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-right-color:#c5c5c5; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-268e8c56" col="20" row="4"/>
+          <cl:output std:sid="output-4fe773a3" style="font-weight:bold; text-align:center;" value="~">
+            <cl:xylayoutdata std:sid="xyl-data-0aa3b12c" bottom="1px" horizontalAnchor="BOTH" left="1px" right="1px" top="1px" verticalAnchor="BOTH"/>
+          </cl:output>
+          <cl:xylayout std:sid="xylayout-3e75e5d1"/>
+        </cl:group>
+        <cl:group std:sid="group-02c1d9fa" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-right-color:#c5c5c5; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-7c106ee9" col="21" row="4"/>
+          <cl:combobox std:sid="c-box-e63ccc1a" id="cmbOpenHourEnd3" style="font-size:14px; text-align:center;" preventinput="true">
+            <cl:xylayoutdata std:sid="xyl-data-20492183" bottom="1px" horizontalAnchor="BOTH" left="1px" right="1px" top="1px" verticalAnchor="BOTH"/>
+          </cl:combobox>
+          <cl:xylayout std:sid="xylayout-02153a2d"/>
+        </cl:group>
+        <cl:group std:sid="group-26bb1363" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-right-color:#c5c5c5; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-e9894f37" col="22" row="4"/>
+          <cl:output std:sid="output-73b8aa23" style="font-weight:bold; text-align:center;" value=":">
+            <cl:xylayoutdata std:sid="xyl-data-86791f4f" bottom="1px" horizontalAnchor="BOTH" left="1px" right="1px" top="1px" verticalAnchor="BOTH"/>
+          </cl:output>
+          <cl:xylayout std:sid="xylayout-53041f91"/>
+        </cl:group>
+        <cl:group std:sid="group-348b6dce" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-right-color:#c5c5c5; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-7b45210c" col="23" row="4"/>
+          <cl:combobox std:sid="c-box-016d0c5d" id="cmbOpenMinuteEnd3" style="font-size:14px; text-align:center;" preventinput="true">
+            <cl:xylayoutdata std:sid="xyl-data-5d7cdf8f" bottom="1px" horizontalAnchor="BOTH" left="1px" right="1px" top="1px" verticalAnchor="BOTH"/>
+          </cl:combobox>
+          <cl:xylayout std:sid="xylayout-42d13b5a"/>
+        </cl:group>
+        <cl:combobox std:sid="c-box-a8875878" id="cmbSelectApply" style="font-size:14px; text-align:center;" preventinput="true">
+          <cl:listener std:sid="listener-a61020f6" handler="onCmbSelectApplySelectionChange" name="selection-change"/>
+          <cl:formdata col="15" colspan="5" row="6" rowspan="1"/>
+        </cl:combobox>
+        <cl:button std:sid="button-d7a27c54" id="btnApply" class="userInfo_btn">
+          <cl:listener std:sid="listener-5e94e7be" handler="onBtnApplyClick" name="click"/>
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_Apply"/>
+          <cl:formdata col="21" colspan="3" row="6" rowspan="1"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-d02aee26" hspace="0px" vspace="0px">
+          <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows autoSizing="false" length="20" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows autoSizing="false" length="10" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows autoSizing="false" length="10" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows autoSizing="false" length="30" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="80" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="40" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="10" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="40" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="20" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="40" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="10" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="40" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="20" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="40" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="10" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="40" minlength="0" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="20" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="40" minlength="0" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="10" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="40" minlength="0" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="20" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="40" minlength="0" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="10" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="40" minlength="0" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="20" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="40" minlength="0" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="10" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="40" minlength="0" unit="PIXEL"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:grid std:sid="grid-469d425f" id="grdLockSchedule" datasetid="dsLockSchedule">
+        <cl:listener std:sid="listener-a5a501f4" handler="onGrdLockScheduleClick" name="click"/>
+        <cl:formdata std:sid="f-data-c9893b63" col="0" row="2"/>
+        <cl:gridcolumn std:sid="g-column-f36b925c"/>
+        <cl:gridcolumn std:sid="g-column-13495813"/>
+        <cl:gridcolumn std:sid="g-column-0a689da5"/>
+        <cl:gridcolumn std:sid="g-column-7354269c"/>
+        <cl:gridcolumn std:sid="g-column-be3d67bd"/>
+        <cl:gridcolumn std:sid="g-column-2efb8724"/>
+        <cl:gridcolumn std:sid="g-column-59e64153"/>
+        <cl:gridheader std:sid="gh-band-e52ed0c9">
+          <cl:gridrow std:sid="g-row-349a38d7"/>
+          <cl:gridcell std:sid="gh-cell-f93d0dd1" colindex="0" rowindex="0" filterable="false" sortable="false" targetcolumnname="Week"/>
+          <cl:gridcell std:sid="gh-cell-b27796dd" colindex="1" rowindex="0" filterable="false" sortable="false" targetcolumnname="Lock1" text="Lock1"/>
+          <cl:gridcell std:sid="gh-cell-d4019b44" colindex="2" rowindex="0" filterable="false" sortable="false" targetcolumnname="Lock2" text="Lock2"/>
+          <cl:gridcell std:sid="gh-cell-0a4a3969" colindex="3" rowindex="0" filterable="false" sortable="false" targetcolumnname="Lock3" text="Lock3"/>
+          <cl:gridcell std:sid="gh-cell-fc90e643" colindex="4" rowindex="0" filterable="false" sortable="false" targetcolumnname="Open1" text="Open1"/>
+          <cl:gridcell std:sid="gh-cell-a5c2c5d5" colindex="5" rowindex="0" filterable="false" sortable="false" targetcolumnname="Open2" text="Open2"/>
+          <cl:gridcell std:sid="gh-cell-f7f2e0f5" colindex="6" rowindex="0" filterable="false" sortable="false" targetcolumnname="Open3" text="Open3"/>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-9e2bc3bd">
+          <cl:gridrow std:sid="g-row-8f2839c4"/>
+          <cl:gridcell std:sid="gd-cell-3be34c9e" colindex="0" rowindex="0" columnname="Week"/>
+          <cl:gridcell std:sid="gd-cell-6cce309e" colindex="1" rowindex="0" columnname="Lock1"/>
+          <cl:gridcell std:sid="gd-cell-16ee875f" colindex="2" rowindex="0" columnname="Lock2"/>
+          <cl:gridcell std:sid="gd-cell-2f9a27e7" colindex="3" rowindex="0" columnname="Lock3"/>
+          <cl:gridcell std:sid="gd-cell-e8a76c0f" colindex="4" rowindex="0" columnname="Open1"/>
+          <cl:gridcell std:sid="gd-cell-bf83ee3a" colindex="5" rowindex="0" columnname="Open2"/>
+          <cl:gridcell std:sid="gd-cell-8c3a9857" colindex="6" rowindex="0" columnname="Open3"/>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:formlayout std:sid="f-layout-dcd2fe65" hspace="0px" vspace="0px">
+        <cl:rows autoSizing="false" length="170" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:rows autoSizing="false" length="10" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:rows autoSizing="false" length="280" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-801febb7"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

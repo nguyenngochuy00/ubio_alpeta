@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-e7ab3212" version="1.0.0.0">
+  <head std:sid="head-b5817c2c">
+    <title>elevatorAccessFloorManagement</title>
+    <screen std:sid="screen-b6b29f07" id="default" name="default" minwidth="1024px" width="1024px" height="768px"/>
+    <screen std:sid="screen-d7c41475" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-c5c064e5" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-1bc48cd4">
+      <cl:dataset std:sid="d-set-3e4aefd9" id="dsFloorList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-6d0da851" name="Floor" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-917d64bc" name="FloorName"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-89e3aa66" id="ElevatorSetList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-aaad270e" name="ElevatorSetID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-87594216" name="ElevatorSetName"/>
+          <cl:datacolumn std:sid="d-column-bbaa2d2d" name="AccessFloor" datatype="string"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-715d92af" id="CustomFloorList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-56e7d6f4" name="ElevatorSetID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-a5c1995d" name="AccessFloor" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-44fa2495" name="FloorName" datatype="string"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-640eb320" id="FloorInfos">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-fd946a2d" name="AccessFloor" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-e844dbef" name="FloorName" datatype="string"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-9647bd6c" id="ModifyFloorList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-0c15a8ec" name="ElevatorSetID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-8ac76fe6" name="AccessFloor" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-57a74b9c" name="FloorName" datatype="string"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-542a4d18" id="ElevatorSetInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-ee0bfe37" name="ElevatorSetID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-9b27aaa6" name="ElevatorSetName"/>
+          <cl:datacolumn std:sid="d-column-70afded7" name="AccessFloor"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-a33aca7f" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-99a37a0f" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-ee71e7db" id="OptionElevator">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-3fdff928" name="TotalFloorCount" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-7d420f2a" name="FirstFloor" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-245dfe49" id="Floor"/>
+      <cl:datamap std:sid="d-map-79fb5bf3" id="CustomFloorInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-838644d0" name="ElevatorSetID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-7ac619dd" name="AccessFloor" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-36d740cb" name="FloorName" datatype="string"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-28f54824" id="sms_getAccessFloorCount" method="get" action="/v1/elevator/accessFloors">
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="ElevatorSetInfo"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-af40fc68" id="sms_getOptionElevator" method="get" action="/v1/options/elevator">
+        <cl:listener std:sid="listener-0b941832" name="submit-done" handler="onSms_getOptionElevatorSubmitDone"/>
+        <cl:listener std:sid="listener-c082c1f2" name="submit-timeout" handler="onSms_getOptionElevatorSubmitTimeout"/>
+        <cl:listener std:sid="listener-01352c0a" name="submit-error" handler="onSms_getOptionElevatorSubmitError"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="OptionElevator"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-6fb7246d" id="sms_postElevatorSet" action="/v1/elevators">
+        <cl:listener std:sid="listener-47047058" name="submit-done" handler="onSms_postAccessFloorSubmitDone"/>
+        <cl:listener std:sid="listener-e10bda8e" name="submit-error" handler="onSms_postAccessFloorSubmitError"/>
+        <cl:listener std:sid="listener-3df956f3" name="submit-timeout" handler="onSms_postAccessFloorSubmitTimeout"/>
+        <cl:requestdata dataid="ElevatorSetInfo"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-0f3a40de" id="sms_getElevatorSetList" method="get" action="/v1/elevators">
+        <cl:listener std:sid="listener-e80d38ba" name="submit-done" handler="onSms_getElevatorSetListSubmitDone"/>
+        <cl:listener std:sid="listener-fb357eff" name="submit-error" handler="onSms_getElevatorSetListSubmitError"/>
+        <cl:listener std:sid="listener-74db03bf" name="submit-timeout" handler="onSms_getElevatorSetListSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="ElevatorSetList"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-3d1a000d" id="sms_putElevatorSet" method="put" action="/v1/elevators">
+        <cl:listener std:sid="listener-d58763af" name="submit-done" handler="onSms_putElevatorSetSubmitDone"/>
+        <cl:listener std:sid="listener-f677bad3" name="submit-error" handler="onSms_putElevatorSetSubmitError"/>
+        <cl:listener std:sid="listener-ee15052b" name="submit-timeout" handler="onSms_putElevatorSetSubmitTimeout"/>
+        <cl:requestdata dataid="ElevatorSetInfo"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-0c60dbda" id="sms_deleteElevatorSet" method="delete" action="/v1/elevators">
+        <cl:listener std:sid="listener-86f8e688" name="submit-done" handler="onSms_deleteElevatorSetSubmitDone"/>
+        <cl:listener std:sid="listener-e1f05b1e" name="submit-error" handler="onSms_deleteElevatorSetSubmitError"/>
+        <cl:listener std:sid="listener-0fad23f9" name="submit-timeout" handler="onSms_deleteElevatorSetSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-79f51f29" id="sms_getCustomFloorList" method="get" action="/v1/mbm/floor">
+        <cl:listener std:sid="listener-097cf148" name="submit-done" handler="onSms_getCustomFloorListSubmitDone"/>
+        <cl:listener std:sid="listener-034c5b45" name="submit-error" handler="onSms_getCustomFloorListSubmitError"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="CustomFloorList"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-dd148e9b" id="sms_postCustomFloorList" action="/v1/mbm/floor">
+        <cl:listener std:sid="listener-bf03043d" name="submit-done" handler="onSms_postCustomFloorListSubmitDone"/>
+        <cl:listener std:sid="listener-e3c4ac05" name="submit-error" handler="onSms_postCustomFloorListSubmitError"/>
+        <cl:listener std:sid="listener-4879fa33" name="submit-timeout" handler="onSms_postCustomFloorListSubmitTimeout"/>
+        <cl:requestdata dataid="CustomFloorInfo"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-d3f0ffc3" id="sms_deleteCustomFloor" method="delete" action="/v1/mbm/floor/">
+        <cl:listener std:sid="listener-4dfdc574" name="submit-done" handler="onSms_deleteCustomFloorSubmitDone"/>
+        <cl:listener std:sid="listener-b7390291" name="submit-error" handler="onSms_deleteCustomFloorSubmitError"/>
+        <cl:listener std:sid="listener-0e113ba7" name="submit-timeout" handler="onSms_deleteCustomFloorSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="CustomFloorList"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-627b3b76" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-61ff969d" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-ee86405a" id="Elevator_grpMain" style="padding:0px;">
+      <cl:xylayoutdata std:sid="xyl-data-de664ca4" top="10px" right="10px" bottom="10px" left="10px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-eedf5e6a">
+        <cl:formdata std:sid="f-data-ebf4d4eb" row="0" col="0" rowspan="3" colspan="1"/>
+        <cl:group std:sid="group-322afa2e" style="padding:0px;">
+          <cl:formdata std:sid="f-data-47c68c3d" row="0" col="0"/>
+          <cl:button std:sid="button-4633b4ff" id="EVMGT_btnAdd" class="userInfo_btn">
+            <cl:listener std:sid="listener-cc8eb77e" name="click" handler="onEVMGT_btnAddClick"/>
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_Add"/>
+            <cl:formdata std:sid="f-data-e08521f7" row="0" col="1"/>
+          </cl:button>
+          <cl:output std:sid="output-8870a99b" class="common-titlelabel">
+            <cl:formdata std:sid="f-data-582e5836" row="0" col="0"/>
+          </cl:output>
+          <cl:formlayout std:sid="f-layout-5a6ec48a">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+            <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:grid std:sid="grid-a51ee5d7" id="EVMGT_grdElevatorsList" style="background-color:#f2f1ef; background-image:none;" readonly="true" datasetid="ElevatorSetList" showdeletedrow="false" resizablecolumns="all" columnMovable="false">
+          <cl:listener std:sid="listener-aca9fccc" name="selection-change" handler="onGrdElevatorsListSelectionChange"/>
+          <cl:listener std:sid="listener-53cb00a6" name="before-selection-change" handler="onEVMGT_grdElevatorsListBeforeSelectionChange"/>
+          <cl:formdata std:sid="f-data-f2b02a10" row="1" col="0"/>
+          <cl:gridcolumn std:sid="g-column-71c8f554" width="90px"/>
+          <cl:gridcolumn std:sid="g-column-42b62e36"/>
+          <cl:gridheader std:sid="gh-band-6af4bab8">
+            <cl:gridrow std:sid="g-row-9a30cc1d"/>
+            <cl:gridcell std:sid="gh-cell-2bf435dd" rowindex="0" colindex="0" targetcolumnname="ElevatorSetID" sortable="false" filterable="false" text="ID">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_Code"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gh-cell-efbb5843" rowindex="0" colindex="1" style="border-right-style:none;" targetcolumnname="ElevatorSetName" sortable="false" filterable="false" text="Name">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_Name"/>
+            </cl:gridcell>
+          </cl:gridheader>
+          <cl:griddetail std:sid="gd-band-c9869d93">
+            <cl:gridrow std:sid="g-row-8b2bfea0"/>
+            <cl:gridcell std:sid="gd-cell-01db11b7" rowindex="0" colindex="0" style="background-color:#fbfbfb;" columnname="ElevatorSetID">
+              <cl:datasetbind property="color" category="STYLER" datacontrolid="ElevatorSetList" columnname="ElevatorSetID"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gd-cell-0e1a418a" rowindex="0" colindex="1" style="background-color:#fbfbfb; border-right-style:none;" columnname="ElevatorSetName">
+              <cl:datasetbind property="color" category="STYLER" datacontrolid="ElevatorSetList" columnname="ElevatorSetName"/>
+            </cl:gridcell>
+          </cl:griddetail>
+        </cl:grid>
+        <cl:formlayout std:sid="f-layout-2be19402">
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-83c13f84">
+        <cl:formdata std:sid="f-data-fd93ede1" row="0" col="1"/>
+        <cl:output std:sid="output-680b55e0" class="common-titlelabel">
+          <cl:formdata std:sid="f-data-39cb7052" row="0" col="0"/>
+        </cl:output>
+        <cl:button std:sid="button-cced8455" id="EVMGT_btnDelete" class="userInfo_btn">
+          <cl:listener std:sid="listener-51b37f34" name="click" handler="onEVMGT_btnDeleteClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Delete"/>
+          <cl:formdata std:sid="f-data-cb581d5e" row="0" col="4"/>
+        </cl:button>
+        <cl:button std:sid="button-fadf80f5" id="EVMGT_btnSave" class="userInfo_btn">
+          <cl:listener std:sid="listener-330792df" name="click" handler="onEVMGT_btnSaveClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Save"/>
+          <cl:formdata std:sid="f-data-c9bf6bfe" row="0" col="3"/>
+        </cl:button>
+        <cl:img std:sid="image-f50a0304" id="USMAG_imgHelpPage" style="cursor:help;" src="../../../theme/images/common/common_btn_window_top_q.png">
+          <cl:listener std:sid="listener-e54483a1" name="click" handler="onUSMAG_imgHelpPageClick"/>
+          <cl:formdata std:sid="f-data-ae4c7ccf" halign="CENTER" valign="CENTER" width="14" height="14" row="0" col="5"/>
+        </cl:img>
+        <cl:button std:sid="button-89f4655f" id="EVMGT_btnClear" class="userInfo_btn" visible="false" enabled="false">
+          <cl:listener std:sid="listener-626aa64a" name="click" handler="onEVMGT_btnClearClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Clear"/>
+          <cl:formdata std:sid="f-data-54edcb3f" row="0" col="2"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-397a7a6c">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="200" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="true" minlength="0"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="14" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-e580fb62" id="EVMGT_grpBasicInfo">
+        <cl:formdata std:sid="f-data-48534137" row="1" col="1"/>
+        <cl:output std:sid="output-c0b4cd88" class="common-controllabel">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Code"/>
+          <cl:formdata std:sid="f-data-2fbad805" row="0" col="0"/>
+        </cl:output>
+        <cl:output std:sid="output-3f70c795" class="common-controllabel">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Name"/>
+          <cl:formdata std:sid="f-data-1b8aae35" row="0" col="2"/>
+        </cl:output>
+        <cl:inputbox std:sid="i-box-93e22419" id="EVMGT_ipbName" style="border-left-style:none; text-align:center;" maxlength="30">
+          <cl:datamapbind property="value" datacontrolid="ElevatorSetInfo" columnname="ElevatorSetName"/>
+          <cl:formdata std:sid="f-data-7e14914d" row="0" col="3"/>
+        </cl:inputbox>
+        <cl:inputbox std:sid="i-box-1e37de1c" id="EVMGT_ipbCode" style="border-left-style:none; text-align:center;" readonly="true">
+          <cl:datamapbind property="value" datacontrolid="ElevatorSetInfo" columnname="ElevatorSetID"/>
+          <cl:formdata std:sid="f-data-99408f6f" row="0" col="1"/>
+        </cl:inputbox>
+        <cl:formlayout std:sid="f-layout-720b724c" hspace="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="120" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="2" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="120" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="3" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:grid std:sid="grid-32505d95" id="EVMGT_grdFloorSet" readonly="true" datasetid="dsFloorList" showdeletedrow="false" autofit="1" resizablecolumns="all" columnMovable="false">
+        <cl:formdata std:sid="f-data-8a487687" row="2" col="1"/>
+        <cl:gridcolumn std:sid="g-column-814e20be" width="45px"/>
+        <cl:gridcolumn std:sid="g-column-628f783d" width="109px"/>
+        <cl:gridcolumn std:sid="g-column-630655eb" width="120px"/>
+        <cl:gridheader std:sid="gh-band-051bf48e">
+          <cl:gridrow std:sid="g-row-48fe3f50"/>
+          <cl:gridcell std:sid="gh-cell-7c351fb2" rowindex="0" colindex="0" sortable="false" filterable="false" columntype="checkbox"/>
+          <cl:gridcell std:sid="gh-cell-b271c163" rowindex="0" colindex="1" targetcolumnname="FloorName" sortable="false" filterable="false" text="FloorName">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_AccessFloor"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-78737093" rowindex="0" colindex="2" targetcolumnname="Floor" text="Floor" visible="false"/>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-aa1de946">
+          <cl:gridrow std:sid="g-row-91a12ff8"/>
+          <cl:gridcell std:sid="gd-cell-21618e64" rowindex="0" colindex="0" columntype="checkbox"/>
+          <cl:gridcell std:sid="gd-cell-a501ed52" rowindex="0" colindex="1" style="font-weight:500; font-size:12px; text-align:center;" columnname="FloorName">
+            <cl:inputbox std:sid="i-box-a6d8cddd" id="ipb_floorName" style="font-weight:500; font-size:12px; text-align:center;" maxlength="20" inputfilter="[\w\s\-]">
+              <cl:listener std:sid="listener-e3f04200" name="value-change" handler="onIpb1ValueChange"/>
+              <cl:listener std:sid="listener-04c5c353" name="before-value-change" handler="onIpb1BeforeValueChange"/>
+              <cl:listener std:sid="listener-3ffdc733" name="clear" handler="onIpb_floorNameClear"/>
+            </cl:inputbox>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-190d2f02" rowindex="0" colindex="2" style="font-weight:500; font-size:12px; text-align:center;" columnname="Floor"/>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:formlayout std:sid="f-layout-bd2243b6">
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="250" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-39c2081d"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

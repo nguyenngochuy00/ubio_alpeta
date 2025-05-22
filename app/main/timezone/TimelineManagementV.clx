@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-502d12d5" version="1.0.0.0">
+  <head std:sid="head-2e1aa73e">
+    <title>TimelineManagement</title>
+    <screen std:sid="screen-1d25752e" id="default" name="default" minwidth="1024px" width="1024px" height="768px"/>
+    <screen std:sid="screen-b746f921" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-3b8815e6" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-f20862f8">
+      <cl:dataset std:sid="d-set-01a0ebad" id="ValList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-992b67a2" info="타임라인아이디" name="TimelineID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-408988ae" name="Type" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-2e06c085" name="ExtVal" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-0519661a" info="타임라인아이템" name="StartTime" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-75341088" info="타임라인아이템" name="EndTime" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-e733fce7" name="Name" datatype="string"/>
+        </cl:datacolumnlist>
+        <cl:datarowlist/>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-40f88121" id="TimelineList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-c25790dc" name="TimelineID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-a2663ece" name="Name"/>
+          <cl:datacolumn std:sid="d-column-eba19690" name="Type" datatype="string"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-c46f6d62" id="ValListBackup">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-b1510e50" info="타임라인아이디" name="TimelineID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-be4d5083" name="Type" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-86b0bc0c" name="ExtVal" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-cbe4ce2f" info="타임라인아이템" name="StartTime" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-d3b045c4" info="타임라인아이템" name="EndTime" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-cf1ad282" name="Name" datatype="string"/>
+        </cl:datacolumnlist>
+        <cl:datarowlist/>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-0813d672" id="TimelineInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-e6aec907" name="TimelineID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-cb52014b" name="Name"/>
+          <cl:datacolumn std:sid="d-column-3a81e8c1" name="Type" datatype="string"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-a4af7263" id="getTimeMgmtList" method="get" action="/v1/timezones/timelines" mediatype="application/x-www-form-urlencoded">
+        <cl:listener std:sid="listener-b79b0fcc" name="submit-success" handler="onGetTimeMgmtListSubmitSuccess"/>
+        <cl:responsedata dataid="TimelineList"/>
+        <cl:responsedata dataid="ValList"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-e8e11be6" id="deleteTimeline" method="delete" action="" mediatype="application/x-www-form-urlencoded"/>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-7e6fe544" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-cc2b9d86" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-be853ce0" style="padding:10px;">
+      <cl:xylayoutdata std:sid="xyl-data-43fccdd3" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-67ab7c04">
+        <cl:formdata std:sid="f-data-14e9e650" row="1" col="0"/>
+        <cl:output std:sid="output-7134492c" class="common-titlelabel">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_TimeLineList"/>
+          <cl:formdata std:sid="f-data-6f990bef" halign="FILL" valign="FILL" row="0" col="0"/>
+        </cl:output>
+        <cl:group std:sid="group-dd97c74e">
+          <cl:formdata std:sid="f-data-ec825089" row="1" col="0"/>
+          <cl:combobox std:sid="c-box-e82f8eac" id="cmbCategory" style="text-align:center;" value="all" preventinput="true">
+            <cl:listener std:sid="listener-27521759" name="selection-change" handler="onCmbCategorySelectionChange"/>
+            <cl:formdata std:sid="f-data-86db38f5" valign="FILL" row="0" col="0"/>
+            <cl:item std:sid="item-5c900f57" label="ALL" value="all"/>
+            <cl:item std:sid="item-800855b8" label="ID" value="id"/>
+            <cl:item std:sid="item-29349695" label="NAME" value="name"/>
+          </cl:combobox>
+          <cl:inputbox std:sid="i-box-debc662e" id="ipbSearch" enabled="false">
+            <cl:formdata std:sid="f-data-3dc4b4b9" valign="FILL" row="0" col="1"/>
+          </cl:inputbox>
+          <cl:button std:sid="button-f983bafb" id="btnSearchTimeLine" class="userInfo_btn">
+            <cl:listener std:sid="listener-485690c5" name="click" handler="onBtnSearchTimeLineClick"/>
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_Search"/>
+            <cl:formdata std:sid="f-data-8c0ea38d" valign="FILL" row="0" col="2"/>
+          </cl:button>
+          <cl:button std:sid="button-54a25fed" id="btnNSave" class="userInfo_btn">
+            <cl:listener std:sid="listener-44155643" name="click" handler="onBtnNSaveClick"/>
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_Save"/>
+            <cl:formdata std:sid="f-data-d61f97d0" valign="FILL" row="0" col="4"/>
+          </cl:button>
+          <cl:formlayout std:sid="f-layout-f09e6ca0">
+            <cl:rows length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+            <cl:columns length="120" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+            <cl:columns length="1" unit="FRACTION"/>
+            <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="3" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+            <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:group std:sid="group-887ab7f2" id="grpTmTime">
+          <cl:formdata std:sid="f-data-e19c3a65" row="2" col="0"/>
+          <cl:udc std:sid="ud-control-68164643" id="udcTimeline" type="udc.timeline.TimeLineV">
+            <cl:formdata std:sid="f-data-eead571a" row="0" col="0"/>
+          </cl:udc>
+          <cl:formlayout std:sid="f-layout-a5d8eab5">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-ca517b59" hspace="0px" vspace="0px">
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          <cl:rows length="8" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-99e4d849">
+        <cl:formdata std:sid="f-data-09b6947d" row="0" col="0"/>
+        <cl:output std:sid="output-ed7939f6" class="common-titlelabel">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_TimelineManagement"/>
+          <cl:formdata std:sid="f-data-6c156263" halign="FILL" valign="FILL" row="0" col="0"/>
+        </cl:output>
+        <cl:img std:sid="image-0e4b5287" id="helpIcon" style="cursor:help;" src="../../../theme/images/common/common_btn_window_top_q.png">
+          <cl:listener std:sid="listener-939f9073" name="click" handler="onHelpIconClick"/>
+          <cl:formdata std:sid="f-data-a54e91d9" halign="CENTER" valign="CENTER" width="14" height="14" row="0" col="1"/>
+        </cl:img>
+        <cl:group std:sid="group-1ce75a6f">
+          <cl:formdata std:sid="f-data-395de7a6" row="1" col="0" rowspan="1" colspan="2"/>
+          <cl:output std:sid="output-523e022a" class="common-controllabel required" value="ID">
+            <cl:formdata std:sid="f-data-57e70e2c" row="0" col="0"/>
+          </cl:output>
+          <cl:output std:sid="output-053de69f" class="common-controllabel required" value="NAME">
+            <cl:formdata std:sid="f-data-c1b17d0f" row="0" col="2"/>
+          </cl:output>
+          <cl:button std:sid="button-be8f425d" id="btnNewTm" style="font-size:14px;" class="userInfo_btn">
+            <cl:listener std:sid="listener-eb4f1360" name="click" handler="onBtnNewTmClick"/>
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_NewTimeline"/>
+            <cl:formdata std:sid="f-data-37d4901b" halign="FILL" valign="FILL" row="0" col="4"/>
+          </cl:button>
+          <cl:group std:sid="group-f649808a" style="border-right-style:solid; border-top-width:1px; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; border-top-style:solid;">
+            <cl:formdata std:sid="f-data-1fc79932" row="0" col="1"/>
+            <cl:inputbox std:sid="i-box-7ffdae2e" id="iptID" inputfilter="^[0-9]">
+              <cl:listener std:sid="listener-cc0ed3e1" name="keyup" handler="onIptIDKeyup"/>
+              <cl:xylayoutdata std:sid="xyl-data-ba83fb2c" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+            </cl:inputbox>
+            <cl:xylayout std:sid="xylayout-0525d60c"/>
+          </cl:group>
+          <cl:group std:sid="group-35783547" style="border-top-width:1px; border-bottom-color:#c5c5c5; border-bottom-width:1px; border-top-color:#c5c5c5; font-size:14px; border-bottom-style:solid; border-top-style:solid;">
+            <cl:formdata std:sid="f-data-5a7b31c4" row="0" col="3"/>
+            <cl:inputbox std:sid="i-box-c963a04a" id="iptName">
+              <cl:listener std:sid="listener-9b3102d5" name="keyup" handler="onIptNameKeyup"/>
+              <cl:xylayoutdata std:sid="xyl-data-df461038" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+            </cl:inputbox>
+            <cl:xylayout std:sid="xylayout-d5fbd6e6"/>
+          </cl:group>
+          <cl:formlayout std:sid="f-layout-8eba57b2" hspace="0px" vspace="0px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="120" unit="PIXEL" autoSizing="false" shadetype="BY_CLASS" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="1" unit="FRACTION"/>
+            <cl:columns length="120" unit="PIXEL" autoSizing="false" shadetype="BY_CLASS" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="1" unit="FRACTION"/>
+            <cl:columns length="200" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-9731a453" hspace="0px" vspace="0px">
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          <cl:columns length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+          <cl:columns length="14" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-f6363eb3" hspace="0px" vspace="0px">
+        <cl:rows length="70" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+        <cl:rows length="3" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-eed30cd9"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-91e29104" version="1.0.0.0">
+  <head std:sid="head-a8fd5081">
+    <title>vmsVideoManager</title>
+    <screen std:sid="screen-d35ebbe4" id="default" name="default" minwidth="1024px" width="1024px" height="768px"/>
+    <screen std:sid="screen-f9d16613" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-7529ee60" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-82489758">
+      <cl:dataset std:sid="d-set-774d5c2c" id="dsDeviceInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-8a9d0c3a" name="deviceSerial"/>
+          <cl:datacolumn std:sid="d-column-8c6d850c" name="channelName"/>
+          <cl:datacolumn std:sid="d-column-8dd69ae8" name="channelSerial"/>
+          <cl:datacolumn std:sid="d-column-233353bd" name="channelMediaSerial"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-31601898" id="dsDeviceList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-a16b10e0" name="deviceSerial"/>
+          <cl:datacolumn std:sid="d-column-cee8cb4a" name="rtspUrl"/>
+          <cl:datacolumn std:sid="d-column-9d076df8" name="deviceName"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-018ac910" id="LangList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-32e594f3" name="Locale" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-5dfc693f" name="Key"/>
+          <cl:datacolumn std:sid="d-column-1df4e3fc" name="Value"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-9d2f207b" id="OptionInnodep">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-7448f150" name="ServerIP" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-48763c00" name="ServerPort" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-d9f6242c" name="UserID" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-b0f131c4" name="UserPW" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-3ef275c7" name="License" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-8a309048" name="UseRecording" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-196a58e2" name="RegularRecording" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-9b5d3614" name="BeforeRecordingTime" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-f0acf40f" name="AfterRecordingTime" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-30515f58" name="PlayerServerIP" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-ef089522" name="PlayerServerPort" datatype="number" defaultvalue="0"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap comment="로그인 결과로부터 받은 정보 + DMS 정보 추가" std:sid="d-map-e4c71f94" id="additionalInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-da82c4b0" name="authToken"/>
+          <cl:datacolumn std:sid="d-column-768038fe" name="apiSerial"/>
+          <cl:datacolumn std:sid="d-column-d70238eb" name="userSerial"/>
+          <cl:datacolumn std:sid="d-column-10e92704" name="vmsID"/>
+          <cl:datacolumn std:sid="d-column-5229f54f" name="mediaStreamVideo"/>
+          <cl:datacolumn std:sid="d-column-bcfe1824" name="dmsVideoPlayerURL"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-27c986e0" id="sms_getLangList" method="get" action="data/lang/lang.json">
+        <cl:listener std:sid="listener-a9a98f73" name="submit-done" handler="onSms_getLangListSubmitDone"/>
+        <cl:responsedata dataid="LangList" isadd="true"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-325894c8" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-535e1ea2" name="load" handler="onBodyLoad"/>
+    <cl:grid std:sid="grid-cba44ded" id="grd_DeviceList" visible="true" datasetid="dsDeviceList">
+      <cl:listener std:sid="listener-d9508738" name="click" handler="onGrd_DeviceListClick"/>
+      <cl:listener std:sid="listener-79d01e76" name="selection-change" handler="onGrd_DeviceListSelectionChange"/>
+      <cl:listener std:sid="listener-d3602f86" name="dblclick" handler="onGrd_DeviceListDblclick"/>
+      <cl:xylayoutdata std:sid="xyl-data-7d0020a2" top="40px" left="10px" width="255px" height="336px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      <cl:gridcolumn std:sid="g-column-78beb45d"/>
+      <cl:gridcolumn std:sid="g-column-9281f858"/>
+      <cl:gridcolumn std:sid="g-column-da2dbbed"/>
+      <cl:gridheader std:sid="gh-band-1b707993">
+        <cl:gridrow std:sid="g-row-67d666bc"/>
+        <cl:gridcell std:sid="gh-cell-57f8d6d6" rowindex="0" colindex="0" targetcolumnname="deviceSerial" sortable="false" filterable="false" text="deviceSerial" visible="false"/>
+        <cl:gridcell std:sid="gh-cell-6b7b0663" rowindex="0" colindex="1" targetcolumnname="rtspUrl" sortable="false" filterable="false" text="rtspUrl" visible="false"/>
+        <cl:gridcell std:sid="gh-cell-b1a0f3ad" rowindex="0" colindex="2" targetcolumnname="deviceName" sortable="false" filterable="false"/>
+      </cl:gridheader>
+      <cl:griddetail std:sid="gd-band-d2f432d4">
+        <cl:gridrow std:sid="g-row-3aff495a"/>
+        <cl:gridcell std:sid="gd-cell-b3caa34b" rowindex="0" colindex="0" columnname="deviceSerial"/>
+        <cl:gridcell std:sid="gd-cell-6363c451" rowindex="0" colindex="1" columnname="rtspUrl"/>
+        <cl:gridcell std:sid="gd-cell-e250469f" rowindex="0" colindex="2" columnname="deviceName"/>
+      </cl:griddetail>
+    </cl:grid>
+    <cl:button std:sid="button-3de03089" id="btnChannel_1" value="1">
+      <cl:listener std:sid="listener-6eb5106b" name="click" handler="onBtnChannel_1Click"/>
+      <cl:xylayoutdata std:sid="xyl-data-4f85dcd7" top="10px" left="10px" width="80px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+    </cl:button>
+    <cl:button std:sid="button-af661630" id="btnChannel_4" value="4">
+      <cl:listener std:sid="listener-dcd140c7" name="click" handler="onBtnChannel_4Click"/>
+      <cl:xylayoutdata std:sid="xyl-data-e72838e5" top="10px" left="98px" width="80px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+    </cl:button>
+    <cl:button std:sid="button-3843afc0" id="btnChannel_9" value="9">
+      <cl:listener std:sid="listener-eab5febc" name="click" handler="onBtnChannel_9Click"/>
+      <cl:xylayoutdata std:sid="xyl-data-0819af5a" top="10px" left="185px" width="80px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+    </cl:button>
+    <cl:embeddedapp std:sid="e-app-173d8517" id="eaVideo" style="background-color:#efe5e5; color:#1c0a0a; border-top-width:1px; border-bottom-color:#000000; border-right-width:1px; border-bottom-width:1px; border-left-color:#000000; border-top-color:#000000; border-right-color:#000000; border-left-width:1px;">
+      <cl:xylayoutdata std:sid="xyl-data-9f69aacf" top="10px" left="275px" width="779px" height="536px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+    </cl:embeddedapp>
+    <cl:button std:sid="button-8270e83b" id="btnPtzTop" style="background-color:#e3e3e3; color:#000000;" value="top">
+      <cl:listener std:sid="listener-2e7690b8" name="click" handler="onBtnPtzTopClick"/>
+      <cl:xylayoutdata std:sid="xyl-data-a0309e3f" top="386px" left="108px" width="60px" height="40px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+    </cl:button>
+    <cl:button std:sid="button-3b6847d2" id="btnPtzRight" style="background-color:#e3e3e3; color:#000000;" value="Right">
+      <cl:listener std:sid="listener-17939d38" name="click" handler="onBtnPtzRightClick"/>
+      <cl:xylayoutdata std:sid="xyl-data-81c859cf" top="425px" left="167px" width="60px" height="40px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+    </cl:button>
+    <cl:button std:sid="button-974d9d0e" id="btnZoomIn" style="background-color:#e3e3e3; color:#000000;" value="Z">
+      <cl:listener std:sid="listener-fa065778" name="click" handler="onBtnZoomInClick"/>
+      <cl:xylayoutdata std:sid="xyl-data-0fab00c0" top="616px" left="73px" width="60px" height="40px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+    </cl:button>
+    <cl:button std:sid="button-e6013aa4" id="btnFocusIn" style="background-color:#e3e3e3; color:#000000;" value="○">
+      <cl:listener std:sid="listener-88fac287" name="click" handler="onBtnFocusInClick"/>
+      <cl:xylayoutdata std:sid="xyl-data-9a2cf72f" top="514px" left="143px" width="60px" height="40px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+    </cl:button>
+    <cl:button std:sid="button-6eb1aeaf" id="btnFocusStop" style="background-color:#e3e3e3; color:#000000;" value="■">
+      <cl:listener std:sid="listener-2e87fc5c" name="click" handler="onBtnFocusStopClick"/>
+      <cl:xylayoutdata std:sid="xyl-data-d2523769" top="564px" left="143px" width="60px" height="40px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+    </cl:button>
+    <cl:button std:sid="button-b999bedf" id="btnPtzBottom" style="background-color:#e3e3e3; color:#000000;" value="bottom">
+      <cl:listener std:sid="listener-df857bb1" name="click" handler="onBtnPtzBottomClick"/>
+      <cl:xylayoutdata std:sid="xyl-data-3994f223" top="464px" left="108px" width="60px" height="40px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+    </cl:button>
+    <cl:button std:sid="button-9b55a952" id="btnPtzZoomOut" style="background-color:#e3e3e3; color:#000000;" value="z">
+      <cl:listener std:sid="listener-4748956f" name="click" handler="onBtnPtzZoomOutClick"/>
+      <cl:xylayoutdata std:sid="xyl-data-57a7d5ef" top="514px" left="73px" width="60px" height="40px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+    </cl:button>
+    <cl:button std:sid="button-7bcb27c7" id="btnZoomStop" style="background-color:#e3e3e3; color:#000000;" value="■">
+      <cl:listener std:sid="listener-92f3c666" name="click" handler="onBtnZoomStopClick"/>
+      <cl:xylayoutdata std:sid="xyl-data-cb123d06" top="564px" left="73px" width="60px" height="40px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+    </cl:button>
+    <cl:button std:sid="button-e3e8d480" id="btnFocusOut" style="background-color:#e3e3e3; color:#000000;" value="●">
+      <cl:listener std:sid="listener-61815744" name="click" handler="onBtnFocusOutClick"/>
+      <cl:xylayoutdata std:sid="xyl-data-c6b180ae" top="616px" left="143px" width="60px" height="40px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+    </cl:button>
+    <cl:button std:sid="button-b05fc86e" id="btnPtzLeft" style="background-color:#e3e3e3; color:#000000;" value="Left">
+      <cl:listener std:sid="listener-ee812255" name="click" handler="onBtnPtzLeftClick"/>
+      <cl:xylayoutdata std:sid="xyl-data-2a90eb9d" top="425px" left="49px" width="60px" height="40px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+    </cl:button>
+    <cl:button std:sid="button-8b5e2cfc" id="btnPtzStop" style="background-color:#e3e3e3; color:#000000;" value="■">
+      <cl:listener std:sid="listener-7ca5ea21" name="click" handler="onBtnPtzStopClick"/>
+      <cl:xylayoutdata std:sid="xyl-data-c497976e" top="428px" left="110px" width="55px" height="34px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+    </cl:button>
+    <cl:xylayout std:sid="xylayout-1fff1697"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

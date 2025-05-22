@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-d452ccf5" version="1.0.0.0">
+  <head std:sid="head-8d8a43dc">
+    <title>visitorInManagement</title>
+    <screen std:sid="screen-adce8b93" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="270" customWidth="650"/>
+    <screen std:sid="screen-db7e0611" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-5c5e8829" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-dc76e2f6">
+      <cl:datamap std:sid="d-map-ff79c10e" id="visitRequestInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-d05b0bb9" name="VisitorName"/>
+          <cl:datacolumn std:sid="d-column-b31176bf" name="VisitorCompanyName"/>
+          <cl:datacolumn std:sid="d-column-b8912fca" name="VisitorPurpose"/>
+          <cl:datacolumn std:sid="d-column-aa99bf5b" name="CardNum"/>
+          <cl:datacolumn std:sid="d-column-29d86a03" name="LeaderName"/>
+          <cl:datacolumn std:sid="d-column-c5e30ddf" name="LeaderPhone"/>
+          <cl:datacolumn std:sid="d-column-94dac685" name="LeaderDepartment"/>
+          <cl:datacolumn std:sid="d-column-619bee2a" name="InputAdminName"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-71f76a43" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-9e948ef1" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-a162b5f4" id="dmCardLayoutInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-655d346d" info="지문 카드용량" name="CardSize" datatype="number" defaultvalue="1"/>
+          <cl:datacolumn std:sid="d-column-1b1acc4d" info="카드종류" name="CardType" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-42ba4095" info="카드 읽기 구분" name="ReadType" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-26eaa2ab" info="지문 템플릿" name="TemplateSize" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-2ea1230c" info="지문 Template 개수" name="TemplateCount" datatype="number" defaultvalue="0"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:dataset std:sid="d-set-168cebbf" id="dsCardLayoutData">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-1272607a" name="Index" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-c80f8783" name="Sector" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-d1c28521" name="Block" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-09d02f48" name="Start" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-75ab08b4" name="Length" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-654166ef" name="KeyType" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-f44aa7a9" name="KeyValue"/>
+          <cl:datacolumn std:sid="d-column-c54fc9e7" name="AIDCode"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:submission std:sid="submission-cff6074f" id="sms_postKwlVisitorIn" action="/v1/kangwonland/visitRequest">
+        <cl:listener std:sid="listener-ff3c7765" name="submit-done" handler="onSms_postKwlVisitorInSubmitDone"/>
+        <cl:listener std:sid="listener-e965baa9" name="submit-error" handler="onSms_postKwlVisitorInSubmitError"/>
+        <cl:listener std:sid="listener-ebfe729c" name="submit-timeout" handler="onSms_postKwlVisitorInSubmitTimeout"/>
+        <cl:requestdata dataid="visitRequestInfo"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-2b99e24d" id="sms_postKwlVisitLogin" action="/v1/kangwonland/visitlogin">
+        <cl:listener std:sid="listener-ed598d6d" name="submit-done" handler="onSms_putKwlVisitLoginSubmitDone"/>
+        <cl:listener std:sid="listener-505ea268" name="submit-error" handler="onSms_putKwlVisitLoginSubmitError"/>
+        <cl:listener std:sid="listener-7c25b546" name="submit-timeout" handler="onSms_putKwlVisitLoginSubmitTimeout"/>
+        <cl:requestdata dataid="VisitLoginInfo"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="VisitLoginResult"/>
+      </cl:submission>
+      <cl:datamap std:sid="d-map-8d3bb7a8" id="VisitLoginInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-2f744d5c" name="UniqueID"/>
+          <cl:datacolumn std:sid="d-column-d15660f6" name="Password"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-576922f9" id="VisitLoginResult">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-322bbb0b" name="AdminName"/>
+          <cl:datacolumn std:sid="d-column-7202bda1" name="UserID"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+    </cl:model>
+    <cl:appspec dev-comment="KWLVI"/>
+  </head>
+  <body std:sid="body-a6749414" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-49d664e8" name="load" handler="onBodyLoad"/>
+    <cl:listener std:sid="listener-3c6b84c9" name="before-unload" handler="onBodyBeforeUnload"/>
+    <cl:group std:sid="group-d18d6d4e" id="KWLVI_grpMain" style="padding-top:5px; padding-left:5px; padding-bottom:5px; padding-right:5px;">
+      <cl:xylayoutdata std:sid="xyl-data-0d9069cb" top="1px" right="1px" bottom="1px" left="1px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-aeaed4ba">
+        <cl:formdata std:sid="f-data-426e6e34" row="1" col="0"/>
+        <cl:group std:sid="group-a90c4e09" id="ipbtest">
+          <cl:formdata std:sid="f-data-611876c2" row="0" col="0"/>
+          <cl:group std:sid="group-1d3a49f7">
+            <cl:formdata std:sid="f-data-039f9483" row="1" col="0"/>
+            <cl:output std:sid="output-4b41be6b" style="background-color:#f6f6f6; font-weight:bold; font-size:14px; background-image:none; text-align:center;" class="userInfo_bold" value="성명">
+              <cl:formdata std:sid="f-data-dda938ca" row="0" col="0"/>
+            </cl:output>
+            <cl:inputbox std:sid="i-box-b8e340bc" id="KWLVI_ipbLeaderName" style="font-size:14px; text-align:center;" maxlength="15">
+              <cl:datamapbind property="value" datacontrolid="visitRequestInfo" columnname="LeaderName"/>
+              <cl:formdata std:sid="f-data-ec889bf9" row="0" col="1"/>
+            </cl:inputbox>
+            <cl:formlayout std:sid="f-layout-2353cae8" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+              <cl:rows length="1" unit="FRACTION"/>
+              <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="1" unit="FRACTION"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:output std:sid="output-cceedf1f" style="background-color:#f6f6f6; font-weight:bold; font-size:14px; background-image:none; text-align:center;" class="userInfo_bold" value="인솔자 정보">
+            <cl:formdata std:sid="f-data-a235b48c" row="0" col="0"/>
+          </cl:output>
+          <cl:group std:sid="group-df3a15ef">
+            <cl:formdata std:sid="f-data-64e0939b" row="2" col="0"/>
+            <cl:output std:sid="output-f1788983" style="background-color:#f6f6f6; font-weight:bold; font-size:14px; background-image:none; text-align:center;" class="userInfo_bold" value="내선번호">
+              <cl:formdata std:sid="f-data-82aea9ba" row="0" col="0"/>
+            </cl:output>
+            <cl:inputbox std:sid="i-box-957cf739" id="KWLVI_ipbLeaderPhone" style="font-size:14px; text-align:center;" maxlength="24">
+              <cl:datamapbind property="value" datacontrolid="visitRequestInfo" columnname="LeaderPhone"/>
+              <cl:formdata std:sid="f-data-76b7a7ff" row="0" col="1"/>
+            </cl:inputbox>
+            <cl:formlayout std:sid="f-layout-ca20c07d" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+              <cl:rows length="1" unit="FRACTION"/>
+              <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="1" unit="FRACTION"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:group std:sid="group-01ee5040">
+            <cl:formdata std:sid="f-data-ab333423" row="3" col="0"/>
+            <cl:output std:sid="output-9b0e8fd4" style="background-color:#f6f6f6; font-weight:bold; font-size:14px; background-image:none; text-align:center;" class="userInfo_bold" value="부서명">
+              <cl:formdata std:sid="f-data-245b4d9f" row="0" col="0"/>
+            </cl:output>
+            <cl:inputbox std:sid="i-box-14af507c" id="KWLVI_ipbLeaderDepartment" style="font-size:14px; text-align:center;" maxlength="30">
+              <cl:datamapbind property="value" datacontrolid="visitRequestInfo" columnname="LeaderDepartment"/>
+              <cl:formdata std:sid="f-data-f0343165" row="0" col="1"/>
+            </cl:inputbox>
+            <cl:formlayout std:sid="f-layout-b202ad93" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+              <cl:rows length="1" unit="FRACTION"/>
+              <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="1" unit="FRACTION"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:formlayout std:sid="f-layout-72a14c61" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+            <cl:rows length="40"/>
+            <cl:rows length="40"/>
+            <cl:rows length="40"/>
+            <cl:rows length="40"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:group std:sid="group-ec7ba0a6">
+          <cl:formdata std:sid="f-data-56101537" row="0" col="1"/>
+          <cl:output std:sid="output-83ad5660" style="background-color:#f6f6f6; font-weight:bold; font-size:14px; background-image:none; text-align:center;" class="userInfo_bold" value="방문자 정보">
+            <cl:formdata std:sid="f-data-f4e479ad" row="0" col="0"/>
+          </cl:output>
+          <cl:group std:sid="group-2dbc772d">
+            <cl:formdata std:sid="f-data-e6ede138" row="1" col="0"/>
+            <cl:output std:sid="output-147f1536" style="background-color:#f6f6f6; font-weight:bold; font-size:14px; background-image:none; text-align:center;" class="userInfo_bold" value="성명">
+              <cl:formdata std:sid="f-data-17ea11ed" row="0" col="0"/>
+            </cl:output>
+            <cl:inputbox std:sid="i-box-dd9e00ee" id="KWLVI_ipbVisitorName" style="font-size:14px; text-align:center;" maxlength="2">
+              <cl:datamapbind property="value" datacontrolid="visitRequestInfo" columnname="VisitorName"/>
+              <cl:formdata std:sid="f-data-23f2ad3c" row="0" col="1"/>
+            </cl:inputbox>
+            <cl:inputbox std:sid="i-box-99a1c52c" id="ipb5" style="font-size:15px; text-align:center;" enabled="false" readonly="true" value="**">
+              <cl:formdata std:sid="f-data-eb7b4fa5" row="0" col="2"/>
+            </cl:inputbox>
+            <cl:button std:sid="button-eefb9daa" id="KWLVR_CardReader" class="userInfo_btn" visible="false" value="카드읽기">
+              <cl:listener std:sid="listener-36af6e18" name="click" handler="onKWLVR_CardReaderClick"/>
+              <cl:formdata std:sid="f-data-d9272ace" row="0" col="3"/>
+            </cl:button>
+            <cl:formlayout std:sid="f-layout-540f7149" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+              <cl:rows length="1" unit="FRACTION"/>
+              <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="50" unit="PIXEL" autoSizing="false" minlength="0"/>
+              <cl:columns length="50" unit="PIXEL" autoSizing="false" minlength="0"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:group std:sid="group-b328e849">
+            <cl:formdata std:sid="f-data-ee198461" row="2" col="0"/>
+            <cl:output std:sid="output-377c1449" style="background-color:#f6f6f6; font-weight:bold; font-size:14px; background-image:none; text-align:center;" class="userInfo_bold" value="카드번호">
+              <cl:formdata std:sid="f-data-87743fef" row="0" col="0"/>
+            </cl:output>
+            <cl:inputbox std:sid="i-box-7eee9036" id="KWLVI_ipbCardNum" style="font-size:14px; text-align:center;" maxlength="24">
+              <cl:datamapbind property="value" datacontrolid="visitRequestInfo" columnname="CardNum"/>
+              <cl:formdata std:sid="f-data-3a3aaa73" row="0" col="1"/>
+            </cl:inputbox>
+            <cl:formlayout std:sid="f-layout-7dbfca02" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+              <cl:rows length="1" unit="FRACTION"/>
+              <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:group std:sid="group-437d40f6">
+            <cl:formdata std:sid="f-data-4e4bba00" row="3" col="0"/>
+            <cl:output std:sid="output-7bf079cf" style="background-color:#f6f6f6; font-weight:bold; font-size:14px; background-image:none; text-align:center;" class="userInfo_bold" value="업체명">
+              <cl:formdata std:sid="f-data-90a7667d" row="0" col="0"/>
+            </cl:output>
+            <cl:inputbox std:sid="i-box-931d3252" id="KWLVI_ipbCompanyname" style="font-size:14px; text-align:center;">
+              <cl:datamapbind property="value" datacontrolid="visitRequestInfo" columnname="VisitorCompanyName"/>
+              <cl:formdata std:sid="f-data-c0c11064" row="0" col="1"/>
+            </cl:inputbox>
+            <cl:formlayout std:sid="f-layout-3ec4577e" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+              <cl:rows length="1" unit="FRACTION"/>
+              <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="1" unit="FRACTION"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:group std:sid="group-0b5519d2">
+            <cl:formdata std:sid="f-data-fb604f58" row="4" col="0"/>
+            <cl:output std:sid="output-3594ad34" style="background-color:#f6f6f6; font-weight:bold; font-size:14px; background-image:none; text-align:center;" class="userInfo_bold" value="방문사유">
+              <cl:formdata std:sid="f-data-a83feb1a" row="0" col="0"/>
+            </cl:output>
+            <cl:inputbox std:sid="i-box-f4475e83" id="KWLVI_ipbPurpose" style="text-align:center;">
+              <cl:datamapbind property="value" datacontrolid="visitRequestInfo" columnname="VisitorPurpose"/>
+              <cl:formdata std:sid="f-data-83217f64" row="0" col="1"/>
+            </cl:inputbox>
+            <cl:formlayout std:sid="f-layout-6d1dbed7" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+              <cl:rows length="1" unit="FRACTION"/>
+              <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="1" unit="FRACTION"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:formlayout std:sid="f-layout-ec4dcd34" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+            <cl:rows length="40"/>
+            <cl:rows length="40"/>
+            <cl:rows length="40"/>
+            <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-af529829" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="300" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="2" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-19ae0714">
+        <cl:formdata std:sid="f-data-c4f5dfa8" row="2" col="0"/>
+        <cl:button std:sid="button-eb25c26a" id="KWLVR_btnClear" class="userInfo_btn" value="클리어">
+          <cl:listener std:sid="listener-e6ed6b81" name="click" handler="onKWLVR_btnClearClick"/>
+          <cl:formdata std:sid="f-data-717e8f10" row="0" col="2"/>
+        </cl:button>
+        <cl:button std:sid="button-57516003" id="KWLVR_btnSave1" class="userInfo_btn" value="저장 &amp; 클리어">
+          <cl:listener std:sid="listener-f87c4b15" name="click" handler="onKWLVR_btnSave1Click"/>
+          <cl:formdata std:sid="f-data-e15caa8a" row="0" col="3"/>
+        </cl:button>
+        <cl:button std:sid="button-2a46aa34" id="KWLVR_btnClose" class="userInfo_btn" value="종료">
+          <cl:listener std:sid="listener-c82be589" name="click" handler="onKWLVR_btnCloseClick"/>
+          <cl:formdata std:sid="f-data-1c81ff26" row="0" col="5"/>
+        </cl:button>
+        <cl:button std:sid="button-5b624dc2" id="KWLVR_btnSave2" class="userInfo_btn" value="저장 &amp; 계속">
+          <cl:listener std:sid="listener-cb80b766" name="click" handler="onKWLVR_btnSave2Click"/>
+          <cl:formdata std:sid="f-data-c293da50" row="0" col="4"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-a57b871a" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="130" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="130" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-65fa97d8">
+        <cl:formdata std:sid="f-data-b396edaa" row="0" col="0"/>
+        <cl:button std:sid="button-71f1d999" id="KWLVI_btnLogin" class="userInfo_btn" value="login">
+          <cl:listener std:sid="listener-02dd94ce" name="click" handler="onKWLVI_btnLoginClick"/>
+          <cl:formdata std:sid="f-data-d1cdc6e1" row="0" col="6"/>
+        </cl:button>
+        <cl:output std:sid="output-f12fde16" style="background-color:#f6f6f6; font-weight:bold; font-size:14px; background-image:none; text-align:center;" class="userInfo_bold" value="사원번호">
+          <cl:formdata std:sid="f-data-4fc684eb" row="0" col="2"/>
+        </cl:output>
+        <cl:inputbox std:sid="i-box-4d9685e4" id="KWLVI_ipbIdno" style="text-align:center;" maxlength="15">
+          <cl:datamapbind property="value" datacontrolid="VisitLoginInfo" columnname="UniqueID"/>
+          <cl:formdata std:sid="f-data-013422ac" row="0" col="3"/>
+        </cl:inputbox>
+        <cl:output std:sid="output-16feef22" style="background-color:#f6f6f6; font-weight:bold; font-size:14px; background-image:none; text-align:center;" class="userInfo_bold" value="패스워드">
+          <cl:formdata std:sid="f-data-7fa277f9" row="0" col="4"/>
+        </cl:output>
+        <cl:inputbox std:sid="i-box-887bc643" id="KWLVI_ipbPassword" style="text-align:center;" secret="true">
+          <cl:datamapbind property="value" datacontrolid="VisitLoginInfo" columnname="Password"/>
+          <cl:formdata std:sid="f-data-a4d0d668" row="0" col="5"/>
+        </cl:inputbox>
+        <cl:formlayout std:sid="f-layout-6d1aa119" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="70" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="120" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="70" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="120" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-9bed0325" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-042bdae0"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

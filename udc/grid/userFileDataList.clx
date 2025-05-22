@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-d2a19051" version="1.0.0.0">
+  <head std:sid="head-9c14c139">
+    <title>userFileDataList</title>
+    <screen std:sid="screen-2ea60e2d" id="default" name="default" minwidth="1024px" width="1024px" height="768px" customHeight="600" customWidth="800"/>
+    <screen std:sid="screen-50edd567" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-af3e4a42" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-d21292f9">
+      <cl:dataset std:sid="d-set-a1e53e49" id="UserList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-b0256212" name="ID" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-ded1c256" name="UniqueID"/>
+          <cl:datacolumn std:sid="d-column-367f54e0" name="Name" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-9a31a85f" name="AuthInfo"/>
+          <cl:datacolumn std:sid="d-column-09f989c4" name="Privilege" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-c9e1c369" name="CreateDate"/>
+          <cl:datacolumn std:sid="d-column-1d8baf8b" name="UsePeriodFlag"/>
+          <cl:datacolumn std:sid="d-column-7f25c864" name="RegistDate"/>
+          <cl:datacolumn std:sid="d-column-bc6d3fd5" name="ExpireDate"/>
+          <cl:datacolumn std:sid="d-column-6a8e309d" name="Password"/>
+          <cl:datacolumn std:sid="d-column-963b9504" name="Group" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-1c86a403" name="AccessGroup" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-3bdd771e" name="BlackList" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-e2a25e3d" name="FPIdentify" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-d08968d0" name="FaceIdentify" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-72a39e19" name="APBZone" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-22517ee9" name="APBExcept" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-3538cce2" name="WorkName"/>
+          <cl:datacolumn std:sid="d-column-b64e7d13" name="MealName"/>
+          <cl:datacolumn std:sid="d-column-d742c693" name="MoneyName"/>
+          <cl:datacolumn std:sid="d-column-e0a87118" name="VerifyLevel" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-a8632936" name="Position" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-0222308c" name="Department"/>
+          <cl:datacolumn std:sid="d-column-cb286e0a" name="LoginPW"/>
+          <cl:datacolumn std:sid="d-column-38e5dc9b" name="LoginAllowed"/>
+          <cl:datacolumn std:sid="d-column-9ebe35a0" name="EmployeeNum"/>
+          <cl:datacolumn std:sid="d-column-0ac0c6cb" name="Email"/>
+          <cl:datacolumn std:sid="d-column-7ccf5dcc" name="IrisIdentify" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-b1abc31f" name="CarNumber"/>
+          <cl:datacolumn std:sid="d-column-28c0dd9c" name="CarType"/>
+          <cl:datacolumn std:sid="d-column-5c5c0106" name="CarColor"/>
+          <cl:datacolumn std:sid="d-column-d3015027" name="CarBlackbox" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-5d948c65" name="FPCount" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-889ec257" name="CDCount" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-48967ba4" name="FACount" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-e7fff897" name="IRCount" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-78fa42bf" name="FAWCount" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-622e6e5e" name="CardNum"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-02d8b0f3" id="AreaList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-226e6ee8" name="AreaID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-a2d642cc" name="Name"/>
+          <cl:datacolumn std:sid="d-column-c6b1e437" name="isAlert"/>
+        </cl:datacolumnlist>
+        <cl:datarowlist/>
+      </cl:dataset>
+      <cl:submission std:sid="submission-29b99729" id="sms_getAreas" method="get" action="/v1/antiPassback/areas">
+        <cl:listener std:sid="listener-46fde1f4" name="submit-done" handler="onSms_getAreasSubmitDone"/>
+        <cl:responsedata dataid="AreaList"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec>
+      <cl:event name="pagechange" type="cpr.events.CSelectionEvent"/>
+      <cl:event name="before-pagechange" type="cpr.events.CSelectionEvent"/>
+      <cl:event name="userListDblclick" type="cpr.events.CGridEvent"/>
+      <cl:event name="userListClick" type="cpr.events.CSelectionEvent"/>
+    </cl:appspec>
+  </head>
+  <body std:sid="body-5adc2798" style="top:0px; left:0px; width:500px; height:400px;">
+    <cl:listener std:sid="listener-dc637194" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-4aba554e">
+      <cl:datarowcontext datacontrolid="UserList" rowindex="0"/>
+      <cl:xylayoutdata std:sid="xyl-data-181140de" top="1px" right="1px" bottom="1px" left="1px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:pageindexer std:sid="p-indexer-0812fa71" id="userListPageIndexer" style="color:#404040;" class="userList_paging">
+        <cl:listener std:sid="listener-c918516b" name="before-selection-change" handler="onUserListPageIndexerBeforeSelectionChange"/>
+        <cl:listener std:sid="listener-71bfe92a" name="selection-change" handler="onUserListPageIndexerSelectionChange"/>
+        <cl:formdata std:sid="f-data-3b0882a3" width="100" row="1" col="0"/>
+      </cl:pageindexer>
+      <cl:grid std:sid="grid-61327aeb" id="UDC_grdUserList" readonly="false" datasetid="UserList" columnMovable="false">
+        <cl:listener std:sid="listener-99b0cc08" name="dblclick" handler="onUDC_grdUserListDblclick"/>
+        <cl:listener std:sid="listener-cdf03993" name="selection-change" handler="onUDC_grdUserListSelectionChange"/>
+        <cl:formdata std:sid="f-data-941ebce7" row="0" col="0"/>
+        <cl:gridcolumn std:sid="g-column-03fc6312" width="25px"/>
+        <cl:gridcolumn std:sid="g-column-570891bd"/>
+        <cl:gridcolumn std:sid="g-column-14526cf6"/>
+        <cl:gridcolumn std:sid="g-column-6eed0ef1"/>
+        <cl:gridcolumn std:sid="g-column-6c5256ae"/>
+        <cl:gridcolumn std:sid="g-column-559dff25"/>
+        <cl:gridcolumn std:sid="g-column-3e984d7b"/>
+        <cl:gridcolumn std:sid="g-column-47027c56"/>
+        <cl:gridcolumn std:sid="g-column-8d3ec733"/>
+        <cl:gridcolumn std:sid="g-column-e04fb33b"/>
+        <cl:gridcolumn std:sid="g-column-768bfc5c"/>
+        <cl:gridcolumn std:sid="g-column-f3151c8b"/>
+        <cl:gridcolumn std:sid="g-column-d715027b"/>
+        <cl:gridcolumn std:sid="g-column-14c67ffd"/>
+        <cl:gridcolumn std:sid="g-column-3f1a8419"/>
+        <cl:gridcolumn std:sid="g-column-e8d4008a"/>
+        <cl:gridcolumn std:sid="g-column-9269f2e6"/>
+        <cl:gridcolumn std:sid="g-column-2d164d1e"/>
+        <cl:gridcolumn std:sid="g-column-8e4a08cc"/>
+        <cl:gridcolumn std:sid="g-column-8d141df3"/>
+        <cl:gridcolumn std:sid="g-column-ac340945"/>
+        <cl:gridcolumn std:sid="g-column-a72947c8"/>
+        <cl:gridcolumn std:sid="g-column-b1bb928d"/>
+        <cl:gridcolumn std:sid="g-column-dddf4d02"/>
+        <cl:gridcolumn std:sid="g-column-13add2ae"/>
+        <cl:gridcolumn std:sid="g-column-63c2b2c7"/>
+        <cl:gridcolumn std:sid="g-column-81dd8a91"/>
+        <cl:gridcolumn std:sid="g-column-50b97bce"/>
+        <cl:gridcolumn std:sid="g-column-3ead2508"/>
+        <cl:gridcolumn std:sid="g-column-4f2d3632"/>
+        <cl:gridcolumn std:sid="g-column-c2412c02"/>
+        <cl:gridcolumn std:sid="g-column-2bbcffb5"/>
+        <cl:gridcolumn std:sid="g-column-ab2733a0"/>
+        <cl:gridcolumn std:sid="g-column-7bc3cd5a"/>
+        <cl:gridcolumn std:sid="g-column-25e69121"/>
+        <cl:gridcolumn std:sid="g-column-2e7b8f47"/>
+        <cl:gridcolumn std:sid="g-column-30a14d3f"/>
+        <cl:gridcolumn std:sid="g-column-b632acff"/>
+        <cl:gridheader std:sid="gh-band-7f0cd22f">
+          <cl:gridrow std:sid="g-row-5fe0a1bb"/>
+          <cl:gridcell std:sid="gh-cell-e4929581" rowindex="0" colindex="0" sortable="false" filterable="false" columntype="checkbox"/>
+          <cl:gridcell std:sid="gh-cell-be174ee3" rowindex="0" colindex="1" targetcolumnname="ID" sortable="false" filterable="false" text="ID">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_ID"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-9ee641d7" rowindex="0" colindex="2" targetcolumnname="UniqueID" sortable="false" filterable="false" text="UniqueID">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_UniqueID"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-b10e59ac" rowindex="0" colindex="3" targetcolumnname="Name" sortable="false" filterable="false" text="Name">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_Name"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-c0d7639e" rowindex="0" colindex="4" targetcolumnname="AuthInfo" sortable="false" filterable="false" text="AuthInfo">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_AuthInfo"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-9b8ef4f3" rowindex="0" colindex="10" targetcolumnname="Privilege" sortable="false" filterable="false" text="Privilege">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_Privilege"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-166c0731" rowindex="0" colindex="11" targetcolumnname="CreateDate" sortable="false" filterable="false" text="CreateDate">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_CreateDate"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-d10511e6" rowindex="0" colindex="12" targetcolumnname="UsePeriodFlag" sortable="false" filterable="false" text="UsePeriodFlag">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_UsePeriod"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-f29f77d6" rowindex="0" colindex="13" targetcolumnname="RegistDate" sortable="false" filterable="false" text="RegistDate">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_RegistDate"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-8041696a" rowindex="0" colindex="14" targetcolumnname="ExpireDate" sortable="false" filterable="false" text="ExpiredDate">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_ExpireDate"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-08408da5" rowindex="0" colindex="15" targetcolumnname="Password" sortable="false" filterable="false" text="Password">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_Password"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-06291af5" rowindex="0" colindex="16" targetcolumnname="Group" sortable="false" filterable="false" text="GroupCode">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_Group"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-a8368959" rowindex="0" colindex="17" targetcolumnname="AccessGroup" sortable="false" filterable="false" text="AccessGroupCode">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_AccessGroup"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-75416853" rowindex="0" colindex="18" targetcolumnname="BlackList" sortable="false" filterable="false" text="BlackList">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_BlackList"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-a678b835" rowindex="0" colindex="19" targetcolumnname="FPIdentify" sortable="false" filterable="false" text="FPIdentify">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_AuthTypeFPIdentify"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-71f09860" rowindex="0" colindex="20" targetcolumnname="FaceIdentify" sortable="false" filterable="false" text="FaceIdentify">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_AuthTypeFaceIdentify"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-b04f789d" rowindex="0" colindex="21" targetcolumnname="APBZone" sortable="false" filterable="false" text="APBZone">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_APBAreaLocation"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-f98451ff" rowindex="0" colindex="22" targetcolumnname="APBExcept" sortable="false" filterable="false" text="APBExcept">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_APBException"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-6a2a52bc" rowindex="0" colindex="23" targetcolumnname="WorkName" sortable="false" filterable="false" text="WorkCode">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_Schedule"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-336e7139" rowindex="0" colindex="24" targetcolumnname="MealName" sortable="false" filterable="false" text="MealCode">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_MealCode"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-5c353d3a" rowindex="0" colindex="25" targetcolumnname="MoneyName" sortable="false" filterable="false" text="MoneyCode">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_Salary"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-58407676" rowindex="0" colindex="26" targetcolumnname="VerifyLevel" sortable="false" filterable="false" text="VerifyLevel">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_VerifyLevel"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-693ecca3" rowindex="0" colindex="27" targetcolumnname="Position" sortable="false" filterable="false" text="PositionCode">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_Position"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-54e02748" rowindex="0" colindex="28" targetcolumnname="Department" sortable="false" filterable="false" text="Department">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_Department"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-0ab44621" rowindex="0" colindex="29" targetcolumnname="LoginPW" sortable="false" filterable="false" text="LoginPW">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_LoginPassword"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-a57dfd90" rowindex="0" colindex="30" targetcolumnname="LoginAllowed" sortable="false" filterable="false" text="LoginAllowed">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_AllowSignin"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-61b6eee5" rowindex="0" colindex="31" targetcolumnname="Email" sortable="false" filterable="false" text="Email">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_EmailAddress"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-0fe70e1a" rowindex="0" colindex="32" targetcolumnname="IrisIdentify" sortable="false" filterable="false" text="IrisIdentify">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_TypeIrisIdentify"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-72f013a3" rowindex="0" colindex="33" targetcolumnname="CarNumber" text="Str_CarNumber">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_CarNumber"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-fd031bcc" rowindex="0" colindex="34" targetcolumnname="CarColor">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_CarColor"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-0d3830ba" rowindex="0" colindex="35" targetcolumnname="CarType">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_CarType"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-c0a4c04b" rowindex="0" colindex="36" targetcolumnname="CarBlackbox">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_CarBlackbox"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-a247db8a" rowindex="0" colindex="9">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_FAWCount"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-2ef3b2ca" rowindex="0" colindex="8">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_IRCount"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-3185a7ab" rowindex="0" colindex="7">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_FACount"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-b75275a6" rowindex="0" colindex="6">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_CDCount"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-f50f723d" rowindex="0" colindex="5">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_FPCount"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-df51780e" rowindex="0" colindex="37">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_Card"/>
+          </cl:gridcell>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-1f607af6">
+          <cl:gridrow std:sid="g-row-acb7427a"/>
+          <cl:gridcell std:sid="gd-cell-a71bd03b" rowindex="0" colindex="0" columntype="checkbox"/>
+          <cl:gridcell std:sid="gd-cell-a4a1cde7" rowindex="0" colindex="1" columnname="ID"/>
+          <cl:gridcell std:sid="gd-cell-0e93e9f1" rowindex="0" colindex="2" columnname="UniqueID"/>
+          <cl:gridcell std:sid="gd-cell-78267740" rowindex="0" colindex="3" columnname="Name"/>
+          <cl:gridcell std:sid="gd-cell-982bf87c" rowindex="0" colindex="4" columnname="AuthInfo"/>
+          <cl:gridcell std:sid="gd-cell-2dd3f0b7" rowindex="0" colindex="10" columnname="Privilege">
+            <cl:combobox std:sid="c-box-7b3a00ef" id="UDC_grdUserList_cmbPrivilege" style="text-align:center;" readonly="true" hidebutton="true">
+              <cl:item std:sid="item-8a9c58cb" label="---" value="0"/>
+            </cl:combobox>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-737e3e05" rowindex="0" colindex="11" columnname="CreateDate"/>
+          <cl:gridcell std:sid="gd-cell-70526ff2" rowindex="0" colindex="12" columnname="UsePeriodFlag"/>
+          <cl:gridcell std:sid="gd-cell-e0488497" rowindex="0" colindex="13" columnname="RegistDate"/>
+          <cl:gridcell std:sid="gd-cell-a58413c0" rowindex="0" colindex="14" columnname="ExpireDate"/>
+          <cl:gridcell std:sid="gd-cell-63e9602f" rowindex="0" colindex="15" columnname="Password"/>
+          <cl:gridcell std:sid="gd-cell-c93c4ea3" rowindex="0" colindex="16" columnname="Group"/>
+          <cl:gridcell std:sid="gd-cell-077ba088" rowindex="0" colindex="17" columnname="AccessGroup"/>
+          <cl:gridcell std:sid="gd-cell-f760c901" rowindex="0" colindex="18" columnname="BlackList"/>
+          <cl:gridcell std:sid="gd-cell-0551f8df" rowindex="0" colindex="19" columnname="FPIdentify"/>
+          <cl:gridcell std:sid="gd-cell-085fd95f" rowindex="0" colindex="20" columnname="FaceIdentify"/>
+          <cl:gridcell std:sid="gd-cell-9348dea3" rowindex="0" colindex="21" columnname="APBZone">
+            <cl:combobox std:sid="c-box-e0574ee5" id="UDC_grdUserList_cmbApbArea" style="text-align:center;" readonly="true" hidebutton="true">
+              <cl:item std:sid="item-13ae2624" label="---" value="0"/>
+            </cl:combobox>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-c3b95f1c" rowindex="0" colindex="22" columnname="APBExcept"/>
+          <cl:gridcell std:sid="gd-cell-57b95470" rowindex="0" colindex="23" columnname="WorkName"/>
+          <cl:gridcell std:sid="gd-cell-ea0ba0eb" rowindex="0" colindex="24" columnname="MealName"/>
+          <cl:gridcell std:sid="gd-cell-51ed56ac" rowindex="0" colindex="25" columnname="MoneyName"/>
+          <cl:gridcell std:sid="gd-cell-6f299d0f" rowindex="0" colindex="26" columnname="VerifyLevel"/>
+          <cl:gridcell std:sid="gd-cell-d5baf35c" rowindex="0" colindex="27" columnname="Position"/>
+          <cl:gridcell std:sid="gd-cell-cc4e5006" rowindex="0" colindex="28" columnname="Department"/>
+          <cl:gridcell std:sid="gd-cell-e844c175" rowindex="0" colindex="29" columnname="LoginPW">
+            <cl:inputbox std:sid="i-box-d32b4f4c" id="ipb1" secret="true"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-d9c38c18" rowindex="0" colindex="30" columnname="LoginAllowed"/>
+          <cl:gridcell std:sid="gd-cell-c668f0be" rowindex="0" colindex="31" columnname="Email"/>
+          <cl:gridcell std:sid="gd-cell-5c17c781" rowindex="0" colindex="32" columnname="IrisIdentify"/>
+          <cl:gridcell std:sid="gd-cell-26388af8" rowindex="0" colindex="33" columnname="CarNumber"/>
+          <cl:gridcell std:sid="gd-cell-b00a08c6" rowindex="0" colindex="34" columnname="CarColor"/>
+          <cl:gridcell std:sid="gd-cell-90989ff3" rowindex="0" colindex="35" columnname="CarType"/>
+          <cl:gridcell std:sid="gd-cell-a371cd88" rowindex="0" colindex="36" columnname="CarBlackbox"/>
+          <cl:gridcell std:sid="gd-cell-a7ea8fb3" rowindex="0" colindex="9" columnname="FAWCount"/>
+          <cl:gridcell std:sid="gd-cell-2e047146" rowindex="0" colindex="8" columnname="IRCount"/>
+          <cl:gridcell std:sid="gd-cell-e2ea06fa" rowindex="0" colindex="7" columnname="FACount"/>
+          <cl:gridcell std:sid="gd-cell-efffe17d" rowindex="0" colindex="6" columnname="CDCount"/>
+          <cl:gridcell std:sid="gd-cell-8bcc9ac0" rowindex="0" colindex="5" columnname="FPCount"/>
+          <cl:gridcell std:sid="gd-cell-5c1a6490" rowindex="0" colindex="37" columnname="CardNum">
+            <cl:datasetbind property="color" category="STYLER" datacontrolid="UserList" columnname="CardNum" rowindex="37"/>
+          </cl:gridcell>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:formlayout std:sid="f-layout-8ae29e84" vspace="0px">
+        <cl:rows length="1" unit="FRACTION" shadetype="NONE" shadecolor="#000000"/>
+        <cl:rows length="40" unit="PIXEL" shadetype="NONE" shadecolor="#000000"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-dd80e958"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

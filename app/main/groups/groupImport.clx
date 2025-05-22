@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-8219151a" version="1.0.0.0">
+  <head std:sid="head-bea8a47e">
+    <title>userImport</title>
+    <screen std:sid="screen-3619ab62" id="default" name="default" minwidth="1024px" width="1024px" height="768px"/>
+    <screen std:sid="screen-2f68e562" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-954d9fdd" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-8afae15e">
+      <cl:dataset std:sid="d-set-15888a62" id="dsGroupInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-1e34eb7e" name="GroupID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-a5297e84" name="GroupName"/>
+          <cl:datacolumn std:sid="d-column-22ab61a2" name="Parent" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-eb6a4e27" name="Description"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-cedbe583" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-87513087" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-b8455ed7" id="sms_postGroupImport" action="/v1/groups/import">
+        <cl:listener std:sid="listener-1a6a1b13" name="submit-done" handler="onSms_postGroupImportSubmitDone"/>
+        <cl:listener std:sid="listener-d2a5e823" name="submit-error" handler="onSms_postGroupImportSubmitError"/>
+        <cl:listener std:sid="listener-d9052940" name="submit-timeout" handler="onSms_postGroupImportSubmitTimeout"/>
+        <cl:requestdata dataid="dsGroupInfo" payload="all"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec dev-comment="USIMP_"/>
+  </head>
+  <body std:sid="body-530913c9" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-8882809d" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-11371556" style="padding:10px;">
+      <cl:xylayoutdata std:sid="xyl-data-9c383d81" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:grid std:sid="grid-5a1428f2" id="GIDLGP_grdGroupImportList" class="user_allList" readonly="false" datasetid="dsGroupInfo" resizablecolumns="all" columnMovable="false">
+        <cl:formdata std:sid="f-data-1b159535" row="1" col="1"/>
+        <cl:gridcolumn std:sid="g-column-0e78a546" width="60px"/>
+        <cl:gridcolumn std:sid="g-column-8256cd54"/>
+        <cl:gridcolumn std:sid="g-column-756612de" width="60px"/>
+        <cl:gridcolumn std:sid="g-column-e2023179"/>
+        <cl:gridheader std:sid="gh-band-5add4a1b">
+          <cl:gridrow std:sid="g-row-f8962438"/>
+          <cl:gridcell std:sid="gh-cell-41876d3b" rowindex="0" colindex="0" targetcolumnname="GroupID" sortable="false" filterable="false" text="GroupID">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_GroupID"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-c0d981ff" rowindex="0" colindex="1" targetcolumnname="GroupName" sortable="false" filterable="false" text="GroupName">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_GroupName"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-c3831ae9" rowindex="0" colindex="2" targetcolumnname="Parent" sortable="false" filterable="false" text="Parent">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_GroupParent"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-a3e2680d" rowindex="0" colindex="3" targetcolumnname="Description" sortable="false" filterable="false" text="Description">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_Description"/>
+          </cl:gridcell>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-cf96c13b">
+          <cl:gridrow std:sid="g-row-1f0641d5"/>
+          <cl:gridcell std:sid="gd-cell-3c3e9f9a" rowindex="0" colindex="0" columnname="GroupID">
+            <cl:inputbox std:sid="i-box-c9dc4630" id="ipb1"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-28910bde" rowindex="0" colindex="1" columnname="GroupName">
+            <cl:inputbox std:sid="i-box-6193caa3" id="ipb2"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-c08a768f" rowindex="0" colindex="2" columnname="Parent">
+            <cl:inputbox std:sid="i-box-75a3c396" id="ipb3"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-60a8928f" rowindex="0" colindex="3" columnname="Description">
+            <cl:inputbox std:sid="i-box-d79cda7a" id="ipb4"/>
+          </cl:gridcell>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:group std:sid="group-8a95eb33">
+        <cl:formdata std:sid="f-data-a8d4cfcd" row="0" col="0" rowspan="1" colspan="2"/>
+        <cl:fileinput std:sid="f-input-0e67fdb8" id="my_file_input" placeholder="가져올 파일을 드래그하여 올려 놓으세요.">
+          <cl:listener std:sid="listener-cb0451d7" name="value-change" handler="onMy_file_inputValueChange"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_DragFile"/>
+          <cl:formdata std:sid="f-data-31c5632a" row="0" col="0"/>
+        </cl:fileinput>
+        <cl:button std:sid="button-4fd5d2e8" id="GIDLG_btnGroupImport" class="userInfo_btn" visible="true">
+          <cl:listener std:sid="listener-34ab8fa7" name="click" handler="onGIDLG_btnGroupImportClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_BatchApply"/>
+          <cl:formdata std:sid="f-data-8da2b119" row="0" col="3"/>
+        </cl:button>
+        <cl:img std:sid="image-c74f3ce3" id="USIMP_btnHelpPage" style="cursor:help;" visible="false" src="../../../theme/images/common/common_btn_window_top_q.png">
+          <cl:listener std:sid="listener-7485bded" name="click" handler="onUSIMP_btnHelpPageClick"/>
+          <cl:formdata std:sid="f-data-f7de5fb6" halign="CENTER" valign="CENTER" width="14" height="14" row="0" col="4"/>
+        </cl:img>
+        <cl:button std:sid="button-57a54c7d" id="GIDLG_btnRefresh" class="userInfo_btn" visible="true">
+          <cl:listener std:sid="listener-7d00f9d4" name="click" handler="onGIDLG_btnRefreshClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Renewal"/>
+          <cl:formdata std:sid="f-data-5b0492c5" row="0" col="2"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-65bf496c">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" minlength="0"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="14" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:tree std:sid="tree-03711d89" id="GIDLG_treGroup">
+        <cl:formdata std:sid="f-data-6f8bc5ee" row="1" col="0"/>
+        <cl:treeitemset datasetid="dsGroupInfo" label="GroupName" value="GroupID" tooltip="Description" parent="Parent"/>
+      </cl:tree>
+      <cl:formlayout std:sid="f-layout-4eaa90a4" hspace="5px" vspace="5px">
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="300" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-e33ba410"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

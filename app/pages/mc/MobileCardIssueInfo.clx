@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-a3626375" version="1.0.0.0">
+  <head std:sid="head-edc835aa">
+    <title>MobileCardInfo</title>
+    <screen std:sid="screen-71c111ee" id="default" customHeight="600" customWidth="1100" height="768px" minwidth="1024px" name="default" useCustomWidth="true" width="1024px"/>
+    <screen std:sid="screen-823299ef" id="tablet" height="667px" maxwidth="1023px" minwidth="500px" name="tablet" width="500px"/>
+    <screen std:sid="screen-3a110e26" id="mobile" height="525px" maxwidth="499px" name="mobile" width="350px"/>
+    <cl:model std:sid="model-c478015e">
+      <cl:dataset std:sid="d-set-fcbfc0f0" id="ds_IssueInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn name="UserID"/>
+          <cl:datacolumn name="UserName"/>
+          <cl:datacolumn name="RegDate"/>
+          <cl:datacolumn name="ExpDate"/>
+          <cl:datacolumn name="KeyCode"/>
+          <cl:datacolumn name="AutoRenewalYn"/>
+          <cl:datacolumn name="isChecked"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:submission std:sid="submission-b84a3966" id="getIssueInfo" action="data/mobile/MobileCardIssueInfo.json">
+        <cl:listener std:sid="listener-76590a62" handler="onGetIssueInfoSubmitSuccess" name="submit-success"/>
+        <cl:requestdata dataid="dm_SearchParam"/>
+        <cl:responsedata dataid="ds_IssueInfo"/>
+      </cl:submission>
+      <cl:datamap std:sid="d-map-cc517011" id="dm_SearchParam">
+        <cl:datacolumnlist>
+          <cl:datacolumn name="clssCd"/>
+          <cl:datacolumn name="keyword"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-988b0e1c" id="doRenew" action="/mobilecard/issue/regRenew.do">
+        <cl:listener std:sid="listener-6bd5a0f0" handler="onDoRenewSubmitSuccess" name="submit-success"/>
+        <cl:requestdata dataid="ds_IssueInfo"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-7627ea79" id="doAutoRenew" action="/mobilecard/issue/regAutoRenew.do">
+        <cl:listener std:sid="listener-3ed0838f" handler="onDoAutoRenewSubmitSuccess" name="submit-success"/>
+        <cl:requestdata dataid="ds_IssueInfo"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-493b3245" id="doDeleteInfo">
+        <cl:listener std:sid="listener-72cd66b7" handler="onDoDeleteInfoSubmitSuccess" name="submit-success"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-09ba18d3" style="padding:20px; top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-6bb665ef" handler="onBodyLoad" name="load"/>
+    <cl:group std:sid="group-4b84650d">
+      <cl:formdata std:sid="f-data-8e4bdcb7" col="0" colspan="1" row="0" rowspan="1"/>
+      <cl:group std:sid="group-7a7a5e7a" id="grp_search" class="search-box">
+        <cl:listener std:sid="listener-3c5d123a" handler="onGroupKeydown" name="keydown"/>
+        <cl:formdata std:sid="f-data-80ce513b" col="0" row="0"/>
+        <cl:combobox std:sid="c-box-5774050b" id="cbx_cate" value="0">
+          <cl:listener std:sid="listener-2819e44e" handler="onCbx_cateSelectionChange" name="selection-change"/>
+          <cl:formdata std:sid="f-data-2acc750a" col="1" row="0" valign="CENTER"/>
+          <cl:item label="전체" value="0"/>
+          <cl:item label="아이디" value="1"/>
+          <cl:item label="이름" value="2"/>
+          <cl:item label="만료일30일미만" value="3"/>
+        </cl:combobox>
+        <cl:inputbox std:sid="i-box-7e26f9a8" id="ipt_search" enabled="false" placeholder="검색어를 입력해주세요.">
+          <cl:listener std:sid="listener-ccfcfd4f" handler="onIpt_searchValueChange" name="value-change"/>
+          <cl:formdata std:sid="f-data-08d581b8" col="2" row="0" valign="CENTER"/>
+        </cl:inputbox>
+        <cl:button std:sid="button-5ead2580" id="btn_IssueSearch" class="search" value="검색">
+          <cl:listener std:sid="listener-6f1c5b0a" handler="onBtn_IssueSearchClick" name="click"/>
+          <cl:formdata std:sid="f-data-16928cb9" col="3" row="0" valign="CENTER"/>
+        </cl:button>
+        <cl:button std:sid="button-82b29089" id="btn_Renew" enabled="false" value="갱신">
+          <cl:listener std:sid="listener-f0e2c3f2" handler="onBtn_RenewClick" name="click"/>
+          <cl:expbind category="STYLER" property="cursor" expression="enabled==true?&quot;pointer&quot;:&quot;no-drop&quot;"/>
+          <cl:formdata std:sid="f-data-54e75df2" col="8" row="0" valign="CENTER"/>
+        </cl:button>
+        <cl:button std:sid="button-665068c2" id="btn_AutoRenew" enabled="false" value="자동갱신">
+          <cl:listener std:sid="listener-2ce67b30" handler="onBtn_AutoRenewClick" name="click"/>
+          <cl:expbind category="STYLER" property="cursor" expression="enabled==true?&quot;pointer&quot;:&quot;no-drop&quot;"/>
+          <cl:formdata std:sid="f-data-8bd05d6f" col="9" row="0" valign="CENTER"/>
+        </cl:button>
+        <cl:button std:sid="button-4f6fbb2c" id="btn_IssueDelete" enabled="false" value="삭제">
+          <cl:listener std:sid="listener-3f81306e" handler="onBtn_IssueDeleteClick" name="click"/>
+          <cl:expbind category="STYLER" property="cursor" expression="enabled==true?&quot;pointer&quot;:&quot;no-drop&quot;"/>
+          <cl:formdata std:sid="f-data-8781b8b4" col="10" row="0" valign="CENTER"/>
+        </cl:button>
+        <cl:button std:sid="button-af6a70fa" id="btn_RenewAll" enabled="false" value="갱신 전체선택">
+          <cl:listener std:sid="listener-3e36f88d" handler="onBtn_RenewAllClick" name="click"/>
+          <cl:expbind category="STYLER" property="cursor" expression="enabled==true?&quot;pointer&quot;:&quot;no-drop&quot;"/>
+          <cl:formdata std:sid="f-data-f0b8cebd" col="5" row="0" valign="CENTER"/>
+        </cl:button>
+        <cl:button std:sid="button-fcd72f55" id="btn_AutoRenewAll" enabled="false" value="자동갱신 전체선택">
+          <cl:listener std:sid="listener-9fffb78e" handler="onBtn_AutoRenewAllClick" name="click"/>
+          <cl:expbind category="STYLER" property="cursor" expression="enabled==true?&quot;pointer&quot;:&quot;no-drop&quot;"/>
+          <cl:formdata std:sid="f-data-7dbc8576" col="6" row="0" valign="CENTER"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-3c46ab25">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="2" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+          <cl:columns length="4" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+          <cl:columns length="60" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns length="1" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+          <cl:columns length="3" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+          <cl:columns length="3" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+          <cl:columns length="1" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+          <cl:columns length="2" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+          <cl:columns length="2" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+          <cl:columns length="2" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-2bd50dc5" id="grp_Grid" class="un-form-border">
+        <cl:formdata std:sid="f-data-73c9f51e" col="0" row="1"/>
+        <cl:grid std:sid="grid-4414cd14" id="grd_IssueInfo" columnMovable="false" columnResizable="false" datasetid="ds_IssueInfo" nodatamessage="데이터가 없습니다." readonly="false" selectionmulti="none">
+          <cl:xylayoutdata std:sid="xyl-data-d4edb6e6" bottom="10px" horizontalAnchor="BOTH" left="10px" right="10px" top="10px" verticalAnchor="BOTH"/>
+          <cl:gridcolumn std:sid="g-column-8a99849c" width="25px"/>
+          <cl:gridcolumn std:sid="g-column-91c01ad2" width="120px"/>
+          <cl:gridcolumn std:sid="g-column-b2accc1c" width="150px"/>
+          <cl:gridcolumn std:sid="g-column-46b8bacf"/>
+          <cl:gridcolumn std:sid="g-column-a011052e"/>
+          <cl:gridcolumn std:sid="g-column-627b3048" width="200px"/>
+          <cl:gridcolumn std:sid="g-column-5d9b8c08" width="80px"/>
+          <cl:gridheader std:sid="gh-band-9a27da8b">
+            <cl:gridrow std:sid="g-row-0bba5c33"/>
+            <cl:gridcell std:sid="gh-cell-7ad527f0" colindex="0" rowindex="0" filterable="true" visible="true"/>
+            <cl:gridcell std:sid="gh-cell-0eef5991" colindex="1" rowindex="0" style="font-weight:bold;" sortable="false" targetcolumnname="UserID" text="사용자 ID"/>
+            <cl:gridcell std:sid="gh-cell-40ff6e61" colindex="2" rowindex="0" style="font-weight:bold;" sortable="false" targetcolumnname="UserName" text="사용자 이름"/>
+            <cl:gridcell std:sid="gh-cell-ead7cf3a" colindex="3" rowindex="0" style="font-weight:bold;" filterable="false" sortable="true" targetcolumnname="RegDate" text="등록일"/>
+            <cl:gridcell std:sid="gh-cell-034a407e" colindex="4" rowindex="0" style="font-weight:bold;" filterable="false" sortable="true" targetcolumnname="ExpDate" text="만료일"/>
+            <cl:gridcell std:sid="gh-cell-dc2fd7be" colindex="5" rowindex="0" style="font-weight:bold;" filterable="false" sortable="false" targetcolumnname="KeyCode" text="키코드"/>
+            <cl:gridcell std:sid="gh-cell-b46badda" colindex="6" rowindex="0" style="font-weight:bold;" sortable="true" targetcolumnname="AutoRenewalYn" text="자동 갱신"/>
+          </cl:gridheader>
+          <cl:griddetail std:sid="gd-band-9da6eec9">
+            <cl:gridrow std:sid="g-row-97581424"/>
+            <cl:gridcell std:sid="gd-cell-fd7bf242" colindex="0" rowindex="0" columntype="checkbox"/>
+            <cl:gridcell std:sid="gd-cell-6f725030" colindex="1" rowindex="0" style="text-align:left;" columnname="UserID"/>
+            <cl:gridcell std:sid="gd-cell-63a0e95a" colindex="2" rowindex="0" style="text-align:left;" columnname="UserName"/>
+            <cl:gridcell std:sid="gd-cell-97268947" colindex="3" rowindex="0" columnname="RegDate"/>
+            <cl:gridcell std:sid="gd-cell-58aa1222" colindex="4" rowindex="0" columnname="ExpDate"/>
+            <cl:gridcell std:sid="gd-cell-da244e21" colindex="5" rowindex="0" columnname="KeyCode"/>
+            <cl:gridcell std:sid="gd-cell-bb3e8aa5" colindex="6" rowindex="0" columnname="AutoRenewalYn">
+              <cl:combobox std:sid="c-box-50029a74" id="cmb2" style="text-align:center;">
+                <cl:item label="사용" value="Y"/>
+                <cl:item label="사용안함" value="N"/>
+              </cl:combobox>
+            </cl:gridcell>
+          </cl:griddetail>
+        </cl:grid>
+        <cl:xylayout std:sid="xylayout-7a0ef6e5"/>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-41ec519a">
+        <cl:rows length="1" shadecolor="transparent" shadetype="NONE" unit="FRACTION"/>
+        <cl:rows length="9" shadecolor="transparent" shadetype="NONE" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:formlayout std:sid="f-layout-79cc8e0f">
+      <cl:rows length="1" unit="FRACTION"/>
+      <cl:columns length="1" shadecolor="transparent" shadetype="NONE" unit="FRACTION"/>
+    </cl:formlayout>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

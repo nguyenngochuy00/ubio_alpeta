@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-ec9570c0" version="1.0.0.0">
+  <head std:sid="head-90b2a646">
+    <title>OptionPageExDB</title>
+    <screen std:sid="screen-809b86ed" id="default" name="default" minwidth="1024px" width="1024px" height="768px"/>
+    <screen std:sid="screen-faf68db9" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-96f20708" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-4cddad0c">
+      <cl:dataset std:sid="d-set-9b89575d" id="ExdbTableList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-6111207a" name="tablename"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-bc44c600" id="ExdbRowInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-e7677591" name="colname"/>
+          <cl:datacolumn std:sid="d-column-73b9f6f0" name="coltype"/>
+          <cl:datacolumn std:sid="d-column-37ea4e7a" name="collen" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-85acff3b" name="colsel"/>
+          <cl:datacolumn std:sid="d-column-1d0e90da" name="colnum" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-a50fb55b" name="colbegin" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-b3852f40" id="ExdbTableColumInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-a8b5152a" name="colname"/>
+          <cl:datacolumn std:sid="d-column-4176ae49" name="coltype"/>
+          <cl:datacolumn std:sid="d-column-f5224dd8" name="collen" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-5488dde6" name="colnum" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-f429e4f9" name="colsel" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-4fbed160" name="colbegin" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-b58e5d7d" id="ExdbLoginAccountInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-f54dcdc1" info="" name="id" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-d30cc43f" info="" name="pw" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-a1fb8975" name="dbType" datatype="string"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-d1035b27" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-bb77afec" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-70bcf470" id="ExdbReqTableColumInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-23575a63" name="id"/>
+          <cl:datacolumn std:sid="d-column-47056c47" name="pw"/>
+          <cl:datacolumn std:sid="d-column-093fe6d8" name="tablename"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-be4645b1" id="smsExdbLogin" method="post" action="/v1/ExdbLogin">
+        <cl:listener std:sid="listener-55d05891" name="submit-done" handler="onSmsExdbLoginSubmitDone"/>
+        <cl:listener std:sid="listener-d2421428" name="submit-success" handler="onSmsExdbLoginSubmitSuccess"/>
+        <cl:listener std:sid="listener-1ebfbf74" name="submit-timeout" handler="onSmsExdbLoginSubmitTimeout"/>
+        <cl:listener std:sid="listener-12e4a681" name="submit-error" handler="onSmsExdbLoginSubmitError"/>
+        <cl:requestdata dataid="ExdbLoginAccountInfo"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="ExdbTableList"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-9356feb9" id="smsExdbTableColumInfo" method="post" action="/v1/ExdbTableColumInfo">
+        <cl:listener std:sid="listener-168162ec" name="submit-done" handler="onSmsExdbTableColumInfoSubmitDone"/>
+        <cl:listener std:sid="listener-673655cb" name="submit-error" handler="onSmsExdbTableColumInfoSubmitError"/>
+        <cl:listener std:sid="listener-58647854" name="submit-success" handler="onSmsExdbTableColumInfoSubmitSuccess"/>
+        <cl:listener std:sid="listener-1439b410" name="submit-timeout" handler="onSmsExdbTableColumInfoSubmitTimeout"/>
+        <cl:requestdata dataid="ExdbReqTableColumInfo"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="ExdbTableColumInfo"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-e6b0ffd2" id="smsExdbSaveTableColumInfo" action="/v1/ExdbSaveTableColumInfo" mediatype="application/x-www-form-urlencoded">
+        <cl:listener std:sid="listener-851dd57f" name="submit-done" handler="onSmsExdbSaveTableColumInfoSubmitDone"/>
+        <cl:listener std:sid="listener-45a28477" name="submit-error" handler="onSmsExdbSaveTableColumInfoSubmitError"/>
+        <cl:listener std:sid="listener-68630d22" name="submit-success" handler="onSmsExdbSaveTableColumInfoSubmitSuccess"/>
+        <cl:requestdata dataid="ExdbReqTableColumInfo"/>
+        <cl:requestdata dataid="ExdbTableColumInfo"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-db538167" id="smsExdbLoadTableColumInfo" method="get" action="/v1/ExdbLoadTableColumInfo">
+        <cl:listener std:sid="listener-e80b241b" name="submit-success" handler="onSmsExdbLoadTableColumInfoSubmitSuccess"/>
+        <cl:requestdata dataid="ExdbLoginAccountInfo"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="ExdbTableColumInfo"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-b53ccc60" id="smsExdbGetLoginInfo" method="get" action="/v1/ExdbLogin">
+        <cl:listener std:sid="listener-e312f1d2" name="submit-done" handler="onSmsExdbGetLoginInfoSubmitDone"/>
+        <cl:listener std:sid="listener-43e4dc8c" name="submit-error" handler="onSmsExdbGetLoginInfoSubmitError"/>
+        <cl:listener std:sid="listener-878c2efd" name="submit-timeout" handler="onSmsExdbGetLoginInfoSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="ExdbReqTableColumInfo"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-61f8d31e" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-03c7adb7" name="load" handler="onBodyLoad2"/>
+    <cl:group std:sid="group-1e09da18">
+      <cl:xylayoutdata std:sid="xyl-data-b1e4d865" top="20px" left="20px" width="730px" height="480px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      <cl:group std:sid="group-12a182ca">
+        <cl:formdata std:sid="f-data-a7476c93" row="1" col="0"/>
+        <cl:grid std:sid="grid-3cd917de" id="Exdb_grd_selectcolum" datasetid="ExdbTableColumInfo" wheelrowcount="5">
+          <cl:listener std:sid="listener-4aa6e2b0" name="update" handler="onExdb_grd_selectcolumUpdate"/>
+          <cl:xylayoutdata std:sid="xyl-data-a723aec9" top="0px" left="0px" width="729px" height="284px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+          <cl:gridcolumn std:sid="g-column-65eed3d2"/>
+          <cl:gridcolumn std:sid="g-column-de27a761"/>
+          <cl:gridcolumn std:sid="g-column-ca25e599"/>
+          <cl:gridcolumn std:sid="g-column-99c9561a"/>
+          <cl:gridcolumn std:sid="g-column-b7992415"/>
+          <cl:gridcolumn std:sid="g-column-b983c4ab"/>
+          <cl:gridheader std:sid="gh-band-b3fcdcdf">
+            <cl:gridrow std:sid="g-row-b1c3784f"/>
+            <cl:gridcell std:sid="gh-cell-4d966ff9" rowindex="0" colindex="0" targetcolumnname="colname" sortable="false" filterable="false" text="colname">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_ColName"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gh-cell-59e382c8" rowindex="0" colindex="1" targetcolumnname="coltype" sortable="false" filterable="false" text="coltype">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_ColType"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gh-cell-b2895e90" rowindex="0" colindex="2" targetcolumnname="collen" sortable="false" filterable="false" text="collen">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_ColLen"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gh-cell-32604a9e" rowindex="0" colindex="3" targetcolumnname="colnum" sortable="false" filterable="false" text="colnum">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_ColNum"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gh-cell-1d274180" rowindex="0" colindex="4" targetcolumnname="colsel" sortable="false" filterable="false" text="colsel">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_ColSel"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gh-cell-9778a646" rowindex="0" colindex="5" targetcolumnname="colbegin" sortable="false" filterable="false" text="colbegin">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_ColBegin"/>
+            </cl:gridcell>
+          </cl:gridheader>
+          <cl:griddetail std:sid="gd-band-8eacd283">
+            <cl:gridrow std:sid="g-row-4df9443a"/>
+            <cl:gridcell std:sid="gd-cell-37b84112" rowindex="0" colindex="0" columnname="colname"/>
+            <cl:gridcell std:sid="gd-cell-812a011c" rowindex="0" colindex="1" columnname="coltype"/>
+            <cl:gridcell std:sid="gd-cell-407a4619" rowindex="0" colindex="2" columnname="collen"/>
+            <cl:gridcell std:sid="gd-cell-62856c9c" rowindex="0" colindex="3" columnname="colnum"/>
+            <cl:gridcell std:sid="gd-cell-535a8046" rowindex="0" colindex="4" columnname="colsel">
+              <cl:combobox std:sid="c-box-e05bdf34" id="Exdb_Cmb_ColSel" style="background-color:#bcf7c1;" autoselect="false">
+                <cl:celldata std:sid="c-data-99ee4c15"/>
+              </cl:combobox>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gd-cell-27e7f88c" rowindex="0" colindex="5" columnname="colbegin">
+              <cl:numbereditor std:sid="n-editor-8520466f" id="Exdb_Cmb_ColBegin" style="background-color:#bcf7c1;">
+                <cl:celldata std:sid="c-data-9ea7a97a"/>
+              </cl:numbereditor>
+            </cl:gridcell>
+          </cl:griddetail>
+        </cl:grid>
+        <cl:xylayout std:sid="xylayout-d9ea30ba"/>
+      </cl:group>
+      <cl:group std:sid="group-710ff8b0">
+        <cl:formdata std:sid="f-data-f3995abc" row="0" col="0"/>
+        <cl:output std:sid="output-8a850a33" style="text-align:right;" class="common-controllabel">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_OptionDsnNameFix"/>
+          <cl:formdata std:sid="f-data-cda51f22" row="0" col="0"/>
+        </cl:output>
+        <cl:inputbox std:sid="i-box-e62def62" id="ipbDsnNameFix" enabled="false" readonly="true" value="exdb">
+          <cl:formdata std:sid="f-data-b83b1e7a" row="0" col="1"/>
+        </cl:inputbox>
+        <cl:output std:sid="output-5fe90252" style="text-align:right;" class="common-controllabel">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_OptionDsnID"/>
+          <cl:formdata std:sid="f-data-804c5006" row="1" col="0"/>
+        </cl:output>
+        <cl:inputbox std:sid="i-box-9385e4ef" id="Exdb_ipb_id">
+          <cl:listener std:sid="listener-3222d917" name="value-change" handler="onExdb_ipb_idValueChange"/>
+          <cl:formdata std:sid="f-data-e69b7d3b" row="1" col="1"/>
+        </cl:inputbox>
+        <cl:output std:sid="output-6ce06f30" style="text-align:right;" class="common-controllabel">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_OptionDsnPW"/>
+          <cl:formdata std:sid="f-data-6878610a" row="2" col="0"/>
+        </cl:output>
+        <cl:inputbox std:sid="i-box-036364b7" id="Exdb_ipb_pw" secret="true">
+          <cl:listener std:sid="listener-ea57a6b9" name="value-change" handler="onExdb_ipb_pwValueChange"/>
+          <cl:formdata std:sid="f-data-3a2680e4" row="2" col="1"/>
+        </cl:inputbox>
+        <cl:output std:sid="output-d0a810f2" style="text-align:right;" class="common-controllabel" value="TableName: ">
+          <cl:formdata std:sid="f-data-ad5cbb9f" row="3" col="0"/>
+        </cl:output>
+        <cl:inputbox std:sid="i-box-8c93f061" id="Exdb_ipb_TableName">
+          <cl:formdata std:sid="f-data-957f6948" row="3" col="1"/>
+        </cl:inputbox>
+        <cl:output std:sid="output-107678c8" style="text-align:right;" class="common-controllabel">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_OptionDsnTableList"/>
+          <cl:formdata std:sid="f-data-3d118fd6" row="4" col="0"/>
+        </cl:output>
+        <cl:combobox std:sid="c-box-e18c8518" id="Exdb_cmb_extables" enabled="false">
+          <cl:listener std:sid="listener-ff71654e" name="selection-change" handler="onExdb_cmb_extablesSelectionChange"/>
+          <cl:formdata std:sid="f-data-d090456f" row="4" col="1"/>
+        </cl:combobox>
+        <cl:checkbox std:sid="c-box-e5a6b1ba" id="Exdb_cbxOracleDB" style="text-align:center;" text="Oracle DB">
+          <cl:formdata std:sid="f-data-200c1a96" row="0" col="3"/>
+        </cl:checkbox>
+        <cl:button std:sid="button-0d054efd" id="Exdb_btn_TableName" style="font-size:12px;" class="userInfo_btn" enabled="true" value="Add TableName">
+          <cl:listener std:sid="listener-4401146e" name="click" handler="onExdb_btn_TableNameClick"/>
+          <cl:formdata std:sid="f-data-8a92ccea" row="3" col="3"/>
+        </cl:button>
+        <cl:group std:sid="group-7a0b1490">
+          <cl:formdata std:sid="f-data-396e1751" row="1" col="3" rowspan="2" colspan="3"/>
+          <cl:button std:sid="button-9eaa1f95" id="Exdb_btnConnect" style="font-size:12px;" class="userInfo_btn" enabled="false">
+            <cl:listener std:sid="listener-175e35e3" name="click" handler="onExdb_btnConnectClick"/>
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_OptionExDBGetTableList"/>
+            <cl:formdata std:sid="f-data-d420a639" row="0" col="0"/>
+          </cl:button>
+          <cl:button std:sid="button-b64d5b2a" id="Exdb_btnTableColumInfo" style="font-size:12px;" class="userInfo_btn" enabled="false">
+            <cl:listener std:sid="listener-1d463f46" name="click" handler="onExdb_btnTableColumInfoClick"/>
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_OptionExDBGetSelectTableInfo"/>
+            <cl:formdata std:sid="f-data-07270e4d" row="1" col="0"/>
+          </cl:button>
+          <cl:formlayout std:sid="f-layout-2f419ff6" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+            <cl:rows length="25" unit="PIXEL"/>
+            <cl:rows length="25" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="180" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:group std:sid="group-5bafe7d2">
+          <cl:formdata std:sid="f-data-23b8e686" row="4" col="3" rowspan="1" colspan="3"/>
+          <cl:button std:sid="button-38832aa0" id="Exdb_btnSave" style="font-size:12px;" class="userInfo_btn" enabled="false">
+            <cl:listener std:sid="listener-ce2fc303" name="click" handler="onExdb_btnSaveClick"/>
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_OptionExDBSave"/>
+            <cl:formdata std:sid="f-data-c5b31644" row="0" col="0"/>
+          </cl:button>
+          <cl:button std:sid="button-105e0ebc" id="Exdb_btnLoad" style="font-size:12px;" class="userInfo_btn" enabled="true">
+            <cl:listener std:sid="listener-752bd3d4" name="click" handler="onExdb_btnLoadClick"/>
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_OptionExDBGetSavedInfo"/>
+            <cl:formdata std:sid="f-data-945fa52f" row="0" col="1"/>
+          </cl:button>
+          <cl:formlayout std:sid="f-layout-6ebf9566" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="120" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="150" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-a70bde3c" scrollable="false" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="25" unit="PIXEL"/>
+          <cl:rows length="25" unit="PIXEL"/>
+          <cl:rows length="25" unit="PIXEL"/>
+          <cl:rows length="25" unit="PIXEL"/>
+          <cl:rows length="25" unit="PIXEL"/>
+          <cl:columns length="120" unit="PIXEL" autoSizing="true" minlength="120"/>
+          <cl:columns length="120" unit="PIXEL" autoSizing="false"/>
+          <cl:columns length="30" unit="PIXEL"/>
+          <cl:columns length="180" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="transparent" minlength="170"/>
+          <cl:columns length="170" unit="PIXEL" autoSizing="false" minlength="170"/>
+          <cl:columns length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-b7d427c5">
+        <cl:rows length="150" unit="PIXEL"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-aca64a09"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

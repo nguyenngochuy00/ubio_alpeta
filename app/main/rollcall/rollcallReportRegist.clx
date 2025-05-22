@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-596dd908" version="1.0.0.0">
+  <head std:sid="head-7ee2c8fc">
+    <title>rollcallReportRegist</title>
+    <screen std:sid="screen-b610e88d" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="580" customWidth="500"/>
+    <screen std:sid="screen-7f46a44a" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-74f9a663" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-19eb428f">
+      <cl:dataset std:sid="d-set-449d8fb0" id="RollCallReportList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-b8dc74cb" name="StartAt"/>
+          <cl:datacolumn std:sid="d-column-b33de526" name="EndAt"/>
+          <cl:datacolumn std:sid="d-column-fe71e964" name="ReportName"/>
+          <cl:datacolumn std:sid="d-column-13cb9c10" name="Creator" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-973fe476" name="CreatorID"/>
+          <cl:datacolumn std:sid="d-column-98db7724" name="EventType" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-31f040fa" name="Desc"/>
+        </cl:datacolumnlist>
+        <cl:datarowlist>
+          <cl:datarow>
+            <cl:datavalue columnname="StartAt">2020-08-11 14:33:29</cl:datavalue>
+            <cl:datavalue columnname="EndAt">2020-08-11 19:33:29</cl:datavalue>
+            <cl:datavalue columnname="ReportName">창고 화재</cl:datavalue>
+            <cl:datavalue columnname="Creator">1</cl:datavalue>
+            <cl:datavalue columnname="CreatorID">1</cl:datavalue>
+            <cl:datavalue columnname="EventType">1</cl:datavalue>
+            <cl:datavalue columnname="Desc">11일 창고 화재 레포트</cl:datavalue>
+          </cl:datarow>
+        </cl:datarowlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-38400d6b" id="RollCallReport">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-a410dfcd" name="StartAt"/>
+          <cl:datacolumn std:sid="d-column-bfd9dae1" name="EndAt"/>
+          <cl:datacolumn std:sid="d-column-b2e5460c" name="ReportName"/>
+          <cl:datacolumn std:sid="d-column-6fd158be" name="CreateType" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-37718158" name="CreatorID"/>
+          <cl:datacolumn std:sid="d-column-c466f7cf" name="EventType" datatype="number" defaultvalue="196630"/>
+          <cl:datacolumn std:sid="d-column-3e4aeadc" name="Desc"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-bbd429b1" id="sms_postRollCallReport" action="/v1/musterings/rollCallReport">
+        <cl:listener std:sid="listener-231a900c" name="submit-done" handler="onSms_postRollCallReportSubmitDone"/>
+        <cl:listener std:sid="listener-b6897652" name="submit-error" handler="onSms_postRollCallReportSubmitError"/>
+        <cl:listener std:sid="listener-3798b598" name="submit-timeout" handler="onSms_postRollCallReportSubmitTimeout"/>
+        <cl:requestdata dataid="RollCallReport"/>
+        <cl:requestdata dataid="MusteringIDs" payload="all"/>
+        <cl:requestdata dataid="GroupIDs" payload="all"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:datamap std:sid="d-map-135f0a7f" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-97893e48" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:dataset std:sid="d-set-174ba88d" id="GroupList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-572d67eb" name="GroupID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-ae44e509" name="Parent" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-3e3eb4b4" name="Name"/>
+          <cl:datacolumn std:sid="d-column-8741a264" name="Description"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-2e14bae8" id="MusteringList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-47a37b83" name="MusteringID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-eb5fd0fd" name="MusteringName"/>
+          <cl:datacolumn std:sid="d-column-b1638230" name="MusteringDesc"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-67dcf290" id="GroupIDs">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-e5423561" name="GroupID" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-1e51ff49" id="MusteringIDs">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-28463a9d" name="MusteringID" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-d71da6d5" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-16f1a838" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-327c69a0">
+      <cl:xylayoutdata std:sid="xyl-data-63e64a51" top="8px" right="8px" bottom="8px" left="8px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-20d6c0fa">
+        <cl:formdata std:sid="f-data-a0ae6d2c" row="3" col="1"/>
+        <cl:button std:sid="button-b7143e3e" id="MMMRR_btnCancel" style="padding:0px;" class="userInfo_btn">
+          <cl:listener std:sid="listener-8943c326" name="click" handler="onMMMRR_btnCancelClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Cancel"/>
+          <cl:formdata std:sid="f-data-32ddc1c0" row="0" col="2"/>
+        </cl:button>
+        <cl:button std:sid="button-311c1d65" id="MMMRR_btnRegist" style="padding:0px;" class="userInfo_btn">
+          <cl:listener std:sid="listener-8ed50da3" name="click" handler="onMMMRR_btnRegistClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Enrollment"/>
+          <cl:formdata std:sid="f-data-5356a79c" row="0" col="1"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-f3782266">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:output std:sid="output-2e29cd4b" style="border-bottom-color:#2446a4; font-weight:700; border-bottom-width:1px; font-size:14px; border-bottom-style:solid;">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_ZoneList"/>
+        <cl:formdata std:sid="f-data-f53c8ff5" halign="LEFT" width="150" row="1" col="0" rowspan="1" colspan="1"/>
+      </cl:output>
+      <cl:group std:sid="group-6af8cde0">
+        <cl:formdata std:sid="f-data-63024d5b" row="0" col="0" rowspan="1" colspan="2"/>
+        <cl:output std:sid="output-ebe7341f" style="border-right-style:solid; background-color:#f6f6f6; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; border-right-color:#c5c5c5; border-bottom-style:solid; text-align:center;" class="userInfo_bold">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Name"/>
+          <cl:formdata std:sid="f-data-f7d3b668" row="0" col="0"/>
+        </cl:output>
+        <cl:inputbox std:sid="i-box-70339b9d" id="MMMRR_ipbName">
+          <cl:datamapbind property="value" datacontrolid="RollCallReport" columnname="ReportName"/>
+          <cl:formdata std:sid="f-data-3e14d2ca" row="0" col="1"/>
+        </cl:inputbox>
+        <cl:output std:sid="output-c09034a2" style="border-right-style:solid; background-color:#f6f6f6; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; border-right-color:#c5c5c5; border-bottom-style:solid; text-align:center;" class="userInfo_bold">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Period"/>
+          <cl:formdata std:sid="f-data-dbc53342" row="1" col="0"/>
+        </cl:output>
+        <cl:group std:sid="group-464cc5f3">
+          <cl:formdata std:sid="f-data-02866a0b" row="1" col="1"/>
+          <cl:dateinput std:sid="d-input-eef1c316" id="MMMRR_dtiStartDate" style="border-right-style:none; border-bottom-color:#cccccc; color:#6b6b6b; border-left-style:none; border-bottom-width:1px; font-size:12px; border-bottom-style:solid; border-top-style:none; text-align:center;" tabindex="2" hidebutton="true" buttonimage="../../theme/images/visitor/icon_day.png" mask="YYYY-MM-DD HH:mm" format="YYYY-MM-DD HH:mm">
+            <cl:datamapbind property="value" datacontrolid="RollCallReport" columnname="StartAt"/>
+            <cl:formdata std:sid="f-data-e4364917" row="0" col="1"/>
+          </cl:dateinput>
+          <cl:dateinput std:sid="d-input-4bc9ed80" id="MMMRR_dtiEndDate" style="border-right-style:none; border-bottom-color:#cccccc; color:#6b6b6b; border-left-style:none; border-bottom-width:1px; font-size:12px; border-bottom-style:solid; border-top-style:none; text-align:center;" tabindex="2" hidebutton="true" buttonimage="../../theme/images/visitor/icon_day.png" mask="YYYY-MM-DD HH:mm" format="YYYY-MM-DD HH:mm">
+            <cl:datamapbind property="value" datacontrolid="RollCallReport" columnname="EndAt"/>
+            <cl:formdata std:sid="f-data-2d0729c2" row="0" col="3"/>
+          </cl:dateinput>
+          <cl:output std:sid="output-1c21c361" value="~">
+            <cl:formdata std:sid="f-data-0d78f898" row="0" col="2"/>
+          </cl:output>
+          <cl:formlayout std:sid="f-layout-e4ea1038">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="120" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="8" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="120" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:output std:sid="output-ff88668c" style="border-right-style:solid; background-color:#f6f6f6; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; border-right-color:#c5c5c5; border-bottom-style:solid; text-align:center;" class="userInfo_bold">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Event"/>
+          <cl:formdata std:sid="f-data-6ecdbc0c" row="2" col="0"/>
+        </cl:output>
+        <cl:combobox std:sid="c-box-8998c57b" id="MMMRR_cmbEventType" style="text-align:center;">
+          <cl:datamapbind property="value" datacontrolid="RollCallReport" columnname="EventType"/>
+          <cl:formdata std:sid="f-data-2003ca7d" row="2" col="1"/>
+        </cl:combobox>
+        <cl:output std:sid="output-0e2a701a" style="border-right-style:solid; background-color:#f6f6f6; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; border-right-color:#c5c5c5; border-bottom-style:solid; text-align:center;" class="userInfo_bold">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Description"/>
+          <cl:formdata std:sid="f-data-51f75f56" row="3" col="0"/>
+        </cl:output>
+        <cl:inputbox std:sid="i-box-f05a4c00" id="MMMRR_ipbDescription">
+          <cl:datamapbind property="value" datacontrolid="RollCallReport" columnname="Desc"/>
+          <cl:formdata std:sid="f-data-82962df2" row="3" col="1"/>
+        </cl:inputbox>
+        <cl:formlayout std:sid="f-layout-2cbbb019">
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="100" unit="PIXEL"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:output std:sid="output-fa6ebb3c" style="border-bottom-color:#2446a4; font-weight:700; border-bottom-width:1px; font-size:14px; border-bottom-style:solid;">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_Group"/>
+        <cl:formdata std:sid="f-data-254e0195" row="1" col="1"/>
+      </cl:output>
+      <cl:tree std:sid="tree-4f5b7dae" id="MMMRR_treGroup" showselectioncheckbox="true" showitemcheckbox="false" showlines="true" multiple="true" itemchecktype="allchild">
+        <cl:formdata std:sid="f-data-a95ebffc" row="2" col="1"/>
+        <cl:treeitemset datasetid="GroupList" label="Name" value="GroupID" parent="Parent"/>
+      </cl:tree>
+      <cl:grid std:sid="grid-e925aece" id="MMMRR_grdMusteringList" readonly="true" datasetid="MusteringList" columnResizable="true">
+        <cl:formdata std:sid="f-data-1bb7b460" row="2" col="0"/>
+        <cl:gridcolumn std:sid="g-column-35d0c548" width="25px"/>
+        <cl:gridcolumn std:sid="g-column-ab1b843b"/>
+        <cl:gridheader std:sid="gh-band-7c43189b">
+          <cl:gridrow std:sid="g-row-790a8ef1"/>
+          <cl:gridcell std:sid="gh-cell-1031423b" rowindex="0" colindex="0" sortable="false" filterable="false" columntype="checkbox"/>
+          <cl:gridcell std:sid="gh-cell-cc0bad17" rowindex="0" colindex="1" targetcolumnname="MusteringName" sortable="false" filterable="false" text="MusteringName"/>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-b65b5a54">
+          <cl:gridrow std:sid="g-row-d7b8dd02"/>
+          <cl:gridcell std:sid="gd-cell-6c91236d" rowindex="0" colindex="0" columntype="checkbox"/>
+          <cl:gridcell std:sid="gd-cell-926a3476" rowindex="0" colindex="1" columnname="MusteringName"/>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:formlayout std:sid="f-layout-2608eb90">
+        <cl:rows length="136" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-8b70ce2d"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-f265626a" version="1.0.0.0">
+  <head std:sid="head-3dbd4999">
+    <title>visitCardRetrieve</title>
+    <screen std:sid="screen-4af598dd" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomHeight="true" customHeight="900" customWidth="800"/>
+    <screen std:sid="screen-e3f5306d" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-f3299ae7" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-325d4414">
+      <cl:dataset std:sid="d-set-a26a90aa" id="TerminalsInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-ef0ed3ae" name="ID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-4f2b7dff" name="Name"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-905e1c47" id="UserCardInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-62cdd1b2" name="CardNum"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-cedbe583" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-87513087" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-cce61f77" id="AccessCardInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn comment="출입증 종류" std:sid="d-column-473bf2b5" name="CardType" datatype="number"/>
+          <cl:datacolumn comment="카드 번호" std:sid="d-column-6d3eadee" name="CardNumber"/>
+          <cl:datacolumn comment="출입증명" std:sid="d-column-993d7f99" name="CardName"/>
+          <cl:datacolumn comment="관리번호" std:sid="d-column-405cec2f" name="ManagementNumber" datatype="string"/>
+          <cl:datacolumn comment="출입증 상태" std:sid="d-column-d4479864" name="CardStatus" datatype="number"/>
+          <cl:datacolumn comment="등록일" std:sid="d-column-1703c9c7" name="RegistAt"/>
+          <cl:datacolumn comment="교부일" std:sid="d-column-5f25c862" name="IssueAt"/>
+          <cl:datacolumn comment="회수일" std:sid="d-column-dbca7f56" name="RetrieveAt"/>
+          <cl:datacolumn comment="출입자,사용자 아이디" std:sid="d-column-8ccfe0c4" name="OwnerID"/>
+          <cl:datacolumn comment="발급자 아이디" std:sid="d-column-60065ad3" name="IssuerID"/>
+          <cl:datacolumn comment="비고" std:sid="d-column-a858bba4" name="Description"/>
+          <cl:datacolumn std:sid="d-column-69a9def8" name="ApplicationIndex"/>
+          <cl:datacolumn std:sid="d-column-29c7278b" name="OwnerBirthday"/>
+          <cl:datacolumn std:sid="d-column-2eea4131" name="OwnerServiceNumber"/>
+          <cl:datacolumn std:sid="d-column-badad626" name="OwnerName"/>
+          <cl:datacolumn std:sid="d-column-82fd835e" name="OwnerPosition"/>
+          <cl:datacolumn std:sid="d-column-e98200e8" name="OwnerGroup"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-c0e4e813" id="AccessApplicationInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-12307c0d" name="ApplicationIndex" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-47d17c80" name="AccessCardStatus" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-13efc290" name="UserType" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-ead7161d" name="UserID"/>
+          <cl:datacolumn std:sid="d-column-e5916c46" name="Name"/>
+          <cl:datacolumn std:sid="d-column-de9d09e5" name="Position"/>
+          <cl:datacolumn std:sid="d-column-ad6b6a4c" name="ServiceNumber"/>
+          <cl:datacolumn std:sid="d-column-003dea64" name="GroupCode"/>
+          <cl:datacolumn std:sid="d-column-6b5cde11" name="Birthday"/>
+          <cl:datacolumn std:sid="d-column-51b1b4c6" name="Mobile"/>
+          <cl:datacolumn std:sid="d-column-4b809fa1" name="CreateAt"/>
+          <cl:datacolumn std:sid="d-column-7238fd58" name="AccessGroup"/>
+          <cl:datacolumn std:sid="d-column-ad90d992" name="AccessStart"/>
+          <cl:datacolumn std:sid="d-column-188af80e" name="AccessEnd"/>
+          <cl:datacolumn std:sid="d-column-9ba59e3c" name="UserPicture"/>
+          <cl:datacolumn std:sid="d-column-5ce86e09" name="FamilyRelation"/>
+          <cl:datacolumn std:sid="d-column-d5e018f2" name="VisitApplicationType" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-2ab59f3e" name="Address"/>
+          <cl:datacolumn std:sid="d-column-3719ef44" name="UserClass"/>
+          <cl:datacolumn std:sid="d-column-ee0447a4" name="VisitPurpose"/>
+          <cl:datacolumn std:sid="d-column-ef0cd99a" name="CarType"/>
+          <cl:datacolumn std:sid="d-column-df5f9193" name="CarNumber"/>
+          <cl:datacolumn std:sid="d-column-80d23fab" name="VisitTargetName"/>
+          <cl:datacolumn std:sid="d-column-32463b3c" name="VisitTargetGroup"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-b4f20a50" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-66a7b98f" name="Count" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-9b70e126" id="sms_getVisitCardDetail" method="get" action="/v1/armyhq/accessApplication/detailByCard">
+        <cl:listener std:sid="listener-bb809a75" name="submit-done" handler="onSms_getVisitCardDetailSubmitDone"/>
+        <cl:listener std:sid="listener-acba7a7e" name="submit-error" handler="onSubmitError"/>
+        <cl:listener std:sid="listener-cad1adf1" name="submit-timeout" handler="onSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="AccessApplicationInfo"/>
+        <cl:responsedata dataid="AccessCardInfo"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-f677ffec" id="sms_putVisitCard" method="put" action="/v1/armyhq/accessCards/visitCard">
+        <cl:listener std:sid="listener-8c123a6e" name="submit-done" handler="onSms_putVisitCardSubmitDone"/>
+        <cl:listener std:sid="listener-b51d9260" name="submit-error" handler="onSubmitError"/>
+        <cl:listener std:sid="listener-b73c7e77" name="submit-timeout" handler="onSubmitTimeout"/>
+        <cl:requestdata dataid="AccessCardInfo"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-ef1cabb2" id="sms_getTerminalList" method="get" action="/v1/accessGroups/&quot;{ID)+&quot;/terminals">
+        <cl:listener std:sid="listener-555987c1" name="submit-done" handler="onSms_getTerminalListSubmitDone"/>
+        <cl:listener std:sid="listener-ae19b3ee" name="submit-error" handler="onSubmitError"/>
+        <cl:listener std:sid="listener-6bc4ad4c" name="submit-timeout" handler="onSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total"/>
+        <cl:responsedata dataid="TerminalsInfo"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-9005fb49" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-f3717c97" name="load" handler="onBodyLoad"/>
+    <cl:listener std:sid="listener-ceaf318e" name="unload" handler="onBodyUnload"/>
+    <cl:group std:sid="group-225436e9" id="VMVCR_grpVisitInfo" style="color:#010101;">
+      <cl:xylayoutdata std:sid="xyl-data-90dd34a0" top="25px" right="10px" bottom="0px" left="50px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:output std:sid="output-f6b76d23" class="section-green-top-amhq" visible="true">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_ARMY_UserType"/>
+        <cl:formdata std:sid="f-data-fa7e20c8" row="7" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-669c9e62" class="section-green-amhq" visible="true">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_ARMYHQ_ServiceNameBirthDay"/>
+        <cl:formdata std:sid="f-data-e7771e05" row="8" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-b6eaa2e4" class="section-green-amhq" visible="true">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_ARMY_UserGroup1"/>
+        <cl:formdata std:sid="f-data-c18a5c1c" row="10" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-94f43611" class="section-green-amhq" visible="true">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_ARMY_AccessGroup"/>
+        <cl:formdata std:sid="f-data-361f5d07" row="11" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-b0d94696" class="section-green-top-amhq" visible="true">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_ARMY_Name"/>
+        <cl:formdata std:sid="f-data-f34a5be0" row="7" col="2"/>
+      </cl:output>
+      <cl:output std:sid="output-bcd5e7c4" class="section-green-amhq" visible="true">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_ARMY_Position"/>
+        <cl:formdata std:sid="f-data-fbb675f3" row="9" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-632d22dd" class="section-green-amhq" visible="true" value="방문시작일">
+        <cl:formdata std:sid="f-data-28c47382" row="12" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-4421b8eb" class="section-green-amhq" visible="true" value="방문종료일">
+        <cl:formdata std:sid="f-data-fbb9e38e" row="12" col="2"/>
+      </cl:output>
+      <cl:output std:sid="output-9aabdc37" id="VMVCR_opbPhone" class="section-green-amhq" visible="true" value="핸드폰번호">
+        <cl:formdata std:sid="f-data-7cbc5cf7" row="8" col="2"/>
+      </cl:output>
+      <cl:output std:sid="output-0dbdb960" class="section-green-amhq" visible="true" value="방문목적">
+        <cl:formdata std:sid="f-data-43840336" row="9" col="2"/>
+      </cl:output>
+      <cl:output std:sid="output-c857d812" class="section-green-amhq" visible="true" value="차량번호">
+        <cl:formdata std:sid="f-data-9242796d" row="13" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-00125253" class="section-green-amhq" visible="true" value="차량종류">
+        <cl:formdata std:sid="f-data-a0def553" row="13" col="2"/>
+      </cl:output>
+      <cl:output std:sid="output-d8bb015a" class="section-green-top-amhq" visible="true" value="방문대상자명">
+        <cl:formdata std:sid="f-data-487eca86" row="16" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-6dedb6a2" class="section-green-top-amhq" visible="true" value="부서">
+        <cl:formdata std:sid="f-data-7de3d0f0" row="16" col="2"/>
+      </cl:output>
+      <cl:group std:sid="group-fc71f9c4" style="color:#010101;">
+        <cl:formdata std:sid="f-data-d41b193b" row="18" col="0" rowspan="1" colspan="4"/>
+        <cl:button std:sid="button-916f31c9" id="VMVCR_btnIssuance" class="button-green-amhq" value="회수">
+          <cl:listener std:sid="listener-d1ae9927" name="click" handler="onVMVCR_btnIssuanceClick"/>
+          <cl:formdata std:sid="f-data-c876ab67" row="0" col="1"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-024c6736" scrollable="false" hspace="0px" vspace="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="120" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:output std:sid="output-439e1da5" class="section-green-top-amhq" visible="true" value="방문증번호">
+        <cl:formdata std:sid="f-data-396e6d02" row="3" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-6ac748fb" class="section-green-amhq" visible="true" value="방문증상태">
+        <cl:formdata std:sid="f-data-37b345fb" row="4" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-bd85f56e" class="section-green-top-amhq" visible="true" value="방문증종류">
+        <cl:formdata std:sid="f-data-2762b4c3" row="3" col="2"/>
+      </cl:output>
+      <cl:output std:sid="output-a240bf7c" class="section-green-amhq" visible="true" value="교부일자">
+        <cl:formdata std:sid="f-data-29f0a77d" row="4" col="2"/>
+      </cl:output>
+      <cl:output std:sid="output-7634935f" class="menu-title-amhq" value="방문증 회수">
+        <cl:formdata std:sid="f-data-a22239b4" halign="LEFT" width="200" row="0" col="0" rowspan="1" colspan="3"/>
+      </cl:output>
+      <cl:output std:sid="output-9f93ae55" class="section-title-amhq" value="방문증 정보">
+        <cl:formdata std:sid="f-data-f857dcce" row="2" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-4b91a52b" class="section-title-amhq" value="방문자 정보">
+        <cl:formdata std:sid="f-data-ca689d1d" row="6" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-33249d81" class="section-title-amhq" value="방문대상자(인솔자)정보">
+        <cl:formdata std:sid="f-data-cfff0ba3" row="15" col="0" rowspan="1" colspan="2"/>
+      </cl:output>
+      <cl:group std:sid="group-e4c3f1bf" class="section-white-top-amhq">
+        <cl:formdata std:sid="f-data-32bef9ba" row="3" col="1"/>
+        <cl:output std:sid="output-864ee3cf" id="VMVCR_opbManagementNumber" class="outputbox-boxline-amhq">
+          <cl:datamapbind property="value" datacontrolid="AccessCardInfo" columnname="ManagementNumber"/>
+          <cl:formdata std:sid="f-data-b983be9d" row="0" col="0"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-35d019c5" scrollable="false" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="150" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-1169a3e5" class="section-white-top-amhq">
+        <cl:formdata std:sid="f-data-f97fdb6f" row="3" col="3"/>
+        <cl:combobox std:sid="c-box-4b14ef90" id="VMVCR_cmbCardType" class="combobox-center-amhq" readonly="true" hidebutton="true" preventinput="true">
+          <cl:datamapbind property="value" datacontrolid="AccessCardInfo" columnname="CardType"/>
+          <cl:formdata std:sid="f-data-1b22d17b" row="0" col="0"/>
+          <cl:item std:sid="item-1ea6dcad" label="병사" value="1"/>
+          <cl:item std:sid="item-754d74fa" label="군가족" value="2"/>
+          <cl:item std:sid="item-638bcd6d" label="상주민간인" value="3"/>
+          <cl:item std:sid="item-e544224f" label="방문자" value="4"/>
+          <cl:item std:sid="item-703e4357" label="감사" value="5"/>
+          <cl:item std:sid="item-89e2792a" label="공사" value="6"/>
+          <cl:item std:sid="item-8149d155" label="면회" value="7"/>
+        </cl:combobox>
+        <cl:formlayout std:sid="f-layout-e2487ecc" scrollable="false" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="150" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-60787e0c" class="section-white-top-amhq">
+        <cl:formdata std:sid="f-data-c1ca1e75" row="7" col="1"/>
+        <cl:combobox std:sid="c-box-d1549001" id="VMVCR_cmbVisitorUserType" class="combobox-center-amhq" readonly="true" hidebutton="true" preventinput="true">
+          <cl:datamapbind property="value" datacontrolid="AccessApplicationInfo" columnname="UserType"/>
+          <cl:formdata std:sid="f-data-c935c1de" row="0" col="0"/>
+          <cl:item std:sid="item-fc7e208b" label="민간인" value="902"/>
+          <cl:item std:sid="item-7df15d68" label="타부대원" value="901"/>
+        </cl:combobox>
+        <cl:formlayout std:sid="f-layout-180ba954" scrollable="false" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="150" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-20b97351" class="section-white-top-amhq">
+        <cl:formdata std:sid="f-data-d5b80fd6" row="7" col="3"/>
+        <cl:output std:sid="output-9b56d11e" id="VMVCR_opbVisitorName" class="outputbox-boxline-amhq">
+          <cl:datamapbind property="value" datacontrolid="AccessApplicationInfo" columnname="Name"/>
+          <cl:formdata std:sid="f-data-7ce53b8a" row="0" col="0"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-dc96716c" scrollable="false" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="150" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-f3e32d5f" class="section-white-top-amhq">
+        <cl:formdata std:sid="f-data-3210df33" row="16" col="1"/>
+        <cl:output std:sid="output-dc9930ec" id="VMVCR_opbTargetName" class="outputbox-boxline-amhq">
+          <cl:datamapbind property="value" datacontrolid="AccessApplicationInfo" columnname="VisitTargetName"/>
+          <cl:formdata std:sid="f-data-2652a3ef" row="0" col="0"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-01b9c982" scrollable="false" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="150" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-65c3b8ae" class="section-white-top-amhq">
+        <cl:formdata std:sid="f-data-acc266e0" row="16" col="3"/>
+        <cl:output std:sid="output-337df06c" id="VMVCR_opbTargetGroup" class="outputbox-boxline-amhq">
+          <cl:datamapbind property="value" datacontrolid="AccessApplicationInfo" columnname="VisitTargetGroup"/>
+          <cl:formdata std:sid="f-data-c10285f0" row="0" col="0"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-ee57c9e1" scrollable="false" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="150" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-4f7ffd9f" class="section-white-amhq">
+        <cl:formdata std:sid="f-data-bad2728f" row="4" col="1"/>
+        <cl:combobox std:sid="c-box-d6db29bb" id="VMVCR_cmbCardStatus" class="combobox-center-amhq" readonly="true" hidebutton="true" preventinput="true">
+          <cl:datamapbind property="value" datacontrolid="AccessCardInfo" columnname="CardStatus"/>
+          <cl:formdata std:sid="f-data-722acbbe" row="0" col="0"/>
+          <cl:item std:sid="item-00ed8c6d" label="-----" value="0"/>
+          <cl:item std:sid="item-74bc740b" label="출력대기" value="1"/>
+          <cl:item std:sid="item-ac954051" label="발급대기" value="2"/>
+          <cl:item std:sid="item-e8b2c53a" label="발급" value="3"/>
+          <cl:item std:sid="item-462b038f" label="교부" value="4"/>
+          <cl:item std:sid="item-2c4e85d7" label="회수" value="5"/>
+          <cl:item std:sid="item-10dd106b" label="사고" value="6"/>
+          <cl:item std:sid="item-17d4ca9e" label="사용중단" value="7"/>
+        </cl:combobox>
+        <cl:formlayout std:sid="f-layout-e90f5490" scrollable="false" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="150" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-528a65ea" class="section-white-amhq">
+        <cl:formdata std:sid="f-data-13ec9ff0" row="4" col="3"/>
+        <cl:output std:sid="output-9664d67a" id="VMVCR_opbIssuanceDate" class="outputbox-boxline-amhq">
+          <cl:formdata std:sid="f-data-e1513ab9" row="0" col="0"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-cb2bfe8d" scrollable="false" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="150" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-a646b6e1" class="section-white-amhq">
+        <cl:formdata std:sid="f-data-83f355ed" row="8" col="1"/>
+        <cl:output std:sid="output-c57f9ced" id="VMVCR_opbVisitorServiceNumber" class="outputbox-boxline-amhq">
+          <cl:formdata std:sid="f-data-4e3bec0f" row="0" col="0"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-875a59e1" scrollable="false" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="150" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-dc0558d2" class="section-white-amhq">
+        <cl:formdata std:sid="f-data-7d0faaca" row="8" col="3"/>
+        <cl:output std:sid="output-9b215c74" id="VMVIS_opbVisitorPhone" class="outputbox-boxline-amhq">
+          <cl:datamapbind property="value" datacontrolid="AccessApplicationInfo" columnname="Mobile"/>
+          <cl:formdata std:sid="f-data-3da400b0" row="0" col="0"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-fade8587" scrollable="false" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="150" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-d153d89e" class="section-white-amhq">
+        <cl:formdata std:sid="f-data-b69b54ad" row="9" col="1"/>
+        <cl:output std:sid="output-d1616ca5" id="VMVCR_opbVisitorPosition" class="outputbox-boxline-amhq">
+          <cl:formdata std:sid="f-data-df062ff2" row="0" col="0"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-49bb90d1" scrollable="false" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="150" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-a96a5938" class="section-white-amhq">
+        <cl:formdata std:sid="f-data-75357810" row="9" col="3"/>
+        <cl:output std:sid="output-750dd24b" id="VMVCR_opbVisitPurpose" class="outputbox-boxline-amhq">
+          <cl:datamapbind property="value" datacontrolid="AccessApplicationInfo" columnname="VisitPurpose"/>
+          <cl:formdata std:sid="f-data-a5bd0c58" row="0" col="0"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-b3576b08" scrollable="false" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="150" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-d7d7bff5" class="section-white-amhq">
+        <cl:formdata std:sid="f-data-a857b6c8" row="10" col="1" rowspan="1" colspan="3"/>
+        <cl:output std:sid="output-47e33049" id="VMVCR_opbVisitorGroup" class="outputbox-boxline-amhq">
+          <cl:datamapbind property="value" datacontrolid="AccessApplicationInfo" columnname="Address"/>
+          <cl:formdata std:sid="f-data-d78c9e9e" row="0" col="0"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-d8478a48" scrollable="false" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="250" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-28b86e37" style="padding-top:0px; padding-bottom:0px;" class="section-white-amhq">
+        <cl:formdata std:sid="f-data-4fb61a9e" row="11" col="1" rowspan="1" colspan="3"/>
+        <cl:textarea std:sid="t-area-913b09a0" id="VMVCR_optVisitorAccessGroup" style="color:#010101;" readonly="true">
+          <cl:formdata std:sid="f-data-c86a51ba" row="0" col="0"/>
+        </cl:textarea>
+        <cl:formlayout std:sid="f-layout-0e72180b" scrollable="false" hspace="5px" vspace="5px" top-margin="3.5px" right-margin="0px" bottom-margin="3.5px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-4ee81cfc" class="section-white-amhq">
+        <cl:formdata std:sid="f-data-78fcb60b" row="12" col="1"/>
+        <cl:output std:sid="output-aa0ceec2" id="VMVCR_opbVisitorVisitStart" class="outputbox-boxline-amhq">
+          <cl:datamapbind property="value" datacontrolid="AccessApplicationInfo" columnname="AccessStart"/>
+          <cl:formdata std:sid="f-data-5d5c5c48" row="0" col="0"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-9b1317ce" scrollable="false" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="150" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-009dd70a" class="section-white-amhq">
+        <cl:formdata std:sid="f-data-4a5fa530" row="12" col="3"/>
+        <cl:output std:sid="output-5d63a91a" id="VMVCR_opbVisitorVisitEnd" class="outputbox-boxline-amhq">
+          <cl:datamapbind property="value" datacontrolid="AccessApplicationInfo" columnname="AccessEnd"/>
+          <cl:formdata std:sid="f-data-d25aa677" row="0" col="0"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-06f11379" scrollable="false" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="150" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-688c9af8" class="section-white-amhq">
+        <cl:formdata std:sid="f-data-dc649c03" row="13" col="1"/>
+        <cl:output std:sid="output-32a95fa6" id="VMVCR_opbCarNumber" class="outputbox-boxline-amhq">
+          <cl:datamapbind property="value" datacontrolid="AccessApplicationInfo" columnname="CarNumber"/>
+          <cl:formdata std:sid="f-data-244db7e7" row="0" col="0"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-59eeaf0f" scrollable="false" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="150" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-b47f9243" class="section-white-amhq">
+        <cl:formdata std:sid="f-data-07f28a0c" row="13" col="3"/>
+        <cl:output std:sid="output-18505c38" id="VMVCR_opbCarType" class="outputbox-boxline-amhq">
+          <cl:datamapbind property="value" datacontrolid="AccessApplicationInfo" columnname="CarType"/>
+          <cl:formdata std:sid="f-data-b608033d" row="0" col="0"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-bab1943d" scrollable="false" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="150" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-f9f87cdd">
+        <cl:formdata std:sid="f-data-0e38a53e" row="1" col="1" rowspan="2" colspan="3"/>
+        <cl:button std:sid="button-625480ac" id="VMVCR_btnCardScan1" class="button-white-amhq" value="단말기선택">
+          <cl:listener std:sid="listener-e331258f" name="click" handler="onVMVCR_btnCardScan1Click"/>
+          <cl:xylayoutdata std:sid="xyl-data-c5bd6faa" top="10px" right="0px" width="120px" height="50px" horizontalAnchor="RIGHT" verticalAnchor="TOP"/>
+        </cl:button>
+        <cl:htmlsnippet std:sid="htmlsnippet-44472485" id="VMVCR_sniDownloadLink" style="color:#010101; padding-left:2px; vertical-align:middle;" visible="false">
+          <cl:xylayoutdata std:sid="xyl-data-ddafbd37" top="0px" right="296px" width="134px" height="30px" horizontalAnchor="RIGHT" verticalAnchor="TOP"/>
+        </cl:htmlsnippet>
+        <cl:output std:sid="output-cf59e3db" id="VMVCR_opbDeviceMsg" style="color:#010101; text-align:left; padding-right:2px;">
+          <cl:xylayoutdata std:sid="xyl-data-a5a3f701" top="35px" right="296px" width="134px" height="30px" horizontalAnchor="RIGHT" verticalAnchor="TOP"/>
+        </cl:output>
+        <cl:button std:sid="button-ed39e3c4" id="VMVCR_btnCardScan" class="button-white-amhq" value="카드인식">
+          <cl:listener std:sid="listener-d2a26591" name="click" handler="onVMVCR_btnCardScanClick"/>
+          <cl:xylayoutdata std:sid="xyl-data-9873da43" top="10px" right="130px" width="120px" height="50px" horizontalAnchor="RIGHT" verticalAnchor="TOP"/>
+        </cl:button>
+        <cl:xylayout std:sid="xylayout-fe78cab6" scrollable="false"/>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-552533c8" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+        <cl:rows length="35" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL"/>
+        <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL"/>
+        <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="200" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="200" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-29cb6bf2"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-f67ce8da" version="1.0.0.0">
+  <head std:sid="head-a0dd5f2e">
+    <title>NavigationBar</title>
+    <screen std:sid="screen-6a6b5adb" id="default" name="default" minwidth="1024px" width="1024px" height="768px" customHeight="600" customWidth="800"/>
+    <screen std:sid="screen-e6fa56ef" id="ipplus" name="ipplus" minwidth="414px" maxwidth="499px" width="414px" height="736px" customHeight="600" customWidth="800" active="true"/>
+    <screen std:sid="screen-83aeac10" id="mobile" name="mobile" maxwidth="413px" width="350px" height="525px" customHeight="600" customWidth="800" active="false"/>
+    <cl:model std:sid="model-67c6f362"/>
+    <cl:appspec>
+      <cl:property name="leftIcon" type="string" default="Menu"/>
+      <cl:property name="rightIcon" type="string" default="Dashboard"/>
+      <cl:property name="pageName" type="string"/>
+      <cl:property name="isDisplayPageName" type="number" default="false"/>
+      <cl:property name="rightIconVisible" type="boolean"/>
+      <cl:property name="rightBtnPath" type="string"/>
+      <cl:property name="leftBtnPath" type="string"/>
+      <cl:property name="userContext" type="object"/>
+      <cl:property name="searchCategory" type="object"/>
+      <cl:event name="pageChange" type="cpr.events.CUIEvent"/>
+      <cl:event name="btnMoreClick" type="cpr.events.CUIEvent"/>
+      <cl:event name="rightBtnClick" type="cpr.events.CUIEvent"/>
+      <cl:event name="leftBtnClick" type="cpr.events.CUIEvent"/>
+      <cl:event name="onSearch" type="cpr.events.CUIEvent"/>
+      <cl:event name="menuClick" type="cpr.events.CUIEvent"/>
+    </cl:appspec>
+  </head>
+  <body std:sid="body-7210437c" style="top:0px; left:0px; font-weight:normal; width:300px; font-size:14px; height:300px;" class="overlay">
+    <cl:listener std:sid="listener-fbf75149" name="property-change" handler="onBodyPropertyChange"/>
+    <cl:listener std:sid="listener-e0226c03" name="load" handler="onBodyLoad"/>
+    <cl:listener std:sid="listener-fe7a8581" name="before-unload" handler="onBodyBeforeUnload"/>
+    <cl:attribute name="pageName" value="aValue"/>
+    <cl:img std:sid="image-f0b7b705" id="rightBtn" style="background-repeat:no-repeat; background-size:contain; background-position:center;">
+      <cl:listener std:sid="listener-f8c1ac57" name="click" handler="onRightBtnClick"/>
+      <cl:apppropbind property="visible" app-property="rightIconVisible"/>
+      <cl:xylayoutdata std:sid="xyl-data-4deeae99" top="0px" right="0px" width="28px" height="28px" horizontalAnchor="RIGHT" verticalAnchor="TOP"/>
+    </cl:img>
+    <cl:output std:sid="output-237ea1a5" id="pageName" style="color:#FFFFFF; font-size:17px; text-align:center;">
+      <cl:apppropbind property="visible" category="PROPERTY" app-property="isDisplayPageName"/>
+      <cl:apppropbind property="value" category="PROPERTY" app-property="pageName"/>
+      <cl:xylayoutdata std:sid="xyl-data-94d6f112" top="0px" width="85px" height="28px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
+    </cl:output>
+    <cl:img std:sid="image-f3b67a12" id="leftBtn" class="leftBtn" src="/theme/images/mobile/common_top_btn_icon_menu.png">
+      <cl:listener std:sid="listener-176759bf" name="click" handler="onLeftBtnClick"/>
+      <cl:xylayoutdata std:sid="xyl-data-c057a8de" top="0px" left="0px" width="28px" height="28px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+    </cl:img>
+    <cl:udc std:sid="ud-control-a9f5b722" id="searchBtn" style="border-radius:30px;" visible="false" type="udc.Common.SearchBtn">
+      <cl:listener std:sid="listener-5456b0f2" name="onSearch" handler="onSearchBtnOnSearch"/>
+      <cl:xylayoutdata std:sid="xyl-data-f8d1e2b7" top="0px" right="0px" left="49px" height="30px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+    </cl:udc>
+    <cl:xylayout std:sid="xylayout-d5329f29"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-dd1b755e" version="1.0.0.0">
+  <head std:sid="head-ccfcc858">
+    <title>visitApplicationList</title>
+    <screen std:sid="screen-9b0a3f8b" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="false" useCustomHeight="false" customHeight="600" customWidth="800" active="true"/>
+    <screen std:sid="screen-fe7b9d40" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px" active="false"/>
+    <screen std:sid="screen-8e891086" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px" active="false"/>
+    <cl:model std:sid="model-809a78e2">
+      <cl:dataset std:sid="d-set-60992931" id="VisitInfoList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-35b593cd" name="VisitIndex"/>
+          <cl:datacolumn std:sid="d-column-e4840748" name="RegistAt"/>
+          <cl:datacolumn std:sid="d-column-8b6e132f" name="StartAt"/>
+          <cl:datacolumn std:sid="d-column-df49fd20" name="EndAt"/>
+          <cl:datacolumn std:sid="d-column-14f08938" name="Purpose"/>
+          <cl:datacolumn std:sid="d-column-f90b1a65" name="VisitTargetID"/>
+          <cl:datacolumn std:sid="d-column-b525a92b" name="VisitTargetUserName"/>
+          <cl:datacolumn std:sid="d-column-433eca46" name="VisitTargetGroupName"/>
+          <cl:datacolumn std:sid="d-column-b7facb1c" name="Status" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-9aa35024" name="VisitStatus"/>
+          <cl:datacolumn std:sid="d-column-e4a08a5c" name="VisitorFirstName"/>
+          <cl:datacolumn std:sid="d-column-3ebcf9ea" name="VisitorLastName"/>
+          <cl:datacolumn std:sid="d-column-2615eea7" name="VisitorCount" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-f035664e" name="VisitorSummary"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-018ac910" id="LangList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-32e594f3" name="Locale" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-5dfc693f" name="Key"/>
+          <cl:datacolumn std:sid="d-column-1df4e3fc" name="Value"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-bd252d0d" id="LangErrorList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-e24567f3" name="Locale" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-43166539" name="Key"/>
+          <cl:datacolumn std:sid="d-column-4e47f33a" name="Value"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-61fc6de6" id="VisitInfoListDelete">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-f9f620c8" name="VisitIndex"/>
+          <cl:datacolumn std:sid="d-column-3c1a2041" name="rowIndex" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-24fadfcd" id="VisitInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-1dd177b0" name="StartDate"/>
+          <cl:datacolumn std:sid="d-column-778f4dc8" name="StartTime"/>
+          <cl:datacolumn std:sid="d-column-6e26dd0d" name="EndDate"/>
+          <cl:datacolumn std:sid="d-column-81445f0c" name="EndTime"/>
+          <cl:datacolumn std:sid="d-column-ace934e2" name="Purpose" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-3b1761e3" name="VisitTargetID"/>
+          <cl:datacolumn std:sid="d-column-35f6300b" name="VisitTargetUserName"/>
+          <cl:datacolumn std:sid="d-column-8f527830" name="VisitTargetGroupName"/>
+          <cl:datacolumn std:sid="d-column-36bfd23a" name="Password"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-866f6864" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-64643222" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-c2bd18fc" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-ca49bc58" name="Count" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-7af4152d" id="ApplicationInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-2d4ad971" name="FirstName" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-3a26b3d7" name="LastName"/>
+          <cl:datacolumn std:sid="d-column-6112485d" name="Birthday"/>
+          <cl:datacolumn std:sid="d-column-5558bab2" name="Password"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-f8c50ddb" id="sms_getVisitApplicationList" method="get" action="/v1/visitor/visitApplication">
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total"/>
+        <cl:responsedata dataid="VisitInfoList"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-27c986e0" id="sms_getLangList" method="get" action="data/lang/lang.json">
+        <cl:listener std:sid="listener-49221724" name="submit-done" handler="onSms_getLangListSubmitDone"/>
+        <cl:listener std:sid="listener-8b2528e6" name="submit-success" handler="onSms_getLangListSubmitSuccess"/>
+        <cl:responsedata dataid="LangList" isadd="true"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-e8716775" id="sms_getLangErrorList" method="get" action="data/lang/lang.json">
+        <cl:listener std:sid="listener-c3e828fe" name="submit-done" handler="onSms_getLangErrorListSubmitDone"/>
+        <cl:listener std:sid="listener-790df911" name="submit-success" handler="onSms_getLangErrorListSubmitSuccess"/>
+        <cl:responsedata dataid="LangErrorList" isadd="true"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-42cd2d5a" id="sms_delVisitApplicationList" method="delete" action="/v1/visitor/visitorApplication">
+        <cl:listener std:sid="listener-d3262122" name="submit-done" handler="onSms_delVisitApplicationListSubmitDone"/>
+        <cl:listener std:sid="listener-53456b20" name="submit-error" handler="onSms_delVisitApplicationListSubmitError"/>
+        <cl:listener std:sid="listener-46b34649" name="submit-timeout" handler="onSms_delVisitApplicationListSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-fec43b99" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-ba9ffe8e" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-9d6b25c3">
+      <cl:responsivexylayoutdata std:sid="rxyl-data-1e208588">
+        <cl:xylayoutdata std:sid="sxyl-data-3dfcbb74" top="91px" width="1004px" height="39px" horizontalAnchor="CENTER" verticalAnchor="TOP" screenid="default"/>
+        <cl:xylayoutdata std:sid="sxyl-data-a8a32da8" top="91px" width="343px" height="39px" horizontalAnchor="CENTER" verticalAnchor="TOP" screenid="mobile"/>
+        <cl:xylayoutdata std:sid="sxyl-data-20685fa7" top="91px" width="490px" height="39px" horizontalAnchor="CENTER" verticalAnchor="TOP" screenid="tablet"/>
+      </cl:responsivexylayoutdata>
+      <cl:output std:sid="output-4e46d02a" id="VMVAL_opb1" style="font-weight:700; font-size:14px;">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_VisitApplicationList"/>
+        <cl:responsivexylayoutdata std:sid="rxyl-data-f766b4a5">
+          <cl:xylayoutdata std:sid="sxyl-data-bbcf870a" top="0px" left="0px" width="200px" height="30px" horizontalAnchor="LEFT" verticalAnchor="TOP" screenid="default"/>
+          <cl:xylayoutdata std:sid="sxyl-data-752d29fb" top="0px" left="0px" width="191px" height="30px" horizontalAnchor="LEFT" verticalAnchor="TOP" screenid="mobile"/>
+          <cl:xylayoutdata std:sid="sxyl-data-c24d8c95" top="0px" left="0px" width="200px" height="30px" horizontalAnchor="LEFT" verticalAnchor="TOP" screenid="tablet"/>
+        </cl:responsivexylayoutdata>
+      </cl:output>
+      <cl:group std:sid="group-f3a6eb72" style="border-bottom-color:#2446a4; border-bottom-width:1px; border-bottom-style:solid;">
+        <cl:responsivexylayoutdata std:sid="rxyl-data-156c9a90">
+          <cl:xylayoutdata std:sid="sxyl-data-486f99ab" top="30px" left="0px" width="200px" height="9px" horizontalAnchor="LEFT" verticalAnchor="TOP" screenid="default"/>
+          <cl:xylayoutdata std:sid="sxyl-data-073d03a9" top="30px" left="0px" width="190px" height="9px" horizontalAnchor="LEFT" verticalAnchor="TOP" screenid="mobile"/>
+          <cl:xylayoutdata std:sid="sxyl-data-0513b619" top="30px" left="0px" width="200px" height="9px" horizontalAnchor="LEFT" verticalAnchor="TOP" screenid="tablet"/>
+        </cl:responsivexylayoutdata>
+        <cl:xylayout std:sid="xylayout-3cbef76b"/>
+      </cl:group>
+      <cl:group std:sid="group-7624e1b0">
+        <cl:responsivexylayoutdata std:sid="rxyl-data-ab1d8ac1">
+          <cl:xylayoutdata std:sid="sxyl-data-d7b66f8b" top="0px" left="924px" width="80px" height="39px" horizontalAnchor="LEFT" verticalAnchor="TOP" screenid="default"/>
+          <cl:xylayoutdata std:sid="sxyl-data-6ea1225f" top="0px" left="276px" width="67px" height="39px" horizontalAnchor="LEFT" verticalAnchor="TOP" screenid="mobile"/>
+          <cl:xylayoutdata std:sid="sxyl-data-b64bb79e" top="0px" left="394px" width="96px" height="39px" horizontalAnchor="LEFT" verticalAnchor="TOP" screenid="tablet"/>
+        </cl:responsivexylayoutdata>
+        <cl:button std:sid="button-ccea59ff" id="VMVAL_btnVisitApplicationCancel" style="padding:0px; font-weight:600; font-size:14px;" class="userInfo_btn">
+          <cl:listener std:sid="listener-b6c63819" name="click" handler="onVMVAL_btnVisitApplicationCancelClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_VisitCancel"/>
+          <cl:xylayoutdata std:sid="xyl-data-71f17676" right="0px" bottom="0px" left="0px" height="30px" horizontalAnchor="BOTH" verticalAnchor="BOTTOM"/>
+        </cl:button>
+        <cl:xylayout std:sid="xylayout-dbdc1085"/>
+      </cl:group>
+      <cl:group std:sid="group-da06603c">
+        <cl:responsivexylayoutdata std:sid="rxyl-data-c30c1eb8">
+          <cl:xylayoutdata std:sid="sxyl-data-d7585539" top="0px" left="834px" width="80px" height="39px" horizontalAnchor="LEFT" verticalAnchor="TOP" screenid="default"/>
+          <cl:xylayoutdata std:sid="sxyl-data-dd0b4edc" top="0px" left="201px" width="65px" height="39px" horizontalAnchor="LEFT" verticalAnchor="TOP" screenid="mobile"/>
+          <cl:xylayoutdata std:sid="sxyl-data-c3e214ca" top="0px" left="287px" width="93px" height="39px" horizontalAnchor="LEFT" verticalAnchor="TOP" screenid="tablet"/>
+        </cl:responsivexylayoutdata>
+        <cl:button std:sid="button-5173d41b" id="VMVAL_btnVisitApplication" style="padding:0px; font-weight:600; font-size:14px;" class="userInfo_btn">
+          <cl:listener std:sid="listener-afdeebee" name="click" handler="onVMVAL_btnVisitApplicationClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_VisitApplication"/>
+          <cl:xylayoutdata std:sid="xyl-data-697c54f1" right="0px" bottom="0px" left="0px" height="30px" horizontalAnchor="BOTH" verticalAnchor="BOTTOM"/>
+        </cl:button>
+        <cl:xylayout std:sid="xylayout-08b1728c"/>
+      </cl:group>
+      <cl:responsivexylayout std:sid="r-xylayout-01d63efc"/>
+    </cl:group>
+    <cl:group std:sid="group-07c72ad0">
+      <cl:responsivexylayoutdata std:sid="rxyl-data-ab909cab">
+        <cl:xylayoutdata std:sid="sxyl-data-1dabf129" top="140px" bottom="40px" width="1004px" horizontalAnchor="CENTER" verticalAnchor="BOTH" screenid="default"/>
+        <cl:xylayoutdata std:sid="sxyl-data-cefaf76d" top="140px" bottom="40px" width="343px" horizontalAnchor="CENTER" verticalAnchor="BOTH" screenid="mobile"/>
+        <cl:xylayoutdata std:sid="sxyl-data-cfd1606d" top="140px" bottom="40px" width="490px" horizontalAnchor="CENTER" verticalAnchor="BOTH" screenid="tablet"/>
+      </cl:responsivexylayoutdata>
+      <cl:grid std:sid="grid-50d5eebe" id="VMVAL_grdVisitApplicationList" readonly="true" datasetid="VisitInfoList">
+        <cl:listener std:sid="listener-63d3ae18" name="row-dblclick" handler="onVMVAL_grdVisitApplicationListRowDblclick"/>
+        <cl:xylayoutdata std:sid="xyl-data-c9944097" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+        <cl:gridcolumn std:sid="g-column-1371995a" width="25px"/>
+        <cl:gridcolumn std:sid="g-column-707e4446"/>
+        <cl:gridcolumn std:sid="g-column-11366298"/>
+        <cl:gridcolumn std:sid="g-column-bc2c55ea"/>
+        <cl:gridcolumn std:sid="g-column-88593962"/>
+        <cl:gridcolumn std:sid="g-column-1ac7bd3c"/>
+        <cl:gridcolumn std:sid="g-column-f27e0484"/>
+        <cl:gridcolumn std:sid="g-column-c9fc4b93"/>
+        <cl:gridcolumn std:sid="g-column-b91e73b3"/>
+        <cl:gridheader std:sid="gh-band-32810562">
+          <cl:gridrow std:sid="g-row-dd7788ea"/>
+          <cl:gridcell std:sid="gh-cell-a8e89c89" rowindex="0" colindex="0" sortable="false" filterable="false" columntype="checkbox"/>
+          <cl:gridcell std:sid="gh-cell-1f60a498" rowindex="0" colindex="1" targetcolumnname="RegistAt" sortable="true" filterable="false" text="RegistAt">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_VisitRegistAt"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-481c2661" rowindex="0" colindex="2" targetcolumnname="StartAt" sortable="true" filterable="false" text="StartAt">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_VisitStartAt"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-56fe241e" rowindex="0" colindex="3" targetcolumnname="EndAt" sortable="true" filterable="false" text="EndAt">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_VisitEndAt"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-8436b0ea" rowindex="0" colindex="4" targetcolumnname="VisitTargetUserName" sortable="true" filterable="false" text="VisitTargetName">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_VisitTargetName"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-3ccfbe33" rowindex="0" colindex="5" targetcolumnname="VisitTargetGroupName" sortable="false" filterable="false" text="VisitTargetGroup">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_VisitTargetGroup"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-fd4ddcab" rowindex="0" colindex="6" targetcolumnname="Purpose" sortable="false" filterable="false" text="Purpose">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_VisitorPurpose"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-0496557a" rowindex="0" colindex="7" targetcolumnname="VisitorSummary" text="방문자">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_VisitorInfo"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-8dd67667" rowindex="0" colindex="8" targetcolumnname="Status" sortable="true" filterable="false" text="Status">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_Status"/>
+          </cl:gridcell>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-b7352c02">
+          <cl:gridrow std:sid="g-row-c6abee17"/>
+          <cl:gridcell std:sid="gd-cell-797f77e1" rowindex="0" colindex="0" columntype="checkbox"/>
+          <cl:gridcell std:sid="gd-cell-892a3286" rowindex="0" colindex="1" columnname="RegistAt"/>
+          <cl:gridcell std:sid="gd-cell-27ce016a" rowindex="0" colindex="2" columnname="StartAt"/>
+          <cl:gridcell std:sid="gd-cell-288add66" rowindex="0" colindex="3" columnname="EndAt"/>
+          <cl:gridcell std:sid="gd-cell-ba64082b" rowindex="0" colindex="4" columnname="VisitTargetUserName"/>
+          <cl:gridcell std:sid="gd-cell-ff9fba3b" rowindex="0" colindex="5" columnname="VisitTargetGroupName"/>
+          <cl:gridcell std:sid="gd-cell-56b836c9" rowindex="0" colindex="6" columnname="Purpose"/>
+          <cl:gridcell std:sid="gd-cell-088693b2" rowindex="0" colindex="7" columnname="VisitorSummary"/>
+          <cl:gridcell std:sid="gd-cell-6672974f" rowindex="0" colindex="8" columnname="Status">
+            <cl:combobox std:sid="c-box-dba8afae" id="VMVAL_cmbStatus" style="text-align:center;"/>
+          </cl:gridcell>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:xylayout std:sid="xylayout-ca5b4691"/>
+    </cl:group>
+    <cl:group std:sid="group-7b9618eb" style="background-image:url('../../theme/custom/nhedu_03/top_bg.png');">
+      <cl:responsivexylayoutdata std:sid="rxyl-data-9322db20">
+        <cl:xylayoutdata std:sid="sxyl-data-d90d09c8" top="0px" width="1024px" height="40px" horizontalAnchor="CENTER" verticalAnchor="TOP" screenid="default"/>
+        <cl:xylayoutdata std:sid="sxyl-data-eafde408" top="0px" width="350px" height="40px" horizontalAnchor="CENTER" verticalAnchor="TOP" screenid="mobile"/>
+        <cl:xylayoutdata std:sid="sxyl-data-54029cfd" top="0px" width="500px" height="40px" horizontalAnchor="CENTER" verticalAnchor="TOP" screenid="tablet"/>
+      </cl:responsivexylayoutdata>
+      <cl:output std:sid="output-83a1ed14" id="VMEVA_opb1" style="color:#ffffff; font-weight:700; font-size:20px;">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_VisitApplicationList"/>
+        <cl:responsivexylayoutdata std:sid="rxyl-data-eabd898c">
+          <cl:xylayoutdata std:sid="sxyl-data-88ef7765" left="20px" width="319px" height="30px" horizontalAnchor="LEFT" verticalAnchor="CENTER" screenid="default"/>
+          <cl:xylayoutdata std:sid="sxyl-data-43e5787a" left="20px" width="228px" height="30px" horizontalAnchor="LEFT" verticalAnchor="CENTER" screenid="mobile"/>
+          <cl:xylayoutdata std:sid="sxyl-data-24f6abe4" left="20px" width="223px" height="30px" horizontalAnchor="LEFT" verticalAnchor="CENTER" screenid="tablet"/>
+        </cl:responsivexylayoutdata>
+      </cl:output>
+      <cl:responsivexylayout std:sid="r-xylayout-0ab7dc3b"/>
+    </cl:group>
+    <cl:responsivexylayout std:sid="r-xylayout-488c4ac3"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

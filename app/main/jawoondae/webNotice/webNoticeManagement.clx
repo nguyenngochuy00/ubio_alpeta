@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-e5218ccc" version="1.0.0.0">
+  <head std:sid="head-20ba2ba4">
+    <title>WebNoticeManagement</title>
+    <screen std:sid="screen-91af1970" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="350" customWidth="450"/>
+    <screen std:sid="screen-10bd8b0b" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-dba3b5bf" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-afa71d80">
+      <cl:datamap std:sid="d-map-9f004e22" id="WebNoticeInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-dff60adf" name="Title"/>
+          <cl:datacolumn std:sid="d-column-69020170" name="Message"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-b9d1a461" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-3df1ac2f" name="ResultCode"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-46e414da" id="sms_getWebNotice" method="get" action="/v1/jawoondae/notice">
+        <cl:listener std:sid="listener-8e9bc062" name="submit-done" handler="onSms_getWebNoticeSubmitDone"/>
+        <cl:listener std:sid="listener-caee7014" name="submit-timeout" handler="onSms_getWebNoticeSubmitTimeout"/>
+        <cl:listener std:sid="listener-9a4cc089" name="submit-error" handler="onSms_getWebNoticeSubmitError"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="WebNoticeInfo"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-c42cc618" id="sms_postWebNotice" action="/v1/jawoondae/notice">
+        <cl:listener std:sid="listener-6516a920" name="submit-done" handler="onSms_postWebNoticeSubmitDone"/>
+        <cl:listener std:sid="listener-1456641a" name="submit-error" handler="onSms_postWebNoticeSubmitError"/>
+        <cl:listener std:sid="listener-15fc3b81" name="submit-timeout" handler="onSms_postWebNoticeSubmitTimeout"/>
+        <cl:requestdata dataid="WebNoticeInfo"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-326a67eb" id="sms_deleteWebNotice" method="delete" action="/v1/jawoondae/notice">
+        <cl:listener std:sid="listener-7b418dd5" name="submit-done" handler="onSms_deleteWebNoticeSubmitDone"/>
+        <cl:listener std:sid="listener-cd50e5a0" name="submit-error" handler="onSms_deleteWebNoticeSubmitError"/>
+        <cl:listener std:sid="listener-7b99eccc" name="submit-timeout" handler="onSms_deleteWebNoticeSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec dev-comment="WNMMN&#xD;&#xA;&#xD;&#xA;"/>
+  </head>
+  <body std:sid="body-20d74b0b" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-b1e5b812" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-7cfd3604">
+      <cl:xylayoutdata std:sid="xyl-data-a4ea8d68" top="1px" right="1px" bottom="1px" left="1px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-a2112182" style="padding:5px;">
+        <cl:formdata std:sid="f-data-e4d57379" row="0" col="0"/>
+        <cl:group std:sid="group-0bcda78d">
+          <cl:formdata std:sid="f-data-d1ae459c" row="0" col="0"/>
+          <cl:output std:sid="output-b52a71f3" style="text-align:center;" class="userInfo_bold" value="제목 :">
+            <cl:formdata std:sid="f-data-6b8675a0" row="0" col="1"/>
+          </cl:output>
+          <cl:inputbox std:sid="i-box-8be30de0" id="WNMMN_ipbTitle">
+            <cl:datamapbind property="value" datacontrolid="WebNoticeInfo" columnname="Title"/>
+            <cl:formdata std:sid="f-data-23dca11f" row="0" col="2"/>
+          </cl:inputbox>
+          <cl:output std:sid="output-799d7796" class="userInfo_bold" value="공지사항">
+            <cl:formdata std:sid="f-data-a4967761" row="0" col="0"/>
+          </cl:output>
+          <cl:formlayout std:sid="f-layout-8d0ac0a6">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:textarea std:sid="t-area-dedf075b" id="WNMMN_ipbMessage">
+          <cl:datamapbind property="value" datacontrolid="WebNoticeInfo" columnname="Message"/>
+          <cl:formdata std:sid="f-data-cd7d26fa" row="1" col="0"/>
+        </cl:textarea>
+        <cl:formlayout std:sid="f-layout-c00e4b37">
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-f91ce4ca">
+        <cl:formdata std:sid="f-data-bb60d01f" row="1" col="0"/>
+        <cl:button std:sid="button-5ff1810e" id="WNMMN_btnSave" class="userInfo_btn" value="저장">
+          <cl:listener std:sid="listener-15b5b735" name="click" handler="onWNMMN_btnSaveClick"/>
+          <cl:formdata std:sid="f-data-10566aa6" row="0" col="2"/>
+        </cl:button>
+        <cl:button std:sid="button-c70727cf" id="WNMMN_btnDelete" class="userInfo_btn" value="삭제">
+          <cl:listener std:sid="listener-afe1de14" name="click" handler="onWNMMN_btnDeleteClick"/>
+          <cl:formdata std:sid="f-data-8f316bd2" row="0" col="3"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-03057d58">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-da8bf992">
+        <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-4711a894"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

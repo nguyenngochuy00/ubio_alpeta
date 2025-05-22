@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-48d4bdb0" version="1.0.0.0">
+  <head std:sid="head-baf65d5a">
+    <title>userSelect</title>
+    <screen std:sid="screen-0f692cdf" id="default" name="default" minwidth="1024px" width="1024px" height="768px"/>
+    <screen std:sid="screen-f505d17a" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-91632502" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-6ad60865">
+      <cl:dataset std:sid="d-set-a1e53e49" id="TerminalSelectList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-b33ff6d3" name="ID" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-2c83bb3f" name="Name" datatype="string"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-a944bb60" id="TerminalList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-6784ea20" name="ID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-b0469e83" name="Name"/>
+          <cl:datacolumn std:sid="d-column-d4b5e4e9" name="GroupCode" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-a0bfdc2a" name="State" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-2f702e19" name="Type" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-7237aedd" name="FuncType" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-5791e40e" name="IPAddress"/>
+          <cl:datacolumn std:sid="d-column-f27cdfac" name="MacAddress"/>
+          <cl:datacolumn std:sid="d-column-85ad964a" name="Version"/>
+          <cl:datacolumn std:sid="d-column-d7b24c77" name="RemoteDoor" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-7a913f96" name="UTCIndex" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-08c6d0fd" name="Description"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-c2bd18fc" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-c5e3e522" name="Count" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-a33aca7f" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-fc8abe32" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-8f727f9d" id="sms_getTerminalListAll" method="get" action="/v1/terminals">
+        <cl:listener std:sid="listener-4f8f8707" name="submit-done" handler="onSmsgetTerminalListAllSubmitDone"/>
+        <cl:listener std:sid="listener-f52b3c8e" name="submit-success" handler="onSmsgetTerminalListAllSubmitSuccess"/>
+        <cl:listener std:sid="listener-fbe2ce21" name="submit-error" handler="onSmsgetTerminalListAllSubmitError"/>
+        <cl:listener std:sid="listener-a457f936" name="submit-timeout" handler="onSmsgetTerminalListAllSubmitTimeout"/>
+        <cl:requestparam name="searchCategory"/>
+        <cl:requestparam name="searchKeyword"/>
+        <cl:requestparam name="offset" value="0"/>
+        <cl:requestparam name="limit" value="50"/>
+        <cl:requestparam name="picture" value="false"/>
+        <cl:requestparam name="fields"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total"/>
+        <cl:responsedata dataid="TerminalList" isadd="false"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-72e07456" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-5c77b376" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-bc47e907" style="padding-right:10px;">
+      <cl:xylayoutdata std:sid="xyl-data-fb5bde1a" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-4e9bf5ae" style="padding:0px;">
+        <cl:formdata std:sid="f-data-74b74cad" row="0" col="2" rowspan="1" colspan="1"/>
+        <cl:group std:sid="group-2c508047" style="padding:10px 0px 0px 0px;">
+          <cl:formdata std:sid="f-data-717aa61e" row="0" col="0" rowspan="1" colspan="1"/>
+          <cl:output std:sid="output-28e65b02" style="font-weight:700; font-size:14px; text-align:left;">
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_Total"/>
+            <cl:formdata std:sid="f-data-61e1e0fc" row="0" col="0"/>
+          </cl:output>
+          <cl:output std:sid="output-150a9b82" id="TMSEL_optTerminalSelectTotal" style="font-size:14px;" value="0">
+            <cl:formdata std:sid="f-data-9e1c12ca" row="0" col="1"/>
+          </cl:output>
+          <cl:output std:sid="output-fca2b9fe" style="font-weight:700; font-size:14px;">
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_SelectList"/>
+            <cl:formdata std:sid="f-data-e323a52d" row="1" col="0" rowspan="1" colspan="2"/>
+          </cl:output>
+          <cl:button std:sid="button-b0af1ff8" id="TMSEL_btnApply" class="userInfo_btn">
+            <cl:listener std:sid="listener-40a5994c" name="click" handler="onTMSEL_btnApplyClick"/>
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_Apply"/>
+            <cl:formdata std:sid="f-data-4ee5cb84" row="1" col="2"/>
+          </cl:button>
+          <cl:formlayout std:sid="f-layout-ce845543" hspace="0px" vspace="0px">
+            <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+            <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+            <cl:columns length="50" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:udc std:sid="ud-control-7eab8c48" id="TMSEL_udcTerminalSelectList" type="udc.grid.terminalList">
+          <cl:listener std:sid="listener-b7dfcead" name="terminalListDblclick" handler="onTMSEL_udcUserSelectListTerminalListDblclick"/>
+          <cl:datarowcontext datacontrolid="TerminalList" rowindex="0"/>
+          <cl:formdata std:sid="f-data-b3ef39f5" row="1" col="0"/>
+        </cl:udc>
+        <cl:formlayout std:sid="f-layout-56a26cca">
+          <cl:rows length="70" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          <cl:rows length="1" unit="FRACTION" shadetype="NONE" shadecolor="#000000"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-bb34e300">
+        <cl:formdata std:sid="f-data-3ec1c6a8" row="0" col="1"/>
+        <cl:group std:sid="group-deebad4c">
+          <cl:xylayoutdata std:sid="xyl-data-af412cb6" width="30px" height="170px" horizontalAnchor="CENTER" verticalAnchor="CENTER"/>
+          <cl:button std:sid="button-1b25ece5" id="TMSEL_btnAdd" style="padding:5px;" class="userInfo_btn" value=">">
+            <cl:listener std:sid="listener-bfd0ce02" name="click" handler="onTMSEL_btnAddClick"/>
+            <cl:xylayoutdata std:sid="xyl-data-d347c21f" top="0px" right="0px" left="0px" height="30px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+          </cl:button>
+          <cl:button std:sid="button-e7e0629f" id="TMSEL_btnRemove" style="padding:5px;" class="userInfo_btn" value="&lt;">
+            <cl:listener std:sid="listener-84a40c02" name="click" handler="onTMSEL_btnRemoveClick"/>
+            <cl:xylayoutdata std:sid="xyl-data-9235ada3" top="40px" right="0px" left="0px" height="30px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+          </cl:button>
+          <cl:button std:sid="button-3903e508" id="TMSEL_btnAddAll" style="padding:5px;" class="userInfo_btn" value=">>">
+            <cl:listener std:sid="listener-43ec36c8" name="click" handler="onTMSEL_btnAddAllClick"/>
+            <cl:xylayoutdata std:sid="xyl-data-a2b03374" right="0px" bottom="40px" left="0px" height="30px" horizontalAnchor="BOTH" verticalAnchor="BOTTOM"/>
+          </cl:button>
+          <cl:button std:sid="button-41d1c196" id="TMSEL_btnRemoveAll" style="padding:5px;" class="userInfo_btn" value="&lt;&lt;">
+            <cl:listener std:sid="listener-6ba55715" name="click" handler="onTMSEL_btnRemoveAllClick"/>
+            <cl:xylayoutdata std:sid="xyl-data-f642b241" right="0px" bottom="0px" left="0px" height="30px" horizontalAnchor="BOTH" verticalAnchor="BOTTOM"/>
+          </cl:button>
+          <cl:xylayout std:sid="xylayout-3d4a1981"/>
+        </cl:group>
+        <cl:xylayout std:sid="xylayout-396ebe63"/>
+      </cl:group>
+      <cl:udc std:sid="ud-control-ce725503" id="TMSEL_udcUserTerminal" type="udc.grid.gridUserTerminal">
+        <cl:listener std:sid="listener-627e3fd3" name="userListDblclick" handler="onUSSEL_udcUserTerminalUserListDblclick"/>
+        <cl:listener std:sid="listener-eedcd3cf" name="userListUpdate" handler="onUSSEL_udcUserTerminalUserListUpdate"/>
+        <cl:listener std:sid="listener-88c1cb32" name="terminalListDblclick" handler="onTMSEL_udcUserTerminalTerminalListDblclick"/>
+        <cl:formdata std:sid="f-data-f4f3fc6e" row="0" col="0"/>
+      </cl:udc>
+      <cl:formlayout std:sid="f-layout-651c1178">
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="560" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+        <cl:columns length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+        <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-86f0b7f3"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

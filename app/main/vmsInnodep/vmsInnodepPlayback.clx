@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-648aa29d" version="1.0.0.0">
+  <head std:sid="head-0b728110">
+    <title>vmsInnodepPlayback</title>
+    <screen std:sid="screen-35aaaeff" id="default" height="768px" minwidth="1024px" name="default" width="1024px"/>
+    <screen std:sid="screen-ccfc26b7" id="tablet" height="667px" maxwidth="1023px" minwidth="500px" name="tablet" width="500px"/>
+    <screen std:sid="screen-8e4ee5de" id="mobile" height="525px" maxwidth="499px" name="mobile" width="350px"/>
+    <cl:model std:sid="model-9f2c36bb">
+      <cl:datamap std:sid="d-map-9d2f207b" id="OptionInnodep">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-7448f150" defaultvalue="" name="ServerIP"/>
+          <cl:datacolumn std:sid="d-column-48763c00" datatype="number" defaultvalue="0" name="ServerPort"/>
+          <cl:datacolumn std:sid="d-column-d9f6242c" defaultvalue="" name="UserID"/>
+          <cl:datacolumn std:sid="d-column-b0f131c4" defaultvalue="" name="UserPW"/>
+          <cl:datacolumn std:sid="d-column-3ef275c7" defaultvalue="" name="License"/>
+          <cl:datacolumn std:sid="d-column-8a309048" datatype="number" defaultvalue="0" name="UseRecording"/>
+          <cl:datacolumn std:sid="d-column-196a58e2" datatype="number" defaultvalue="0" name="RegularRecording"/>
+          <cl:datacolumn std:sid="d-column-9b5d3614" datatype="number" defaultvalue="0" name="BeforeRecordingTime"/>
+          <cl:datacolumn std:sid="d-column-f0acf40f" datatype="number" defaultvalue="0" name="AfterRecordingTime"/>
+          <cl:datacolumn std:sid="d-column-81be451d" defaultvalue="" info="" name="PlayerServerIP"/>
+          <cl:datacolumn std:sid="d-column-fc6b0d53" datatype="number" defaultvalue="0" info="" name="PlayerServerPort"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-35d85d5a" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-fae20911" datatype="number" name="ResultCode"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-99a6a51e" id="smsGetOptionInnodep" action="/v1/options/innodep" method="get">
+        <cl:listener std:sid="listener-fa5b0b7b" handler="onSmsGetOptionInnodepSubmitDone" name="submit-done"/>
+        <cl:listener std:sid="listener-0c834a6e" handler="onSmsGetOptionInnodepSubmitError" name="submit-error"/>
+        <cl:listener std:sid="listener-9b2d3151" handler="onSmsGetOptionInnodepSubmitTimeout" name="submit-timeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="OptionInnodep"/>
+      </cl:submission>
+      <cl:dataset std:sid="d-set-8192fd03" id="dsInnodepPlayback">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-e6640e65" datatype="number" name="TerminalID"/>
+          <cl:datacolumn std:sid="d-column-b4f5ab3c" name="DevName"/>
+          <cl:datacolumn std:sid="d-column-3a0b6dc1" name="DevSerial"/>
+          <cl:datacolumn std:sid="d-column-db3c14d3" name="EventTime"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:submission std:sid="submission-e9f6259d" id="smsGetInnodepPlayback" action="/v1/innodepplayback/" method="get">
+        <cl:listener std:sid="listener-7c763776" handler="onSmsGetInnodepPlaybackSubmitDone" name="submit-done"/>
+        <cl:requestdata dataid="dsInnodepPlaybackReq"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="dsInnodepPlayback"/>
+      </cl:submission>
+      <cl:datamap std:sid="d-map-e14c413b" id="dsInnodepPlaybackReq">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-ce7ba3f0" datatype="number" name="TerminalID"/>
+          <cl:datacolumn std:sid="d-column-316021c3" name="EventTime"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:dataset std:sid="d-set-dc42de5d" id="dsInnodepPlaybackGrid">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-5be2a797" datatype="number" name="TerminalID"/>
+          <cl:datacolumn std:sid="d-column-5c8dc36a" name="DevName"/>
+          <cl:datacolumn std:sid="d-column-aea38217" name="DevSerial"/>
+          <cl:datacolumn std:sid="d-column-83c16f76" name="EventTime"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-723de898" id="dsInnodepPlaybackTemp">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-6dba3b88" datatype="number" name="TerminalID"/>
+          <cl:datacolumn std:sid="d-column-21139c6c" name="DevName"/>
+          <cl:datacolumn std:sid="d-column-f37a9ad1" name="DevSerial"/>
+          <cl:datacolumn std:sid="d-column-ff5c10b7" name="EventTime"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-40327cc8" style="padding:0px; top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-6382f60e" handler="onBodyLoad" name="load"/>
+    <cl:listener std:sid="listener-76288e11" handler="onBodyUnload" name="unload"/>
+    <cl:group std:sid="group-0cf064a5" id="grp1" style="padding:0px;">
+      <cl:xylayoutdata std:sid="xyl-data-16a242e0" bottom="0px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="BOTH"/>
+      <cl:uicontrolshell std:sid="uic-shell-72d07eb6" id="shl_player1" style="border-right-style:solid; border-bottom-color:#d02222; border-left-style:solid; border-left-color:#d02222; border-top-color:#d02222; border-bottom-style:solid; border-right-color:#d02222; border-top-style:solid;">
+        <cl:listener std:sid="listener-573fa86b" handler="onShl_player1Load2" name="load"/>
+        <cl:formdata std:sid="f-data-e39767c7" col="0" row="0"/>
+      </cl:uicontrolshell>
+      <cl:grid std:sid="grid-0583968d" id="grdPlayback" datasetid="dsInnodepPlaybackGrid" hscroll="auto">
+        <cl:listener std:sid="listener-dbb0c2fb" handler="onGrdPlaybackRowDblclick2" name="row-dblclick"/>
+        <cl:formdata std:sid="f-data-24676916" col="0" row="1"/>
+        <cl:gridcolumn std:sid="g-column-d3f31be5"/>
+        <cl:gridcolumn std:sid="g-column-8780bc59"/>
+        <cl:gridcolumn std:sid="g-column-f7af743b"/>
+        <cl:gridcolumn std:sid="g-column-8297a9d9"/>
+        <cl:gridheader std:sid="gh-band-18803a3e">
+          <cl:gridrow std:sid="g-row-cc880c86"/>
+          <cl:gridcell std:sid="gh-cell-534d5d17" colindex="0" rowindex="0" filterable="false" sortable="false" targetcolumnname="TerminalID" text="TerminalID"/>
+          <cl:gridcell std:sid="gh-cell-d147cc17" colindex="1" rowindex="0" filterable="false" sortable="false" targetcolumnname="DevName" text="DevName"/>
+          <cl:gridcell std:sid="gh-cell-c1749001" colindex="2" rowindex="0" filterable="false" sortable="false" targetcolumnname="DevSerial" text="DevSerial"/>
+          <cl:gridcell std:sid="gh-cell-36eaed2c" colindex="3" rowindex="0" filterable="false" sortable="false" targetcolumnname="EventTime" text="EventTime"/>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-c0619e43">
+          <cl:gridrow std:sid="g-row-ee25583f"/>
+          <cl:gridcell std:sid="gd-cell-93697155" colindex="0" rowindex="0" columnname="TerminalID"/>
+          <cl:gridcell std:sid="gd-cell-f77d10ff" colindex="1" rowindex="0" columnname="DevName"/>
+          <cl:gridcell std:sid="gd-cell-dfb8d22f" colindex="2" rowindex="0" columnname="DevSerial"/>
+          <cl:gridcell std:sid="gd-cell-977352f3" colindex="3" rowindex="0" columnname="EventTime"/>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:formlayout std:sid="f-layout-cdb3a313">
+        <cl:rows autoSizing="false" length="2" minlength="0" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+        <cl:rows length="1" shadecolor="transparent" shadetype="NONE" unit="FRACTION"/>
+        <cl:columns autoSizing="false" length="3" minlength="0" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-02dfee10"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

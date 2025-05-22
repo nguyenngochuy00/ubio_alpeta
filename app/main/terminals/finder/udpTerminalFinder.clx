@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-e7299597" version="1.0.0.0">
+  <head std:sid="head-f3c2beb3">
+    <title>udpTerminalFinder</title>
+    <screen std:sid="screen-21465dc3" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="650" customWidth="550"/>
+    <screen std:sid="screen-18ceec13" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-3ea88bf4" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-634adc78">
+      <cl:dataset std:sid="d-set-e6d500f3" id="TerminalList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-3960c247" name="TerminalID" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-72485f5e" name="NetWorkType" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-22552894" name="NetWorkIpAddr"/>
+          <cl:datacolumn std:sid="d-column-2314a236" name="NetWorkSubnetMask"/>
+          <cl:datacolumn std:sid="d-column-300c6af4" name="NetWorkGateway"/>
+          <cl:datacolumn std:sid="d-column-ce32b3ae" name="ServerIpAddr"/>
+          <cl:datacolumn std:sid="d-column-96ae7c13" name="ServerPort" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-d090df4b" name="Version"/>
+          <cl:datacolumn std:sid="d-column-edd3999b" name="MacAddr"/>
+          <cl:datacolumn std:sid="d-column-81177975" name="LockingFlag" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-ca621aba" name="SiteKey"/>
+          <cl:datacolumn std:sid="d-column-db48f5d5" name="Password" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-bcb586d8" name="NewPassword"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-78a7689a" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-c7b68d23" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-09cad0cf" id="TerminalInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-3105df18" name="TerminalID" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-7e1e4beb" name="NetWorkType" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-a07fe995" name="NetWorkIpAddr"/>
+          <cl:datacolumn std:sid="d-column-4eff1324" name="NetWorkSubnetMask"/>
+          <cl:datacolumn std:sid="d-column-7e686b82" name="NetWorkGateway"/>
+          <cl:datacolumn std:sid="d-column-a5de7488" name="ServerIpAddr"/>
+          <cl:datacolumn std:sid="d-column-7b70278c" name="ServerPort" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-cff7b80c" name="Version"/>
+          <cl:datacolumn std:sid="d-column-fa133836" name="MacAddr"/>
+          <cl:datacolumn std:sid="d-column-99878ce8" name="LockingFlag" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-00988a09" name="SiteKey"/>
+          <cl:datacolumn std:sid="d-column-ceee4010" name="Password"/>
+          <cl:datacolumn std:sid="d-column-785cdfc3" name="NewPassword"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-4bda765e" id="ReqTerminalIpAddress">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-9be49b15" name="TerminalIP"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap comment="단말기 수동 찾기" std:sid="d-map-0450e4e6" id="ManualTerminalInfo" info="단말기 수동 찾기">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-53c59b31" name="TerminalID" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-e71e675f" name="NetWorkIpAddr"/>
+          <cl:datacolumn std:sid="d-column-be05d1b3" name="NetWorkGateway"/>
+          <cl:datacolumn std:sid="d-column-193f0cfe" name="ServerPort" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-e3486376" id="sms_getUdpTerminalList" method="get" action="/v1/terminalfinder/search">
+        <cl:listener std:sid="listener-617df02a" name="submit-done" handler="onSms_getUdpTerminalListSubmitDone"/>
+        <cl:listener std:sid="listener-53d93e2c" name="submit-error" handler="onSms_getUdpTerminalListSubmitError"/>
+        <cl:listener std:sid="listener-41b8d6ba" name="submit-timeout" handler="onSms_getUdpTerminalListSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-e265a8a6" id="sms_putUdpTerminalInfo" method="put" action="/v1/terminalfinder/update">
+        <cl:requestdata dataid="ReqTerminalIpAddress"/>
+        <cl:requestdata dataid="TerminalInfo"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-dce1c230" id="sms_getManualUDPTerminal" method="get" action="/v1/terminalfinder/manualSearch">
+        <cl:listener std:sid="listener-9db20dfb" name="submit-done" handler="onSms_getUdpTerminalListSubmitDone"/>
+        <cl:listener std:sid="listener-52deb764" name="submit-error" handler="onSms_getUdpTerminalListSubmitError"/>
+        <cl:requestdata dataid="ManualTerminalInfo"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-815f1ab0" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-2d3896dd" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-3700e0d5" id="TMSEH_grpTerminalSearch" style="padding:5px;">
+      <cl:xylayoutdata std:sid="xyl-data-e431067b" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-e325d479" id="UTF_BtnGroup">
+        <cl:formdata std:sid="f-data-d4b33d44" row="0" col="0"/>
+        <cl:button std:sid="button-38aa5580" id="TMSEH_btnSearch" class="userInfo_btn">
+          <cl:listener std:sid="listener-54d1cfa1" name="click" handler="onTMFDR_btnSearchClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Search"/>
+          <cl:formdata std:sid="f-data-0eb1a8f3" row="0" col="1"/>
+        </cl:button>
+        <cl:group std:sid="group-c7bc2a68">
+          <cl:formdata std:sid="f-data-3538e38d" row="0" col="3"/>
+          <cl:img std:sid="image-caf4033f" id="TMSEH_imgHelp" src="../../../../theme/images/common/common_btn_window_top_q.gif">
+            <cl:listener std:sid="listener-281e7c43" name="click" handler="onTMSEH_imgHelpClick"/>
+            <cl:formdata std:sid="f-data-2b8c478c" row="1" col="0"/>
+          </cl:img>
+          <cl:formlayout std:sid="f-layout-4c294da8">
+            <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:rows length="15" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:rows length="1" unit="FRACTION" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="14" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:button std:sid="button-b85c43db" class="userInfo_btn">
+          <cl:listener std:sid="listener-b89dfd82" name="click" handler="onButtonClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Manual"/>
+          <cl:formdata std:sid="f-data-7fa0995b" row="0" col="2"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-e022eb2e">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+          <cl:columns length="75" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="75" unit="PIXEL" autoSizing="true" hidden="true" minlength="0"/>
+          <cl:columns length="10" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:grid std:sid="grid-930d2ce4" id="TMSEH_grdTerminalList" readonly="true" datasetid="TerminalList" resizablecolumns="none" columnMovable="false">
+        <cl:listener std:sid="listener-23e49823" name="selection-change" handler="onTMSEH_grdTerminalListSelectionChange"/>
+        <cl:formdata std:sid="f-data-eb84b644" row="1" col="0"/>
+        <cl:gridcolumn std:sid="g-column-fdbbc43e"/>
+        <cl:gridcolumn std:sid="g-column-b5b1b1aa" width="118px"/>
+        <cl:gridcolumn std:sid="g-column-eb33ad62"/>
+        <cl:gridcolumn std:sid="g-column-26e672b3"/>
+        <cl:gridcolumn std:sid="g-column-78c65729"/>
+        <cl:gridheader std:sid="gh-band-e8283d35">
+          <cl:gridrow std:sid="g-row-81069db7"/>
+          <cl:gridcell std:sid="gh-cell-38cacf60" rowindex="0" colindex="0" targetcolumnname="TerminalID" sortable="false" filterable="false" text="TerminalID" sortcolumnname="TerminalID">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_TerminalID"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-92e5ea47" rowindex="0" colindex="1" targetcolumnname="NetWorkIpAddr" sortable="false" filterable="false" text="NetWorkIpAddr">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_NetWorkIpAddr"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-aa487b63" rowindex="0" colindex="2" targetcolumnname="Version" sortable="false" filterable="false" text="Version">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_Version"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-04192d57" rowindex="0" colindex="3" targetcolumnname="MacAddr" sortable="false" filterable="false" text="MacAddr">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_MacAddress"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-bc6d9c91" rowindex="0" colindex="4" targetcolumnname="SiteKey" sortable="false" filterable="false" text="SiteKey">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_SiteKey"/>
+          </cl:gridcell>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-3d3c1a83">
+          <cl:gridrow std:sid="g-row-2fa1c6dc"/>
+          <cl:gridcell std:sid="gd-cell-5064807c" rowindex="0" colindex="0" columnname="TerminalID"/>
+          <cl:gridcell std:sid="gd-cell-a4a1960f" rowindex="0" colindex="1" columnname="NetWorkIpAddr"/>
+          <cl:gridcell std:sid="gd-cell-c791dd07" rowindex="0" colindex="2" columnname="Version"/>
+          <cl:gridcell std:sid="gd-cell-6930c2fd" rowindex="0" colindex="3" columnname="MacAddr"/>
+          <cl:gridcell std:sid="gd-cell-848dc5fc" rowindex="0" colindex="4" columnname="SiteKey"/>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:group std:sid="group-fc062697">
+        <cl:formdata std:sid="f-data-046cbd70" row="2" col="0"/>
+        <cl:radiobutton std:sid="r-button-9a831ac3" id="TMSEH_rdbNetWorkType">
+          <cl:listener std:sid="listener-3cfb9507" name="selection-change" handler="onTMSEH_rdbNetWorkTypeSelectionChange"/>
+          <cl:datamapbind property="value" datacontrolid="TerminalInfo" columnname="NetWorkType"/>
+          <cl:formdata std:sid="f-data-e8868f23" row="0" col="0"/>
+          <cl:item std:sid="item-88dd7af4" label="DHCP" value="1"/>
+          <cl:item std:sid="item-87cc19b8" label="Static IP" value="0"/>
+        </cl:radiobutton>
+        <cl:formlayout std:sid="f-layout-a1d7574d">
+          <cl:rows length="25" unit="PIXEL"/>
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="150" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-4d3879c6">
+        <cl:formdata std:sid="f-data-3e16cd47" row="3" col="0"/>
+        <cl:group std:sid="group-4c005c14">
+          <cl:formdata std:sid="f-data-c9aa8809" row="0" col="0"/>
+          <cl:group std:sid="group-e3c2c2a3">
+            <cl:formdata std:sid="f-data-83e2013d" row="0" col="0"/>
+            <cl:group std:sid="group-68112916">
+              <cl:formdata std:sid="f-data-48a1ebeb" row="0" col="0"/>
+              <cl:output std:sid="output-b84543ac">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_TerminalID"/>
+                <cl:formdata std:sid="f-data-b6f66cde" row="0" col="0"/>
+              </cl:output>
+              <cl:inputbox std:sid="i-box-778b0981" id="TMSEH_ipbTerminalID">
+                <cl:datamapbind property="value" datacontrolid="TerminalInfo" columnname="TerminalID"/>
+                <cl:formdata std:sid="f-data-3d9949d9" row="0" col="1"/>
+              </cl:inputbox>
+              <cl:formlayout std:sid="f-layout-f535f81a">
+                <cl:rows length="25" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="110" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="1" unit="FRACTION"/>
+              </cl:formlayout>
+            </cl:group>
+            <cl:group std:sid="group-19165092">
+              <cl:formdata std:sid="f-data-96471c26" row="2" col="0"/>
+              <cl:output std:sid="output-5222ffba">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_SubnetMask"/>
+                <cl:formdata std:sid="f-data-6c28d432" row="0" col="0" rowspan="2" colspan="1"/>
+              </cl:output>
+              <cl:inputbox std:sid="i-box-5192a838" id="TMSEH_ipbSubnetMask">
+                <cl:datamapbind property="value" datacontrolid="TerminalInfo" columnname="NetWorkSubnetMask"/>
+                <cl:formdata std:sid="f-data-02aae1d9" row="0" col="1"/>
+              </cl:inputbox>
+              <cl:formlayout std:sid="f-layout-ae9575da">
+                <cl:rows length="25" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="1" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="110" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="1" unit="FRACTION"/>
+              </cl:formlayout>
+            </cl:group>
+            <cl:group std:sid="group-8a684691">
+              <cl:formdata std:sid="f-data-e8383e5f" row="3" col="0"/>
+              <cl:output std:sid="output-8a85d345">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_GateWay"/>
+                <cl:formdata std:sid="f-data-58df27f0" row="0" col="0"/>
+              </cl:output>
+              <cl:inputbox std:sid="i-box-f19cfaff" id="TMSEH_ipbGateway">
+                <cl:datamapbind property="value" datacontrolid="TerminalInfo" columnname="NetWorkGateway"/>
+                <cl:formdata std:sid="f-data-2aa694be" row="0" col="1"/>
+              </cl:inputbox>
+              <cl:formlayout std:sid="f-layout-513d7527">
+                <cl:rows length="25" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="110" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="1" unit="FRACTION"/>
+              </cl:formlayout>
+            </cl:group>
+            <cl:group std:sid="group-78aca050">
+              <cl:formdata std:sid="f-data-f1eae15e" row="1" col="0"/>
+              <cl:output std:sid="output-fa7f53c7">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_TerminalIp"/>
+                <cl:formdata std:sid="f-data-dfb2cd29" row="0" col="0" rowspan="2" colspan="1"/>
+              </cl:output>
+              <cl:inputbox std:sid="i-box-9b6c7812" id="TMSEH_ipbTerminalIP">
+                <cl:datamapbind property="value" datacontrolid="TerminalInfo" columnname="NetWorkIpAddr"/>
+                <cl:formdata std:sid="f-data-fdd79d45" row="0" col="1"/>
+              </cl:inputbox>
+              <cl:formlayout std:sid="f-layout-e37ad74f">
+                <cl:rows length="25" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="1" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="110" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="1" unit="FRACTION"/>
+              </cl:formlayout>
+            </cl:group>
+            <cl:formlayout std:sid="f-layout-aa548bd3">
+              <cl:rows length="25" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:rows length="25" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:rows length="25" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:rows length="25" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="1" unit="FRACTION"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:group std:sid="group-0fb9670c">
+            <cl:formdata std:sid="f-data-36dff97e" row="0" col="1"/>
+            <cl:group std:sid="group-1f94ae3a">
+              <cl:formdata std:sid="f-data-a59c2741" row="0" col="0"/>
+              <cl:output std:sid="output-f2eb51a4">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_ServerIp"/>
+                <cl:formdata std:sid="f-data-f7deb57a" row="0" col="0" rowspan="2" colspan="1"/>
+              </cl:output>
+              <cl:inputbox std:sid="i-box-9c0e23aa" id="TMSEH_ipbServerIp">
+                <cl:datamapbind property="value" datacontrolid="TerminalInfo" columnname="ServerIpAddr"/>
+                <cl:formdata std:sid="f-data-01e1421a" row="0" col="1"/>
+              </cl:inputbox>
+              <cl:formlayout std:sid="f-layout-4a18d3ab">
+                <cl:rows length="25" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="1" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="110" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="1" unit="FRACTION"/>
+              </cl:formlayout>
+            </cl:group>
+            <cl:group std:sid="group-8a1fdf8d">
+              <cl:formdata std:sid="f-data-0b4ec76e" row="1" col="0"/>
+              <cl:output std:sid="output-a25bd625">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_ServerPort"/>
+                <cl:formdata std:sid="f-data-651fd5e0" row="0" col="0"/>
+              </cl:output>
+              <cl:inputbox std:sid="i-box-4a912db1" id="TMSEH_ipbPort">
+                <cl:datamapbind property="value" datacontrolid="TerminalInfo" columnname="ServerPort"/>
+                <cl:formdata std:sid="f-data-e610231a" row="0" col="1"/>
+              </cl:inputbox>
+              <cl:formlayout std:sid="f-layout-7ea38b06">
+                <cl:rows length="25" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="110" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="1" unit="FRACTION"/>
+              </cl:formlayout>
+            </cl:group>
+            <cl:formlayout std:sid="f-layout-0c1e78fd">
+              <cl:rows length="25" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:rows length="25" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="1" unit="FRACTION"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:formlayout std:sid="f-layout-5f61ea2e">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:group std:sid="group-aefdc387">
+          <cl:formdata std:sid="f-data-8e20fd3e" row="1" col="0"/>
+          <cl:group std:sid="group-2071b8f6">
+            <cl:formdata std:sid="f-data-f5d27ad1" row="3" col="0"/>
+            <cl:checkbox std:sid="c-box-14161c4a" id="TMSEH_cbxLocking" truevalue="1" falsevalue="0">
+              <cl:listener std:sid="listener-45b4bc66" name="value-change" handler="onTMSEH_cbxLockingValueChange"/>
+              <cl:listener std:sid="listener-49a0851e" name="value-change" handler="onTMSEH_cbxLockingValueChange"/>
+              <cl:listener std:sid="listener-1b66a9c9" name="value-change" handler="onTMSEH_cbxLockingValueChange2"/>
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_LockConfiguration"/>
+              <cl:formdata std:sid="f-data-46990322" row="0" col="0"/>
+            </cl:checkbox>
+            <cl:formlayout std:sid="f-layout-c95ab076">
+              <cl:rows length="1" unit="FRACTION"/>
+              <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:group std:sid="group-9ca8dbf9">
+            <cl:formdata std:sid="f-data-cfcbd845" row="1" col="0"/>
+            <cl:output std:sid="output-14259d15">
+              <cl:langbind property="value" category="PROPERTY" keypath="Str_Password"/>
+              <cl:formdata std:sid="f-data-d706d5c3" row="0" col="0"/>
+            </cl:output>
+            <cl:inputbox std:sid="i-box-08f35cbf" id="TMSEH_ipbPassword">
+              <cl:datamapbind property="value" datacontrolid="TerminalInfo" columnname="Password"/>
+              <cl:formdata std:sid="f-data-b70328aa" halign="LEFT" width="170" row="0" col="1"/>
+            </cl:inputbox>
+            <cl:formlayout std:sid="f-layout-a1518522">
+              <cl:rows length="1" unit="FRACTION"/>
+              <cl:columns length="150" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+              <cl:columns length="1" unit="FRACTION"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:group std:sid="group-a21b0da5">
+            <cl:formdata std:sid="f-data-29a44f0a" row="2" col="0"/>
+            <cl:checkbox std:sid="c-box-25a011e7" id="TMSEH_cbxNewPassword">
+              <cl:listener std:sid="listener-8f251cc1" name="value-change" handler="onTMSEH_cbxNewPasswordValueChange"/>
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_NewPassword"/>
+              <cl:formdata std:sid="f-data-b5ca5040" row="0" col="0"/>
+            </cl:checkbox>
+            <cl:inputbox std:sid="i-box-eb9810fc" id="TMSEH_ipbNewPassword">
+              <cl:datamapbind property="value" datacontrolid="TerminalInfo" columnname="NewPassword"/>
+              <cl:formdata std:sid="f-data-62e1057f" halign="LEFT" width="150" row="0" col="1"/>
+            </cl:inputbox>
+            <cl:formlayout std:sid="f-layout-289b528e">
+              <cl:rows length="1" unit="FRACTION"/>
+              <cl:columns length="150" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+              <cl:columns length="1" unit="FRACTION"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:group std:sid="group-9a4986c8">
+            <cl:formdata std:sid="f-data-eafa6943" row="0" col="0"/>
+            <cl:output std:sid="output-76588efa">
+              <cl:langbind property="value" category="PROPERTY" keypath="Str_SiteKey"/>
+              <cl:formdata std:sid="f-data-310956c3" row="0" col="0"/>
+            </cl:output>
+            <cl:inputbox std:sid="i-box-df40f946" id="TMSEH_ipbSiteKey">
+              <cl:datamapbind property="value" datacontrolid="TerminalInfo" columnname="SiteKey"/>
+              <cl:formdata std:sid="f-data-121316df" halign="LEFT" width="170" row="0" col="1"/>
+            </cl:inputbox>
+            <cl:formlayout std:sid="f-layout-9df626ec">
+              <cl:rows length="1" unit="FRACTION"/>
+              <cl:columns length="150" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+              <cl:columns length="1" unit="FRACTION"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:formlayout std:sid="f-layout-485b7d0c">
+            <cl:rows length="25" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+            <cl:rows length="25" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+            <cl:rows length="25" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+            <cl:rows length="25" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-73a81328">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-2e5a872d">
+        <cl:formdata std:sid="f-data-b96530d2" row="4" col="0"/>
+        <cl:button std:sid="button-f4046808" id="TMSEH_btnApply" class="userInfo_btn">
+          <cl:listener std:sid="listener-4af29c83" name="click" handler="onTMSEH_btnApplyClick"/>
+          <cl:listener std:sid="listener-4f54bcf8" name="click" handler="onTMSEH_btnApplyClick"/>
+          <cl:listener std:sid="listener-472f55b0" name="click" handler="onTMSEH_btnApplyClick2"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Apply"/>
+          <cl:formdata std:sid="f-data-282a8ee5" row="0" col="1"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-c3a26eff" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="75" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-fe945a4f">
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+        <cl:rows length="225" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+        <cl:rows length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-c9727b12"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

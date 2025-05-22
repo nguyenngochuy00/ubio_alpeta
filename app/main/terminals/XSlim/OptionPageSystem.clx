@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-471ebae8" version="1.0.0.0">
+  <head std:sid="head-c78ffcaa">
+    <title>OptionPageSystem</title>
+    <screen std:sid="screen-aa1b2c47" id="default" name="default" minwidth="1024px" width="1024px" height="768px"/>
+    <screen std:sid="screen-8e2eb5a6" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-1fc11ede" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-ae105240">
+      <cl:datamap std:sid="d-map-605a9ec8" id="SysOption">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-17f7350d" name="EncryptionType" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-b4fa8688" name="UseLog" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-de1049c5" name="UseRF" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-cebf1eff" name="SizeOfWiegandBit" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-a5d48635" name="TnAMode" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-41bc278c" name="ExpTnAMode" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-cd944d3c" name="AutoTnAmode" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-652c61d5" name="MustUseFuncKey" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-3701e699" name="AuthMode" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-5f6be98f" name="TimezonMode" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-25088b38" name="TerminalMode" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-8f4ce2b5" name="FacilityCode8" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-7417cc97" name="FacilityCode16" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-57941562" id="NetOption">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-bd0d008e" name="UseNodeId" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-ef16acd2" name="PortNum" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-889c4e19" name="TerminalIP"/>
+          <cl:datacolumn std:sid="d-column-a865194f" name="ServerIP"/>
+          <cl:datacolumn std:sid="d-column-11a56795" name="SubnetMask"/>
+          <cl:datacolumn std:sid="d-column-19fdd024" name="Gateway"/>
+          <cl:datacolumn std:sid="d-column-50388e3c" name="UseDHCP" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-f26f98ab" name="NetworkTimeout" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-b1a7fa72" name="PingPeriod" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-32c731e7" name="NetworkType" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-92675855" id="DoorOption">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-49e75ded" name="Door1Func" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-08adfd9f" name="Door1Result" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-f179f6ab" name="Door1OpenDuration" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-c2e94d5c" name="Door1OpenWarnDuration" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-c961b4a6" name="Door2Func" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-462edeb1" name="Door2Result" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-d11b17b1" name="Door2OpenDuration" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-88229670" name="Door2OpenWarnDuration" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-2ee15fdd" name="DoorOpenOption" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-4bed6add" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-52378d06" name="load" handler="onBodyLoad"/>
+    <cl:listener std:sid="listener-0ce6415a" name="unload" handler="onBodyUnload"/>
+    <cl:group std:sid="group-49a551aa" id="TMUTN_grpSystem">
+      <cl:xylayoutdata std:sid="xyl-data-9cfacbe5" top="0px" left="0px" width="452px" height="599px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      <cl:group std:sid="group-7dd21abd">
+        <cl:formdata std:sid="f-data-27f3243a" row="0" col="0"/>
+        <cl:output std:sid="output-8608164d" style="font-weight:bold; font-size:14px;" value="단말기 설정">
+          <cl:formdata std:sid="f-data-964d4ded" row="0" col="0" rowspan="1" colspan="2"/>
+        </cl:output>
+        <cl:group std:sid="group-624d0db4" style="font-size:14px;">
+          <cl:formdata std:sid="f-data-b3a41a50" row="1" col="0" rowspan="1" colspan="2"/>
+          <cl:checkbox std:sid="c-box-ad47f1b3" id="cbx1" truevalue="1" falsevalue="0" text="로그저장 사용">
+            <cl:datamapbind property="value" datacontrolid="SysOption" columnname="UseLog"/>
+            <cl:formdata std:sid="f-data-89a20a3c" row="0" col="0"/>
+          </cl:checkbox>
+          <cl:checkbox std:sid="c-box-d73a8cb3" id="cbx2" truevalue="1" falsevalue="0" text="타임존 사용">
+            <cl:datamapbind property="value" datacontrolid="SysOption" columnname="TimezonMode"/>
+            <cl:formdata std:sid="f-data-1495177e" row="0" col="1"/>
+          </cl:checkbox>
+          <cl:formlayout std:sid="f-layout-6be861f7">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:output std:sid="output-b56909ea" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-top-color:#c5c5c5; border-bottom-style:solid; border-right-color:#c5c5c5; border-top-style:solid; text-align:center;" value="RF카드 사용">
+          <cl:formdata std:sid="f-data-03505ce6" row="2" col="0"/>
+        </cl:output>
+        <cl:output std:sid="output-bf2e0dd4" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="암호화 방식">
+          <cl:formdata std:sid="f-data-35f8492a" row="3" col="0"/>
+        </cl:output>
+        <cl:output std:sid="output-00168a96" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="통신시간 제한 (초)">
+          <cl:formdata std:sid="f-data-8328d9ce" row="4" col="0"/>
+        </cl:output>
+        <cl:output std:sid="output-d4a8861e" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="인증 방식">
+          <cl:formdata std:sid="f-data-eee0271e" row="5" col="0"/>
+        </cl:output>
+        <cl:group std:sid="group-0d2b9c62" style="border-bottom-color:#c5c5c5; border-top-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-8090536f" row="2" col="1"/>
+          <cl:combobox std:sid="c-box-aca380a1" id="cmb2" style="font-size:14px;">
+            <cl:datamapbind property="value" datacontrolid="SysOption" columnname="UseRF"/>
+            <cl:xylayoutdata std:sid="xyl-data-c9787651" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+            <cl:item std:sid="item-3c1476bb" label="사용 안함" value="0"/>
+            <cl:item std:sid="item-c9b6c254" label="사용" value="1"/>
+          </cl:combobox>
+          <cl:xylayout std:sid="xylayout-7c8b521d"/>
+        </cl:group>
+        <cl:group std:sid="group-53a722cf" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+          <cl:formdata std:sid="f-data-e4b282f8" row="3" col="1"/>
+          <cl:combobox std:sid="c-box-5dab9180" id="cmb1" style="font-size:14px;">
+            <cl:datamapbind property="value" datacontrolid="SysOption" columnname="EncryptionType"/>
+            <cl:xylayoutdata std:sid="xyl-data-d6d8e0f1" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+            <cl:item std:sid="item-bede5d99" label="AES 256" value="3"/>
+          </cl:combobox>
+          <cl:xylayout std:sid="xylayout-bf0dab1d"/>
+        </cl:group>
+        <cl:group std:sid="group-18494962" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+          <cl:formdata std:sid="f-data-8b8201a3" row="4" col="1"/>
+          <cl:numbereditor std:sid="n-editor-3896a34e" id="nbe1" style="font-size:14px;" value="" min="2.0" max="20.0">
+            <cl:datamapbind property="value" datacontrolid="NetOption" columnname="NetworkTimeout"/>
+            <cl:xylayoutdata std:sid="xyl-data-211895a7" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+          </cl:numbereditor>
+          <cl:xylayout std:sid="xylayout-a75a7c8f"/>
+        </cl:group>
+        <cl:group std:sid="group-929dc861" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+          <cl:formdata std:sid="f-data-0e0f9b20" row="5" col="1"/>
+          <cl:combobox std:sid="c-box-6c44a79a" id="cmb6" style="font-size:14px;">
+            <cl:datamapbind property="value" datacontrolid="SysOption" columnname="AuthMode"/>
+            <cl:xylayoutdata std:sid="xyl-data-cbfe452e" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+            <cl:item std:sid="item-85052def" label="서버 / 단말기" value="0"/>
+            <cl:item std:sid="item-b757f379" label="단말기 / 서버" value="1"/>
+            <cl:item std:sid="item-042f5107" label="서버 전용" value="2"/>
+            <cl:item std:sid="item-97aecc47" label="단말기 전용" value="3"/>
+          </cl:combobox>
+          <cl:xylayout std:sid="xylayout-7a8fd784"/>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-641cbfdd" hspace="0px" vspace="0px">
+          <cl:rows length="30" unit="PIXEL"/>
+          <cl:rows length="30" unit="PIXEL"/>
+          <cl:rows length="30" unit="PIXEL"/>
+          <cl:rows length="30" unit="PIXEL"/>
+          <cl:rows length="30" unit="PIXEL"/>
+          <cl:rows length="30" unit="PIXEL"/>
+          <cl:columns length="150" unit="PIXEL" shadetype="NONE" shadecolor="#000000"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-8a9e88e9">
+        <cl:formdata std:sid="f-data-035a734b" row="1" col="0"/>
+        <cl:checkbox std:sid="c-box-57f4d2d1" id="cbx3" style="font-weight:bold; font-size:14px;" truevalue="1" falsevalue="0" text="근태모드">
+          <cl:datamapbind property="value" datacontrolid="SysOption" columnname="TnAMode"/>
+          <cl:formdata std:sid="f-data-3753ce54" row="0" col="0" rowspan="1" colspan="2"/>
+        </cl:checkbox>
+        <cl:output std:sid="output-6fa752e9" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-top-color:#c5c5c5; border-bottom-style:solid; border-right-color:#c5c5c5; border-top-style:solid; text-align:center;" value="타입">
+          <cl:formdata std:sid="f-data-8f840b7d" row="1" col="0"/>
+        </cl:output>
+        <cl:output std:sid="output-bc6805ec" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="근태인증만 허용">
+          <cl:formdata std:sid="f-data-1ece3315" row="2" col="0"/>
+        </cl:output>
+        <cl:radiobutton std:sid="r-button-4e0e95ab" id="rdb1" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; font-size:14px; border-bottom-style:solid;">
+          <cl:formdata std:sid="f-data-e90aa760" row="2" col="1"/>
+          <cl:item std:sid="item-fb2d2f1c" label="사용" value="1"/>
+          <cl:item std:sid="item-d660e60b" label="사용 안함" value="value2"/>
+        </cl:radiobutton>
+        <cl:output std:sid="output-3c4bf685" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="자동 근태모드">
+          <cl:formdata std:sid="f-data-9d688685" row="3" col="0"/>
+        </cl:output>
+        <cl:radiobutton std:sid="r-button-7a22872d" id="rdb2" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; font-size:14px; border-bottom-style:solid;">
+          <cl:datamapbind property="value" datacontrolid="SysOption" columnname="AutoTnAmode"/>
+          <cl:formdata std:sid="f-data-6544e3b5" row="3" col="1"/>
+          <cl:item std:sid="item-31da1079" label="사용" value="1"/>
+          <cl:item std:sid="item-1f9583cd" label="사용 안함" value="0"/>
+        </cl:radiobutton>
+        <cl:group std:sid="group-03ba8684" style="border-bottom-color:#c5c5c5; border-top-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-70bd955e" row="1" col="1"/>
+          <cl:combobox std:sid="c-box-a4f5c428" id="cmb3" style="font-size:14px;">
+            <cl:datamapbind property="value" datacontrolid="SysOption" columnname="ExpTnAMode"/>
+            <cl:xylayoutdata std:sid="xyl-data-171ff606" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+            <cl:item std:sid="item-286d8d2f" label="일반형" value="2"/>
+            <cl:item std:sid="item-f102a42f" label="간소형" value="3"/>
+            <cl:item std:sid="item-3e93056c" label="확장형" value="1"/>
+          </cl:combobox>
+          <cl:xylayout std:sid="xylayout-3ed13de1"/>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-5be9f714" hspace="0px" vspace="0px">
+          <cl:rows length="30" unit="PIXEL"/>
+          <cl:rows length="30" unit="PIXEL"/>
+          <cl:rows length="30" unit="PIXEL"/>
+          <cl:rows length="30" unit="PIXEL"/>
+          <cl:columns length="150" unit="PIXEL" shadetype="NONE" shadecolor="#000000"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-d3178627">
+        <cl:formdata std:sid="f-data-4934ddeb" row="2" col="0" rowspan="1" colspan="1"/>
+        <cl:output std:sid="output-63955624" style="font-weight:bold; font-size:14px;" value="출입문 설정">
+          <cl:formdata std:sid="f-data-49a857b2" row="0" col="0" rowspan="1" colspan="2"/>
+        </cl:output>
+        <cl:group std:sid="group-8c16e491" style="font-size:14px;">
+          <cl:formdata std:sid="f-data-f34d34eb" row="1" col="1" rowspan="6" colspan="1"/>
+          <cl:output std:sid="output-65f0a486" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-left-color:#c5c5c5; font-size:14px; border-right-color:#c5c5c5; border-left-width:1px; border-top-style:solid; border-left-style:solid; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; text-align:center;" value="출입문 1">
+            <cl:formdata std:sid="f-data-efb0fc55" row="0" col="0"/>
+          </cl:output>
+          <cl:output std:sid="output-0b2df6ea" style="border-bottom-color:#c5c5c5; border-top-width:1px; border-bottom-width:1px; font-size:14px; border-top-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid; text-align:center;" value="출입문 2">
+            <cl:formdata std:sid="f-data-0cf82cb0" row="0" col="1"/>
+          </cl:output>
+          <cl:group std:sid="group-ff9b97f9" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; border-bottom-style:solid; border-right-color:#c5c5c5;">
+            <cl:formdata std:sid="f-data-fa06988a" row="1" col="0"/>
+            <cl:combobox std:sid="c-box-28c74c71" id="cmb13" style="font-size:14px;">
+              <cl:datamapbind property="value" datacontrolid="DoorOption" columnname="Door1Func"/>
+              <cl:xylayoutdata std:sid="xyl-data-3f1333ef" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+              <cl:item std:sid="item-59f8abdf" label="사용 안함" value="0"/>
+              <cl:item std:sid="item-0719bcfb" label="사용" value="1"/>
+              <cl:item std:sid="item-e3fff7bb" label="화재 경보" value="2"/>
+              <cl:item std:sid="item-99fed5fa" label="점등 경보" value="3"/>
+            </cl:combobox>
+            <cl:xylayout std:sid="xylayout-0773c3b9"/>
+          </cl:group>
+          <cl:group std:sid="group-c9235348" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; border-bottom-style:solid; border-right-color:#c5c5c5;">
+            <cl:formdata std:sid="f-data-88d60ca6" row="2" col="0"/>
+            <cl:combobox std:sid="c-box-36560e7d" id="cmb11" style="font-size:14px;">
+              <cl:datamapbind property="value" datacontrolid="DoorOption" columnname="Door1Result"/>
+              <cl:xylayoutdata std:sid="xyl-data-9f5cc514" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+              <cl:item std:sid="item-b43ae392" label="성공" value="1"/>
+              <cl:item std:sid="item-286c673c" label="실패" value="0"/>
+            </cl:combobox>
+            <cl:xylayout std:sid="xylayout-7add6902"/>
+          </cl:group>
+          <cl:group std:sid="group-8ec0dc5b" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; border-bottom-style:solid; border-right-color:#c5c5c5;">
+            <cl:formdata std:sid="f-data-e4cdf689" row="3" col="0"/>
+            <cl:numbereditor std:sid="n-editor-042de2c9" id="nbe2" style="font-size:14px;" value="" min="2.0" max="20.0">
+              <cl:datamapbind property="value" datacontrolid="DoorOption" columnname="Door1OpenDuration"/>
+              <cl:xylayoutdata std:sid="xyl-data-5400ab54" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+            </cl:numbereditor>
+            <cl:xylayout std:sid="xylayout-94e9f4aa"/>
+          </cl:group>
+          <cl:group std:sid="group-193da28f" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; border-bottom-style:solid; border-right-color:#c5c5c5;">
+            <cl:formdata std:sid="f-data-989a0775" row="4" col="0"/>
+            <cl:numbereditor std:sid="n-editor-3f40b5f8" id="nbe4" style="font-size:14px;" value="" min="2.0" max="20.0">
+              <cl:datamapbind property="value" datacontrolid="DoorOption" columnname="Door1OpenWarnDuration"/>
+              <cl:xylayoutdata std:sid="xyl-data-40ab3a81" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+            </cl:numbereditor>
+            <cl:xylayout std:sid="xylayout-9bf6fe1a"/>
+          </cl:group>
+          <cl:group std:sid="group-9e283649" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; border-bottom-style:solid; border-right-color:#c5c5c5;">
+            <cl:formdata std:sid="f-data-dc205ee9" row="5" col="0"/>
+            <cl:combobox std:sid="c-box-dadc279d" id="cmb7" style="font-size:14px;">
+              <cl:datamapbind property="value" datacontrolid="DoorOption" columnname="Door1Result"/>
+              <cl:xylayoutdata std:sid="xyl-data-12322ed4" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+              <cl:item std:sid="item-06ca6de8" label="문열림상태NC" value="1"/>
+              <cl:item std:sid="item-64b58500" label="문열림상태NO" value="0"/>
+            </cl:combobox>
+            <cl:xylayout std:sid="xylayout-2d79d0c4"/>
+          </cl:group>
+          <cl:group std:sid="group-ebcaa4aa" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+            <cl:formdata std:sid="f-data-e31306cb" row="1" col="1"/>
+            <cl:combobox std:sid="c-box-2bc516dc" id="cmb4" style="font-size:14px;">
+              <cl:datamapbind property="value" datacontrolid="DoorOption" columnname="Door2Func"/>
+              <cl:xylayoutdata std:sid="xyl-data-ef10f95e" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+              <cl:item std:sid="item-cf46ce2e" label="사용 안함" value="0"/>
+              <cl:item std:sid="item-90e8d6d9" label="사용" value="1"/>
+              <cl:item std:sid="item-28bf6245" label="화재 경보" value="2"/>
+              <cl:item std:sid="item-cc075400" label="점등 경보" value="3"/>
+            </cl:combobox>
+            <cl:xylayout std:sid="xylayout-25bffaf2"/>
+          </cl:group>
+          <cl:group std:sid="group-c2826c15" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+            <cl:formdata std:sid="f-data-fc514d52" row="2" col="1"/>
+            <cl:combobox std:sid="c-box-16dcd257" id="cmb5" style="font-size:14px;">
+              <cl:datamapbind property="value" datacontrolid="DoorOption" columnname="Door2Result"/>
+              <cl:xylayoutdata std:sid="xyl-data-0ebeb026" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+              <cl:item std:sid="item-6b861947" label="성공" value="1"/>
+              <cl:item std:sid="item-126e8769" label="실패" value="0"/>
+            </cl:combobox>
+            <cl:xylayout std:sid="xylayout-32992ca3"/>
+          </cl:group>
+          <cl:group std:sid="group-176f9806" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+            <cl:formdata std:sid="f-data-6be13e0b" row="3" col="1"/>
+            <cl:numbereditor std:sid="n-editor-fc92db3c" id="nbe3" style="font-size:14px;" value="" min="2.0" max="20.0">
+              <cl:datamapbind property="value" datacontrolid="DoorOption" columnname="Door2OpenDuration"/>
+              <cl:xylayoutdata std:sid="xyl-data-e25a7e47" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+            </cl:numbereditor>
+            <cl:xylayout std:sid="xylayout-0e60d709"/>
+          </cl:group>
+          <cl:group std:sid="group-93c0bfd2" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+            <cl:formdata std:sid="f-data-7258de96" row="4" col="1"/>
+            <cl:numbereditor std:sid="n-editor-87812ded" id="nbe5" style="font-size:14px;" value="" min="2.0" max="20.0">
+              <cl:datamapbind property="value" datacontrolid="DoorOption" columnname="Door2OpenWarnDuration"/>
+              <cl:xylayoutdata std:sid="xyl-data-c9ffa090" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+            </cl:numbereditor>
+            <cl:xylayout std:sid="xylayout-c2dbad20"/>
+          </cl:group>
+          <cl:group std:sid="group-1a8b335d" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+            <cl:formdata std:sid="f-data-52930c8d" row="5" col="1"/>
+            <cl:combobox std:sid="c-box-98a35076" id="cmb8" style="font-size:14px;">
+              <cl:datamapbind property="value" datacontrolid="DoorOption" columnname="Door1Result"/>
+              <cl:xylayoutdata std:sid="xyl-data-368859d2" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+              <cl:item std:sid="item-573644ee" label="문열림상태NC" value="1"/>
+              <cl:item std:sid="item-01135f48" label="문열림상태NO" value="0"/>
+            </cl:combobox>
+            <cl:xylayout std:sid="xylayout-2cbad5f7"/>
+          </cl:group>
+          <cl:formlayout std:sid="f-layout-5bc01441" hspace="0px" vspace="0px">
+            <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+            <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+            <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+            <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+            <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+            <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+            <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:output std:sid="output-7d8b5905" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-top-color:#c5c5c5; border-bottom-style:solid; border-right-color:#c5c5c5; border-top-style:solid; text-align:center;" value="기능 선택">
+          <cl:formdata std:sid="f-data-929721ee" row="2" col="0"/>
+        </cl:output>
+        <cl:output std:sid="output-9cec0f85" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="결과 신호">
+          <cl:formdata std:sid="f-data-4478d5d5" row="3" col="0"/>
+        </cl:output>
+        <cl:output std:sid="output-2cbac895" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="문열림 시간">
+          <cl:formdata std:sid="f-data-e21f441c" row="4" col="0"/>
+        </cl:output>
+        <cl:output std:sid="output-4611dc87" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="문열림 경고">
+          <cl:formdata std:sid="f-data-bbc5f069" row="5" col="0"/>
+        </cl:output>
+        <cl:output std:sid="output-8dd6bd2f" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="열림 설정">
+          <cl:formdata std:sid="f-data-1efc514a" row="6" col="0"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-fbbf6670" hspace="0px" vspace="0px">
+          <cl:rows length="30" unit="PIXEL"/>
+          <cl:rows length="30" unit="PIXEL" shadetype="NONE" shadecolor="#000000"/>
+          <cl:rows length="30" unit="PIXEL" shadetype="NONE" shadecolor="#000000"/>
+          <cl:rows length="30" unit="PIXEL" shadetype="NONE" shadecolor="#000000"/>
+          <cl:rows length="30" unit="PIXEL" shadetype="NONE" shadecolor="#000000"/>
+          <cl:rows length="30" unit="PIXEL" shadetype="NONE" shadecolor="#000000"/>
+          <cl:rows length="30" unit="PIXEL" shadetype="NONE" shadecolor="#000000"/>
+          <cl:columns length="150" unit="PIXEL" shadetype="NONE" shadecolor="#000000"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-39da7f81">
+        <cl:rows length="6" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+        <cl:rows length="4" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+        <cl:rows length="7" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-7b91035e"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-752973d0" version="1.0.0.0">
+  <head std:sid="head-2ab7ad8d">
+    <title>hcsmUserCustomSetting</title>
+    <screen std:sid="screen-a62e3a8b" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="560" customWidth="800"/>
+    <screen std:sid="screen-41dbf440" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-bbf19247" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-2e3ca9a3">
+      <cl:dataset std:sid="d-set-fae6ecb1" id="HCSMCompany">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-b742af42" name="CompanyID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-4ee75ef5" name="CompanyName"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-4962713c" id="HCSMBloodType">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-bae7f2da" name="BloodID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-504ce9b5" name="BloodName"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-d2937200" id="HCSMNationality">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-1c6593d9" name="NationalityID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-93d2b6e0" name="NationalityName"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-e058de66" id="HCSMTeam">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-0b297ba2" name="TeamID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-e07de00e" name="TeamName"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-99ce7101" id="HCSMPart">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-cec45093" name="TeamID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-664a2dda" name="PartID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-6cff4ff8" name="PartName"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-a33aca7f" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-80d61523" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-070ea9dc" id="dmHCSMCompany">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-5dce2efa" name="CompanyID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-b8d91911" name="CompanyName"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-2cdafd5b" id="dmHCSMTeam">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-c7227d02" name="TeamID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-aa018d28" name="TeamName"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-287226f8" id="dmHCSMNationality">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-2af38f1e" name="NationalityID" datatype="number" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-024ad3b9" name="NationalityName"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-51982957" id="dmHCSMBloodType">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-dc5e2b0f" name="BloodID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-b969812d" name="BloodName"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-e51e87f2" id="dmHCSMPart">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-42fac8b0" name="TeamID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-3356694b" name="PartID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-c043ffeb" name="PartName"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-71cf8ff5" id="sms_postCompany" action="/v1/oemData/hcsm/company">
+        <cl:listener std:sid="listener-9072a95c" name="submit-timeout" handler="onSms_SubmitTimeout"/>
+        <cl:listener std:sid="listener-767b1950" name="submit-error" handler="onSms_SubmitError"/>
+        <cl:listener std:sid="listener-571cb4cb" name="submit-done" handler="onSms_postCompanySubmitDone"/>
+        <cl:requestdata dataid="dmHCSMCompany"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="dmHCSMCompany" alias="HCSMCompany"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-2705945e" id="sms_putCompany" method="put" action="/v1/oemData/hcsm/company">
+        <cl:listener std:sid="listener-49b86136" name="submit-error" handler="onSms_SubmitError"/>
+        <cl:listener std:sid="listener-349ce2af" name="submit-timeout" handler="onSms_SubmitTimeout"/>
+        <cl:listener std:sid="listener-01142d06" name="submit-done" handler="onSms_putCompanySubmitDone"/>
+        <cl:requestdata dataid="dmHCSMCompany"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="dmHCSMCompany" alias="HCSMCompany"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-7dd17d16" id="sms_deleteCompany" method="delete" action="/v1/oemData/hcsm/company">
+        <cl:listener std:sid="listener-e271099c" name="submit-done" handler="onSms_deleteCompanySubmitDone"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-039bd8a5" id="sms_postTeam" action="/v1/oemData/hcsm/team">
+        <cl:listener std:sid="listener-c24bc7cb" name="submit-done" handler="onSms_postTeamSubmitDone"/>
+        <cl:listener std:sid="listener-245f97db" name="submit-error" handler="onSms_postTeamSubmitError"/>
+        <cl:listener std:sid="listener-01892ebb" name="submit-timeout" handler="onSms_postTeamSubmitTimeout"/>
+        <cl:requestdata dataid="dmHCSMTeam"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="dmHCSMTeam"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-04c68990" id="sms_postNationality" action="/v1/oemData/hcsm/nationality">
+        <cl:listener std:sid="listener-21b989f7" name="submit-done" handler="onSms_postNationalitySubmitDone"/>
+        <cl:listener std:sid="listener-68f4ae5f" name="submit-error" handler="onSms_postNationalitySubmitError"/>
+        <cl:listener std:sid="listener-6d5c1aa2" name="submit-timeout" handler="onSms_postNationalitySubmitTimeout"/>
+        <cl:requestdata dataid="dmHCSMNationality"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="dmHCSMNationality"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-fb943e12" id="sms_postBloodType" action="/v1/oemData/hcsm/bloodType">
+        <cl:listener std:sid="listener-e7f41434" name="submit-done" handler="onSms_postBloodTypeSubmitDone"/>
+        <cl:listener std:sid="listener-464df80e" name="submit-error" handler="onSms_postBloodTypeSubmitError"/>
+        <cl:listener std:sid="listener-2e50c03e" name="submit-timeout" handler="onSms_postBloodTypeSubmitTimeout"/>
+        <cl:requestdata dataid="dmHCSMBloodType"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="dmHCSMBloodType"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-c0f621c4" id="sms_putTeam" method="put" action="/v1/oemData/hcsm/team">
+        <cl:listener std:sid="listener-465a4177" name="submit-done" handler="onSms_putTeamSubmitDone"/>
+        <cl:requestdata dataid="dmHCSMTeam"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="dmHCSMTeam"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-0770d7e5" id="sms_putNationality" method="put" action="/v1/oemData/hcsm/nationality">
+        <cl:listener std:sid="listener-a1c7aaa5" name="submit-done" handler="onSms_putNationalitySubmitDone"/>
+        <cl:requestdata dataid="dmHCSMNationality"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="dmHCSMNationality"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-64452a57" id="sms_putBloodType" method="put" action="/v1/oemData/hcsm/bloodType">
+        <cl:listener std:sid="listener-58ee3089" name="submit-done" handler="onSms_putBloodTypeSubmitDone"/>
+        <cl:requestdata dataid="dmHCSMBloodType"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="dmHCSMBloodType"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-f3be8a03" id="sms_deleteTeam" method="delete" action="/v1/oemData/hcsm/team">
+        <cl:listener std:sid="listener-e77d96bb" name="submit-done" handler="onSms_deleteTeamSubmitDone"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-341ca098" id="sms_deleteNationality" method="delete" action="/v1/oemData/hcsm/nationality">
+        <cl:listener std:sid="listener-3140cd38" name="submit-done" handler="onSms_deleteNationalitySubmitDone"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-ea8ebc06" id="sms_deleteBloodType" method="delete" action="/v1/oemData/hcsm/bloodType">
+        <cl:listener std:sid="listener-fea50112" name="submit-done" handler="onSms_deleteBloodTypeSubmitDone"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-41b4bf95" id="sms_postPart" action="/v1/oemData/hcsm/part">
+        <cl:listener std:sid="listener-9f036e61" name="submit-done" handler="onSms_postPartSubmitDone"/>
+        <cl:requestdata dataid="dmHCSMPart"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="dmHCSMPart"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-6a5df551" id="sms_putPart" method="put" action="/v1/oemData/hcsm/part">
+        <cl:listener std:sid="listener-516c8d50" name="submit-done" handler="onSms_putPartSubmitDone"/>
+        <cl:requestdata dataid="dmHCSMPart"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="dmHCSMPart"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-06bbe210" id="sms_deletePart" method="delete" action="/v1/oemData/hcsm/part">
+        <cl:listener std:sid="listener-5f3c6b7c" name="submit-done" handler="onSms_deletePartSubmitDone"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-937f2785" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-03f63ead" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-fa30fd8d">
+      <cl:xylayoutdata std:sid="xyl-data-04b8766e" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:tabfolder std:sid="t-folder-f6ece0d3" id="HCSMS_tabUserCustom">
+        <cl:formdata std:sid="f-data-76a9ec58" row="0" col="0"/>
+        <cl:tabitem std:sid="t-item-c18e629b" selected="true" text="tab1">
+          <std:metadata>
+            <std:property key="is-active-item" value="true"/>
+          </std:metadata>
+          <cl:langbind property="text" category="PROPERTY" keypath="Str_Company"/>
+          <cl:group std:sid="group-76b67242">
+            <std:metadata>
+              <std:property key="locked" value="true"/>
+            </std:metadata>
+            <cl:grid std:sid="grid-401fafaa" id="HCSMS_grdCompany" readonly="true" datasetid="HCSMCompany" resizablecolumns="all">
+              <cl:listener std:sid="listener-3ce5cedd" name="row-dblclick" handler="onHCSMS_grdCompanyRowDblclick"/>
+              <cl:xylayoutdata std:sid="xyl-data-fd568b2d" top="4px" right="2px" bottom="0px" left="2px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+              <cl:gridcolumn std:sid="g-column-9b9b3a08"/>
+              <cl:gridcolumn std:sid="g-column-3b2c89c3" width="200px"/>
+              <cl:gridheader std:sid="gh-band-89fa65c6">
+                <cl:gridrow std:sid="g-row-bfcb67d0" height="26px"/>
+                <cl:gridcell std:sid="gh-cell-2a460ab2" rowindex="0" colindex="0" targetcolumnname="CompanyID" sortable="false" filterable="false" text="CompanyID" visible="false"/>
+                <cl:gridcell std:sid="gh-cell-8ec885e4" rowindex="0" colindex="1" targetcolumnname="CompanyName" sortable="false" filterable="false" text="CompanyName"/>
+              </cl:gridheader>
+              <cl:griddetail std:sid="gd-band-8eed5cc2">
+                <cl:gridrow std:sid="g-row-aeccb579" height="26px"/>
+                <cl:gridcell std:sid="gd-cell-0142df12" rowindex="0" colindex="0" columnname="CompanyID"/>
+                <cl:gridcell std:sid="gd-cell-285ea469" rowindex="0" colindex="1" style="padding-left:10px; text-align:left;" columnname="CompanyName"/>
+              </cl:griddetail>
+            </cl:grid>
+            <cl:xylayout std:sid="xylayout-54aa738e"/>
+          </cl:group>
+        </cl:tabitem>
+        <cl:tabitem std:sid="t-item-999e7b1f" text="Team">
+          <cl:langbind property="text" category="PROPERTY" keypath="Str_Team"/>
+          <cl:group std:sid="group-044ce112">
+            <std:metadata>
+              <std:property key="locked" value="true"/>
+            </std:metadata>
+            <cl:grid std:sid="grid-00964a55" id="HCSMS_grdTeam" readonly="true" datasetid="HCSMTeam" resizablecolumns="all">
+              <cl:listener std:sid="listener-b47ada78" name="row-dblclick" handler="onHCSMS_grdTeamRowDblclick"/>
+              <cl:xylayoutdata std:sid="xyl-data-75186245" top="4px" right="2px" bottom="0px" left="2px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+              <cl:gridcolumn std:sid="g-column-feb10ef7"/>
+              <cl:gridcolumn std:sid="g-column-a6e2460d"/>
+              <cl:gridheader std:sid="gh-band-0aab7c03">
+                <cl:gridrow std:sid="g-row-43d8b92c"/>
+                <cl:gridcell std:sid="gh-cell-d46e90b9" rowindex="0" colindex="0" targetcolumnname="TeamID" sortable="false" filterable="false" text="TeamID" visible="false"/>
+                <cl:gridcell std:sid="gh-cell-6434c858" rowindex="0" colindex="1" targetcolumnname="TeamName" sortable="false" filterable="false" text="TeamName"/>
+              </cl:gridheader>
+              <cl:griddetail std:sid="gd-band-80e0487f">
+                <cl:gridrow std:sid="g-row-36a25638"/>
+                <cl:gridcell std:sid="gd-cell-38e0a0e2" rowindex="0" colindex="0" columnname="TeamID"/>
+                <cl:gridcell std:sid="gd-cell-75470daf" rowindex="0" colindex="1" style="text-align:left;" columnname="TeamName"/>
+              </cl:griddetail>
+            </cl:grid>
+            <cl:xylayout std:sid="xylayout-166be4e7"/>
+          </cl:group>
+        </cl:tabitem>
+        <cl:tabitem std:sid="t-item-4c517e76" text="Part">
+          <cl:langbind property="text" category="PROPERTY" keypath="Str_Part"/>
+          <cl:group std:sid="group-b2a28cd0">
+            <std:metadata>
+              <std:property key="locked" value="true"/>
+            </std:metadata>
+            <cl:grid std:sid="grid-5ebdb266" id="HCSMS_grdPart" readonly="true" datasetid="HCSMPart" resizablecolumns="all">
+              <cl:listener std:sid="listener-90718a7f" name="row-dblclick" handler="onHCSMS_grdPartRowDblclick"/>
+              <cl:xylayoutdata std:sid="xyl-data-e539546a" top="4px" right="2px" bottom="0px" left="2px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+              <cl:gridcolumn std:sid="g-column-5f2ba8bf"/>
+              <cl:gridcolumn std:sid="g-column-f5cac3c4"/>
+              <cl:gridcolumn std:sid="g-column-1ca46652"/>
+              <cl:gridheader std:sid="gh-band-55f39d32">
+                <cl:gridrow std:sid="g-row-0d59da6e"/>
+                <cl:gridcell std:sid="gh-cell-5aedd2e2" rowindex="0" colindex="0" targetcolumnname="TeamID" sortable="false" filterable="false" text="TeamName" visible="true"/>
+                <cl:gridcell std:sid="gh-cell-799990ac" rowindex="0" colindex="1" targetcolumnname="PartID" sortable="false" filterable="false" text="PartID" visible="false"/>
+                <cl:gridcell std:sid="gh-cell-be88d348" rowindex="0" colindex="2" targetcolumnname="PartName" sortable="false" filterable="false" text="PartName"/>
+              </cl:gridheader>
+              <cl:griddetail std:sid="gd-band-5a5acbaf">
+                <cl:gridrow std:sid="g-row-02d39ec8"/>
+                <cl:gridcell std:sid="gd-cell-3a50453f" rowindex="0" colindex="0" rowspan="1" colspan="1" columnname="TeamID" suppressible="true">
+                  <cl:combobox std:sid="c-box-3b957a42" id="CMB_TeamName" style="text-align:center;" readonly="true"/>
+                </cl:gridcell>
+                <cl:gridcell std:sid="gd-cell-1aa6fdbe" rowindex="0" colindex="1" columnname="PartID"/>
+                <cl:gridcell std:sid="gd-cell-ab4cdf88" rowindex="0" colindex="2" style="text-align:left;" columnname="PartName"/>
+              </cl:griddetail>
+            </cl:grid>
+            <cl:xylayout std:sid="xylayout-74cfb61c"/>
+          </cl:group>
+        </cl:tabitem>
+        <cl:tabitem std:sid="t-item-60458222" text="Nationality">
+          <cl:langbind property="text" category="PROPERTY" keypath="Str_Nationality"/>
+          <cl:group std:sid="group-ec15df1c">
+            <std:metadata>
+              <std:property key="locked" value="true"/>
+            </std:metadata>
+            <cl:grid std:sid="grid-aed45d7a" id="HCSMS_grdNationality" readonly="true" datasetid="HCSMNationality" resizablecolumns="all">
+              <cl:listener std:sid="listener-bbf60763" name="row-dblclick" handler="onHCSMS_grdNationalityRowDblclick"/>
+              <cl:xylayoutdata std:sid="xyl-data-1e5f37b2" top="4px" right="2px" bottom="0px" left="2px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+              <cl:gridcolumn std:sid="g-column-970bb608"/>
+              <cl:gridcolumn std:sid="g-column-06a5efe7"/>
+              <cl:gridheader std:sid="gh-band-1236b1d7">
+                <cl:gridrow std:sid="g-row-61d9ead7"/>
+                <cl:gridcell std:sid="gh-cell-a767ed54" rowindex="0" colindex="0" targetcolumnname="NationalityID" sortable="false" filterable="false" text="NationalityID" visible="false"/>
+                <cl:gridcell std:sid="gh-cell-78f0d388" rowindex="0" colindex="1" targetcolumnname="NationalityName" sortable="false" filterable="false" text="NationalityName"/>
+              </cl:gridheader>
+              <cl:griddetail std:sid="gd-band-2dfb4d84">
+                <cl:gridrow std:sid="g-row-8630c5c0"/>
+                <cl:gridcell std:sid="gd-cell-b84de295" rowindex="0" colindex="0" columnname="NationalityID"/>
+                <cl:gridcell std:sid="gd-cell-f83c1a83" rowindex="0" colindex="1" style="padding-left:10px; text-align:left;" columnname="NationalityName"/>
+              </cl:griddetail>
+            </cl:grid>
+            <cl:xylayout std:sid="xylayout-b4c14280"/>
+          </cl:group>
+        </cl:tabitem>
+        <cl:tabitem std:sid="t-item-c5a64620" text="BloodType">
+          <cl:langbind property="text" category="PROPERTY" keypath="Str_BloodType"/>
+          <cl:group std:sid="group-15eda8c0">
+            <std:metadata>
+              <std:property key="locked" value="true"/>
+            </std:metadata>
+            <cl:grid std:sid="grid-08444bf4" id="HCSMS_grdBloodType" readonly="true" datasetid="HCSMBloodType" resizablecolumns="all">
+              <cl:listener std:sid="listener-f2027923" name="row-dblclick" handler="onHCSMS_grdBloodTypeRowDblclick"/>
+              <cl:xylayoutdata std:sid="xyl-data-b0e39692" top="4px" right="2px" bottom="0px" left="2px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+              <cl:gridcolumn std:sid="g-column-0573fdb5"/>
+              <cl:gridcolumn std:sid="g-column-395996f1" width="200px"/>
+              <cl:gridheader std:sid="gh-band-11e78590">
+                <cl:gridrow std:sid="g-row-7e172455"/>
+                <cl:gridcell std:sid="gh-cell-96ae1363" rowindex="0" colindex="0" targetcolumnname="BloodID" sortable="false" filterable="false" text="BloodID" visible="false"/>
+                <cl:gridcell std:sid="gh-cell-bec88937" rowindex="0" colindex="1" targetcolumnname="BloodName" sortable="false" filterable="false" text="BloodName"/>
+              </cl:gridheader>
+              <cl:griddetail std:sid="gd-band-493ad84f">
+                <cl:gridrow std:sid="g-row-c5bb2f10"/>
+                <cl:gridcell std:sid="gd-cell-f311e8ae" rowindex="0" colindex="0" columnname="BloodID"/>
+                <cl:gridcell std:sid="gd-cell-a61dfd11" rowindex="0" colindex="1" style="padding-left:10px; text-align:left;" columnname="BloodName"/>
+              </cl:griddetail>
+            </cl:grid>
+            <cl:xylayout std:sid="xylayout-0d3a3288"/>
+          </cl:group>
+        </cl:tabitem>
+      </cl:tabfolder>
+      <cl:group std:sid="group-bc294533">
+        <cl:formdata std:sid="f-data-dc7e56a7" row="1" col="0"/>
+        <cl:button std:sid="button-5fe69ff3" id="HCSMS_btnRefresh" class="userInfo_btn">
+          <cl:listener std:sid="listener-3c3e55c3" name="click" handler="onHCSMS_btnRefreshClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Renewal"/>
+          <cl:formdata std:sid="f-data-754ae69c" row="0" col="1"/>
+        </cl:button>
+        <cl:button std:sid="button-8ac41ab1" id="HCSMS_btnAdd" class="userInfo_btn">
+          <cl:listener std:sid="listener-d730f0da" name="click" handler="onHCSMS_btnAddClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Add"/>
+          <cl:formdata std:sid="f-data-eecb2914" row="0" col="2"/>
+        </cl:button>
+        <cl:button std:sid="button-6fac757f" id="HCSMS_btnDelete" class="userInfo_btn">
+          <cl:listener std:sid="listener-933073b4" name="click" handler="onHCSMS_btnDeleteClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Delete"/>
+          <cl:formdata std:sid="f-data-ca72aa2b" row="0" col="3"/>
+        </cl:button>
+        <cl:button std:sid="button-6f09ba99" class="userInfo_btn">
+          <cl:listener std:sid="listener-6f32f5fc" name="click" handler="onButtonClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Close"/>
+          <cl:formdata std:sid="f-data-f5a3b912" row="0" col="4"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-1beb50eb" hspace="1px" vspace="1px" top-margin="1px" right-margin="1px" bottom-margin="1px" left-margin="1px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="true" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-2f5e3481" hspace="1px" vspace="1px" top-margin="1px" right-margin="1px" bottom-margin="1px" left-margin="1px">
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-d87961a2"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

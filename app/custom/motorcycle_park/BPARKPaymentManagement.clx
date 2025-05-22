@@ -1,0 +1,737 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-42b43f7b" version="1.0.0.0">
+  <head std:sid="head-bea44e4f">
+    <title>BPARKPaymentManagement</title>
+    <screen std:sid="screen-1f0f7b11" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="1200" customWidth="800"/>
+    <screen std:sid="screen-39af7d92" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-bb582c44" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-0724ba74">
+      <cl:dataset std:sid="d-set-66c93913" id="BPARKInfoList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-d8399a65" name="IndexKey" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-8af8b532" name="TypeID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-49a6c063" name="Name"/>
+          <cl:datacolumn std:sid="d-column-7723376f" name="BasicTime" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-bdee2e4b" name="BasicPrice" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-cbfda4ad" id="BPARKValList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-5611e473" name="IndexKey" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-71a56d69" name="SubType" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-fd2e6d97" name="Param1" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-31c82990" name="Param2" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-01aa03aa" name="Price" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-35d85d5a" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-fae20911" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-5d918f0e" id="BPARKOptionPayment">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-38111c33" name="TypeID" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-016caa00" id="BPARKPayInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-2ec0ad45" name="BasicTimeHoursTypeA"/>
+          <cl:datacolumn std:sid="d-column-b30f7f07" name="BasicTimeMinutesTypeA"/>
+          <cl:datacolumn std:sid="d-column-a3ea39c1" name="BasicPriceTypeA"/>
+          <cl:datacolumn std:sid="d-column-8dc53b54" name="AddPriceAMTypeA"/>
+          <cl:datacolumn std:sid="d-column-c2e42ba7" name="AddPricePMTypeA"/>
+          <cl:datacolumn std:sid="d-column-1997a4f9" name="FirstTimeHoursTypeA"/>
+          <cl:datacolumn std:sid="d-column-a3a5a31f" name="FirstTimeMinutesTypeA"/>
+          <cl:datacolumn std:sid="d-column-1d35eda3" name="FirstTimePriceTypeA"/>
+          <cl:datacolumn std:sid="d-column-eb30cba0" name="SecondTimeHoursTypeA"/>
+          <cl:datacolumn std:sid="d-column-0acfd53c" name="SecondTimeMinutesTypeA"/>
+          <cl:datacolumn std:sid="d-column-e15af566" name="SecondTimePriceTypeA"/>
+          <cl:datacolumn std:sid="d-column-43ae10b4" name="ThirdTimeHoursTypeA"/>
+          <cl:datacolumn std:sid="d-column-1f3d7c91" name="ThirdTimeMinutesTypeA"/>
+          <cl:datacolumn std:sid="d-column-51205c09" name="ThirdTimePriceTypeA"/>
+          <cl:datacolumn std:sid="d-column-2d9b4fc2" name="BasicTimeHoursTypeB"/>
+          <cl:datacolumn std:sid="d-column-0ee36cda" name="BasicTimeMinutesTypeB"/>
+          <cl:datacolumn std:sid="d-column-37042e20" name="BasicPriceTypeB"/>
+          <cl:datacolumn std:sid="d-column-f1d9a7fd" name="AddPriceHoursTypeB"/>
+          <cl:datacolumn std:sid="d-column-0ca33e86" name="AddPriceMinutesTypeB"/>
+          <cl:datacolumn std:sid="d-column-cc894e15" name="AddPriceTypeB"/>
+          <cl:datacolumn std:sid="d-column-b0342daf" name="LimmitPriceTypeB"/>
+          <cl:datacolumn std:sid="d-column-85462a47" name="BasicPriceTypeC"/>
+          <cl:datacolumn std:sid="d-column-476c2a4c" name="BasicPriceTypeD"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-c71ed2c6" id="sms_putBPARKData" method="put" action="/v1/oemData/bpark">
+        <cl:listener std:sid="listener-dc57e103" name="submit-done" handler="onSms_putBPARKDataSubmitDone"/>
+        <cl:listener std:sid="listener-5b31804f" name="submit-error" handler="onSms_putBPARKDataSubmitError"/>
+        <cl:listener std:sid="listener-872cc8e7" name="submit-timeout" handler="onSms_putBPARKDataSubmitTimeout"/>
+        <cl:requestdata dataid="BPARKInfoList" payload="all"/>
+        <cl:requestdata dataid="BPARKValList" payload="all"/>
+        <cl:requestdata dataid="BPARKOptionPayment"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-54966477" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-bd637648" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-be853ce0" style="padding-top:0px; padding-left:0px; padding-bottom:0px; padding-right:0px;">
+      <cl:xylayoutdata std:sid="xyl-data-797db17a" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-67ab7c04">
+        <cl:formdata std:sid="f-data-76a6211a" row="0" col="0" rowspan="1" colspan="1"/>
+        <cl:group std:sid="group-1c202773" id="BPARKPM_grpAll" style="padding-top:10px; padding-left:20px; padding-bottom:10px; padding-right:20px;">
+          <cl:formdata std:sid="f-data-74266e47" row="0" col="0" rowspan="2" colspan="1"/>
+          <cl:group std:sid="group-62ed388a" id="grp5">
+            <cl:formdata std:sid="f-data-642739ca" row="0" col="0"/>
+            <cl:button std:sid="button-0ae2fe53" id="BPARKPM_btnApply" class="userInfo_btn">
+              <cl:listener std:sid="listener-46fcc209" name="click" handler="onBPARKPM_btnApplyClick"/>
+              <cl:langbind property="value" category="PROPERTY" keypath="Str_Apply"/>
+              <cl:formdata std:sid="f-data-e4bc9b1f" row="0" col="1"/>
+            </cl:button>
+            <cl:formlayout std:sid="f-layout-73635d72">
+              <cl:rows length="1" unit="FRACTION"/>
+              <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="14" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:group std:sid="group-813630ec" id="SESYS_grpMain">
+            <cl:formdata std:sid="f-data-8535191f" row="1" col="0"/>
+            <cl:group std:sid="group-7764880a">
+              <cl:formdata std:sid="f-data-4954403c" row="14" col="0" rowspan="11" colspan="2"/>
+              <cl:output std:sid="output-fd37ff64" style="font-weight:700; font-size:16px;">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_BPARK_BasicSetting"/>
+                <cl:formdata std:sid="f-data-4399869c" row="2" col="0"/>
+              </cl:output>
+              <cl:output std:sid="output-48fc0a5b" class="common-controllabel">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_BPARK_BasicFare"/>
+                <cl:formdata std:sid="f-data-e3145760" halign="FILL" row="3" col="0"/>
+              </cl:output>
+              <cl:output std:sid="output-2682829d" style="font-weight:700; font-size:16px;">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_BPARK_AddPriceSetting"/>
+                <cl:formdata std:sid="f-data-3bd34187" row="5" col="0"/>
+              </cl:output>
+              <cl:output std:sid="output-ab361630" class="common-controllabel">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_BPARK_AddPrice"/>
+                <cl:formdata std:sid="f-data-a3d00e59" row="6" col="0"/>
+              </cl:output>
+              <cl:output std:sid="output-6dfa4629" style="font-weight:700; font-size:16px;">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_BPARK_LimmitPrice"/>
+                <cl:formdata std:sid="f-data-f843d7bd" row="8" col="0"/>
+              </cl:output>
+              <cl:output std:sid="output-a39b43a9" class="common-controllabel">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_BPARK_Price"/>
+                <cl:formdata std:sid="f-data-fa95e36c" row="9" col="0"/>
+              </cl:output>
+              <cl:group std:sid="group-80aaa1c9">
+                <cl:formdata std:sid="f-data-9913a5cf" row="9" col="1"/>
+                <cl:output std:sid="output-8438eb52" value="VND">
+                  <cl:formdata std:sid="f-data-396dba9a" row="0" col="3"/>
+                </cl:output>
+                <cl:inputbox std:sid="i-box-a7497fb2" id="BPARKPM_ipblimmitPriceTypeB" style="padding-right:10px; text-align:right;" maxlength="10">
+                  <cl:datamapbind property="value" datacontrolid="BPARKPayInfo" columnname="LimmitPriceTypeB"/>
+                  <cl:formdata std:sid="f-data-eedb38cd" row="0" col="1"/>
+                </cl:inputbox>
+                <cl:formlayout std:sid="f-layout-4ef7e61a" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+                  <cl:rows length="1" unit="FRACTION"/>
+                  <cl:columns length="320" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                </cl:formlayout>
+              </cl:group>
+              <cl:group std:sid="group-3f03cb68">
+                <cl:formdata std:sid="f-data-3de0547f" row="3" col="1"/>
+                <cl:group std:sid="group-85ff31cf">
+                  <cl:formdata std:sid="f-data-5718c243" row="0" col="0"/>
+                  <cl:output std:sid="output-06380d67" style="text-align:center;" value=":">
+                    <cl:formdata std:sid="f-data-9ae77a77" row="0" col="3"/>
+                  </cl:output>
+                  <cl:numbereditor std:sid="n-editor-36bdd287" id="BPARKPM_nbeBasicPriceHoursTypeB" style="font-size:14px; text-align:center;" min="0.0" max="24.0" spinbutton="false" format="0#">
+                    <cl:datamapbind property="value" datacontrolid="BPARKPayInfo" columnname="BasicTimeHoursTypeB"/>
+                    <cl:formdata std:sid="f-data-4da88e56" row="0" col="1"/>
+                  </cl:numbereditor>
+                  <cl:numbereditor std:sid="n-editor-6e539afb" id="BPARKPM_nbeBasicPriceMinutesTypeB" style="font-size:14px; text-align:center;" min="0.0" max="59.0" spinbutton="false" format="0#">
+                    <cl:datamapbind property="value" datacontrolid="BPARKPayInfo" columnname="BasicTimeMinutesTypeB"/>
+                    <cl:formdata std:sid="f-data-5205e3fc" row="0" col="5"/>
+                  </cl:numbereditor>
+                  <cl:output std:sid="output-55ce5dd3" style="text-align:center;">
+                    <cl:langbind property="value" category="PROPERTY" keypath="Str_Time3"/>
+                    <cl:formdata std:sid="f-data-f4e5fd96" row="0" col="2"/>
+                  </cl:output>
+                  <cl:output std:sid="output-78c396cd" style="text-align:center;">
+                    <cl:langbind property="value" category="PROPERTY" keypath="Str_Minute"/>
+                    <cl:formdata std:sid="f-data-b9f7a7a9" row="0" col="6"/>
+                  </cl:output>
+                  <cl:formlayout std:sid="f-layout-d45062d4">
+                    <cl:rows length="1" unit="FRACTION"/>
+                    <cl:columns length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                    <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                    <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                    <cl:columns length="15" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                    <cl:columns length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                    <cl:columns length="1" unit="FRACTION"/>
+                    <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  </cl:formlayout>
+                </cl:group>
+                <cl:inputbox std:sid="i-box-4ed8867c" id="BPARKPM_ipbBasicPriceTypeB" style="padding-right:10px; text-align:right;" maxlength="10">
+                  <cl:datamapbind property="value" datacontrolid="BPARKPayInfo" columnname="BasicPriceTypeB"/>
+                  <cl:formdata std:sid="f-data-973708e7" row="0" col="2"/>
+                </cl:inputbox>
+                <cl:output std:sid="output-ad1a0c32" value="VND">
+                  <cl:formdata std:sid="f-data-b25e485d" row="0" col="4"/>
+                </cl:output>
+                <cl:formlayout std:sid="f-layout-1d03b9a8" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+                  <cl:rows length="1" unit="FRACTION"/>
+                  <cl:columns length="300" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="1" unit="FRACTION"/>
+                  <cl:columns length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                </cl:formlayout>
+              </cl:group>
+              <cl:group std:sid="group-e671682d">
+                <cl:formdata std:sid="f-data-ffa27c88" row="6" col="1"/>
+                <cl:group std:sid="group-8934349e">
+                  <cl:formdata std:sid="f-data-8a1243f1" row="0" col="0"/>
+                  <cl:output std:sid="output-e7d1a598" style="text-align:center;" value=":">
+                    <cl:formdata std:sid="f-data-fa6c4103" row="0" col="3"/>
+                  </cl:output>
+                  <cl:numbereditor std:sid="n-editor-acfd64de" id="BPARKPM_nbeAddPriceHoursTypeB" style="font-size:14px; text-align:center;" min="0.0" max="24.0" spinbutton="false" format="0#">
+                    <cl:datamapbind property="value" datacontrolid="BPARKPayInfo" columnname="AddPriceHoursTypeB"/>
+                    <cl:formdata std:sid="f-data-c3c0bf4f" row="0" col="1"/>
+                  </cl:numbereditor>
+                  <cl:numbereditor std:sid="n-editor-f2bcc7aa" id="BPARKPM_nbeAdd\PriceMinutesTypeB" style="font-size:14px; text-align:center;" min="0.0" max="59.0" spinbutton="false" format="0#">
+                    <cl:datamapbind property="value" datacontrolid="BPARKPayInfo" columnname="AddPriceMinutesTypeB"/>
+                    <cl:formdata std:sid="f-data-c0e9e438" row="0" col="5"/>
+                  </cl:numbereditor>
+                  <cl:output std:sid="output-4024cff2" style="text-align:center;">
+                    <cl:langbind property="value" category="PROPERTY" keypath="Str_Time3"/>
+                    <cl:formdata std:sid="f-data-aa21235c" row="0" col="2"/>
+                  </cl:output>
+                  <cl:output std:sid="output-f2bde0d4" style="text-align:center;">
+                    <cl:langbind property="value" category="PROPERTY" keypath="Str_Minute"/>
+                    <cl:formdata std:sid="f-data-eb9f3eb3" row="0" col="6"/>
+                  </cl:output>
+                  <cl:formlayout std:sid="f-layout-d3e027c2">
+                    <cl:rows length="1" unit="FRACTION"/>
+                    <cl:columns length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                    <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                    <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                    <cl:columns length="15" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                    <cl:columns length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                    <cl:columns length="1" unit="FRACTION"/>
+                    <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  </cl:formlayout>
+                </cl:group>
+                <cl:inputbox std:sid="i-box-f425cada" id="BPARKPM_ipbAddPriceTypeB" style="padding-right:10px; text-align:right;" maxlength="10">
+                  <cl:datamapbind property="value" datacontrolid="BPARKPayInfo" columnname="AddPriceTypeB"/>
+                  <cl:formdata std:sid="f-data-a4badfcc" row="0" col="2"/>
+                </cl:inputbox>
+                <cl:output std:sid="output-82b8f674" value="VND">
+                  <cl:formdata std:sid="f-data-e1976ad2" row="0" col="4"/>
+                </cl:output>
+                <cl:formlayout std:sid="f-layout-0750f568" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+                  <cl:rows length="1" unit="FRACTION"/>
+                  <cl:columns length="300" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="1" unit="FRACTION"/>
+                  <cl:columns length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                </cl:formlayout>
+              </cl:group>
+              <cl:group std:sid="group-187e4c78">
+                <cl:formdata std:sid="f-data-490a8efa" row="0" col="0" rowspan="1" colspan="2"/>
+                <cl:output std:sid="output-ad45a725" style="font-weight:700; border-bottom-width:2px; font-size:18px; border-bottom-style:solid; text-align:center;">
+                  <cl:langbind property="value" category="PROPERTY" keypath="Str_BPARK_TypeB"/>
+                  <cl:formdata std:sid="f-data-1d99c4c4" row="0" col="0"/>
+                </cl:output>
+                <cl:checkbox std:sid="c-box-af07ff3f" id="BPARKPM_cbxApplayTypeB" style="font-weight:300; padding-left:15px; font-size:15px; text-align:left;">
+                  <cl:listener std:sid="listener-1dce875e" name="click" handler="onBPARK_cbxApplayTypeBClick"/>
+                  <cl:langbind property="text" category="PROPERTY" keypath="Str_BPARK_ApplyPayment"/>
+                  <cl:formdata std:sid="f-data-e50af1d6" row="0" col="1"/>
+                </cl:checkbox>
+                <cl:formlayout std:sid="f-layout-f73900f0" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+                  <cl:rows length="1" unit="FRACTION"/>
+                  <cl:columns length="350" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="1" unit="FRACTION"/>
+                </cl:formlayout>
+              </cl:group>
+              <cl:formlayout std:sid="f-layout-66f72670" hspace="0px" vspace="0px">
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="300" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="1" unit="FRACTION"/>
+              </cl:formlayout>
+            </cl:group>
+            <cl:group std:sid="group-5f37fa52">
+              <cl:formdata std:sid="f-data-80b6b7c7" row="0" col="0" rowspan="14" colspan="2"/>
+              <cl:output std:sid="output-3f93be60" style="font-weight:700; font-size:16px;">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_BPARK_BasicSetting"/>
+                <cl:formdata std:sid="f-data-b447acba" row="2" col="0"/>
+              </cl:output>
+              <cl:output std:sid="output-221e19b8" class="common-controllabel">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_BPARK_BasicFare"/>
+                <cl:formdata std:sid="f-data-fe4e9f6b" halign="FILL" row="3" col="0"/>
+              </cl:output>
+              <cl:output std:sid="output-b14f8837" style="font-weight:700; font-size:16px;">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_BPARK_FixedBilling"/>
+                <cl:formdata std:sid="f-data-be45a3f0" row="9" col="0"/>
+              </cl:output>
+              <cl:output std:sid="output-10338da1" style="font-weight:700; font-size:16px;">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_BPARK_DifferentialImposition"/>
+                <cl:formdata std:sid="f-data-890bbca6" row="5" col="0"/>
+              </cl:output>
+              <cl:output std:sid="output-8c7c26e0" class="common-controllabel" value="AM">
+                <cl:formdata std:sid="f-data-59ff7415" row="6" col="0"/>
+              </cl:output>
+              <cl:output std:sid="output-a6423742" class="common-controllabel" value="PM">
+                <cl:formdata std:sid="f-data-842f29a7" row="7" col="0"/>
+              </cl:output>
+              <cl:group std:sid="group-7eec8f15">
+                <cl:formdata std:sid="f-data-742d2f4f" row="6" col="1"/>
+                <cl:inputbox std:sid="i-box-db7b805d" id="BPARKPM_ipbAddPriceAMTypeA" style="padding-right:10px; text-align:right;" maxlength="10">
+                  <cl:datamapbind property="value" datacontrolid="BPARKPayInfo" columnname="AddPriceAMTypeA"/>
+                  <cl:formdata std:sid="f-data-c9b55e13" row="0" col="1"/>
+                </cl:inputbox>
+                <cl:output std:sid="output-55ffad71" value="VND">
+                  <cl:formdata std:sid="f-data-05b8278e" row="0" col="3"/>
+                </cl:output>
+                <cl:formlayout std:sid="f-layout-36b64175" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+                  <cl:rows length="1" unit="FRACTION"/>
+                  <cl:columns length="320" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                </cl:formlayout>
+              </cl:group>
+              <cl:group std:sid="group-edb01545">
+                <cl:formdata std:sid="f-data-e3db6d76" row="7" col="1"/>
+                <cl:inputbox std:sid="i-box-38b129e0" id="BPARKPM_ipbAddPricePMTypeA" style="padding-right:10px; text-align:right;" maxlength="10">
+                  <cl:datamapbind property="value" datacontrolid="BPARKPayInfo" columnname="AddPricePMTypeA"/>
+                  <cl:formdata std:sid="f-data-3d639f42" row="0" col="1"/>
+                </cl:inputbox>
+                <cl:output std:sid="output-0b5b0142" value="VND">
+                  <cl:formdata std:sid="f-data-3f82febf" row="0" col="3"/>
+                </cl:output>
+                <cl:formlayout std:sid="f-layout-3464dc12" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+                  <cl:rows length="1" unit="FRACTION"/>
+                  <cl:columns length="320" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                </cl:formlayout>
+              </cl:group>
+              <cl:output std:sid="output-caa1d9fd" class="common-controllabel">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_BPARK_FirstTimeInterval"/>
+                <cl:formdata std:sid="f-data-2cf2c2ed" row="10" col="0"/>
+              </cl:output>
+              <cl:group std:sid="group-d9e765bf">
+                <cl:formdata std:sid="f-data-04ee1b50" row="10" col="1"/>
+                <cl:group std:sid="group-23d92ebd">
+                  <cl:formdata std:sid="f-data-001cf795" row="0" col="0"/>
+                  <cl:output std:sid="output-b9a8bdef" style="text-align:center;" value=":">
+                    <cl:formdata std:sid="f-data-10d6812c" row="0" col="3"/>
+                  </cl:output>
+                  <cl:numbereditor std:sid="n-editor-626202bb" id="BPARKPM_nbeFixPriceFirstHoursTypeA" style="font-size:14px; text-align:center;" min="0.0" max="24.0" spinbutton="false" format="0#">
+                    <cl:datamapbind property="value" datacontrolid="BPARKPayInfo" columnname="FirstTimeHoursTypeA"/>
+                    <cl:formdata std:sid="f-data-11f9d1f5" row="0" col="1"/>
+                  </cl:numbereditor>
+                  <cl:numbereditor std:sid="n-editor-e99de3d5" id="BPARKPM_nbeFixPriceFirstMinutesTypeA" style="font-size:14px; text-align:center;" min="0.0" max="59.0" spinbutton="false" format="0#">
+                    <cl:datamapbind property="value" datacontrolid="BPARKPayInfo" columnname="FirstTimeMinutesTypeA"/>
+                    <cl:formdata std:sid="f-data-aae6fc6a" row="0" col="5"/>
+                  </cl:numbereditor>
+                  <cl:output std:sid="output-d3663ef2" style="text-align:center;">
+                    <cl:langbind property="value" category="PROPERTY" keypath="Str_Time3"/>
+                    <cl:formdata std:sid="f-data-77e54a89" row="0" col="2"/>
+                  </cl:output>
+                  <cl:output std:sid="output-9e33bdaf" style="text-align:center;">
+                    <cl:langbind property="value" category="PROPERTY" keypath="Str_Minute"/>
+                    <cl:formdata std:sid="f-data-527be586" row="0" col="6"/>
+                  </cl:output>
+                  <cl:formlayout std:sid="f-layout-80474470">
+                    <cl:rows length="1" unit="FRACTION"/>
+                    <cl:columns length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                    <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                    <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                    <cl:columns length="15" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                    <cl:columns length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                    <cl:columns length="1" unit="FRACTION"/>
+                    <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  </cl:formlayout>
+                </cl:group>
+                <cl:inputbox std:sid="i-box-ad550d71" id="BPARKPM_ipbFixPriceFirstPriceTypeA" style="padding-right:10px; text-align:right;">
+                  <cl:datamapbind property="value" datacontrolid="BPARKPayInfo" columnname="FirstTimePriceTypeA"/>
+                  <cl:formdata std:sid="f-data-517918bb" row="0" col="2"/>
+                </cl:inputbox>
+                <cl:output std:sid="output-c851d399" value="VND">
+                  <cl:formdata std:sid="f-data-fd5b2bd7" row="0" col="4"/>
+                </cl:output>
+                <cl:formlayout std:sid="f-layout-e74ba566" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+                  <cl:rows length="1" unit="FRACTION"/>
+                  <cl:columns length="300" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+                  <cl:columns length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                </cl:formlayout>
+              </cl:group>
+              <cl:output std:sid="output-ddd1d5b4" class="common-controllabel">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_BPARK_SecondTimeInterval"/>
+                <cl:formdata std:sid="f-data-3cbff7be" row="11" col="0"/>
+              </cl:output>
+              <cl:output std:sid="output-37f5d999" class="common-controllabel">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_BPARK_ThirdTimeInterval"/>
+                <cl:formdata std:sid="f-data-86185f98" row="12" col="0"/>
+              </cl:output>
+              <cl:group std:sid="group-5002cd63">
+                <cl:formdata std:sid="f-data-fe05da5e" row="11" col="1"/>
+                <cl:group std:sid="group-775a63f6">
+                  <cl:formdata std:sid="f-data-b7242560" row="0" col="0"/>
+                  <cl:output std:sid="output-fc4c4bfd" style="text-align:center;" value=":">
+                    <cl:formdata std:sid="f-data-94c8a5b1" row="0" col="3"/>
+                  </cl:output>
+                  <cl:numbereditor std:sid="n-editor-3527cfd8" id="BPARKPM_nbeFixPriceSecondHoursTypeA" style="font-size:14px; text-align:center;" min="0.0" max="24.0" spinbutton="false" format="0#">
+                    <cl:datamapbind property="value" datacontrolid="BPARKPayInfo" columnname="SecondTimeHoursTypeA"/>
+                    <cl:formdata std:sid="f-data-da3bcad1" row="0" col="1"/>
+                  </cl:numbereditor>
+                  <cl:numbereditor std:sid="n-editor-ab319715" id="BPARKPM_nbeFixPriceSecondMinutesTypeA" style="font-size:14px; text-align:center;" min="0.0" max="59.0" spinbutton="false" format="0#">
+                    <cl:datamapbind property="value" datacontrolid="BPARKPayInfo" columnname="SecondTimeMinutesTypeA"/>
+                    <cl:formdata std:sid="f-data-f3e90210" row="0" col="5"/>
+                  </cl:numbereditor>
+                  <cl:output std:sid="output-cddad665" style="text-align:center;">
+                    <cl:langbind property="value" category="PROPERTY" keypath="Str_Time3"/>
+                    <cl:formdata std:sid="f-data-d3376975" row="0" col="2"/>
+                  </cl:output>
+                  <cl:output std:sid="output-987f8932" style="text-align:center;">
+                    <cl:langbind property="value" category="PROPERTY" keypath="Str_Minute"/>
+                    <cl:formdata std:sid="f-data-5ef44231" row="0" col="6"/>
+                  </cl:output>
+                  <cl:formlayout std:sid="f-layout-c847e83f">
+                    <cl:rows length="1" unit="FRACTION"/>
+                    <cl:columns length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                    <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                    <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                    <cl:columns length="15" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                    <cl:columns length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                    <cl:columns length="1" unit="FRACTION"/>
+                    <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  </cl:formlayout>
+                </cl:group>
+                <cl:inputbox std:sid="i-box-fde075ef" id="BPARKPM_ipbFixPriceSecondPriceTypeA" style="padding-right:10px; text-align:right;">
+                  <cl:datamapbind property="value" datacontrolid="BPARKPayInfo" columnname="SecondTimePriceTypeA"/>
+                  <cl:formdata std:sid="f-data-c84042f5" row="0" col="2"/>
+                </cl:inputbox>
+                <cl:output std:sid="output-0c3d2774" value="VND">
+                  <cl:formdata std:sid="f-data-effa3d50" row="0" col="4"/>
+                </cl:output>
+                <cl:formlayout std:sid="f-layout-51458e73" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+                  <cl:rows length="1" unit="FRACTION"/>
+                  <cl:columns length="300" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+                  <cl:columns length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                </cl:formlayout>
+              </cl:group>
+              <cl:group std:sid="group-47d64a81">
+                <cl:formdata std:sid="f-data-e3cc177d" row="12" col="1"/>
+                <cl:group std:sid="group-2e0d9cc9">
+                  <cl:formdata std:sid="f-data-39d83c77" row="0" col="0"/>
+                  <cl:output std:sid="output-729fbd16" style="text-align:center;" value=":">
+                    <cl:formdata std:sid="f-data-52a49702" row="0" col="3"/>
+                  </cl:output>
+                  <cl:numbereditor std:sid="n-editor-fd8e2167" id="BPARKPM_nbeFixPriceThirdHoursTypeA" style="font-size:14px; text-align:center;" readonly="true" min="0.0" max="24.0" spinbutton="false" format="0#">
+                    <cl:datamapbind property="value" datacontrolid="BPARKPayInfo" columnname="ThirdTimeHoursTypeA"/>
+                    <cl:formdata std:sid="f-data-17389daa" row="0" col="1"/>
+                  </cl:numbereditor>
+                  <cl:numbereditor std:sid="n-editor-d46876ff" id="BPARKPM_nbeFixPriceThirdMinutesTypeA" style="font-size:14px; text-align:center;" readonly="true" min="0.0" max="59.0" spinbutton="false" format="0#">
+                    <cl:datamapbind property="value" datacontrolid="BPARKPayInfo" columnname="ThirdTimeMinutesTypeA"/>
+                    <cl:formdata std:sid="f-data-c3671de5" row="0" col="5"/>
+                  </cl:numbereditor>
+                  <cl:output std:sid="output-07597df7" style="text-align:center;">
+                    <cl:langbind property="value" category="PROPERTY" keypath="Str_Time3"/>
+                    <cl:formdata std:sid="f-data-a05e2825" row="0" col="2"/>
+                  </cl:output>
+                  <cl:output std:sid="output-66fc55ae" style="text-align:center;">
+                    <cl:langbind property="value" category="PROPERTY" keypath="Str_Minute"/>
+                    <cl:formdata std:sid="f-data-6e339885" row="0" col="6"/>
+                  </cl:output>
+                  <cl:formlayout std:sid="f-layout-3731861c">
+                    <cl:rows length="1" unit="FRACTION"/>
+                    <cl:columns length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                    <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                    <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                    <cl:columns length="15" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                    <cl:columns length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                    <cl:columns length="1" unit="FRACTION"/>
+                    <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  </cl:formlayout>
+                </cl:group>
+                <cl:inputbox std:sid="i-box-900bfde0" id="BPARKPM_ipbFixPriceThirdPriceTypeA" style="padding-right:10px; text-align:right;">
+                  <cl:datamapbind property="value" datacontrolid="BPARKPayInfo" columnname="ThirdTimePriceTypeA"/>
+                  <cl:formdata std:sid="f-data-0998f825" row="0" col="2"/>
+                </cl:inputbox>
+                <cl:output std:sid="output-7b222a50" value="VND">
+                  <cl:formdata std:sid="f-data-a067ff50" row="0" col="4"/>
+                </cl:output>
+                <cl:formlayout std:sid="f-layout-87728366" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+                  <cl:rows length="1" unit="FRACTION"/>
+                  <cl:columns length="300" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+                  <cl:columns length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                </cl:formlayout>
+              </cl:group>
+              <cl:group std:sid="group-7b303198">
+                <cl:formdata std:sid="f-data-b050a746" row="3" col="1"/>
+                <cl:group std:sid="group-5cdfebbb">
+                  <cl:formdata std:sid="f-data-36f3d56d" row="0" col="0"/>
+                  <cl:output std:sid="output-41f6a5d8" style="text-align:center;" value=":">
+                    <cl:formdata std:sid="f-data-9a8aa0bc" row="0" col="3"/>
+                  </cl:output>
+                  <cl:numbereditor std:sid="n-editor-6fa55dea" id="BPARKPM_nbeBasicPriceHoursTypeA" style="font-size:14px; text-align:center;" min="0.0" max="24.0" spinbutton="false" format="0#">
+                    <cl:datamapbind property="value" datacontrolid="BPARKPayInfo" columnname="BasicTimeHoursTypeA"/>
+                    <cl:formdata std:sid="f-data-0a272410" row="0" col="1"/>
+                  </cl:numbereditor>
+                  <cl:numbereditor std:sid="n-editor-4d32eafd" id="BPARKPM_nbeBasicPriceMinutesTypeA" style="font-size:14px; text-align:center;" min="0.0" max="59.0" spinbutton="false" format="0#">
+                    <cl:datamapbind property="value" datacontrolid="BPARKPayInfo" columnname="BasicTimeMinutesTypeA"/>
+                    <cl:formdata std:sid="f-data-1713b064" row="0" col="5"/>
+                  </cl:numbereditor>
+                  <cl:output std:sid="output-bbff7d1a" style="text-align:center;">
+                    <cl:langbind property="value" category="PROPERTY" keypath="Str_Time3"/>
+                    <cl:formdata std:sid="f-data-4eacce2c" row="0" col="2"/>
+                  </cl:output>
+                  <cl:output std:sid="output-415005af" style="text-align:center;">
+                    <cl:langbind property="value" category="PROPERTY" keypath="Str_Minute"/>
+                    <cl:formdata std:sid="f-data-51712919" row="0" col="6"/>
+                  </cl:output>
+                  <cl:formlayout std:sid="f-layout-a60c4a5e">
+                    <cl:rows length="1" unit="FRACTION"/>
+                    <cl:columns length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                    <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                    <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                    <cl:columns length="15" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                    <cl:columns length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                    <cl:columns length="1" unit="FRACTION"/>
+                    <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  </cl:formlayout>
+                </cl:group>
+                <cl:inputbox std:sid="i-box-585bbb0b" id="BPARKPM_ipbBasicPriceTypeA" style="text-align:right; padding-right:10px;" maxlength="10">
+                  <cl:datamapbind property="value" datacontrolid="BPARKPayInfo" columnname="BasicPriceTypeA"/>
+                  <cl:formdata std:sid="f-data-1d90fe15" row="0" col="2"/>
+                </cl:inputbox>
+                <cl:output std:sid="output-e8ea73a0" value="VND">
+                  <cl:formdata std:sid="f-data-99dc061e" row="0" col="4"/>
+                </cl:output>
+                <cl:formlayout std:sid="f-layout-36d2d8dd" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+                  <cl:rows length="1" unit="FRACTION"/>
+                  <cl:columns length="300" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                </cl:formlayout>
+              </cl:group>
+              <cl:group std:sid="group-5d7d5e8a">
+                <cl:formdata std:sid="f-data-c5b1797d" row="0" col="0" rowspan="1" colspan="2"/>
+                <cl:output std:sid="output-2ca8cb13" style="font-weight:700; border-bottom-width:2px; font-size:18px; border-bottom-style:solid; text-align:center;">
+                  <cl:langbind property="value" category="PROPERTY" keypath="Str_BPARK_TypeA"/>
+                  <cl:formdata std:sid="f-data-e4a68216" row="0" col="0"/>
+                </cl:output>
+                <cl:checkbox std:sid="c-box-61ad942f" id="BPARKPM_cbxApplayTypeA" style="font-weight:300; padding-left:15px; font-size:15px; text-align:left;">
+                  <cl:listener std:sid="listener-64ee423d" name="click" handler="onBPARKPM_cbxApplayTypeAClick"/>
+                  <cl:langbind property="text" category="PROPERTY" keypath="Str_BPARK_ApplyPayment"/>
+                  <cl:formdata std:sid="f-data-a1894e3a" row="0" col="1"/>
+                </cl:checkbox>
+                <cl:formlayout std:sid="f-layout-1da4f36d" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+                  <cl:rows length="1" unit="FRACTION"/>
+                  <cl:columns length="350" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="1" unit="FRACTION"/>
+                </cl:formlayout>
+              </cl:group>
+              <cl:formlayout std:sid="f-layout-3927806f" hspace="0px" vspace="0px">
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="300" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="1" unit="FRACTION"/>
+              </cl:formlayout>
+            </cl:group>
+            <cl:group std:sid="group-59526058">
+              <cl:formdata std:sid="f-data-7c814825" row="25" col="0" rowspan="10" colspan="2"/>
+              <cl:group std:sid="group-0d7d9838">
+                <cl:formdata std:sid="f-data-460e1d4c" row="3" col="1"/>
+                <cl:output std:sid="output-27a8f491" value="VND">
+                  <cl:formdata std:sid="f-data-fca347b8" row="0" col="3"/>
+                </cl:output>
+                <cl:inputbox std:sid="i-box-703f03b2" id="BPARKPM_ipbBasicPriceTypeC" style="padding-right:10px; text-align:right;" maxlength="10">
+                  <cl:datamapbind property="value" datacontrolid="BPARKPayInfo" columnname="BasicPriceTypeC"/>
+                  <cl:formdata std:sid="f-data-2681a024" row="0" col="1"/>
+                </cl:inputbox>
+                <cl:formlayout std:sid="f-layout-ba4cecc1" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+                  <cl:rows length="1" unit="FRACTION"/>
+                  <cl:columns length="320" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                </cl:formlayout>
+              </cl:group>
+              <cl:output std:sid="output-b0da9876" style="font-weight:700; font-size:16px;">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_BPARK_SeasonTicketPrice"/>
+                <cl:formdata std:sid="f-data-c0cef435" row="2" col="0"/>
+              </cl:output>
+              <cl:output std:sid="output-62fc70e9" class="common-controllabel">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_BPARK_Price"/>
+                <cl:formdata std:sid="f-data-b58b922a" row="3" col="0"/>
+              </cl:output>
+              <cl:output std:sid="output-2068178d" style="font-weight:700; font-size:16px;">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_BPARK_DailyPrice"/>
+                <cl:formdata std:sid="f-data-144a5450" row="7" col="0"/>
+              </cl:output>
+              <cl:output std:sid="output-9d73e389" class="common-controllabel">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_BPARK_Price"/>
+                <cl:formdata std:sid="f-data-17d88640" row="8" col="0"/>
+              </cl:output>
+              <cl:group std:sid="group-448c9de3">
+                <cl:formdata std:sid="f-data-78fdf371" row="8" col="1"/>
+                <cl:output std:sid="output-92586a6d" value="VND">
+                  <cl:formdata std:sid="f-data-9bbe80b9" row="0" col="3"/>
+                </cl:output>
+                <cl:inputbox std:sid="i-box-a5a265a9" id="BPARKPM_ipbBasicPriceTypeD" style="padding-right:10px; text-align:right;" maxlength="10">
+                  <cl:datamapbind property="value" datacontrolid="BPARKPayInfo" columnname="BasicPriceTypeD"/>
+                  <cl:formdata std:sid="f-data-0ecc8ec0" row="0" col="1"/>
+                </cl:inputbox>
+                <cl:formlayout std:sid="f-layout-b2764558" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+                  <cl:rows length="1" unit="FRACTION"/>
+                  <cl:columns length="320" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                </cl:formlayout>
+              </cl:group>
+              <cl:group std:sid="group-7ae4f6a4">
+                <cl:formdata std:sid="f-data-6da290d6" row="0" col="0" rowspan="1" colspan="2"/>
+                <cl:output std:sid="output-51e08574" style="font-weight:700; border-bottom-width:2px; font-size:18px; border-bottom-style:solid; text-align:center;">
+                  <cl:langbind property="value" category="PROPERTY" keypath="Str_BPARK_TypeC"/>
+                  <cl:formdata std:sid="f-data-c1af5d47" row="0" col="0"/>
+                </cl:output>
+                <cl:formlayout std:sid="f-layout-a3d5f45f" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+                  <cl:rows length="1" unit="FRACTION"/>
+                  <cl:columns length="350" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="1" unit="FRACTION"/>
+                </cl:formlayout>
+              </cl:group>
+              <cl:group std:sid="group-17db0e5b">
+                <cl:formdata std:sid="f-data-fc0fa94c" row="5" col="0" rowspan="1" colspan="2"/>
+                <cl:output std:sid="output-c2a45050" style="font-weight:700; border-bottom-width:2px; font-size:18px; border-bottom-style:solid; text-align:center;">
+                  <cl:langbind property="value" category="PROPERTY" keypath="Str_BPARK_TypeD"/>
+                  <cl:formdata std:sid="f-data-fef74bbf" row="0" col="0"/>
+                </cl:output>
+                <cl:formlayout std:sid="f-layout-3c1b9128" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+                  <cl:rows length="1" unit="FRACTION"/>
+                  <cl:columns length="350" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="1" unit="FRACTION"/>
+                </cl:formlayout>
+              </cl:group>
+              <cl:formlayout std:sid="f-layout-77813766" hspace="0px" vspace="0px">
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="300" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="1" unit="FRACTION"/>
+              </cl:formlayout>
+            </cl:group>
+            <cl:formlayout std:sid="f-layout-6c2f29ed" hspace="0px" vspace="0px">
+              <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="300" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="1" unit="FRACTION"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:formlayout std:sid="f-layout-7f6af5a9" hspace="10px" vspace="10px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+            <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-1409a15f" hspace="10px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-f6363eb3" hspace="0px" vspace="0px">
+        <cl:rows length="3" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-701a1017"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

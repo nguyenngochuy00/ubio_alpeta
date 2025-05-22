@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-39971b80" version="1.0.0.0">
+  <head std:sid="head-ba9aa303">
+    <title>UserAuthUnavailableManagement</title>
+    <screen std:sid="screen-d151f871" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="500" customWidth="600"/>
+    <screen std:sid="screen-67513e79" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-2e2ded1b" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-afdfd48d">
+      <cl:dataset std:sid="d-set-a1e53e49" id="UserList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-1935768c" name="ID" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-b7cf8b04" name="UniqueID"/>
+          <cl:datacolumn std:sid="d-column-5d28fead" name="Name" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-ad35ddb4" name="Privilege" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-448d0b02" name="GroupCode" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-39601b39" name="AccessGroupCode" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-86cdb915" name="BlackList" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-99bc623c" name="PositionCode"/>
+          <cl:datacolumn std:sid="d-column-39ccb876" name="UnavailableTime"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-ab9c534d" id="dsUpdateList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-2c940d51" name="UserID"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-652abb0d" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-51599a2a" name="ResultCode"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-0388ba95" id="sms_getUnavailableUserList" method="get" action="/v1/users">
+        <cl:responsedata dataid="UserList"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-96abe9bf" id="sms_putUnavailableUser" method="put">
+        <cl:listener std:sid="listener-9643cffa" name="submit-done" handler="onSms_putUnavailableUserSubmitDone"/>
+        <cl:listener std:sid="listener-b3ef458f" name="submit-error" handler="onSms_putUnavailableUserSubmitError"/>
+        <cl:listener std:sid="listener-ed6f4e93" name="submit-timeout" handler="onSms_putUnavailableUserSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-83f3887c" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-7f21e278" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-58bde267" style="padding-top:10px; padding-left:10px; padding-bottom:10px; padding-right:10px;">
+      <cl:xylayoutdata std:sid="xyl-data-13834994" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:grid std:sid="grid-072086c8" id="UAUMGR_grdUserList" datasetid="UserList">
+        <cl:formdata std:sid="f-data-6b8864b8" row="0" col="0" rowspan="1" colspan="3"/>
+        <cl:gridcolumn std:sid="g-column-cd345741" width="25px"/>
+        <cl:gridcolumn std:sid="g-column-35cb753e"/>
+        <cl:gridcolumn std:sid="g-column-589cca65" width="150px"/>
+        <cl:gridcolumn std:sid="g-column-5434e7b7"/>
+        <cl:gridcolumn std:sid="g-column-da5e53aa"/>
+        <cl:gridcolumn std:sid="g-column-adcb2a45"/>
+        <cl:gridcolumn std:sid="g-column-6f3521d1"/>
+        <cl:gridcolumn std:sid="g-column-89ea2b7b"/>
+        <cl:gridcolumn std:sid="g-column-139eefaf"/>
+        <cl:gridcolumn std:sid="g-column-25a5eb45"/>
+        <cl:gridheader std:sid="gh-band-ed3b4bd5">
+          <cl:gridrow std:sid="g-row-969018aa"/>
+          <cl:gridcell std:sid="gh-cell-26e318e2" rowindex="0" colindex="0" sortable="false" filterable="false" columntype="checkbox"/>
+          <cl:gridcell std:sid="gh-cell-fceaadcc" rowindex="0" colindex="1" targetcolumnname="ID" sortable="false" filterable="false" text="ID">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_ID"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-7d5baf68" rowindex="0" colindex="2" targetcolumnname="UnavailableTime" sortable="false" filterable="false" text="UnavailableTime">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_OptionAuthUnavailableTime"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-531cd046" rowindex="0" colindex="3" targetcolumnname="Name" sortable="false" filterable="false" text="Name">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_Name"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-93cff986" rowindex="0" colindex="4" targetcolumnname="UniqueID" sortable="false" filterable="false" text="UniqueID">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_UniqueID"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-b14795f8" rowindex="0" colindex="5" targetcolumnname="Privilege" sortable="false" filterable="false" text="Privilege">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_Privilege"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-b437a9cc" rowindex="0" colindex="6" targetcolumnname="GroupCode" sortable="false" filterable="false" text="GroupCode">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_GroupName"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-35427ed0" rowindex="0" colindex="7" targetcolumnname="AccessGroupCode" sortable="false" filterable="false" text="AccessGroupCode">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_AccessGroup"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-dc520e1d" rowindex="0" colindex="8" targetcolumnname="PositionCode" sortable="false" filterable="false" text="PositionCode">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_Position"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-73b06387" rowindex="0" colindex="9" targetcolumnname="BlackList" sortable="false" filterable="false" text="BlackList">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_BlackList"/>
+          </cl:gridcell>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-9b05eb2a">
+          <cl:gridrow std:sid="g-row-4ce6ede9"/>
+          <cl:gridcell std:sid="gd-cell-588f8040" rowindex="0" colindex="0" columntype="checkbox"/>
+          <cl:gridcell std:sid="gd-cell-309bef75" rowindex="0" colindex="1" style="text-align:center;" columnname="ID"/>
+          <cl:gridcell std:sid="gd-cell-bc03a630" rowindex="0" colindex="2" style="text-align:center;" columnname="UnavailableTime"/>
+          <cl:gridcell std:sid="gd-cell-bc500c3d" rowindex="0" colindex="3" style="text-align:center;" columnname="Name"/>
+          <cl:gridcell std:sid="gd-cell-6224daae" rowindex="0" colindex="4" style="text-align:center;" columnname="UniqueID"/>
+          <cl:gridcell std:sid="gd-cell-13e85a22" rowindex="0" colindex="5" style="text-align:center;" columnname="Privilege">
+            <cl:combobox std:sid="c-box-4ff764fb" id="UAUMGR_cmbPrivilege" style="text-align:center;">
+              <cl:item std:sid="item-25f1af74" label="---" value="0"/>
+            </cl:combobox>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-9e11aaa6" rowindex="0" colindex="6" style="text-align:center;" columnname="GroupCode">
+            <cl:combobox std:sid="c-box-2361b403" id="UAUMGR_cmbGroupList" style="text-align:center;">
+              <cl:item std:sid="item-21d49386" label="---" value="0"/>
+            </cl:combobox>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-90b68f9c" rowindex="0" colindex="7" style="text-align:center;" columnname="AccessGroupCode">
+            <cl:combobox std:sid="c-box-6514fec3" id="UAUMGR_cmbAccessGroupList" style="text-align:center;">
+              <cl:item std:sid="item-8270d7bc" label="---" value="0"/>
+            </cl:combobox>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-f9706aa6" rowindex="0" colindex="8" style="text-align:center;" columnname="PositionCode">
+            <cl:combobox std:sid="c-box-df0af91a" id="UAUMGR_cmbPositionList" style="text-align:center;">
+              <cl:item std:sid="item-1b7eb981" label="---" value="0"/>
+            </cl:combobox>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-4338d25e" rowindex="0" colindex="9" style="text-align:center;" columnname="BlackList"/>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:button std:sid="button-09a48428" id="UAUMGR_btnUpdate" class="userInfo_btn">
+        <cl:listener std:sid="listener-37efddad" name="click" handler="onUAUMGR_btnUpdateClick"/>
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_LoginUnavailableAllow"/>
+        <cl:formdata std:sid="f-data-847f76e2" row="1" col="1"/>
+      </cl:button>
+      <cl:button std:sid="button-732fe730" id="UAUMGR_btnClose" class="userInfo_btn">
+        <cl:listener std:sid="listener-d810eed3" name="click" handler="onUAUTMGR_btnCloseClick"/>
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_Close"/>
+        <cl:formdata std:sid="f-data-1493a929" row="1" col="2"/>
+      </cl:button>
+      <cl:formlayout std:sid="f-layout-a7144e15" hspace="10px" vspace="10px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+        <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="1"/>
+        <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+        <cl:columns length="80" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="80" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-00cbb832"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-92bf7751" version="1.0.0.0">
+  <head std:sid="head-68b37828">
+    <title>tnaReghourlyPayment</title>
+    <screen std:sid="screen-9e9164a0" id="default" name="default" minwidth="600px" width="600px" height="650px" useCustomWidth="false" useCustomHeight="false" customHeight="500" customWidth="400"/>
+    <screen std:sid="screen-36448cef" id="tablet" name="tablet" minwidth="500px" maxwidth="599px" width="500px" height="667px"/>
+    <screen std:sid="screen-4f9cb416" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-991180a1">
+      <cl:dataset std:sid="d-set-44c5afdd" id="dsWorkPaymentTinyList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-67e3e614" name="Code"/>
+          <cl:datacolumn std:sid="d-column-8cf86704" name="Name"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-9ebec6de" id="dmWorkPayment">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-c3760568" name="Code" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-9f725bc4" name="Name" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-02bab0bf" name="Unit" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-02f06840" name="NormalTime" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-68ac5c0a" name="TimeBefore" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-4444bc52" name="Overtime1" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-da7fed9b" name="Overtime2" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-9400c190" name="OffDayHours" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-32548786" name="Overtime3" datatype="number" defaultvalue="0"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-a33aca7f" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-9b2142bd" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-52b3a120" id="initWorkPayment">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-c786dc1a" name="Code" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-fe6142ea" name="Name" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-17e78997" name="Unit" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-e8a7513b" name="NormalTime" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-38b7f997" name="TimeBefore" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-ed0ec1a7" name="Overtime1" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-2c97dabb" name="Overtime2" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-0eb36034" name="OffDayHours" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-58890f9a" name="Overtime3" datatype="number" defaultvalue="0"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-a177b11d" id="sms_getWorkPayments" method="get" action="/v1/tna/payment">
+        <cl:listener std:sid="listener-ae23539e" name="submit-done" handler="onSms_getWorkPaymentsSubmitDone"/>
+        <cl:listener std:sid="listener-dbb215db" name="submit-error" handler="onSms_getWorkPaymentsSubmitError"/>
+        <cl:listener std:sid="listener-ed811ffe" name="submit-timeout" handler="onSms_getWorkPaymentsSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="dsWorkPaymentTinyList"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-21b8ea03" id="sms_getWorkPayment" method="get" action="/v1/tna/payment/">
+        <cl:listener std:sid="listener-558c3868" name="submit-done" handler="onSms_getWorkPaymentSubmitDone"/>
+        <cl:listener std:sid="listener-3db797ca" name="submit-error" handler="onSms_getWorkPaymentSubmitError"/>
+        <cl:listener std:sid="listener-671d5e75" name="submit-timeout" handler="onSms_getWorkPaymentSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="dmWorkPayment"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-1d3e7ac9" id="sms_postWorkPayment" action="/v1/tna/payment/" mediatype="application/x-www-form-urlencoded">
+        <cl:listener std:sid="listener-35ff2087" name="submit-done" handler="onSms_postWorkPaymentSubmitDone"/>
+        <cl:requestdata dataid="dmWorkPayment"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-864bcaaf" id="sms_putWorkPayment" method="put" action="/v1/tna/payment/" mediatype="application/x-www-form-urlencoded">
+        <cl:listener std:sid="listener-b8b24ed6" name="submit-done" handler="onSms_putWorkPaymentSubmitDone"/>
+        <cl:requestdata dataid="dmWorkPayment"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-57da5333" id="sms_deleteWorkPayment" method="delete" action="/v1/tna/payment/">
+        <cl:listener std:sid="listener-bdfeeda7" name="submit-done" handler="onSms_deleteWorkPaymentSubmitDone"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-157a9d74" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-830088d2" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-5d5944b7" id="TAPMR_grp" style="padding:10px;">
+      <cl:xylayoutdata std:sid="xyl-data-f5011769" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-e638c2a7" style="padding:0px;">
+        <cl:formdata std:sid="f-data-097a1831" row="1" col="0"/>
+        <cl:group std:sid="group-0a44064a">
+          <cl:formdata std:sid="f-data-ae4d28ad" row="0" col="0"/>
+          <cl:output std:sid="output-c1db3e99" style="font-weight:700; font-size:14px; text-align:left;">
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_InputInfo"/>
+            <cl:formdata std:sid="f-data-e3149640" row="0" col="0" rowspan="1" colspan="2"/>
+          </cl:output>
+          <cl:output std:sid="output-650115a4" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:2px; font-weight:700.0; border-left-color:#c5c5c5; font-size:14px; border-right-color:#c5c5c5; border-left-width:1px; border-top-style:solid; background-color:#f0f0f0; border-left-style:solid; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; text-align:center;">
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_Code"/>
+            <cl:formdata std:sid="f-data-411ae537" row="1" col="0"/>
+          </cl:output>
+          <cl:output std:sid="output-90bb8e2d" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:2px; font-weight:700.0; border-left-color:#c5c5c5; font-size:14px; border-right-color:#c5c5c5; border-left-width:1px; border-top-style:solid; background-color:#f0f0f0; border-left-style:solid; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; text-align:center;">
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_Name"/>
+            <cl:formdata std:sid="f-data-3cb29dee" row="2" col="0"/>
+          </cl:output>
+          <cl:group std:sid="group-6cc2f46b" style="border-bottom-color:#c5c5c5; border-top-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid;">
+            <cl:formdata std:sid="f-data-d8449d67" row="1" col="1"/>
+            <cl:inputbox std:sid="i-box-50305981" id="TAPMR_ipbCode" style="font-size:14px;" maxlength="4">
+              <cl:xylayoutdata std:sid="xyl-data-393594f2" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+            </cl:inputbox>
+            <cl:xylayout std:sid="xylayout-b5b7dafd"/>
+          </cl:group>
+          <cl:group std:sid="group-8b5f9640" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+            <cl:formdata std:sid="f-data-57926f15" row="2" col="1"/>
+            <cl:inputbox std:sid="i-box-b1d5947a" id="TAPMR_ipbName" style="font-size:14px;">
+              <cl:xylayoutdata std:sid="xyl-data-df1fb01e" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+            </cl:inputbox>
+            <cl:xylayout std:sid="xylayout-4611dc37"/>
+          </cl:group>
+          <cl:formlayout std:sid="f-layout-a28d4c8c" hspace="0px" vspace="0px">
+            <cl:rows length="28" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+            <cl:rows length="28" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+            <cl:rows length="28" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+            <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:grid std:sid="grid-469698e0" id="TAPMR_grd" readonly="true" datasetid="dsWorkPaymentTinyList" showdeletedrow="false" resizablecolumns="none" columnMovable="false">
+          <cl:listener std:sid="listener-765a504e" name="selection-change" handler="onTAPMR_grdSelectionChange"/>
+          <cl:formdata std:sid="f-data-f407a202" row="1" col="0"/>
+          <cl:gridcolumn std:sid="g-column-421ba128" width="70px"/>
+          <cl:gridcolumn std:sid="g-column-d836fd70"/>
+          <cl:gridheader std:sid="gh-band-84f23d3b">
+            <cl:gridrow std:sid="g-row-f96fd32f"/>
+            <cl:gridcell std:sid="gh-cell-d63ce4d6" rowindex="0" colindex="0" style="font-weight:700; font-size:14px;" targetcolumnname="Code" sortable="false" filterable="false" text="Code">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_Code"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gh-cell-55574388" rowindex="0" colindex="1" style="font-weight:700; font-size:14px;" targetcolumnname="Name" sortable="false" filterable="false" text="Name">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_Name"/>
+            </cl:gridcell>
+          </cl:gridheader>
+          <cl:griddetail std:sid="gd-band-9d02c7db">
+            <cl:gridrow std:sid="g-row-396c2c30"/>
+            <cl:gridcell std:sid="gd-cell-efb5a57b" rowindex="0" colindex="0" style="font-size:14px;" columnname="Code"/>
+            <cl:gridcell std:sid="gd-cell-21554d6e" rowindex="0" colindex="1" style="font-size:14px;" columnname="Name"/>
+          </cl:griddetail>
+        </cl:grid>
+        <cl:formlayout std:sid="f-layout-e0c99146" hspace="0px" vspace="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:rows length="2" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-ef5c1f8b" style="padding:0px 0px 0px 5px;">
+        <cl:formdata std:sid="f-data-c9deaf3f" row="1" col="1"/>
+        <cl:group std:sid="group-d5eff6ae" class="user_radio">
+          <cl:formdata std:sid="f-data-dd9e52c0" row="0" col="0"/>
+          <cl:radiobutton std:sid="r-button-f6042abf" id="TAPMR_rdbPayUnit" style="padding:0px;" value="0" colcount="1">
+            <cl:formdata std:sid="f-data-44d4b53c" row="1" col="0"/>
+            <cl:item std:sid="item-b0ea4376" label="시간 단위" value="0">
+              <cl:langbind property="label" category="PROPERTY" keypath="Str_Hour"/>
+            </cl:item>
+            <cl:item std:sid="item-a31dec13" label="30분 단위" value="1">
+              <cl:langbind property="label" category="PROPERTY" keypath="Str_30Min"/>
+            </cl:item>
+            <cl:item std:sid="item-5d55245d" label="15분 단위" value="2">
+              <cl:langbind property="label" category="PROPERTY" keypath="Str_15Min"/>
+            </cl:item>
+            <cl:item std:sid="item-9e71625b" label="10분 단위" value="3">
+              <cl:langbind property="label" category="PROPERTY" keypath="Str_10Min"/>
+            </cl:item>
+            <cl:item std:sid="item-eaab6494" label="1분 단위" value="4">
+              <cl:langbind property="label" category="PROPERTY" keypath="Str_1Min"/>
+            </cl:item>
+          </cl:radiobutton>
+          <cl:output std:sid="output-860f7325" style="font-weight:700; font-size:14px;">
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_PayUnit"/>
+            <cl:formdata std:sid="f-data-d19cd3ec" row="0" col="0"/>
+          </cl:output>
+          <cl:formlayout std:sid="f-layout-779c8560" hspace="0px" vspace="0px">
+            <cl:rows length="28" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+            <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:group std:sid="group-ef59f935">
+          <cl:formdata std:sid="f-data-752e37fa" row="1" col="0"/>
+          <cl:output std:sid="output-77359abd" style="font-weight:700; font-size:14px;">
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_PayRate"/>
+            <cl:formdata std:sid="f-data-17e708fe" row="0" col="0" rowspan="1" colspan="2"/>
+          </cl:output>
+          <cl:output std:sid="output-f61e9302" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:2px; font-weight:700.0; border-left-color:#c5c5c5; font-size:14px; border-right-color:#c5c5c5; border-left-width:1px; border-top-style:solid; background-color:#f0f0f0; border-left-style:solid; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; text-align:center;">
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_NomalTime"/>
+            <cl:formdata std:sid="f-data-e3482b54" row="1" col="0"/>
+          </cl:output>
+          <cl:output std:sid="output-4227ab19" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:2px; font-weight:700.0; border-left-color:#c5c5c5; font-size:14px; border-right-color:#c5c5c5; border-left-width:1px; border-top-style:solid; background-color:#f0f0f0; border-left-style:solid; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; text-align:center;">
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_TimeBeforeShift"/>
+            <cl:formdata std:sid="f-data-4e279173" row="2" col="0"/>
+          </cl:output>
+          <cl:output std:sid="output-80e7ef76" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:2px; font-weight:700.0; border-left-color:#c5c5c5; font-size:14px; border-right-color:#c5c5c5; border-left-width:1px; border-top-style:solid; background-color:#f0f0f0; border-left-style:solid; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; text-align:center;">
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_Overtime1Hours"/>
+            <cl:formdata std:sid="f-data-00f9db3f" row="3" col="0"/>
+          </cl:output>
+          <cl:output std:sid="output-71f4c476" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:2px; font-weight:700.0; border-left-color:#c5c5c5; font-size:14px; border-right-color:#c5c5c5; border-left-width:1px; border-top-style:solid; background-color:#f0f0f0; border-left-style:solid; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; text-align:center;">
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_Overtime2Hours"/>
+            <cl:formdata std:sid="f-data-723780af" row="4" col="0"/>
+          </cl:output>
+          <cl:output std:sid="output-1b6c08f9" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:2px; font-weight:700.0; border-left-color:#c5c5c5; font-size:14px; border-right-color:#c5c5c5; border-left-width:1px; border-top-style:solid; background-color:#f0f0f0; border-left-style:solid; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; text-align:center;">
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_OffDayHours"/>
+            <cl:formdata std:sid="f-data-c4a9e7ab" row="5" col="0"/>
+          </cl:output>
+          <cl:output std:sid="output-5802b4fe" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:2px; font-weight:700.0; border-left-color:#c5c5c5; font-size:14px; border-right-color:#c5c5c5; border-left-width:1px; border-top-style:solid; background-color:#f0f0f0; border-left-style:solid; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; text-align:center;">
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_Overtime3Hours"/>
+            <cl:formdata std:sid="f-data-0da4ca90" row="6" col="0"/>
+          </cl:output>
+          <cl:group std:sid="group-011b7c44" style="border-bottom-color:#c5c5c5; border-top-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid;">
+            <cl:formdata std:sid="f-data-174456c4" row="1" col="1"/>
+            <cl:inputbox std:sid="i-box-2e218e61" id="TAPMR_ipbMoney1" maxlength="10" inputfilter="[0-9]">
+              <cl:xylayoutdata std:sid="xyl-data-5ea869e0" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+            </cl:inputbox>
+            <cl:xylayout std:sid="xylayout-f9b24c39"/>
+          </cl:group>
+          <cl:group std:sid="group-39610b96" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+            <cl:formdata std:sid="f-data-48030e78" row="2" col="1"/>
+            <cl:inputbox std:sid="i-box-c2870b61" id="TAPMR_ipbMoney2" maxlength="10" inputfilter="[0-9]">
+              <cl:xylayoutdata std:sid="xyl-data-c0df8662" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+            </cl:inputbox>
+            <cl:xylayout std:sid="xylayout-f8b4df93"/>
+          </cl:group>
+          <cl:group std:sid="group-a921fea1" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+            <cl:formdata std:sid="f-data-ac58af78" row="3" col="1"/>
+            <cl:inputbox std:sid="i-box-533259aa" id="TAPMR_ipbMoney3" maxlength="10" inputfilter="[0-9]">
+              <cl:xylayoutdata std:sid="xyl-data-685d0ffc" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+            </cl:inputbox>
+            <cl:xylayout std:sid="xylayout-e905f309"/>
+          </cl:group>
+          <cl:group std:sid="group-3df0da50" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+            <cl:formdata std:sid="f-data-6985d4c8" row="4" col="1"/>
+            <cl:inputbox std:sid="i-box-a99b91e6" id="TAPMR_ipbMoney4" maxlength="10" inputfilter="[0-9]">
+              <cl:xylayoutdata std:sid="xyl-data-71696ab3" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+            </cl:inputbox>
+            <cl:xylayout std:sid="xylayout-0b4ea9c5"/>
+          </cl:group>
+          <cl:group std:sid="group-a66b605b" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+            <cl:formdata std:sid="f-data-c8b37fee" row="5" col="1"/>
+            <cl:inputbox std:sid="i-box-5830b32d" id="TAPMR_ipbMoney5" maxlength="10" inputfilter="[0-9]">
+              <cl:xylayoutdata std:sid="xyl-data-ef1ec02a" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+            </cl:inputbox>
+            <cl:xylayout std:sid="xylayout-57f67d64"/>
+          </cl:group>
+          <cl:group std:sid="group-75846a6e" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+            <cl:formdata std:sid="f-data-0655b34f" row="6" col="1"/>
+            <cl:inputbox std:sid="i-box-bab6e6c4" id="TAPMR_ipbMoney6" maxlength="10" inputfilter="[0-9]">
+              <cl:xylayoutdata std:sid="xyl-data-4e4f26c7" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+            </cl:inputbox>
+            <cl:xylayout std:sid="xylayout-da6cc113"/>
+          </cl:group>
+          <cl:formlayout std:sid="f-layout-8a791c00" hspace="0px" vspace="0px">
+            <cl:rows length="28" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+            <cl:rows length="28" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+            <cl:rows length="28" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+            <cl:rows length="28" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+            <cl:rows length="28" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+            <cl:rows length="28" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+            <cl:rows length="28" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+            <cl:columns length="140" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-448658d3" hspace="0px" vspace="0px">
+          <cl:rows length="190" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-66fa4a34">
+        <cl:formdata std:sid="f-data-0e72fbd3" row="2" col="0" rowspan="1" colspan="2"/>
+        <cl:button std:sid="button-02804a5e" id="TAPMR_btnSend" class="userInfo_btn">
+          <cl:listener std:sid="listener-9d0a8329" name="click" handler="onTAPMR_btnSendClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Save"/>
+          <cl:formdata std:sid="f-data-5e3f99f5" row="0" col="1"/>
+        </cl:button>
+        <cl:button std:sid="button-68a1d01f" id="TAPMR_btnDelete" class="userInfo_btn">
+          <cl:listener std:sid="listener-a4f3adc8" name="click" handler="onTAPMR_btnDeleteClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Delete"/>
+          <cl:formdata std:sid="f-data-729e2210" row="0" col="2"/>
+        </cl:button>
+        <cl:button std:sid="button-8bade43c" id="TAPMR_btnClose" class="userInfo_btn">
+          <cl:listener std:sid="listener-4ac655e6" name="click" handler="onTAPMR_btnCloseClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Close"/>
+          <cl:formdata std:sid="f-data-651030f0" row="0" col="3"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-31fc7074">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-4c4da952">
+        <cl:formdata std:sid="f-data-e26356a4" row="0" col="0" rowspan="1" colspan="2"/>
+        <cl:output std:sid="output-aaab06e6" style="padding:5px; font-size:12px;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_SetPayUnitAndPayRate"/>
+          <cl:formdata std:sid="f-data-a8235c15" row="0" col="0"/>
+        </cl:output>
+        <cl:img std:sid="image-7666cc89" style="cursor:help;" src="../../../theme/images/common/common_btn_window_top_q.png">
+          <cl:listener std:sid="listener-a5f37745" name="click" handler="onImageClick"/>
+          <cl:formdata std:sid="f-data-cfbfa2ea" halign="CENTER" valign="CENTER" width="14" height="14" row="0" col="1"/>
+        </cl:img>
+        <cl:formlayout std:sid="f-layout-3f4d7797">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="14" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-06e1300d" hspace="0px" vspace="5px">
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+        <cl:columns length="1" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-328c6b9d"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

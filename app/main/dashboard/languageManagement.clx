@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-366d46b3" version="1.0.0.0">
+  <head std:sid="head-daed409d">
+    <title>languageManagement</title>
+    <screen std:sid="screen-fa886048" id="default" customHeight="550" customWidth="1000" height="768px" minwidth="1024px" name="default" useCustomHeight="true" useCustomWidth="true" width="1024px"/>
+    <screen std:sid="screen-505f56b8" id="tablet" height="667px" maxwidth="1023px" minwidth="500px" name="tablet" width="500px"/>
+    <screen std:sid="screen-ee743517" id="mobile" height="525px" maxwidth="499px" name="mobile" width="350px"/>
+    <cl:model std:sid="model-0b38d1d1">
+      <cl:dataset std:sid="d-set-018ac910" id="LangListL">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-87cb0512" datatype="string" name="Locale"/>
+          <cl:datacolumn std:sid="d-column-09ee6587" name="Key"/>
+          <cl:datacolumn std:sid="d-column-eb12dee1" name="Value"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-6a073618" id="CountryCodeList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-9a750967" name="Key"/>
+          <cl:datacolumn std:sid="d-column-1166c759" name="Value"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:submission std:sid="submission-dec2d602" id="sms_getCountryCodeList" action="data/lang/lang_countrycode.json">
+        <cl:listener std:sid="listener-1695a49b" handler="onSms_getCountryCodeListSubmitSuccess" name="submit-success"/>
+        <cl:responsedata dataid="CountryCodeList"/>
+      </cl:submission>
+      <cl:datamap std:sid="d-map-1cba6d4e" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-6b2f9031" datatype="number" name="ResultCode"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:dataset std:sid="d-set-698b0df7" id="LangListR">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-88d7a3cf" datatype="string" name="Locale"/>
+          <cl:datacolumn std:sid="d-column-4aaafd1c" name="Key"/>
+          <cl:datacolumn std:sid="d-column-88a51623" name="Value"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:submission std:sid="submission-27c986e0" id="sms_getLangList" action="data/lang/lang.json">
+        <cl:listener std:sid="listener-680197df" handler="onSms_getLangListSubmitSuccess" name="submit-success"/>
+        <cl:responsedata dataid="LangList"/>
+      </cl:submission>
+      <cl:dataset std:sid="d-set-1713426f" id="LangList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-f1c5f8dc" datatype="string" name="Locale"/>
+          <cl:datacolumn std:sid="d-column-08a91b21" name="Key"/>
+          <cl:datacolumn std:sid="d-column-ea9bc85c" name="Value"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-697ffa4d" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-8e303b13" handler="onBodyLoad" name="load"/>
+    <cl:group std:sid="group-6364827a">
+      <cl:datarowcontext datacontrolid="LangListL" rowindex="0"/>
+      <cl:xylayoutdata std:sid="xyl-data-5c86256c" bottom="4px" horizontalAnchor="BOTH" left="4px" right="4px" top="4px" verticalAnchor="BOTH"/>
+      <cl:combobox std:sid="c-box-f6a8690a" id="LE_cmbLanguageL" style="font-size:14px;">
+        <cl:listener std:sid="listener-87a40837" handler="onLE_cmbLanguageLSelectionChange" name="selection-change"/>
+        <cl:formdata std:sid="f-data-66ea99e9" col="0" row="1"/>
+      </cl:combobox>
+      <cl:combobox std:sid="c-box-31b43b3b" id="LE_cmbLanguageR" style="font-size:14px;">
+        <cl:listener std:sid="listener-5e404644" handler="onLE_cmbLanguageRSelectionChange" name="selection-change"/>
+        <cl:formdata std:sid="f-data-61dd2f2a" col="6" row="1"/>
+      </cl:combobox>
+      <cl:grid std:sid="grid-dfd4406b" id="LE_grdLanguageL" clickmode="edit" columnResizable="true" datasetid="LangListL">
+        <cl:formdata col="0" colspan="6" row="2" rowspan="1"/>
+        <cl:gridcolumn std:sid="g-column-a1f044b9" width="25px"/>
+        <cl:gridcolumn std:sid="g-column-3c226a11"/>
+        <cl:gridcolumn std:sid="g-column-79b1d165" width="300px"/>
+        <cl:gridheader>
+          <cl:gridrow std:sid="g-row-f84b77b5"/>
+          <cl:gridcell std:sid="gh-cell-8a2b695a" colindex="0" rowindex="0" columntype="checkbox" filterable="false" sortable="false"/>
+          <cl:gridcell std:sid="gh-cell-84552091" colindex="1" rowindex="0" filterable="false" sortable="true" targetcolumnname="Key" text="Key"/>
+          <cl:gridcell std:sid="gh-cell-5061099d" colindex="2" rowindex="0" filterable="false" sortable="false" targetcolumnname="Value" text="Value"/>
+        </cl:gridheader>
+        <cl:griddetail>
+          <cl:gridrow std:sid="g-row-71d6e721"/>
+          <cl:gridcell std:sid="gd-cell-fd8edc37" colindex="0" rowindex="0" columntype="checkbox"/>
+          <cl:gridcell std:sid="gd-cell-bd87079b" colindex="1" rowindex="0" columnname="Key">
+            <cl:inputbox style="padding:0px 0px 0px 4px;"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-56f1677e" colindex="2" rowindex="0" columnname="Value">
+            <cl:inputbox style="padding:0px 0px 0px 4px;"/>
+          </cl:gridcell>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:grid std:sid="grid-15c10d55" id="LE_grdLanguageR" columnResizable="true" datasetid="LangListR">
+        <cl:formdata col="6" colspan="6" row="2" rowspan="1"/>
+        <cl:gridcolumn std:sid="g-column-e878fb1f" width="25px"/>
+        <cl:gridcolumn std:sid="g-column-cc36b0b9"/>
+        <cl:gridcolumn std:sid="g-column-c7e7e485" width="300px"/>
+        <cl:gridheader>
+          <cl:gridrow std:sid="g-row-38a0a6b9"/>
+          <cl:gridcell std:sid="gh-cell-549cf606" colindex="0" rowindex="0" columntype="checkbox" filterable="false" sortable="false"/>
+          <cl:gridcell std:sid="gh-cell-d810aab7" colindex="1" rowindex="0" filterable="false" sortable="true" targetcolumnname="Key" text="Key"/>
+          <cl:gridcell std:sid="gh-cell-c06fb059" colindex="2" rowindex="0" filterable="false" sortable="false" targetcolumnname="Value" text="Value"/>
+        </cl:gridheader>
+        <cl:griddetail>
+          <cl:gridrow std:sid="g-row-533c2c64"/>
+          <cl:gridcell std:sid="gd-cell-a35314ba" colindex="0" rowindex="0" columntype="checkbox"/>
+          <cl:gridcell std:sid="gd-cell-acf13dd8" colindex="1" rowindex="0" columnname="Key">
+            <cl:inputbox style="padding:0px 0px 0px 4px;"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-e286b958" colindex="2" rowindex="0" columnname="Value">
+            <cl:inputbox style="padding:0px 0px 0px 4px;"/>
+          </cl:gridcell>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:group std:sid="group-e0666777">
+        <cl:formdata col="0" colspan="12" row="0" rowspan="1"/>
+        <cl:button std:sid="button-de76dcf6" id="LE_btnValidation" class="userInfo_btn" value="검증">
+          <cl:listener std:sid="listener-3bec4ffc" handler="onLE_btnValidationClick" name="click"/>
+          <cl:formdata col="5" row="0"/>
+        </cl:button>
+        <cl:button std:sid="button-646987ed" class="userInfo_btn" value="저장">
+          <cl:formdata std:sid="f-data-0f31883b" col="6" row="0"/>
+        </cl:button>
+        <cl:formlayout>
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="100" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="100" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:inputbox std:sid="i-box-759614b8" id="LE_ipbSearchKeywordL">
+        <cl:listener std:sid="listener-e1a6df9a" handler="onLE_ipbSearchKeywordLKeyup" name="keyup"/>
+        <cl:formdata col="2" row="1"/>
+      </cl:inputbox>
+      <cl:inputbox std:sid="i-box-d9de26e4" id="LE_ipbSearchKeywordR">
+        <cl:listener std:sid="listener-ae9144d4" handler="onLE_ipbSearchKeywordRKeyup" name="keyup"/>
+        <cl:formdata std:sid="f-data-f6060358" col="8" row="1"/>
+      </cl:inputbox>
+      <cl:checkbox std:sid="c-box-085d149d" id="LE_cbxKeywordMatchL" text="Matched">
+        <cl:formdata std:sid="f-data-b222851e" col="1" row="1"/>
+      </cl:checkbox>
+      <cl:checkbox std:sid="c-box-8089133a" id="LE_cbxKeywordMatchR" text="Matched">
+        <cl:formdata std:sid="f-data-b19fa63e" col="7" row="1"/>
+      </cl:checkbox>
+      <cl:output std:sid="output-9f73ffb0" value="Missing list">
+        <cl:formdata col="0" colspan="6" row="3" rowspan="1"/>
+      </cl:output>
+      <cl:button std:sid="button-85d217c2" class="userInfo_btn" value="삭제">
+        <cl:formdata std:sid="f-data-9b31ae72" col="11" row="1"/>
+      </cl:button>
+      <cl:button std:sid="button-03adbb1a" class="userInfo_btn" value="추가">
+        <cl:formdata std:sid="f-data-6bf5b171" col="10" row="1"/>
+      </cl:button>
+      <cl:button std:sid="button-73fdc066" class="userInfo_btn" value="삭제">
+        <cl:formdata std:sid="f-data-73d4d636" col="5" row="1"/>
+      </cl:button>
+      <cl:button std:sid="button-b7dd7c5a" class="userInfo_btn" value="추가">
+        <cl:formdata std:sid="f-data-022654c7" col="4" row="1"/>
+      </cl:button>
+      <cl:formlayout>
+        <cl:rows autoSizing="false" length="36" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:rows autoSizing="false" length="30" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:rows autoSizing="false" length="3" minlength="0" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+        <cl:rows autoSizing="false" length="30" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns autoSizing="false" length="70" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:columns autoSizing="false" length="80" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:columns autoSizing="false" length="100" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:columns autoSizing="false" length="1" minlength="0" unit="FRACTION"/>
+        <cl:columns autoSizing="false" length="80" minlength="0" unit="PIXEL"/>
+        <cl:columns autoSizing="false" length="80" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:columns autoSizing="false" length="70" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:columns autoSizing="false" length="80" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:columns autoSizing="false" length="100" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:columns length="1" unit="FRACTION"/>
+        <cl:columns autoSizing="false" length="80" minlength="0" unit="PIXEL"/>
+        <cl:columns autoSizing="false" length="80" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-a82ba733"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-245b611a" version="1.0.0.0">
+  <head std:sid="head-5aba3360">
+    <title>SystemLogManagement</title>
+    <screen std:sid="screen-d1ace83e" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="false" useCustomHeight="false" customHeight="600" customWidth="900"/>
+    <screen std:sid="screen-aa171efd" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px" customHeight="600" customWidth="800"/>
+    <screen std:sid="screen-96f27072" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-a23c7e02">
+      <cl:dataset std:sid="d-set-1794d2e3" id="AuditLogList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-90d449d6" name="EventTime"/>
+          <cl:datacolumn std:sid="d-column-b5ae0fdf" name="UserID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-77027930" name="Category" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-6482ea9f" name="Content" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-8231e029" name="Detail"/>
+          <cl:datacolumn std:sid="d-column-db8676f1" name="Target"/>
+          <cl:datacolumn std:sid="d-column-a4a04a0b" name="Action" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-69374ec1" name="Location" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-ccd9af6b" name="Remark"/>
+          <cl:datacolumn std:sid="d-column-9c5be550" name="StrReserved"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-f34919af" id="ExportAuditLogList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-36c760a9" name="EventTime"/>
+          <cl:datacolumn std:sid="d-column-30e85a31" name="UserID" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-9653e44d" name="Category" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-73d99575" name="Content" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-cfc42b1e" name="Action" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-f7299c54" name="Target"/>
+          <cl:datacolumn std:sid="d-column-b51ee487" name="Remark"/>
+          <cl:datacolumn std:sid="d-column-5f797633" name="Detail"/>
+          <cl:datacolumn std:sid="d-column-dd005b95" name="Location" datatype="string"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-c2bd18fc" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-a4e6dc57" name="Count" datatype="number" defaultvalue="0"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-a33aca7f" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-d22ef317" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-822239bf" id="dm_ExportParam">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-23095cb9" name="offset" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-0d10dfbd" name="total" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-27608c31" name="mode" datatype="string"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-b89e79d5" id="sms_getAuditLogList" method="get" action="/v1/logs/audit_log">
+        <cl:listener std:sid="listener-676c57cf" name="submit-done" handler="onSms_getAuditLogListSubmitDone"/>
+        <cl:listener std:sid="listener-e7605f52" name="submit-error" handler="onSubmitError"/>
+        <cl:listener std:sid="listener-5290e97b" name="submit-timeout" handler="onSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total"/>
+        <cl:responsedata dataid="AuditLogList"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-1331243c" style="padding:0px; top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-8926e156" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-e79c4eb7" style="padding:10px;">
+      <cl:xylayoutdata std:sid="xyl-data-5d9b0898" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-3cc43a62" id="SLMGR_grp" style="padding:0px;">
+        <cl:xylayoutdata std:sid="xyl-data-3bb3c1a6" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+        <cl:group std:sid="group-d241cf2b">
+          <cl:formdata std:sid="f-data-2d4247b8" row="0" col="0"/>
+          <cl:output std:sid="output-067ddd96" style="text-align:center;" class="common-titlelabel">
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_Total"/>
+            <cl:formdata std:sid="f-data-0090ca7b" row="0" col="0"/>
+          </cl:output>
+          <cl:dateinput std:sid="d-input-1f70e2d2" id="SLMGR_dtStart" value="2018-11-23" format="YYYY-MM-DD" autoselect="false">
+            <cl:formdata std:sid="f-data-ddfb35f4" row="0" col="10"/>
+          </cl:dateinput>
+          <cl:dateinput std:sid="d-input-91383edd" id="SLMGR_dtEnd" value="2018-11-23" format="YYYY-MM-DD" autoselect="false">
+            <cl:formdata std:sid="f-data-0d78e8ec" row="0" col="12"/>
+          </cl:dateinput>
+          <cl:output std:sid="output-5640978c" style="font-weight:bold; vertical-align:middle; text-align:center;" value="~">
+            <cl:formdata std:sid="f-data-8e684a2b" row="0" col="11"/>
+          </cl:output>
+          <cl:output std:sid="output-e7f96a97" style="text-align:right;" class="common-titlelabel">
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_Period"/>
+            <cl:formdata std:sid="f-data-40df2a1a" row="0" col="9"/>
+          </cl:output>
+          <cl:output std:sid="output-9c892426" id="SLMGR_optTotal" value="100000" datatype="number" format="s#,###">
+            <cl:datamapbind property="value" datacontrolid="Total" columnname="Count"/>
+            <cl:formdata std:sid="f-data-b1189817" row="0" col="1"/>
+          </cl:output>
+          <cl:group std:sid="group-82d9cf56" style="border-right-style:solid; border-top-width:1px; border-bottom-color:#cccccc; border-right-width:1px; border-left-color:#cccccc; border-right-color:#cccccc; border-left-width:1px; border-top-style:solid; background-color:#F6F6F6; border-radius:10px; border-left-style:solid; border-bottom-width:1px; border-top-color:#cccccc; border-bottom-style:solid;">
+            <cl:formdata std:sid="f-data-b1f62c7d" row="0" col="13"/>
+            <cl:combobox std:sid="c-box-09bd201a" id="SLMGR_cmbCategory" style="background-color:#F6F6F6; border-right-style:none; border-left-style:none; border-bottom-style:none; border-top-style:none; text-align:center;" value="0">
+              <cl:formdata std:sid="f-data-f6f32714" row="0" col="0"/>
+            </cl:combobox>
+            <cl:inputbox std:sid="i-box-bb1a933d" id="SLMGR_edtKeyword" style="background-color:#F6F6F6; border-right-style:solid; border-left-style:solid; border-right-width:1px; border-left-color:#cccccc; border-bottom-style:none; border-right-color:#cccccc; border-left-width:1px; border-top-style:none;">
+              <cl:listener std:sid="listener-995482fe" name="keyup" handler="onSLMGR_edtKeywordKeyup"/>
+              <cl:formdata std:sid="f-data-d215d730" row="0" col="1"/>
+            </cl:inputbox>
+            <cl:group std:sid="group-9e6ca500" style="cursor:pointer;">
+              <cl:listener std:sid="listener-79fb42ea" name="click" handler="onButtonClick"/>
+              <cl:formdata std:sid="f-data-9462854d" row="0" col="2"/>
+              <cl:img std:sid="image-6504aefa" src="/theme/images/common/common_text_field_btn_icons_search.png">
+                <cl:xylayoutdata std:sid="xyl-data-2d786f99" top="1px" bottom="1px" width="26px" horizontalAnchor="CENTER" verticalAnchor="BOTH"/>
+              </cl:img>
+              <cl:xylayout std:sid="xylayout-f82cbc71"/>
+            </cl:group>
+            <cl:formlayout std:sid="f-layout-701e8431" hspace="0px" vspace="0px">
+              <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+              <cl:columns length="2" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="3" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:img std:sid="image-6c9be4de" style="cursor:help;" src="../../../theme/images/common/common_btn_window_top_q.png">
+            <cl:listener std:sid="listener-e44dce5b" name="click" handler="onImageClick"/>
+            <cl:formdata std:sid="f-data-fa62d1a9" halign="CENTER" valign="CENTER" width="14" height="14" row="0" col="14"/>
+          </cl:img>
+          <cl:combobox std:sid="c-box-23e0ee76" id="SLMGR_cmbLocation" style="text-align:center;" value="-1">
+            <cl:formdata std:sid="f-data-c784ccb1" row="0" col="3"/>
+            <cl:item std:sid="item-b1357a05" label="------" value="-1"/>
+            <cl:item std:sid="item-c6cc45d8" label="label2" value="1">
+              <cl:langbind property="label" category="PROPERTY" keypath="Str_Server"/>
+            </cl:item>
+            <cl:item std:sid="item-d4f70467" label="Str_Terminal" value="2">
+              <cl:langbind property="label" category="PROPERTY" keypath="Str_Terminal"/>
+            </cl:item>
+          </cl:combobox>
+          <cl:output std:sid="output-6f690994" id="SLMGR_optLocation" style="text-align:right;">
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_Location"/>
+            <cl:formdata std:sid="f-data-e44a3169" row="0" col="2"/>
+          </cl:output>
+          <cl:output std:sid="output-344f2326" id="SLMGR_optBase" style="text-align:right;" visible="false" enabled="true">
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_BaseCategory"/>
+            <cl:formdata std:sid="f-data-1456688b" row="0" col="4"/>
+          </cl:output>
+          <cl:combobox std:sid="c-box-d016636f" id="SLMGR_cmbBaseCategory" style="text-align:center;" visible="false" enabled="false" value="-1">
+            <cl:formdata std:sid="f-data-29daf270" row="0" col="5"/>
+            <cl:item std:sid="item-634dbd6f" label="----------" value="-1"/>
+          </cl:combobox>
+          <cl:output std:sid="output-6c19fca2" id="SLMGR_optAction" style="text-align:right;" visible="false" enabled="true">
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_Action"/>
+            <cl:formdata std:sid="f-data-64a9862e" row="0" col="6"/>
+          </cl:output>
+          <cl:combobox std:sid="c-box-de6c3d73" id="SLMGR_cmbAction" style="text-align:center;" visible="false" enabled="false" value="-1">
+            <cl:formdata std:sid="f-data-cf838405" row="0" col="7"/>
+            <cl:item std:sid="item-132dae1b" label="----------" value="-1"/>
+          </cl:combobox>
+          <cl:button std:sid="button-9374908c" id="btn_Export" class="userInfo_btn" visible="false">
+            <cl:listener std:sid="listener-353b66df" name="click" handler="onBtn_ExportClick"/>
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_Export"/>
+            <cl:formdata std:sid="f-data-5f68a3b7" row="0" col="15"/>
+          </cl:button>
+          <cl:formlayout std:sid="f-layout-e3168c9b">
+            <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+            <cl:columns length="30" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="55" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="30" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="60" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="45" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="60" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="30" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="50" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="10" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="47" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="90" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="10" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+            <cl:columns length="90" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="220" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="14" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="40" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:udc std:sid="ud-control-fdeebd6a" id="SLMGR_udcAuditLogList" type="udc.grid.auditLogList">
+          <cl:listener std:sid="listener-3ccd025a" name="pagechange" handler="onSLMGR_udcAuditLogListPagechange"/>
+          <cl:formdata std:sid="f-data-0cb92048" row="1" col="0"/>
+        </cl:udc>
+        <cl:formlayout std:sid="f-layout-1db71e2e">
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          <cl:rows length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:xylayout std:sid="xylayout-ffd79239"/>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-3da5d600"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

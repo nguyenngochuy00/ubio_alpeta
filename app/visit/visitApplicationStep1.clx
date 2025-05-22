@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-d92e160c" version="1.0.0.0">
+  <head std:sid="head-13794550">
+    <title>visitApplicationStep1</title>
+    <screen std:sid="screen-fe2f4dac" id="default" name="default" minwidth="1024px" width="1024px" height="768px" customHeight="600" customWidth="800" active="false"/>
+    <screen std:sid="screen-91cfbf44" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px" useCustomHeight="true" customHeight="550" customWidth="800" active="false"/>
+    <screen std:sid="screen-594b7451" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px" useCustomHeight="true" customHeight="550" customWidth="800" active="true"/>
+    <cl:model std:sid="model-38157dd8">
+      <cl:dataset std:sid="d-set-f4fca70f" id="UserList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-37cb338b" name="UserID"/>
+          <cl:datacolumn std:sid="d-column-11ac712d" name="Name"/>
+          <cl:datacolumn std:sid="d-column-f2c95d31" name="Group"/>
+          <cl:datacolumn std:sid="d-column-46c5ad19" name="Position"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-018ac910" id="LangList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-4ec5ff10" name="Locale" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-0ad81824" name="Key"/>
+          <cl:datacolumn std:sid="d-column-3d27e721" name="Value"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-bd252d0d" id="LangErrorList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-2b39448c" name="Locale" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-9f6ad2de" name="Key"/>
+          <cl:datacolumn std:sid="d-column-7aec4718" name="Value"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-24fadfcd" id="VisitInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-1ba3f487" name="StartDate"/>
+          <cl:datacolumn std:sid="d-column-9fa796a7" name="StartTime"/>
+          <cl:datacolumn std:sid="d-column-e990ca06" name="EndDate"/>
+          <cl:datacolumn std:sid="d-column-a782ebb7" name="EndTime"/>
+          <cl:datacolumn std:sid="d-column-22a32fd5" name="Purpose" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-16958432" name="VisitTargetID"/>
+          <cl:datacolumn std:sid="d-column-89bec924" name="VisitTargetUserName"/>
+          <cl:datacolumn std:sid="d-column-02e7419b" name="VisitTargetPositionName"/>
+          <cl:datacolumn std:sid="d-column-bd162035" name="VisitTargetGroupName"/>
+          <cl:datacolumn std:sid="d-column-0e51bc7d" name="Password"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-866f6864" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-3186aade" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-072b01cd" id="OptionVisitor">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-7a3e55d1" name="ServerAddress"/>
+          <cl:datacolumn std:sid="d-column-1959bcb4" name="ServerPort" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-3d61bed6" name="VisitorLinkMessage"/>
+          <cl:datacolumn std:sid="d-column-0fb6e3ec" name="VisitorLinkTitle"/>
+          <cl:datacolumn std:sid="d-column-2bf2cf25" name="FaceRegistMessage"/>
+          <cl:datacolumn std:sid="d-column-852e93be" name="FaceRegistTitle"/>
+          <cl:datacolumn std:sid="d-column-a265f5a2" name="ServiceName"/>
+          <cl:datacolumn std:sid="d-column-2a2b5f56" name="MendatoryField" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-68d24bb8" name="Param1" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-27c986e0" id="sms_getLangList" method="get" action="/data/lang/lang.json">
+        <cl:listener std:sid="listener-89431a4a" name="submit-done" handler="onSms_getLangListSubmitDone"/>
+        <cl:listener std:sid="listener-44f5a95a" name="submit-success" handler="onSms_getLangListSubmitSuccess"/>
+        <cl:responsedata dataid="LangList" isadd="true"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-e8716775" id="sms_getLangErrorList" method="get" action="data/lang/lang.json">
+        <cl:listener std:sid="listener-37741163" name="submit-done" handler="onSms_getLangErrorListSubmitDone"/>
+        <cl:listener std:sid="listener-14feeb2a" name="submit-success" handler="onSms_getLangErrorListSubmitSuccess"/>
+        <cl:responsedata dataid="LangErrorList" isadd="true"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-6aacc886" id="sms_getOption" method="get" action="/v1/visitor/options">
+        <cl:listener std:sid="listener-ca49f207" name="submit-done" handler="onSms_getOptionSubmitDone"/>
+        <cl:listener std:sid="listener-88d9e073" name="submit-error" handler="onSms_getOptionSubmitError"/>
+        <cl:listener std:sid="listener-e125ade0" name="submit-timeout" handler="onSms_getOptionSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="OptionVisitor"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-5fdc0bab" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-2a8e9408" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-7b9618eb" style="background-image:url('../../theme/custom/nhedu_03/top_bg.png');">
+      <cl:responsivexylayoutdata std:sid="rxyl-data-33d6db71">
+        <cl:xylayoutdata std:sid="sxyl-data-25804ae0" top="10px" width="350px" height="40px" horizontalAnchor="CENTER" verticalAnchor="TOP" screenid="mobile"/>
+        <cl:xylayoutdata std:sid="sxyl-data-89738ba5" top="10px" width="1024px" height="40px" horizontalAnchor="CENTER" verticalAnchor="TOP" screenid="default"/>
+        <cl:xylayoutdata std:sid="sxyl-data-8a7aad5e" top="10px" width="500px" height="40px" horizontalAnchor="CENTER" verticalAnchor="TOP" screenid="tablet"/>
+      </cl:responsivexylayoutdata>
+      <cl:output std:sid="output-c5eb21bd" id="VMVAP_opb1" style="color:#ffffff; font-weight:700; font-size:20px;">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_VisitApplication"/>
+        <cl:responsivexylayoutdata std:sid="rxyl-data-a5a02207">
+          <cl:xylayoutdata std:sid="sxyl-data-0c5e5f43" left="20px" width="277px" height="32px" horizontalAnchor="LEFT" verticalAnchor="CENTER" screenid="default"/>
+          <cl:xylayoutdata std:sid="sxyl-data-075c3345" left="20px" width="250px" height="32px" horizontalAnchor="LEFT" verticalAnchor="CENTER" screenid="mobile"/>
+          <cl:xylayoutdata std:sid="sxyl-data-c917436c" left="29px" width="357px" height="32px" horizontalAnchor="LEFT" verticalAnchor="CENTER" screenid="tablet"/>
+        </cl:responsivexylayoutdata>
+      </cl:output>
+      <cl:responsivexylayout std:sid="r-xylayout-df3efd81"/>
+    </cl:group>
+    <cl:group std:sid="group-fd1cfe4e" id="VMVAS1_grpVisitInfo">
+      <cl:responsivexylayoutdata std:sid="rxyl-data-f080b32c">
+        <cl:xylayoutdata std:sid="sxyl-data-18f4777e" top="70px" bottom="35px" width="330px" horizontalAnchor="CENTER" verticalAnchor="BOTH" screenid="mobile"/>
+        <cl:xylayoutdata std:sid="sxyl-data-d47f5970" top="80px" width="984px" height="304px" horizontalAnchor="CENTER" verticalAnchor="TOP" screenid="default"/>
+        <cl:xylayoutdata std:sid="sxyl-data-1781b7ed" top="70px" width="480px" height="446px" horizontalAnchor="CENTER" verticalAnchor="TOP" screenid="tablet"/>
+      </cl:responsivexylayoutdata>
+      <cl:group std:sid="group-3405a80c" style="background-color:#61befe; background-image:none;">
+        <cl:responsivexylayoutdata std:sid="rxyl-data-20aaa1f6">
+          <cl:xylayoutdata std:sid="sxyl-data-d694d0b4" top="60px" left="0px" width="119px" height="155px" horizontalAnchor="LEFT" verticalAnchor="TOP" screenid="default"/>
+          <cl:xylayoutdata std:sid="sxyl-data-17861ed1" top="39px" left="0px" width="0px" height="0px" horizontalAnchor="LEFT" verticalAnchor="TOP" screenid="tablet"/>
+          <cl:xylayoutdata std:sid="sxyl-data-b757ceaa" top="39px" left="0px" width="0px" height="0px" horizontalAnchor="LEFT" verticalAnchor="TOP" screenid="mobile"/>
+        </cl:responsivexylayoutdata>
+        <cl:img std:sid="image-10dabb3b" src="../../theme/images/visitor/step_icon_1.png">
+          <cl:xylayoutdata std:sid="xyl-data-efeba906" width="45px" height="74px" horizontalAnchor="CENTER" verticalAnchor="CENTER"/>
+        </cl:img>
+        <cl:xylayout std:sid="xylayout-215dc3eb"/>
+      </cl:group>
+      <cl:output std:sid="output-d7b4d887" id="VMVAS1_opbApplicationGuide" style="vertical-align:top; font-size:12px;">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_VisitApplicationGuide"/>
+        <cl:responsivexylayoutdata std:sid="rxyl-data-1b0e4231">
+          <cl:xylayoutdata std:sid="sxyl-data-b1ccd5c0" top="360px" width="480px" height="34px" horizontalAnchor="CENTER" verticalAnchor="TOP" screenid="tablet"/>
+          <cl:xylayoutdata std:sid="sxyl-data-aee26846" top="360px" right="0px" left="0px" height="34px" horizontalAnchor="BOTH" verticalAnchor="TOP" screenid="mobile"/>
+          <cl:xylayoutdata std:sid="sxyl-data-fefae5f9" top="214px" right="0px" left="572px" height="34px" horizontalAnchor="BOTH" verticalAnchor="TOP" screenid="default"/>
+        </cl:responsivexylayoutdata>
+      </cl:output>
+      <cl:group std:sid="group-aa2512eb">
+        <cl:responsivexylayoutdata std:sid="rxyl-data-c79d5805">
+          <cl:xylayoutdata std:sid="sxyl-data-b006e0c6" top="110px" left="572px" width="412px" height="50px" horizontalAnchor="LEFT" verticalAnchor="TOP" screenid="default"/>
+          <cl:xylayoutdata std:sid="sxyl-data-ab75d074" top="200px" right="0px" left="0px" height="50px" horizontalAnchor="BOTH" verticalAnchor="TOP" screenid="mobile"/>
+          <cl:xylayoutdata std:sid="sxyl-data-c83645be" top="200px" width="480px" height="50px" horizontalAnchor="CENTER" verticalAnchor="TOP" screenid="tablet"/>
+        </cl:responsivexylayoutdata>
+        <cl:output std:sid="output-3680fb82" id="VMVAP_opb6" style="background-color:#F6F6F6; border-right-style:solid; border-bottom-color:#f2f2f2; color:#6b6b6b; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#f2f2f2; text-align:center;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_VisitEndAt"/>
+          <cl:formdata std:sid="f-data-8a0c2155" row="0" col="0"/>
+        </cl:output>
+        <cl:group std:sid="group-14fc4db0">
+          <cl:formdata std:sid="f-data-0d7c6055" valign="CENTER" height="30" row="0" col="2"/>
+          <cl:dateinput std:sid="d-input-e58c8841" id="VMVAS1_dtiEndDate" style="border-right-style:none; border-bottom-color:#cccccc; color:#6b6b6b; border-left-style:none; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-top-style:none; text-align:center;" tabindex="4" hidebutton="true" buttonimage="../../theme/images/visitor/icon_day.png">
+            <cl:datamapbind property="value" datacontrolid="VisitInfo" columnname="EndDate"/>
+            <cl:formdata std:sid="f-data-e71e3e7e" row="0" col="1"/>
+          </cl:dateinput>
+          <cl:dateinput std:sid="d-input-4c0555b5" id="VMVAS1_dtiEndTime" style="border-right-style:none; color:#6b6b6b; border-bottom-color:#cccccc; border-left-style:none; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-top-style:none; text-align:center;" tabindex="5" hidebutton="true" mask="HH:mm" format="HH:mm" autoselect="false">
+            <cl:datamapbind property="value" datacontrolid="VisitInfo" columnname="EndTime"/>
+            <cl:formdata std:sid="f-data-75f36ca6" row="0" col="2"/>
+          </cl:dateinput>
+          <cl:formlayout std:sid="f-layout-2228dfb1">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="120" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="60" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:output std:sid="output-14fb3a88" style="background-color:#f6f6f6; color:red; font-size:18px; background-image:none; text-align:center;" value="*">
+          <cl:formdata std:sid="f-data-5fdc464d" row="0" col="1"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-6399129a" hspace="0px" vspace="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="110" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="10" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-b74d9e73">
+        <cl:responsivexylayoutdata std:sid="rxyl-data-53cba15a">
+          <cl:xylayoutdata std:sid="sxyl-data-6b7ede0c" top="60px" left="160px" width="413px" height="50px" horizontalAnchor="LEFT" verticalAnchor="TOP" screenid="default"/>
+          <cl:xylayoutdata std:sid="sxyl-data-6d7cb5aa" top="50px" right="0px" left="0px" height="50px" horizontalAnchor="BOTH" verticalAnchor="TOP" screenid="mobile"/>
+          <cl:xylayoutdata std:sid="sxyl-data-29ce37f2" top="50px" right="0px" left="0px" height="50px" horizontalAnchor="BOTH" verticalAnchor="TOP" screenid="tablet"/>
+        </cl:responsivexylayoutdata>
+        <cl:output std:sid="output-586d1dd8" id="VMVAP_opb4" style="background-color:#F6F6F6; border-right-style:solid; border-bottom-color:#f2f2f2; color:#6b6b6b; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#f2f2f2; text-align:center;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_VisitTargetName"/>
+          <cl:formdata std:sid="f-data-2a3b10d1" row="0" col="0"/>
+        </cl:output>
+        <cl:group std:sid="group-00046a9d">
+          <cl:formdata std:sid="f-data-f3a75033" valign="CENTER" height="36" row="0" col="2"/>
+          <cl:output std:sid="output-9cb6ff40" id="VMVAS1_obpVisitTargetName" style="border-right-style:none; color:#6b6b6b; border-bottom-color:#cccccc; border-left-style:none; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-top-style:none; text-align:center;" readonly="true" tabindex="1" value="">
+            <cl:listener std:sid="listener-a54d0078" name="click" handler="onVMVAS1_obpVisitTargetNameClick"/>
+            <cl:formdata std:sid="f-data-c2dcde88" row="0" col="1"/>
+          </cl:output>
+          <cl:button std:sid="button-46f41393" id="VMVAS1_btnSearchTarget" style="background-color:transparent; border-right-style:none; background-repeat:no-repeat; background-size:contain; border-left-style:none; border-bottom-style:none; background-image:url('../../theme/images/visitor/btn_search.png'); background-position:center; border-top-style:none;" tabindex="1">
+            <cl:listener std:sid="listener-ddc257e3" name="click" handler="onVMVAS1_btnSearchTargetClick"/>
+            <cl:formdata std:sid="f-data-b5e1907c" halign="CENTER" valign="CENTER" width="32" height="32" row="0" col="2"/>
+          </cl:button>
+          <cl:output std:sid="output-34f11f49" id="VMVAS1_obpVisitTargetFactory" style="border-right-style:none; color:#6b6b6b; border-left-style:none; font-size:14px; border-top-style:none; text-align:center;" readonly="true" value="">
+            <cl:formdata std:sid="f-data-2811c57b" row="0" col="0"/>
+          </cl:output>
+          <cl:formlayout std:sid="f-layout-6675fca6">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="20" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="36" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="4" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:output std:sid="output-49c921c9" style="background-color:#f6f6f6; color:red; font-size:18px; background-image:none; text-align:left;" value="*">
+          <cl:formdata std:sid="f-data-254e83f6" row="0" col="1"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-ba903712" hspace="0px" vspace="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="110" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="10" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-b5906bce">
+        <cl:responsivexylayoutdata std:sid="rxyl-data-71bcfd5f">
+          <cl:xylayoutdata std:sid="sxyl-data-8c91d447" top="160px" left="160px" width="413px" height="50px" horizontalAnchor="LEFT" verticalAnchor="TOP" screenid="default"/>
+          <cl:xylayoutdata std:sid="sxyl-data-4c7ca108" top="250px" right="0px" left="0px" height="50px" horizontalAnchor="BOTH" verticalAnchor="TOP" screenid="mobile"/>
+          <cl:xylayoutdata std:sid="sxyl-data-16191628" top="250px" width="480px" height="50px" horizontalAnchor="CENTER" verticalAnchor="TOP" screenid="tablet"/>
+        </cl:responsivexylayoutdata>
+        <cl:output std:sid="output-39c414f3" id="VMVAP_opb7" style="background-color:#F6F6F6; border-right-style:solid; border-bottom-color:#f2f2f2; color:#6b6b6b; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-right-color:#f2f2f2; border-bottom-style:solid; text-align:center;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_VisitorPurpose"/>
+          <cl:formdata std:sid="f-data-2978260d" row="0" col="0"/>
+        </cl:output>
+        <cl:group std:sid="group-c40e8af8">
+          <cl:formdata std:sid="f-data-0261bf5c" row="0" col="2"/>
+          <cl:inputbox std:sid="i-box-e485cfe8" id="VMVAS1_ipbPurpose" style="border-right-style:none; border-bottom-color:#cccccc; color:#6b6b6b; border-left-style:none; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-top-style:none; text-align:center;" tabindex="6" maxlength="255">
+            <cl:datamapbind property="value" datacontrolid="VisitInfo" columnname="Purpose"/>
+            <cl:xylayoutdata std:sid="xyl-data-b06f58e8" right="20px" left="20px" height="24px" horizontalAnchor="BOTH" verticalAnchor="CENTER"/>
+          </cl:inputbox>
+          <cl:xylayout std:sid="xylayout-2ff26588"/>
+        </cl:group>
+        <cl:output std:sid="output-d2dc5d35" id="op_purposeRequired" style="background-color:#f6f6f6; color:red; font-size:18px; background-image:none; text-align:left;" value="">
+          <cl:formdata std:sid="f-data-12649296" row="0" col="1"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-03817dd7" hspace="0px" vspace="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="110" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="10" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-d30fefce">
+        <cl:responsivexylayoutdata std:sid="rxyl-data-a6e69756">
+          <cl:xylayoutdata std:sid="sxyl-data-e8c91163" top="60px" left="572px" width="412px" height="50px" horizontalAnchor="LEFT" verticalAnchor="TOP" screenid="default"/>
+          <cl:xylayoutdata std:sid="sxyl-data-b56e0a65" top="100px" right="0px" left="0px" height="50px" horizontalAnchor="BOTH" verticalAnchor="TOP" screenid="mobile"/>
+          <cl:xylayoutdata std:sid="sxyl-data-31325248" top="100px" width="480px" height="50px" horizontalAnchor="CENTER" verticalAnchor="TOP" screenid="tablet"/>
+        </cl:responsivexylayoutdata>
+        <cl:output std:sid="output-312206aa" style="background-color:#F6F6F6; border-right-style:solid; border-bottom-color:#f2f2f2; color:#6b6b6b; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#f2f2f2; text-align:center;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_VisitTargetGroupPosition"/>
+          <cl:formdata std:sid="f-data-5e99fb13" row="0" col="0"/>
+        </cl:output>
+        <cl:group std:sid="group-96e92e4a">
+          <cl:formdata std:sid="f-data-01e8ec86" row="0" col="2"/>
+          <cl:output std:sid="output-c2716e3f" id="VMVAS1_obpVisitTargetGroup" style="border-right-style:none; border-bottom-color:#cccccc; color:#6b6b6b; border-left-style:none; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-top-style:none; text-align:center;" value="">
+            <cl:xylayoutdata std:sid="xyl-data-460e4613" right="20px" left="20px" height="25px" horizontalAnchor="BOTH" verticalAnchor="CENTER"/>
+          </cl:output>
+          <cl:xylayout std:sid="xylayout-30af5f57"/>
+        </cl:group>
+        <cl:output std:sid="output-51f52241" style="background-color:#f6f6f6; color:red; font-size:18px; background-image:none; text-align:center;" value="">
+          <cl:formdata std:sid="f-data-d8c39ee4" row="0" col="1"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-7189b95a" hspace="0px" vspace="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="110" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="10" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-a1f501e0">
+        <cl:responsivexylayoutdata std:sid="rxyl-data-31f86584">
+          <cl:xylayoutdata std:sid="sxyl-data-6f06c8b6" top="110px" left="160px" width="413px" height="50px" horizontalAnchor="LEFT" verticalAnchor="TOP" screenid="default"/>
+          <cl:xylayoutdata std:sid="sxyl-data-391240f6" top="150px" right="0px" left="0px" height="50px" horizontalAnchor="BOTH" verticalAnchor="TOP" screenid="mobile"/>
+          <cl:xylayoutdata std:sid="sxyl-data-bb54ae71" top="150px" width="480px" height="50px" horizontalAnchor="CENTER" verticalAnchor="TOP" screenid="tablet"/>
+        </cl:responsivexylayoutdata>
+        <cl:output std:sid="output-6fa2bca4" id="VMVAP_opb5" style="background-color:#F6F6F6; border-right-style:solid; border-bottom-color:#f2f2f2; color:#6b6b6b; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-right-color:#f2f2f2; border-bottom-style:solid; text-align:center;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_VisitStartAt"/>
+          <cl:formdata std:sid="f-data-ef9f5b5f" row="0" col="0"/>
+        </cl:output>
+        <cl:group std:sid="group-3aa7c8e6">
+          <cl:formdata std:sid="f-data-5750a998" valign="CENTER" height="30" row="0" col="2"/>
+          <cl:dateinput std:sid="d-input-eef1c316" id="VMVAS1_dtiStartDate" style="border-right-style:none; border-bottom-color:#cccccc; color:#6b6b6b; border-left-style:none; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-top-style:none; text-align:center;" tabindex="2" hidebutton="true" buttonimage="../../theme/images/visitor/icon_day.png">
+            <cl:listener std:sid="listener-be8fb3c7" name="value-change" handler="onVMVAS1_dtiStartDateValueChange"/>
+            <cl:datamapbind property="value" datacontrolid="VisitInfo" columnname="StartDate"/>
+            <cl:formdata std:sid="f-data-484f1986" row="0" col="1"/>
+          </cl:dateinput>
+          <cl:dateinput std:sid="d-input-34eb422d" id="VMVAS1_dtiStartTime" style="border-right-style:none; color:#6b6b6b; border-bottom-color:#cccccc; border-left-style:none; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-top-style:none; text-align:center;" tabindex="3" hidebutton="true" mask="HH:mm" format="HH:mm" autoselect="false">
+            <cl:datamapbind property="value" datacontrolid="VisitInfo" columnname="StartTime"/>
+            <cl:formdata std:sid="f-data-a6dbf673" row="0" col="2"/>
+          </cl:dateinput>
+          <cl:formlayout std:sid="f-layout-82e9abe0">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="120" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="60" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:output std:sid="output-0b56c879" style="background-color:#f6f6f6; color:red; font-size:18px; background-image:none; text-align:center;" value="*">
+          <cl:formdata std:sid="f-data-304e3a9b" row="0" col="1"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-82469306" hspace="0px" vspace="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="110" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="10" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-044b98d1">
+        <cl:responsivexylayoutdata std:sid="rxyl-data-6afb805f">
+          <cl:xylayoutdata std:sid="sxyl-data-0586af58" top="160px" left="572px" width="412px" height="50px" horizontalAnchor="LEFT" verticalAnchor="TOP" screenid="default"/>
+          <cl:xylayoutdata std:sid="sxyl-data-a522f831" top="300px" right="0px" left="0px" height="50px" horizontalAnchor="BOTH" verticalAnchor="TOP" screenid="mobile"/>
+          <cl:xylayoutdata std:sid="sxyl-data-de91df76" top="300px" width="480px" height="50px" horizontalAnchor="CENTER" verticalAnchor="TOP" screenid="tablet"/>
+        </cl:responsivexylayoutdata>
+        <cl:output std:sid="output-522b13ff" style="background-color:#F6F6F6; border-right-style:solid; border-bottom-color:#f2f2f2; color:#6b6b6b; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#f2f2f2; text-align:center;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Password"/>
+          <cl:formdata std:sid="f-data-8db89a37" row="0" col="0"/>
+        </cl:output>
+        <cl:group std:sid="group-d6cb771f">
+          <cl:formdata std:sid="f-data-a6e09fd5" row="0" col="2"/>
+          <cl:inputbox std:sid="i-box-1a6b88a3" id="VMVAS1_ipbPassword" style="border-right-style:none; border-bottom-color:#cccccc; color:#6b6b6b; border-left-style:none; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-top-style:none; text-align:center;" tabindex="7" secret="true" maxlength="8">
+            <cl:datamapbind property="value" datacontrolid="VisitInfo" columnname="Password"/>
+            <cl:xylayoutdata std:sid="xyl-data-865f6c71" right="20px" left="20px" height="24px" horizontalAnchor="BOTH" verticalAnchor="CENTER"/>
+          </cl:inputbox>
+          <cl:xylayout std:sid="xylayout-955bfe42"/>
+        </cl:group>
+        <cl:output std:sid="output-71da7db7" style="background-color:#f6f6f6; color:red; font-size:18px; background-image:none; text-align:center;" value="*">
+          <cl:formdata std:sid="f-data-09e732e2" row="0" col="1"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-8f2141a2" hspace="0px" vspace="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="110" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="10" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:button std:sid="button-0ec7141f" id="VMVAS1_btnNext" style="padding:4px;" class="userInfo_btn" tabindex="8">
+        <cl:listener std:sid="listener-97f0237e" name="click" handler="onVMVAS1_btnNextClick"/>
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_Next"/>
+        <cl:responsivexylayoutdata std:sid="rxyl-data-2c33012c">
+          <cl:xylayoutdata std:sid="sxyl-data-c0c405f5" top="400px" right="0px" width="100px" height="40px" horizontalAnchor="RIGHT" verticalAnchor="TOP" screenid="mobile"/>
+          <cl:xylayoutdata std:sid="sxyl-data-1c81f24c" top="258px" right="0px" width="100px" height="40px" horizontalAnchor="RIGHT" verticalAnchor="TOP" screenid="default"/>
+          <cl:xylayoutdata std:sid="sxyl-data-f1fd8c63" top="400px" right="0px" width="100px" height="40px" horizontalAnchor="RIGHT" verticalAnchor="TOP" screenid="tablet"/>
+        </cl:responsivexylayoutdata>
+      </cl:button>
+      <cl:output std:sid="output-7c352be3" id="VMVAS1_opbSubTitle" style="font-weight:700; font-size:16px;">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_VisitInfo"/>
+        <cl:responsivexylayoutdata std:sid="rxyl-data-6093c9ce">
+          <cl:xylayoutdata std:sid="sxyl-data-02ad093c" top="0px" left="0px" width="200px" height="32px" horizontalAnchor="LEFT" verticalAnchor="TOP" screenid="default"/>
+          <cl:xylayoutdata std:sid="sxyl-data-a538ec64" top="0px" left="0px" width="160px" height="32px" horizontalAnchor="LEFT" verticalAnchor="TOP" screenid="mobile"/>
+          <cl:xylayoutdata std:sid="sxyl-data-7684794c" top="0px" left="0px" width="200px" height="32px" horizontalAnchor="LEFT" verticalAnchor="TOP" screenid="tablet"/>
+        </cl:responsivexylayoutdata>
+      </cl:output>
+      <cl:group std:sid="group-f3a6eb72" style="border-bottom-color:#2446a4; border-bottom-width:1px; border-bottom-style:solid;">
+        <cl:responsivexylayoutdata std:sid="rxyl-data-fb49b7b6">
+          <cl:xylayoutdata std:sid="sxyl-data-38f8559c" top="34px" left="0px" width="200px" height="1px" horizontalAnchor="LEFT" verticalAnchor="TOP" screenid="default"/>
+          <cl:xylayoutdata std:sid="sxyl-data-ca74240b" top="34px" left="0px" width="160px" height="1px" horizontalAnchor="LEFT" verticalAnchor="TOP" screenid="mobile"/>
+          <cl:xylayoutdata std:sid="sxyl-data-2c4ac68c" top="34px" left="0px" width="98px" height="1px" horizontalAnchor="LEFT" verticalAnchor="TOP" screenid="tablet"/>
+        </cl:responsivexylayoutdata>
+        <cl:xylayout std:sid="xylayout-3cbef76b"/>
+      </cl:group>
+      <cl:group std:sid="group-653373e7">
+        <cl:responsivexylayoutdata std:sid="rxyl-data-bb6c4b20">
+          <cl:xylayoutdata std:sid="sxyl-data-0df86183" top="0px" right="0px" width="120px" height="32px" horizontalAnchor="RIGHT" verticalAnchor="TOP" screenid="default"/>
+          <cl:xylayoutdata std:sid="sxyl-data-2316e461" top="0px" right="0px" width="120px" height="32px" horizontalAnchor="RIGHT" verticalAnchor="TOP" screenid="mobile"/>
+          <cl:xylayoutdata std:sid="sxyl-data-ea02ff82" top="0px" right="0px" width="120px" height="32px" horizontalAnchor="RIGHT" verticalAnchor="TOP" screenid="tablet"/>
+        </cl:responsivexylayoutdata>
+        <cl:output std:sid="output-d8111c5c" style="font-size:16px; text-align:center;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Step"/>
+          <cl:formdata std:sid="f-data-84f9e1b4" row="0" col="0"/>
+        </cl:output>
+        <cl:output std:sid="output-cfd714bb" style="font-weight:700; font-size:16px; text-align:center;" value="1 / 3">
+          <cl:formdata std:sid="f-data-51e6aec2" row="0" col="1"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-15a38104" hspace="0px" vspace="0px">
+          <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="60" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="60" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:responsivexylayout std:sid="r-xylayout-a4eb8889"/>
+    </cl:group>
+    <cl:responsivexylayout std:sid="r-xylayout-4bd269cb"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

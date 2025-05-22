@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-8219151a" version="1.0.0.0">
+  <head std:sid="head-bea8a47e">
+    <title>userImport</title>
+    <screen std:sid="screen-ed613fd8" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="400" customWidth="800"/>
+    <screen std:sid="screen-43f9be11" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-c6ee90ab" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-8afae15e">
+      <cl:dataset std:sid="d-set-9399e195" id="ds_fileInfo" sortcondition="">
+        <cl:listener std:sid="listener-e7bea598" name="update" handler="onDs_fileInfoUpdate2"/>
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-3942a4ee" name="rn" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-e2a677e4" name="lastModified"/>
+          <cl:datacolumn std:sid="d-column-fc61a16d" name="lastModifiedDate"/>
+          <cl:datacolumn std:sid="d-column-f4e5c08b" name="name"/>
+          <cl:datacolumn std:sid="d-column-adcef57e" name="size"/>
+          <cl:datacolumn std:sid="d-column-b0539fd1" name="type"/>
+          <cl:datacolumn std:sid="d-column-e3ffd3b9" name="webkitRelativePath"/>
+          <cl:datacolumn std:sid="d-column-2a59fb1e" name="statusValue" datatype="string"/>
+          <cl:datacolumn comment="" std:sid="d-column-36308429" info="" name="userId" datatype="string"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-cedbe583" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-87513087" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-0825fe49" id="sms_userFaceUpload" action="/v1/users/facepicturesimport">
+        <cl:listener std:sid="listener-11ed154d" name="submit-done" handler="onSms_userFaceUploadSubmitDone"/>
+        <cl:listener std:sid="listener-bb9e98f2" name="submit-error" handler="onSms_userFaceUploadSubmitError"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-530913c9" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-e3021417" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-dff87f4e">
+      <cl:xylayoutdata std:sid="xyl-data-89fcad21" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-f31d3eda">
+        <cl:formdata std:sid="f-data-73e2181a" row="0" col="0"/>
+        <cl:group std:sid="group-69ac98c7">
+          <cl:formdata std:sid="f-data-a4799339" topSpacing="2" bottomSpacing="2" leftSpacing="2" rightSpacing="2" row="2" col="0"/>
+          <cl:button std:sid="button-017e6fc1" id="ddd" style="background-color:white; font-size:14px; background-image:none;" class="userInfo_btn">
+            <cl:listener std:sid="listener-9c187c06" name="click" handler="onButtonClick"/>
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_Submit"/>
+            <cl:formdata std:sid="f-data-1a6319b7" row="0" col="5"/>
+          </cl:button>
+          <cl:button std:sid="button-0437b100" style="background-color:white; font-size:14px; background-image:none;" class="userInfo_btn">
+            <cl:listener std:sid="listener-10760a3b" name="click" handler="onButtonClick4"/>
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_ListClear"/>
+            <cl:formdata std:sid="f-data-df122c0b" row="0" col="1"/>
+          </cl:button>
+          <cl:button std:sid="button-3e8b653f" style="background-color:white; font-size:14px; background-image:none;" class="userInfo_btn">
+            <cl:listener std:sid="listener-ae9e3883" name="click" handler="onButtonClick2"/>
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_Delete"/>
+            <cl:formdata std:sid="f-data-763b1583" row="0" col="0"/>
+          </cl:button>
+          <cl:output std:sid="output-8a08822f">
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_ProfileInsert"/>
+            <cl:formdata std:sid="f-data-18324fb7" row="0" col="3"/>
+          </cl:output>
+          <cl:group std:sid="group-fd07db0d" class="user_nav2">
+            <cl:formdata std:sid="f-data-38b7aa77" row="0" col="4"/>
+            <cl:navigationbar std:sid="n-bar-4fb7be8f" id="NVBAR_imageInsert" style="border-radius:50px;">
+              <cl:listener std:sid="listener-564cb0d3" name="selection-change" handler="onNVBAR_imageInsertSelectionChange"/>
+              <cl:formdata std:sid="f-data-9bb8cbf5" valign="CENTER" height="28" row="0" col="0"/>
+              <cl:menuitem std:sid="m-item-799e83ad" label="ON" value="1"/>
+              <cl:menuitem std:sid="m-item-ad052e32" label="OFF" value="0"/>
+            </cl:navigationbar>
+            <cl:formlayout std:sid="f-layout-edb8264b" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+              <cl:rows length="1" unit="FRACTION"/>
+              <cl:columns length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:formlayout std:sid="f-layout-9bbeb080" hspace="5px" vspace="5px" top-margin="0px" right-margin="5px" bottom-margin="0px" left-margin="5px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="100" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="50" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="83" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="80" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:group std:sid="group-18ba36d6">
+          <cl:formdata std:sid="f-data-c066245b" row="0" col="0"/>
+          <cl:group std:sid="group-f5df4aaf">
+            <cl:formdata std:sid="f-data-58a7cb57" row="0" col="1"/>
+            <cl:output std:sid="output-a241e38e" id="opt_tot" style="padding-top:2px; vertical-align:middle; font-size:14px; text-align:left;" datatype="number" format="s#,###">
+              <cl:formdata std:sid="f-data-eccdc3fd" row="0" col="2"/>
+            </cl:output>
+            <cl:output std:sid="output-1dde52dd" style="vertical-align:middle; font-size:14px; text-align:right;">
+              <cl:langbind property="value" category="PROPERTY" keypath="Str_Total"/>
+              <cl:formdata std:sid="f-data-9ed8ed5d" row="0" col="1"/>
+            </cl:output>
+            <cl:img std:sid="image-3dce40c4" id="UFU_imgHelpPage" style="cursor:help;" src="../../../theme/images/common/common_btn_window_top_q.png">
+              <cl:listener std:sid="listener-a870bf60" name="click" handler="onUFU_imgHelpPageClick"/>
+              <cl:formdata std:sid="f-data-82121a9e" halign="CENTER" valign="CENTER" width="14" height="14" row="0" col="3"/>
+            </cl:img>
+            <cl:uicontrolshell std:sid="uic-shell-93ab59b0" id="UFAWR_shlCameraCapture">
+              <cl:listener std:sid="listener-523bf8ed" name="load" handler="onUFAWR_shlCameraCaptureLoad"/>
+              <cl:formdata std:sid="f-data-3374a1fc" row="0" col="0"/>
+            </cl:uicontrolshell>
+            <cl:formlayout std:sid="f-layout-7868ea29" scrollable="false" hspace="5px" vspace="5px" top-margin="0px" right-margin="3px" bottom-margin="0px" left-margin="0px">
+              <cl:rows length="1" unit="FRACTION"/>
+              <cl:columns length="1" unit="FRACTION"/>
+              <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="50" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="14" unit="PIXEL" autoSizing="false" minlength="0"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:group std:sid="group-cd25c817">
+            <cl:formdata std:sid="f-data-a372baa1" row="0" col="0"/>
+            <cl:embeddedpage std:sid="e-page-f86e4792" id="ep1" visible="false" src="userFaceUploadhtml.html" scrolling="no">
+              <cl:listener std:sid="listener-53017568" name="load" handler="onEp1Load"/>
+              <cl:formdata std:sid="f-data-bd0d1f9a" row="0" col="1"/>
+            </cl:embeddedpage>
+            <cl:button std:sid="button-0989042f" class="userInfo_btn">
+              <cl:listener std:sid="listener-df64a18b" name="click" handler="onButtonClick3"/>
+              <cl:langbind property="value" category="PROPERTY" keypath="Str_FileSearch"/>
+              <cl:formdata std:sid="f-data-63fe3ef1" row="0" col="0"/>
+            </cl:button>
+            <cl:formlayout std:sid="f-layout-147e4891" scrollable="false" hspace="5px" vspace="5px" top-margin="5px" right-margin="0px" bottom-margin="0px" left-margin="3px">
+              <cl:rows length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+              <cl:columns length="80" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="1" unit="FRACTION" autoSizing="false" minlength="0"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:formlayout std:sid="f-layout-4607624a" scrollable="false" hspace="5px" vspace="5px" top-margin="0px" right-margin="5px" bottom-margin="0px" left-margin="5px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:group std:sid="group-89f1b1e6">
+          <cl:formdata std:sid="f-data-576636a1" row="1" col="0"/>
+          <cl:grid std:sid="grid-9e73d1e1" id="grd_fileInfoList" class="user_allList" readonly="true" datasetid="ds_fileInfo" autofit="1, 2, 3, 4, 5, 6" resizablecolumns="none">
+            <cl:formdata std:sid="f-data-79c230b0" row="0" col="0" rowspan="1" colspan="1"/>
+            <cl:gridcolumn std:sid="g-column-8c370f02" width="30px"/>
+            <cl:gridcolumn std:sid="g-column-49e632e8" width="100px"/>
+            <cl:gridcolumn std:sid="g-column-cb1d26cd"/>
+            <cl:gridcolumn std:sid="g-column-82793afc"/>
+            <cl:gridcolumn std:sid="g-column-17ec967a"/>
+            <cl:gridcolumn std:sid="g-column-daa39ee6"/>
+            <cl:gridcolumn std:sid="g-column-aa756142"/>
+            <cl:gridheader std:sid="gh-band-ff71d664">
+              <cl:gridrow std:sid="g-row-e5b62cf9"/>
+              <cl:gridcell std:sid="gh-cell-2f2deb0c" rowindex="0" colindex="0" columntype="checkbox"/>
+              <cl:gridcell std:sid="gh-cell-08c8b294" rowindex="0" colindex="2" targetcolumnname="name" sortable="false" filterable="false" text="파일명(ID)">
+                <cl:langbind property="text" category="PROPERTY" keypath="Str_FileName"/>
+              </cl:gridcell>
+              <cl:gridcell std:sid="gh-cell-6ef901da" rowindex="0" colindex="3" targetcolumnname="size" sortable="false" filterable="false" text="size">
+                <cl:langbind property="text" category="PROPERTY" keypath="Str_FileSize"/>
+              </cl:gridcell>
+              <cl:gridcell std:sid="gh-cell-772d5687" rowindex="0" colindex="4" targetcolumnname="type" sortable="false" filterable="false" text="type">
+                <cl:langbind property="text" category="PROPERTY" keypath="Str_Type"/>
+              </cl:gridcell>
+              <cl:gridcell std:sid="gh-cell-45f7f701" rowindex="0" colindex="5" targetcolumnname="webkitRelativePath" sortable="false" filterable="false" text="webkitRelativePath">
+                <cl:langbind property="text" category="PROPERTY" keypath="Str_DatabaseDatafilePath"/>
+              </cl:gridcell>
+              <cl:gridcell std:sid="gh-cell-e95c801f" rowindex="0" colindex="6" text="결과">
+                <cl:langbind property="text" category="PROPERTY" keypath="Str_Result"/>
+              </cl:gridcell>
+              <cl:gridcell std:sid="gh-cell-e65bc7a1" rowindex="0" colindex="1" targetcolumnname="userId" sortcolumnname="rn" visible="true">
+                <cl:langbind property="text" category="PROPERTY" keypath="Str_UserID"/>
+              </cl:gridcell>
+            </cl:gridheader>
+            <cl:griddetail std:sid="gd-band-18699f26">
+              <cl:gridrow std:sid="g-row-a2d77491"/>
+              <cl:gridcell std:sid="gd-cell-dfd30b5c" rowindex="0" colindex="0" columntype="checkbox"/>
+              <cl:gridcell std:sid="gd-cell-e9bb3c46" rowindex="0" colindex="2" columnname="name"/>
+              <cl:gridcell std:sid="gd-cell-2d176eac" rowindex="0" colindex="3" columnname="size"/>
+              <cl:gridcell std:sid="gd-cell-7f054791" rowindex="0" colindex="4" columnname="type"/>
+              <cl:gridcell std:sid="gd-cell-b38246ee" rowindex="0" colindex="5" columnname="webkitRelativePath"/>
+              <cl:gridcell std:sid="gd-cell-bb3010e3" rowindex="0" colindex="6" columnname="statusValue"/>
+              <cl:gridcell std:sid="gd-cell-63891eaa" rowindex="0" colindex="1" columnname="userId"/>
+            </cl:griddetail>
+          </cl:grid>
+          <cl:formlayout std:sid="f-layout-5617a1e8" hspace="10px" vspace="10px" top-margin="5px" right-margin="5px" bottom-margin="5px" left-margin="5px">
+            <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-08c27b13" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="35" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="35" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="3" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-f16d38e0" hspace="1px" vspace="1px" top-margin="1px" right-margin="1px" bottom-margin="1px" left-margin="1px">
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-e33ba410"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

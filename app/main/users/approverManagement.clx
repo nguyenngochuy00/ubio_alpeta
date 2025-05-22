@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-a98aa0b2" version="1.0.0.0">
+  <head std:sid="head-ff1f5fdc">
+    <title>approverManagement</title>
+    <screen std:sid="screen-9e331e7c" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="500" customWidth="800"/>
+    <screen std:sid="screen-ee9ac022" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-d1ced407" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-adf755ee">
+      <cl:dataset std:sid="d-set-174ba88d" id="GroupList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-7ad5f074" name="GroupID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-e30540db" name="Parent" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-a6bd5912" name="Name"/>
+          <cl:datacolumn std:sid="d-column-77412540" name="Description"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-c4082c72" id="ApproverList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-a5e6878c" name="ID" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-4f479d6a" name="Name"/>
+          <cl:datacolumn std:sid="d-column-f2196b60" name="GroupCode" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-f63d26b7" name="MinApproveLevel" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-844b8a3f" name="MaxApproveLevel" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-4b53d3e8" name="UniqueID"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-a1e53e49" id="UserList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-1935768c" name="ID" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-b7cf8b04" name="UniqueID"/>
+          <cl:datacolumn std:sid="d-column-5d28fead" name="Name" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-287d6d09" name="AuthInfo"/>
+          <cl:datacolumn std:sid="d-column-ad35ddb4" name="Privilege" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-24cd2acd" name="RegistDate"/>
+          <cl:datacolumn std:sid="d-column-70c166ba" name="ExpireDate"/>
+          <cl:datacolumn std:sid="d-column-448d0b02" name="GroupCode" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-39601b39" name="AccessGroupCode" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-6e38bd37" name="TimezoneCode" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-86cdb915" name="BlackList" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-e873f9ce" name="FPIdentify" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-663390e3" name="FaceIdentify" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-2be1e4d3" name="APBZone" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-99bc623c" name="PositionCode"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-ab9c534d" id="UserIDList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-2c940d51" name="UserID"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-a33aca7f" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-8c91325a" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-c2bd18fc" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-b184ff7d" name="Count" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-1e7c1063" id="ApproverInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-a512eaba" name="ID"/>
+          <cl:datacolumn std:sid="d-column-79d9793d" name="MinApproveLevel" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-5fe1dc11" name="MaxApproveLevel" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-4e96b415" id="sms_getApproverList" method="get" action="/v1/approvers">
+        <cl:listener std:sid="listener-0fe1b1e7" name="submit-done" handler="onSms_getApproverListSubmitDone"/>
+        <cl:listener std:sid="listener-c3e4f5ad" name="submit-error" handler="onSms_getApproverListSubmitError"/>
+        <cl:listener std:sid="listener-75f7414e" name="submit-timeout" handler="onSms_getApproverListSubmitTimeout"/>
+        <cl:requestparam name="minLevel" value="0"/>
+        <cl:requestparam name="maxLevel" value="0"/>
+        <cl:requestparam name="group" value="0"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="ApproverList"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-81231b5a" id="sms_getUserList" method="get" action="/v1/users">
+        <cl:listener std:sid="listener-4d3fcd27" name="submit-done" handler="onSms_getUserListSubmitDone"/>
+        <cl:listener std:sid="listener-fa27a472" name="submit-error" handler="onSms_getUserListSubmitError"/>
+        <cl:listener std:sid="listener-067411e6" name="submit-timeout" handler="onSms_getUserListSubmitTimeout"/>
+        <cl:requestparam name="searchCategory"/>
+        <cl:requestparam name="searchKeyword" value=""/>
+        <cl:requestparam name="offset" value="0"/>
+        <cl:requestparam name="limit" value="50"/>
+        <cl:requestparam name="picture" value="false"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total" isadd="false"/>
+        <cl:responsedata dataid="UserList" isadd="false"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-59b71142" id="sms_postApprover" action="/v1/approvers">
+        <cl:listener std:sid="listener-7d7fcef0" name="submit-done" handler="onSms_postApproverSubmitDone"/>
+        <cl:listener std:sid="listener-e6608f48" name="submit-error" handler="onSms_postApproverSubmitError"/>
+        <cl:listener std:sid="listener-7b6e6506" name="submit-timeout" handler="onSms_postApproverSubmitTimeout"/>
+        <cl:requestdata dataid="ApproverInfo"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-bc3f577b" id="sms_putApprover" method="put" action="/v1/approvers/{id}">
+        <cl:listener std:sid="listener-f3bd95de" name="submit-done" handler="onSms_putApproverSubmitDone"/>
+        <cl:listener std:sid="listener-ab070540" name="submit-error" handler="onSms_putApproverSubmitError"/>
+        <cl:listener std:sid="listener-5c1d756c" name="submit-timeout" handler="onSms_putApproverSubmitTimeout"/>
+        <cl:requestdata dataid="ApproverInfo"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-e2157ea2" id="sms_deleteApprover" method="delete">
+        <cl:listener std:sid="listener-a6e25b02" name="submit-done" handler="onSms_deleteApproverSubmitDone"/>
+        <cl:listener std:sid="listener-ddd364cf" name="submit-error" handler="onSms_deleteApproverSubmitError"/>
+        <cl:listener std:sid="listener-615107f6" name="submit-timeout" handler="onSms_deleteApproverSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-bfe77908" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-6c3277b6" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-df1cfccf">
+      <cl:xylayoutdata std:sid="xyl-data-a512587e" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:grid std:sid="grid-958f9189" id="UMAPM_grdApproverList" style="font-size:12px;" readonly="true" datasetid="ApproverList">
+        <cl:listener std:sid="listener-4081d65b" name="row-dblclick" handler="onUMAPM_grdApproverListRowDblclick"/>
+        <cl:formdata std:sid="f-data-ba8b3b01" row="2" col="1"/>
+        <cl:gridcolumn std:sid="g-column-a57c9a15" width="25px"/>
+        <cl:gridcolumn std:sid="g-column-492e92b2" width="70px"/>
+        <cl:gridcolumn std:sid="g-column-d8f96f4b"/>
+        <cl:gridcolumn std:sid="g-column-593155f9" width="90px"/>
+        <cl:gridcolumn std:sid="g-column-068c8643" width="120px"/>
+        <cl:gridheader std:sid="gh-band-bdc466b7">
+          <cl:gridrow std:sid="g-row-e61cc5f8"/>
+          <cl:gridcell std:sid="gh-cell-e23932e4" rowindex="0" colindex="0" sortable="false" filterable="false" columntype="checkbox"/>
+          <cl:gridcell std:sid="gh-cell-263e5b5c" rowindex="0" colindex="1" targetcolumnname="ID" sortable="false" filterable="false" text="군번"/>
+          <cl:gridcell std:sid="gh-cell-59f80510" rowindex="0" colindex="2" targetcolumnname="Name" sortable="false" filterable="false" text="이름"/>
+          <cl:gridcell std:sid="gh-cell-60a26502" rowindex="0" colindex="3" style="text-align:center;" targetcolumnname="GroupCode" sortable="false" filterable="false" text="Group">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_GroupName"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-de5f9338" rowindex="0" colindex="4" rowspan="1" colspan="1" targetcolumnname="MinApproveLevel" sortable="false" filterable="false" text="MinApproveLevel">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_ApproveLevel"/>
+          </cl:gridcell>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-ac1009e6">
+          <cl:gridrow std:sid="g-row-71554bc3"/>
+          <cl:gridcell std:sid="gd-cell-c6c44a81" rowindex="0" colindex="0" columntype="checkbox"/>
+          <cl:gridcell std:sid="gd-cell-fcb7356d" rowindex="0" colindex="1" columnname="UniqueID"/>
+          <cl:gridcell std:sid="gd-cell-95a7869b" rowindex="0" colindex="2" style="padding-left:4px; text-align:left;" columnname="Name"/>
+          <cl:gridcell std:sid="gd-cell-36bb0236" rowindex="0" colindex="3" columnname="GroupCode">
+            <cl:combobox std:sid="c-box-0ba60efb" id="UMAPM_cmbGroup" readonly="true"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-692ee0fa" rowindex="0" colindex="4" columnname="MinApproveLevel">
+            <cl:output std:sid="output-9bd1c43c" style="text-align:center;">
+              <cl:expbind property="value" category="PROPERTY" expression="MinApproveLevel +&quot; ~ &quot;+MaxApproveLevel"/>
+            </cl:output>
+          </cl:gridcell>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:group std:sid="group-c62c21f4">
+        <cl:formdata std:sid="f-data-a600457a" row="0" col="0" rowspan="1" colspan="4"/>
+        <cl:output std:sid="output-d304fa2a" style="border-bottom-color:#2446a4; font-weight:700.0; border-bottom-width:1px; font-size:16px; border-bottom-style:solid;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_ApproverList"/>
+          <cl:formdata std:sid="f-data-55639d68" row="0" col="0"/>
+        </cl:output>
+        <cl:output std:sid="output-9cc0e59b" style="text-align:left;" class="common-titlelabel">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_UsrCount"/>
+          <cl:formdata std:sid="f-data-be545841" row="0" col="3"/>
+        </cl:output>
+        <cl:output std:sid="output-f4bac93d" id="UMAPM_optUserTotal" style="text-align:right;">
+          <cl:formdata std:sid="f-data-0f114c58" row="0" col="2"/>
+        </cl:output>
+        <cl:udc std:sid="ud-control-5289e431" id="UMAPM_udcSearchUser" type="udc.search.searchUser">
+          <cl:listener std:sid="listener-d6f2c415" name="search" handler="onUMAPM_udcSearchUserSearch"/>
+          <cl:listener std:sid="listener-e9d3f34d" name="searchKeydown" handler="onKeywordKeydown"/>
+          <cl:formdata std:sid="f-data-3f224d87" row="0" col="4"/>
+        </cl:udc>
+        <cl:formlayout std:sid="f-layout-19a76eed" hspace="4px" vspace="2px" top-margin="2px" right-margin="2px" bottom-margin="2px" left-margin="2px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="200" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="206" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:tree std:sid="tree-e559072d" id="UMAPM_treGroup" style="border-right-style:solid; border-top-width:1px; border-bottom-color:#cccccc; border-right-width:1px; border-left-color:#cccccc; font-size:12px; border-right-color:#cccccc; border-left-width:1px; border-top-style:solid; border-left-style:solid; border-bottom-width:1px; border-top-color:#cccccc; border-bottom-style:solid;" showlines="true" autoOpen="1">
+        <cl:listener std:sid="listener-9f31532b" name="selection-change" handler="onUMAPM_treGroupSelectionChange"/>
+        <cl:formdata std:sid="f-data-61c8ad7e" row="2" col="0"/>
+        <cl:treeitemset datasetid="GroupList" label="Name" value="GroupID" parent="Parent"/>
+      </cl:tree>
+      <cl:udc std:sid="ud-control-eb5ecf43" id="UMAPM_udcUserList" type="udc.grid.userList">
+        <cl:listener std:sid="listener-34d0971d" name="pagechange" handler="onUMAPM_udcUserListPagechange"/>
+        <cl:formdata std:sid="f-data-a2a7f6c1" row="2" col="3"/>
+      </cl:udc>
+      <cl:group std:sid="group-1700300b">
+        <cl:formdata std:sid="f-data-8bd7b9b3" row="2" col="2"/>
+        <cl:button std:sid="button-5df78cee" id="UMAPM_btnAdd" style="padding-top:0px; padding-left:0px; padding-bottom:0px; padding-right:0px;" class="userInfo_btn" value="&lt;">
+          <cl:listener std:sid="listener-a7d817c0" name="click" handler="onUMAPM_btnAddClick"/>
+          <cl:formdata std:sid="f-data-30bb0212" row="1" col="0"/>
+        </cl:button>
+        <cl:button std:sid="button-e25f83dc" id="UMAPM_btnDelete" style="padding-top:0px; padding-left:0px; padding-bottom:0px; padding-right:0px;" class="userInfo_btn" value=">">
+          <cl:listener std:sid="listener-6af2a3ce" name="click" handler="onUMAPM_btnDeleteClick"/>
+          <cl:formdata std:sid="f-data-b7e278a0" row="3" col="0"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-4be80c9d" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="4" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-fa2d10fc" hspace="2px" vspace="2px" top-margin="5px" right-margin="5px" bottom-margin="5px" left-margin="5px">
+        <cl:rows length="34" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="4" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="160" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-634f9916"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

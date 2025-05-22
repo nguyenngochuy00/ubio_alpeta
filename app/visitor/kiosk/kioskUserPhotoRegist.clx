@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-84fe042d" version="1.0.0.0">
+  <head std:sid="head-14bf8ad8">
+    <title>kioskUserPhotoRegist</title>
+    <screen std:sid="screen-99f7bbac" id="default" name="default" minwidth="1024px" width="1024px" height="768px" customHeight="600" customWidth="800" active="false"/>
+    <screen std:sid="screen-781895ec" id="kiosk2" name="kiosk2" minwidth="810px" maxwidth="1023px" width="810px" height="1100px" customHeight="600" customWidth="800" active="true"/>
+    <screen std:sid="screen-58797494" id="tablet" name="tablet" minwidth="500px" maxwidth="809px" width="500px" height="667px" customHeight="600" customWidth="800"/>
+    <screen std:sid="screen-0ff5598e" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-8dc0948a">
+      <cl:dataset std:sid="d-set-a7351d38" id="UserFPInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-d364d522" name="FingerID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-72dad553" name="MinConvType" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-777de982" name="TemplateIndex" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-b85f30bc" name="TemplateData"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-f2b285bc" id="UserFaceInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-38c99e58" info="사용자 ID" name="UserID" datatype="number" displayonly="false"/>
+          <cl:datacolumn std:sid="d-column-e19cbda2" info="얼굴등록 index 1,2,3" name="Index" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-8e4db188" info="0 고정" name="Type" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-c12e372e" info="등록 이미지 순번" name="SubIndex" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-b5e7ea61" info="템플릿 사이즈" name="TemplateSize" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-46ab2a3c" info="템플릿 데이터" name="TemplateData" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-9d8983d2" name="status" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-905e1c47" id="UserCardInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-7669a8cb" name="CardNum"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-258ad132" id="UserFaceWTInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-06db1194" name="UserID"/>
+          <cl:datacolumn std:sid="d-column-908d32e0" name="TemplateSize" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-9011641f" name="TemplateData" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-5128c642" name="TemplateType" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-de68808e" id="UserPhoto">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-f0edcc1b" name="Photo"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-12e33e33" id="dmUserFaceWTInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-4b19bc94" name="UserID"/>
+          <cl:datacolumn std:sid="d-column-9f9b4714" name="TemplateSize" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-bb4666a9" name="TemplateData"/>
+          <cl:datacolumn std:sid="d-column-6116ad6e" name="TemplateType" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-866f6864" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-3186aade" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-a5923302" id="UserInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-0d6236c4" name="ID"/>
+          <cl:datacolumn std:sid="d-column-ef3e3a28" name="UniqueID"/>
+          <cl:datacolumn std:sid="d-column-d5392899" name="Name"/>
+          <cl:datacolumn std:sid="d-column-73a5ddac" name="AuthInfo" datatype="string" defaultvalue="0,0,0,0,0,0,0,0"/>
+          <cl:datacolumn std:sid="d-column-c3f0dc58" name="Privilege" datatype="number" defaultvalue="1"/>
+          <cl:datacolumn std:sid="d-column-900b9c6f" name="CreateDate"/>
+          <cl:datacolumn std:sid="d-column-49e5c597" name="UsePeriodFlag" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-da4a09f3" name="RegistDate"/>
+          <cl:datacolumn std:sid="d-column-1c89972c" name="ExpireDate"/>
+          <cl:datacolumn std:sid="d-column-0b747865" name="Password" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-6cdaf6a4" name="GroupCode" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-2c2675d7" name="AccessGroupCode" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-a07cba2a" name="UserType" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-534ec1a7" name="TimezoneCode" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-380558c8" name="BlackList" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-bb2fa7be" name="FPIdentify" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-e8b27b29" name="FaceIdentify" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-822118c3" name="DuressFinger" defaultvalue="0,0,0,0,0,0,0,0"/>
+          <cl:datacolumn std:sid="d-column-97d2eb43" name="Partition" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-ec0a8181" name="APBExcept" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-75128b92" name="APBZone" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-9492210b" name="WorkCode" datatype="string" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-5e2712d0" name="MealCode" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-dd90bc63" name="MoneyCode" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-e43a1746" name="MessageCode" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-5716dfad" name="VerifyLevel" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-1d750d2e" name="PositionCode" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-6c8cb03e" name="Department" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-fb584dbf" name="LoginPW" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-873f7800" name="LoginAllowed" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-bd0f98db" name="Picture"/>
+          <cl:datacolumn std:sid="d-column-8b0dd9fe" name="EmployeeNum"/>
+          <cl:datacolumn std:sid="d-column-50e7d975" name="Email"/>
+          <cl:datacolumn std:sid="d-column-ee22d920" name="Phone"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-01afb5d1" id="sms_postFaceDetect" action="/v1/visitorKiosk/faceDetect">
+        <cl:listener std:sid="listener-0aa3441f" name="submit-done" handler="onSms_postFaceDetectSubmitDone"/>
+        <cl:listener std:sid="listener-f21ceee9" name="submit-error" handler="onSms_postFaceDetectSubmitError"/>
+        <cl:listener std:sid="listener-1336a04d" name="submit-timeout" handler="onSms_postFaceDetectSubmitTimeout"/>
+        <cl:requestdata dataid="UserInfo"/>
+        <cl:requestdata dataid="UserFPInfo"/>
+        <cl:requestdata dataid="UserFaceInfo"/>
+        <cl:requestdata dataid="UserCardInfo" payload="all"/>
+        <cl:requestdata dataid="UserFaceWTInfo" payload="all"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-0825fe49" id="sms_userFaceUpload" action="/v1/users/facepicturesimport" mediatype="multipart/form-data">
+        <cl:listener std:sid="listener-5bd61979" name="submit-error" handler="onSms_postFaceDetectSubmitError"/>
+        <cl:listener std:sid="listener-236999c2" name="submit-timeout" handler="onSms_postFaceDetectSubmitTimeout"/>
+        <cl:listener std:sid="listener-16eb928e" name="submit-done" handler="onSms_postFaceDetectSubmitDone"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-f3399ae9" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-1aaac3b8" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-f5aaa02a" style="border-right-style:none; padding-top:0px; background-size:cover; border-top-width:0px; border-right-width:0px; padding-left:0px; padding-bottom:0px; border-left-width:0px; border-top-style:none; border-left-style:none; border-bottom-width:0px; border-bottom-style:none; padding-right:0px;">
+      <cl:xylayoutdata std:sid="xyl-data-59a2e35f" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-ea23c7c1" style="border-right-style:none; padding-top:0px; border-top-width:0px; border-left-style:none; border-right-width:0px; padding-left:0px; border-bottom-width:0px; padding-bottom:0px; border-bottom-style:none; border-left-width:0px; border-top-style:none; padding-right:0px;">
+        <std:metadata>
+          <std:property key="locked" value="true"/>
+        </std:metadata>
+        <cl:formdata std:sid="f-data-0e8a500c" row="1" col="0"/>
+        <cl:group std:sid="group-a203deb5" style="border-right-style:solid; border-top-width:0px; border-left-style:solid; border-right-width:0px; border-bottom-width:0px; border-bottom-style:solid; border-left-width:0px; border-top-style:solid;">
+          <cl:responsivexylayoutdata std:sid="rxyl-data-868f45aa">
+            <cl:xylayoutdata std:sid="sxyl-data-0b2bf505" top="1px" right="0px" bottom="1px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH" screenid="default"/>
+            <cl:xylayoutdata std:sid="sxyl-data-d0bbf520" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH" screenid="kiosk2"/>
+          </cl:responsivexylayoutdata>
+          <cl:uicontrolshell std:sid="uic-shell-3fecc903" id="shlCameraPreview">
+            <cl:listener std:sid="listener-59dc4326" name="load" handler="onShlCameraPreviewLoad"/>
+            <cl:xylayoutdata std:sid="xyl-data-67d0873f" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+          </cl:uicontrolshell>
+          <cl:img std:sid="image-a200ad72" id="VMUPR_imgCameraCapture" visible="false">
+            <cl:xylayoutdata std:sid="xyl-data-9c0df3d7" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+          </cl:img>
+          <cl:output std:sid="output-aeaa225c" id="captureCount" style="background-repeat:no-repeat; background-size:contain; font-size:100px; background-image:url('../../../theme/images/kioskVisit/count_3.png'); background-position:center;" visible="false">
+            <cl:xylayoutdata std:sid="xyl-data-6072a503" top="200px" right="200px" left="200px" height="357px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+          </cl:output>
+          <cl:xylayout std:sid="xylayout-b96cfcf5"/>
+        </cl:group>
+        <cl:responsivexylayout std:sid="r-xylayout-498b5189"/>
+      </cl:group>
+      <cl:group std:sid="group-3b6cf803" style="border-right-style:none; border-top-width:0px; border-left-style:none; border-right-width:0px; border-bottom-width:0px; border-bottom-style:none; border-left-width:0px; border-top-style:none;">
+        <cl:formdata std:sid="f-data-f27cb6f5" row="2" col="0"/>
+        <cl:group std:sid="group-cd0bd4bc">
+          <cl:formdata std:sid="f-data-f707348b" row="0" col="0"/>
+          <cl:button std:sid="button-445f490c" id="VMUPR_btnCapture" style="background-color:#477aff; border-right-style:none; background-size:cover; color:#ffffff; border-top-width:0px; border-left-style:none; border-right-width:0px; border-bottom-width:0px; font-size:40px; border-bottom-style:none; border-left-width:0px; border-top-style:none;" class="userInfo_btn">
+            <cl:listener std:sid="listener-c7d25878" name="click" handler="onVMUPR_btnCaptureClick"/>
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_PhotoShoot"/>
+            <cl:xylayoutdata std:sid="xyl-data-2fcbeee3" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+          </cl:button>
+          <cl:xylayout std:sid="xylayout-ee603313"/>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-f8e5faf6" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-93d19fae" style="background-color:#444444;">
+        <cl:formdata std:sid="f-data-aacf0bbb" row="0" col="0"/>
+        <cl:group std:sid="group-a1a7efc2">
+          <cl:formdata std:sid="f-data-1849bc03" row="0" col="0"/>
+          <cl:output std:sid="output-f0f4d5cd" style="background-repeat:no-repeat; background-image:url('../../../theme/images/kioskVisit/icon_prev2.png'); background-position:center;">
+            <cl:listener std:sid="listener-cb9da0dc" name="click" handler="onOutputClick"/>
+            <cl:responsivexylayoutdata std:sid="rxyl-data-a944072b">
+              <cl:xylayoutdata std:sid="sxyl-data-3f06cefb" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH" screenid="default"/>
+              <cl:xylayoutdata std:sid="sxyl-data-25c588a1" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH" screenid="kiosk2"/>
+            </cl:responsivexylayoutdata>
+          </cl:output>
+          <cl:responsivexylayout std:sid="r-xylayout-7abb6187"/>
+        </cl:group>
+        <cl:group std:sid="group-61e8bd4e">
+          <cl:formdata std:sid="f-data-1d6574f9" row="0" col="1"/>
+          <cl:output std:sid="output-b76275ae" style="color:#ffffff; font-size:30px; text-align:center;">
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_LookStraightScreen"/>
+            <cl:responsivexylayoutdata std:sid="rxyl-data-6a83a6d4">
+              <cl:xylayoutdata std:sid="sxyl-data-a2d3c95f" top="10px" right="47px" bottom="10px" left="47px" horizontalAnchor="BOTH" verticalAnchor="BOTH" screenid="default"/>
+              <cl:xylayoutdata std:sid="sxyl-data-c16724e8" top="10px" right="41px" bottom="10px" left="70px" horizontalAnchor="BOTH" verticalAnchor="BOTH" screenid="kiosk2"/>
+            </cl:responsivexylayoutdata>
+          </cl:output>
+          <cl:responsivexylayout std:sid="r-xylayout-0c6527b7"/>
+        </cl:group>
+        <cl:uicontrolshell std:sid="uic-shell-077dbf47" id="VMUPR_shlInput">
+          <cl:listener std:sid="listener-8bf81a72" name="load" handler="onVMUPR_shlInputLoad"/>
+          <cl:formdata std:sid="f-data-6238ce1c" row="0" col="2"/>
+        </cl:uicontrolshell>
+        <cl:uicontrolshell std:sid="uic-shell-af082c17" id="shl1">
+          <cl:listener std:sid="listener-fabb48d9" name="load" handler="onShlCaptureCanvasLoad"/>
+          <cl:formdata std:sid="f-data-a81ef60b" row="0" col="3"/>
+        </cl:uicontrolshell>
+        <cl:formlayout std:sid="f-layout-2a4c138d" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="10" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="10" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-8055b3b9" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+        <cl:rows length="2" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="50"/>
+        <cl:rows length="810" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="2" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="80"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-5e465236"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler>
+      <std:guide position="84"/>
+    </std:hruler>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

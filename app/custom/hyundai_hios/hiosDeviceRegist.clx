@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-3aac8e6e" version="1.0.0.0">
+  <head std:sid="head-31fb4564">
+    <title>hiosDeviceRegist</title>
+    <screen std:sid="screen-0e212897" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="170" customWidth="300"/>
+    <screen std:sid="screen-d26a06e2" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-a9ce6582" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-50c92335">
+      <cl:datamap std:sid="d-map-c12cff25" id="hiosGateInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-49713ef8" name="TerminalID" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-0457d379" name="GateInfo" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-31e81c1a" name="RegFlag" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-71f76a43" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-e4fa42cf" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-766d49aa" id="sms_getHIosGateInfo" method="get">
+        <cl:listener std:sid="listener-dd80e77f" name="submit-done" handler="onSms_getHIosGateInfoSubmitDone"/>
+        <cl:listener std:sid="listener-5fe2d4b0" name="submit-error" handler="onSubmitError"/>
+        <cl:listener std:sid="listener-eaf46511" name="submit-timeout" handler="onSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="hiosGateInfo"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-e5d7025a" id="sms_postHIosGateInfo" action="/v1/hyundai/hois/">
+        <cl:listener std:sid="listener-4f3322a9" name="submit-error" handler="onSubmitError"/>
+        <cl:listener std:sid="listener-290679d3" name="submit-timeout" handler="onSubmitTimeout"/>
+        <cl:listener std:sid="listener-941b4d80" name="submit-done" handler="onSms_postHIosGateInfoSubmitDone"/>
+        <cl:requestdata dataid="hiosGateInfo"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec dev-comment="HHSTM_"/>
+  </head>
+  <body std:sid="body-e8188189" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-92ad846c" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-f37b1c25" id="HHSTM_grdMain">
+      <cl:xylayoutdata std:sid="xyl-data-634110bd" top="1px" right="1px" bottom="1px" left="1px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-b073edba" id="grp2">
+        <cl:formdata std:sid="f-data-187ca973" row="0" col="0"/>
+        <cl:output std:sid="output-9de8460c" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-top-color:#c5c5c5; border-bottom-style:solid; border-right-color:#c5c5c5; border-top-style:solid; text-align:center;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_ID"/>
+          <cl:formdata std:sid="f-data-99333d71" halign="FILL" valign="FILL" width="90" row="0" col="0"/>
+        </cl:output>
+        <cl:group std:sid="group-f325aff5" id="grp3" style="background-color:#f6f6f6; border-bottom-color:#c5c5c5; border-top-width:1px; border-bottom-width:1px; font-size:14px; border-top-color:#c5c5c5; border-bottom-style:solid; background-image:none; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-5439497d" row="0" col="1"/>
+          <cl:numbereditor std:sid="n-editor-9dbb3b44" id="HHSTM_nbeTerminalID" style="background-color:#f6f6f6; background-image:none;" readonly="true" min="1.0" max="9.9999999E7" spinbutton="false" placeholder="1 ~ 99999999" format="99999999">
+            <cl:datamapbind property="value" datacontrolid="hiosGateInfo" columnname="TerminalID"/>
+            <cl:xylayoutdata std:sid="xyl-data-4b6783ac" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+          </cl:numbereditor>
+          <cl:xylayout std:sid="xylayout-13b849cf"/>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-7782f0e0" hspace="0px" vspace="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-4aa44c0d">
+        <cl:formdata std:sid="f-data-2a350463" row="1" col="0"/>
+        <cl:output std:sid="output-403ae274" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-top-color:#c5c5c5; border-bottom-style:solid; border-right-color:#c5c5c5; border-top-style:solid; text-align:center;" value="게이트정보">
+          <cl:formdata std:sid="f-data-4cb032cf" halign="FILL" valign="FILL" width="90" row="0" col="0"/>
+        </cl:output>
+        <cl:group std:sid="group-0c0510fc" style="border-bottom-color:#c5c5c5; border-top-width:1px; border-bottom-width:1px; font-size:14px; border-top-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-c8fdf564" row="0" col="1"/>
+          <cl:inputbox std:sid="i-box-9dffc142" id="HHSTM_ipbGateInfo">
+            <cl:datamapbind property="value" datacontrolid="hiosGateInfo" columnname="GateInfo"/>
+            <cl:xylayoutdata std:sid="xyl-data-fd3996c3" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+          </cl:inputbox>
+          <cl:xylayout std:sid="xylayout-ca4a5fba"/>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-5054642c" hspace="0px" vspace="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-1049bf87">
+        <cl:formdata std:sid="f-data-60579759" row="3" col="0"/>
+        <cl:button std:sid="button-1c6d0349" id="HHSTM_btnTerminalRegist" class="userInfo_btn">
+          <cl:listener std:sid="listener-abce2168" name="click" handler="onHHSTM_btnTerminalRegistClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Enrollment"/>
+          <cl:formdata std:sid="f-data-9145af63" row="0" col="1"/>
+        </cl:button>
+        <cl:button std:sid="button-db846d6d" id="HHSTM_btnCancel" class="userInfo_btn">
+          <cl:listener std:sid="listener-a58f2b71" name="click" handler="onHHSTM_btnCancelClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Cancel"/>
+          <cl:formdata std:sid="f-data-27109626" row="0" col="2"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-1a2cb22c" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-b87fbe54" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+        <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" shadetype="NONE" shadecolor="transparent"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-1f40d116"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

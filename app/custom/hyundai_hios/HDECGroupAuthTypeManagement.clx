@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-45bbce4f" version="1.0.0.0">
+  <head std:sid="head-6cbfadb8">
+    <title>HDECGroupAuthTypeManagement</title>
+    <screen std:sid="screen-f9ced964" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="false" useCustomHeight="false" customHeight="600" customWidth="800" active="true"/>
+    <screen std:sid="screen-a2153fad" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px" customHeight="600" customWidth="800" active="false"/>
+    <screen std:sid="screen-a215da07" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-76157aeb">
+      <cl:dataset std:sid="d-set-174ba88d" id="GroupList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-572d67eb" name="GroupID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-ae44e509" name="Parent" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-3e3eb4b4" name="Name"/>
+          <cl:datacolumn std:sid="d-column-8741a264" name="Description"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-a1e53e49" id="UserList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-6205f1b6" name="ID" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-7c5b94a7" name="UniqueID"/>
+          <cl:datacolumn std:sid="d-column-2f66dac7" name="Name" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-8c7af996" name="AuthInfo"/>
+          <cl:datacolumn std:sid="d-column-efd894dd" name="Privilege"/>
+          <cl:datacolumn std:sid="d-column-83fae542" name="RegistDate"/>
+          <cl:datacolumn std:sid="d-column-2aba027d" name="ExpiredDate"/>
+          <cl:datacolumn std:sid="d-column-8400bf5b" name="GroupCode"/>
+          <cl:datacolumn std:sid="d-column-3f73b3ad" name="AccessGroupCode" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-3194ac44" name="TimezoneCode"/>
+          <cl:datacolumn std:sid="d-column-d95ade34" name="BlackList"/>
+          <cl:datacolumn std:sid="d-column-bc7c9d2e" name="FPIdentify"/>
+          <cl:datacolumn std:sid="d-column-46f7cb30" name="FaceIdentify"/>
+          <cl:datacolumn std:sid="d-column-778319b4" name="APBZone"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-c2bd18fc" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-7746d30b" name="Count" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-a33aca7f" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-99ac474b" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-dc488d86" id="dmAuthType">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-483dc072" name="GroupCode"/>
+          <cl:datacolumn std:sid="d-column-a63707f7" name="AuthInfo" datatype="string"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-0c3fa939" id="sms_putUserGroupAuthType" method="put" action="/v1/users/groupsAuthtype">
+        <cl:listener std:sid="listener-dc3676eb" name="submit-done" handler="onSms_postUserGroupAuthTypeSubmitDone"/>
+        <cl:listener std:sid="listener-77058ecc" name="submit-timeout" handler="onSms_postUserGroupAuthTypeSubmitTimeout"/>
+        <cl:listener std:sid="listener-4233562e" name="submit-error" handler="onSms_postUserGroupAuthTypeSubmitError"/>
+        <cl:requestdata dataid="dmAuthType"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-2f6bde21" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-0b57134e" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-265c6ec8" id="grp1">
+      <cl:formdata std:sid="f-data-8f279463" row="0" col="0"/>
+      <cl:group std:sid="group-4cd69ca9" id="grpListLayout" style="padding:10px;">
+        <cl:formdata std:sid="f-data-744a24fe" row="0" col="1"/>
+        <cl:group std:sid="group-fcc7574e" id="grp5">
+          <cl:formdata std:sid="f-data-e663bea0" row="1" col="0" rowspan="2" colspan="1"/>
+          <cl:group std:sid="group-f392b0b7" id="userListGroup_grpUser">
+            <cl:formdata std:sid="f-data-e33e69a0" row="0" col="0"/>
+            <cl:group std:sid="group-c0b4b910" id="grp7">
+              <cl:formdata std:sid="f-data-b24c050b" row="0" col="0"/>
+              <cl:output std:sid="output-9692f15e" style="text-align:center;" class="common-titlelabel">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_Total"/>
+                <cl:formdata std:sid="f-data-bb2ff3af" valign="CENTER" height="30" row="0" col="0"/>
+              </cl:output>
+              <cl:output std:sid="output-d9ede22c" id="userListGroup_opbUserTotal" value="0" datatype="number" format="s#,###">
+                <cl:formdata std:sid="f-data-f4e49dba" valign="CENTER" height="30" row="0" col="1"/>
+              </cl:output>
+              <cl:formlayout std:sid="f-layout-ad9115ba">
+                <cl:rows length="1" unit="FRACTION"/>
+                <cl:columns length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="40" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="1" unit="FRACTION"/>
+                <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+                <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+              </cl:formlayout>
+            </cl:group>
+            <cl:udc std:sid="ud-control-e470bf50" id="HDEC_udcUserList" type="udc.grid.userList">
+              <cl:listener std:sid="listener-f15d96a5" name="pagechange" handler="onHDEC_udcUserListPagechange"/>
+              <cl:formdata std:sid="f-data-d829ae02" row="1" col="0" rowspan="1" colspan="1"/>
+            </cl:udc>
+            <cl:formlayout std:sid="f-layout-e253cb25">
+              <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:rows length="1" unit="FRACTION"/>
+              <cl:columns length="1" unit="FRACTION"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:group std:sid="group-69f9278c" id="userListGroup_grpTerminal">
+            <cl:formdata std:sid="f-data-137517e4" row="0" col="2"/>
+            <cl:group std:sid="group-47da1f13" id="grp9">
+              <cl:formdata std:sid="f-data-a15c62bb" row="0" col="0"/>
+              <cl:output std:sid="output-12f00488" style="text-align:left;" class="common-titlelabel">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_AuthMethod"/>
+                <cl:formdata std:sid="f-data-a3ef0ee4" row="0" col="0" rowspan="1" colspan="4"/>
+              </cl:output>
+              <cl:formlayout std:sid="f-layout-29945cac">
+                <cl:rows length="1" unit="FRACTION"/>
+                <cl:columns length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="1" unit="FRACTION"/>
+                <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+                <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+              </cl:formlayout>
+            </cl:group>
+            <cl:output std:sid="output-60eb05cf" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:1px; border-left-color:#c5c5c5; border-right-color:#c5c5c5; border-left-width:1px; border-top-style:solid; background-color:#f6f6f6; border-left-style:solid; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; text-align:center;" class="userInfo_bold">
+              <cl:langbind property="value" category="PROPERTY" keypath="Str_RequiredAuth"/>
+              <cl:formdata std:sid="f-data-16c79233" row="1" col="0"/>
+            </cl:output>
+            <cl:output std:sid="output-20dfdaaa" id="HDEC_opbAuthAnd" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-left-style:solid; border-bottom-width:1px; border-left-color:#c5c5c5; border-right-color:#c5c5c5; border-bottom-style:solid; border-left-width:1px; text-align:center;" class="userInfo_text">
+              <cl:formdata std:sid="f-data-1c1f3b21" row="2" col="0"/>
+            </cl:output>
+            <cl:output std:sid="output-2c0cb0f1" style="border-right-style:solid; background-color:#f6f6f6; border-bottom-color:#c5c5c5; border-right-width:1px; border-left-style:solid; border-bottom-width:1px; border-left-color:#c5c5c5; border-right-color:#c5c5c5; border-bottom-style:solid; border-left-width:1px; text-align:center;" class="userInfo_bold">
+              <cl:langbind property="value" category="PROPERTY" keypath="Str_SelectedAuth"/>
+              <cl:formdata std:sid="f-data-c48ddee0" row="3" col="0"/>
+            </cl:output>
+            <cl:output std:sid="output-a5b8d5a8" id="HDEC_opbAuthOr" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-left-style:solid; border-bottom-width:1px; border-left-color:#c5c5c5; border-right-color:#c5c5c5; border-bottom-style:solid; border-left-width:1px; text-align:center;" class="userInfo_text">
+              <cl:formdata std:sid="f-data-c87b51bc" row="4" col="0"/>
+            </cl:output>
+            <cl:button std:sid="button-d2695222" id="HDEC_btnAuthTypeModify" class="userInfo_btn">
+              <cl:listener std:sid="listener-0448e05a" name="click" handler="onHDEC_btnAuthTypeModifyClick"/>
+              <cl:langbind property="value" category="PROPERTY" keypath="Str_AuthTypeSelect"/>
+              <cl:formdata std:sid="f-data-d92da485" row="6" col="0"/>
+            </cl:button>
+            <cl:button std:sid="button-7ddaea46" id="HDEC_btnSave" class="userInfo_btn">
+              <cl:listener std:sid="listener-e9579c85" name="click" handler="onHDEC_btnSaveClick"/>
+              <cl:langbind property="value" category="PROPERTY" keypath="Str_Save"/>
+              <cl:formdata std:sid="f-data-354e9592" row="8" col="0"/>
+            </cl:button>
+            <cl:formlayout std:sid="f-layout-eb1e6849" hspace="0px" vspace="0px">
+              <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:rows length="60" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:rows length="60" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:rows length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:rows length="60" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:rows length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:rows length="60" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:rows length="1" unit="FRACTION"/>
+              <cl:columns length="1" unit="FRACTION"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:formlayout std:sid="f-layout-416f0e5a">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="2" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="10" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-a722152a">
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="30" unit="PIXEL" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-94333af0" id="grp2" class="common-snbarea">
+        <cl:formdata std:sid="f-data-03b2d4e4" row="0" col="0"/>
+        <cl:tabfolder std:sid="t-folder-1c01ce6d" id="tapFolder" style="padding:10px;" class="common-snbtab">
+          <cl:xylayoutdata std:sid="xyl-data-3e98914a" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+          <cl:tabitem std:sid="t-item-06029622" selected="true" text="그룹">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_Group"/>
+            <cl:group std:sid="group-a579b13f" id="grp3">
+              <std:metadata>
+                <std:property key="locked" value="true"/>
+              </std:metadata>
+              <cl:tree std:sid="tree-409426ed" id="HDECGroupList_treeGroup" style="padding:0px 0px 0px 10px;" class="user_list" showlines="true" autoOpen="1">
+                <cl:listener std:sid="listener-779cc9c8" name="selection-change" handler="onHDECGroupList_treeGroupSelectionChange"/>
+                <cl:formdata std:sid="f-data-bd90b6ed" row="0" col="0"/>
+                <cl:treeitemset datasetid="GroupList" label="Name" value="GroupID" parent="Parent"/>
+              </cl:tree>
+              <cl:formlayout std:sid="f-layout-2bc85b2c" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+                <cl:rows length="1" unit="FRACTION"/>
+                <cl:columns length="1" unit="FRACTION"/>
+              </cl:formlayout>
+            </cl:group>
+          </cl:tabitem>
+        </cl:tabfolder>
+        <cl:xylayout std:sid="xylayout-08008e98"/>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-b66a3a44">
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="240" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="3" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:formlayout std:sid="f-layout-b3cfbb7a" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+      <cl:rows length="1" unit="FRACTION"/>
+      <cl:columns length="1" unit="FRACTION"/>
+    </cl:formlayout>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

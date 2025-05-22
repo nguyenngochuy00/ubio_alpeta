@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-e318449e" version="1.0.0.0">
+  <head std:sid="head-f1dc2848">
+    <title>MobileCardBatch</title>
+    <screen std:sid="screen-2e29b0b2" id="default" height="768px" minwidth="1024px" name="default" width="1024px"/>
+    <screen std:sid="screen-8c514b87" id="tablet" height="667px" maxwidth="1023px" minwidth="500px" name="tablet" width="500px"/>
+    <screen std:sid="screen-1fdb41e4" id="mobile" height="525px" maxwidth="499px" name="mobile" width="350px"/>
+    <cl:model std:sid="model-17f73eb1">
+      <cl:dataset std:sid="d-set-ec0b1af0" id="ds_MobileUserList">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="string" name="UserID"/>
+          <cl:datacolumn name="UserName"/>
+          <cl:datacolumn datatype="string" name="GroupCode"/>
+          <cl:datacolumn datatype="string" name="TerminalID"/>
+          <cl:datacolumn datatype="string" name="EventTime"/>
+          <cl:datacolumn datatype="string" name="AuthType"/>
+          <cl:datacolumn datatype="string" name="AuthResult"/>
+          <cl:datacolumn datatype="string" name="Card"/>
+          <cl:datacolumn datatype="string" name="Func"/>
+          <cl:datacolumn datatype="string" name="FuncType"/>
+          <cl:datacolumn datatype="string" name="UserType"/>
+          <cl:datacolumn datatype="string" expression="ExpDate.substr(0,4)+&quot;-&quot;+ExpDate.substr(4,2)+&quot;-&quot;+ExpDate.substr(6,2)" name="ExpDate"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:submission std:sid="submission-69086737" id="getUserList" action="data/mobile/MobileCardBatch.json">
+        <cl:listener std:sid="listener-75a95567" handler="onGetUserListSubmitSuccess" name="submit-success"/>
+        <cl:requestdata dataid="dm_SearchParam"/>
+        <cl:responsedata dataid="ds_MobileUserList"/>
+      </cl:submission>
+      <cl:datamap std:sid="d-map-10d73134" id="dm_SearchParam" info="검색영역의 파라미터">
+        <cl:datacolumnlist>
+          <cl:datacolumn info="구분" name="clssCd"/>
+          <cl:datacolumn info="기간지정" name="period"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-bf3afd47" style="padding:20px; top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-b317a3f2" handler="onBodyLoad" name="load"/>
+    <cl:group std:sid="group-778daa5f">
+      <cl:formdata std:sid="f-data-59d9b9e5" col="0" row="0"/>
+      <cl:group std:sid="group-f0b8fe42" class="search-box">
+        <cl:formdata std:sid="f-data-03811044" col="0" row="0"/>
+        <cl:group std:sid="group-65d744a3">
+          <cl:formdata std:sid="f-data-e7192bf1" col="0" height="35" row="0"/>
+          <cl:button std:sid="button-61746a7f" id="btn_UserSearch" class="search" value="조회">
+            <cl:listener std:sid="listener-a90f9ae6" handler="onBtn_UserSearchClick" name="click"/>
+            <cl:formdata std:sid="f-data-be1862d2" col="1" halign="FILL" height="25" row="0" valign="CENTER"/>
+          </cl:button>
+          <cl:radiobutton std:sid="r-button-80b6101a" id="rad_User" style="text-align:center;" itemspacing="0">
+            <cl:listener std:sid="listener-0d86d1d8" handler="onRad_UserSelectionChange" name="selection-change"/>
+            <cl:formdata std:sid="f-data-31f6742b" col="0" row="0"/>
+            <cl:item label="미발급 사용자" value="0"/>
+            <cl:item label="1달 이내 사용자" value="1"/>
+          </cl:radiobutton>
+          <cl:formlayout std:sid="f-layout-5d30d44b">
+            <cl:rows length="1" shadecolor="transparent" shadetype="NONE" unit="FRACTION"/>
+            <cl:columns length="3" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+            <cl:columns length="60" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+            <cl:columns length="60" unit="PIXEL"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-e6ddb7fb">
+          <cl:rows length="1" shadecolor="transparent" shadetype="NONE" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-b0784a5d">
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="1" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:group std:sid="group-7f31e829" class="un-form-border" style="padding:10px;">
+      <cl:formdata std:sid="f-data-025ccbf9" col="0" colspan="1" row="1" rowspan="2"/>
+      <cl:grid std:sid="grid-0ec5f9bf" id="grd_MobileCardBatch" autorowheight="all" columnMovable="false" columnResizable="false" datasetid="ds_MobileUserList" nodatamessage="데이터가 없습니다." readonly="false">
+        <cl:formdata std:sid="f-data-ee021bf7" col="0" row="0"/>
+        <cl:gridcolumn std:sid="g-column-7eb73f71" width="25px"/>
+        <cl:gridcolumn std:sid="g-column-b540160f" width="134px"/>
+        <cl:gridcolumn std:sid="g-column-afb35ee7" width="127px"/>
+        <cl:gridcolumn std:sid="g-column-cbafe0ed"/>
+        <cl:gridcolumn std:sid="g-column-e66efa69" width="180px"/>
+        <cl:gridcolumn std:sid="g-column-e08f8480" width="102px"/>
+        <cl:gridcolumn std:sid="g-column-267821b6" width="101px"/>
+        <cl:gridcolumn std:sid="g-column-113ca6be" width="105px"/>
+        <cl:gridcolumn std:sid="g-column-91076e0e" width="66px"/>
+        <cl:gridcolumn std:sid="g-column-8ba4fb21" width="87px"/>
+        <cl:gridcolumn std:sid="g-column-39be5efe" width="92px"/>
+        <cl:gridcolumn std:sid="g-column-d65443ff" width="93px"/>
+        <cl:gridheader std:sid="gh-band-11f3728e">
+          <cl:gridrow std:sid="g-row-fce78d05"/>
+          <cl:gridcell std:sid="gh-cell-41dc8a34" colindex="0" rowindex="0" style="background-color:#f0f0f0; font-weight:bold;" columntype="checkbox" filterable="false" sortable="false"/>
+          <cl:gridcell std:sid="gh-cell-57318f3c" colindex="1" rowindex="0" style="background-color:#f0f0f0; font-weight:bold; font-style:normal;" filterable="true" sortable="false" targetcolumnname="UserID" text="UserID"/>
+          <cl:gridcell std:sid="gh-cell-85bd72b8" colindex="2" rowindex="0" style="background-color:#f0f0f0; font-weight:bold; font-style:normal;" filterable="true" sortable="false" targetcolumnname="UserName" text="UserName"/>
+          <cl:gridcell std:sid="gh-cell-8f9c26b0" colindex="3" rowindex="0" style="background-color:#f0f0f0; font-weight:bold; font-style:normal;" filterable="false" sortable="true" targetcolumnname="GroupCode" text="GroupCode"/>
+          <cl:gridcell std:sid="gh-cell-d9fa460f" colindex="4" rowindex="0" style="background-color:#f0f0f0; font-weight:bold; font-style:normal;" filterable="false" sortable="false" targetcolumnname="TerminalID" text="TerminalID"/>
+          <cl:gridcell std:sid="gh-cell-0d9c190d" colindex="5" rowindex="0" style="background-color:#f0f0f0; font-weight:bold; font-style:normal;" filterable="false" sortable="true" targetcolumnname="ExpDate" text="Expire Date"/>
+          <cl:gridcell std:sid="gh-cell-4ca963bd" colindex="6" rowindex="0" style="background-color:#f0f0f0; font-weight:bold; font-style:normal;" filterable="false" sortable="true" targetcolumnname="AuthType" text="AuthType"/>
+          <cl:gridcell std:sid="gh-cell-be66edc4" colindex="7" rowindex="0" style="background-color:#f0f0f0; font-weight:bold; font-style:normal;" filterable="false" sortable="true" targetcolumnname="AuthResult" text="AuthResult"/>
+          <cl:gridcell std:sid="gh-cell-a3690c1f" colindex="8" rowindex="0" style="background-color:#f0f0f0; font-weight:bold; font-style:normal;" sortable="true" targetcolumnname="Card" text="Card"/>
+          <cl:gridcell std:sid="gh-cell-cd52cbe0" colindex="9" rowindex="0" style="background-color:#f0f0f0; font-weight:bold; font-style:normal;" filterable="false" sortable="false" targetcolumnname="Func" text="Func"/>
+          <cl:gridcell std:sid="gh-cell-cea4b557" colindex="10" rowindex="0" style="background-color:#f0f0f0; font-weight:bold; font-style:normal;" filterable="false" sortable="false" targetcolumnname="FuncType" text="FuncType"/>
+          <cl:gridcell std:sid="gh-cell-c09ed418" colindex="11" rowindex="0" style="background-color:#f0f0f0; font-weight:bold; font-style:normal;" filterable="false" sortable="true" targetcolumnname="UserType" text="UserType"/>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-116785a3">
+          <cl:gridrow std:sid="g-row-6b32142f"/>
+          <cl:gridcell std:sid="gd-cell-54d0d1eb" colindex="0" rowindex="0" columntype="checkbox"/>
+          <cl:gridcell std:sid="gd-cell-244eb023" colindex="1" rowindex="0" style="text-align:left;" columnname="UserID"/>
+          <cl:gridcell std:sid="gd-cell-7e99cfc0" colindex="2" rowindex="0" style="text-align:left;" columnname="UserName"/>
+          <cl:gridcell std:sid="gd-cell-4305d1ea" colindex="3" rowindex="0" columnname="GroupCode"/>
+          <cl:gridcell std:sid="gd-cell-c7cc4d62" colindex="4" rowindex="0" columnname="TerminalID"/>
+          <cl:gridcell std:sid="gd-cell-384cee3a" colindex="5" rowindex="0" columnname="ExpDate">
+            <cl:dateinput std:sid="d-input-64adb1e9" id="dti1" style="text-align:center;" hidebutton="true" readonly="true"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-5ac55d5a" colindex="6" rowindex="0" columnname="AuthType"/>
+          <cl:gridcell std:sid="gd-cell-2332ea9e" colindex="7" rowindex="0" columnname="AuthResult"/>
+          <cl:gridcell std:sid="gd-cell-0edb14e6" colindex="8" rowindex="0" columnname="Card">
+            <cl:combobox std:sid="c-box-9c49bf2c" id="cmb1" readonly="true">
+              <cl:item label="미발급" value="0"/>
+              <cl:item label="발급" value="1"/>
+            </cl:combobox>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-d4afd091" colindex="9" rowindex="0" columnname="Func"/>
+          <cl:gridcell std:sid="gd-cell-171453a7" colindex="10" rowindex="0" columnname="FuncType"/>
+          <cl:gridcell std:sid="gd-cell-aaf04342" colindex="11" rowindex="0" columnname="UserType"/>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:group std:sid="group-230a1168">
+        <cl:formdata std:sid="f-data-2488f9d3" col="0" row="1"/>
+        <cl:output std:sid="output-98d11e63" style="background-color:#eeeeee; text-align:center;" value="기간지정">
+          <cl:formdata std:sid="f-data-1ca38fda" col="1" row="0" valign="CENTER"/>
+        </cl:output>
+        <cl:button std:sid="button-3fa7b4c8" id="btn_UserBatch" value="일괄발급">
+          <cl:listener std:sid="listener-af08eb6b" handler="onBtn_UserBatchClick" name="click"/>
+          <cl:formdata std:sid="f-data-26bd56a2" col="4" row="0" valign="CENTER"/>
+        </cl:button>
+        <cl:output std:sid="output-e4147062" style="background-color:#eeeeee; text-align:center;" value=" ~ 1년간">
+          <cl:formdata std:sid="f-data-97e016b5" col="3" row="0" valign="CENTER"/>
+        </cl:output>
+        <cl:udc std:sid="ud-control-e5297607" id="cbx_date" type="udc.DateCombo">
+          <cl:listener std:sid="listener-cb07430e" handler="onCbx_dateChangeValue" name="change-value"/>
+          <cl:formdata std:sid="f-data-fe4b3a0b" col="2" row="0" valign="CENTER"/>
+        </cl:udc>
+        <cl:formlayout std:sid="f-layout-ed82287a">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-e1a445b0">
+        <cl:rows length="5" shadecolor="transparent" shadetype="NONE" unit="FRACTION"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:formlayout std:sid="f-layout-6939231e">
+      <cl:rows length="1" shadecolor="transparent" shadetype="NONE" unit="FRACTION"/>
+      <cl:rows length="9" shadecolor="transparent" shadetype="NONE" unit="FRACTION"/>
+      <cl:rows length="1" shadecolor="transparent" shadetype="NONE" unit="FRACTION"/>
+      <cl:columns length="1" unit="FRACTION"/>
+    </cl:formlayout>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

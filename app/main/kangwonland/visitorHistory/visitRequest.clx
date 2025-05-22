@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-8b1409b3" version="1.0.0.0">
+  <head std:sid="head-e7c99d78">
+    <title>visitRequest</title>
+    <screen std:sid="screen-baa5668a" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="500" customWidth="1000"/>
+    <screen std:sid="screen-3f460992" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-9a30581a" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-bb1237c7">
+      <cl:dataset std:sid="d-set-63ced7c6" id="VisitRequestList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-5698c60c" name="VIndex" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-b63d71ff" name="VStatus" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-648d5143" name="VisitorName"/>
+          <cl:datacolumn std:sid="d-column-5177ebde" name="VisitorCompanyName"/>
+          <cl:datacolumn std:sid="d-column-33e8a757" name="VisitorPurpose"/>
+          <cl:datacolumn std:sid="d-column-f0c4e272" name="CardNum"/>
+          <cl:datacolumn std:sid="d-column-6c43cd6c" name="InputAdminName" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-fb6c0e56" name="VisitorInDate"/>
+          <cl:datacolumn std:sid="d-column-06280f4e" name="OutputAdminName"/>
+          <cl:datacolumn std:sid="d-column-6845d61d" name="VisitorOutDate"/>
+          <cl:datacolumn std:sid="d-column-792048e9" name="LeaderName"/>
+          <cl:datacolumn std:sid="d-column-8f351221" name="LeaderPhone"/>
+          <cl:datacolumn std:sid="d-column-2a2acd88" name="LeaderDepartment"/>
+          <cl:datacolumn std:sid="d-column-b71a3385" name="RegistDate"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-71f76a43" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-9e948ef1" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-1804400d" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-251eeb54" name="Count" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-82cd2aef" id="sms_getVisitRequestList" method="get" action="/v1/kangwonland/visitRequest">
+        <cl:listener std:sid="listener-dfc6acd5" name="submit-done" handler="onSms_getVisitRequestListSubmitDone"/>
+        <cl:listener std:sid="listener-ffeb7111" name="submit-error" handler="onSms_getVisitRequestListSubmitError"/>
+        <cl:listener std:sid="listener-f5ab0529" name="submit-timeout" handler="onSms_getVisitRequestListSubmitTimeout"/>
+        <cl:requestparam name="limit" value="50"/>
+        <cl:requestparam name="offset" value="0"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total"/>
+        <cl:responsedata dataid="VisitRequestList"/>
+      </cl:submission>
+      <cl:datamap std:sid="d-map-cc517011" id="dm_ExportParam">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-d83b48dd" name="offset" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-fc1a603e" name="total" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-bbc173f9" name="mode"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:dataset std:sid="d-set-f8e9d051" id="ExportVisitRequestList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-466822a0" name="VIndex" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-5b8a1e1e" name="VStatus" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-d2b83aca" name="VisitorName"/>
+          <cl:datacolumn std:sid="d-column-301b2f77" name="VisitorCompanyName"/>
+          <cl:datacolumn std:sid="d-column-1ad3086f" name="VisitorPurpose"/>
+          <cl:datacolumn std:sid="d-column-b09a6abe" name="CardNum"/>
+          <cl:datacolumn std:sid="d-column-a5215b81" name="InputAdminName" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-acd2839a" name="VisitorInDate"/>
+          <cl:datacolumn std:sid="d-column-82051597" name="OutputAdminName"/>
+          <cl:datacolumn std:sid="d-column-5b812dcc" name="VisitorOutDate"/>
+          <cl:datacolumn std:sid="d-column-3bb45616" name="LeaderName"/>
+          <cl:datacolumn std:sid="d-column-a6259093" name="LeaderPhone"/>
+          <cl:datacolumn std:sid="d-column-d8041d7c" name="LeaderDepartment"/>
+          <cl:datacolumn std:sid="d-column-28ebb2d9" name="RegistDate"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+    </cl:model>
+    <cl:appspec dev-comment="조회-> 발급 / 회수&#xD;&#xA;&#xD;&#xA;KWLVR&#xD;&#xA;&#xD;&#xA;KWLVR_grdVisitRegist"/>
+  </head>
+  <body std:sid="body-915a43ac" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-0ec31e36" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-d9b27d3f">
+      <cl:xylayoutdata std:sid="xyl-data-fd75006d" top="1px" right="1px" bottom="1px" left="1px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-fce1fabc" id="JWDVM_grpTop">
+        <cl:formdata std:sid="f-data-642e05e4" row="1" col="0"/>
+        <cl:output std:sid="output-e053a255" style="padding:4px; text-align:right;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_All"/>
+          <cl:formdata std:sid="f-data-9b370de7" row="0" col="0"/>
+        </cl:output>
+        <cl:output std:sid="output-5a63dfa3" id="KWLVR_opbTotal" value="">
+          <cl:formdata std:sid="f-data-31d6ef3b" row="0" col="1"/>
+        </cl:output>
+        <cl:dateinput std:sid="d-input-64444c3a" id="KWLVR_dtiStart">
+          <cl:formdata std:sid="f-data-f3616048" row="0" col="3"/>
+        </cl:dateinput>
+        <cl:output std:sid="output-a8dd97cd" style="text-align:center;" value="~">
+          <cl:formdata std:sid="f-data-6ffea206" row="0" col="4"/>
+        </cl:output>
+        <cl:dateinput std:sid="d-input-d0fd391c" id="KWLVR_dtiEnd">
+          <cl:formdata std:sid="f-data-2964c8b6" row="0" col="5"/>
+        </cl:dateinput>
+        <cl:group std:sid="group-a84f9729" style="border-right-style:solid; color:#6b6b6b; border-top-width:1px; border-bottom-color:#cccccc; border-right-width:1px; border-left-color:#cccccc; border-right-color:#cccccc; border-left-width:1px; border-top-style:solid; background-color:#F6F6F6; border-radius:10px; border-left-style:solid; border-bottom-width:1px; border-top-color:#cccccc; border-bottom-style:solid;">
+          <cl:formdata std:sid="f-data-43e0e373" row="0" col="6"/>
+          <cl:combobox std:sid="c-box-6107e546" id="KWLVR_cmbCategory" style="background-color:#F6F6F6; border-right-style:none; border-left-style:none; border-bottom-style:none; border-top-style:none;" preventinput="true">
+            <cl:apppropbind property="value" category="PROPERTY" app-property="searchCategory"/>
+            <cl:formdata std:sid="f-data-8adb84bb" row="0" col="0"/>
+            <cl:item std:sid="item-3aad8294" label="성명" value="name"/>
+            <cl:item std:sid="item-663ba944" label="인솔자" value="leader"/>
+            <cl:item std:sid="item-de83d5f5" label="카드번호" value="cardnum"/>
+            <cl:item std:sid="item-fb25d968" label="업체명" value="companyname"/>
+          </cl:combobox>
+          <cl:inputbox std:sid="i-box-c326c7b5" id="KWLVR_ipbKeyword" style="background-color:#F6F6F6; padding:0px 0px 0px 10px; border-bottom-color:#cccccc; border-left-color:#cccccc; border-top-color:#cccccc; border-bottom-style:none; border-right-color:#cccccc; border-top-style:none;">
+            <cl:langbind property="placeholder" category="PROPERTY" keypath="Str_SearchKeword"/>
+            <cl:apppropbind property="value" category="PROPERTY" app-property="searchKeyword"/>
+            <cl:formdata std:sid="f-data-87f7c575" row="0" col="1"/>
+          </cl:inputbox>
+          <cl:group std:sid="group-94b972ce" id="KWLVR_btnSearch" style="border-right-style:none; cursor:pointer; background-color:transparent; background-repeat:no-repeat; border-left-style:none; border-bottom-style:none; background-image:url('../../../../theme/images/common/common_text_field_btn_icons_search.png'); background-position:center; border-top-style:none;">
+            <cl:listener std:sid="listener-2a5878d2" name="click" handler="onKWLVR_btnSearchClick"/>
+            <cl:formdata std:sid="f-data-838eccbc" height="29" row="0" col="2"/>
+            <cl:xylayout std:sid="xylayout-3b76f87f"/>
+          </cl:group>
+          <cl:formlayout std:sid="f-layout-409a1d5f" hspace="0px" vspace="0px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+            <cl:columns length="3" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:button std:sid="button-eb25c26a" id="KWLVR_btnIn" class="userInfo_btn" value="입장관리">
+          <cl:listener std:sid="listener-eb6d8652" name="click" handler="onKWLVR_btnInClick"/>
+          <cl:formdata std:sid="f-data-181d9359" row="0" col="9"/>
+        </cl:button>
+        <cl:button std:sid="button-b6f76504" id="KWLVR_btnOut" class="userInfo_btn" value="퇴장관리">
+          <cl:listener std:sid="listener-3541e486" name="click" handler="onKWLVR_btnOutClick"/>
+          <cl:formdata std:sid="f-data-8f47ef52" row="0" col="10"/>
+        </cl:button>
+        <cl:button std:sid="button-eefb9daa" id="KWLVR_CardReader" class="userInfo_btn" visible="false" value="카드읽기">
+          <cl:formdata std:sid="f-data-3703fd78" row="0" col="7"/>
+        </cl:button>
+        <cl:button std:sid="button-3907ad57" id="KWLVR_btnExcel" class="userInfo_btn" value="내보내기">
+          <cl:listener std:sid="listener-90ca2cde" name="click" handler="onKWLVR_btnExcelClick"/>
+          <cl:formdata std:sid="f-data-7bfbd8da" row="0" col="8"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-016dc211">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="10" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" minlength="0"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" minlength="0"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" minlength="0"/>
+          <cl:columns length="15" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:pageindexer std:sid="p-indexer-700b4b78" id="visitorListPageIndexer" class="userList_paging">
+        <cl:listener std:sid="listener-58efb84b" name="selection-change" handler="onVisitorListPageIndexerSelectionChange"/>
+        <cl:formdata std:sid="f-data-21695163" row="3" col="0"/>
+      </cl:pageindexer>
+      <cl:grid std:sid="grid-94796cab" id="KWLVR_grdVisitRegist" readonly="true" datasetid="VisitRequestList" columnResizable="true">
+        <cl:formdata std:sid="f-data-bfa202d2" row="2" col="0"/>
+        <cl:gridcolumn std:sid="g-column-e284b0be" width="25px"/>
+        <cl:gridcolumn std:sid="g-column-b8eee700"/>
+        <cl:gridcolumn std:sid="g-column-f50e1b1f"/>
+        <cl:gridcolumn std:sid="g-column-3170e949"/>
+        <cl:gridcolumn std:sid="g-column-57c72468"/>
+        <cl:gridcolumn std:sid="g-column-c9e28a80"/>
+        <cl:gridcolumn std:sid="g-column-75694b95"/>
+        <cl:gridcolumn std:sid="g-column-a959fd3c"/>
+        <cl:gridcolumn std:sid="g-column-54243ec8"/>
+        <cl:gridcolumn std:sid="g-column-68aad39e"/>
+        <cl:gridcolumn std:sid="g-column-413fefed"/>
+        <cl:gridcolumn std:sid="g-column-c001bdf4"/>
+        <cl:gridcolumn std:sid="g-column-af717548"/>
+        <cl:gridcolumn std:sid="g-column-f2540b45"/>
+        <cl:gridheader std:sid="gh-band-f95cd03e">
+          <cl:gridrow std:sid="g-row-e59ccc68"/>
+          <cl:gridcell std:sid="gh-cell-135f31d6" rowindex="0" colindex="0" sortable="false" filterable="false" columntype="checkbox"/>
+          <cl:gridcell std:sid="gh-cell-0e2b4e9e" rowindex="0" colindex="1" targetcolumnname="VIndex" sortable="false" filterable="false" text="NO"/>
+          <cl:gridcell std:sid="gh-cell-41de33c4" rowindex="0" colindex="2" targetcolumnname="VStatus" sortable="false" filterable="false" text="상태"/>
+          <cl:gridcell std:sid="gh-cell-7ad930c4" rowindex="0" colindex="3" targetcolumnname="VisitorName" sortable="false" filterable="false" text="성명"/>
+          <cl:gridcell std:sid="gh-cell-118c8dfb" rowindex="0" colindex="4" targetcolumnname="VisitorCompanyName" sortable="false" filterable="false" text="업체명"/>
+          <cl:gridcell std:sid="gh-cell-9ca92e92" rowindex="0" colindex="5" targetcolumnname="VisitorPurpose" sortable="false" filterable="false" text="방문사유"/>
+          <cl:gridcell std:sid="gh-cell-cd1c6418" rowindex="0" colindex="6" targetcolumnname="CardNum" sortable="false" filterable="false" text="카드번호"/>
+          <cl:gridcell std:sid="gh-cell-9ad4ef8c" rowindex="0" colindex="7" targetcolumnname="InputAdminName" sortable="false" filterable="false" text="입장등록자"/>
+          <cl:gridcell std:sid="gh-cell-60b32b2b" rowindex="0" colindex="8" targetcolumnname="VisitorInDate" sortable="false" filterable="false" text="입장일자"/>
+          <cl:gridcell std:sid="gh-cell-6ce8438c" rowindex="0" colindex="9" targetcolumnname="OutputAdminName" sortable="false" filterable="false" text="퇴장등록자"/>
+          <cl:gridcell std:sid="gh-cell-5898afa1" rowindex="0" colindex="10" targetcolumnname="VisitorOutDate" sortable="false" filterable="false" text="퇴장일자"/>
+          <cl:gridcell std:sid="gh-cell-64064d07" rowindex="0" colindex="11" targetcolumnname="LeaderName" sortable="false" filterable="false" text="인솔자"/>
+          <cl:gridcell std:sid="gh-cell-6c47bc5e" rowindex="0" colindex="12" targetcolumnname="LeaderPhone" sortable="false" filterable="false" text="내선번호"/>
+          <cl:gridcell std:sid="gh-cell-cc0ab983" rowindex="0" colindex="13" targetcolumnname="LeaderDepartment" sortable="false" filterable="false" text="부서명"/>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-82b59f4a">
+          <cl:gridrow std:sid="g-row-11da62da"/>
+          <cl:gridcell std:sid="gd-cell-e2a114df" rowindex="0" colindex="0" columntype="checkbox"/>
+          <cl:gridcell std:sid="gd-cell-a69e1837" rowindex="0" colindex="1" columnname="VIndex"/>
+          <cl:gridcell std:sid="gd-cell-3ed05375" rowindex="0" colindex="2" columnname="VStatus">
+            <cl:combobox std:sid="c-box-323aa9d4" id="KWLVR_cmbVStatus">
+              <cl:item std:sid="item-229ef3ee" label="입장" value="0"/>
+              <cl:item std:sid="item-18f5c4e4" label="퇴장" value="1"/>
+            </cl:combobox>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-7df4ebf2" rowindex="0" colindex="3" columnname="VisitorName"/>
+          <cl:gridcell std:sid="gd-cell-bc80d063" rowindex="0" colindex="4" columnname="VisitorCompanyName"/>
+          <cl:gridcell std:sid="gd-cell-cf3ccbba" rowindex="0" colindex="5" columnname="VisitorPurpose"/>
+          <cl:gridcell std:sid="gd-cell-5a5e3c2e" rowindex="0" colindex="6" columnname="CardNum"/>
+          <cl:gridcell std:sid="gd-cell-69466aa7" rowindex="0" colindex="7" columnname="InputAdminName"/>
+          <cl:gridcell std:sid="gd-cell-a2f5e85c" rowindex="0" colindex="8" columnname="VisitorInDate"/>
+          <cl:gridcell std:sid="gd-cell-73a13131" rowindex="0" colindex="9" columnname="OutputAdminName"/>
+          <cl:gridcell std:sid="gd-cell-3031a0a3" rowindex="0" colindex="10" columnname="VisitorOutDate"/>
+          <cl:gridcell std:sid="gd-cell-d8dc0d1e" rowindex="0" colindex="11" columnname="LeaderName"/>
+          <cl:gridcell std:sid="gd-cell-7f42ca8f" rowindex="0" colindex="12" columnname="LeaderPhone"/>
+          <cl:gridcell std:sid="gd-cell-42562bdb" rowindex="0" colindex="13" columnname="LeaderDepartment"/>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:formlayout std:sid="f-layout-6169c271">
+        <cl:rows length="1" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-e9847276"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-5ef813b9" version="1.0.0.0">
+  <head std:sid="head-fef350f5">
+    <title>visitInfoUpdate</title>
+    <screen std:sid="screen-9e43ac8b" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="150" customWidth="300"/>
+    <screen std:sid="screen-1f5fbf9e" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-b4d25c14" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-e481d420">
+      <cl:datamap std:sid="d-map-74729289" id="VisitRequestInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-faaf7db0" name="IndexKey" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-a4592f96" name="TargetGroupID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-d55250db" name="VisitPurpose"/>
+          <cl:datacolumn std:sid="d-column-2d5a4534" name="VisitStartAt"/>
+          <cl:datacolumn std:sid="d-column-08c47a97" name="VisitEndAt"/>
+          <cl:datacolumn std:sid="d-column-6fd8a4e5" name="LeaderID"/>
+          <cl:datacolumn std:sid="d-column-a858cfb9" name="ApproverID"/>
+          <cl:datacolumn std:sid="d-column-24504a96" name="Status" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-8b3416ce" name="RegistAt"/>
+          <cl:datacolumn std:sid="d-column-00e6392b" name="ProcessAt"/>
+          <cl:datacolumn std:sid="d-column-3df3f4c6" name="Description"/>
+          <cl:datacolumn std:sid="d-column-c99e7e1d" name="VisitorType"/>
+          <cl:datacolumn std:sid="d-column-b810ae69" name="VisitorRegistType" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-6f46f166" id="sms_putVisitInfoUpdate" method="put" action="/v1/visitRequest/update">
+        <cl:listener std:sid="listener-1600313b" name="submit-done" handler="onSms_putVisitInfoUpdateSubmitDone"/>
+        <cl:listener std:sid="listener-98fbff44" name="submit-error" handler="onSms_putVisitInfoUpdateSubmitError"/>
+        <cl:listener std:sid="listener-9b23daa7" name="submit-timeout" handler="onSms_putVisitInfoUpdateSubmitTimeout"/>
+        <cl:requestdata dataid="VisitRequestInfo"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:datamap std:sid="d-map-71f76a43" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-40328ca0" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+    </cl:model>
+    <cl:appspec dev-comment="JWDVUP_cmbTargetGroup&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;"/>
+  </head>
+  <body std:sid="body-d1bb3976" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-037ac722" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-a278f18b" id="JWDVUP_grpMain">
+      <cl:xylayoutdata std:sid="xyl-data-b3566559" top="1px" right="1px" bottom="1px" left="1px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-3b25c9db">
+        <cl:formdata std:sid="f-data-3f5320a8" row="3" col="0" rowspan="1" colspan="2"/>
+        <cl:button std:sid="button-a3b11f49" id="JWDVUP_btnModify" style="font-weight:400.0; font-size:12px;" class="userInfo_btn" value="수 정">
+          <cl:listener std:sid="listener-aa653633" name="click" handler="onJWDVUP_btnModifyClick"/>
+          <cl:formdata std:sid="f-data-b652f75b" row="0" col="1"/>
+        </cl:button>
+        <cl:button std:sid="button-d9045e84" id="JWDVUP_btnCancel" style="font-weight:400.0; font-size:12px;" class="userInfo_btn" value="취 소">
+          <cl:listener std:sid="listener-37b4e116" name="click" handler="onJWDVUP_btnCancelClick"/>
+          <cl:formdata std:sid="f-data-59f46eed" row="0" col="2"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-2ef2b3d4">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:output std:sid="output-d9b5c09b" style="padding:4px;" class="userInfo_bold">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_VisitorAccessUnit"/>
+        <cl:formdata std:sid="f-data-7b5e4059" row="0" col="0"/>
+      </cl:output>
+      <cl:group std:sid="group-b88749d0">
+        <cl:formdata std:sid="f-data-8d18e15f" row="1" col="0" rowspan="1" colspan="2"/>
+        <cl:output std:sid="output-8810bbb2" style="padding:4px;" class="userInfo_bold">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_VisitAccessPeriod"/>
+          <cl:formdata std:sid="f-data-a4ff1d0d" row="0" col="0"/>
+        </cl:output>
+        <cl:group std:sid="group-8449d3b6" id="JWDVR_grpAccessPeriod">
+          <cl:formdata std:sid="f-data-efe21419" row="0" col="1"/>
+          <cl:dateinput std:sid="d-input-e9d775f1" id="JWDVUP_dtiVisitStartAt" style="text-align:center;">
+            <cl:formdata std:sid="f-data-16ba9b13" row="0" col="0"/>
+          </cl:dateinput>
+          <cl:dateinput std:sid="d-input-356bc40b" id="JWDVUP_dtiVisitEndAt" style="text-align:center;">
+            <cl:formdata std:sid="f-data-fd2caba1" row="0" col="2"/>
+          </cl:dateinput>
+          <cl:output std:sid="output-b443453d" value="~">
+            <cl:formdata std:sid="f-data-9ebc370b" row="0" col="1"/>
+          </cl:output>
+          <cl:formlayout std:sid="f-layout-cde9a79f">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+            <cl:columns length="12" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-4ced85ae" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:output std:sid="output-3019d519" style="padding:4px;" class="userInfo_bold">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_VisitAccessPurpose"/>
+        <cl:formdata std:sid="f-data-4f9a6d4b" row="2" col="0"/>
+      </cl:output>
+      <cl:inputbox std:sid="i-box-6ea340c5" id="JWDVUP_ipbVisitPurpose" style="text-align:left;">
+        <cl:datamapbind property="value" datacontrolid="VisitRequestInfo" columnname="VisitPurpose"/>
+        <cl:formdata std:sid="f-data-2ca26a01" row="2" col="1"/>
+      </cl:inputbox>
+      <cl:combobox std:sid="c-box-b870605b" id="JWDVUP_cmbTargetGroup">
+        <cl:datamapbind property="value" datacontrolid="VisitRequestInfo" columnname="TargetGroupID"/>
+        <cl:formdata std:sid="f-data-a5a271a0" row="0" col="1"/>
+      </cl:combobox>
+      <cl:formlayout std:sid="f-layout-7645e58c" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-60bde82c"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

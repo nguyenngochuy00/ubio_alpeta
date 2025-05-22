@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-cc2a9053" version="1.0.0.0">
+  <head std:sid="head-08505916">
+    <title>terminalCCTVManagement</title>
+    <screen std:sid="screen-46a84134" id="default" name="default" minwidth="1024px" width="1024px" height="768px"/>
+    <screen std:sid="screen-b5491787" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-1a5313c1" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-0079f6a7">
+      <cl:dataset std:sid="d-set-71ba8e27" id="TerminalList" sortcondition="">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-6e30c3de" name="ID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-64cce495" name="Name"/>
+          <cl:datacolumn std:sid="d-column-b18f564a" name="Status" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-d4d0f203" id="CCTVList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-eef46b2f" name="TerminalID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-047ea7dc" name="CameraIP"/>
+          <cl:datacolumn std:sid="d-column-112ab73f" name="CameraPort" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-90aaa79c" name="UserID"/>
+          <cl:datacolumn std:sid="d-column-5de523eb" name="UserPassword"/>
+          <cl:datacolumn std:sid="d-column-bdc5584b" name="RTSPPort" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap comment="Hike Vision CCTV Info. used to WebSDK" std:sid="d-map-7894323c" id="CCTVInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-0f6a919b" name="TerminalID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-5a7adcb0" name="CameraIP" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-144aae1f" name="CameraPort" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-cb1210cb" name="UserID"/>
+          <cl:datacolumn std:sid="d-column-71a0c96f" name="UserPassword"/>
+          <cl:datacolumn std:sid="d-column-4fc44e91" name="RTSPPort" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-c30ddf49" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-0a194d06" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-cda16c79" id="sms_put_terminal_cctv_info" action="/v1/vietnam/integ/cctv">
+        <cl:listener std:sid="listener-f3b6da78" name="submit-done" handler="onSms_put_terminal_cctv_infoSubmitDone"/>
+        <cl:listener std:sid="listener-04b6ffbd" name="submit-error" handler="onSms_SubmitError"/>
+        <cl:listener std:sid="listener-3c2f5abd" name="submit-timeout" handler="onSms_SubmitTimeout"/>
+        <cl:requestdata dataid="CCTVInfo"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-676c68f4" id="sms_get_terminal_cctv_infos" method="get" action="/v1/vietnam/integ/cctv">
+        <cl:listener std:sid="listener-ebe4003d" name="submit-done" handler="onSms_get_terminal_cctv_infosSubmitDone"/>
+        <cl:listener std:sid="listener-0ab4cd46" name="submit-timeout" handler="onSms_SubmitTimeout"/>
+        <cl:listener std:sid="listener-0a6117eb" name="submit-error" handler="onSms_SubmitError"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="CCTVList"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-de98dd80" id="sms_del_terminal_cctv_info" method="delete" action="">
+        <cl:listener std:sid="listener-e8e9de95" name="submit-done" handler="onSms_del_terminal_cctv_infoSubmitDone"/>
+        <cl:listener std:sid="listener-17248188" name="submit-timeout" handler="onSms_SubmitTimeout"/>
+        <cl:listener std:sid="listener-85c2793d" name="submit-error" handler="onSms_SubmitError"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-56e46022" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-fdc7b07b" name="load" handler="onBodyLoad"/>
+    <cl:listener std:sid="listener-766223ca" name="before-unload" handler="onBodyBeforeUnload"/>
+    <cl:group std:sid="group-7369fd06" id="gr_test">
+      <cl:xylayoutdata std:sid="xyl-data-0222d3ba" top="10px" right="222px" bottom="154px" left="10px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:output std:sid="output-2e29cd4b" style="border-bottom-color:#2446a4; font-weight:700; border-bottom-width:1px; font-size:14px; border-bottom-style:solid;">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_TerminalList"/>
+        <cl:formdata std:sid="f-data-9a27c856" halign="LEFT" width="200" row="0" col="0"/>
+      </cl:output>
+      <cl:grid std:sid="grid-88c79e21" id="VICTCM_grdTerminalList" readonly="true" tabindex="6" datasetid="TerminalList" resizablecolumns="all">
+        <cl:listener std:sid="listener-c93abe2b" name="selection-change" handler="onVICTCM_grdTerminalListSelectionChange"/>
+        <cl:formdata std:sid="f-data-6d4fc475" row="1" col="0" rowspan="4" colspan="1"/>
+        <cl:gridcolumn std:sid="g-column-b6778e5a" width="25px"/>
+        <cl:gridcolumn std:sid="g-column-981d91ea"/>
+        <cl:gridcolumn std:sid="g-column-f2ab63ea"/>
+        <cl:gridheader std:sid="gh-band-7ff1b935">
+          <cl:gridrow std:sid="g-row-27fbe705"/>
+          <cl:gridcell std:sid="gh-cell-17c64be5" rowindex="0" colindex="0" sortable="false" filterable="false" columntype="checkbox" visible="false"/>
+          <cl:gridcell std:sid="gh-cell-bc58b13b" rowindex="0" colindex="1" targetcolumnname="ID" sortable="false" filterable="false" text="ID"/>
+          <cl:gridcell std:sid="gh-cell-55ebb401" rowindex="0" colindex="2" targetcolumnname="Name" sortable="false" filterable="false" text="Name"/>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-036fc4b3">
+          <cl:gridrow std:sid="g-row-8a147b6d"/>
+          <cl:gridcell std:sid="gd-cell-465e80e6" rowindex="0" colindex="0" columntype="checkbox"/>
+          <cl:gridcell std:sid="gd-cell-7b4ab91a" rowindex="0" colindex="1" columnname="ID"/>
+          <cl:gridcell std:sid="gd-cell-4452b84c" rowindex="0" colindex="2" columnname="Name"/>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:group std:sid="group-049ff2a3">
+        <cl:formdata std:sid="f-data-40f9bf73" row="0" col="1"/>
+        <cl:output std:sid="output-d478415f" style="border-bottom-color:#2446a4; font-weight:700; border-bottom-width:1px; font-size:14px; border-bottom-style:solid;" value="Hik Vision Camera">
+          <cl:formdata std:sid="f-data-eba11dbe" row="0" col="0"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-cf0cdf69" hspace="10px" vspace="10px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="200" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-4e7d25d9" id="VICTCM_gr_cctv_info">
+        <cl:formdata std:sid="f-data-f19a0b84" row="1" col="1"/>
+        <cl:inputbox std:sid="i-box-62513d94" id="VICTCM_ipb_ip" style="padding-left:10px;" tabindex="1">
+          <cl:datamapbind property="value" category="PROPERTY" datacontrolid="CCTVInfo" columnname="CameraIP"/>
+          <cl:formdata std:sid="f-data-802a284b" row="0" col="1"/>
+        </cl:inputbox>
+        <cl:inputbox std:sid="i-box-c1020c3d" id="VICTCM_ipb_userName" style="padding-left:10px;" tabindex="3">
+          <cl:datamapbind property="value" category="PROPERTY" datacontrolid="CCTVInfo" columnname="UserID"/>
+          <cl:formdata std:sid="f-data-98f7e2b3" row="2" col="1"/>
+        </cl:inputbox>
+        <cl:inputbox std:sid="i-box-7a051d8d" id="VICTCM_ipb_pwd" style="padding-left:10px;" tabindex="4" secret="true">
+          <cl:listener std:sid="listener-baed0169" name="mousedown" handler="onVICTCM_ipb_pwdMousedown"/>
+          <cl:listener std:sid="listener-63995327" name="mouseup" handler="onVICTCM_ipb_pwdMouseup"/>
+          <cl:datamapbind property="value" category="PROPERTY" datacontrolid="CCTVInfo" columnname="UserPassword"/>
+          <cl:formdata std:sid="f-data-d85720d8" row="3" col="1"/>
+        </cl:inputbox>
+        <cl:group std:sid="group-8091948e">
+          <cl:formdata std:sid="f-data-19577875" row="6" col="0" rowspan="1" colspan="2"/>
+          <cl:button std:sid="button-88cea3b1" id="VICTCM_btnConnectTest" style="padding:0px;" class="userInfo_btn" tabindex="6">
+            <cl:listener std:sid="listener-a089c0db" name="click" handler="onVICTCM_btnConnectTestClick"/>
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_ConnectionTest"/>
+            <cl:formdata std:sid="f-data-d0c1b68e" row="0" col="0"/>
+          </cl:button>
+          <cl:button std:sid="button-cb7e8de9" id="VICTCM_btnLiveView" style="padding:0px;" class="userInfo_btn" tabindex="6">
+            <cl:listener std:sid="listener-40133e58" name="click" handler="onVICTCM_btnLiveViewClick"/>
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_LiveVideo"/>
+            <cl:formdata std:sid="f-data-41a36218" row="0" col="1"/>
+          </cl:button>
+          <cl:button std:sid="button-65c8b50b" id="VICTCM_btnDeleteCamera" style="padding:0px;" class="userInfo_btn" tabindex="6">
+            <cl:listener std:sid="listener-40493fff" name="click" handler="onVICTCM_btnDeleteCameraClick"/>
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_Delete"/>
+            <cl:formdata std:sid="f-data-689ea529" row="0" col="2"/>
+          </cl:button>
+          <cl:formlayout std:sid="f-layout-3b0afbfd" hspace="15px" vspace="0px" top-margin="0px" right-margin="5px" bottom-margin="0px" left-margin="5px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:button std:sid="button-5ca48163" id="VICTCM_btnSaveSetting" style="padding:0px;" class="userInfo_btn" tabindex="6">
+          <cl:listener std:sid="listener-c81a1182" name="click" handler="onVICTCM_btnSaveSettingClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Save"/>
+          <cl:formdata std:sid="f-data-8b5b4078" row="5" col="0" rowspan="1" colspan="2"/>
+        </cl:button>
+        <cl:numbereditor std:sid="n-editor-b7c320bf" id="VICTCM_ipb_rtspPort" style="padding-left:10px;" tabindex="5">
+          <cl:datamapbind property="value" category="PROPERTY" datacontrolid="CCTVInfo" columnname="RTSPPort"/>
+          <cl:formdata std:sid="f-data-6facada5" row="4" col="1"/>
+        </cl:numbereditor>
+        <cl:numbereditor std:sid="n-editor-ad5dcf5f" id="VICTCM_ipb_port" style="padding-left:10px;" tabindex="2">
+          <cl:datamapbind property="value" category="PROPERTY" datacontrolid="CCTVInfo" columnname="CameraPort"/>
+          <cl:formdata std:sid="f-data-832571ae" row="1" col="1"/>
+        </cl:numbereditor>
+        <cl:group std:sid="group-3e1c079d">
+          <cl:formdata std:sid="f-data-38521587" row="0" col="0"/>
+          <cl:output std:sid="output-580eec63" style="background-color:#f6f6f6; border-bottom-color:#c5c5c5; border-top-width:1px; border-bottom-width:1px; font-size:14px; border-top-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid; text-align:center;" value="IP Address">
+            <cl:formdata std:sid="f-data-b43428ca" row="0" col="0"/>
+          </cl:output>
+          <cl:output std:sid="output-ed33acca" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; color:red; border-right-width:2px; font-size:14px; border-right-color:#c5c5c5; border-top-style:solid; background-color:#f6f6f6; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; text-align:left;" value="*">
+            <cl:formdata std:sid="f-data-60684465" row="0" col="1"/>
+          </cl:output>
+          <cl:formlayout std:sid="f-layout-03a02db4" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="15" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:group std:sid="group-ec9c38d9">
+          <cl:formdata std:sid="f-data-ec688ed2" row="1" col="0"/>
+          <cl:output std:sid="output-e790e140" style="background-color:#f6f6f6; border-bottom-color:#c5c5c5; border-top-width:1px; border-bottom-width:1px; font-size:14px; border-top-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid; text-align:center;" value="Http Port">
+            <cl:formdata std:sid="f-data-736ccfc3" row="0" col="0"/>
+          </cl:output>
+          <cl:output std:sid="output-d9946ece" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; color:red; border-right-width:2px; font-size:14px; border-right-color:#c5c5c5; border-top-style:solid; background-color:#f6f6f6; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; text-align:left;" value="*">
+            <cl:formdata std:sid="f-data-8bdf2568" row="0" col="1"/>
+          </cl:output>
+          <cl:formlayout std:sid="f-layout-5eb574bd" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="15" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:group std:sid="group-8570d639">
+          <cl:formdata std:sid="f-data-49fc7887" row="2" col="0"/>
+          <cl:output std:sid="output-a5a8ae7e" style="background-color:#f6f6f6; border-bottom-color:#c5c5c5; border-top-width:1px; border-bottom-width:1px; font-size:14px; border-top-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid; text-align:center;" value="UserName">
+            <cl:formdata std:sid="f-data-82e4e0a9" row="0" col="0"/>
+          </cl:output>
+          <cl:output std:sid="output-2d0a9f7c" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; color:red; border-right-width:2px; font-size:14px; border-right-color:#c5c5c5; border-top-style:solid; background-color:#f6f6f6; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; text-align:left;" value="*">
+            <cl:formdata std:sid="f-data-914f5b6f" row="0" col="1"/>
+          </cl:output>
+          <cl:formlayout std:sid="f-layout-73fecf34" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="15" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:group std:sid="group-9ef0e895">
+          <cl:formdata std:sid="f-data-d647dfd9" row="3" col="0"/>
+          <cl:output std:sid="output-c471c697" style="background-color:#f6f6f6; border-bottom-color:#c5c5c5; border-top-width:1px; border-bottom-width:1px; font-size:14px; border-top-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid; text-align:center;" value="Password">
+            <cl:formdata std:sid="f-data-445a4f37" row="0" col="0"/>
+          </cl:output>
+          <cl:output std:sid="output-909e2fad" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; color:red; border-right-width:2px; font-size:14px; border-right-color:#c5c5c5; border-top-style:solid; background-color:#f6f6f6; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; text-align:left;" value="*">
+            <cl:formdata std:sid="f-data-523ae60e" row="0" col="1"/>
+          </cl:output>
+          <cl:formlayout std:sid="f-layout-2e8df0d6" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="15" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:group std:sid="group-dc421a90">
+          <cl:formdata std:sid="f-data-ebcdfa7f" row="4" col="0"/>
+          <cl:output std:sid="output-9076413f" style="background-color:#f6f6f6; border-bottom-color:#c5c5c5; border-top-width:1px; border-bottom-width:1px; font-size:14px; border-top-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid; text-align:center;" value="RTSP Port">
+            <cl:formdata std:sid="f-data-98ea8279" row="0" col="0"/>
+          </cl:output>
+          <cl:output std:sid="output-0d88106c" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; color:red; border-right-width:2px; font-size:14px; border-right-color:#c5c5c5; border-top-style:solid; background-color:#f6f6f6; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; text-align:center;">
+            <cl:formdata std:sid="f-data-35043c14" row="0" col="1"/>
+          </cl:output>
+          <cl:formlayout std:sid="f-layout-8ec6858f" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="15" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-147bb3a2" hspace="10px" vspace="10px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="2" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-08ad5099">
+        <cl:formdata std:sid="f-data-eaa5c2cb" row="4" col="1"/>
+        <cl:uicontrolshell std:sid="uic-shell-85886a18" id="shl1" tooltip="asdasd">
+          <cl:listener std:sid="listener-0403a00b" name="load" handler="onShl1Load"/>
+          <cl:xylayoutdata std:sid="xyl-data-4d007bb7" top="0px" right="5px" bottom="5px" left="359px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+        </cl:uicontrolshell>
+        <cl:xylayout std:sid="xylayout-8f35dbc4"/>
+      </cl:group>
+      <cl:textarea std:sid="t-area-28810439" id="VICTCM_txt" tabindex="8">
+        <cl:formdata std:sid="f-data-50684f69" row="2" col="1"/>
+      </cl:textarea>
+      <cl:htmlsnippet std:sid="htmlsnippet-9c32aac1" id="VICTCM_snippet" style="font-size:14px; text-align:left;" tabindex="8">
+        <cl:formdata std:sid="f-data-87950441" row="3" col="1"/>
+      </cl:htmlsnippet>
+      <cl:formlayout std:sid="f-layout-217701e2" hspace="30px" vspace="10px">
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="3" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="2" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="10" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:button std:sid="button-dd54ed95" visible="false" value="Button">
+      <cl:listener std:sid="listener-66b4bccd" name="click" handler="onButtonClick"/>
+      <cl:xylayoutdata std:sid="xyl-data-3020bc37" top="674px" left="394px" width="100px" height="20px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+    </cl:button>
+    <cl:xylayout std:sid="xylayout-e50dcbc0"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

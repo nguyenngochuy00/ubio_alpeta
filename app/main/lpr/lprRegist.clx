@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-ec3b745f" version="1.0.0.0">
+  <head std:sid="head-bdb774a2">
+    <title>lprRegist</title>
+    <screen std:sid="screen-ba90c896" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="300" customWidth="500" active="true"/>
+    <screen std:sid="screen-108d9eaf" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-f8298f56" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px" active="false"/>
+    <cl:model std:sid="model-93b03a3d">
+      <cl:datamap std:sid="d-map-650e077f" id="LprInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-3d702040" name="DeviceID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-7a850f38" name="Password"/>
+          <cl:datacolumn std:sid="d-column-efe0d373" name="Name"/>
+          <cl:datacolumn std:sid="d-column-46c726d6" name="GateSet" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-c36dd2ab" name="InOutSet" datatype="number" defaultvalue="0"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-a33aca7f" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-741aee98" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-b20f17e6" id="sms_postLprInfo" action="/v1/lpr">
+        <cl:listener std:sid="listener-3e549192" name="submit-done" handler="onSms_postLprInfoSubmitDone"/>
+        <cl:listener std:sid="listener-0b491ddf" name="submit-error" handler="onSms_postLprInfoSubmitError"/>
+        <cl:listener std:sid="listener-bed21975" name="submit-timeout" handler="onSms_postLprInfoSubmitTimeout"/>
+        <cl:requestdata dataid="LprInfo"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-9bb94f5c" id="sms_getLprInfo" method="get" action="/v1/Lpr/">
+        <cl:listener std:sid="listener-bca105b7" name="submit-done" handler="onSms_getLprInfoSubmitDone"/>
+        <cl:listener std:sid="listener-77b41ea2" name="submit-error" handler="onSms_getLprInfoSubmitError"/>
+        <cl:listener std:sid="listener-f810e2bb" name="submit-timeout" handler="onSms_getLprInfoSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="LprInfo"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-a25f1034" id="sms_putLprInfo" method="put">
+        <cl:listener std:sid="listener-e2f6a3f6" name="submit-done" handler="onSms_putLprInfoSubmitDone"/>
+        <cl:listener std:sid="listener-f2b2dde6" name="submit-error" handler="onSms_putLprInfoSubmitError"/>
+        <cl:listener std:sid="listener-bb9b5758" name="submit-timeout" handler="onSms_putLprInfoSubmitTimeout"/>
+        <cl:requestdata dataid="LprInfo"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec dev-comment="In/Out Classification&#xD;&#xA;LPRRG"/>
+  </head>
+  <body std:sid="body-d8f95df6" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-c56d182c" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-e4df8145" id="LPRRG_grpMain" style="padding:5px;">
+      <cl:xylayoutdata std:sid="xyl-data-05421bdb" top="1px" right="1px" bottom="1px" left="1px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-e1ca0223">
+        <cl:formdata std:sid="f-data-1483edea" row="0" col="0"/>
+        <cl:output std:sid="output-152ef7ec">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_DeviceID"/>
+          <cl:formdata std:sid="f-data-07569a09" row="0" col="0"/>
+        </cl:output>
+        <cl:inputbox std:sid="i-box-fbe5ca3c" id="LPRRG_ipbDeviceID">
+          <cl:datamapbind property="value" datacontrolid="LprInfo" columnname="DeviceID"/>
+          <cl:formdata std:sid="f-data-dbc3b45c" row="0" col="1"/>
+        </cl:inputbox>
+        <cl:formlayout std:sid="f-layout-527c8e11">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="120" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-cbbef987">
+        <cl:formdata std:sid="f-data-817491b0" row="1" col="0"/>
+        <cl:output std:sid="output-4f4eef68">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Password"/>
+          <cl:formdata std:sid="f-data-f2a6c883" row="0" col="0"/>
+        </cl:output>
+        <cl:inputbox std:sid="i-box-5dfd2087" id="LPRRG_ipbPassword" secret="true" maxlength="8">
+          <cl:datamapbind property="value" datacontrolid="LprInfo" columnname="Password"/>
+          <cl:formdata std:sid="f-data-125222f6" row="0" col="1"/>
+        </cl:inputbox>
+        <cl:formlayout std:sid="f-layout-cb58d4ff">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="120" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-082dd761">
+        <cl:formdata std:sid="f-data-e0b99f1b" row="2" col="0"/>
+        <cl:output std:sid="output-480970d6">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Name"/>
+          <cl:formdata std:sid="f-data-4165e37a" row="0" col="0"/>
+        </cl:output>
+        <cl:inputbox std:sid="i-box-031cc42a" id="LPRRG_ipbName">
+          <cl:datamapbind property="value" datacontrolid="LprInfo" columnname="Name"/>
+          <cl:formdata std:sid="f-data-83d44139" row="0" col="1"/>
+        </cl:inputbox>
+        <cl:formlayout std:sid="f-layout-d1af1aa9">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="120" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-799f0a56">
+        <cl:formdata std:sid="f-data-2519e288" row="3" col="0"/>
+        <cl:output std:sid="output-69f46d9e">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_LprGateSet"/>
+          <cl:formdata std:sid="f-data-53391d46" row="0" col="0"/>
+        </cl:output>
+        <cl:combobox std:sid="c-box-49318be8" id="LPRRG_cmbGateSet">
+          <cl:datamapbind property="value" datacontrolid="LprInfo" columnname="GateSet"/>
+          <cl:formdata std:sid="f-data-0e604de3" row="0" col="1"/>
+          <cl:item std:sid="item-169243e4" label="등록된 차량만" value="0">
+            <cl:langbind property="label" category="PROPERTY" keypath="Str_LprRegistedCarNumber"/>
+          </cl:item>
+          <cl:item std:sid="item-be0c4dda" label="자동통과" value="1">
+            <cl:langbind property="label" category="PROPERTY" keypath="Str_LprAutoPass"/>
+          </cl:item>
+          <cl:item std:sid="item-7495a406" label="수동설정" value="2">
+            <cl:langbind property="label" category="PROPERTY" keypath="Str_LprManualPass"/>
+          </cl:item>
+        </cl:combobox>
+        <cl:formlayout std:sid="f-layout-9fdf0020">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="120" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-7670bac1">
+        <cl:formdata std:sid="f-data-20d51b63" row="4" col="0"/>
+        <cl:output std:sid="output-2bd9efb0">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_LprInOutSet"/>
+          <cl:formdata std:sid="f-data-b51ec428" row="0" col="0"/>
+        </cl:output>
+        <cl:combobox std:sid="c-box-50f1740e" id="LPRRG_cmbInOutSet">
+          <cl:datamapbind property="value" datacontrolid="LprInfo" columnname="InOutSet"/>
+          <cl:formdata std:sid="f-data-4a9a8cae" row="0" col="1"/>
+          <cl:item std:sid="item-b1b6ea3a" label="사용안함" value="0">
+            <cl:langbind property="label" category="PROPERTY" keypath="Str_NotUsed"/>
+          </cl:item>
+          <cl:item std:sid="item-7503568b" label="입구" value="1">
+            <cl:langbind property="label" category="PROPERTY" keypath="Str_LprIn"/>
+          </cl:item>
+          <cl:item std:sid="item-2abc8e4b" label="출구" value="2">
+            <cl:langbind property="label" category="PROPERTY" keypath="Str_LprOut"/>
+          </cl:item>
+        </cl:combobox>
+        <cl:formlayout std:sid="f-layout-048452cf">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="120" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-88dbf35b">
+        <cl:formdata std:sid="f-data-ef9bdf78" row="6" col="0"/>
+        <cl:button std:sid="button-d0e4c03e" id="LPRRG_btnRegist" class="userInfo_btn" value="등록">
+          <cl:listener std:sid="listener-5528ad10" name="click" handler="onJWDLR_btnRegistClick"/>
+          <cl:formdata std:sid="f-data-19da20ff" row="0" col="1"/>
+        </cl:button>
+        <cl:button std:sid="button-39395e5b" id="LPRRG_btnClose" class="userInfo_btn">
+          <cl:listener std:sid="listener-c204a0d8" name="click" handler="onLPRRG_btnCloseClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Cancel"/>
+          <cl:formdata std:sid="f-data-16e0dbef" row="0" col="3"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-c81b9631">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="10" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-3cd5a258">
+        <cl:rows length="30" unit="PIXEL"/>
+        <cl:rows length="30" unit="PIXEL"/>
+        <cl:rows length="30" unit="PIXEL"/>
+        <cl:rows length="30" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
+        <cl:rows length="30" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
+        <cl:rows length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+        <cl:rows length="35" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-7fde0394"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

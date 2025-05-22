@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-e23943e9" version="1.0.0.0">
+  <head std:sid="head-d64eb17b">
+    <title>setHyundaiHios</title>
+    <screen std:sid="screen-83d4cacd" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="400" customWidth="800"/>
+    <screen std:sid="screen-99eee846" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-3e40897e" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-7b11de5f">
+      <cl:datamap std:sid="d-map-08564192" id="SethyundaiHios">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-03e2c698" name="UseFlag" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-30e91484" name="ServerIP"/>
+          <cl:datacolumn std:sid="d-column-c1635bfe" name="Port" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-05da0fb1" name="SiteCD"/>
+          <cl:datacolumn std:sid="d-column-f9a0feb7" name="ClientType"/>
+          <cl:datacolumn std:sid="d-column-48fc21d4" name="SystemToken"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-a33aca7f" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-80d61523" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-8513d172" id="sms_getSetHios" method="get" action="/v1/hyundai/hois">
+        <cl:listener std:sid="listener-70679ede" name="submit-done" handler="onSms_getSetHiosSubmitDone"/>
+        <cl:listener std:sid="listener-5861af3b" name="submit-error" handler="onSms_SubmitError"/>
+        <cl:listener std:sid="listener-2b7c1bbf" name="submit-timeout" handler="onSms_SubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="SethyundaiHios"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-08f992e3" id="sms_putSetHios" method="put" action="/v1/hyundai/hois">
+        <cl:listener std:sid="listener-b86ba3c4" name="submit-done" handler="onSms_putSetHiosSubmitDone"/>
+        <cl:listener std:sid="listener-1ebca004" name="submit-error" handler="onSms_SubmitError"/>
+        <cl:listener std:sid="listener-b5c517f2" name="submit-timeout" handler="onSms_SubmitTimeout"/>
+        <cl:requestdata dataid="SethyundaiHios"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec dev-comment="HDHSM_"/>
+  </head>
+  <body std:sid="body-7d8afc48" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-05bc629d" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-bbd0c82c" id="HDHSM_grdMain" style="padding-top:5px; padding-left:5px; padding-bottom:5px; padding-right:5px;">
+      <cl:xylayoutdata std:sid="xyl-data-4cc9e301" top="1px" right="1px" bottom="1px" left="1px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:output std:sid="output-98cfeb82" style="font-weight:bold; font-size:13px; font-style:normal;" value="HIOS 열화상 정보 전송을 위한 설정 화면 입니다. 각 항목에 대한 설명은 입력창에 마우스를 올리면 툴팁으로 표시됩니다. &#xD;&#xA;(그외에는 메뉴얼로 확인 하세요)">
+        <cl:formdata std:sid="f-data-52a907b0" row="0" col="0"/>
+      </cl:output>
+      <cl:group std:sid="group-04830fdb">
+        <cl:formdata std:sid="f-data-54167034" row="2" col="0"/>
+        <cl:output std:sid="output-0753dea6" style="background-color:#f6f6f6; text-align:center;" class="userInfo_bold" value="서버아이피">
+          <cl:formdata std:sid="f-data-423e83a9" row="0" col="0"/>
+        </cl:output>
+        <cl:inputbox std:sid="i-box-c7aae70b" id="HDHSM_ipbHiosIP" style="text-align:center;" tooltip="IOT API서버 IP주소 혹은 Domain 주소입니다.">
+          <cl:datamapbind property="value" datacontrolid="SethyundaiHios" columnname="ServerIP"/>
+          <cl:formdata std:sid="f-data-0e8489fe" row="0" col="1"/>
+        </cl:inputbox>
+        <cl:formlayout std:sid="f-layout-ae6c955c" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-eea59ee6">
+        <cl:formdata std:sid="f-data-dfc2a432" row="3" col="0"/>
+        <cl:output std:sid="output-4a257790" style="background-color:#f6f6f6; text-align:center;" class="userInfo_bold" value="포트">
+          <cl:formdata std:sid="f-data-6d9f9d58" row="0" col="0"/>
+        </cl:output>
+        <cl:inputbox std:sid="i-box-cc59bf6b" id="HDHSM_ipbHiosPort" style="text-align:center;" tooltip="서비스 포트 (ex: 8080, 443 …)" inputfilter="^[0-9]*$">
+          <cl:datamapbind property="value" datacontrolid="SethyundaiHios" columnname="Port"/>
+          <cl:formdata std:sid="f-data-99c543e4" row="0" col="1"/>
+        </cl:inputbox>
+        <cl:formlayout std:sid="f-layout-aca17d11" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-5d34a33b">
+        <cl:formdata std:sid="f-data-7590a249" row="5" col="0"/>
+        <cl:output std:sid="output-75a8e45e" style="background-color:#f6f6f6; text-align:center;" class="userInfo_bold" value="client_type">
+          <cl:formdata std:sid="f-data-d9958794" row="0" col="0"/>
+        </cl:output>
+        <cl:inputbox std:sid="i-box-1d08c57b" id="HDHSM_ipbClientType" style="text-align:center;" tooltip="고정값" readonly="true">
+          <cl:datamapbind property="value" datacontrolid="SethyundaiHios" columnname="ClientType"/>
+          <cl:formdata std:sid="f-data-81e5e6c3" row="0" col="1"/>
+        </cl:inputbox>
+        <cl:formlayout std:sid="f-layout-50887999" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-324369b3">
+        <cl:formdata std:sid="f-data-c75332b0" row="6" col="0"/>
+        <cl:output std:sid="output-cccc9397" style="background-color:#f6f6f6; text-align:center;" class="userInfo_bold" value="system_token">
+          <cl:formdata std:sid="f-data-6bd17be2" row="0" col="0"/>
+        </cl:output>
+        <cl:inputbox std:sid="i-box-a96dd7cc" id="HDHSM_ipbSystemToken" style="text-align:center;" tooltip="시스템 인증 키 입니다. 현장서버ip를 통해서 별도로 입력받으세요">
+          <cl:datamapbind property="value" datacontrolid="SethyundaiHios" columnname="SystemToken"/>
+          <cl:formdata std:sid="f-data-6d66b9da" row="0" col="1"/>
+        </cl:inputbox>
+        <cl:formlayout std:sid="f-layout-b1545f57" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-5fea455f">
+        <cl:formdata std:sid="f-data-71c3e20e" row="7" col="0"/>
+        <cl:button std:sid="button-6a2841b9" id="HDHSM_btnSave" class="userInfo_btn" value="적 용">
+          <cl:listener std:sid="listener-400817d9" name="click" handler="onHDHSM_btnSaveClick"/>
+          <cl:formdata std:sid="f-data-190d12a0" row="0" col="5"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-8a3453b7" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:checkbox std:sid="c-box-7a157faf" id="HDHSM_cbxUseFlag" truevalue="1" falsevalue="0" text="HIOS 열화상 정보 전송 기능 사용">
+        <cl:listener std:sid="listener-7c16a039" name="value-change" handler="onHDHSM_cbxUseFlagValueChange"/>
+        <cl:datamapbind property="value" datacontrolid="SethyundaiHios" columnname="UseFlag"/>
+        <cl:formdata std:sid="f-data-18a4bbcc" row="1" col="0"/>
+      </cl:checkbox>
+      <cl:group std:sid="group-758f4dd6">
+        <cl:formdata std:sid="f-data-2eab3c4e" row="4" col="0"/>
+        <cl:output std:sid="output-9b5d7bda" style="background-color:#f6f6f6; text-align:center;" class="userInfo_bold" value="사이트 코드">
+          <cl:formdata std:sid="f-data-6f587e48" row="0" col="0"/>
+        </cl:output>
+        <cl:inputbox std:sid="i-box-6a2127f8" id="HDHSM_ipbHiosSiteCD" style="text-align:center;" tooltip="현장 코드입니다. 인사연동관련한 설정을 완료하고 작업해주세요" inputfilter="^[0-9]*$">
+          <cl:datamapbind property="value" datacontrolid="SethyundaiHios" columnname="SiteCD"/>
+          <cl:formdata std:sid="f-data-f3351501" row="0" col="1"/>
+        </cl:inputbox>
+        <cl:formlayout std:sid="f-layout-88d90f8f" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-dfa96627" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+        <cl:rows length="60" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="40" unit="PIXEL"/>
+        <cl:rows length="40" unit="PIXEL"/>
+        <cl:rows length="40" unit="PIXEL"/>
+        <cl:rows length="40" unit="PIXEL"/>
+        <cl:rows length="40" unit="PIXEL"/>
+        <cl:rows length="40" unit="PIXEL"/>
+        <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-8b60f06e"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

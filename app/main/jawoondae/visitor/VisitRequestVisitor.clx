@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-edd833ff" version="1.0.0.0">
+  <head std:sid="head-721a81e2">
+    <title>otherTroopsExcelRegist</title>
+    <screen std:sid="screen-634d1f5d" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="500" customWidth="800"/>
+    <screen std:sid="screen-5f705de6" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-32a36c80" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-5236596e">
+      <cl:dataset std:sid="d-set-76004b18" id="dsVisitorRegistInfo" info="엑셀에서 읽은 방문신청 정보 리스트">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-e1cc8a0d" name="visitorID"/>
+          <cl:datacolumn std:sid="d-column-11d9c43a" name="visitorGroupName"/>
+          <cl:datacolumn std:sid="d-column-d0a1ea8f" name="visitorPosition"/>
+          <cl:datacolumn std:sid="d-column-5c53b432" name="visitorName"/>
+          <cl:datacolumn std:sid="d-column-90421684" name="visitorPhone"/>
+          <cl:datacolumn std:sid="d-column-436b473f" name="visitorMobile"/>
+          <cl:datacolumn std:sid="d-column-0b192bbc" name="visitorType"/>
+          <cl:datacolumn std:sid="d-column-2587bb00" name="carNumber"/>
+          <cl:datacolumn std:sid="d-column-afecb585" name="carColor"/>
+          <cl:datacolumn std:sid="d-column-e024eb56" name="carType"/>
+          <cl:datacolumn std:sid="d-column-87a29dc9" name="status"/>
+          <cl:datacolumn std:sid="d-column-3ce7d9b9" name="result"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-71f76a43" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-546654ed" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-e2e26c55" id="dmVisitTargetInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-65f1206b" name="TargetGroupID" datatype="string" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-198f29dd" name="VisitType" datatype="number" defaultvalue="901"/>
+          <cl:datacolumn std:sid="d-column-9b975ef6" name="VisitStartAt" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-04110d31" name="VisitEndAt"/>
+          <cl:datacolumn std:sid="d-column-60c2b5de" name="LeaderID" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-230f78be" name="VisitPurpose"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-4783d8c0" id="LeaderInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-e53f49df" name="ID"/>
+          <cl:datacolumn std:sid="d-column-2af94d70" name="UniqueID"/>
+          <cl:datacolumn std:sid="d-column-c013bb44" name="Name"/>
+          <cl:datacolumn std:sid="d-column-bcf260d0" name="GroupCode" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-eb6a5612" name="PositionCode" datatype="decimal"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-03970581" id="VisitorInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-d172a4b5" name="visitorGroupName" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-d003c176" name="visitorID"/>
+          <cl:datacolumn std:sid="d-column-8396167d" name="visitorPosition" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-06e6ede2" name="visitorName"/>
+          <cl:datacolumn std:sid="d-column-371a32be" name="visitorPhone"/>
+          <cl:datacolumn std:sid="d-column-a98320b7" name="visitorMobile"/>
+          <cl:datacolumn std:sid="d-column-781378a4" name="carNumber"/>
+          <cl:datacolumn std:sid="d-column-19a74d7a" name="carColor"/>
+          <cl:datacolumn std:sid="d-column-481da046" name="carType"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-a7123388" id="dmCarInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-7dddbfe1" name="CarNumber"/>
+          <cl:datacolumn std:sid="d-column-953d99bf" name="CarColor"/>
+          <cl:datacolumn std:sid="d-column-39f53f34" name="CarType"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-5228eefb" id="sms_postVisitRegist" action="/v1/visitRequest/excel">
+        <cl:listener std:sid="listener-b4bea346" name="submit-done" handler="onSms_postVisitRegistSubmitDone"/>
+        <cl:listener std:sid="listener-d247795b" name="submit-error" handler="onSms_postVisitRegistSubmitError"/>
+        <cl:listener std:sid="listener-9c16dfca" name="submit-timeout" handler="onSms_postVisitRegistSubmitTimeout"/>
+        <cl:requestdata dataid="dmVisitTargetInfo"/>
+        <cl:requestdata dataid="dsVisitorRegistInfo" payload="all"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec dev-comment="JWDOTE_grdOtherTroopsRegist&#xD;&#xA;&#xD;&#xA;카드 없이 사용자 생성까지만 한다.&#xD;&#xA;Str_VisitorGroup&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;"/>
+  </head>
+  <body std:sid="body-a3d9de29" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-a385f12c" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-1bc72036" id="JWDVR_grpMain">
+      <cl:xylayoutdata std:sid="xyl-data-ed3cf3b2" top="1px" right="1px" bottom="1px" left="1px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-a610449d">
+        <cl:formdata std:sid="f-data-c8d291d4" row="1" col="0"/>
+        <cl:button std:sid="button-6cde2ea6" id="JWDOTE_btnIssue" style="font-weight:400; font-size:12px;" class="userInfo_btn" tabindex="0">
+          <cl:listener std:sid="listener-315c042d" name="click" handler="onJWDOTE_btnIssueClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Request"/>
+          <cl:formdata std:sid="f-data-8fa367ae" row="0" col="3"/>
+        </cl:button>
+        <cl:output std:sid="output-8494c5d2" style="padding:4px; font-size:13px;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_VisitTargetInfomation"/>
+          <cl:formdata std:sid="f-data-8fee781d" row="0" col="0"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-1f1e854f">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="200" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="4" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-2a91a1eb">
+        <cl:formdata std:sid="f-data-e7217ed0" row="2" col="0"/>
+        <cl:output std:sid="output-d9b5c09b" style="padding:4px;" class="userInfo_bold">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_VisitLeader"/>
+          <cl:formdata std:sid="f-data-0429740b" row="2" col="0"/>
+        </cl:output>
+        <cl:output std:sid="output-3019d519" style="padding:4px;" class="userInfo_bold">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_VisitAccessPurpose"/>
+          <cl:formdata std:sid="f-data-b4315a33" row="0" col="2"/>
+        </cl:output>
+        <cl:output std:sid="output-8810bbb2" style="padding:4px;" class="userInfo_bold">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_VisitAccessPeriod"/>
+          <cl:formdata std:sid="f-data-7bef48c5" row="1" col="0"/>
+        </cl:output>
+        <cl:combobox std:sid="c-box-b89cedef" id="JWDVR_cmbTargetGroup" style="text-align:left;" tabindex="1">
+          <cl:datamapbind property="value" datacontrolid="dmVisitTargetInfo" columnname="TargetGroupID"/>
+          <cl:formdata std:sid="f-data-cdef7d1a" row="0" col="1"/>
+        </cl:combobox>
+        <cl:inputbox std:sid="i-box-6ea340c5" id="JWDVR_ipbVisitPurpose" style="text-align:left;" tabindex="2">
+          <cl:datamapbind property="value" datacontrolid="dmVisitTargetInfo" columnname="VisitPurpose"/>
+          <cl:formdata std:sid="f-data-60fe929d" row="0" col="3"/>
+        </cl:inputbox>
+        <cl:group std:sid="group-8449d3b6" id="JWDVR_grpAccessPeriod">
+          <cl:formdata std:sid="f-data-2b19f9fc" row="1" col="1" rowspan="1" colspan="3"/>
+          <cl:dateinput std:sid="d-input-e9d775f1" id="JWDVR_dtiVisitStartAt" style="text-align:center;" tabindex="3">
+            <cl:datamapbind property="value" datacontrolid="dmVisitTargetInfo" columnname="VisitStartAt"/>
+            <cl:formdata std:sid="f-data-16ba9b13" row="0" col="0"/>
+          </cl:dateinput>
+          <cl:dateinput std:sid="d-input-356bc40b" id="JWDVR_dtiVisitEndAt" style="text-align:center;" tabindex="4">
+            <cl:datamapbind property="value" datacontrolid="dmVisitTargetInfo" columnname="VisitEndAt"/>
+            <cl:formdata std:sid="f-data-fd2caba1" row="0" col="2"/>
+          </cl:dateinput>
+          <cl:output std:sid="output-b443453d" value="~">
+            <cl:formdata std:sid="f-data-9ebc370b" row="0" col="1"/>
+          </cl:output>
+          <cl:formlayout std:sid="f-layout-cde9a79f">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+            <cl:columns length="12" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:group std:sid="group-c03e020c">
+          <cl:formdata std:sid="f-data-1777d9d0" row="2" col="1" rowspan="1" colspan="3"/>
+          <cl:button std:sid="button-ad74a44e" id="JWDVR_btnUserSearch" style="font-weight:400; font-size:12px;" class="userInfo_btn" tabindex="5" value="검색">
+            <cl:listener std:sid="listener-856d4528" name="click" handler="onJWDVR_btnUserSearchClick"/>
+            <cl:formdata std:sid="f-data-158c7b12" row="0" col="8"/>
+          </cl:button>
+          <cl:output std:sid="output-74673510" id="JWDVR_opbLeader" style="text-align:left;">
+            <cl:datamapbind property="value" datacontrolid="LeaderInfo" columnname="UniqueID"/>
+            <cl:formdata std:sid="f-data-da9f1d69" row="0" col="1"/>
+          </cl:output>
+          <cl:output std:sid="output-6488dc41" id="JWDVR_opbUniqueID" style="text-align:left;">
+            <cl:datamapbind property="value" datacontrolid="LeaderInfo" columnname="Name"/>
+            <cl:formdata std:sid="f-data-e9be3943" row="0" col="3"/>
+          </cl:output>
+          <cl:output std:sid="output-ed9abf1d" style="padding:4px;" class="userInfo_bold">
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_VisitorID"/>
+            <cl:formdata std:sid="f-data-773404f0" row="0" col="0"/>
+          </cl:output>
+          <cl:output std:sid="output-7b5a1d3c" style="padding:4px;" class="userInfo_bold">
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_Name"/>
+            <cl:formdata std:sid="f-data-f451cbcc" row="0" col="2"/>
+          </cl:output>
+          <cl:output std:sid="output-c70fb67a" style="padding:4px;" class="userInfo_bold" value="그룹명">
+            <cl:formdata std:sid="f-data-6fb7bfb9" row="0" col="4"/>
+          </cl:output>
+          <cl:output std:sid="output-9a54bc2f" style="padding:4px;" class="userInfo_bold" value="계급">
+            <cl:formdata std:sid="f-data-d38d68a6" row="0" col="6"/>
+          </cl:output>
+          <cl:combobox std:sid="c-box-3c9cef13" id="JWDVR_cmbLeaderGroup" readonly="true" hidebutton="true">
+            <cl:datamapbind property="value" datacontrolid="LeaderInfo" columnname="GroupCode"/>
+            <cl:formdata std:sid="f-data-311aa122" row="0" col="5"/>
+          </cl:combobox>
+          <cl:combobox std:sid="c-box-1a9853b4" id="JWDVR_cmbLeaderPosition" readonly="true" hidebutton="true">
+            <cl:datamapbind property="value" datacontrolid="LeaderInfo" columnname="PositionCode"/>
+            <cl:formdata std:sid="f-data-d0b9777f" row="0" col="7"/>
+          </cl:combobox>
+          <cl:formlayout std:sid="f-layout-3d7412c6">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="1" unit="FRACTION"/>
+            <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="1" unit="FRACTION"/>
+            <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="1" unit="FRACTION"/>
+            <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="1" unit="FRACTION"/>
+            <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:output std:sid="output-426040ae" style="padding:4px;" class="userInfo_bold">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_VisitorAccessUnit"/>
+          <cl:formdata std:sid="f-data-2a214940" row="0" col="0"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-50e673dd">
+          <cl:rows length="25" unit="PIXEL"/>
+          <cl:rows length="25" unit="PIXEL"/>
+          <cl:rows length="25" unit="PIXEL"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-66ff23de">
+        <cl:formdata std:sid="f-data-b9858b72" row="4" col="0"/>
+        <cl:output std:sid="output-15d3158e" style="padding:4px; text-align:left;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Excel"/>
+          <cl:formdata std:sid="f-data-29a217a0" row="0" col="0"/>
+        </cl:output>
+        <cl:fileinput std:sid="f-input-1c1be75c" id="JWDVR_fiUserFile" placeholder="파일 등록">
+          <cl:listener std:sid="listener-69107a13" name="value-change" handler="onJWDOTE_fiUserFileValueChange"/>
+          <cl:formdata std:sid="f-data-e4a4267e" row="0" col="1"/>
+        </cl:fileinput>
+        <cl:htmlsnippet std:sid="htmlsnippet-e25c31a6" id="JWDVR_sniDownloadLink" style="vertical-align:middle;" visible="true">
+          <cl:formdata std:sid="f-data-9ca85f89" row="0" col="2"/>
+        </cl:htmlsnippet>
+        <cl:formlayout std:sid="f-layout-083a01c1">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="160" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="60" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-13fcb2cc">
+        <cl:formdata std:sid="f-data-d33a1c27" row="5" col="0"/>
+        <cl:output std:sid="output-0a4f7c3c" id="JWDOTE_opbTotal" value="">
+          <cl:formdata std:sid="f-data-2ec5ff75" row="0" col="0"/>
+        </cl:output>
+        <cl:button std:sid="button-a739a6bc" id="JWDOTE_btnAdd" style="font-weight:400; font-size:12px;" class="userInfo_btn" tabindex="12">
+          <cl:listener std:sid="listener-ede32192" name="click" handler="onJWDVR_btnAddClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Add"/>
+          <cl:formdata std:sid="f-data-f4cc9f67" row="0" col="5"/>
+        </cl:button>
+        <cl:button std:sid="button-f6a625ad" id="JWDVR_btnDelete" style="font-weight:400; font-size:12px;" class="userInfo_btn">
+          <cl:listener std:sid="listener-3d555e98" name="click" handler="onJWDVR_btnDeleteClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Delete"/>
+          <cl:formdata std:sid="f-data-adfade33" row="0" col="6"/>
+        </cl:button>
+        <cl:button std:sid="button-186b7abc" id="JWDOTE_btnVisitorSearch" style="font-weight:400.0; font-size:12px;" class="userInfo_btn" value="신청자 기록 검색">
+          <cl:listener std:sid="listener-cab12fe4" name="click" handler="onJWDOTE_btnVisitorSearchClick"/>
+          <cl:formdata std:sid="f-data-98e795a0" row="0" col="4"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-f512f733">
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="60" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="60" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="60"/>
+          <cl:columns length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="120" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-b0a13c99" id="JWDVI_grpVisitorInfo">
+        <cl:formdata std:sid="f-data-83ce9ae0" row="6" col="0"/>
+        <cl:output std:sid="output-994ba9ca" style="padding:4px; font-weight:bold; font-size:13px;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_VisitorGroup"/>
+          <cl:formdata std:sid="f-data-0f7e4420" row="0" col="0"/>
+        </cl:output>
+        <cl:output std:sid="output-152f42c2" style="padding:4px; font-weight:bold; font-size:13px;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_DateOfBirth"/>
+          <cl:formdata std:sid="f-data-cb43d895" row="0" col="2"/>
+        </cl:output>
+        <cl:output std:sid="output-eae528fd" style="padding:4px; font-weight:bold; font-size:13px;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Name"/>
+          <cl:formdata std:sid="f-data-da085ad2" row="1" col="0"/>
+        </cl:output>
+        <cl:output std:sid="output-13ed6149" style="padding:4px; font-weight:bold; font-size:13px;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_VisitorPhone"/>
+          <cl:formdata std:sid="f-data-47f28475" row="2" col="0"/>
+        </cl:output>
+        <cl:output std:sid="output-a2c7550d" style="padding:4px; font-weight:bold; font-size:13px;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_VisitorCellPhone"/>
+          <cl:formdata std:sid="f-data-aeabf4b9" row="1" col="2"/>
+        </cl:output>
+        <cl:inputbox std:sid="i-box-272bcc20" id="JWDVR_ipbVisitorID" tabindex="7" maxlength="8" inputfilter="^[0-9]*$">
+          <cl:datamapbind property="value" datacontrolid="VisitorInfo" columnname="visitorID"/>
+          <cl:formdata std:sid="f-data-eaa213d0" row="0" col="3"/>
+        </cl:inputbox>
+        <cl:inputbox std:sid="i-box-a0084da4" id="JWDVR_ipbVisitorName" tabindex="8">
+          <cl:datamapbind property="value" datacontrolid="VisitorInfo" columnname="visitorName"/>
+          <cl:formdata std:sid="f-data-8084726d" row="1" col="1"/>
+        </cl:inputbox>
+        <cl:inputbox std:sid="i-box-2071a148" id="JWDVR_ipbVisitorPhone" tabindex="10">
+          <cl:datamapbind property="value" datacontrolid="VisitorInfo" columnname="visitorPhone"/>
+          <cl:formdata std:sid="f-data-ebe98d8b" row="2" col="1"/>
+        </cl:inputbox>
+        <cl:inputbox std:sid="i-box-0bbe8057" id="JWDVR_ipbVisitorMobile" tabindex="9" maxlength="11" inputfilter="^[0-9]*$">
+          <cl:datamapbind property="value" datacontrolid="VisitorInfo" columnname="visitorMobile"/>
+          <cl:formdata std:sid="f-data-0ebed28e" row="1" col="3"/>
+        </cl:inputbox>
+        <cl:inputbox std:sid="i-box-bb34fd69" id="JWDVR_ipbvisitorGroup" tabindex="6">
+          <cl:datamapbind property="value" category="PROPERTY" datacontrolid="VisitorInfo" columnname="visitorGroupName"/>
+          <cl:formdata std:sid="f-data-fcb240ae" row="0" col="1"/>
+        </cl:inputbox>
+        <cl:output std:sid="output-95de7512" style="padding:4px; font-weight:bold; font-size:13px;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_CarNumber"/>
+          <cl:formdata std:sid="f-data-022be24f" row="2" col="2"/>
+        </cl:output>
+        <cl:output std:sid="output-16360179" style="padding:4px; font-weight:bold; font-size:13px;" visible="false">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Color"/>
+          <cl:formdata std:sid="f-data-6c16b9a7" row="1" col="4"/>
+        </cl:output>
+        <cl:output std:sid="output-f7e9c2d6" style="padding:4px; font-weight:bold; font-size:13px;" visible="false">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_CarType"/>
+          <cl:formdata std:sid="f-data-1a313ea3" row="2" col="4"/>
+        </cl:output>
+        <cl:inputbox std:sid="i-box-1274f9d1" id="JWDVR_ipbCarNumber" tabindex="11" inputfilter="^[\S]*$">
+          <cl:datamapbind property="value" datacontrolid="VisitorInfo" columnname="carNumber"/>
+          <cl:formdata std:sid="f-data-d88519c5" row="2" col="3"/>
+        </cl:inputbox>
+        <cl:inputbox std:sid="i-box-dbf09dc2" id="JWDVR_ipbCarColor" visible="false">
+          <cl:datamapbind property="value" datacontrolid="VisitorInfo" columnname="carColor"/>
+          <cl:formdata std:sid="f-data-9dc4a857" row="1" col="5"/>
+        </cl:inputbox>
+        <cl:inputbox std:sid="i-box-d5aa03f8" id="JWDVR_ipbCarType" visible="false">
+          <cl:datamapbind property="value" datacontrolid="VisitorInfo" columnname="carType"/>
+          <cl:formdata std:sid="f-data-81e268af" row="2" col="5"/>
+        </cl:inputbox>
+        <cl:formlayout std:sid="f-layout-4894bc53">
+          <cl:rows length="25" unit="PIXEL"/>
+          <cl:rows length="25" unit="PIXEL"/>
+          <cl:rows length="25" unit="PIXEL"/>
+          <cl:columns length="60" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="60" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:grid std:sid="grid-1f50e6c8" id="JWDVR_grdVisitorList" readonly="true" datasetid="dsVisitorRegistInfo">
+        <cl:formdata std:sid="f-data-64d10266" row="7" col="0"/>
+        <cl:gridcolumn std:sid="g-column-6510c3d5" width="25px"/>
+        <cl:gridcolumn std:sid="g-column-8f7fe4b2"/>
+        <cl:gridcolumn std:sid="g-column-6e31bb18"/>
+        <cl:gridcolumn std:sid="g-column-c06fd2a5"/>
+        <cl:gridcolumn std:sid="g-column-30d557ac"/>
+        <cl:gridcolumn std:sid="g-column-c017d8b6"/>
+        <cl:gridcolumn std:sid="g-column-01c87484"/>
+        <cl:gridcolumn std:sid="g-column-34b43dd9"/>
+        <cl:gridheader std:sid="gh-band-7debf126">
+          <cl:gridrow std:sid="g-row-b95751b6"/>
+          <cl:gridcell std:sid="gh-cell-bdc8c75f" rowindex="0" colindex="0" sortable="false" filterable="false" columntype="checkbox"/>
+          <cl:gridcell std:sid="gh-cell-8b7ad325" rowindex="0" colindex="1" targetcolumnname="visitorGroupName" sortable="false" filterable="false" text="visitorGroupName">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_VisitorGroup"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-9a138669" rowindex="0" colindex="2" targetcolumnname="visitorID" sortable="false" filterable="false" text="visitorID">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_VisitorIDorDateOfBirth"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-0737d683" rowindex="0" colindex="3" targetcolumnname="visitorName" sortable="false" filterable="false" text="visitorName">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_Name"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-296277a6" rowindex="0" colindex="4" targetcolumnname="visitorPhone" sortable="false" filterable="false" text="visitorPhone">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_VisitorPhone"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-421353ea" rowindex="0" colindex="5" targetcolumnname="visitorMobile" sortable="false" filterable="false" text="visitorMobile">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_VisitorCellPhone"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-1cfe2d1b" rowindex="0" colindex="6" targetcolumnname="carNumber" sortable="false" filterable="false" text="carNumber">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_CarNumber"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-d0762045" rowindex="0" colindex="7" targetcolumnname="carColor" sortable="false" filterable="false" text="carColor">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_Color"/>
+          </cl:gridcell>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-b85f2d6b">
+          <cl:gridrow std:sid="g-row-39da3083"/>
+          <cl:gridcell std:sid="gd-cell-46fd0fc4" rowindex="0" colindex="0" columntype="checkbox"/>
+          <cl:gridcell std:sid="gd-cell-6fd8c993" rowindex="0" colindex="1" columnname="visitorGroupName"/>
+          <cl:gridcell std:sid="gd-cell-92353273" rowindex="0" colindex="2" columnname="visitorID"/>
+          <cl:gridcell std:sid="gd-cell-19ccffd7" rowindex="0" colindex="3" columnname="visitorName"/>
+          <cl:gridcell std:sid="gd-cell-36ffc550" rowindex="0" colindex="4" columnname="visitorPhone"/>
+          <cl:gridcell std:sid="gd-cell-bc988caa" rowindex="0" colindex="5" columnname="visitorMobile"/>
+          <cl:gridcell std:sid="gd-cell-1f2093f0" rowindex="0" colindex="6" columnname="carNumber"/>
+          <cl:gridcell std:sid="gd-cell-6832807d" rowindex="0" colindex="7" columnname="carColor"/>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:formlayout std:sid="f-layout-cb4198d8">
+        <cl:rows length="4" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="90" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="8" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="90" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-b25d46d1"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

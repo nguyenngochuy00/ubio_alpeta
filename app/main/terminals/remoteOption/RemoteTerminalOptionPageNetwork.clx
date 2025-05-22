@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-10e6b430" version="1.0.0.0">
+  <head std:sid="head-bd56fa7f">
+    <title>RemoteTerminalOptionPageNetwork</title>
+    <screen std:sid="screen-4d79982e" id="default" name="default" minwidth="1024px" width="1024px" height="768px"/>
+    <screen std:sid="screen-4a758d4b" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-2977d465" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-64a589d7">
+      <cl:datamap std:sid="d-map-4c2f94d0" id="NetWorkOptionInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-fe02e526" name="Net_Type" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-43186994" name="Net_IPAddr"/>
+          <cl:datacolumn std:sid="d-column-41b0a43b" name="Net_Subnet"/>
+          <cl:datacolumn std:sid="d-column-de4e711e" name="Net_Gate"/>
+          <cl:datacolumn std:sid="d-column-94f5e806" name="Net_DNS1"/>
+          <cl:datacolumn std:sid="d-column-f97ef553" name="Net_DNS2"/>
+          <cl:datacolumn std:sid="d-column-5b523cb2" name="Net_ServIP"/>
+          <cl:datacolumn std:sid="d-column-ba30629b" name="Net_DDNS" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-d2a4e527" name="Net_Port" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-8b062a7f" name="Net_TID" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-6d6639b1" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-d0fc0cb9" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-22d4bd2c" id="networkgrd" style="padding:10px; border-radius:2px;">
+      <cl:xylayoutdata std:sid="xyl-data-533ceb1e" top="0px" left="0px" width="700px" height="600px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      <cl:group std:sid="group-7aeb7ba9">
+        <cl:formdata std:sid="f-data-8c2f4e54" row="0" col="0"/>
+        <cl:output std:sid="output-5eea1625" style="font-weight:bold; font-size:14px;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Network"/>
+          <cl:formdata std:sid="f-data-e9b80c8c" halign="LEFT" width="394" row="0" col="0" rowspan="1" colspan="2"/>
+        </cl:output>
+        <cl:output std:sid="output-dda12a73" style="border-right-style:solid; background-color:#f6f6f6; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-top-color:#c5c5c5; border-bottom-style:solid; border-right-color:#c5c5c5; border-top-style:solid; text-align:center;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_IPAddress"/>
+          <cl:formdata std:sid="f-data-9d857e46" row="1" col="0"/>
+        </cl:output>
+        <cl:output std:sid="output-ca79c1c5" style="border-right-style:solid; background-color:#f6f6f6; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_TerminalIP"/>
+          <cl:formdata std:sid="f-data-d187aef3" row="2" col="0"/>
+        </cl:output>
+        <cl:output std:sid="output-9cac4c4d" style="border-right-style:solid; background-color:#f6f6f6; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_SubnetMask"/>
+          <cl:formdata std:sid="f-data-e1f9c38d" row="3" col="0"/>
+        </cl:output>
+        <cl:output std:sid="output-d373cf19" style="border-right-style:solid; background-color:#f6f6f6; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_GateWay"/>
+          <cl:formdata std:sid="f-data-a40f2ec8" row="4" col="0"/>
+        </cl:output>
+        <cl:radiobutton std:sid="r-button-42aa3d67" id="RTOPN_Type_rdb" style="border-top-width:1px; font-size:14px; border-top-color:#c5c5c5; border-top-style:solid;" readonly="true">
+          <cl:listener std:sid="listener-406c7449" name="selection-change" handler="onRTOPN_Type_rdbSelectionChange"/>
+          <cl:datamapbind property="value" datacontrolid="NetWorkOptionInfo" columnname="Net_Type"/>
+          <cl:formdata std:sid="f-data-c56684b7" row="1" col="1"/>
+          <cl:item std:sid="item-efde26d4" label="다음Ip 주소 사용" value="0">
+            <cl:langbind property="label" category="PROPERTY" keypath="Str_FollowingIPAddrUsed"/>
+          </cl:item>
+          <cl:item std:sid="item-6c049321" label="자동으로 IP주소 받기" value="1">
+            <cl:langbind property="label" category="PROPERTY" keypath="Str_AutoIPAddrAcquisition"/>
+          </cl:item>
+        </cl:radiobutton>
+        <cl:group std:sid="group-633b9f66" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+          <cl:formdata std:sid="f-data-48112c5a" row="2" col="1"/>
+          <cl:inputbox std:sid="i-box-3996bddc" id="RTOPN_IP_ipb" style="font-size:14px;" enabled="false" readonly="true">
+            <cl:datamapbind property="value" datacontrolid="NetWorkOptionInfo" columnname="Net_IPAddr"/>
+            <cl:xylayoutdata std:sid="xyl-data-22c0fb60" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+          </cl:inputbox>
+          <cl:xylayout std:sid="xylayout-021429b2"/>
+        </cl:group>
+        <cl:group std:sid="group-f2516443" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+          <cl:formdata std:sid="f-data-761a7e51" row="3" col="1"/>
+          <cl:inputbox std:sid="i-box-29b597e1" id="RTOPN_Subnet_ipb" style="font-size:14px;" enabled="false" readonly="true">
+            <cl:datamapbind property="value" datacontrolid="NetWorkOptionInfo" columnname="Net_Subnet"/>
+            <cl:xylayoutdata std:sid="xyl-data-b5c8a9c6" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+          </cl:inputbox>
+          <cl:xylayout std:sid="xylayout-9457f0ff"/>
+        </cl:group>
+        <cl:group std:sid="group-c9fe6958" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+          <cl:formdata std:sid="f-data-0f6ceefa" row="4" col="1"/>
+          <cl:inputbox std:sid="i-box-9b374e63" id="RTOPN_Gateway_ipb" style="font-size:14px;" enabled="false" readonly="true">
+            <cl:datamapbind property="value" datacontrolid="NetWorkOptionInfo" columnname="Net_Gate"/>
+            <cl:xylayoutdata std:sid="xyl-data-ba1068e4" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+          </cl:inputbox>
+          <cl:xylayout std:sid="xylayout-d0a8efa5"/>
+        </cl:group>
+        <cl:output std:sid="output-0830c1ff" style="border-right-style:solid; background-color:#f6f6f6; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_DNSServer"/>
+          <cl:formdata std:sid="f-data-3a53c4ee" row="5" col="0"/>
+        </cl:output>
+        <cl:group std:sid="group-5b4f5814" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+          <cl:formdata std:sid="f-data-6655c479" row="5" col="1"/>
+          <cl:group std:sid="group-e9aef1df">
+            <cl:formdata std:sid="f-data-e776444b" row="0" col="0"/>
+            <cl:inputbox std:sid="i-box-f26430e3" id="RTOPN_DNS1_ipb" style="font-size:14px;" enabled="false">
+              <cl:datamapbind property="value" datacontrolid="NetWorkOptionInfo" columnname="Net_DNS1"/>
+              <cl:xylayoutdata std:sid="xyl-data-c5b6f40d" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+            </cl:inputbox>
+            <cl:xylayout std:sid="xylayout-d3f41816"/>
+          </cl:group>
+          <cl:group std:sid="group-5688f0bb">
+            <cl:formdata std:sid="f-data-2e327685" row="0" col="1"/>
+            <cl:inputbox std:sid="i-box-200a27e5" id="RTOPN_DNS2_ipb" style="font-size:14px;" enabled="false">
+              <cl:datamapbind property="value" datacontrolid="NetWorkOptionInfo" columnname="Net_DNS2"/>
+              <cl:xylayoutdata std:sid="xyl-data-87f93de3" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+            </cl:inputbox>
+            <cl:xylayout std:sid="xylayout-f1f8a5da"/>
+          </cl:group>
+          <cl:formlayout std:sid="f-layout-4f2dcebc" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-f8cfa06f" hspace="0px" vspace="0px">
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          <cl:rows length="30" shadetype="NONE" shadecolor="transparent"/>
+          <cl:rows length="30" shadetype="NONE" shadecolor="transparent"/>
+          <cl:rows length="30" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="transparent"/>
+          <cl:rows length="30" shadetype="NONE" shadecolor="transparent"/>
+          <cl:rows length="30" shadetype="NONE" shadecolor="transparent"/>
+          <cl:columns length="140" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-f68f15c2">
+        <cl:formdata std:sid="f-data-1eb70eb5" row="1" col="0"/>
+        <cl:output std:sid="output-a87d0e75" style="font-weight:bold; font-size:14px;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_AuthServer"/>
+          <cl:formdata std:sid="f-data-0ffcc745" row="0" col="0" rowspan="1" colspan="1"/>
+        </cl:output>
+        <cl:output std:sid="output-4ddb1c1d" style="border-right-style:solid; background-color:#f6f6f6; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_ConnectionPort"/>
+          <cl:formdata std:sid="f-data-14c02e93" row="2" col="0"/>
+        </cl:output>
+        <cl:group std:sid="group-f7abb94e" style="border-bottom-color:#c5c5c5; border-top-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-e5f02419" row="1" col="1"/>
+          <cl:group std:sid="group-a16882fe">
+            <cl:formdata std:sid="f-data-f19196b5" row="0" col="0"/>
+            <cl:inputbox std:sid="i-box-f83dba8f" id="RTOPN_ServerIP_ipb" style="font-size:14px;" enabled="false" readonly="true">
+              <cl:datamapbind property="value" datacontrolid="NetWorkOptionInfo" columnname="Net_ServIP"/>
+              <cl:xylayoutdata std:sid="xyl-data-c1e713f4" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+            </cl:inputbox>
+            <cl:xylayout std:sid="xylayout-e987a8fa"/>
+          </cl:group>
+          <cl:group std:sid="group-c4bbd015">
+            <cl:formdata std:sid="f-data-226f010c" row="0" col="1"/>
+            <cl:output std:sid="output-037b61cf" id="RTOPN_DDNS_opt" style="font-size:14px;" visible="false" enabled="false" readonly="true" value=".unioncomm.co.kr">
+              <cl:xylayoutdata std:sid="xyl-data-94e46703" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+            </cl:output>
+            <cl:xylayout std:sid="xylayout-97060bde"/>
+          </cl:group>
+          <cl:formlayout std:sid="f-layout-d0ed3826" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="200" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:group std:sid="group-1062af76" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+          <cl:formdata std:sid="f-data-c4c60bcd" row="2" col="1"/>
+          <cl:inputbox std:sid="i-box-429d0a20" id="RTOPN_ServerPort_ipb" style="font-size:14px;" enabled="false" secret="true">
+            <cl:datamapbind property="value" datacontrolid="NetWorkOptionInfo" columnname="Net_Port"/>
+            <cl:xylayoutdata std:sid="xyl-data-cfef6305" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+          </cl:inputbox>
+          <cl:xylayout std:sid="xylayout-920ef0e7"/>
+        </cl:group>
+        <cl:output std:sid="output-3e7bafef" style="border-right-style:solid; background-color:#f6f6f6; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-top-color:#c5c5c5; border-bottom-style:solid; border-right-color:#c5c5c5; border-top-style:solid; text-align:center;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_ServerIp"/>
+          <cl:formdata std:sid="f-data-6b979cb9" row="1" col="0"/>
+        </cl:output>
+        <cl:group std:sid="group-855bf712">
+          <cl:formdata std:sid="f-data-94c84d12" row="0" col="1"/>
+          <cl:checkbox std:sid="c-box-9d8af5e1" id="RTOPN_DDNS_cbx" enabled="false" readonly="true" truevalue="1" falsevalue="0" text="DDNS">
+            <cl:listener std:sid="listener-05c5ef24" name="value-change" handler="onRTOPN_DDNS_cbxValueChange"/>
+            <cl:datamapbind property="value" datacontrolid="NetWorkOptionInfo" columnname="Net_DDNS"/>
+            <cl:formdata std:sid="f-data-2e970fc5" row="0" col="1"/>
+          </cl:checkbox>
+          <cl:formlayout std:sid="f-layout-d3dd0570" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="150" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:output std:sid="output-83ae047a" style="border-right-style:solid; background-color:#f6f6f6; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_TerminalID"/>
+          <cl:formdata std:sid="f-data-1a67fa1f" row="3" col="0"/>
+        </cl:output>
+        <cl:group std:sid="group-57bea217" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+          <cl:formdata std:sid="f-data-946b8be3" row="3" col="1"/>
+          <cl:inputbox std:sid="i-box-b601c5c5" id="RTOPN_TID_ipb" style="font-size:14px;" enabled="false" readonly="true">
+            <cl:datamapbind property="value" datacontrolid="NetWorkOptionInfo" columnname="Net_TID"/>
+            <cl:xylayoutdata std:sid="xyl-data-19e6e105" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+          </cl:inputbox>
+          <cl:xylayout std:sid="xylayout-91a35452"/>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-bb53c645" hspace="0px" vspace="0px">
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          <cl:rows length="30" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000"/>
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          <cl:columns length="140" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-d3d43849">
+        <cl:rows length="210" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="230" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-822ae39f"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-cc037be8" version="1.0.0.0">
+  <head std:sid="head-3043c975">
+    <title>adjustmentManagement</title>
+    <screen std:sid="screen-296da187" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="600" customWidth="900"/>
+    <screen std:sid="screen-3dd122d0" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-54c24f12" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-2f594783">
+      <cl:dataset std:sid="d-set-7e04fb96" id="AdjustmentList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-471b5ec2" name="ID" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-e307af6f" name="UniqueID"/>
+          <cl:datacolumn std:sid="d-column-0dedebc3" name="Name"/>
+          <cl:datacolumn std:sid="d-column-0355bbf7" name="MealCount" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-0d66c10a" name="MealMoney" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-8f34c763" name="PrepaymentMoney" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-2434d52e" name="Balance" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:submission std:sid="submission-f2953bd9" id="sms_getAdjustmentList" method="get" action="/v1/ssh/adjustment">
+        <cl:listener std:sid="listener-06bc46dc" name="submit-done" handler="onSms_getAdjustmentListSubmitDone"/>
+        <cl:listener std:sid="listener-bd21b6d1" name="submit-error" handler="onSms_getAdjustmentListSubmitError"/>
+        <cl:listener std:sid="listener-16b90c4b" name="submit-timeout" handler="onSms_getAdjustmentListSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total"/>
+        <cl:responsedata dataid="AdjustmentList"/>
+      </cl:submission>
+      <cl:datamap std:sid="d-map-c2bd18fc" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-bf01545e" name="Count" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-a33aca7f" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-278d86a9" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-e93bde80" id="sms_postAdjustment" action="/v1/ssh/adjustment">
+        <cl:listener std:sid="listener-5971b9e8" name="submit-done" handler="onSms_postAdjustmentSubmitDone"/>
+        <cl:listener std:sid="listener-43ae81e6" name="submit-timeout" handler="onSms_postAdjustmentSubmitTimeout"/>
+        <cl:listener std:sid="listener-edd269cd" name="submit-error" handler="onSms_postAdjustmentSubmitError"/>
+        <cl:requestdata dataid="MonthlySettlementReq"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:datamap std:sid="d-map-1f01c86c" id="MonthlySettlementReq">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-8ac0f945" name="AdjustmentDate"/>
+          <cl:datacolumn comment="0: 당월, 1: 이전월" std:sid="d-column-5b93e38a" name="Processflag" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-cc517011" id="dm_ExportParam">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-d83b48dd" name="offset" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-fc1a603e" name="total" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-bbc173f9" name="mode"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:dataset std:sid="d-set-c9f76f5b" id="ExportAdjustmentList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-6d9dbfff" name="ID" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-f80fded6" name="UniqueID"/>
+          <cl:datacolumn std:sid="d-column-aa4e16c9" name="Name"/>
+          <cl:datacolumn std:sid="d-column-889f8e6e" name="MealCount" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-accffed1" name="MealMoney" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-174f4d68" name="PrepaymentMoney" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-946e94bc" name="Balance" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+    </cl:model>
+    <cl:appspec dev-comment="SSHAM_&#xD;&#xA;결제금액, 식수 횟수, 식수 금액, 잔액 "/>
+  </head>
+  <body std:sid="body-4941df15" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-7a9b8073" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-2384b57f" style="padding-top:5px; padding-left:5px; padding-bottom:5px; padding-right:5px;">
+      <cl:xylayoutdata std:sid="xyl-data-d478cb98" top="1px" right="1px" bottom="1px" left="1px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:grid std:sid="grid-690a9fc1" id="grd1" readonly="true" datasetid="AdjustmentList">
+        <cl:formdata std:sid="f-data-5a2a879b" row="1" col="0"/>
+        <cl:gridcolumn std:sid="g-column-3386e454"/>
+        <cl:gridcolumn std:sid="g-column-d6f56c05"/>
+        <cl:gridcolumn std:sid="g-column-d6cf8bfd"/>
+        <cl:gridcolumn std:sid="g-column-c4d9e813"/>
+        <cl:gridcolumn std:sid="g-column-7023895f"/>
+        <cl:gridcolumn std:sid="g-column-4f7d5a0a"/>
+        <cl:gridcolumn std:sid="g-column-20b3795c"/>
+        <cl:gridheader std:sid="gh-band-fecdaac5">
+          <cl:gridrow std:sid="g-row-9115f6d5"/>
+          <cl:gridcell std:sid="gh-cell-bad16361" rowindex="0" colindex="0" targetcolumnname="ID" sortable="false" filterable="false" text="아이디" visible="false"/>
+          <cl:gridcell std:sid="gh-cell-8b313165" rowindex="0" colindex="1" targetcolumnname="UniqueID" sortable="false" filterable="false" text="Q-ID"/>
+          <cl:gridcell std:sid="gh-cell-76c49350" rowindex="0" colindex="2" targetcolumnname="Name" sortable="false" filterable="false" text="이름"/>
+          <cl:gridcell std:sid="gh-cell-b3c23f12" rowindex="0" colindex="3" targetcolumnname="PrepaymentMoney" sortable="false" filterable="false" text="기존잔액"/>
+          <cl:gridcell std:sid="gh-cell-6bd31e9c" rowindex="0" colindex="4" targetcolumnname="MealCount" sortable="false" filterable="false" text="식수횟수"/>
+          <cl:gridcell std:sid="gh-cell-cc6d59b8" rowindex="0" colindex="5" targetcolumnname="MealMoney" sortable="false" filterable="false" text="식수 금액"/>
+          <cl:gridcell std:sid="gh-cell-758b5d67" rowindex="0" colindex="6" targetcolumnname="Balance" sortable="false" filterable="false" text="잔액"/>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-57a00334">
+          <cl:gridrow std:sid="g-row-eb191c63"/>
+          <cl:gridcell std:sid="gd-cell-28dfe82b" rowindex="0" colindex="0" columnname="ID"/>
+          <cl:gridcell std:sid="gd-cell-27ece12d" rowindex="0" colindex="1" columnname="UniqueID"/>
+          <cl:gridcell std:sid="gd-cell-694f8df6" rowindex="0" colindex="2" columnname="Name"/>
+          <cl:gridcell std:sid="gd-cell-aa542a2a" rowindex="0" colindex="3" columnname="PrepaymentMoney"/>
+          <cl:gridcell std:sid="gd-cell-866e3e38" rowindex="0" colindex="4" columnname="MealCount"/>
+          <cl:gridcell std:sid="gd-cell-92b0c2f9" rowindex="0" colindex="5" columnname="MealMoney"/>
+          <cl:gridcell std:sid="gd-cell-7d27ce8b" rowindex="0" colindex="6" columnname="Balance"/>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:group std:sid="group-76a92e66">
+        <cl:formdata std:sid="f-data-4224d7c3" row="0" col="0"/>
+        <cl:group std:sid="group-a84f9729" style="border-right-style:solid; color:#6b6b6b; border-top-width:1px; border-bottom-color:#cccccc; border-right-width:1px; border-left-color:#cccccc; border-right-color:#cccccc; border-left-width:1px; border-top-style:solid; background-color:#F6F6F6; border-radius:10px; border-left-style:solid; border-bottom-width:1px; border-top-color:#cccccc; border-bottom-style:solid;">
+          <cl:formdata std:sid="f-data-ba73c567" row="0" col="6"/>
+          <cl:combobox std:sid="c-box-6107e546" id="SSHAM_cmbCategory" style="background-color:#F6F6F6; border-right-style:none; border-left-style:none; border-bottom-style:none; border-top-style:none;" preventinput="true">
+            <cl:apppropbind property="value" category="PROPERTY" app-property="searchCategory"/>
+            <cl:formdata std:sid="f-data-8adb84bb" row="0" col="0"/>
+            <cl:item std:sid="item-4608f046" label="사용자 아이디" value="id"/>
+            <cl:item std:sid="item-e863c61d" label="이름" value="name"/>
+            <cl:item std:sid="item-9e16ae0c" label="Q-ID" value="uniqueid"/>
+          </cl:combobox>
+          <cl:inputbox std:sid="i-box-c326c7b5" id="SSHAM_ipbKeyword" style="background-color:#F6F6F6; padding:0px 0px 0px 10px; border-bottom-color:#cccccc; border-left-color:#cccccc; border-top-color:#cccccc; border-bottom-style:none; border-right-color:#cccccc; border-top-style:none;">
+            <cl:langbind property="placeholder" category="PROPERTY" keypath="Str_SearchKeword"/>
+            <cl:apppropbind property="value" category="PROPERTY" app-property="searchKeyword"/>
+            <cl:formdata std:sid="f-data-378afdbf" row="0" col="1"/>
+          </cl:inputbox>
+          <cl:group std:sid="group-94b972ce" id="SSHAM_btnSearch" style="border-right-style:none; cursor:pointer; background-color:transparent; background-repeat:no-repeat; border-left-style:none; border-bottom-style:none; background-image:url('../../../../theme/images/common/common_text_field_btn_icons_search.png'); background-position:center; border-top-style:none;">
+            <cl:listener std:sid="listener-5d2be663" name="click" handler="onSSHAM_btnSearchClick"/>
+            <cl:formdata std:sid="f-data-838eccbc" height="29" row="0" col="2"/>
+            <cl:xylayout std:sid="xylayout-3b76f87f"/>
+          </cl:group>
+          <cl:formlayout std:sid="f-layout-409a1d5f" hspace="0px" vspace="0px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+            <cl:columns length="3" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:dateinput std:sid="d-input-48acdebf" id="SSHAM_dtMonth" style="text-align:center;" calendartype="yearmonth" mask="YYYY-MM" format="YYYYMMDD" autoselect="false">
+          <cl:formdata std:sid="f-data-bce61d64" row="0" col="4"/>
+        </cl:dateinput>
+        <cl:output std:sid="output-e053a255" style="padding:4px; text-align:right;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_All"/>
+          <cl:formdata std:sid="f-data-fccf7dd5" row="0" col="0"/>
+        </cl:output>
+        <cl:output std:sid="output-5a63dfa3" id="SSHAM_opbTotal" value="">
+          <cl:formdata std:sid="f-data-40ad71c9" row="0" col="1"/>
+        </cl:output>
+        <cl:button std:sid="button-0efb715d" id="SSHAM_btnAdjustment" class="userInfo_btn" value="정산처리">
+          <cl:listener std:sid="listener-da0c5762" name="click" handler="onSSHAM_btnAdjustmentClick"/>
+          <cl:formdata std:sid="f-data-c00e5af3" row="0" col="3"/>
+        </cl:button>
+        <cl:button std:sid="button-07a00c2d" id="SSHAM_btnExport" class="userInfo_btn" value="내보내기">
+          <cl:listener std:sid="listener-14e82a80" name="click" handler="onSSHAM_btnExportClick"/>
+          <cl:formdata std:sid="f-data-8f20680b" row="0" col="8"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-0f2c19d7" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" minlength="0"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="250" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:pageindexer std:sid="p-indexer-8376e66b" id="adjustmentListPageIndexer" class="userList_paging">
+        <cl:listener std:sid="listener-54db4182" name="selection-change" handler="onAdjustmentListPageIndexerSelectionChange"/>
+        <cl:formdata std:sid="f-data-380d733f" row="2" col="0"/>
+      </cl:pageindexer>
+      <cl:formlayout std:sid="f-layout-b0aabd0a" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-86ac221e"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

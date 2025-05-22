@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-5c3680b7" version="1.0.0.0">
+  <head std:sid="head-1cdfa759">
+    <title>rollcallManagement</title>
+    <screen std:sid="screen-556cc090" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="600" customWidth="1024"/>
+    <screen std:sid="screen-2d038cdb" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-a6da1b1c" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-13165fc4">
+      <cl:dataset std:sid="d-set-e95a985b" id="TerminalInList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-9cb9cf0d" name="TerminalID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-a0509a00" name="Name"/>
+          <cl:datacolumn std:sid="d-column-97301ee9" name="InOut" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-ce6672b7" id="TerminalOutList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-386c1019" name="TerminalID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-d09fb589" name="Name"/>
+          <cl:datacolumn std:sid="d-column-a777f919" name="InOut" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-2e14bae8" id="MusteringList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-47a37b83" name="MusteringID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-eb5fd0fd" name="MusteringName"/>
+          <cl:datacolumn std:sid="d-column-b1638230" name="MusteringDesc"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-f2a917d2" id="TerminalList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-250b2e6f" name="TerminalID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-7d765f4a" name="Name"/>
+          <cl:datacolumn std:sid="d-column-f5063abd" name="InOut" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-ab9c534d" id="DeleteList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-2c940d51" name="TerminalID" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-cffaaa24" id="RollCallList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-e38340f8" name="UserID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-ff1567f8" name="UserName"/>
+          <cl:datacolumn std:sid="d-column-bab5c3d5" name="InCount" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-c2364b94" name="OutCount" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-71d39365" name="RollCallStatus" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-3bd182db" id="MusteringInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-bd52a513" name="MusteringID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-31574c4f" name="MusteringName"/>
+          <cl:datacolumn std:sid="d-column-43d3c5eb" name="MusteringDesc"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-a33aca7f" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-80d61523" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-3fce7e9b" id="MusteringTerminal">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-7ab50861" name="TerminalID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-48d0566a" name="InOut" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-c2bd18fc" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-f3c8a79a" name="Count" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-deb91fe5" id="sms_getMusteringList" method="get" action="/v1/rollcalls">
+        <cl:listener std:sid="listener-9d5b017c" name="submit-done" handler="onSms_getMusteringListSubmitDone"/>
+        <cl:listener std:sid="listener-8f454256" name="submit-error" handler="onSubmitError"/>
+        <cl:listener std:sid="listener-7105e053" name="submit-timeout" handler="onSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="MusteringList"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-9686a926" id="sms_postMusteringInfo" action="/v1/rollcalls">
+        <cl:listener std:sid="listener-2252f67b" name="submit-done" handler="onSms_postMusteringSubmitDone"/>
+        <cl:listener std:sid="listener-1991eea7" name="submit-error" handler="onSubmitError"/>
+        <cl:listener std:sid="listener-d32dfe6e" name="submit-timeout" handler="onSubmitTimeout"/>
+        <cl:requestdata dataid="MusteringInfo"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="MusteringInfo"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-45843daf" id="sms_deleteMustering" method="delete" action="/v1/rollcalls/{id}">
+        <cl:listener std:sid="listener-ad59ffde" name="submit-done" handler="onSms_deleteMusteringSubmitDone"/>
+        <cl:listener std:sid="listener-7776beff" name="submit-error" handler="onSubmitError"/>
+        <cl:listener std:sid="listener-58fde8cb" name="submit-timeout" handler="onSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-7576cf38" id="sms_putMusteringInfo" method="put">
+        <cl:listener std:sid="listener-59bcc43a" name="submit-done" handler="onSms_putMusteringInfoSubmitDone"/>
+        <cl:listener std:sid="listener-a794001c" name="submit-error" handler="onSubmitError"/>
+        <cl:listener std:sid="listener-e2ba9334" name="submit-timeout" handler="onSubmitTimeout"/>
+        <cl:requestdata dataid="MusteringInfo"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-fcc4be9d" id="sms_postMusteringTerminal" action="/v1/rollcalls/{id}/terminals">
+        <cl:listener std:sid="listener-f393a0f6" name="submit-done" handler="onSms_postMusteringTerminalSubmitDone"/>
+        <cl:listener std:sid="listener-e2d41aad" name="submit-error" handler="onSubmitError"/>
+        <cl:listener std:sid="listener-7f2e7216" name="submit-timeout" handler="onSubmitTimeout"/>
+        <cl:requestdata dataid="MusteringTerminal"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-b9e4e970" id="sms_getMusteringTerminal" method="get" action="/v1/rollcalls/terminals">
+        <cl:listener std:sid="listener-04298adf" name="submit-done" handler="onSms_getMusteringTerminalSubmitDone"/>
+        <cl:listener std:sid="listener-d14dab18" name="submit-error" handler="onSubmitError"/>
+        <cl:listener std:sid="listener-ed7db0cc" name="submit-timeout" handler="onSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="TerminalList"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-b00d8777" id="sms_getRollcallInfosNDPP" method="get" action="/v1/rollcalls/day_infos_ndpp">
+        <cl:listener std:sid="listener-21b25851" name="submit-done" handler="onSms_getRollcallInfosNDPPSubmitDone"/>
+        <cl:listener std:sid="listener-a1079f74" name="submit-error" handler="onSubmitError"/>
+        <cl:listener std:sid="listener-fa222c30" name="submit-timeout" handler="onSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total"/>
+        <cl:responsedata dataid="RollCallList"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-6b67ad49" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-56863085" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-06c6e8da">
+      <cl:xylayoutdata std:sid="xyl-data-04fcbd58" top="4px" right="4px" bottom="4px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:tabfolder std:sid="t-folder-48de7698">
+        <cl:formdata std:sid="f-data-9e5aba8e" row="0" col="0" rowspan="2" colspan="1"/>
+        <cl:tabitem std:sid="t-item-149a484b" name="zone" selected="true" text="구역 관리">
+          <cl:langbind property="text" category="PROPERTY" keypath="Str_ZoneManagement"/>
+          <cl:group std:sid="group-5ad18000" style="border-right-style:solid; border-top-width:1px; border-bottom-color:#cccccc; border-left-style:solid; border-right-width:1px; border-bottom-width:1px; border-left-color:#cccccc; border-top-color:#cccccc; border-bottom-style:solid; border-right-color:#cccccc; border-left-width:1px; border-top-style:solid;">
+            <std:metadata>
+              <std:property key="locked" value="true"/>
+            </std:metadata>
+            <cl:group std:sid="group-ce75271c">
+              <cl:xylayoutdata std:sid="xyl-data-81a0cff5" top="4px" right="4px" bottom="4px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+              <cl:output std:sid="output-9270deef" style="vertical-align:bottom;">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_ZoneInTerminalList"/>
+                <cl:formdata std:sid="f-data-bf1fd79b" row="4" col="2"/>
+              </cl:output>
+              <cl:button std:sid="button-149e4eb0" id="MMZMP_btnTerminalInAdd" style="padding:2px 2px 2px 2px;" class="userInfo_btn">
+                <cl:listener std:sid="listener-298e31ef" name="click" handler="onMMZMP_btnTerminalInAddClick"/>
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_Add"/>
+                <cl:formdata std:sid="f-data-b7a45d4a" row="4" col="3"/>
+              </cl:button>
+              <cl:button std:sid="button-2b9dee4f" id="MMZMP_btnTerminalInDelete" style="padding:2px 2px 2px 2px;" class="userInfo_btn">
+                <cl:listener std:sid="listener-d7e7ab2d" name="click" handler="onMMZMP_btnTerminalInDeleteClick"/>
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_Delete"/>
+                <cl:formdata std:sid="f-data-ccd0a5c6" row="4" col="4"/>
+              </cl:button>
+              <cl:output std:sid="output-4aff1d6b" style="vertical-align:bottom;">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_ZoneOutTerminalList"/>
+                <cl:formdata std:sid="f-data-f5289282" row="4" col="6"/>
+              </cl:output>
+              <cl:button std:sid="button-f3f8041a" id="MMZMP_btnTerminalOutAdd" style="padding:2px 2px 2px 2px;" class="userInfo_btn">
+                <cl:listener std:sid="listener-9a2f148d" name="click" handler="onMMZMP_btnTerminalOutAddClick"/>
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_Add"/>
+                <cl:formdata std:sid="f-data-5902366e" row="4" col="7"/>
+              </cl:button>
+              <cl:button std:sid="button-23cd7f3b" id="MMZMP_btnTerminalOutDelete" style="padding:2px 2px 2px 2px;" class="userInfo_btn">
+                <cl:listener std:sid="listener-378493ef" name="click" handler="onMMZMP_btnTerminalOutDeleteClick"/>
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_Delete"/>
+                <cl:formdata std:sid="f-data-2eb653e3" row="4" col="8"/>
+              </cl:button>
+              <cl:group std:sid="group-7769095f" id="MMZMP_grpMusteringInfo">
+                <cl:formdata std:sid="f-data-0c0f1fec" row="1" col="2" rowspan="1" colspan="7"/>
+                <cl:output std:sid="output-ebe7341f" style="border-right-style:solid; background-color:#f6f6f6; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; border-right-color:#c5c5c5; border-bottom-style:solid; text-align:center;" class="userInfo_bold">
+                  <cl:langbind property="value" category="PROPERTY" keypath="Str_ZoneName"/>
+                  <cl:formdata std:sid="f-data-4f10b10a" row="0" col="0"/>
+                </cl:output>
+                <cl:button std:sid="button-f53b099a" id="MMZMP_btnZoneDelete" class="userInfo_btn">
+                  <cl:listener std:sid="listener-7f3c9f61" name="click" handler="onMMZMP_btnZoneDeleteClick"/>
+                  <cl:langbind property="value" category="PROPERTY" keypath="Str_Delete"/>
+                  <cl:formdata std:sid="f-data-8cc18cf0" row="0" col="6"/>
+                </cl:button>
+                <cl:output std:sid="output-72baa44b" style="border-right-style:solid; background-color:#f6f6f6; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; border-right-color:#c5c5c5; border-bottom-style:solid; text-align:center;" class="userInfo_bold">
+                  <cl:langbind property="value" category="PROPERTY" keypath="Str_Description"/>
+                  <cl:formdata std:sid="f-data-075da5f9" row="0" col="2"/>
+                </cl:output>
+                <cl:inputbox std:sid="i-box-580bdbd0" id="MMZMP_ipbMusteringName" style="padding:0px 0px 0px 10px;">
+                  <cl:datamapbind property="value" datacontrolid="MusteringInfo" columnname="MusteringName"/>
+                  <cl:formdata std:sid="f-data-d8510b48" row="0" col="1"/>
+                </cl:inputbox>
+                <cl:inputbox std:sid="i-box-8ba053e7" id="MMZMP_ipbMusteringDesc" style="padding:0px 0px 0px 10px;">
+                  <cl:datamapbind property="value" datacontrolid="MusteringInfo" columnname="MusteringDesc"/>
+                  <cl:formdata std:sid="f-data-39ec1aee" row="0" col="3"/>
+                </cl:inputbox>
+                <cl:button std:sid="button-311c1d65" id="MMZMP_btnZoneModify" class="userInfo_btn">
+                  <cl:listener std:sid="listener-a4556816" name="click" handler="onMMZMP_btnZoneModifyClick"/>
+                  <cl:langbind property="value" category="PROPERTY" keypath="Str_Modification"/>
+                  <cl:formdata std:sid="f-data-a2a47384" row="0" col="5"/>
+                </cl:button>
+                <cl:formlayout std:sid="f-layout-39633b77">
+                  <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="90" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="140" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="90" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                </cl:formlayout>
+              </cl:group>
+              <cl:grid std:sid="grid-8b001b3b" id="MMZMP_grdTerminalIn" readonly="true" datasetid="TerminalInList">
+                <cl:formdata std:sid="f-data-d2e8ba37" row="5" col="2" rowspan="1" colspan="3"/>
+                <cl:gridcolumn std:sid="g-column-9fd516e4" width="25px"/>
+                <cl:gridcolumn std:sid="g-column-ebb75b19"/>
+                <cl:gridcolumn std:sid="g-column-47155219"/>
+                <cl:gridheader std:sid="gh-band-d0c8f134">
+                  <cl:gridrow std:sid="g-row-6568a067"/>
+                  <cl:gridcell std:sid="gh-cell-52338feb" rowindex="0" colindex="0" sortable="false" filterable="false" columntype="checkbox"/>
+                  <cl:gridcell std:sid="gh-cell-c46fecf4" rowindex="0" colindex="1" targetcolumnname="TerminalID" sortable="false" filterable="false" text="ID">
+                    <cl:langbind property="text" category="PROPERTY" keypath="Str_ID"/>
+                  </cl:gridcell>
+                  <cl:gridcell std:sid="gh-cell-c1d7702d" rowindex="0" colindex="2" targetcolumnname="Name" sortable="false" filterable="false" text="Name">
+                    <cl:langbind property="text" category="PROPERTY" keypath="Str_Name"/>
+                  </cl:gridcell>
+                </cl:gridheader>
+                <cl:griddetail std:sid="gd-band-5195abe7">
+                  <cl:gridrow std:sid="g-row-c91e07f4"/>
+                  <cl:gridcell std:sid="gd-cell-6f4f0bfc" rowindex="0" colindex="0" columntype="checkbox"/>
+                  <cl:gridcell std:sid="gd-cell-b6f02c50" rowindex="0" colindex="1" columnname="TerminalID"/>
+                  <cl:gridcell std:sid="gd-cell-e4c3fbea" rowindex="0" colindex="2" columnname="Name"/>
+                </cl:griddetail>
+              </cl:grid>
+              <cl:grid std:sid="grid-95f5cc34" id="MMZMP_grdTerminalOut" readonly="true" datasetid="TerminalOutList">
+                <cl:formdata std:sid="f-data-cea7cf4f" row="5" col="6" rowspan="1" colspan="3"/>
+                <cl:gridcolumn std:sid="g-column-69587af0" width="25px"/>
+                <cl:gridcolumn std:sid="g-column-d73fbc74"/>
+                <cl:gridcolumn std:sid="g-column-31e265b3"/>
+                <cl:gridheader std:sid="gh-band-cc731239">
+                  <cl:gridrow std:sid="g-row-04d80bd5"/>
+                  <cl:gridcell std:sid="gh-cell-0e82719d" rowindex="0" colindex="0" sortable="false" filterable="false" columntype="checkbox"/>
+                  <cl:gridcell std:sid="gh-cell-b7a569ec" rowindex="0" colindex="1" targetcolumnname="TerminalID" sortable="false" filterable="false" text="ID">
+                    <cl:langbind property="text" category="PROPERTY" keypath="Str_ID"/>
+                  </cl:gridcell>
+                  <cl:gridcell std:sid="gh-cell-e9040200" rowindex="0" colindex="2" targetcolumnname="Name" sortable="false" filterable="false" text="Name">
+                    <cl:langbind property="text" category="PROPERTY" keypath="Str_Name"/>
+                  </cl:gridcell>
+                </cl:gridheader>
+                <cl:griddetail std:sid="gd-band-81803691">
+                  <cl:gridrow std:sid="g-row-2df25945"/>
+                  <cl:gridcell std:sid="gd-cell-5ca970ec" rowindex="0" colindex="0" columntype="checkbox"/>
+                  <cl:gridcell std:sid="gd-cell-7c888fc2" rowindex="0" colindex="1" columnname="TerminalID"/>
+                  <cl:gridcell std:sid="gd-cell-0e3946d9" rowindex="0" colindex="2" columnname="Name"/>
+                </cl:griddetail>
+              </cl:grid>
+              <cl:grid std:sid="grid-e314e2f1" id="MMZMP_grdMusteringList" readonly="true" datasetid="MusteringList">
+                <cl:listener std:sid="listener-d55e6687" name="selection-change" handler="onMMZMP_grdMusteringListSelectionChange"/>
+                <cl:formdata std:sid="f-data-9faafee0" row="1" col="0" rowspan="5" colspan="1"/>
+                <cl:gridcolumn std:sid="g-column-326f4229"/>
+                <cl:gridheader std:sid="gh-band-1d61d773">
+                  <cl:gridrow std:sid="g-row-a7af2271"/>
+                  <cl:gridcell std:sid="gh-cell-f09a36f9" rowindex="0" colindex="0" targetcolumnname="MusteringName" sortable="false" filterable="false" text="MusteringName">
+                    <cl:langbind property="text" category="PROPERTY" keypath="Str_ZoneName"/>
+                  </cl:gridcell>
+                </cl:gridheader>
+                <cl:griddetail std:sid="gd-band-aafcd3c2">
+                  <cl:gridrow std:sid="g-row-4b454e22" height="30"/>
+                  <cl:gridcell std:sid="gd-cell-d3a27b87" rowindex="0" colindex="0" columnname="MusteringName"/>
+                </cl:griddetail>
+              </cl:grid>
+              <cl:group std:sid="group-64bc437e">
+                <cl:formdata std:sid="f-data-6f70e50f" row="0" col="0"/>
+                <cl:output std:sid="output-d6646ef6" style="font-weight:700; font-size:14px;">
+                  <cl:langbind property="value" category="PROPERTY" keypath="Str_ZoneList"/>
+                  <cl:formdata std:sid="f-data-3ad49a57" row="0" col="0"/>
+                </cl:output>
+                <cl:button std:sid="button-da5142cb" id="MMZMP_btnZoneAdd" class="userInfo_btn">
+                  <cl:listener std:sid="listener-09879070" name="click" handler="onMMZMP_btnZoneAddClick"/>
+                  <cl:langbind property="value" category="PROPERTY" keypath="Str_Add"/>
+                  <cl:formdata std:sid="f-data-04402acd" row="0" col="1"/>
+                </cl:button>
+                <cl:formlayout std:sid="f-layout-0f07d9ea">
+                  <cl:rows length="1" unit="FRACTION"/>
+                  <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="70" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                </cl:formlayout>
+              </cl:group>
+              <cl:output std:sid="output-2e29cd4b" style="border-bottom-color:#2446a4; font-weight:700; border-bottom-width:1px; font-size:14px; border-bottom-style:solid;">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_MusteringInfo"/>
+                <cl:formdata std:sid="f-data-fb1b8b30" row="0" col="2"/>
+              </cl:output>
+              <cl:output std:sid="output-d9d95d14" style="border-bottom-color:#2446a4; font-weight:700; border-bottom-width:1px; font-size:14px; border-bottom-style:solid;">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_TerminalList"/>
+                <cl:formdata std:sid="f-data-e2b81aba" row="3" col="2"/>
+              </cl:output>
+              <cl:formlayout std:sid="f-layout-6ebbb17d">
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="26" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="1" unit="FRACTION"/>
+                <cl:columns length="200" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="4" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="70" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="70" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="4" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="1" unit="FRACTION"/>
+                <cl:columns length="70" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="70" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              </cl:formlayout>
+            </cl:group>
+            <cl:xylayout std:sid="xylayout-6bddff50"/>
+          </cl:group>
+        </cl:tabitem>
+        <cl:tabitem std:sid="t-item-2a9d26b0" name="report" text="출석조회">
+          <std:metadata>
+            <std:property key="is-active-item" value="true"/>
+          </std:metadata>
+          <cl:group std:sid="group-7481b373" style="border-right-style:solid; border-top-width:1px; border-bottom-color:#cccccc; border-left-style:solid; border-right-width:1px; border-bottom-width:1px; border-left-color:#cccccc; border-top-color:#cccccc; border-bottom-style:solid; border-right-color:#cccccc; border-left-width:1px; border-top-style:solid;">
+            <std:metadata>
+              <std:property key="locked" value="true"/>
+            </std:metadata>
+            <cl:group std:sid="group-ad6bfa69">
+              <cl:xylayoutdata std:sid="xyl-data-ca7de0b2" top="4px" right="4px" bottom="4px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+              <cl:group std:sid="group-0d31ef92">
+                <cl:formdata std:sid="f-data-111890da" row="0" col="0"/>
+                <cl:output std:sid="output-c5d914a7" style="font-weight:700; font-size:14px;" value="구역선택">
+                  <cl:formdata std:sid="f-data-3acb5082" row="0" col="0"/>
+                </cl:output>
+                <cl:grid std:sid="grid-c0670924" id="MMZMP_grdMusteringSearch" readonly="true" datasetid="MusteringList">
+                  <cl:formdata std:sid="f-data-31b0cd19" row="1" col="0"/>
+                  <cl:gridcolumn std:sid="g-column-6d38a369"/>
+                  <cl:gridheader std:sid="gh-band-225a2d05">
+                    <cl:gridrow std:sid="g-row-831c4659"/>
+                    <cl:gridcell std:sid="gh-cell-f2a3ea6e" rowindex="0" colindex="0" targetcolumnname="MusteringName" sortable="false" filterable="false" text="MusteringName">
+                      <cl:langbind property="text" category="PROPERTY" keypath="Str_ZoneName"/>
+                    </cl:gridcell>
+                  </cl:gridheader>
+                  <cl:griddetail std:sid="gd-band-9195e573">
+                    <cl:gridrow std:sid="g-row-cc9163d3" height="30"/>
+                    <cl:gridcell std:sid="gd-cell-2ed53938" rowindex="0" colindex="0" columnname="MusteringName"/>
+                  </cl:griddetail>
+                </cl:grid>
+                <cl:formlayout std:sid="f-layout-07a9f1a5" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+                  <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:rows length="1" unit="FRACTION"/>
+                  <cl:columns length="1" unit="FRACTION"/>
+                </cl:formlayout>
+              </cl:group>
+              <cl:group std:sid="group-cc44792d">
+                <cl:formdata std:sid="f-data-10396927" row="0" col="1"/>
+                <cl:group std:sid="group-c5c64df0">
+                  <cl:formdata std:sid="f-data-efcf0ede" row="0" col="0"/>
+                  <cl:output std:sid="output-5170d5ad" style="border-bottom-color:#2446a4; font-weight:700; border-bottom-width:1px; font-size:14px; border-bottom-style:solid;" value="출석 조회">
+                    <cl:formdata std:sid="f-data-d6b48352" row="0" col="0"/>
+                  </cl:output>
+                  <cl:formlayout std:sid="f-layout-5ae57dba" hspace="10px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+                    <cl:rows length="1" unit="FRACTION"/>
+                    <cl:columns length="250" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                    <cl:columns length="1" unit="FRACTION"/>
+                  </cl:formlayout>
+                </cl:group>
+                <cl:grid std:sid="grid-8e995646" id="MMZMP_grdRollCallData" datasetid="RollCallList" resizablecolumns="all">
+                  <cl:formdata std:sid="f-data-98327e7e" row="2" col="0"/>
+                  <cl:gridcolumn std:sid="g-column-20188a09"/>
+                  <cl:gridcolumn std:sid="g-column-0f04843f"/>
+                  <cl:gridcolumn std:sid="g-column-16bf02a2"/>
+                  <cl:gridcolumn std:sid="g-column-92f1e6df"/>
+                  <cl:gridcolumn std:sid="g-column-60e45098"/>
+                  <cl:gridheader std:sid="gh-band-e9f6f5c7">
+                    <cl:gridrow std:sid="g-row-fd01e0cb"/>
+                    <cl:gridcell std:sid="gh-cell-0379add5" rowindex="0" colindex="0" targetcolumnname="UserID" text="ID"/>
+                    <cl:gridcell std:sid="gh-cell-dc799c9e" rowindex="0" colindex="1" targetcolumnname="UserName" text="이름"/>
+                    <cl:gridcell std:sid="gh-cell-3d562535" rowindex="0" colindex="2" targetcolumnname="InCount" text="출입수"/>
+                    <cl:gridcell std:sid="gh-cell-c32afccf" rowindex="0" colindex="3" targetcolumnname="OutCount" text="퇴실수"/>
+                    <cl:gridcell std:sid="gh-cell-5b6d4b0b" rowindex="0" colindex="4" text="출석상태"/>
+                  </cl:gridheader>
+                  <cl:griddetail std:sid="gd-band-01906435">
+                    <cl:gridrow std:sid="g-row-5d3a67f9"/>
+                    <cl:gridcell std:sid="gd-cell-4bf0bfc9" rowindex="0" colindex="0" columnname="UserID"/>
+                    <cl:gridcell std:sid="gd-cell-1895b4aa" rowindex="0" colindex="1" columnname="UserName"/>
+                    <cl:gridcell std:sid="gd-cell-98f66b9e" rowindex="0" colindex="2" columnname="InCount"/>
+                    <cl:gridcell std:sid="gd-cell-82b1d103" rowindex="0" colindex="3" columnname="OutCount"/>
+                    <cl:gridcell std:sid="gd-cell-4be0c8ae" rowindex="0" colindex="4" columnname="RollCallStatus">
+                      <cl:combobox std:sid="c-box-52a7e7ab" id="RollCallStatus" style="text-align:center;" readonly="true">
+                        <cl:expbind property="color" category="STYLER" expression="switch ( RollCallStatus ) {&#xD;&#xA;&#x9;case -1: &quot;red&quot;&#xD;&#xA;&#x9;default: &quot;black&quot;&#xD;&#xA;}"/>
+                        <cl:item std:sid="item-e5cd12dd" label="정상" value="0"/>
+                        <cl:item std:sid="item-eeb352a3" label="출석진행" value="1"/>
+                        <cl:item std:sid="item-6050df1a" label="출석오류" value="-1"/>
+                      </cl:combobox>
+                    </cl:gridcell>
+                  </cl:griddetail>
+                </cl:grid>
+                <cl:group std:sid="group-b1149f94">
+                  <cl:formdata std:sid="f-data-2ddf8dad" row="1" col="0"/>
+                  <cl:button std:sid="button-6152db7c" id="btSearch" class="userInfo_btn" visible="true" value="조회">
+                    <cl:listener std:sid="listener-d47319cb" name="click" handler="onBtSearchClick"/>
+                    <cl:formdata std:sid="f-data-6ce10c3f" row="0" col="5"/>
+                  </cl:button>
+                  <cl:dateinput std:sid="d-input-71da1be8" id="MMZMP_dtSearchDate" format="YYYY-MM-DD" autoselect="false">
+                    <cl:formdata std:sid="f-data-31c5bcfc" row="0" col="4"/>
+                  </cl:dateinput>
+                  <cl:output std:sid="output-621deaca" style="text-align:right;" class="common-titlelabel" value="조회날짜">
+                    <cl:formdata std:sid="f-data-5120393b" row="0" col="3"/>
+                  </cl:output>
+                  <cl:output std:sid="output-1a601c63" style="text-align:center;" class="common-titlelabel" value="출입자수">
+                    <cl:formdata std:sid="f-data-a24ceecf" row="0" col="0"/>
+                  </cl:output>
+                  <cl:output std:sid="output-134fff99" id="MMZMP_opbTotal" value="1000000" datatype="number" format="s#,###">
+                    <cl:datamapbind property="value" datacontrolid="Total" columnname="Count"/>
+                    <cl:formdata std:sid="f-data-fc9f43a9" row="0" col="1"/>
+                  </cl:output>
+                  <cl:formlayout std:sid="f-layout-fb7b13c6" hspace="10px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+                    <cl:rows length="1" unit="FRACTION"/>
+                    <cl:columns length="70" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                    <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                    <cl:columns length="1" unit="FRACTION"/>
+                    <cl:columns length="150" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                    <cl:columns length="150" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                    <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  </cl:formlayout>
+                </cl:group>
+                <cl:formlayout std:sid="f-layout-e7d19835" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+                  <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="1" unit="FRACTION"/>
+                </cl:formlayout>
+              </cl:group>
+              <cl:formlayout std:sid="f-layout-738cf239" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+                <cl:rows length="1" unit="FRACTION"/>
+                <cl:columns length="200" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="1" unit="FRACTION"/>
+              </cl:formlayout>
+            </cl:group>
+            <cl:xylayout std:sid="xylayout-bd9537fc"/>
+          </cl:group>
+        </cl:tabitem>
+      </cl:tabfolder>
+      <cl:formlayout std:sid="f-layout-1e7b53d5">
+        <cl:rows length="36" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-ea975421"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

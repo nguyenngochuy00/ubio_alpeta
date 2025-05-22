@@ -1,0 +1,65 @@
+<html>
+<head>
+    <meta charset="utf-8">    
+    <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1, maximum-scale=1">
+    <title>UBioAlpeta web tna</title>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <script>
+        $(document).ready(function(){ 
+            var fileTarget = $('#videoData'); 
+            fileTarget.on('change', function(){ // 값이 변경되면
+                var cur=$(".filebox input[type='file']").val();
+                var filename = cur.replace(/^.*[\\\/]/, '')
+                $(".upload-name").val(filename); 
+            });
+
+            navigator.geolocation.getCurrentPosition(function(pos) {
+                var latitude = pos.coords.latitude;
+                var longitude = pos.coords.longitude;
+                $("#latitude").val(latitude);
+                $("#longitude").val(longitude);                
+            });
+        });
+
+        function onUpload(){            
+            var form = $('#FILE_FORM')[0];
+            var formData = new FormData(form);
+            formData.append("videoData", $("#videoData")[0].files[0]);            
+
+            $.ajax({
+                url:"/v1/custom/goToWorkUpload",
+                processData: false,
+                contentType: false,
+                data: formData,
+                type:"POST",
+                success: function(result) {
+                    alert(result.Message);                    
+                }
+            });
+        }
+    </script>
+  
+</head>
+
+<body>    
+    <form id="FILE_FORM" method="post" enctype="multipart/form-data" action="">
+        <input type="hidden" id="latitude" name="latitude" value=""/>
+        <input type="hidden" id="longitude" name="longitude" value=""/>
+        <div class="form__group field">
+            <div>
+                <input class="form__field" type="text" placeholder="User id" id="userID" name="userID" >
+            </div>
+            <div>
+                <input class="form__field" type="password" placeholder="Enter user password" id="userPass"  name="userPass">                    
+            </div>
+            <div class="form__field filebox">                    
+                    <label for="videoData">Get video</label> 
+                    <input type="file" accept="video/*;capture=camcorder" id="videoData" name="videoData"/>                        
+                    <input class="upload-name" value="" readonly="true" id="fileName" name="fileName"/> 
+            </div>
+            <div style="text-align: center;"><br><a href="javascript:onUpload();" class="button pulse">Upload</a></div>
+        </div>        
+    </form>
+</body>
+</html>

@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-fdaf10d6" version="1.0.0.0">
+  <head std:sid="head-3f18d3c8">
+    <title>WorkingRowInGroup</title>
+    <screen std:sid="screen-ffbff43a" id="default" name="default" minwidth="1024px" width="1024px" height="768px" active="true"/>
+    <screen std:sid="screen-0c72af79" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-2cec9c08" id="ipplus" name="ipplus" minwidth="414px" maxwidth="499px" width="414px" height="736px"/>
+    <screen std:sid="screen-c4785608" id="ip678" name="ip678" minwidth="375px" maxwidth="413px" width="375px" height="667px" active="false"/>
+    <screen std:sid="screen-8aba43c7" id="mobile" name="mobile" minwidth="350px" maxwidth="374px" width="350px" height="525px"/>
+    <screen std:sid="screen-88067704" id="test" name="ip5" maxwidth="349px" width="320px" height="585px"/>
+    <cl:model std:sid="model-99889a41">
+      <cl:dataset std:sid="d-set-a872091a" id="WorkTimeList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-a332c9e8" name="UserID"/>
+          <cl:datacolumn std:sid="d-column-beb1c7d8" name="BasicWorkTime"/>
+          <cl:datacolumn std:sid="d-column-bf397513" name="OverWorkTime"/>
+          <cl:datacolumn std:sid="d-column-0df1cf8d" name="TotalWorkTime"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-1a4bcfc0" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-e6085eb2" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-99f4f251" id="PictureInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-fbe652cc" name="ImageType"/>
+          <cl:datacolumn std:sid="d-column-49a52032" name="Picture"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-2db16482" id="smsGetTnaPeriodWorkTime" method="get" action="/tna/periodWorkTime">
+        <cl:listener std:sid="listener-a836e98f" name="submit-done" handler="onSmsGetTnaPeriodWorkTimeSubmitDone"/>
+        <cl:listener std:sid="listener-51f0651b" name="before-submit" handler="onSmsGetTnaPeriodWorkTimeBeforeSubmit"/>
+        <cl:listener std:sid="listener-398b17a3" name="receive" handler="onSmsGetTnaPeriodWorkTimeReceive"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="WorkTimeList"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-f4dd2ba3" id="smsGetPicture" withCredentials="true" method="get" action="/users/{id}/picture">
+        <cl:listener std:sid="listener-085cb025" name="before-submit" handler="onSmsGetPictureBeforeSubmit"/>
+        <cl:listener std:sid="listener-9320ded8" name="receive" handler="onSmsGetPictureReceive"/>
+        <cl:listener std:sid="listener-477ceaad" name="submit-done" handler="onSmsGetPictureSubmitDone"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="PictureInfo"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec>
+      <cl:property name="UserName" type="string"/>
+      <cl:property name="UserID" type="string"/>
+      <cl:property name="periodTime" type="string" default="Day"/>
+      <cl:property name="UserPosition" type="string"/>
+      <cl:property name="Time" type="string"/>
+    </cl:appspec>
+  </head>
+  <body std:sid="body-bff0ee47" style="border-radius:30px; background-color:#FFFFFF; padding-top:10px; top:0px; left:0px; padding-left:10px; width:300px; padding-bottom:10px; height:300px; padding-right:28px;">
+    <cl:listener std:sid="listener-1edda3f8" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-967bda2e">
+      <cl:formdata std:sid="f-data-de695f23" row="0" col="0"/>
+      <cl:group std:sid="group-5c01319e">
+        <cl:formdata std:sid="f-data-f2a374f2" row="0" col="0"/>
+        <cl:img std:sid="image-52c27a36" id="userPicture" src="/theme/images/mobile/common_img_profile_blank_gray_human@3x.png">
+          <cl:xylayoutdata std:sid="xyl-data-69c83e58" width="54px" height="54px" horizontalAnchor="CENTER" verticalAnchor="CENTER"/>
+        </cl:img>
+        <cl:xylayout std:sid="xylayout-52ba1860"/>
+      </cl:group>
+      <cl:group std:sid="group-ea0da21f" style="border-bottom-color:#e4e4e4; border-bottom-width:1px; border-bottom-style:solid;">
+        <cl:formdata std:sid="f-data-f392062f" row="0" col="1"/>
+        <cl:group std:sid="group-891880ae" style="border-bottom-color:#f4f4f4; border-bottom-width:1px; border-bottom-style:solid;">
+          <cl:formdata std:sid="f-data-f415edf9" row="0" col="0"/>
+          <cl:output std:sid="output-ec7845d6">
+            <cl:apppropbind property="value" category="PROPERTY" app-property="UserName"/>
+            <cl:xylayoutdata std:sid="xyl-data-f3299195" top="0px" bottom="0px" left="0px" width="88px" horizontalAnchor="LEFT" verticalAnchor="BOTH"/>
+          </cl:output>
+          <cl:output std:sid="output-41ea2d3d" id="userPosition" style="color:#848484; font-size:12px; text-align:right;">
+            <cl:apppropbind property="value" category="PROPERTY" app-property="UserPosition"/>
+            <cl:xylayoutdata std:sid="xyl-data-00e0a6c2" top="0px" right="0px" bottom="0px" width="74px" horizontalAnchor="RIGHT" verticalAnchor="BOTH"/>
+          </cl:output>
+          <cl:xylayout std:sid="xylayout-8cf86242"/>
+        </cl:group>
+        <cl:group std:sid="group-cd0b6981">
+          <cl:formdata std:sid="f-data-f84f11d3" row="1" col="0"/>
+          <cl:output std:sid="output-db76edc0" id="currentWorkTime" value="00:00">
+            <cl:flowlayoutdata std:sid="f-data-7580371a" width="62px" height="69px" autosize="both"/>
+          </cl:output>
+          <cl:output std:sid="output-6a5980d9" style="color:#848484; font-size:12px; text-align:center;" value="/">
+            <cl:flowlayoutdata std:sid="f-data-08b0e7f6" width="11px" height="69px" autosize="both"/>
+          </cl:output>
+          <cl:output std:sid="output-13c84e0c" id="totalWorkTime" style="color:#848484; font-size:12px;">
+            <cl:flowlayoutdata std:sid="f-data-a68e9cec" width="62px" height="69px" autosize="both"/>
+          </cl:output>
+          <cl:flowlayout std:sid="f-layout-14906aa5" valign="middle"/>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-8ee922db" hspace="0px" vspace="0px">
+          <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-b990bf18" hspace="0px" vspace="0px">
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="5" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:group std:sid="group-72b7837c">
+      <cl:formdata std:sid="f-data-438d9ef1" row="1" col="0"/>
+      <cl:group std:sid="group-f7ca4f0a">
+        <cl:verticaldata std:sid="v-data-7f5fcefe" width="400px" height="27px"/>
+        <cl:output std:sid="output-2a98d669" style="color:#91C720; font-size:12px; text-align:center;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Work_WorkingHours"/>
+          <cl:formdata std:sid="f-data-4d27296e" row="0" col="0"/>
+        </cl:output>
+        <cl:group std:sid="group-d8aa96ed">
+          <cl:formdata std:sid="f-data-5bd63779" row="0" col="1"/>
+          <cl:progress std:sid="progress-20af9761" id="basicWorkTimeBar" value="0">
+            <cl:xylayoutdata std:sid="xyl-data-f6cbb431" right="0px" left="0px" height="3px" horizontalAnchor="BOTH" verticalAnchor="CENTER"/>
+            <cl:barstyle style="color:#91C720;"/>
+          </cl:progress>
+          <cl:output std:sid="output-a4f8aa9f" id="basicWorkTime" style="color:#91C720; vertical-align:bottom; font-size:10px; text-align:right;" value="20:12">
+            <cl:xylayoutdata std:sid="xyl-data-5ab40053" right="0px" bottom="0px" width="35px" height="15px" horizontalAnchor="RIGHT" verticalAnchor="BOTTOM"/>
+          </cl:output>
+          <cl:xylayout std:sid="xylayout-4840db01"/>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-d8a50167" hspace="0px" vspace="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="5" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-48e47e5a">
+        <cl:verticaldata std:sid="v-data-f0276433" width="262px" height="27px" autosize="none"/>
+        <cl:group std:sid="group-174ba396">
+          <cl:formdata std:sid="f-data-97aa443a" row="0" col="1"/>
+          <cl:group std:sid="group-f3c9b15c">
+            <cl:xylayoutdata std:sid="xyl-data-544f423b" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+            <cl:progress std:sid="progress-9d9dd97c" id="overWorkTimeBar" style="background-color:#FBA354;" value="0">
+              <cl:xylayoutdata std:sid="xyl-data-a7eaef30" right="0px" left="0px" height="3px" horizontalAnchor="BOTH" verticalAnchor="CENTER"/>
+              <cl:barstyle style="background-color:#FBA354; color:#FBA354;"/>
+            </cl:progress>
+            <cl:output std:sid="output-deda00b1" id="overWorkTime" style="color:#FBA354; vertical-align:bottom; font-size:10px; text-align:right;" value="2:12">
+              <cl:xylayoutdata std:sid="xyl-data-3aaaca12" top="11px" right="0px" bottom="0px" width="35px" horizontalAnchor="RIGHT" verticalAnchor="BOTH"/>
+            </cl:output>
+            <cl:xylayout std:sid="xylayout-7321c86f"/>
+          </cl:group>
+          <cl:xylayout std:sid="xylayout-21a11c8d"/>
+        </cl:group>
+        <cl:output std:sid="output-e327538b" style="color:#FBA354; font-size:12px; text-align:center;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Overtime1Hours"/>
+          <cl:formdata std:sid="f-data-dbfded23" row="0" col="0"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-e0d650bd" hspace="0px" vspace="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="5" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:verticallayout std:sid="v-layout-ee583eae" spacing="0"/>
+    </cl:group>
+    <cl:formlayout std:sid="f-layout-75033b6a" hspace="0px" vspace="0px">
+      <cl:rows length="1" unit="FRACTION"/>
+      <cl:rows length="1" unit="FRACTION"/>
+      <cl:columns length="1" unit="FRACTION"/>
+    </cl:formlayout>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler>
+      <std:guide position="131"/>
+    </std:vruler>
+  </std:studiosetting>
+</html>

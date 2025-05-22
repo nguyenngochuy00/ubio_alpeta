@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-dd73a8ad" version="1.0.0.0">
+  <head std:sid="head-ada4952f">
+    <title>antipassbackManagement</title>
+    <screen std:sid="screen-9be1026b" id="default" name="default" minwidth="1024px" width="1024px" height="768px"/>
+    <screen std:sid="screen-50fefd19" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-45d1e08c" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-3a2b19ce">
+      <cl:dataset std:sid="d-set-13187340" id="AntipassBack" sortcondition="">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-564c41b0" name="TerminalID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-f289fb11" name="AreaIn" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-2a4a18c3" name="AreaOut" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-be19f47a" name="SoftPassback"/>
+          <cl:datacolumn std:sid="d-column-c54c8046" name="className" datatype="string"/>
+        </cl:datacolumnlist>
+        <cl:datarowlist/>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-02d8b0f3" id="AreaList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-226e6ee8" name="AreaID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-a2d642cc" name="Name"/>
+          <cl:datacolumn std:sid="d-column-c6b1e437" name="isAlert"/>
+        </cl:datacolumnlist>
+        <cl:datarowlist/>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-e7e5eae4" id="tmpEntranceList" sortcondition="">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-0e676e15" name="TerminalID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-49e461fc" name="AreaIn" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-c4dbcf3c" name="AreaOut" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-d4da4057" name="SoftPassback"/>
+          <cl:datacolumn std:sid="d-column-8931b948" name="className" datatype="string"/>
+        </cl:datacolumnlist>
+        <cl:datarowlist/>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-5a504087" id="tmpExitList" sortcondition="">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-2d9543bf" name="TerminalID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-8bdf4133" name="AreaIn" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-3541ac44" name="AreaOut" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-6c0be59a" name="SoftPassback"/>
+          <cl:datacolumn std:sid="d-column-6615bed4" name="className" datatype="string"/>
+        </cl:datacolumnlist>
+        <cl:datarowlist/>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-8c959fba" id="entMenu">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-eb8f75b6" name="label"/>
+          <cl:datacolumn std:sid="d-column-d83a0985" name="value" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-45304a4e" name="parent" datatype="string"/>
+        </cl:datacolumnlist>
+        <cl:datarowlist>
+          <cl:datarow>
+            <cl:datavalue columnname="label">구역선택</cl:datavalue>
+            <cl:datavalue columnname="value">s</cl:datavalue>
+            <cl:datavalue columnname="parent"/>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="label">구역해제</cl:datavalue>
+            <cl:datavalue columnname="value">d</cl:datavalue>
+            <cl:datavalue columnname="parent"/>
+          </cl:datarow>
+        </cl:datarowlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-5569c1c4" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-31f411f6" name="ResultCode" datatype="number" defaultvalue="-1"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-9b328efa" id="APBStatusInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-cdee54c2" name="status" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-ae93d540" name="terminalID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-47ce7b62" name="AreaIn" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-fed89317" name="AreaOut" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-8551f5c3" id="optInOutValue">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-5f71695a" name="optInDesc"/>
+          <cl:datacolumn std:sid="d-column-31c54b00" name="optOutDesc"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-82d75c6c" id="sms_getAreas" method="get" action="/v1/antiPassback/areas">
+        <cl:listener std:sid="listener-d2de90bf" name="submit-success" handler="onSms_getAreasSubmitSuccess"/>
+        <cl:responsedata dataid="AreaList"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-968f74cc" id="sms_getAntipassBack" method="get" action="/v1/antiPassback">
+        <cl:listener std:sid="listener-32ac1954" name="submit-success" handler="onSms_getAntipassBackSubmitSuccess"/>
+        <cl:responsedata dataid="AntipassBack"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-29d42415" id="sms_deleteArea" method="delete" action="">
+        <cl:listener std:sid="listener-2b3b065e" name="submit-success" handler="onSms_deleteAreaSubmitSuccess"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-a7d18e89" id="smsCheckExist" method="get"/>
+      <cl:submission std:sid="submission-32bf049f" id="sms_clearArea" action="">
+        <cl:listener std:sid="listener-5bf63469" name="submit-done" handler="onSms_clearAreaSubmitDone"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-44e227a2" id="smsValidCheck" method="patch" action="/v1/antiPassback">
+        <cl:listener std:sid="listener-bb18d87b" name="submit-done" handler="onSmsValidCheckSubmitDone"/>
+        <cl:responsedata dataid="APBStatusInfo"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-10fb19db" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-f199f552" name="load" handler="onBodyLoad"/>
+    <cl:listener std:sid="listener-e9ad14a7" name="contextmenu" handler="onBodyContextmenu"/>
+    <cl:listener std:sid="listener-74a52309" name="init" handler="onBodyInit"/>
+    <cl:listener std:sid="listener-789054c2" name="dispose" handler="onBodyDispose"/>
+    <cl:group std:sid="group-9d5eeac6" style="padding-top:0px; padding-left:0px; padding-bottom:0px; padding-right:0px;">
+      <cl:xylayoutdata std:sid="xyl-data-7816a9ef" top="25px" right="10px" bottom="10px" left="50px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-17a3ee86">
+        <cl:formdata std:sid="f-data-4c17d377" row="0" col="0" rowspan="1" colspan="2"/>
+        <cl:output std:sid="output-49b34f86" id="ACAPAP_opbTitle" class="menu-title-amhq" value="군사통제구역 설정">
+          <cl:formdata std:sid="f-data-88c4e0e4" row="0" col="0"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-19e74b48" scrollable="false" hspace="1px" vspace="1px" top-margin="1px" right-margin="1px" bottom-margin="1px" left-margin="1px" hseparatorwidth="1" hseparatortype="BY_CLASS" vseparatorwidth="1" vseparatortype="BY_CLASS">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-3caed125" style="padding-top:10px; padding-left:10px; padding-bottom:10px; padding-right:10px;">
+        <cl:formdata std:sid="f-data-98ece2d9" row="2" col="0"/>
+        <cl:group std:sid="group-e4197068">
+          <cl:formdata std:sid="f-data-ee1bf680" row="0" col="0"/>
+          <cl:output std:sid="output-17f5390d" style="padding-top:3px; font-weight:700.0; padding-left:3px; font-size:16px; padding-bottom:3px; text-align:center; padding-right:3px;" class="section-title-amhq">
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_Zone"/>
+            <cl:formdata std:sid="f-data-535b7a89" row="0" col="0" rowspan="1" colspan="2"/>
+          </cl:output>
+          <cl:formlayout std:sid="f-layout-54237540">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="15" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+            <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:button std:sid="button-9b616b70" id="APBMAM_btnAddArea" class="button-amhq">
+          <cl:listener std:sid="listener-6a088fd4" name="click" handler="onBtnAddAreaClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Add"/>
+          <cl:formdata std:sid="f-data-3a31d565" halign="FILL" valign="FILL" width="80" height="30" row="0" col="2"/>
+        </cl:button>
+        <cl:button std:sid="button-145183ba" id="APBMAM_btnDelArea" class="button-amhq">
+          <cl:listener std:sid="listener-04122127" name="click" handler="onBtnDelAreaClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Delete"/>
+          <cl:formdata std:sid="f-data-20f715f5" halign="FILL" valign="FILL" width="80" height="30" row="0" col="3"/>
+        </cl:button>
+        <cl:grid std:sid="grid-f39f66e5" id="APBMAM_grdAreas" class="grid-amhq" readonly="false" datasetid="AreaList" showdeletedrow="false" nodatamessage="No Data" resizablecolumns="none" columnMovable="false">
+          <cl:listener std:sid="listener-f3198858" name="selection-change" handler="onGrdAreasSelectionChange"/>
+          <cl:formdata std:sid="f-data-35c50945" row="1" col="0" rowspan="1" colspan="4"/>
+          <cl:gridcolumn std:sid="g-column-772138ba"/>
+          <cl:gridcolumn std:sid="g-column-bf9657dd"/>
+          <cl:gridheader std:sid="gh-band-1c28ac8a">
+            <cl:gridrow std:sid="g-row-909aa47d" height="50px"/>
+            <cl:gridcell std:sid="gh-cell-4df83102" rowindex="0" colindex="0" style="text-align:center;" class="display_none" targetcolumnname="AreaID" sortable="false" filterable="false" text="AreaID">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_ID"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gh-cell-538d6aa5" rowindex="0" colindex="1" style="text-align:center;" class="display_none" targetcolumnname="Name" text="Name">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_Name"/>
+            </cl:gridcell>
+          </cl:gridheader>
+          <cl:griddetail std:sid="gd-band-2c4af4e4">
+            <cl:gridrow std:sid="g-row-68e818ce" height="30px"/>
+            <cl:gridcell std:sid="gd-cell-5ae6d90e" rowindex="0" colindex="0" style="text-align:center;" columnname="AreaID"/>
+            <cl:gridcell std:sid="gd-cell-4f244466" rowindex="0" colindex="1" style="text-align:center;" columnname="Name"/>
+          </cl:griddetail>
+        </cl:grid>
+        <cl:formlayout std:sid="f-layout-d0d2b10e">
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-1015fdd8" id="grp1">
+        <cl:formdata std:sid="f-data-64d41ed0" row="1" col="1"/>
+        <cl:button std:sid="button-f7d2eb12" id="APBMAM_btnValidCheck" class="button-amhq">
+          <cl:listener std:sid="listener-3e6bd0a5" name="click" handler="onBtnValidCheckClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_APBSettingValidate"/>
+          <cl:formdata std:sid="f-data-01b09bcb" valign="FILL" height="30" row="0" col="2"/>
+        </cl:button>
+        <cl:button std:sid="button-a02aa20e" id="APBMAM_btnClear" class="button-amhq">
+          <cl:listener std:sid="listener-d3adff64" name="click" handler="onBtnClearClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Clear"/>
+          <cl:formdata std:sid="f-data-3f52a2a7" valign="FILL" height="30" row="0" col="3"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-3d03e1cb">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="120" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          <cl:columns length="120" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          <cl:columns length="14" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-493268cf" style="padding-top:10px; padding-left:10px; padding-bottom:10px; padding-right:10px;">
+        <cl:formdata std:sid="f-data-df452864" row="2" col="1"/>
+        <cl:group std:sid="group-fc4c1cb4">
+          <cl:formdata std:sid="f-data-2c8a9f4b" row="0" col="0"/>
+          <cl:group std:sid="group-1f431e65">
+            <cl:formdata std:sid="f-data-780f570b" row="0" col="0" rowspan="1" colspan="1"/>
+            <cl:output std:sid="output-b0ca2e2d" style="text-align:center;" class="section-title-amhq">
+              <cl:langbind property="value" category="PROPERTY" keypath="Str_EnterZone"/>
+              <cl:formdata std:sid="f-data-b000a111" row="0" col="0"/>
+            </cl:output>
+            <cl:formlayout std:sid="f-layout-009bc9fa">
+              <cl:rows length="1" unit="FRACTION"/>
+              <cl:columns length="1" unit="FRACTION"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:grid std:sid="grid-dd6f5ae2" id="APBMAM_grdEntrance" class="grid-amhq" visible="false" readonly="true" datasetid="tmpEntranceList" showdeletedrow="false" nodatamessage="No Data" resizablecolumns="none" columnMovable="false" collapsible="true">
+            <cl:listener std:sid="listener-5c420e9b" name="selection-change" handler="onGrdEntranceSelectionChange"/>
+            <cl:formdata std:sid="f-data-c51f372e" row="1" col="0"/>
+            <cl:gheaderstyle>
+              <cl:expbind property="background-color" category="STYLER" expression="className == &quot;미지정단말&quot; || className == &quot;unspecified&quot; ? &quot;orange&quot;:&quot;#99b4d1&quot;"/>
+            </cl:gheaderstyle>
+            <cl:gridcolumn std:sid="g-column-b28a43bb" width="80px"/>
+            <cl:gridcolumn std:sid="g-column-6bbc358c"/>
+            <cl:gridcolumn std:sid="g-column-4bcd6582"/>
+            <cl:gridcolumn std:sid="g-column-23f4f5ba"/>
+            <cl:gridheader std:sid="gh-band-6ceba923">
+              <cl:gridrow std:sid="g-row-c9bff106"/>
+              <cl:gridcell std:sid="gh-cell-c2714d64" rowindex="0" colindex="0" targetcolumnname="TerminalID" sortable="false" filterable="false" text="TerminalID">
+                <cl:langbind property="text" category="PROPERTY" keypath="Str_TerminalID"/>
+              </cl:gridcell>
+              <cl:gridcell std:sid="gh-cell-20dd94ba" rowindex="0" colindex="1" visible="false"/>
+              <cl:gridcell std:sid="gh-cell-768c5946" rowindex="0" colindex="2" visible="false"/>
+              <cl:gridcell std:sid="gh-cell-6616c328" rowindex="0" colindex="3" visible="false"/>
+            </cl:gridheader>
+            <cl:griddetail std:sid="gd-band-8c2e7e22">
+              <cl:gridrow std:sid="g-row-e7be38c1"/>
+              <cl:gridcell std:sid="gd-cell-1ca65d0b" rowindex="0" colindex="0" columnname="TerminalID"/>
+              <cl:gridcell std:sid="gd-cell-f06e5378" rowindex="0" colindex="1" columnname="AreaIn"/>
+              <cl:gridcell std:sid="gd-cell-22424280" rowindex="0" colindex="2" columnname="AreaOut"/>
+              <cl:gridcell std:sid="gd-cell-7db4fabc" rowindex="0" colindex="3" columnname="SoftPassback"/>
+            </cl:griddetail>
+            <cl:gridrowgrouplist std:sid="grg-list-274fb925">
+              <cl:gridrowgroup std:sid="gr-group-00c8e8e6" groupcondition="className">
+                <cl:gridgroupheader std:sid="gf-band-02b9cafc">
+                  <cl:gridrow std:sid="g-row-d42b809e"/>
+                  <cl:gridcell std:sid="gf-cell-e6abb397" rowindex="0" colindex="0" rowspan="1" colspan="1" expr="className"/>
+                  <cl:gridcell std:sid="gf-cell-0fe5fedc" rowindex="0" colindex="1" expr="&quot;&quot;"/>
+                  <cl:gridcell std:sid="gf-cell-9ebb0974" rowindex="0" colindex="2" expr="&quot;&quot;"/>
+                  <cl:gridcell std:sid="gf-cell-e21d51e2" rowindex="0" colindex="3" expr="&quot;&quot;"/>
+                </cl:gridgroupheader>
+                <cl:gridgroupfooter std:sid="gf-band-629ed32d">
+                  <cl:gridrow std:sid="g-row-2196f9fb" height="5px"/>
+                  <cl:gridcell std:sid="gf-cell-ab78e624" rowindex="0" colindex="0" style="border-right-style:solid; border-top-width:1px; border-right-width:1px; border-left-style:solid; border-bottom-width:1px; border-bottom-style:solid; border-left-width:1px; border-top-style:solid;" expr="&quot;&quot;"/>
+                  <cl:gridcell std:sid="gf-cell-6b167cc4" rowindex="0" colindex="1" expr="&quot;&quot;"/>
+                  <cl:gridcell std:sid="gf-cell-bbf8292d" rowindex="0" colindex="2" expr="&quot;&quot;"/>
+                  <cl:gridcell std:sid="gf-cell-1590a078" rowindex="0" colindex="3" expr="&quot;&quot;"/>
+                </cl:gridgroupfooter>
+              </cl:gridrowgroup>
+            </cl:gridrowgrouplist>
+          </cl:grid>
+          <cl:group std:sid="group-b77d9d6f">
+            <cl:formdata std:sid="f-data-c71c4ea3" row="1" col="1"/>
+            <cl:img std:sid="image-6fe7b80b" style="padding:5px;" src="../../../../theme/images/arrow_icon/popup_certification_bg_img_arrow_right.png">
+              <cl:xylayoutdata std:sid="xyl-data-a43f8d71" right="0px" left="0px" height="104px" horizontalAnchor="BOTH" verticalAnchor="CENTER"/>
+            </cl:img>
+            <cl:xylayout std:sid="xylayout-a484934b"/>
+          </cl:group>
+          <cl:formlayout std:sid="f-layout-b141065e">
+            <cl:rows length="45" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="2" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+            <cl:columns length="1" unit="FRACTION" autoSizing="false"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:group std:sid="group-c4d9c4a6" style="background-image:url('../../../../theme/images/popup/popup_bg_pattern_green_dot.png');">
+          <cl:formdata std:sid="f-data-56cfda12" row="0" col="1"/>
+          <cl:group std:sid="group-2642b670">
+            <cl:formdata std:sid="f-data-45e2dd47" row="1" col="0"/>
+            <cl:group std:sid="group-ba4a93f6">
+              <cl:formdata std:sid="f-data-3dd46d7b" row="0" col="0" rowspan="1" colspan="1"/>
+              <cl:group std:sid="group-b94ef581">
+                <cl:formdata std:sid="f-data-e89f59a4" row="0" col="0"/>
+                <cl:output std:sid="output-31b1a34a" id="APBMAM_optInDesc" style="border-right-style:solid; background-color:#F6F6F6; border-top-width:1px; border-right-width:1px; border-left-style:solid; font-weight:bold; border-bottom-width:1px; border-bottom-style:solid; border-left-width:1px; border-top-style:solid; text-align:center;">
+                  <cl:langbind property="tooltip" category="PROPERTY" keypath="Str_DisplayZoneDescription"/>
+                  <cl:datamapbind property="value" datacontrolid="optInOutValue" columnname="optInDesc"/>
+                  <cl:xylayoutdata std:sid="xyl-data-e0c552e1" top="20px" right="20px" bottom="20px" left="20px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+                </cl:output>
+                <cl:xylayout std:sid="xylayout-d36598ca"/>
+              </cl:group>
+              <cl:group std:sid="group-69f1d779">
+                <cl:formdata std:sid="f-data-4b1abae0" row="1" col="0"/>
+                <cl:button std:sid="button-ec00e45f" id="APBMAM_btnAddTml" style="padding-top:0px; padding-left:2px; padding-bottom:0px; padding-right:2px;" class="button-amhq">
+                  <cl:listener std:sid="listener-a394e745" name="click" handler="onBtnAddTmlClick"/>
+                  <cl:attribute name="code" value="ent"/>
+                  <cl:langbind property="value" category="PROPERTY" keypath="Str_AddEnterTerminal"/>
+                  <cl:xylayoutdata std:sid="xyl-data-d5d8aedb" top="0px" right="20px" bottom="0px" left="20px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+                </cl:button>
+                <cl:xylayout std:sid="xylayout-b4683d8d"/>
+              </cl:group>
+              <cl:formlayout std:sid="f-layout-c4ce0957">
+                <cl:rows length="2" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+                <cl:rows length="1" unit="FRACTION"/>
+                <cl:columns length="1" unit="FRACTION"/>
+              </cl:formlayout>
+            </cl:group>
+            <cl:group std:sid="group-ff7b0e82">
+              <cl:formdata std:sid="f-data-bdc4a7bd" row="0" col="1"/>
+              <cl:group std:sid="group-9c0aaf06">
+                <cl:formdata std:sid="f-data-12a247f1" row="0" col="0"/>
+                <cl:output std:sid="output-0ff2e78b" id="APBMAM_optOutDesc" style="border-right-style:solid; background-color:#F6F6F6; border-top-width:1px; border-right-width:1px; border-left-style:solid; font-weight:bold; border-bottom-width:1px; border-bottom-style:solid; border-left-width:1px; border-top-style:solid; text-align:center;">
+                  <cl:langbind property="tooltip" category="PROPERTY" keypath="Str_DisplayZoneDescription"/>
+                  <cl:datamapbind property="value" datacontrolid="optInOutValue" columnname="optOutDesc"/>
+                  <cl:xylayoutdata std:sid="xyl-data-ad7a5cf7" top="20px" right="20px" bottom="20px" left="20px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+                </cl:output>
+                <cl:xylayout std:sid="xylayout-dc0a8e76"/>
+              </cl:group>
+              <cl:group std:sid="group-70f4c128">
+                <cl:formdata std:sid="f-data-83d2f99b" row="1" col="0"/>
+                <cl:button std:sid="button-c969be32" style="padding-top:0px; padding-left:2px; padding-bottom:0px; padding-right:2px;" class="button-amhq">
+                  <cl:listener std:sid="listener-66a72018" name="click" handler="onBtnAddTmlClick"/>
+                  <cl:attribute name="code" value="ext"/>
+                  <cl:langbind property="value" category="PROPERTY" keypath="Str_AddExitTerminal"/>
+                  <cl:xylayoutdata std:sid="xyl-data-10dcbeaf" top="0px" right="20px" bottom="0px" left="20px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+                </cl:button>
+                <cl:xylayout std:sid="xylayout-d5d37b79"/>
+              </cl:group>
+              <cl:formlayout std:sid="f-layout-88b8a428">
+                <cl:rows length="2" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+                <cl:rows length="1" unit="FRACTION"/>
+                <cl:columns length="1" unit="FRACTION"/>
+              </cl:formlayout>
+            </cl:group>
+            <cl:formlayout std:sid="f-layout-529df192">
+              <cl:rows length="1" unit="FRACTION"/>
+              <cl:columns length="2" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+              <cl:columns length="2" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:group std:sid="group-e0b720ce">
+            <cl:formdata std:sid="f-data-ab845d38" row="0" col="0"/>
+            <cl:output std:sid="output-6a9cf127" style="border-right-style:solid; border-top-width:1px; border-bottom-color:#c5c5c5; font-weight:700; border-right-width:1px; border-left-color:#c5c5c5; font-size:14px; border-right-color:#c5c5c5; border-left-width:1px; border-top-style:solid; background-color:#F6F6F6; border-radius:15px; border-left-style:solid; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; text-align:center;">
+              <cl:relativebind property="value" category="PROPERTY" columnname="Name"/>
+              <cl:xylayoutdata std:sid="xyl-data-931468f8" top="30px" right="20px" bottom="0px" left="20px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+            </cl:output>
+            <cl:xylayout std:sid="xylayout-6cb2d02a"/>
+          </cl:group>
+          <cl:formlayout std:sid="f-layout-31faa63c">
+            <cl:rows length="75" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:rows length="400" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:group std:sid="group-8598bb54">
+          <cl:formdata std:sid="f-data-611f8247" row="0" col="2"/>
+          <cl:group std:sid="group-db599dd8">
+            <cl:formdata std:sid="f-data-ed5a0d20" row="0" col="1"/>
+            <cl:output std:sid="output-751694de" style="text-align:center;" class="section-title-amhq">
+              <cl:langbind property="value" category="PROPERTY" keypath="Str_ExitZone"/>
+              <cl:formdata std:sid="f-data-30e0c023" row="0" col="0"/>
+            </cl:output>
+            <cl:formlayout std:sid="f-layout-e79f292b">
+              <cl:rows length="1" unit="FRACTION"/>
+              <cl:columns length="1" unit="FRACTION"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:grid std:sid="grid-cc78d92d" id="APBMAM_grdExit" class="grid-amhq" visible="false" readonly="true" datasetid="tmpExitList" showdeletedrow="false" nodatamessage="No Data" resizablecolumns="none" columnMovable="false" collapsible="true">
+            <cl:formdata std:sid="f-data-e435d2ea" row="1" col="1"/>
+            <cl:gheaderstyle>
+              <cl:expbind property="background-color" category="STYLER" expression="className == &quot;미지정단말&quot; || className == &quot;unspecified&quot; ? &quot;orange&quot;:&quot;#99b4d1&quot;"/>
+            </cl:gheaderstyle>
+            <cl:gridcolumn std:sid="g-column-19a427ea" width="80px"/>
+            <cl:gridcolumn std:sid="g-column-df9fc401"/>
+            <cl:gridcolumn std:sid="g-column-5c05fff6"/>
+            <cl:gridcolumn std:sid="g-column-76ad103a"/>
+            <cl:gridheader std:sid="gh-band-181228db">
+              <cl:gridrow std:sid="g-row-268ad0ee"/>
+              <cl:gridcell std:sid="gh-cell-e7417acd" rowindex="0" colindex="0" targetcolumnname="TerminalID" sortable="false" filterable="false" text="">
+                <cl:langbind property="text" category="PROPERTY" keypath="Str_TerminalID"/>
+              </cl:gridcell>
+              <cl:gridcell std:sid="gh-cell-2be590d9" rowindex="0" colindex="1" visible="false"/>
+              <cl:gridcell std:sid="gh-cell-045abdd2" rowindex="0" colindex="2" visible="false"/>
+              <cl:gridcell std:sid="gh-cell-649f857a" rowindex="0" colindex="3" visible="false"/>
+            </cl:gridheader>
+            <cl:griddetail std:sid="gd-band-383b4ee7">
+              <cl:gridrow std:sid="g-row-fe5cb5cc"/>
+              <cl:gridcell std:sid="gd-cell-f8413ca7" rowindex="0" colindex="0" columnname="TerminalID"/>
+              <cl:gridcell std:sid="gd-cell-ec11a2ba" rowindex="0" colindex="1" columnname="AreaOut"/>
+              <cl:gridcell std:sid="gd-cell-909f6edf" rowindex="0" colindex="2" columnname="AreaIn"/>
+              <cl:gridcell std:sid="gd-cell-80e6451a" rowindex="0" colindex="3" columnname="SoftPassback"/>
+            </cl:griddetail>
+            <cl:gridrowgrouplist std:sid="grg-list-ce92107d">
+              <cl:gridrowgroup std:sid="gr-group-17b5e6dd" groupcondition="className">
+                <cl:gridgroupheader std:sid="gf-band-bf9b8156">
+                  <cl:gridrow std:sid="g-row-34e7a956"/>
+                  <cl:gridcell std:sid="gf-cell-e1d479be" rowindex="0" colindex="0" expr="className"/>
+                  <cl:gridcell std:sid="gf-cell-52d07e15" rowindex="0" colindex="1" expr="&quot;&quot;"/>
+                  <cl:gridcell std:sid="gf-cell-f4c77c6e" rowindex="0" colindex="2" expr="&quot;&quot;"/>
+                  <cl:gridcell std:sid="gf-cell-47d66e18" rowindex="0" colindex="3" expr="&quot;&quot;"/>
+                </cl:gridgroupheader>
+                <cl:gridgroupfooter std:sid="gf-band-215b5542">
+                  <cl:gridrow std:sid="g-row-53f0a930" height="5px"/>
+                  <cl:gridcell std:sid="gf-cell-67cc6ccc" rowindex="0" colindex="0" expr=""/>
+                  <cl:gridcell std:sid="gf-cell-47a8d4ad" rowindex="0" colindex="1" expr="&quot;&quot;"/>
+                  <cl:gridcell std:sid="gf-cell-f9de211c" rowindex="0" colindex="2" expr="&quot;&quot;"/>
+                  <cl:gridcell std:sid="gf-cell-b7d353c1" rowindex="0" colindex="3" expr="&quot;&quot;"/>
+                </cl:gridgroupfooter>
+              </cl:gridrowgroup>
+            </cl:gridrowgrouplist>
+          </cl:grid>
+          <cl:group std:sid="group-acf3bd16">
+            <cl:formdata std:sid="f-data-c13ae08b" row="1" col="0"/>
+            <cl:img std:sid="image-1a7a85bf" style="padding:5px;" src="../../../../theme/images/arrow_icon/popup_certification_bg_img_arrow_right.png">
+              <cl:xylayoutdata std:sid="xyl-data-253cfe0e" right="0px" left="0px" height="104px" horizontalAnchor="BOTH" verticalAnchor="CENTER"/>
+            </cl:img>
+            <cl:xylayout std:sid="xylayout-3e53aec3"/>
+          </cl:group>
+          <cl:formlayout std:sid="f-layout-16d5587b">
+            <cl:rows length="45" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+            <cl:columns length="2" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-bbcbd0d2">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="3" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-61aadf3e" hspace="0px" vspace="0px">
+        <cl:rows length="35" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="250" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-3e844f9a"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

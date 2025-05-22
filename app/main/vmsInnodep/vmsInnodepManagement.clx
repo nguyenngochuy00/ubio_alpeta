@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-e6d6ac94" version="1.0.0.0">
+  <head std:sid="head-06b0ea58">
+    <title>vmsInnodepManagement</title>
+    <screen std:sid="screen-e49e18bc" id="default" name="default" minwidth="1024px" width="1024px" height="768px"/>
+    <screen std:sid="screen-57f66897" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-833c2ed0" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-6ab89b16">
+      <cl:datamap std:sid="d-map-9d2f207b" id="OptionInnodep">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-7448f150" name="ServerIP" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-48763c00" name="ServerPort" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-d9f6242c" name="UserID" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-b0f131c4" name="UserPW" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-3ef275c7" name="License" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-8a309048" name="UseRecording" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-196a58e2" name="RegularRecording" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-9b5d3614" name="BeforeRecordingTime" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-f0acf40f" name="AfterRecordingTime" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-30515f58" name="PlayerServerIP" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-ef089522" name="PlayerServerPort" datatype="number" defaultvalue="0"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-35d85d5a" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-fae20911" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-b5bf4ffe" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-d9924134" name="Count" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap comment="로그인 결과로부터 받은 정보 + DMS 정보 추가" std:sid="d-map-e4c71f94" id="additionalInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-da82c4b0" name="authToken"/>
+          <cl:datacolumn std:sid="d-column-768038fe" name="apiSerial"/>
+          <cl:datacolumn std:sid="d-column-d70238eb" name="userSerial"/>
+          <cl:datacolumn std:sid="d-column-10e92704" name="vmsID"/>
+          <cl:datacolumn std:sid="d-column-5229f54f" name="mediaStreamVideo"/>
+          <cl:datacolumn std:sid="d-column-bcfe1824" name="dmsVideoPlayerURL"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-99a6a51e" id="smsGetOptionInnodep" method="get" action="/v1/options/innodep">
+        <cl:listener std:sid="listener-024ba35f" name="submit-done" handler="onSmsGetOptionInnodepSubmitDone"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="OptionInnodep"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-a68d4a33" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-87875111" name="load" handler="onBodyLoad"/>
+    <cl:listener std:sid="listener-948fb406" name="unload" handler="onBodyUnload"/>
+    <cl:group std:sid="group-34cd280e">
+      <cl:xylayoutdata std:sid="xyl-data-04ba2d7a" top="6px" right="8px" bottom="8px" left="6px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-c5f0a4ea" style="background-color:#7f31ac;">
+        <cl:formdata std:sid="f-data-8adc9e6c" row="0" col="0" rowspan="1" colspan="2"/>
+        <cl:button std:sid="button-a05d63c6" id="btnCamera" style="background-color:#7f31ac;" class="terminal_btn" visible="true">
+          <cl:listener std:sid="listener-471105dd" name="click" handler="onBtnCameraClick2"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_VmsGeneral"/>
+          <cl:formdata std:sid="f-data-f0d6c210" row="0" col="0"/>
+        </cl:button>
+        <cl:button std:sid="button-a427aa2d" id="btnRecordingStorage" style="background-color:#7f31ac;" class="terminal_btn" visible="true">
+          <cl:listener std:sid="listener-9fac6a1e" name="click" handler="onBtnRecordingStorageClick2"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_VmsStorage"/>
+          <cl:formdata std:sid="f-data-6cd54d24" row="0" col="1"/>
+        </cl:button>
+        <cl:button std:sid="button-5a1b6542" id="btnUser" style="background-color:#7f31ac;" class="terminal_btn">
+          <cl:listener std:sid="listener-dc4aa1ec" name="click" handler="onBtnUserClick2"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_VmsUserInfo"/>
+          <cl:formdata std:sid="f-data-e2accb97" row="0" col="2"/>
+        </cl:button>
+        <cl:button std:sid="button-154aaa91" id="btnVideo" style="background-color:#7f31ac;" class="terminal_btn">
+          <cl:listener std:sid="listener-1da9005c" name="click" handler="onBtnVideoClick2"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_RealTimeVideo"/>
+          <cl:formdata std:sid="f-data-60af0a34" row="0" col="3"/>
+        </cl:button>
+        <cl:img std:sid="image-da2dae6c" id="TMMGR_imgHelpPage" style="cursor:help;" src="../../../theme/images/common/common_btn_window_top_q.png">
+          <cl:listener std:sid="listener-a0124f2b" name="click" handler="onTMMGR_imgHelpPageClick"/>
+          <cl:formdata std:sid="f-data-874852f0" halign="CENTER" valign="CENTER" width="14" height="14" row="0" col="7"/>
+        </cl:img>
+        <cl:button std:sid="button-507f2dcf" id="btnInnodepVmsOption" style="background-color:#7f31ac;" class="terminal_btn">
+          <cl:listener std:sid="listener-33aefb26" name="click" handler="onBtnInnodepVmsOptionClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_InnodepVmsSetup"/>
+          <cl:formdata std:sid="f-data-22267d9e" row="0" col="4"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-bdb09f2d">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="120" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="120" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="120" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="120" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="120" unit="PIXEL" autoSizing="false" minlength="0"/>
+          <cl:columns length="120" unit="PIXEL" autoSizing="false" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:embeddedapp std:sid="e-app-1c813abd" id="eaMain">
+        <cl:formdata std:sid="f-data-0894edfd" row="1" col="0" rowspan="1" colspan="2"/>
+      </cl:embeddedapp>
+      <cl:formlayout std:sid="f-layout-252c7170">
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="225" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="3" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-902ca53c"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

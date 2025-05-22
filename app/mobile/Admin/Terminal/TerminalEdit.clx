@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-a4a42a2b" version="1.0.0.0">
+  <head std:sid="head-3b55c5af">
+    <title>TerminalEdit</title>
+    <screen std:sid="screen-d07d2829" id="default" name="default" minwidth="1024px" width="1024px" height="768px" active="false"/>
+    <screen std:sid="screen-3b66a452" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-a5bfeb05" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px" active="true"/>
+    <cl:model std:sid="model-5c6d1127">
+      <cl:datamap std:sid="d-map-dea9e7f7" id="TerminalInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-bfec1e94" name="ID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-eaa80142" name="Name"/>
+          <cl:datacolumn std:sid="d-column-0d1e82b7" name="GroupID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-b7c86784" name="State" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-b955b95b" name="Type" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-e9565286" name="FuncType" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-447aec90" name="IPAddress"/>
+          <cl:datacolumn std:sid="d-column-45687989" name="MacAddress"/>
+          <cl:datacolumn std:sid="d-column-9ed129a9" name="Version"/>
+          <cl:datacolumn std:sid="d-column-c5f901c7" name="RemoteDoor" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-58ade432" name="UTCIndex" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-202361de" name="Description"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-0f301610" id="TerminalApbAreaInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-e7e4d2c9" name="ID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-0769ec68" name="AreaIn" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-09507b58" name="AreaOut" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-fae59007" name="AreaInName"/>
+          <cl:datacolumn std:sid="d-column-d4e3d143" name="AreaOutName"/>
+          <cl:datacolumn std:sid="d-column-877b6956" name="SoftPassback" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-f689434b" id="TerminalImage">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-43479324" name="FileType"/>
+          <cl:datacolumn std:sid="d-column-34513207" name="FileSize" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-ad1dd4ce" name="ImageData"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-42296f53" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-0c4db06e" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-e6719283" id="smsUpdateTerminal" withCredentials="true" method="put" action="/terminals/">
+        <cl:listener std:sid="listener-fbf94b7b" name="submit-done" handler="onSmsUpdateTerminalSubmitDone"/>
+        <cl:listener std:sid="listener-6874574d" name="before-submit" handler="onSmsUpdateTerminalBeforeSubmit"/>
+        <cl:listener std:sid="listener-94d69390" name="receive" handler="onSmsUpdateTerminalReceive"/>
+        <cl:requestdata dataid="TerminalInfo"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec>
+      <cl:property name="TerminalImage" type="object"/>
+      <cl:property name="TerminalApbAreaInfo" type="object"/>
+      <cl:property name="TerminalInfo" type="object"/>
+    </cl:appspec>
+  </head>
+  <body std:sid="body-deeb97bf" style="background-color:#f2f2f2; top:0px; left:0px; width:800px; background-image:none; height:600px;">
+    <cl:listener std:sid="listener-ebf8a583" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-b3a28518">
+      <cl:responsivexylayoutdata std:sid="rxyl-data-6c4022b8">
+        <cl:xylayoutdata std:sid="sxyl-data-7f182ca5" top="207px" right="639px" bottom="92px" left="10px" horizontalAnchor="BOTH" verticalAnchor="BOTH" screenid="default"/>
+        <cl:xylayoutdata std:sid="sxyl-data-4057da47" top="196px" right="0px" bottom="1px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH" screenid="mobile"/>
+      </cl:responsivexylayoutdata>
+      <cl:group std:sid="group-4d77680c">
+        <cl:verticaldata std:sid="v-data-a473f906" width="375px" height="419px" autosize="height"/>
+        <cl:group std:sid="group-3e6f4dfc">
+          <cl:verticaldata std:sid="v-data-fd3d5a27" width="375px" height="140px" autosize="none"/>
+          <cl:img std:sid="image-9c0edee4" id="terminalImage" src="/theme/images/mobile/common_img_profile_blank_gray_device@3x.png">
+            <cl:xylayoutdata std:sid="xyl-data-9ada4608" width="120px" height="120px" horizontalAnchor="CENTER" verticalAnchor="CENTER"/>
+          </cl:img>
+          <cl:xylayout std:sid="xylayout-7f699cd3"/>
+        </cl:group>
+        <cl:output std:sid="output-82a8751c" style="background-color:#EAEAEA; color:#474747; padding-left:21px; font-size:10px;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_TerminalInfo"/>
+          <cl:verticaldata std:sid="v-data-e62b1f51" width="375px" height="25px" autosize="none"/>
+        </cl:output>
+        <cl:group std:sid="group-47adf83c" style="padding-left:21px; padding-right:21px;">
+          <cl:verticaldata std:sid="v-data-1af0df8f" width="375px" height="199px" autosize="height"/>
+          <cl:output std:sid="output-15c67896" style="color:#909090; border-bottom-color:#eaeaea; border-bottom-width:1px; font-size:12px; border-bottom-style:solid;">
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_TerminalName"/>
+            <cl:formdata std:sid="f-data-a7768463" row="0" col="0"/>
+          </cl:output>
+          <cl:output std:sid="output-780b607e" style="color:#909090; border-bottom-color:#eaeaea; border-bottom-width:1px; font-size:12px; border-bottom-style:solid;" value="ID">
+            <cl:formdata std:sid="f-data-d974b02f" row="1" col="0"/>
+          </cl:output>
+          <cl:output std:sid="output-6d2b8023" id="terminalID" style="color:#363636; border-bottom-color:#eaeaea; border-bottom-width:1px; border-bottom-style:solid; text-align:right;" value="">
+            <cl:formdata std:sid="f-data-2be607e1" row="1" col="1"/>
+          </cl:output>
+          <cl:output std:sid="output-28ddf39b" style="color:#909090; border-bottom-color:#eaeaea; border-bottom-width:1px; font-size:12px; border-bottom-style:solid;">
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_TerminalType"/>
+            <cl:formdata std:sid="f-data-f41d7eee" row="2" col="0"/>
+          </cl:output>
+          <cl:output std:sid="output-2d12d782" id="terminalType" style="color:#363636; border-bottom-color:#eaeaea; border-bottom-width:1px; border-bottom-style:solid; text-align:right;" value="">
+            <cl:formdata std:sid="f-data-c6d857d7" row="2" col="1"/>
+          </cl:output>
+          <cl:output std:sid="output-6ebc1a8e" style="color:#909090; border-bottom-color:#eaeaea; border-bottom-width:1px; font-size:12px; border-bottom-style:solid;">
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_FWVersion"/>
+            <cl:formdata std:sid="f-data-e81c0918" row="3" col="0"/>
+          </cl:output>
+          <cl:output std:sid="output-c78159a5" id="terminalVersion" style="color:#363636; border-bottom-color:#eaeaea; border-bottom-width:1px; border-bottom-style:solid; text-align:right;" value="">
+            <cl:formdata std:sid="f-data-d39ec02d" row="3" col="1"/>
+          </cl:output>
+          <cl:output std:sid="output-4edd6b54" style="color:#909090; border-bottom-color:#eaeaea; border-bottom-width:1px; font-size:12px; border-bottom-style:solid;">
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_IPAddress"/>
+            <cl:formdata std:sid="f-data-36ded9bc" row="4" col="0"/>
+          </cl:output>
+          <cl:output std:sid="output-ac789570" id="terminalIP" style="color:#363636; border-bottom-color:#eaeaea; border-bottom-width:1px; border-bottom-style:solid; text-align:right;" value="">
+            <cl:formdata std:sid="f-data-1b1515f5" row="4" col="1"/>
+          </cl:output>
+          <cl:inputbox std:sid="i-box-f9404a6f" id="terminalName" style="border-right-style:none; background-color:#f2f2f2; color:#363636; border-bottom-color:#eaeaea; border-left-style:none; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; background-image:none; border-top-style:none; text-align:right;" value="" secret="false" maxlength="50">
+            <cl:formdata std:sid="f-data-a0d11d28" row="0" col="1"/>
+          </cl:inputbox>
+          <cl:formlayout std:sid="f-layout-cd14d4e5">
+            <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="100" unit="PIXEL"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:verticallayout std:sid="v-layout-50dfa4a7" spacing="0"/>
+      </cl:group>
+      <cl:group std:sid="group-2de4a380">
+        <cl:verticaldata std:sid="v-data-df2cbc94" width="400px" height="45px"/>
+        <cl:output std:sid="output-443f7151" id="updateTerminalBtn" style="background-color:#006938; border-radius:20px; color:#FFFFFF; padding-left:21px; text-align:center; padding-right:21px;">
+          <cl:listener std:sid="listener-b7b29546" name="click" handler="onUpdateTerminalBtnClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Save"/>
+          <cl:xylayoutdata std:sid="xyl-data-31882fc0" top="5px" right="21px" bottom="5px" left="21px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+        </cl:output>
+        <cl:xylayout std:sid="xylayout-d3fb681d"/>
+      </cl:group>
+      <cl:verticallayout std:sid="v-layout-3921417f"/>
+    </cl:group>
+    <cl:group std:sid="group-54383a10" style="background-color:#006938;">
+      <cl:responsivexylayoutdata std:sid="rxyl-data-0699c3d9">
+        <cl:xylayoutdata std:sid="sxyl-data-502f76d0" top="0px" right="0px" left="0px" height="197px" horizontalAnchor="BOTH" verticalAnchor="TOP" screenid="mobile"/>
+      </cl:responsivexylayoutdata>
+      <cl:udc std:sid="ud-control-e03c0761" type="udc.MobileStatusBar">
+        <cl:xylayoutdata std:sid="xyl-data-f1d4d717" top="0px" right="0px" left="0px" height="20px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+      </cl:udc>
+      <cl:group std:sid="group-4b7eff31">
+        <cl:xylayoutdata std:sid="xyl-data-c273acee" top="50px" right="0px" bottom="30px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+        <cl:output std:sid="output-f7f02d2c" id="pageName" style="color:#FFFFFF; font-weight:lighter; font-size:45px; text-align:center;">
+          <cl:xylayoutdata std:sid="xyl-data-57a4711b" right="0px" left="0px" height="104px" horizontalAnchor="BOTH" verticalAnchor="CENTER"/>
+        </cl:output>
+        <cl:xylayout std:sid="xylayout-0408bda0"/>
+      </cl:group>
+      <cl:udc std:sid="ud-control-18b29407" id="navigationBar" type="udc.NavigationBar">
+        <cl:listener std:sid="listener-e07980a3" name="leftBtnClick" handler="onNavigationBarLeftBtnClick"/>
+        <cl:xylayoutdata std:sid="xyl-data-ca180187" top="20px" right="21px" left="21px" height="30px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+        <cl:property name="rightIconVisible" value="false" type="boolean"/>
+        <cl:property name="leftIcon" value="Back" type="string"/>
+      </cl:udc>
+      <cl:xylayout std:sid="xylayout-0d5cfea4"/>
+    </cl:group>
+    <cl:responsivexylayout std:sid="r-xylayout-d24d8048"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

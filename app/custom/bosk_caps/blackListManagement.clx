@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-ae2736d4" version="1.0.0.0">
+  <head std:sid="head-c871299f">
+    <title>UserManagement</title>
+    <screen std:sid="screen-642abed3" id="default" name="default" minwidth="1024px" width="1024px" height="768px"/>
+    <screen std:sid="screen-0e7527e9" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-7b1be591" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-fab34df5">
+      <cl:dataset std:sid="d-set-174ba88d" id="GroupList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-6f37dbca" name="GroupID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-07295ba7" name="Parent" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-f3f1c944" name="Name"/>
+          <cl:datacolumn std:sid="d-column-124b59e3" name="Description"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-a1e53e49" id="UserList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-d63158bc" name="ID" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-a00b639a" name="UniqueID"/>
+          <cl:datacolumn std:sid="d-column-8e53d0ca" name="Name" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-5467c968" name="AuthInfo"/>
+          <cl:datacolumn std:sid="d-column-910e18c0" name="Privilege" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-01cbf43b" name="RegistDate"/>
+          <cl:datacolumn std:sid="d-column-588ea3f1" name="ExpireDate"/>
+          <cl:datacolumn std:sid="d-column-6238d319" name="GroupCode" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-4833fccd" name="AccessGroupCode" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-048fe786" name="TimezoneCode" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-44d6b366" name="BlackList" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-32232f04" name="FPIdentify" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-ddc97f4f" name="FaceIdentify" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-a806df75" name="APBZone" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-ab9c534d" id="dsDeleteList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-c3f5eb04" name="UserID"/>
+          <cl:datacolumn std:sid="d-column-d6ff956d" name="rowIndex" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-532f84ed" id="dsReleaseList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-ac6c6f2b" name="UserID"/>
+          <cl:datacolumn std:sid="d-column-d2ee7eb7" name="rowIndex"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-cc517011" id="dm_SearchParam">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-930c8e78" name="clssCd"/>
+          <cl:datacolumn std:sid="d-column-00a40899" name="keyword"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-c2bd18fc" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-816ad6ff" name="Count" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-a33aca7f" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-27c3f89f" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-8119d3f8" id="dmUserInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-1f70bc28" name="ID"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-81231b5a" id="sms_getBlackList" method="get" action="/v1/blacklists">
+        <cl:listener std:sid="listener-49c16de9" name="submit-done" handler="onSms_getUserListSubmitDone"/>
+        <cl:listener std:sid="listener-edb64543" name="submit-error" handler="onSms_getUserListSubmitError"/>
+        <cl:listener std:sid="listener-14453d03" name="submit-timeout" handler="onSms_getUserListSubmitTimeout"/>
+        <cl:requestparam name="searchCategory"/>
+        <cl:requestparam name="searchKeyword" value=""/>
+        <cl:requestparam name="offset" value="0"/>
+        <cl:requestparam name="limit" value="50"/>
+        <cl:requestparam name="picture" value="false"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total" isadd="false"/>
+        <cl:responsedata dataid="UserList" isadd="false"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-203e17a7" id="sms_deleteUser" method="delete" action="/v1/users">
+        <cl:listener std:sid="listener-4529ef83" name="submit-done" handler="onSms_deleteUserSubmitDone"/>
+        <cl:listener std:sid="listener-d8a66632" name="submit-error" handler="onSms_deleteUserSubmitError"/>
+        <cl:listener std:sid="listener-0525e2bf" name="submit-timeout" handler="onSms_deleteUserSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-225b6a4e" id="sms_postBlackList" action="/v1/blacklists"/>
+      <cl:submission std:sid="submission-64c5ec9b" id="sms_releaseBlackList">
+        <cl:listener std:sid="listener-c23b6903" name="submit-done" handler="onSms_releaseBlackListSubmitDone"/>
+        <cl:listener std:sid="listener-f7e092b8" name="submit-error" handler="onSms_releaseBlackListSubmitError"/>
+        <cl:listener std:sid="listener-ccc3a029" name="submit-timeout" handler="onSms_releaseBlackListSubmitTimeout"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-66bd7c7f" style="padding:0px; top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-a41ea218" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-03dff9d8">
+      <cl:xylayoutdata std:sid="xyl-data-1c27f25f" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-1e6a10b6" style="border-right-style:none; padding:10px; border-left-style:none; border-bottom-style:none; border-top-style:none;" class="un-form-border">
+        <cl:formdata std:sid="f-data-2860a7df" row="0" col="0" rowspan="1" colspan="1"/>
+        <cl:group std:sid="group-ecd6adbb">
+          <cl:formdata std:sid="f-data-81bb40d6" row="0" col="0"/>
+          <cl:button std:sid="button-f25e20fd" id="USMGR_btnDeleteUser" style="background-color:white; font-size:14px;" class="userInfo_btn">
+            <cl:listener std:sid="listener-425e22c6" name="click" handler="onUSMGR_btnDeleteUserClick"/>
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_Delete"/>
+            <cl:formdata std:sid="f-data-3d16d532" row="0" col="4"/>
+          </cl:button>
+          <cl:button std:sid="button-65d15940" id="USMGR_btnReleaseBlackList" style="background-color:white; font-size:14px;" class="userInfo_btn">
+            <cl:listener std:sid="listener-3a277250" name="click" handler="onUSMGR_btnReleaseBlackListClick"/>
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_Release"/>
+            <cl:formdata std:sid="f-data-b1c7e242" row="0" col="5"/>
+          </cl:button>
+          <cl:udc std:sid="ud-control-5289e431" id="USMAG_udcSearchUser" type="udc.search.searchUser">
+            <cl:listener std:sid="listener-8072e96f" name="search" handler="onUSMGR_udcSearchUserSearch"/>
+            <cl:listener std:sid="listener-b3d767ea" name="searchKeydown" handler="onUSMAG_udcSearchUserSearchKeydown"/>
+            <cl:formdata std:sid="f-data-72722286" row="0" col="3"/>
+          </cl:udc>
+          <cl:output std:sid="output-9cc0e59b" style="text-align:center;" class="common-titlelabel">
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_Total"/>
+            <cl:formdata std:sid="f-data-49768f7e" row="0" col="0"/>
+          </cl:output>
+          <cl:output std:sid="output-a241e38e" id="opt_tot" style="vertical-align:middle; text-align:left;" datatype="number" format="s#,###">
+            <cl:datamapbind property="value" datacontrolid="Total" columnname="Count"/>
+            <cl:formdata std:sid="f-data-76d3a01c" row="0" col="1"/>
+          </cl:output>
+          <cl:img std:sid="image-f50a0304" id="USMAG_imgHelpPage" style="cursor:help;" src="../../../../theme/images/common/common_btn_window_top_q.png">
+            <cl:listener std:sid="listener-9154b267" name="click" handler="onUSMAG_imgHelpPageClick2"/>
+            <cl:formdata std:sid="f-data-41fde79f" halign="CENTER" valign="CENTER" width="15" height="15" row="0" col="6"/>
+          </cl:img>
+          <cl:formlayout std:sid="f-layout-0886cf82" hspace="5px" vspace="5px">
+            <cl:rows length="30" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
+            <cl:columns length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="70" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="370" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="14" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:udc std:sid="ud-control-25561f98" id="USMAG_udcUserList" class="user_allList" readonly="true" type="udc.grid.userList">
+          <cl:listener std:sid="listener-31a83177" name="pagechange" handler="onUSMAG_udcUserListPagechange"/>
+          <cl:listener std:sid="listener-9884389e" name="userListDblclick" handler="onUSMAG_udcUserListUserListDblclick"/>
+          <cl:formdata std:sid="f-data-2cfb96c6" row="1" col="0"/>
+        </cl:udc>
+        <cl:formlayout std:sid="f-layout-934c0ac9">
+          <cl:rows length="30" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
+          <cl:rows length="1" unit="FRACTION" shadetype="NONE" shadecolor="#000000"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-4e59751b" hspace="0px" vspace="0px">
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-9fb9d556"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

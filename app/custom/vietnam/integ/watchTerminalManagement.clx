@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-152a3524" version="1.0.0.0">
+  <head std:sid="head-63a0fe8c">
+    <title>watchTerminalManagement</title>
+    <screen std:sid="screen-04a63279" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="600" customWidth="800"/>
+    <screen std:sid="screen-861ea9c3" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-fc84437d" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-695ae171">
+      <cl:dataset std:sid="d-set-fbd71a41" id="EnrolledTerminalList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-82eb2b45" name="ID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-0bfd92d6" name="Name"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-1e7a9ce3" id="TerminalList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-348df65a" name="ID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-6178839b" name="Name"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-525d32fb" id="TerminalIDs">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-3a146569" name="ID" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-ac2d0aca" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-8eb906b5" name="Count" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-c30ddf49" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-0a194d06" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-25b3e7f4" id="sms_getTerminalList" method="get" action="/v1/terminals">
+        <cl:listener std:sid="listener-49688d66" name="submit-error" handler="onSms_SubmitError"/>
+        <cl:listener std:sid="listener-aa19936d" name="submit-timeout" handler="onSms_SubmitTimeout"/>
+        <cl:listener std:sid="listener-d85e30d4" name="submit-done" handler="onSms_getTerminalListSubmitDone"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total"/>
+        <cl:responsedata dataid="TerminalList"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-cc0d3b05" id="sms_getEnrolledTerminalList" method="get" action="/v1/vietname/integ/enrollTerminals">
+        <cl:listener std:sid="listener-2e4152d8" name="submit-timeout" handler="onSms_SubmitTimeout"/>
+        <cl:listener std:sid="listener-f461686a" name="submit-error" handler="onSms_SubmitError"/>
+        <cl:listener std:sid="listener-50e6bc78" name="submit-done" handler="onSms_getEnrolledTerminalListSubmitDone"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total"/>
+        <cl:responsedata dataid="EnrolledTerminalList"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-c69b4dcd" id="sms_postEnrolledTerminalList" method="post" action="/v1/vietname/integ/enrollTerminals">
+        <cl:listener std:sid="listener-d7525c45" name="submit-done" handler="onSms_postEnrolledTerminalListSubmitDone"/>
+        <cl:listener std:sid="listener-98d60202" name="submit-error" handler="onSms_SubmitError"/>
+        <cl:listener std:sid="listener-346378e6" name="submit-timeout" handler="onSms_SubmitTimeout"/>
+        <cl:requestdata dataid="TerminalIDs"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-ff022d3c" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-ff962357" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-7a86cdac" id="VICWTM_grp_main">
+      <cl:xylayoutdata std:sid="xyl-data-5287dd78" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-96c7c6e8">
+        <cl:formdata std:sid="f-data-3e9f6745" row="0" col="0"/>
+        <cl:group std:sid="group-d0a5d0cb">
+          <cl:formdata std:sid="f-data-4b650e70" row="0" col="0"/>
+          <cl:button std:sid="button-d7875736" id="VICWTM_btnAreaDelete" class="userInfo_btn" visible="false" enabled="false">
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_Delete"/>
+            <cl:formdata std:sid="f-data-98421f5e" row="0" col="3"/>
+          </cl:button>
+          <cl:button std:sid="button-e4e17894" id="VICWTM_btnAreaSave" class="userInfo_btn" enabled="false">
+            <cl:listener std:sid="listener-6ed3e717" name="click" handler="onVICWTM_btnAreaSaveClick"/>
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_Save"/>
+            <cl:formdata std:sid="f-data-24ac4925" row="0" col="2"/>
+          </cl:button>
+          <cl:output std:sid="output-11d9b418" class="common-titlelabel" value="Terminal Detail Infomation">
+            <cl:formdata std:sid="f-data-67b3ac53" row="0" col="0"/>
+          </cl:output>
+          <cl:formlayout std:sid="f-layout-d57ef76c" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="250" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="1" unit="FRACTION"/>
+            <cl:columns length="80" unit="PIXEL" autoSizing="true" minlength="0"/>
+            <cl:columns length="10" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="14" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-3e11adf2" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-56d6aaf5">
+        <cl:formdata std:sid="f-data-4dcc78ad" row="1" col="0"/>
+        <cl:output std:sid="output-95bcfe74" class="userInfo_btn" readonly="true">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_EnrollmentTerminal"/>
+          <cl:formdata std:sid="f-data-3f5aa62f" row="0" col="0"/>
+        </cl:output>
+        <cl:output std:sid="output-682b588d" class="userInfo_btn" readonly="true">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_AdditionalTerminal"/>
+          <cl:formdata std:sid="f-data-e4d37ee7" row="0" col="2"/>
+        </cl:output>
+        <cl:udc std:sid="ud-control-4de49d3d" id="VICWTM_udcRegistTerminalList" type="udc.grid.terminalList">
+          <cl:listener std:sid="listener-24cb266a" name="pagechange" handler="onVICWTM_udcRegistTerminalListPagechange"/>
+          <cl:formdata std:sid="f-data-ef69346b" row="1" col="0"/>
+        </cl:udc>
+        <cl:udc std:sid="ud-control-33ce90a8" id="VICWTM_udcUnregistTerminalList" type="udc.grid.terminalList">
+          <cl:listener std:sid="listener-19664cdc" name="pagechange" handler="onVICWTM_udcUnregistTerminalListPagechange"/>
+          <cl:formdata std:sid="f-data-e00609df" row="1" col="2"/>
+        </cl:udc>
+        <cl:group std:sid="group-6eca59bf">
+          <cl:formdata std:sid="f-data-9f672956" row="1" col="1"/>
+          <cl:group std:sid="group-f913bbae">
+            <cl:formdata std:sid="f-data-fbd9d6fa" row="1" col="0"/>
+            <cl:button std:sid="button-ef09385f" id="VICWTM_btnTerminalUnregist" style="padding-top:3px; padding-left:10px; padding-bottom:3px; padding-right:10px;" class="userInfo_btn" value=">">
+              <cl:listener std:sid="listener-35575d81" name="click" handler="onVICWTM_btnTerminalUnregistClick"/>
+              <cl:xylayoutdata std:sid="xyl-data-2ae486cc" top="20px" right="0px" left="0px" height="20px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+            </cl:button>
+            <cl:button std:sid="button-5a08da07" id="VICWTM_btnTerminalRegist" style="padding-top:3px; padding-left:10px; padding-bottom:3px; padding-right:10px;" class="userInfo_btn" value="&lt;">
+              <cl:listener std:sid="listener-5284caa2" name="click" handler="onVICWTM_btnTerminalRegistClick"/>
+              <cl:xylayoutdata std:sid="xyl-data-246ecd0f" top="50px" right="0px" left="0px" height="20px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+            </cl:button>
+            <cl:button std:sid="button-ad060bb1" id="VICWTM_btnTerminalUnregistAll" style="padding-top:3px; padding-left:9px; padding-bottom:3px; padding-right:9px;" class="userInfo_btn" value=">>">
+              <cl:listener std:sid="listener-87eb22fa" name="click" handler="onVICWTM_btnTerminalUnregistAllClick"/>
+              <cl:xylayoutdata std:sid="xyl-data-2ceb2cdc" top="91px" right="0px" left="0px" height="20px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+            </cl:button>
+            <cl:button std:sid="button-c616389c" id="VICWTM_btnTerminalRegistAll" style="padding-top:3px; padding-left:9px; padding-bottom:3px; padding-right:9px;" class="userInfo_btn" value="&lt;&lt;">
+              <cl:listener std:sid="listener-45f3fe33" name="click" handler="onVICWTM_btnTerminalRegistAllClick"/>
+              <cl:xylayoutdata std:sid="xyl-data-4ad48294" top="121px" right="0px" left="0px" height="20px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+            </cl:button>
+            <cl:xylayout std:sid="xylayout-654d703d"/>
+          </cl:group>
+          <cl:formlayout std:sid="f-layout-8c0db865" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:rows length="150" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-8498b8e6" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="35" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-abe59bfb" hspace="5px" vspace="5px" top-margin="5px" right-margin="5px" bottom-margin="5px" left-margin="5px">
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="60"/>
+        <cl:rows length="5" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-3828403b"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

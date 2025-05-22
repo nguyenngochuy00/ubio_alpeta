@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-85a160d5" version="1.0.0.0">
+  <head std:sid="head-9e29c07b">
+    <title>authLogListCkb</title>
+    <screen std:sid="screen-c29c0a76" id="default" name="default" minwidth="1024px" width="1024px" height="768px" customHeight="600" customWidth="800"/>
+    <screen std:sid="screen-6878f306" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-a4214f47" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-3117ebe4">
+      <cl:dataset std:sid="d-set-9a1b7ed5" id="AuthLogList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-1395a8a4" name="IndexKey" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-f9bc86e1" name="TerminalID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-9a6209d1" name="UserID" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-49417bf2" name="GroupCode" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-ce1d9956" name="UserName"/>
+          <cl:datacolumn std:sid="d-column-8b41af4d" name="EventTime"/>
+          <cl:datacolumn std:sid="d-column-c23b01ae" name="ServerRecordTime"/>
+          <cl:datacolumn std:sid="d-column-398b8c04" name="AuthType" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-a0f70332" name="AuthResult" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-a02cedd5" name="Func" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-0a856b07" name="FuncType" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-5b1b0ef1" name="Card"/>
+          <cl:datacolumn std:sid="d-column-f683b7a6" name="UserType" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-9c88d5e3" name="IsPicture" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-6a27eb23" name="Property"/>
+          <cl:datacolumn std:sid="d-column-a46404b1" name="GroupName"/>
+          <cl:datacolumn std:sid="d-column-a5c7aba5" name="PositionName"/>
+          <cl:datacolumn std:sid="d-column-fa708561" name="UniqueID"/>
+          <cl:datacolumn std:sid="d-column-dc050ca7" name="TerminalName"/>
+          <cl:datacolumn std:sid="d-column-f17c0b80" name="ReservType" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-ec39a23f" name="ReservData"/>
+          <cl:datacolumn std:sid="d-column-316a499e" name="Detail"/>
+          <cl:datacolumn std:sid="d-column-f0b3ab15" name="SendFlag"/>
+          <cl:datacolumn std:sid="d-column-90e415fb" name="WebSendFlag"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-5e9776b4" id="PaymentLogList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-33c55f99" name="PaymentMethod" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-a9300cd4" name="PurchaseDate"/>
+          <cl:datacolumn std:sid="d-column-091fe741" name="MerchantUsername"/>
+          <cl:datacolumn std:sid="d-column-fe04ccbb" name="ShopId" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-a774418a" name="OrderNo" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-31fc1a00" name="OrderCash" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-e9bc0461" name="Bankname"/>
+          <cl:datacolumn std:sid="d-column-c1f019be" name="CardNumber"/>
+          <cl:datacolumn std:sid="d-column-03ab8cf8" name="CardIssuanceType" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-7e2a164e" name="PaymentStatus" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+    </cl:model>
+    <cl:appspec>
+      <cl:event name="pagechange" type="cpr.events.CUIEvent"/>
+      <cl:event name="before-pagechange" type="cpr.events.CUIEvent"/>
+      <cl:event name="dbclick" type="cpr.events.CUIEvent"/>
+    </cl:appspec>
+  </head>
+  <body std:sid="body-d1d7062d" style="top:0px; left:0px; width:500px; height:400px;">
+    <cl:listener std:sid="listener-a89b3960" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-57f88d26">
+      <cl:xylayoutdata std:sid="xyl-data-3df07637" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:pageindexer std:sid="p-indexer-7378f086" id="authLogListPageIndexer" class="userList_paging">
+        <cl:listener std:sid="listener-531de0dc" name="before-selection-change" handler="onAuthLogListPageIndexerBeforeSelectionChange"/>
+        <cl:listener std:sid="listener-eb763156" name="selection-change" handler="onAuthLogListPageIndexerSelectionChange"/>
+        <cl:formdata std:sid="f-data-8c9887c9" row="1" col="0"/>
+      </cl:pageindexer>
+      <cl:grid std:sid="grid-3e93ff73" id="PaymentLogListGrid" readonly="true" datasetid="PaymentLogList" columnMovable="true">
+        <cl:formdata std:sid="f-data-49425d7e" row="0" col="0"/>
+        <cl:gridcolumn std:sid="g-column-2e8fd063" width="130px"/>
+        <cl:gridcolumn std:sid="g-column-10ef7830" width="124px"/>
+        <cl:gridcolumn std:sid="g-column-31f4bcc2" width="157px"/>
+        <cl:gridcolumn std:sid="g-column-b9a859cb"/>
+        <cl:gridcolumn std:sid="g-column-ae3c91ec"/>
+        <cl:gridcolumn std:sid="g-column-a1c90dd5"/>
+        <cl:gridcolumn std:sid="g-column-404d150d"/>
+        <cl:gridcolumn std:sid="g-column-e56c3d7c"/>
+        <cl:gridcolumn std:sid="g-column-2d88498c" width="148px"/>
+        <cl:gridcolumn std:sid="g-column-279cbd17" width="133px"/>
+        <cl:gridheader std:sid="gh-band-2ac19819">
+          <cl:gridrow std:sid="g-row-de56376b"/>
+          <cl:gridcell std:sid="gh-cell-a6cd3c48" rowindex="0" colindex="0" targetcolumnname="PaymentMethod" sortable="false" filterable="false" text="PaymentMethod"/>
+          <cl:gridcell std:sid="gh-cell-0e482ab4" rowindex="0" colindex="1" targetcolumnname="PurchaseDate" sortable="false" filterable="false" text="PurchaseDate"/>
+          <cl:gridcell std:sid="gh-cell-80784da1" rowindex="0" colindex="2" targetcolumnname="MerchantUsername" sortable="false" filterable="false" text="MerchantUsername"/>
+          <cl:gridcell std:sid="gh-cell-ff5dce25" rowindex="0" colindex="3" targetcolumnname="ShopId" sortable="false" filterable="false" text="ShopId"/>
+          <cl:gridcell std:sid="gh-cell-41db475c" rowindex="0" colindex="4" targetcolumnname="OrderNo" sortable="false" filterable="false" text="OrderNo"/>
+          <cl:gridcell std:sid="gh-cell-60fe8804" rowindex="0" colindex="5" targetcolumnname="OrderCash" sortable="false" filterable="false" text="OrderCash"/>
+          <cl:gridcell std:sid="gh-cell-471cca1c" rowindex="0" colindex="6" targetcolumnname="Bankname" sortable="false" filterable="false" text="Bankname"/>
+          <cl:gridcell std:sid="gh-cell-cf872f91" rowindex="0" colindex="7" targetcolumnname="CardNumber" sortable="false" filterable="false" text="CardNumber"/>
+          <cl:gridcell std:sid="gh-cell-efe0855f" rowindex="0" colindex="8" targetcolumnname="CardIssuanceType" sortable="false" filterable="false" text="CardIssuanceType"/>
+          <cl:gridcell std:sid="gh-cell-a5e53b4d" rowindex="0" colindex="9" targetcolumnname="PaymentStatus" sortable="false" filterable="false" text="PaymentStatus"/>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-413f5287">
+          <cl:gridrow std:sid="g-row-63378368"/>
+          <cl:gridcell std:sid="gd-cell-3954a1a5" rowindex="0" colindex="0" columnname="PaymentMethod"/>
+          <cl:gridcell std:sid="gd-cell-90623956" rowindex="0" colindex="1" columnname="PurchaseDate"/>
+          <cl:gridcell std:sid="gd-cell-2a9bf867" rowindex="0" colindex="2" columnname="MerchantUsername"/>
+          <cl:gridcell std:sid="gd-cell-355770e3" rowindex="0" colindex="3" columnname="ShopId"/>
+          <cl:gridcell std:sid="gd-cell-0fbb7de4" rowindex="0" colindex="4" columnname="OrderNo"/>
+          <cl:gridcell std:sid="gd-cell-1cfde439" rowindex="0" colindex="5" columnname="OrderCash"/>
+          <cl:gridcell std:sid="gd-cell-c8e8f20e" rowindex="0" colindex="6" columnname="Bankname"/>
+          <cl:gridcell std:sid="gd-cell-092bcbb5" rowindex="0" colindex="7" columnname="CardNumber"/>
+          <cl:gridcell std:sid="gd-cell-ab3a0e19" rowindex="0" colindex="8" columnname="CardIssuanceType"/>
+          <cl:gridcell std:sid="gd-cell-1583837d" rowindex="0" colindex="9" columnname="PaymentStatus"/>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:formlayout std:sid="f-layout-d9702ac7" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+        <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-5d8e0758"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-e24adb2f" version="1.0.0.0">
+  <head std:sid="head-7737d999">
+    <title>aMealManagement</title>
+    <screen std:sid="screen-cf1cfd54" id="default" customHeight="600" customWidth="800" height="400px" minwidth="600px" name="default" width="600px"/>
+    <screen std:sid="screen-d108759a" id="tablet" height="667px" maxwidth="599px" minwidth="500px" name="tablet" width="500px"/>
+    <screen std:sid="screen-3cf4d8e5" id="mobile" height="525px" maxwidth="499px" name="mobile" width="350px"/>
+    <cl:model std:sid="model-b598ed97">
+      <cl:dataset std:sid="d-set-63a198bc" id="MealData">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="string" name="Code"/>
+          <cl:datacolumn name="Name"/>
+          <cl:datacolumn datatype="number" name="Type"/>
+          <cl:datacolumn datatype="number" name="Limit"/>
+          <cl:datacolumn name="StartTime"/>
+          <cl:datacolumn name="EndTime"/>
+          <cl:datacolumn name="Menu1"/>
+          <cl:datacolumn datatype="string" name="Menu1Price"/>
+          <cl:datacolumn name="Menu2"/>
+          <cl:datacolumn datatype="string" name="Menu2Price"/>
+          <cl:datacolumn name="Menu3"/>
+          <cl:datacolumn datatype="string" name="Menu3Price"/>
+          <cl:datacolumn name="Menu4"/>
+          <cl:datacolumn datatype="string" name="Menu4Price"/>
+          <cl:datacolumn name="Menu5"/>
+          <cl:datacolumn datatype="string" name="Menu5Price"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:submission std:sid="submission-22148695" id="sms_get_MealTime" action="/v1/meal/code" method="get">
+        <cl:listener std:sid="listener-c04e1795" handler="onSms_get_MealTimeSubmitSuccess" name="submit-success"/>
+        <cl:responsedata dataid="MealData"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-ef0397a1" id="sms_set_MealTime" action="/v1/meal/MealTime/code" mediatype="application/json">
+        <cl:requestdata dataid="MealData"/>
+      </cl:submission>
+      <cl:dataset std:sid="d-set-aca6cda6" id="MealDaily">
+        <cl:datacolumnlist>
+          <cl:datacolumn name="Code"/>
+          <cl:datacolumn name="Name"/>
+          <cl:datacolumn name="DayLimit"/>
+          <cl:datacolumn name="MonthLimit"/>
+          <cl:datacolumn name="Period"/>
+          <cl:datacolumn name="MtCode1"/>
+          <cl:datacolumn name="MtCode2"/>
+          <cl:datacolumn name="MtCode3"/>
+          <cl:datacolumn name="MtCode4"/>
+          <cl:datacolumn name="MtCode5"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:submission std:sid="submission-caf984dd" id="sms_del_MealTime" action="/v1/meal/code" mediatype="application/x-www-form-urlencoded" method="delete">
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:datamap std:sid="d-map-506f28de" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn name="ResultCode"/>
+          <cl:datacolumn name="message"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:dataset std:sid="d-set-63a98878" id="IDPool">
+        <cl:datacolumnlist>
+          <cl:datacolumn name="Code"/>
+          <cl:datacolumn datatype="number" name="Use"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-136d16bd" id="MenuData">
+        <cl:datacolumnlist>
+          <cl:datacolumn name="Name"/>
+          <cl:datacolumn datatype="number" name="Price"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-4b1e3b66" id="dmMealData">
+        <cl:datacolumnlist>
+          <cl:datacolumn name="Code"/>
+          <cl:datacolumn name="Name"/>
+          <cl:datacolumn datatype="number" name="Type"/>
+          <cl:datacolumn datatype="number" name="Limit"/>
+          <cl:datacolumn name="StartTime"/>
+          <cl:datacolumn name="EndTime"/>
+          <cl:datacolumn name="Menu1"/>
+          <cl:datacolumn name="Menu1Price"/>
+          <cl:datacolumn name="Menu2"/>
+          <cl:datacolumn name="Menu2Price"/>
+          <cl:datacolumn name="Menu3"/>
+          <cl:datacolumn name="Menu3Price"/>
+          <cl:datacolumn name="Menu4"/>
+          <cl:datacolumn name="Menu4Price"/>
+          <cl:datacolumn name="Menu5"/>
+          <cl:datacolumn name="Menu5Price"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-d96f0e6e" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-4103db9f" handler="onBodyLoad" name="load"/>
+    <cl:group std:sid="group-af7e7dd6" id="grp" style="padding:10px;">
+      <cl:xylayoutdata std:sid="xyl-data-5801e422" bottom="0px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-8e995986" style="border-radius:2px;">
+        <cl:formdata std:sid="f-data-437ba6eb" col="0" row="0"/>
+        <cl:group std:sid="group-29ea49a2">
+          <cl:formdata std:sid="f-data-0c622864" col="0" row="0"/>
+          <cl:button std:sid="button-752fd55e" class="userInfo_btn">
+            <cl:listener std:sid="listener-b8aad799" handler="onButtonClick2" name="click"/>
+            <cl:langbind category="PROPERTY" property="value" keypath="Str_Add"/>
+            <cl:formdata std:sid="f-data-591b890e" height="30" valign="FILL" col="1" row="0"/>
+          </cl:button>
+          <cl:output std:sid="output-a3461073" class="common-titlelabel">
+            <cl:langbind category="PROPERTY" property="value" keypath="Str_MealList2"/>
+            <cl:formdata std:sid="f-data-45e255f9" height="30" valign="FILL" col="0" row="0"/>
+          </cl:output>
+          <cl:formlayout std:sid="f-layout-f5cbb47d">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns autoSizing="false" length="1" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+            <cl:columns autoSizing="false" length="80" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:grid std:sid="grid-6c6d805f" id="grd1" columnMovable="false" columnResizable="false" datasetid="MealData" readonly="false">
+          <cl:formdata std:sid="f-data-14ef6062" col="0" row="1"/>
+          <cl:gridcolumn std:sid="g-column-bed4ccd0" width="25px"/>
+          <cl:gridcolumn std:sid="g-column-c67b5a8f"/>
+          <cl:gridheader std:sid="gh-band-fd46c226">
+            <cl:gridrow std:sid="g-row-81dbbd01"/>
+            <cl:gridcell std:sid="gh-cell-aba7af47" colindex="0" rowindex="0" style="font-weight:700; font-size:14px; text-align:center;" columntype="checkbox" filterable="false" sortable="false"/>
+            <cl:gridcell std:sid="gh-cell-49caefa5" colindex="1" rowindex="0" style="font-weight:700; font-size:14px; text-align:center;" filterable="false" sortable="false" targetcolumnname="Name" text="구분">
+              <cl:langbind category="PROPERTY" property="filterDialogTitle" keypath="Str_Division"/>
+              <cl:langbind category="PROPERTY" property="text" keypath="Str_Category"/>
+            </cl:gridcell>
+          </cl:gridheader>
+          <cl:griddetail std:sid="gd-band-ceb0bc5c">
+            <cl:gridrow std:sid="g-row-9061bdaa"/>
+            <cl:gridcell std:sid="gd-cell-088147e8" colindex="0" rowindex="0" style="font-size:14px;" columntype="checkbox"/>
+            <cl:gridcell std:sid="gd-cell-195c1a7d" colindex="1" rowindex="0" style="font-size:14px;" columnname="Name">
+              <cl:inputbox std:sid="i-box-78e711a9" id="ipb2" style="font-size:14px; text-align:center;"/>
+            </cl:gridcell>
+          </cl:griddetail>
+        </cl:grid>
+        <cl:formlayout std:sid="f-layout-6b17f46a">
+          <cl:rows autoSizing="false" length="30" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" shadecolor="transparent" shadetype="NONE" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-efd531d2" style="border-radius:2px;">
+        <cl:formdata std:sid="f-data-46116e1c" col="1" row="0"/>
+        <cl:group std:sid="group-26227edb">
+          <cl:formdata std:sid="f-data-80f41fc2" col="0" row="0"/>
+          <cl:button std:sid="button-3f446b20" class="userInfo_btn">
+            <cl:listener std:sid="listener-7310f2f6" handler="onButtonClick" name="click"/>
+            <cl:langbind category="PROPERTY" property="value" keypath="Str_Delete"/>
+            <cl:formdata std:sid="f-data-f0f634b5" halign="FILL" height="30" valign="FILL" col="3" row="0"/>
+          </cl:button>
+          <cl:button std:sid="button-f512d420" class="userInfo_btn">
+            <cl:listener std:sid="listener-d3a8be8a" handler="onButtonClick3" name="click"/>
+            <cl:langbind category="PROPERTY" property="value" keypath="Str_Save"/>
+            <cl:formdata std:sid="f-data-f3e4047d" height="30" valign="FILL" col="2" row="0"/>
+          </cl:button>
+          <cl:output std:sid="output-e5d0e548" class="common-titlelabel">
+            <cl:langbind category="PROPERTY" property="value" keypath="Str_MealDetail"/>
+            <cl:formdata std:sid="f-data-ff649143" halign="FILL" height="30" valign="FILL" col="0" row="0"/>
+          </cl:output>
+          <cl:img std:sid="image-be5a8a5a" id="MSSCM_imgHelp" style="cursor:help;" src="../../../../theme/images/common/common_btn_window_top_q.png">
+            <cl:formdata std:sid="f-data-7715186f" height="14" valign="CENTER" width="14" col="4" row="0"/>
+          </cl:img>
+          <cl:formlayout std:sid="f-layout-beda14c6">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+            <cl:columns autoSizing="false" length="2" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+            <cl:columns autoSizing="false" length="80" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+            <cl:columns autoSizing="false" length="80" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+            <cl:columns autoSizing="false" length="14" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:group std:sid="group-7526ad70" id="meal_time_grid" style="text-align:center;">
+          <cl:formdata std:sid="f-data-683f6e41" col="0" row="1"/>
+          <cl:group std:sid="group-ce4f2296" style="font-size:14px;">
+            <cl:formdata std:sid="f-data-67088108" col="1" row="6"/>
+            <cl:output std:sid="output-ad5f2443" style="background-color:#f6f6f6; border-right-style:solid; background-size:14; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;">
+              <cl:langbind category="PROPERTY" property="value" keypath="Str_Price"/>
+              <cl:formdata std:sid="f-data-7bf904d9" col="1" row="0"/>
+            </cl:output>
+            <cl:inputbox std:sid="i-box-a7dfe42c" id="ipb8" style="text-align:center;">
+              <cl:datamapbind property="value" columnname="Menu4" datacontrolid="dmMealData"/>
+              <cl:formdata std:sid="f-data-6a0395db" col="0" row="0"/>
+            </cl:inputbox>
+            <cl:inputbox std:sid="i-box-b9e7ec5d" id="ipb9" style="text-align:center;">
+              <cl:datamapbind property="value" columnname="Menu4Price" datacontrolid="dmMealData"/>
+              <cl:formdata std:sid="f-data-ad4db105" col="2" row="0"/>
+            </cl:inputbox>
+            <cl:formlayout std:sid="f-layout-09545d87" hspace="0px" vspace="0px">
+              <cl:rows length="1" unit="FRACTION"/>
+              <cl:columns length="1" unit="FRACTION"/>
+              <cl:columns autoSizing="false" length="60" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+              <cl:columns length="1" unit="FRACTION"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:group std:sid="group-ddb0f65c" style="font-size:14px;">
+            <cl:formdata std:sid="f-data-87c2eb64" col="1" row="5"/>
+            <cl:output std:sid="output-862250c4" style="background-color:#f6f6f6; border-right-style:solid; background-size:14; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;">
+              <cl:langbind category="PROPERTY" property="value" keypath="Str_Price"/>
+              <cl:formdata std:sid="f-data-f8215e8e" col="1" row="0"/>
+            </cl:output>
+            <cl:inputbox std:sid="i-box-cad11864" id="ipb7" style="text-align:center;">
+              <cl:datamapbind property="value" columnname="Menu3" datacontrolid="dmMealData"/>
+              <cl:formdata std:sid="f-data-14b3fee7" col="0" row="0"/>
+            </cl:inputbox>
+            <cl:inputbox std:sid="i-box-490e9ffe" id="ipb10" style="text-align:center;">
+              <cl:datamapbind property="value" columnname="Menu3Price" datacontrolid="dmMealData"/>
+              <cl:formdata std:sid="f-data-46b72f35" col="2" row="0"/>
+            </cl:inputbox>
+            <cl:formlayout std:sid="f-layout-e72d7d7c" hspace="0px" vspace="0px">
+              <cl:rows length="1" unit="FRACTION"/>
+              <cl:columns length="1" unit="FRACTION"/>
+              <cl:columns autoSizing="false" length="60" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+              <cl:columns length="1" unit="FRACTION"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:group std:sid="group-cbefa34f" style="font-size:14px;">
+            <cl:formdata std:sid="f-data-4942427f" col="1" row="4"/>
+            <cl:output std:sid="output-1fdfdb33" style="background-color:#f6f6f6; border-right-style:solid; background-size:14; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;">
+              <cl:langbind category="PROPERTY" property="value" keypath="Str_Price"/>
+              <cl:formdata std:sid="f-data-70dc8ce4" col="1" row="0"/>
+            </cl:output>
+            <cl:inputbox std:sid="i-box-e5e99c4d" id="ipb6" style="text-align:center;">
+              <cl:datamapbind property="value" columnname="Menu2" datacontrolid="dmMealData"/>
+              <cl:formdata std:sid="f-data-dc5d0ab6" col="0" row="0"/>
+            </cl:inputbox>
+            <cl:inputbox std:sid="i-box-a2a4883a" id="ipb11" style="text-align:center;">
+              <cl:datamapbind property="value" columnname="Menu2Price" datacontrolid="dmMealData"/>
+              <cl:formdata std:sid="f-data-a54e737b" col="2" row="0"/>
+            </cl:inputbox>
+            <cl:formlayout std:sid="f-layout-cb27b46b" hspace="0px" vspace="0px">
+              <cl:rows length="1" unit="FRACTION"/>
+              <cl:columns length="1" unit="FRACTION"/>
+              <cl:columns autoSizing="false" length="60" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+              <cl:columns length="1" unit="FRACTION"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:group std:sid="group-5a6b1cfb" style="font-size:14px;">
+            <cl:formdata std:sid="f-data-d7971f58" col="1" row="3"/>
+            <cl:output std:sid="output-27abf97e" style="background-color:#f6f6f6; border-right-style:solid; background-size:14; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;">
+              <cl:langbind category="PROPERTY" property="value" keypath="Str_Price"/>
+              <cl:formdata std:sid="f-data-7ac31556" col="1" row="0"/>
+            </cl:output>
+            <cl:inputbox std:sid="i-box-48aa5c7d" id="ipb14" style="text-align:center;">
+              <cl:datamapbind property="value" columnname="Menu1" datacontrolid="dmMealData"/>
+              <cl:formdata std:sid="f-data-a5c31617" col="0" row="0"/>
+            </cl:inputbox>
+            <cl:inputbox std:sid="i-box-f76cb862" id="ipb12" style="text-align:center;">
+              <cl:datamapbind property="value" columnname="Menu1Price" datacontrolid="dmMealData"/>
+              <cl:formdata std:sid="f-data-84a66ec2" col="2" row="0"/>
+            </cl:inputbox>
+            <cl:formlayout std:sid="f-layout-4eebd989" hspace="0px" vspace="0px">
+              <cl:rows length="1" unit="FRACTION"/>
+              <cl:columns length="1" unit="FRACTION"/>
+              <cl:columns autoSizing="false" length="60" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+              <cl:columns length="1" unit="FRACTION"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:output std:sid="output-4db30ca4" class="common-controllabel">
+            <cl:langbind category="PROPERTY" property="value" keypath="Str_MealName2"/>
+            <cl:formdata std:sid="f-data-d3735bf1" col="0" row="0"/>
+          </cl:output>
+          <cl:output std:sid="output-7367fa6c" class="common-controllabel">
+            <cl:langbind category="PROPERTY" property="value" keypath="Str_MealTime"/>
+            <cl:formdata std:sid="f-data-c2d0ce92" col="0" row="1"/>
+          </cl:output>
+          <cl:output std:sid="output-3b7891a5" class="common-controllabel">
+            <cl:langbind category="PROPERTY" property="value" keypath="Str_AuthLimit"/>
+            <cl:formdata std:sid="f-data-58a432ff" col="0" row="2"/>
+          </cl:output>
+          <cl:output std:sid="output-f749e02b" class="common-controllabel">
+            <cl:langbind category="PROPERTY" property="value" keypath="Str_Menu1"/>
+            <cl:formdata std:sid="f-data-7d0a6b87" col="0" row="3"/>
+          </cl:output>
+          <cl:output std:sid="output-ade0d980" class="common-controllabel">
+            <cl:langbind category="PROPERTY" property="value" keypath="Str_Menu2"/>
+            <cl:formdata std:sid="f-data-7a195b68" col="0" row="4"/>
+          </cl:output>
+          <cl:output std:sid="output-c3cfb148" class="common-controllabel">
+            <cl:langbind category="PROPERTY" property="value" keypath="Str_Menu3"/>
+            <cl:formdata std:sid="f-data-2fdb0bd8" col="0" row="5"/>
+          </cl:output>
+          <cl:output std:sid="output-1be492f3" class="common-controllabel">
+            <cl:langbind category="PROPERTY" property="value" keypath="Str_Menu4"/>
+            <cl:formdata std:sid="f-data-469e520a" col="0" row="6"/>
+          </cl:output>
+          <cl:group std:sid="group-a215fdb2" style="font-size:14px;">
+            <cl:formdata std:sid="f-data-d9c17e22" col="1" row="1"/>
+            <cl:dateinput std:sid="d-input-34eb422d" id="MSSCM_dtiStartTime" style="text-align:center;" autoselect="false" format="HHmm" hidebutton="true" mask="HH:mm" value="00:00">
+              <cl:formdata std:sid="f-data-3a875b00" col="0" row="0"/>
+            </cl:dateinput>
+            <cl:output std:sid="output-0c7d0c98" style="text-align:center;" value="~">
+              <cl:formdata std:sid="f-data-a238d59c" col="1" row="0"/>
+            </cl:output>
+            <cl:dateinput std:sid="d-input-29c7942f" id="MSSCM_dtiEndTime" style="text-align:center;" autoselect="false" format="HHmm" hidebutton="true" mask="HH:mm" value="23:59">
+              <cl:formdata std:sid="f-data-3a954ae1" col="2" row="0"/>
+            </cl:dateinput>
+            <cl:formlayout std:sid="f-layout-6f02d88d" hspace="0px" vspace="0px">
+              <cl:rows length="1" unit="FRACTION"/>
+              <cl:columns length="1" unit="FRACTION"/>
+              <cl:columns autoSizing="false" length="60" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+              <cl:columns length="1" unit="FRACTION"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:group std:sid="group-d53d29ee" style="border-bottom-color:#c5c5c5; border-top-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid;">
+            <cl:formdata std:sid="f-data-93d5ca5a" col="1" row="0"/>
+            <cl:inputbox std:sid="i-box-d8911bbe" id="ipb1" style="font-size:14px; text-align:center;" maxlength="30">
+              <cl:relativebind category="PROPERTY" property="value" columnname="Name"/>
+              <cl:selectioncontext selectionProvider="#grid-6c6d805f"/>
+              <cl:xylayoutdata std:sid="xyl-data-0550db3e" bottom="2px" horizontalAnchor="BOTH" left="4px" right="4px" top="2px" verticalAnchor="BOTH"/>
+            </cl:inputbox>
+            <cl:xylayout std:sid="xylayout-1922567d"/>
+          </cl:group>
+          <cl:output std:sid="output-ae7213cb" class="common-controllabel">
+            <cl:langbind category="PROPERTY" property="value" keypath="Str_Menu5"/>
+            <cl:formdata std:sid="f-data-e1d491a1" col="0" row="7"/>
+          </cl:output>
+          <cl:group std:sid="group-31cc6e09" style="font-size:14px;">
+            <cl:formdata std:sid="f-data-8da3034d" col="1" row="7"/>
+            <cl:output std:sid="output-86575b12" style="background-color:#f6f6f6; border-right-style:solid; background-size:14; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;">
+              <cl:langbind category="PROPERTY" property="value" keypath="Str_Price"/>
+              <cl:formdata std:sid="f-data-2f8e2707" col="1" row="0"/>
+            </cl:output>
+            <cl:inputbox std:sid="i-box-aea4ec78" id="ipb3" style="text-align:center;" maxlength="20">
+              <cl:datamapbind property="value" columnname="Menu5" datacontrolid="dmMealData"/>
+              <cl:formdata std:sid="f-data-be1160e6" col="0" row="0"/>
+            </cl:inputbox>
+            <cl:inputbox std:sid="i-box-bab7c42e" id="ipb15" style="text-align:center;">
+              <cl:datamapbind property="value" columnname="Menu5Price" datacontrolid="dmMealData"/>
+              <cl:formdata std:sid="f-data-91a15a03" col="2" row="0"/>
+            </cl:inputbox>
+            <cl:formlayout std:sid="f-layout-19547259" hspace="0px" vspace="0px">
+              <cl:rows length="1" unit="FRACTION"/>
+              <cl:columns length="1" unit="FRACTION"/>
+              <cl:columns autoSizing="false" length="60" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+              <cl:columns length="1" unit="FRACTION"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:group std:sid="group-2127d9c4">
+            <cl:formdata std:sid="f-data-4cb22e28" col="1" row="2"/>
+            <cl:numbereditor std:sid="n-editor-be3ad600" id="nbe1" style="text-align:center;" max="999.0" min="1.0" value="1">
+              <cl:xylayoutdata std:sid="xyl-data-cab366d9" bottom="0px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="BOTH"/>
+            </cl:numbereditor>
+            <cl:xylayout std:sid="xylayout-4d15bbf4"/>
+          </cl:group>
+          <cl:formlayout std:sid="f-layout-cb36f32a" hspace="0px" vspace="0px">
+            <cl:rows length="30" unit="PIXEL"/>
+            <cl:rows length="30" unit="PIXEL"/>
+            <cl:rows length="30" unit="PIXEL"/>
+            <cl:rows length="30" unit="PIXEL"/>
+            <cl:rows length="30" unit="PIXEL"/>
+            <cl:rows length="30" unit="PIXEL"/>
+            <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+            <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+            <cl:rows autoSizing="false" length="1" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+            <cl:columns autoSizing="false" length="120" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-d8144ccf">
+          <cl:rows autoSizing="false" length="30" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows autoSizing="false" length="1" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-e36b2993">
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns autoSizing="false" length="200" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-1caf31f6"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler>
+      <std:guide position="385"/>
+    </std:vruler>
+  </std:studiosetting>
+</html>

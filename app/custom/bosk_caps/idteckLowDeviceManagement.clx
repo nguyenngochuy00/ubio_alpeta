@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-6acb6f4e" version="1.0.0.0">
+  <head std:sid="head-750ca8b9">
+    <title>idteckLowDeviceManagement</title>
+    <screen std:sid="screen-a30f0952" id="default" name="default" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="700" customWidth="800" active="true"/>
+    <screen std:sid="screen-301a95bd" id="tablet" name="tablet" width="500px" height="667px" useCustomWidth="true" useCustomHeight="true" customHeight="600" customWidth="800"/>
+    <screen std:sid="screen-890b64a7" id="mobile" name="mobile" width="350px" height="525px"/>
+    <cl:model std:sid="model-d00411df">
+      <cl:dataset std:sid="d-set-e82740b2" id="LowAcuDeviceList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-34df5a09" name="BoardID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-181a00c0" name="InoutPortNo"/>
+          <cl:datacolumn std:sid="d-column-df756863" name="DoorID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-88056889" name="LowDeviceType" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-bcbaaaa2" name="LowDeviceName"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-b5bf4ffe" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-f3592a27" name="Count" datatype="number" defaultvalue="0"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-78a7689a" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-d9e8f259" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-1063bb4a" id="dm_LowAcuDeviceInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-d3380f0c" name="BoardID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-c66d0bd0" name="InoutPortNo" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-04b8e5ac" name="DoorID" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-5a86ca8a" name="LowDeviceType" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-dc9d3133" name="LowDeviceName" defaultvalue=""/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-ef1cabb2" id="sms_getLowAcuDeviceList" method="get" action="/v1/bosk/acus/LowDevice">
+        <cl:listener std:sid="listener-08320600" name="submit-timeout" handler="onSms_getSubmitTimeout"/>
+        <cl:listener std:sid="listener-1485c45a" name="submit-error" handler="onSms_getSubmitError"/>
+        <cl:listener std:sid="listener-ef81bdf4" name="submit-done" handler="onSms_getLowAcuDeviceListSubmitDone"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total"/>
+        <cl:responsedata dataid="LowAcuDeviceList"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-9de08aa7" id="sms_postLowAcuDeviceInfo" action="/v1/bosk/acus/LowDevice">
+        <cl:listener std:sid="listener-3437ad98" name="submit-error" handler="onSms_getSubmitError"/>
+        <cl:listener std:sid="listener-9b286ffd" name="submit-timeout" handler="onSms_getSubmitTimeout"/>
+        <cl:listener std:sid="listener-bf9ea7b1" name="submit-done" handler="onSms_postLowAcuDeviceListSubmitDone"/>
+        <cl:requestdata dataid="dm_LowAcuDeviceInfo"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-794a88dd" id="sms_putLowAcuDeviceInfo" method="put" action="/v1/bosk/acus/LowDevice">
+        <cl:listener std:sid="listener-e19b60b0" name="submit-error" handler="onSms_getSubmitError"/>
+        <cl:listener std:sid="listener-a1a22cf8" name="submit-timeout" handler="onSms_getSubmitTimeout"/>
+        <cl:listener std:sid="listener-f64055e6" name="submit-done" handler="onSms_putLowAcuDeviceInfoSubmitDone"/>
+        <cl:requestdata dataid="dm_LowAcuDeviceInfo"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-84bf6d8f" id="sms_deleteLowAcuDeviceInfo" method="delete" action="/v1/bosk/acus/LowDevice">
+        <cl:listener std:sid="listener-6da2552a" name="submit-error" handler="onSms_getSubmitError"/>
+        <cl:listener std:sid="listener-c296db99" name="submit-timeout" handler="onSms_getSubmitTimeout"/>
+        <cl:listener std:sid="listener-ad2e35f0" name="submit-done" handler="onSms_deleteLowAcuDeviceInfoSubmitDone"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec dev-comment="ILDM&#xD;&#xA;&#xD;&#xA;ILDM_ipb_LowDevcieName1&#xD;&#xA;ILDM_ipb_LowDevcieName1"/>
+  </head>
+  <body std:sid="body-addda07f" style="padding-top:5px; top:0px; left:0px; padding-left:5px; width:800px; padding-bottom:5px; height:600px; padding-right:5px;">
+    <cl:listener std:sid="listener-a9792cad" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-1aae0612" id="ILDM_grp_main">
+      <cl:formdata std:sid="f-data-c3743ecf" row="0" col="0"/>
+      <cl:group std:sid="group-50ec8c3a">
+        <cl:formdata std:sid="f-data-14e58cf0" row="0" col="0"/>
+        <cl:output std:sid="output-2168c119" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="BoardID">
+          <cl:formdata std:sid="f-data-33b40896" row="0" col="0"/>
+        </cl:output>
+        <cl:numbereditor std:sid="n-editor-9dbb3b44" id="ILDM_nbe_boardID" enabled="false" min="0.0" max="255.0" spinbutton="false" placeholder="1 ~ 255" format="999">
+          <cl:formdata std:sid="f-data-c7157c99" row="0" col="1"/>
+        </cl:numbereditor>
+        <cl:button std:sid="button-d4e78f73" id="ILDM_btn_Close" class="userInfo_btn" value="CLOSE">
+          <cl:listener std:sid="listener-c99e8fb2" name="click" handler="onILDM_btn_CloseClick"/>
+          <cl:formdata std:sid="f-data-190eb5ff" row="0" col="3"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-975c31b9" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="130" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="90" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-156bf36c" id="ILDM_grp_topmain">
+        <cl:formdata std:sid="f-data-3f9ba65b" row="1" col="0"/>
+        <cl:group std:sid="group-1878ecec">
+          <cl:formdata std:sid="f-data-32ed4f68" topSpacing="2" bottomSpacing="2" leftSpacing="2" rightSpacing="2" row="0" col="0"/>
+          <cl:output std:sid="output-7815aba6" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="InoutPortNo">
+            <cl:formdata std:sid="f-data-7d49a0a4" row="0" col="0"/>
+          </cl:output>
+          <cl:output std:sid="output-9c4d61b4" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="Door ID">
+            <cl:formdata std:sid="f-data-e7a615ea" row="0" col="2"/>
+          </cl:output>
+          <cl:output std:sid="output-9a397bc8" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="LowDeviceType">
+            <cl:formdata std:sid="f-data-e2a32471" row="0" col="6"/>
+          </cl:output>
+          <cl:inputbox std:sid="i-box-536badb3" id="ILDM_ipb_LowDevcieDoorID" maxlength="6" inputfilter="[0-9*]">
+            <cl:datamapbind property="value" datacontrolid="dm_LowAcuDeviceInfo" columnname="DoorID"/>
+            <cl:formdata std:sid="f-data-55675db0" row="0" col="3"/>
+          </cl:inputbox>
+          <cl:combobox std:sid="c-box-45c545f0" id="ILDM_cmb_LowDevcieType">
+            <cl:datamapbind property="value" datacontrolid="dm_LowAcuDeviceInfo" columnname="LowDeviceType"/>
+            <cl:formdata std:sid="f-data-01234b19" row="0" col="7"/>
+          </cl:combobox>
+          <cl:output std:sid="output-d0b75860" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:1px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;" value="LowDeviceName">
+            <cl:formdata std:sid="f-data-32c556d9" row="0" col="4"/>
+          </cl:output>
+          <cl:inputbox std:sid="i-box-c0357996" id="ILDM_ipb_LowDevcieName">
+            <cl:datamapbind property="value" datacontrolid="dm_LowAcuDeviceInfo" columnname="LowDeviceName"/>
+            <cl:formdata std:sid="f-data-026a4689" row="0" col="5"/>
+          </cl:inputbox>
+          <cl:combobox std:sid="c-box-91ece063" id="ILDM_cmb_PortNo">
+            <cl:datamapbind property="value" datacontrolid="dm_LowAcuDeviceInfo" columnname="InoutPortNo"/>
+            <cl:formdata std:sid="f-data-bf3ce94e" row="0" col="1"/>
+          </cl:combobox>
+          <cl:formlayout std:sid="f-layout-5801a11a" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="130" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="transparent" minlength="0"/>
+            <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="110" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:group std:sid="group-343ab5ae">
+          <cl:formdata std:sid="f-data-498bfc0e" topSpacing="2" bottomSpacing="2" leftSpacing="2" rightSpacing="2" row="1" col="0"/>
+          <cl:button std:sid="button-17745729" id="ILDM_btn_Add" class="userInfo_btn" value="ADD">
+            <cl:listener std:sid="listener-2fc73143" name="click" handler="onILDM_btn_AddClick"/>
+            <cl:formdata std:sid="f-data-f17628f8" row="0" col="2"/>
+          </cl:button>
+          <cl:button std:sid="button-252b6190" id="ILDM_btn_Modify" class="userInfo_btn" value="MODIFY">
+            <cl:listener std:sid="listener-cc24ff81" name="click" handler="onILDM_btn_ModifyClick"/>
+            <cl:formdata std:sid="f-data-2bda0d68" row="0" col="3"/>
+          </cl:button>
+          <cl:button std:sid="button-2f5d63eb" id="ILDM_btn_Clear" class="userInfo_btn" value="Clear">
+            <cl:listener std:sid="listener-717556df" name="click" handler="onILDM_btn_ClearClick"/>
+            <cl:formdata std:sid="f-data-0292892b" row="0" col="1"/>
+          </cl:button>
+          <cl:button std:sid="button-d8ed339b" id="ILDM_btn_Delete" class="userInfo_btn" value="DELETE">
+            <cl:listener std:sid="listener-3b34409e" name="click" handler="onILDM_btn_DeleteClick"/>
+            <cl:formdata std:sid="f-data-3c236231" row="0" col="4"/>
+          </cl:button>
+          <cl:formlayout std:sid="f-layout-7adc3144" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+            <cl:columns length="90"/>
+            <cl:columns length="90"/>
+            <cl:columns length="90"/>
+            <cl:columns length="90"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-3c22f0dc" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="35" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="35" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-80ffd0da">
+        <cl:formdata std:sid="f-data-dc7e3a84" row="2" col="0"/>
+        <cl:grid std:sid="grid-ec4686da" id="ILDM_grd_LowAcuDeviceList" readonly="true" datasetid="LowAcuDeviceList" showdeletedrow="false" resizablecolumns="all">
+          <cl:listener std:sid="listener-7e985f4b" name="selection-change" handler="onILDM_grd_LowAcuDeviceListSelectionChange"/>
+          <cl:formdata std:sid="f-data-0d0c6ae2" topSpacing="2" bottomSpacing="2" leftSpacing="2" rightSpacing="2" row="0" col="0"/>
+          <cl:gridcolumn std:sid="g-column-b0ceaddc"/>
+          <cl:gridcolumn std:sid="g-column-a094e783"/>
+          <cl:gridcolumn std:sid="g-column-4cfa54bd"/>
+          <cl:gridcolumn std:sid="g-column-19fb06fe"/>
+          <cl:gridcolumn std:sid="g-column-8777fc5c"/>
+          <cl:gridheader std:sid="gh-band-0b318d27">
+            <cl:gridrow std:sid="g-row-45763746"/>
+            <cl:gridcell std:sid="gh-cell-61d5dc65" rowindex="0" colindex="0" targetcolumnname="BoardID" sortable="false" filterable="false" text="BoardID" visible="false"/>
+            <cl:gridcell std:sid="gh-cell-f91efa44" rowindex="0" colindex="1" targetcolumnname="InoutPortNo" sortable="false" filterable="false" text="InoutPortNo"/>
+            <cl:gridcell std:sid="gh-cell-3f296adf" rowindex="0" colindex="2" targetcolumnname="DoorID" sortable="false" filterable="false" text="DoorID"/>
+            <cl:gridcell std:sid="gh-cell-2bd11e32" rowindex="0" colindex="3" targetcolumnname="LowDeviceType" sortable="false" filterable="false" text="LowDeviceType"/>
+            <cl:gridcell std:sid="gh-cell-68c4cd13" rowindex="0" colindex="4" targetcolumnname="LowDeviceName" sortable="false" filterable="false" text="LowDevcieName"/>
+          </cl:gridheader>
+          <cl:griddetail std:sid="gd-band-b5b988ef">
+            <cl:gridrow std:sid="g-row-332e9308"/>
+            <cl:gridcell std:sid="gd-cell-cd2f5c23" rowindex="0" colindex="0" columnname="BoardID"/>
+            <cl:gridcell std:sid="gd-cell-7890228b" rowindex="0" colindex="1" columnname="InoutPortNo"/>
+            <cl:gridcell std:sid="gd-cell-e6d51ee9" rowindex="0" colindex="2" columnname="DoorID"/>
+            <cl:gridcell std:sid="gd-cell-9b784a3f" rowindex="0" colindex="3" columnname="LowDeviceType">
+              <cl:combobox std:sid="c-box-52ec50d8" id="ILDM_cmb_grdLowDeviceType" hidebutton="true" preventinput="true"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gd-cell-23611bf5" rowindex="0" colindex="4" columnname="LowDeviceName"/>
+          </cl:griddetail>
+        </cl:grid>
+        <cl:formlayout std:sid="f-layout-f1b1f172" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-cbaf7227" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:formlayout std:sid="f-layout-e7f41f2c" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+      <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      <cl:columns length="1" unit="FRACTION"/>
+    </cl:formlayout>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

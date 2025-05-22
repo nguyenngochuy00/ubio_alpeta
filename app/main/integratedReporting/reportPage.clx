@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-d6c0d61c" version="1.0.0.0">
+  <head std:sid="head-5c6a4dfb">
+    <title>reportPage</title>
+    <screen std:sid="screen-abd3aac4" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="false" useCustomHeight="false" customHeight="1272" customWidth="900" active="false"/>
+    <screen std:sid="screen-6b9f9ac5" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-c285006b" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-f1767e13">
+      <cl:datamap std:sid="d-map-c28429ef" id="reportPageSet">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-3472f3bd" name="title" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-437b47a2" name="fontsize" datatype="number" defaultvalue="15"/>
+          <cl:datacolumn std:sid="d-column-9522994e" name="fontweight" datatype="number" defaultvalue="400"/>
+          <cl:datacolumn std:sid="d-column-ef7aa508" name="signedColumnFlag" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-ef34be19" name="SignedColumn1" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-3cf18267" name="SignedColumn2" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-71aa136f" name="SignedColumn3" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-02f10fd5" name="SignedColumn4" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-4bbe5923" name="SignedColumn5" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-888e173e" name="SignedColumn6" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-b940f85a" name="SignedColumn7" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-ca2556d8" name="SignedColumn8" defaultvalue=""/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-3be050b4" id="smsSetData">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-c1d4754f" name="smsType"/>
+          <cl:datacolumn std:sid="d-column-6b99199a" name="startTime"/>
+          <cl:datacolumn std:sid="d-column-0ea1c737" name="endTime"/>
+          <cl:datacolumn std:sid="d-column-1f1571c1" name="groupID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-fcf25db4" name="searchCategory"/>
+          <cl:datacolumn std:sid="d-column-02416ca9" name="searchKeyword"/>
+          <cl:datacolumn std:sid="d-column-158ead6c" name="authResult" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-e1b1380d" id="sms_getAuthLogList" method="get" action="/v1/authLogs">
+        <cl:listener std:sid="listener-642783d1" name="submit-done" handler="onSms_getAuthLogListSubmitDone"/>
+        <cl:listener std:sid="listener-2a9c4195" name="submit-error" handler="onSms_getAuthLogListSubmitError"/>
+        <cl:listener std:sid="listener-d5e22174" name="submit-timeout" handler="onSms_getAuthLogListSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total"/>
+        <cl:responsedata dataid="AuthLogList"/>
+      </cl:submission>
+      <cl:dataset std:sid="d-set-4c1e86ed" id="AuthLogList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-93bfdc89" name="IndexKey" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-ac6019cd" name="TerminalID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-d40f3bc9" name="UserID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-22b707fb" name="GroupCode"/>
+          <cl:datacolumn std:sid="d-column-894b870e" name="UserName"/>
+          <cl:datacolumn std:sid="d-column-74e2677d" name="EventTime"/>
+          <cl:datacolumn std:sid="d-column-ca210639" name="ServerRecordTime"/>
+          <cl:datacolumn std:sid="d-column-ce291728" name="AuthType"/>
+          <cl:datacolumn std:sid="d-column-8506a9e1" name="AuthResult"/>
+          <cl:datacolumn std:sid="d-column-1fe1d153" name="Func" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-df813213" name="FuncType"/>
+          <cl:datacolumn std:sid="d-column-fab8c85f" name="Card"/>
+          <cl:datacolumn std:sid="d-column-86bd945f" name="UserType" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-adf6650f" name="IsPicture" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-464d5a79" name="Property"/>
+          <cl:datacolumn std:sid="d-column-27eeba53" name="GroupName"/>
+          <cl:datacolumn std:sid="d-column-b267c7fe" name="PositionName"/>
+          <cl:datacolumn std:sid="d-column-2599ce65" name="UniqueID"/>
+          <cl:datacolumn std:sid="d-column-1247cd0e" name="TerminalName"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-9045a3c5" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-07a0df6a" name="Count" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-bd262d67" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-903af4e8" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:dataset std:sid="d-set-b3c7b864" id="AuthLogListAll">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-1a99da00" name="IndexKey" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-05feeaa8" name="TerminalID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-76886257" name="UserID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-8f18abcd" name="GroupCode"/>
+          <cl:datacolumn std:sid="d-column-8c01a4c9" name="UserName"/>
+          <cl:datacolumn std:sid="d-column-1a3d5f43" name="EventTime"/>
+          <cl:datacolumn std:sid="d-column-263eb108" name="ServerRecordTime"/>
+          <cl:datacolumn std:sid="d-column-7f44d8f5" name="AuthType"/>
+          <cl:datacolumn std:sid="d-column-e4cffb68" name="AuthResult"/>
+          <cl:datacolumn std:sid="d-column-2b316538" name="Func" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-a945d1c3" name="FuncType"/>
+          <cl:datacolumn std:sid="d-column-e3a05c94" name="Card"/>
+          <cl:datacolumn std:sid="d-column-7c35ae0a" name="UserType" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-c2e887ad" name="IsPicture" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-b55e668b" name="Property"/>
+          <cl:datacolumn std:sid="d-column-4f845461" name="GroupName"/>
+          <cl:datacolumn std:sid="d-column-bc7edc64" name="PositionName"/>
+          <cl:datacolumn std:sid="d-column-d0a0984f" name="UniqueID"/>
+          <cl:datacolumn std:sid="d-column-87b002c8" name="TerminalName"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-c0753edb" id="PrintSetting">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-740fea69" name="title" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-38767df8" info="" name="fontsize" datatype="number" defaultvalue="30"/>
+          <cl:datacolumn std:sid="d-column-c745cc3e" info="" name="fontweight" datatype="number" defaultvalue="700"/>
+          <cl:datacolumn std:sid="d-column-776eb726" info="" name="signedColumnFlag" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-fa83bd1f" name="SignedColumn1" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-0e43aa97" name="SignedColumn2" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-d6813449" name="SignedColumn3" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-28f2f7bd" name="SignedColumn4" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-1f6334b8" name="SignedColumn5" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-68b46726" name="SignedColumn6" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-e83a045b" name="SignedColumn7" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-1ae74071" name="SignedColumn8" defaultvalue=""/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:dataset std:sid="d-set-018ac910" id="LangList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-32e594f3" name="Locale" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-5dfc693f" name="Key"/>
+          <cl:datacolumn std:sid="d-column-1df4e3fc" name="Value"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:submission std:sid="submission-27c986e0" id="sms_getLangList" method="get" action="data/lang/lang.json">
+        <cl:listener std:sid="listener-9f584fc0" name="submit-done" handler="onSms_getLangListSubmitDone"/>
+        <cl:listener std:sid="listener-8735c4a8" name="submit-success" handler="onSms_getLangListSubmitSuccess"/>
+        <cl:responsedata dataid="LangList" isadd="true"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec dev-comment="RPPDF&#xD;&#xA;&#xD;&#xA;동적으로 추가"/>
+  </head>
+  <body std:sid="body-35c90c66" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-fc1a7867" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-f416d5e7" id="RPPDF_grpMain" style="padding:10px;">
+      <cl:xylayoutdata std:sid="xyl-data-53ea8352" top="0px" right="10px" left="10px" height="176px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+      <cl:group std:sid="group-d55ca08d" id="RPPDF_grpSigns">
+        <cl:formdata std:sid="f-data-33bdadd4" halign="FILL" width="500" row="1" col="0" rowspan="1" colspan="1"/>
+        <cl:udc std:sid="ud-control-3f11f78f" id="RPPDF_udcSignColumn8" type="udc.sign.signedSet">
+          <cl:formdata std:sid="f-data-a6b20ccc" row="0" col="8"/>
+        </cl:udc>
+        <cl:udc std:sid="ud-control-9eb19ffd" id="RPPDF_udcSignColumn7" type="udc.sign.signedSet">
+          <cl:formdata std:sid="f-data-3b66ca5f" row="0" col="7"/>
+        </cl:udc>
+        <cl:udc std:sid="ud-control-cb627afb" id="RPPDF_udcSignColumn6" type="udc.sign.signedSet">
+          <cl:formdata std:sid="f-data-9bf35d60" row="0" col="6"/>
+        </cl:udc>
+        <cl:udc std:sid="ud-control-25ee6ae8" id="RPPDF_udcSignColumn5" type="udc.sign.signedSet">
+          <cl:formdata std:sid="f-data-c638a988" row="0" col="5"/>
+        </cl:udc>
+        <cl:udc std:sid="ud-control-276c382f" id="RPPDF_udcSignColumn4" type="udc.sign.signedSet">
+          <cl:formdata std:sid="f-data-6caabfa8" row="0" col="4"/>
+        </cl:udc>
+        <cl:udc std:sid="ud-control-0299b990" id="RPPDF_udcSignColumn3" type="udc.sign.signedSet">
+          <cl:formdata std:sid="f-data-f335079b" row="0" col="1"/>
+        </cl:udc>
+        <cl:udc std:sid="ud-control-27c08936" id="RPPDF_udcSignColumn2" type="udc.sign.signedSet">
+          <cl:formdata std:sid="f-data-b6a668d8" row="0" col="2"/>
+        </cl:udc>
+        <cl:udc std:sid="ud-control-ea3c65bc" id="RPPDF_udcSignColumn1" type="udc.sign.signedSet">
+          <cl:formdata std:sid="f-data-3b85ef2e" row="0" col="3"/>
+        </cl:udc>
+        <cl:formlayout std:sid="f-layout-57483f0d" hspace="0px" vspace="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-64b88388">
+        <cl:formdata std:sid="f-data-1d5293c9" row="0" col="0"/>
+        <cl:button std:sid="button-ade48826" id="RPALR_btnSetting" style="background-color:transparent; border-right-style:none; background-repeat:no-repeat; border-left-style:none; border-bottom-style:none; background-image:url('../../../theme/images/icon_setting.png'); background-position:center; border-top-style:none;">
+          <cl:listener std:sid="listener-61281d55" name="click" handler="onRPALR_btnSettingClick"/>
+          <cl:formdata std:sid="f-data-18e8c38f" valign="CENTER" height="36" row="0" col="3"/>
+        </cl:button>
+        <cl:inputbox std:sid="i-box-83dc7c3c" id="RPALR_ipbTitle" style="padding:2px; font-size:30px; text-align:center;" placeholder="Report title">
+          <cl:formdata std:sid="f-data-2ff42102" row="0" col="2"/>
+        </cl:inputbox>
+        <cl:button std:sid="button-322182e7" id="RPALR_btnPDFPrint" style="background-color:transparent; border-right-style:none; background-repeat:no-repeat; border-left-style:none; border-bottom-style:none; background-position:center; background-image:url('../../../theme/images/icon_pdf.png'); border-top-style:none;">
+          <cl:listener std:sid="listener-1972d262" name="click" handler="onRPALR_btnPDFPrintClick"/>
+          <cl:formdata std:sid="f-data-94f96e8a" halign="CENTER" valign="CENTER" width="36" height="36" row="0" col="4"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-73c7cc52">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:rows length="2" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="36" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="36" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="36" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="36" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-47fa57ec" hspace="4px" vspace="0px">
+        <cl:rows length="60" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="94" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:grid std:sid="grid-3d677545" id="RPALR_grdAuthLog" readonly="true" datasetid="AuthLogList" columnResizable="true" columnMovable="true">
+      <cl:xylayoutdata std:sid="xyl-data-861ca962" top="200px" right="10px" bottom="0px" left="10px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:gridcolumn std:sid="g-column-532df137"/>
+      <cl:gridcolumn std:sid="g-column-5bdbbc12"/>
+      <cl:gridcolumn std:sid="g-column-6b8f26d9"/>
+      <cl:gridcolumn std:sid="g-column-29d97d90"/>
+      <cl:gridcolumn std:sid="g-column-312dbe1a"/>
+      <cl:gridcolumn std:sid="g-column-3ec643ff"/>
+      <cl:gridcolumn std:sid="g-column-074dc71e"/>
+      <cl:gridcolumn std:sid="g-column-f6bc8163"/>
+      <cl:gridcolumn std:sid="g-column-4d4d44ce"/>
+      <cl:gridcolumn std:sid="g-column-eb0c3d8b"/>
+      <cl:gridcolumn std:sid="g-column-ed53e266"/>
+      <cl:gridcolumn std:sid="g-column-190587b4"/>
+      <cl:gridcolumn std:sid="g-column-a3583147"/>
+      <cl:gridcolumn std:sid="g-column-601d1e62"/>
+      <cl:gridcolumn std:sid="g-column-5fec0020"/>
+      <cl:gridcolumn std:sid="g-column-38100b92"/>
+      <cl:gridcolumn std:sid="g-column-8f0fe4e7"/>
+      <cl:gridcolumn std:sid="g-column-1504767a"/>
+      <cl:gridcolumn std:sid="g-column-8d567543"/>
+      <cl:gridheader std:sid="gh-band-0c1ceb48">
+        <cl:gridrow std:sid="g-row-e87d4169"/>
+        <cl:gridcell std:sid="gh-cell-16e67548" rowindex="0" colindex="0" targetcolumnname="IndexKey" sortable="false" filterable="false" text="IndexKey" visible="false"/>
+        <cl:gridcell std:sid="gh-cell-9f9c818a" rowindex="0" colindex="1" targetcolumnname="TerminalID" sortable="false" filterable="false" text="TerminalID"/>
+        <cl:gridcell std:sid="gh-cell-ddef8ab9" rowindex="0" colindex="2" targetcolumnname="UserID" sortable="false" filterable="false" text="UserID"/>
+        <cl:gridcell std:sid="gh-cell-55204797" rowindex="0" colindex="3" targetcolumnname="GroupCode" sortable="false" filterable="false" text="GroupCode"/>
+        <cl:gridcell std:sid="gh-cell-2ca45338" rowindex="0" colindex="4" targetcolumnname="UserName" sortable="false" filterable="false" text="UserName"/>
+        <cl:gridcell std:sid="gh-cell-7ed3dbbc" rowindex="0" colindex="5" targetcolumnname="EventTime" sortable="false" filterable="false" text="EventTime"/>
+        <cl:gridcell std:sid="gh-cell-622725fb" rowindex="0" colindex="6" targetcolumnname="ServerRecordTime" sortable="false" filterable="false" text="ServerRecordTime"/>
+        <cl:gridcell std:sid="gh-cell-42244c3e" rowindex="0" colindex="7" targetcolumnname="AuthType" sortable="false" filterable="false" text="AuthType"/>
+        <cl:gridcell std:sid="gh-cell-0212de04" rowindex="0" colindex="8" targetcolumnname="AuthResult" sortable="false" filterable="false" text="AuthResult"/>
+        <cl:gridcell std:sid="gh-cell-224d4da1" rowindex="0" colindex="9" targetcolumnname="Func" sortable="false" filterable="false" text="Func"/>
+        <cl:gridcell std:sid="gh-cell-3fb7d7f8" rowindex="0" colindex="10" targetcolumnname="FuncType" sortable="false" filterable="false" text="FuncType"/>
+        <cl:gridcell std:sid="gh-cell-770ebc5b" rowindex="0" colindex="11" targetcolumnname="Card" sortable="false" filterable="false" text="Card"/>
+        <cl:gridcell std:sid="gh-cell-e0a666f9" rowindex="0" colindex="12" targetcolumnname="UserType" sortable="false" filterable="false" text="UserType"/>
+        <cl:gridcell std:sid="gh-cell-329be364" rowindex="0" colindex="13" targetcolumnname="IsPicture" sortable="false" filterable="false" text="IsPicture"/>
+        <cl:gridcell std:sid="gh-cell-ec05763b" rowindex="0" colindex="14" targetcolumnname="Property" sortable="false" filterable="false" text="Property"/>
+        <cl:gridcell std:sid="gh-cell-fbccd017" rowindex="0" colindex="15" targetcolumnname="GroupName" sortable="false" filterable="false" text="GroupName"/>
+        <cl:gridcell std:sid="gh-cell-89c66927" rowindex="0" colindex="16" targetcolumnname="PositionName" sortable="false" filterable="false" text="PositionName"/>
+        <cl:gridcell std:sid="gh-cell-d2ccc342" rowindex="0" colindex="17" targetcolumnname="UniqueID" sortable="false" filterable="false" text="UniqueID"/>
+        <cl:gridcell std:sid="gh-cell-3569a24c" rowindex="0" colindex="18" targetcolumnname="TerminalName" sortable="false" filterable="false" text="TerminalName"/>
+      </cl:gridheader>
+      <cl:griddetail std:sid="gd-band-c1ab0b01">
+        <cl:gridrow std:sid="g-row-581d085d"/>
+        <cl:gridcell std:sid="gd-cell-19faf968" rowindex="0" colindex="0" columnname="IndexKey"/>
+        <cl:gridcell std:sid="gd-cell-e9137739" rowindex="0" colindex="1" columnname="TerminalID"/>
+        <cl:gridcell std:sid="gd-cell-08b6e355" rowindex="0" colindex="2" columnname="UserID"/>
+        <cl:gridcell std:sid="gd-cell-509a71ac" rowindex="0" colindex="3" columnname="GroupCode"/>
+        <cl:gridcell std:sid="gd-cell-1832b2a0" rowindex="0" colindex="4" columnname="UserName"/>
+        <cl:gridcell std:sid="gd-cell-38849dff" rowindex="0" colindex="5" columnname="EventTime"/>
+        <cl:gridcell std:sid="gd-cell-d9a13608" rowindex="0" colindex="6" columnname="ServerRecordTime"/>
+        <cl:gridcell std:sid="gd-cell-aab8c02d" rowindex="0" colindex="7" columnname="AuthType">
+          <cl:combobox std:sid="c-box-a3c4a245" id="cmb_AuthLogType"/>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gd-cell-34163735" rowindex="0" colindex="8" columnname="AuthResult">
+          <cl:combobox std:sid="c-box-164536c0" id="cmb_AuthLogResult"/>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gd-cell-de5d9907" rowindex="0" colindex="9" columnname="Func">
+          <cl:combobox std:sid="c-box-3c05f921" id="cmb_AuthFuncKey"/>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gd-cell-62dbfedc" rowindex="0" colindex="10" columnname="FuncType">
+          <cl:combobox std:sid="c-box-f5f549e6" id="cmb_AuthLogFuncType"/>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gd-cell-69b49cf2" rowindex="0" colindex="11" columnname="Card"/>
+        <cl:gridcell std:sid="gd-cell-0b838456" rowindex="0" colindex="12" columnname="UserType"/>
+        <cl:gridcell std:sid="gd-cell-11e98c07" rowindex="0" colindex="13" columnname="IsPicture"/>
+        <cl:gridcell std:sid="gd-cell-c4066695" rowindex="0" colindex="14" columnname="Property"/>
+        <cl:gridcell std:sid="gd-cell-afa1080a" rowindex="0" colindex="15" columnname="GroupName"/>
+        <cl:gridcell std:sid="gd-cell-e36b32a3" rowindex="0" colindex="16" columnname="PositionName"/>
+        <cl:gridcell std:sid="gd-cell-00ab26d2" rowindex="0" colindex="17" columnname="UniqueID"/>
+        <cl:gridcell std:sid="gd-cell-e6cc6781" rowindex="0" colindex="18" columnname="TerminalName"/>
+      </cl:griddetail>
+    </cl:grid>
+    <cl:xylayout std:sid="xylayout-652f867d"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

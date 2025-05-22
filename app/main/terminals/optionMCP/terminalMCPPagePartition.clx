@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-aed822e2" version="1.0.0.0">
+  <head std:sid="head-339f7c53">
+    <title>terminalMCPPagePartition</title>
+    <screen std:sid="screen-a3d38880" id="default" height="768px" minwidth="1024px" name="default" width="1024px"/>
+    <screen std:sid="screen-9bd5bb82" id="tablet" height="667px" maxwidth="1023px" minwidth="500px" name="tablet" width="500px"/>
+    <screen std:sid="screen-4dd2ebb1" id="mobile" height="525px" maxwidth="499px" name="mobile" width="350px"/>
+    <cl:model std:sid="model-f0c65b0f">
+      <cl:dataset std:sid="d-set-29b1eba6" id="dsAcuPartitionOption">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-19a82b69" name="Name"/>
+          <cl:datacolumn std:sid="d-column-470ff5ce" name="Account"/>
+          <cl:datacolumn std:sid="d-column-b1afa807" datatype="number" name="EntryDelay1"/>
+          <cl:datacolumn std:sid="d-column-81a6327c" datatype="number" name="EntryDelay2"/>
+          <cl:datacolumn std:sid="d-column-c715f60a" datatype="number" name="ExitDelay1"/>
+          <cl:datacolumn std:sid="d-column-538ef46a" datatype="number" name="ExitDelay2"/>
+          <cl:datacolumn std:sid="d-column-e8edfc82" datatype="number" displayonly="false" name="SirenTime"/>
+          <cl:datacolumn std:sid="d-column-ddca63d7" datatype="number" displayonly="false" name="AlarmCount"/>
+          <cl:datacolumn std:sid="d-column-889d4a82" datatype="number" name="Enable"/>
+          <cl:datacolumn std:sid="d-column-6e75e984" datatype="number" name="Chime"/>
+          <cl:datacolumn std:sid="d-column-9c2402e0" datatype="number" name="UnlockOnDisarm"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:submission std:sid="submission-8dc9c063" id="smsGetAcuPartitionOption" method="get">
+        <cl:listener std:sid="listener-ce84aebf" handler="onSmsGetAcuPartitionOptionSubmitDone" name="submit-done"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="dsAcuPartitionOption"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-59fc030f" id="smsPutAcuPartitionOption" method="put" mediatype="application/x-www-form-urlencoded">
+        <cl:listener std:sid="listener-ec1aecb8" handler="onSmsPutAcuPartitionOptionSubmitDone" name="submit-done"/>
+        <cl:requestdata dataid="dsAcuPartitionOption" payload="all"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:datamap std:sid="d-map-f6c406cc" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-54fae956" datatype="number" name="ResultCode"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-6f302b51" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-ca12f2a0" handler="onBodyLoad" name="load"/>
+    <cl:group std:sid="group-5a1e6d82" id="basicgrd" style="border-radius:2px; padding:10px;">
+      <cl:xylayoutdata std:sid="xyl-data-96192ca6" height="500px" horizontalAnchor="LEFT" left="10px" top="10px" verticalAnchor="TOP" width="700px"/>
+      <cl:group std:sid="group-878d6771" style="padding:0px; border-radius:2px;">
+        <cl:formdata std:sid="f-data-56094e1d" col="0" row="0"/>
+        <cl:output std:sid="output-db9f8757" style="font-weight:700; font-size:14px;">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_ReaderPartition"/>
+          <cl:formdata std:sid="f-data-8ff45c00" col="0" colspan="1" row="0" rowspan="1"/>
+        </cl:output>
+        <cl:output std:sid="output-cde4a98d" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-top-color:#c5c5c5; border-right-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid; text-align:center;">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_Name"/>
+          <cl:formdata std:sid="f-data-4faf8a58" col="0" row="1"/>
+        </cl:output>
+        <cl:output std:sid="output-0595e6e6" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-right-color:#c5c5c5; border-bottom-style:solid; text-align:center;">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_Account"/>
+          <cl:formdata std:sid="f-data-68da0de3" col="0" row="2"/>
+        </cl:output>
+        <cl:group std:sid="group-ac28a9c7" style="border-bottom-color:#c5c5c5; border-top-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-0abc9b08" col="1" colspan="3" row="1" rowspan="1"/>
+          <cl:inputbox std:sid="i-box-682c1767" id="ipbPartitionName">
+            <cl:xylayoutdata std:sid="xyl-data-32f461ae" bottom="2px" horizontalAnchor="BOTH" left="4px" right="4px" top="2px" verticalAnchor="BOTH"/>
+          </cl:inputbox>
+          <cl:xylayout std:sid="xylayout-202e9875"/>
+        </cl:group>
+        <cl:group std:sid="group-34c4ccb1" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+          <cl:formdata std:sid="f-data-cb50239b" col="1" colspan="3" row="2" rowspan="1"/>
+          <cl:inputbox std:sid="i-box-f14b7171" id="ipbPartitionAccount">
+            <cl:xylayoutdata std:sid="xyl-data-d7fc165e" bottom="2px" horizontalAnchor="BOTH" left="4px" right="4px" top="2px" verticalAnchor="BOTH"/>
+          </cl:inputbox>
+          <cl:xylayout std:sid="xylayout-02c47cdf"/>
+        </cl:group>
+        <cl:group std:sid="group-e50db24a">
+          <cl:formdata std:sid="f-data-b4142a38" col="1" colspan="3" row="0" rowspan="1"/>
+          <cl:combobox std:sid="c-box-7bec1a2c" id="cmbSelectPartition" style="font-size:14px; text-align:center;" preventinput="true">
+            <cl:listener std:sid="listener-de24a0d2" handler="onCmbSelectPartitionSelectionChange" name="selection-change"/>
+            <cl:xylayoutdata std:sid="xyl-data-7668100f" bottom="2px" horizontalAnchor="LEFT" left="4px" top="2px" verticalAnchor="BOTH" width="314px"/>
+          </cl:combobox>
+          <cl:button std:sid="button-d7a27c54" id="btnPartitionInfoSave" class="userInfo_btn">
+            <cl:listener std:sid="listener-1d9d23dc" handler="onBtnPartitionInfoSaveClick" name="click"/>
+            <cl:langbind category="PROPERTY" property="value" keypath="Str_Apply"/>
+            <cl:xylayoutdata std:sid="xyl-data-9d81aae6" height="28px" horizontalAnchor="LEFT" left="322px" top="1px" verticalAnchor="TOP" width="180px"/>
+          </cl:button>
+          <cl:xylayout std:sid="xylayout-a982a0ef"/>
+        </cl:group>
+        <cl:output std:sid="output-eb9b63d0" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-right-color:#c5c5c5; border-bottom-style:solid; text-align:center;">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_EnterDelay1"/>
+          <cl:formdata std:sid="f-data-54aa34fb" col="0" row="3"/>
+        </cl:output>
+        <cl:group std:sid="group-771ec6c2" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+          <cl:formdata std:sid="f-data-dd55f4c2" col="1" colspan="3" row="3" rowspan="1"/>
+          <cl:inputbox std:sid="i-box-ce2f56ce" id="ipbPartitionEnterDelay1">
+            <cl:xylayoutdata std:sid="xyl-data-33453a78" bottom="2px" horizontalAnchor="BOTH" left="4px" right="4px" top="2px" verticalAnchor="BOTH"/>
+          </cl:inputbox>
+          <cl:xylayout std:sid="xylayout-0deba70a"/>
+        </cl:group>
+        <cl:output std:sid="output-73989b14" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-top-color:#c5c5c5; border-right-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid; text-align:center;">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_EnterDelay2"/>
+          <cl:formdata std:sid="f-data-c54f2513" col="0" row="4"/>
+        </cl:output>
+        <cl:group std:sid="group-e8be790c" style="border-bottom-color:#c5c5c5; border-top-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-92d0d0db" col="1" colspan="3" row="4" rowspan="1"/>
+          <cl:inputbox std:sid="i-box-5d3be9bf" id="ipbPartitionEnterDelay2">
+            <cl:xylayoutdata std:sid="xyl-data-680666ed" bottom="2px" horizontalAnchor="BOTH" left="4px" right="4px" top="2px" verticalAnchor="BOTH"/>
+          </cl:inputbox>
+          <cl:xylayout std:sid="xylayout-72b85a0c"/>
+        </cl:group>
+        <cl:output std:sid="output-7320d39e" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-top-color:#c5c5c5; border-right-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid; text-align:center;">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_ExitDelay1"/>
+          <cl:formdata std:sid="f-data-9d36c533" col="0" row="5"/>
+        </cl:output>
+        <cl:group std:sid="group-f415ab2e" style="border-bottom-color:#c5c5c5; border-top-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-e4b38d0b" col="1" colspan="3" row="5" rowspan="1"/>
+          <cl:inputbox std:sid="i-box-dfbcb18f" id="ipbPartitionExitDelay1">
+            <cl:xylayoutdata std:sid="xyl-data-46696bc4" bottom="2px" horizontalAnchor="BOTH" left="4px" right="4px" top="2px" verticalAnchor="BOTH"/>
+          </cl:inputbox>
+          <cl:xylayout std:sid="xylayout-b14bb016"/>
+        </cl:group>
+        <cl:output std:sid="output-a803e9a0" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-top-color:#c5c5c5; border-right-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid; text-align:center;">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_ExitDelay2"/>
+          <cl:formdata std:sid="f-data-45d3fcf7" col="0" row="6"/>
+        </cl:output>
+        <cl:group std:sid="group-0040a3ab" style="border-bottom-color:#c5c5c5; border-top-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-0aba3164" col="1" colspan="3" row="6" rowspan="1"/>
+          <cl:inputbox std:sid="i-box-38957651" id="ipbPartitionExitDelay2">
+            <cl:xylayoutdata std:sid="xyl-data-3ea7aa80" bottom="2px" horizontalAnchor="BOTH" left="4px" right="4px" top="2px" verticalAnchor="BOTH"/>
+          </cl:inputbox>
+          <cl:xylayout std:sid="xylayout-7efc3f7c"/>
+        </cl:group>
+        <cl:output std:sid="output-c6f2d908" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-top-color:#c5c5c5; border-right-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid; text-align:center;">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_SirenTime"/>
+          <cl:formdata std:sid="f-data-1ede32ae" col="0" row="7"/>
+        </cl:output>
+        <cl:group std:sid="group-c9b8698f" style="border-bottom-color:#c5c5c5; border-top-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-d21d4f23" col="1" colspan="3" row="7" rowspan="1"/>
+          <cl:inputbox std:sid="i-box-05d8ea22" id="ipbPartitionSirenTime">
+            <cl:xylayoutdata std:sid="xyl-data-88655ff2" bottom="2px" horizontalAnchor="BOTH" left="4px" right="4px" top="2px" verticalAnchor="BOTH"/>
+          </cl:inputbox>
+          <cl:xylayout std:sid="xylayout-f1fe1dd1"/>
+        </cl:group>
+        <cl:output std:sid="output-bb06bae8" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-top-color:#c5c5c5; border-right-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid; text-align:center;">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_AlarmCount"/>
+          <cl:formdata std:sid="f-data-0c78cacf" col="0" row="8"/>
+        </cl:output>
+        <cl:group std:sid="group-3ef76eb6" style="border-bottom-color:#c5c5c5; border-top-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-8ae063b6" col="1" colspan="3" row="8" rowspan="1"/>
+          <cl:inputbox std:sid="i-box-135448c9" id="ipbPartitionAlarmCount">
+            <cl:xylayoutdata std:sid="xyl-data-d4e3a72e" bottom="2px" horizontalAnchor="BOTH" left="4px" right="4px" top="2px" verticalAnchor="BOTH"/>
+          </cl:inputbox>
+          <cl:xylayout std:sid="xylayout-400c4101"/>
+        </cl:group>
+        <cl:group std:sid="group-811d6873" style="border-bottom-color:#c5c5c5; border-top-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-b993b449" col="0" colspan="4" row="9" rowspan="1"/>
+          <cl:checkbox std:sid="c-box-08d23139" id="cbxUse" style="vertical-align:middle; text-align:center;">
+            <cl:langbind category="PROPERTY" property="text" keypath="Str_Used"/>
+            <cl:xylayoutdata std:sid="xyl-data-e2dfa8b6" bottom="2px" horizontalAnchor="LEFT" left="36px" top="2px" verticalAnchor="BOTH" width="117px"/>
+          </cl:checkbox>
+          <cl:checkbox std:sid="c-box-c0963242" id="cbxBellSound" style="vertical-align:middle; text-align:center;">
+            <cl:langbind category="PROPERTY" property="text" keypath="Str_BellSound"/>
+            <cl:xylayoutdata std:sid="xyl-data-9b3db916" bottom="2px" horizontalAnchor="LEFT" left="215px" top="2px" verticalAnchor="BOTH" width="117px"/>
+          </cl:checkbox>
+          <cl:checkbox std:sid="c-box-f4ad9ed8" id="cbxDoorUnlockOpen" style="vertical-align:middle; text-align:center;">
+            <cl:langbind category="PROPERTY" property="text" keypath="Str_DoorUnlockOpen"/>
+            <cl:xylayoutdata std:sid="xyl-data-a2756f7c" bottom="2px" horizontalAnchor="LEFT" left="415px" top="2px" verticalAnchor="BOTH" width="177px"/>
+          </cl:checkbox>
+          <cl:xylayout std:sid="xylayout-2081aada"/>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-d02aee26" hspace="0px" vspace="0px">
+          <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="1" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-dcd2fe65" hspace="0px" vspace="0px">
+        <cl:rows autoSizing="false" length="340" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-bd908211"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

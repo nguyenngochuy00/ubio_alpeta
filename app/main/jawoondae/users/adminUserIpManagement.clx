@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-87c657f5" version="1.0.0.0">
+  <head std:sid="head-e62fe8e8">
+    <title>adminUserIpManagement</title>
+    <screen std:sid="screen-66f7e2f6" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="500" customWidth="800"/>
+    <screen std:sid="screen-a690a11e" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-92f065bb" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-b2ed610e">
+      <cl:datamap std:sid="d-map-c2bd18fc" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-d8f2bbe5" name="Count" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-a33aca7f" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-7843b1bb" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:dataset std:sid="d-set-a1e53e49" id="AdminUserList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-98798aa2" info="아이디" name="ID" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-7d0a90a5" info="군번" name="UniqueID"/>
+          <cl:datacolumn std:sid="d-column-c2a8d671" info="이름" name="Name" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-7c2ee236" info="권한(관리자)" name="Privilege" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-e0e952e8" info="그룹" name="GroupCode" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-9da05283" info="출입그룹" name="AccessGroupCode" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-6dc7280a" info="로그인허용 ip 주소" name="IpAddress"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:submission std:sid="submission-bb2a2311" id="sms_getAdminTypeUserList" method="get" action="/v1/jawoondae/users/adminType">
+        <cl:listener std:sid="listener-7c600bbd" name="submit-done" handler="onSms_getAdminTypeUserListSubmitDone"/>
+        <cl:listener std:sid="listener-85423365" name="submit-error" handler="onSms_getAdminTypeUserListSubmitError"/>
+        <cl:listener std:sid="listener-3a1e4a85" name="submit-timeout" handler="onSms_getAdminTypeUserListSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total"/>
+        <cl:responsedata dataid="AdminUserList"/>
+      </cl:submission>
+      <cl:dataset std:sid="d-set-ab9c534d" id="dsUpdateList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-7cae4354" name="UserID"/>
+          <cl:datacolumn std:sid="d-column-25fd209d" name="rowIndex" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:submission std:sid="submission-848aedc4" id="sms_putIpAddress" method="put">
+        <cl:listener std:sid="listener-c720ecdc" name="submit-done" handler="onSms_putIpAddressSubmitDone"/>
+        <cl:listener std:sid="listener-24f2923d" name="submit-error" handler="onSms_putIpAddressSubmitError"/>
+        <cl:listener std:sid="listener-a5f40e53" name="submit-timeout" handler="onSms_putIpAddressSubmitTimeout"/>
+        <cl:requestdata dataid="AdminInfo"/>
+      </cl:submission>
+      <cl:datamap std:sid="d-map-900da806" id="AdminInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-830400fd" name="ID"/>
+          <cl:datacolumn std:sid="d-column-6a65ca44" name="IpAddresss"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+    </cl:model>
+    <cl:appspec dev-comment="JWDIP"/>
+  </head>
+  <body std:sid="body-b8febb64" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-1210c122" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-6e80f7fc" id="JWDIP_grpMain">
+      <cl:listener std:sid="listener-9d4dccf1" name="before-draw" handler="onGroupBeforeDraw"/>
+      <cl:xylayoutdata std:sid="xyl-data-87933391" top="1px" right="1px" bottom="1px" left="1px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-fce1fabc">
+        <cl:formdata std:sid="f-data-8ce43fa5" row="0" col="0"/>
+        <cl:output std:sid="output-e053a255" style="padding:4px; text-align:right;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_All"/>
+          <cl:formdata std:sid="f-data-9b370de7" row="0" col="0"/>
+        </cl:output>
+        <cl:output std:sid="output-5a63dfa3" id="JWDIP_opbTotal" value="">
+          <cl:formdata std:sid="f-data-31d6ef3b" row="0" col="1"/>
+        </cl:output>
+        <cl:output std:sid="output-753a5c60" style="padding:4px; text-align:right;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Period"/>
+          <cl:formdata std:sid="f-data-8b5b3ec8" row="0" col="2"/>
+        </cl:output>
+        <cl:group std:sid="group-a84f9729" style="border-right-style:solid; color:#6b6b6b; border-top-width:1px; border-bottom-color:#cccccc; border-right-width:1px; border-left-color:#cccccc; border-right-color:#cccccc; border-left-width:1px; border-top-style:solid; background-color:#F6F6F6; border-radius:10px; border-left-style:solid; border-bottom-width:1px; border-top-color:#cccccc; border-bottom-style:solid;">
+          <cl:formdata std:sid="f-data-3b4d4b92" row="0" col="4"/>
+          <cl:combobox std:sid="c-box-6107e546" id="JWDIP_cmbCategory" style="background-color:#F6F6F6; border-right-style:none; border-left-style:none; border-bottom-style:none; border-top-style:none;" preventinput="true">
+            <cl:apppropbind property="value" category="PROPERTY" app-property="searchCategory"/>
+            <cl:formdata std:sid="f-data-8adb84bb" row="0" col="0"/>
+            <cl:item std:sid="item-bbc71987" label="ID" value="id">
+              <cl:langbind property="label" category="PROPERTY" keypath="Str_ID"/>
+            </cl:item>
+            <cl:item std:sid="item-5c8ec4b0" label="Name" value="name">
+              <cl:langbind property="label" category="PROPERTY" keypath="Str_Name"/>
+            </cl:item>
+            <cl:item std:sid="item-716c9dc9" label="UniqueID" value="uniqueid">
+              <cl:langbind property="label" category="PROPERTY" keypath="Str_UniqueID"/>
+            </cl:item>
+          </cl:combobox>
+          <cl:inputbox std:sid="i-box-c326c7b5" id="JWDIP_ipbKeyword" style="background-color:#F6F6F6; padding:0px 0px 0px 10px; border-bottom-color:#cccccc; border-left-color:#cccccc; border-top-color:#cccccc; border-bottom-style:none; border-right-color:#cccccc; border-top-style:none;">
+            <cl:langbind property="placeholder" category="PROPERTY" keypath="Str_SearchKeword"/>
+            <cl:apppropbind property="value" category="PROPERTY" app-property="searchKeyword"/>
+            <cl:formdata std:sid="f-data-87f7c575" row="0" col="1"/>
+          </cl:inputbox>
+          <cl:group std:sid="group-94b972ce" id="JWDIP_btnSearch" style="border-right-style:none; cursor:pointer; background-color:transparent; background-repeat:no-repeat; border-left-style:none; border-bottom-style:none; background-image:url('../../../../theme/images/common/common_text_field_btn_icons_search.png'); background-position:center; border-top-style:none;">
+            <cl:listener std:sid="listener-47ef434f" name="click" handler="onJWDIP_btnSearchClick"/>
+            <cl:formdata std:sid="f-data-838eccbc" height="29" row="0" col="2"/>
+            <cl:xylayout std:sid="xylayout-3b76f87f"/>
+          </cl:group>
+          <cl:formlayout std:sid="f-layout-409a1d5f" hspace="0px" vspace="0px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+            <cl:columns length="3" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:img std:sid="image-f50a0304" id="USMAG_imgHelpPage" style="cursor:help;" src="../../../../theme/images/common/common_btn_window_top_q.png">
+          <cl:formdata std:sid="f-data-82e98c38" halign="CENTER" valign="CENTER" width="15" height="15" row="0" col="7"/>
+        </cl:img>
+        <cl:button std:sid="button-4e18a91b" style="font-weight:400; font-size:12px;" class="userInfo_btn" value="저 장">
+          <cl:listener std:sid="listener-3e7b90e1" name="click" handler="onButtonClick"/>
+          <cl:formdata std:sid="f-data-00743f91" row="0" col="6"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-016dc211">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="90" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="90" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:grid std:sid="grid-737feea2" id="JWDIP_adminUserList" datasetid="AdminUserList">
+        <cl:formdata std:sid="f-data-00497789" row="1" col="0"/>
+        <cl:gridcolumn std:sid="g-column-a572ad85" width="25px"/>
+        <cl:gridcolumn std:sid="g-column-bf568b86"/>
+        <cl:gridcolumn std:sid="g-column-c6136334"/>
+        <cl:gridcolumn std:sid="g-column-e00ae212"/>
+        <cl:gridcolumn std:sid="g-column-1522f491"/>
+        <cl:gridcolumn std:sid="g-column-34146451"/>
+        <cl:gridcolumn std:sid="g-column-1b39f4d3"/>
+        <cl:gridcolumn std:sid="g-column-8ed0dce6"/>
+        <cl:gridheader std:sid="gh-band-ff3cd04c">
+          <cl:gridrow std:sid="g-row-33af4f6f"/>
+          <cl:gridcell std:sid="gh-cell-304c7a1c" rowindex="0" colindex="0" sortable="false" filterable="false" columntype="checkbox"/>
+          <cl:gridcell std:sid="gh-cell-4abc2391" rowindex="0" colindex="1" targetcolumnname="ID" sortable="false" filterable="false" text="아이디"/>
+          <cl:gridcell std:sid="gh-cell-41ce5327" rowindex="0" colindex="2" targetcolumnname="UniqueID" sortable="false" filterable="false" text="유니크 아이디"/>
+          <cl:gridcell std:sid="gh-cell-f5bf6a06" rowindex="0" colindex="3" targetcolumnname="Name" sortable="false" filterable="false" text="이름"/>
+          <cl:gridcell std:sid="gh-cell-dffba583" rowindex="0" colindex="4" targetcolumnname="Privilege" sortable="false" filterable="false" text="권한"/>
+          <cl:gridcell std:sid="gh-cell-1ed40d76" rowindex="0" colindex="5" targetcolumnname="GroupCode" sortable="false" filterable="false" text="그룹"/>
+          <cl:gridcell std:sid="gh-cell-89ddb83b" rowindex="0" colindex="6" targetcolumnname="AccessGroupCode" sortable="false" filterable="false" text="출입그룹"/>
+          <cl:gridcell std:sid="gh-cell-cb0f632d" rowindex="0" colindex="7" targetcolumnname="IpAddress" sortable="false" filterable="false" text="관리자 IP 주소"/>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-6a373982">
+          <cl:gridrow std:sid="g-row-0538bc14"/>
+          <cl:gridcell std:sid="gd-cell-47f442c2" rowindex="0" colindex="0" columntype="checkbox"/>
+          <cl:gridcell std:sid="gd-cell-07dbaafb" rowindex="0" colindex="1" columnname="ID"/>
+          <cl:gridcell std:sid="gd-cell-27106550" rowindex="0" colindex="2" columnname="UniqueID"/>
+          <cl:gridcell std:sid="gd-cell-5ce8e622" rowindex="0" colindex="3" columnname="Name"/>
+          <cl:gridcell std:sid="gd-cell-3a1cc930" rowindex="0" colindex="4" columnname="Privilege">
+            <cl:combobox std:sid="c-box-4c23eb9f" id="JWDIP_cmbPrivilege" hidebutton="true"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-057871a9" rowindex="0" colindex="5" columnname="GroupCode">
+            <cl:combobox std:sid="c-box-16c14b90" id="JWDIP_cmbTargetGroup" hidebutton="true"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-a467a54d" rowindex="0" colindex="6" columnname="AccessGroupCode">
+            <cl:combobox std:sid="c-box-39d4152d" id="JWDIP_cmbAccessGroup" hidebutton="true"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-8702fdd8" rowindex="0" colindex="7" columnname="IpAddress">
+            <cl:inputbox std:sid="i-box-97668f7f" id="JWDIP_ipbIpAddress"/>
+          </cl:gridcell>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:formlayout std:sid="f-layout-f61f54a5">
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-80d82807"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

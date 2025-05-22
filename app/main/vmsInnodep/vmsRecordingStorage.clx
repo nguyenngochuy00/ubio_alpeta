@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-fe5873bf" version="1.0.0.0">
+  <head std:sid="head-b0b74fa8">
+    <title>vmsRecordingStorage</title>
+    <screen std:sid="screen-5831e928" id="default" height="768px" minwidth="1024px" name="default" width="1024px"/>
+    <screen std:sid="screen-5971658a" id="tablet" height="667px" maxwidth="1023px" minwidth="500px" name="tablet" width="500px"/>
+    <screen std:sid="screen-b01770f6" id="mobile" height="525px" maxwidth="499px" name="mobile" width="350px"/>
+    <cl:model std:sid="model-25c7187e">
+      <cl:dataset std:sid="d-set-4bb39dd0" id="dsRecordServerList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-47958c46" datatype="number" name="srv_id"/>
+          <cl:datacolumn std:sid="d-column-3c315e5b" datatype="number" name="vms_id"/>
+          <cl:datacolumn std:sid="d-column-8e74db0f" datatype="number" name="srv_serial"/>
+          <cl:datacolumn std:sid="d-column-7a183fa5" name="srv_name"/>
+          <cl:datacolumn std:sid="d-column-0c18f73c" datatype="number" name="srv_type"/>
+          <cl:datacolumn std:sid="d-column-b5958c25" name="srv_svc_addr"/>
+          <cl:datacolumn std:sid="d-column-c6bba7f8" datatype="number" name="srv_svc_port"/>
+          <cl:datacolumn std:sid="d-column-ff6b3907" datatype="number" displayonly="false" name="srv_stat"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-ee115ad6" id="dsStorageInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-11f24da7" name="disk"/>
+          <cl:datacolumn std:sid="d-column-5fd601a2" name="file system"/>
+          <cl:datacolumn std:sid="d-column-d7c6ccbd" name="total"/>
+          <cl:datacolumn std:sid="d-column-6013cc1e" name="used"/>
+          <cl:datacolumn std:sid="d-column-131eea62" datatype="string" name="use"/>
+          <cl:datacolumn std:sid="d-column-28474099" name="directory"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-2ed7f0c5" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-c649570f" handler="onBodyLoad" name="load"/>
+    <cl:button std:sid="button-0fe228a3" id="btnRefreshServerList">
+      <cl:listener std:sid="listener-fe76ae4b" handler="onBtnRefreshServerListClick" name="click"/>
+      <cl:langbind category="PROPERTY" property="value" keypath="Str_RecordingServerRefresh"/>
+      <cl:xylayoutdata std:sid="xyl-data-cc2b96d6" height="22px" horizontalAnchor="LEFT" left="10px" top="10px" verticalAnchor="TOP" width="243px"/>
+    </cl:button>
+    <cl:grid std:sid="grid-43d4cf92" id="grdSearchRecordServerList" datasetid="dsRecordServerList" visible="true">
+      <cl:xylayoutdata std:sid="xyl-data-10f5f41c" height="73px" horizontalAnchor="LEFT" left="10px" top="42px" verticalAnchor="TOP" width="932px"/>
+      <cl:gridcolumn std:sid="g-column-5ca33cf9" width="108px"/>
+      <cl:gridcolumn std:sid="g-column-512fa10c" width="108px"/>
+      <cl:gridcolumn std:sid="g-column-40c8fcf1" width="108px"/>
+      <cl:gridcolumn std:sid="g-column-a30a53db" width="108px"/>
+      <cl:gridcolumn std:sid="g-column-01c8cd97" width="108px"/>
+      <cl:gridcolumn std:sid="g-column-f369e167" width="108px"/>
+      <cl:gridcolumn std:sid="g-column-d279756e" width="108px"/>
+      <cl:gridcolumn std:sid="g-column-d9928289" width="108px"/>
+      <cl:gridheader std:sid="gh-band-b681a046">
+        <cl:gridrow std:sid="g-row-f30d77bc"/>
+        <cl:gridcell std:sid="gh-cell-18a33b11" colindex="0" rowindex="0" filterable="false" sortable="false" targetcolumnname="srv_id" text="server id">
+          <cl:langbind category="PROPERTY" property="text" keypath="Str_VmsServerID"/>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gh-cell-2ba0c548" colindex="1" rowindex="0" filterable="false" sortable="false" targetcolumnname="vms_id" text="vms id">
+          <cl:langbind category="PROPERTY" property="text" keypath="Str_VmsID"/>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gh-cell-d3d15ecd" colindex="2" rowindex="0" filterable="false" sortable="false" targetcolumnname="srv_serial" text="serial">
+          <cl:langbind category="PROPERTY" property="text" keypath="Str_VmsSerial"/>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gh-cell-6f19e0da" colindex="3" rowindex="0" filterable="false" sortable="false" targetcolumnname="srv_name" text="name">
+          <cl:langbind category="PROPERTY" property="text" keypath="Str_Name"/>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gh-cell-04b0925c" colindex="4" rowindex="0" filterable="false" sortable="false" targetcolumnname="srv_type" text="type">
+          <cl:langbind category="PROPERTY" property="text" keypath="Str_Type"/>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gh-cell-c42ab499" colindex="5" rowindex="0" filterable="false" sortable="false" targetcolumnname="srv_svc_addr" text="ip address">
+          <cl:langbind category="PROPERTY" property="text" keypath="Str_IPAddress"/>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gh-cell-734f41ca" colindex="6" rowindex="0" filterable="false" sortable="false" targetcolumnname="srv_svc_port" text="port">
+          <cl:langbind category="PROPERTY" property="text" keypath="Str_Port"/>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gh-cell-b699bdb1" colindex="7" rowindex="0" filterable="false" sortable="false" targetcolumnname="srv_stat" text="status">
+          <cl:langbind category="PROPERTY" property="text" keypath="Str_State"/>
+        </cl:gridcell>
+      </cl:gridheader>
+      <cl:griddetail std:sid="gd-band-0855cbff">
+        <cl:gridrow std:sid="g-row-8bf16a44"/>
+        <cl:gridcell std:sid="gd-cell-30f575ea" colindex="0" rowindex="0" columnname="srv_id"/>
+        <cl:gridcell std:sid="gd-cell-35da4964" colindex="1" rowindex="0" columnname="vms_id"/>
+        <cl:gridcell std:sid="gd-cell-fea68f18" colindex="2" rowindex="0" columnname="srv_serial"/>
+        <cl:gridcell std:sid="gd-cell-2d0a5be7" colindex="3" rowindex="0" columnname="srv_name"/>
+        <cl:gridcell std:sid="gd-cell-5678ba90" colindex="4" rowindex="0" columnname="srv_type"/>
+        <cl:gridcell std:sid="gd-cell-672bdece" colindex="5" rowindex="0" columnname="srv_svc_addr"/>
+        <cl:gridcell std:sid="gd-cell-b39ae6fd" colindex="6" rowindex="0" columnname="srv_svc_port"/>
+        <cl:gridcell std:sid="gd-cell-6c8b1134" colindex="7" rowindex="0" columnname="srv_stat"/>
+      </cl:griddetail>
+    </cl:grid>
+    <cl:button std:sid="button-21752c15" id="btnRecordingServerInfo">
+      <cl:listener std:sid="listener-db63cfa5" handler="onBtnRecordingServerInfoClick" name="click"/>
+      <cl:langbind category="PROPERTY" property="value" keypath="Str_RecordingServerInfo"/>
+      <cl:xylayoutdata std:sid="xyl-data-89bee26b" height="22px" horizontalAnchor="LEFT" left="10px" top="152px" verticalAnchor="TOP" width="243px"/>
+    </cl:button>
+    <cl:grid std:sid="grid-c6078f38" id="grdStorage" datasetid="dsStorageInfo">
+      <cl:xylayoutdata std:sid="xyl-data-93c5eecd" height="254px" horizontalAnchor="LEFT" left="10px" top="184px" verticalAnchor="TOP" width="932px"/>
+      <cl:gridcolumn std:sid="g-column-900c9e25"/>
+      <cl:gridcolumn std:sid="g-column-f15c99d8"/>
+      <cl:gridcolumn std:sid="g-column-3fc5407b"/>
+      <cl:gridcolumn std:sid="g-column-3006f74f"/>
+      <cl:gridcolumn std:sid="g-column-82355949"/>
+      <cl:gridcolumn std:sid="g-column-6241cd25"/>
+      <cl:gridheader std:sid="gh-band-39cc4057">
+        <cl:gridrow std:sid="g-row-605dc633"/>
+        <cl:gridcell std:sid="gh-cell-0703b10f" colindex="0" rowindex="0" filterable="false" sortable="false" targetcolumnname="disk" text="disk">
+          <cl:langbind category="PROPERTY" property="text" keypath="Str_Disk"/>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gh-cell-d49392bd" colindex="1" rowindex="0" filterable="false" sortable="false" targetcolumnname="file system" text="file system">
+          <cl:langbind category="PROPERTY" property="text" keypath="Str_FileSystem"/>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gh-cell-da310977" colindex="2" rowindex="0" filterable="false" sortable="false" targetcolumnname="total" text="total">
+          <cl:langbind category="PROPERTY" property="text" keypath="Str_VmsDiskTotal"/>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gh-cell-708cbf79" colindex="3" rowindex="0" filterable="false" sortable="false" targetcolumnname="used" text="used">
+          <cl:langbind category="PROPERTY" property="text" keypath="Str_VmsDiskUsed"/>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gh-cell-bcf96693" colindex="4" rowindex="0" filterable="false" sortable="false" targetcolumnname="use" text="use">
+          <cl:langbind category="PROPERTY" property="text" keypath="Str_IsUse"/>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gh-cell-e9b1ead6" colindex="5" rowindex="0" filterable="false" sortable="false" targetcolumnname="directory" text="directory">
+          <cl:langbind category="PROPERTY" property="text" keypath="Str_RecordDir"/>
+        </cl:gridcell>
+      </cl:gridheader>
+      <cl:griddetail std:sid="gd-band-e4f385da">
+        <cl:gridrow std:sid="g-row-aef7f954"/>
+        <cl:gridcell std:sid="gd-cell-c760a558" colindex="0" rowindex="0" columnname="disk"/>
+        <cl:gridcell std:sid="gd-cell-0be5c25e" colindex="1" rowindex="0" columnname="file system"/>
+        <cl:gridcell std:sid="gd-cell-ad760435" colindex="2" rowindex="0" columnname="total"/>
+        <cl:gridcell std:sid="gd-cell-4ea0435a" colindex="3" rowindex="0" columnname="used"/>
+        <cl:gridcell std:sid="gd-cell-9fcb10b0" colindex="4" rowindex="0" columnname="use"/>
+        <cl:gridcell std:sid="gd-cell-8c51c768" colindex="5" rowindex="0" columnname="directory"/>
+      </cl:griddetail>
+    </cl:grid>
+    <cl:xylayout std:sid="xylayout-804c2cf9"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

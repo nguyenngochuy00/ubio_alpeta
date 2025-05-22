@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-32767861" version="1.0.0.0">
+  <head std:sid="head-6e025104">
+    <title>locationShape</title>
+    <screen std:sid="screen-60c9bb8a" id="default" name="default" minwidth="1024px" width="1024px" height="768px"/>
+    <screen std:sid="screen-9bf1df8c" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-230683a7" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-fa66e0fd">
+      <cl:dataset std:sid="d-set-7454ba13" id="ds1">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-8998a7ec" name="code"/>
+          <cl:datacolumn std:sid="d-column-158d051d" name="name"/>
+          <cl:datacolumn std:sid="d-column-fc944f24" name="filename"/>
+          <cl:datacolumn std:sid="d-column-555e6102" name="file" datatype="string"/>
+        </cl:datacolumnlist>
+        <cl:datarowlist/>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-ac738708" id="MapAreaList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-cd3e0ec4" name="MapCode" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-cc0a4747" name="Name"/>
+          <cl:datacolumn std:sid="d-column-232b338a" name="PosX" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-7114ff5d" name="PosY" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-ea8d8934" name="ImageType"/>
+          <cl:datacolumn std:sid="d-column-f857f388" name="ImageData"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-732fd700" id="MapAreaTerminalList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-0f68b785" name="MapCode" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-9feed4a1" name="TerminalID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-51e1a7ab" name="Type" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-99e99d29" name="PosX" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-4250d51d" name="PosY" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-fec06a61" name="Size" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-c4eadf6e" id="IconMenu">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-7a204d12" name="label"/>
+          <cl:datacolumn std:sid="d-column-03842e86" name="value"/>
+          <cl:datacolumn std:sid="d-column-3a3f05fa" name="parent"/>
+        </cl:datacolumnlist>
+        <cl:datarowlist>
+          <cl:datarow>
+            <cl:datavalue columnname="label">삭제</cl:datavalue>
+            <cl:datavalue columnname="value">d</cl:datavalue>
+            <cl:datavalue columnname="parent"/>
+          </cl:datarow>
+        </cl:datarowlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-71ba8e27" id="TerminalList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-437d5c54" name="ID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-544161ea" name="Name"/>
+          <cl:datacolumn std:sid="d-column-c7148704" name="Status" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-570aeb6e" name="GroupCode" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-0608039c" name="Type" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-96d041fc" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-03252264" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-f6d28cef" id="Count">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-23cb0e2c" name="Count" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-32fa4d12" id="MapAreaInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-56f4d97e" name="MapCode" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-d719ecac" name="Name"/>
+          <cl:datacolumn std:sid="d-column-1ef2a786" name="PosX" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-6b89e53a" name="PosY" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-8088df7d" name="ImageType"/>
+          <cl:datacolumn std:sid="d-column-d5723a4e" name="ImageData"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-c497f417" id="getLoc" action="data/main/loc.json" mediatype="multipart/form-data">
+        <cl:responsedata dataid="ds1"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-637bbda7" id="sms_getMapAreaList" method="get" action="/v1/map/areas">
+        <cl:listener std:sid="listener-9c75a12d" name="submit-done" handler="onSms_getMapAreaListSubmitDone"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Count"/>
+        <cl:responsedata dataid="MapAreaList"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-2f2cb35f" id="sms_registMapAreaInfo" method="post" action="/v1/map/areas" mediatype="application/x-www-form-urlencoded">
+        <cl:listener std:sid="listener-ee5729a9" name="submit-success" handler="onSms_registMapAreaInfoSubmitSuccess"/>
+        <cl:listener std:sid="listener-c7b1ed3b" name="submit-done" handler="onSms_registMapAreaInfoSubmitDone"/>
+        <cl:requestdata dataid="MapAreaInfo"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-22bb4f3b" id="sms_deleteMapAreaInfo" method="delete" action="">
+        <cl:listener std:sid="listener-57d551f0" name="submit-success" handler="onSms_deleteMapAreaInfoSubmitSuccess"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-f756bb96" id="sms_getMapAreaTerminalList" method="get" action="/v1/map/areas/terminals">
+        <cl:listener std:sid="listener-e43ffb8d" name="submit-done" handler="onSms_getMapAreaTerminalListSubmitDone"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Count"/>
+        <cl:responsedata dataid="MapAreaTerminalList"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-c464422d" id="sms_setMapAreaTerminal" action="/v1/map/areas/terminals" mediatype="application/json">
+        <cl:listener std:sid="listener-e368ce1a" name="submit-done" handler="onSms_setMapAreaTerminalSubmitDone"/>
+        <cl:requestdata dataid="MapAreaTerminalList"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-33ad0417" id="sms_deleteMapAreaTerminal" method="delete" action=""/>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-51d465d5" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-d0d4163e" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-93c11762">
+      <cl:xylayoutdata std:sid="xyl-data-a2f67270" top="25px" right="10px" bottom="0px" left="50px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-64220d6e">
+        <cl:formdata std:sid="f-data-c65069f6" row="2" col="1"/>
+        <cl:button std:sid="button-ac0d2c3a" id="btnFileSelect" class="button-amhq" enabled="false">
+          <cl:listener std:sid="listener-13263f0e" name="click" handler="onFileMapImageClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_SelectImage"/>
+          <cl:formdata std:sid="f-data-1e88e2ae" valign="FILL" width="80" height="30" row="0" col="2"/>
+        </cl:button>
+        <cl:button std:sid="button-264bb37d" id="btnSelectTml" class="button-amhq" enabled="false">
+          <cl:listener std:sid="listener-e5158711" name="click" handler="onBtnSelectTmlClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_SelectTerminal"/>
+          <cl:formdata std:sid="f-data-c7bb40b6" valign="FILL" width="80" height="30" row="0" col="3"/>
+        </cl:button>
+        <cl:button std:sid="button-77bfcb4e" id="VMTMS_btnSave" style="font-size:16px;" class="button-search-green-amhq">
+          <cl:listener std:sid="listener-0379aba1" name="click" handler="onVMTMS_btnSaveClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Save"/>
+          <cl:formdata std:sid="f-data-ecb16175" valign="FILL" width="80" height="30" row="0" col="4"/>
+        </cl:button>
+        <cl:output std:sid="output-7f6fb736" class="section-title-amhq">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_MapDrawingManagement"/>
+          <cl:formdata std:sid="f-data-af9e0ed0" valign="FILL" height="30" row="0" col="0"/>
+        </cl:output>
+        <cl:fileinput std:sid="f-input-9bfdbe7b" id="VMLAS_fiMapImage" visible="false" acceptfile="image/*">
+          <cl:listener std:sid="listener-4df4ae2a" name="value-change" handler="onFi1ValueChange"/>
+          <cl:formdata std:sid="f-data-3e9f73fc" row="0" col="1"/>
+        </cl:fileinput>
+        <cl:formlayout std:sid="f-layout-ce81c497" scrollable="false">
+          <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="120" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          <cl:columns length="140" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-3c02e83e">
+        <cl:formdata std:sid="f-data-300d1d47" row="3" col="1"/>
+        <cl:group std:sid="group-5e617f69" style="border-right-style:solid; padding:10px; border-top-width:1px; border-right-width:1px; border-left-style:solid; border-bottom-width:1px; border-bottom-style:solid; border-left-width:1px; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-cbeec635" halign="FILL" valign="FILL" width="627" height="431" row="0" col="0"/>
+          <cl:group std:sid="group-f8d7bf26" id="grpDragArea">
+            <cl:listener std:sid="listener-2c2246da" name="contextmenu" handler="onGrpDragAreaContextmenu"/>
+            <cl:formdata std:sid="f-data-3e259273" halign="CENTER" valign="CENTER" width="700" height="490" row="0" col="0"/>
+            <cl:img std:sid="image-d83ce864" id="VMTMS_imgArea" style="border-right-style:solid; border-top-width:1px; border-bottom-color:#c5c5c5; border-right-width:1px; border-left-style:solid; border-bottom-width:1px; border-left-color:#c5c5c5; border-top-color:#c5c5c5; border-bottom-style:solid; border-right-color:#c5c5c5; border-left-width:1px; border-top-style:solid;">
+              <cl:relativebind property="src" category="PROPERTY" columnname="file"/>
+              <cl:xylayoutdata std:sid="xyl-data-6baa324f" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+            </cl:img>
+            <cl:xylayout std:sid="xylayout-66e42b4a" scrollable="false"/>
+          </cl:group>
+          <cl:formlayout std:sid="f-layout-156b5fad" scrollable="false">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-1de17012" hspace="0px" vspace="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-e169da7f">
+        <cl:formdata std:sid="f-data-93898ffe" row="3" col="0"/>
+        <cl:grid std:sid="grid-cbe9d577" id="grdAreaList" class="grid-amhq" readonly="true" datasetid="MapAreaList" showdeletedrow="false" resizablecolumns="all" columnMovable="true">
+          <cl:listener std:sid="listener-c371ba34" name="selection-change" handler="onGrdAreaListSelectionChange"/>
+          <cl:listener std:sid="listener-ce61bef5" name="update" handler="onGrdAreaListUpdate"/>
+          <cl:formdata std:sid="f-data-5b69a0bf" row="0" col="0"/>
+          <cl:gridcolumn std:sid="g-column-2a398305"/>
+          <cl:gridcolumn std:sid="g-column-f5bf91e9"/>
+          <cl:gridcolumn std:sid="g-column-19751bd1"/>
+          <cl:gridcolumn std:sid="g-column-ee0ba29b"/>
+          <cl:gridcolumn std:sid="g-column-29f5d7e1"/>
+          <cl:gridheader std:sid="gh-band-042990e8">
+            <cl:gridrow std:sid="g-row-4d3e0443" height="50px"/>
+            <cl:gridcell std:sid="gh-cell-b955b423" rowindex="0" colindex="0" targetcolumnname="MapCode" sortable="false" filterable="false" text="Code">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_MapCode"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gh-cell-5c9be6dc" rowindex="0" colindex="1" targetcolumnname="Name" sortable="false" filterable="false" text="Name">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_Name"/>
+              <cl:langbind property="filterDialogTitle" category="PROPERTY" keypath="Str_Name"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gh-cell-61f86bc4" rowindex="0" colindex="2" targetcolumnname="PosX" sortable="false" filterable="false" text="Position X" visible="false"/>
+            <cl:gridcell std:sid="gh-cell-b17a3bb4" rowindex="0" colindex="3" targetcolumnname="PosY" sortable="false" filterable="false" text="Position Y" visible="false"/>
+            <cl:gridcell std:sid="gh-cell-a848e363" rowindex="0" colindex="4" visible="false"/>
+          </cl:gridheader>
+          <cl:griddetail std:sid="gd-band-cdc419e4">
+            <cl:gridrow std:sid="g-row-3dcf0e25" height="30px"/>
+            <cl:gridcell std:sid="gd-cell-d6c24a65" rowindex="0" colindex="0" columnname="MapCode">
+              <cl:output std:sid="output-a056de35" style="text-align:center;" value="Output"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gd-cell-d99ae5e2" rowindex="0" colindex="1" columnname="Name">
+              <cl:output std:sid="output-7e4315e8" style="text-align:center;" value="Output"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gd-cell-6937a751" rowindex="0" colindex="2" columnname="PosX">
+              <cl:output std:sid="output-ceee93f0" style="text-align:center;" value="Output"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gd-cell-d30f1e94" rowindex="0" colindex="3" columnname="PosY">
+              <cl:output std:sid="output-e052596e" style="text-align:center;" value="Output"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gd-cell-cd1e6147" rowindex="0" colindex="4" columnname="ImageData">
+              <cl:output std:sid="output-def5eacf" style="text-align:center;" value="Output"/>
+            </cl:gridcell>
+          </cl:griddetail>
+        </cl:grid>
+        <cl:formlayout std:sid="f-layout-ffa7f5fb" scrollable="false">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-dad0e377">
+        <cl:formdata std:sid="f-data-5da4caf5" row="2" col="0"/>
+        <cl:button std:sid="button-511a986e" id="btnAddRow" style="font-size:16px;" class="button-search-green-amhq">
+          <cl:listener std:sid="listener-a5bf6d5d" name="click" handler="onBtnAddRowClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Add"/>
+          <cl:formdata std:sid="f-data-5fa8fc59" valign="FILL" height="30" row="0" col="0"/>
+        </cl:button>
+        <cl:button std:sid="button-f6f3538b" id="btnDelRow" class="button-amhq">
+          <cl:listener std:sid="listener-5c60929b" name="click" handler="onBtnDelRowClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Delete"/>
+          <cl:formdata std:sid="f-data-9e38cdb8" valign="FILL" height="30" row="0" col="1"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-924da245">
+          <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-c62c21f4">
+        <cl:formdata std:sid="f-data-dac0d043" row="0" col="0" rowspan="1" colspan="2"/>
+        <cl:output std:sid="output-d304fa2a" class="menu-title-amhq" value="장소도면관리">
+          <cl:formdata std:sid="f-data-d5d08a4c" row="0" col="0" rowspan="1" colspan="2"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-19a76eed" scrollable="false" hspace="4px" vspace="2px" top-margin="2px" right-margin="2px" bottom-margin="2px" left-margin="2px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="300" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-4fd29e05" scrollable="false">
+        <cl:rows length="35" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="250" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-ce33a2eb"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

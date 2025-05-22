@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-95e6bf82" version="1.0.0.0">
+  <head std:sid="head-1b21b480">
+    <title>userListGroup</title>
+    <screen std:sid="screen-2799f3aa" id="default" name="default" minwidth="1024px" width="1024px" height="768px" customHeight="600" customWidth="800"/>
+    <screen std:sid="screen-073f06ed" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-71855311" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-c578a3db">
+      <cl:dataset std:sid="d-set-174ba88d" id="GroupList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-724901d2" name="GroupID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-945ead44" name="Parent" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-7e1629c4" name="Name"/>
+          <cl:datacolumn std:sid="d-column-319cd702" name="Description"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-a1e53e49" id="UserList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-32f4f022" name="ID" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-a69862c3" name="UniqueID"/>
+          <cl:datacolumn std:sid="d-column-dc6654bc" name="Name" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-ad538860" name="AuthInfo"/>
+          <cl:datacolumn std:sid="d-column-415d5f5e" name="Privilege"/>
+          <cl:datacolumn std:sid="d-column-869ac7fa" name="RegistDate"/>
+          <cl:datacolumn std:sid="d-column-c31bb3c2" name="ExpiredDate"/>
+          <cl:datacolumn std:sid="d-column-9880b0c4" name="GroupCode"/>
+          <cl:datacolumn std:sid="d-column-99cd9b14" name="AccessGroupCode" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-d2122fef" name="TimezoneCode"/>
+          <cl:datacolumn std:sid="d-column-6ca5433d" name="BlackList"/>
+          <cl:datacolumn std:sid="d-column-3a6c28c4" name="FPIdentify"/>
+          <cl:datacolumn std:sid="d-column-459c9458" name="FaceIdentify"/>
+          <cl:datacolumn std:sid="d-column-2c73d22f" name="APBZone"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-c2bd18fc" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-c1c836f2" name="Count" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-a33aca7f" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-0ce8a34c" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-81231b5a" id="sms_getUserList" method="get" action="/v1/users">
+        <cl:listener std:sid="listener-8801f590" name="submit-done" handler="onSms_getUserListSubmitDone"/>
+        <cl:listener std:sid="listener-5f70c6f6" name="submit-success" handler="onSms_getUserListSubmitSuccess"/>
+        <cl:listener std:sid="listener-7bffdd02" name="submit-error" handler="onSms_getUserListSubmitError"/>
+        <cl:listener std:sid="listener-26b0f5bb" name="submit-timeout" handler="onSms_getUserListSubmitTimeout"/>
+        <cl:requestparam name="searchCategory"/>
+        <cl:requestparam name="searchKeyword" value=""/>
+        <cl:requestparam name="offset" value="0"/>
+        <cl:requestparam name="limit" value="50"/>
+        <cl:requestparam name="picture" value="false"/>
+        <cl:requestparam name="fields"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total" isadd="false"/>
+        <cl:responsedata dataid="UserList" isadd="false"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec>
+      <cl:property name="SearchCategory" type="string"/>
+      <cl:property name="SearchKeyword" type="string"/>
+      <cl:event name="userListUpdate" type="cpr.events.CUIEvent"/>
+      <cl:event name="userListDblclick" type="cpr.events.CGridEvent"/>
+    </cl:appspec>
+  </head>
+  <body std:sid="body-b93816dd" style="top:0px; left:0px; width:600px; height:300px;">
+    <cl:group std:sid="group-5ba9c3aa">
+      <cl:datarowcontext datacontrolid="UserList" rowindex="0"/>
+      <cl:xylayoutdata std:sid="xyl-data-3a0d270f" top="36px" right="0px" bottom="0px" left="210px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:pageindexer std:sid="p-indexer-dac35961" id="userListGroup_pageIndexer" class="userList_paging">
+        <cl:listener std:sid="listener-1a7edfa0" name="selection-change" handler="onUserListGroup_pageIndexerSelectionChange"/>
+        <cl:formdata std:sid="f-data-c1159ef7" width="100" row="1" col="0"/>
+      </cl:pageindexer>
+      <cl:grid std:sid="grid-c61713ad" id="userListGroup_gridUserList" readonly="false" datasetid="UserList" resizablecolumns="none" columnMovable="false">
+        <cl:listener std:sid="listener-4062fd76" name="row-dblclick" handler="onUserListGroup_gridUserListRowDblclick"/>
+        <cl:formdata std:sid="f-data-c9411110" row="0" col="0" rowspan="1" colspan="1"/>
+        <cl:gridcolumn std:sid="g-column-0ae34bfc" width="25px"/>
+        <cl:gridcolumn std:sid="g-column-15ba7cf0"/>
+        <cl:gridcolumn std:sid="g-column-2c33b8a6"/>
+        <cl:gridcolumn std:sid="g-column-1c9175fe"/>
+        <cl:gridcolumn std:sid="g-column-f4a7b18f"/>
+        <cl:gridcolumn std:sid="g-column-96354c05"/>
+        <cl:gridcolumn std:sid="g-column-14feea62"/>
+        <cl:gridcolumn std:sid="g-column-c693de71"/>
+        <cl:gridcolumn std:sid="g-column-d983e596"/>
+        <cl:gridcolumn std:sid="g-column-d46d86d0"/>
+        <cl:gridcolumn std:sid="g-column-fd7f88d9"/>
+        <cl:gridcolumn std:sid="g-column-85b16f77"/>
+        <cl:gridcolumn std:sid="g-column-1299029c"/>
+        <cl:gridcolumn std:sid="g-column-2c7bb4eb"/>
+        <cl:gridcolumn std:sid="g-column-412e69c8"/>
+        <cl:gridheader std:sid="gh-band-94bb3a78">
+          <cl:gridrow std:sid="g-row-b2d77bf0"/>
+          <cl:gridcell std:sid="gh-cell-c6ff9490" rowindex="0" colindex="0" sortable="false" filterable="false" columntype="checkbox"/>
+          <cl:gridcell std:sid="gh-cell-1d3f6b7d" rowindex="0" colindex="1" targetcolumnname="ID" sortable="false" filterable="false" text="ID"/>
+          <cl:gridcell std:sid="gh-cell-ebf20fea" rowindex="0" colindex="2" targetcolumnname="UniqueID" sortable="false" filterable="false" text="UniqueID"/>
+          <cl:gridcell std:sid="gh-cell-da341e99" rowindex="0" colindex="3" targetcolumnname="Name" sortable="false" filterable="false" text="Name"/>
+          <cl:gridcell std:sid="gh-cell-1e7cba7f" rowindex="0" colindex="4" targetcolumnname="AuthInfo" sortable="false" filterable="false" text="AuthInfo"/>
+          <cl:gridcell std:sid="gh-cell-cee860f1" rowindex="0" colindex="5" targetcolumnname="Privilege" sortable="false" filterable="false" text="Privilege"/>
+          <cl:gridcell std:sid="gh-cell-d7c2fbd2" rowindex="0" colindex="6" targetcolumnname="GroupCode" sortable="false" filterable="false" text="GroupCode"/>
+          <cl:gridcell std:sid="gh-cell-7d77ad86" rowindex="0" colindex="7" targetcolumnname="AccessGroupCode" sortable="false" filterable="false" text="AccessGroupCode"/>
+          <cl:gridcell std:sid="gh-cell-b106cc24" rowindex="0" colindex="8" targetcolumnname="RegistDate" sortable="false" filterable="false" text="RegistDate"/>
+          <cl:gridcell std:sid="gh-cell-c7222b1b" rowindex="0" colindex="9" targetcolumnname="ExpiredDate" sortable="false" filterable="false" text="ExpireDate"/>
+          <cl:gridcell std:sid="gh-cell-b0308689" rowindex="0" colindex="10" targetcolumnname="TimezoneCode" sortable="false" filterable="false" text="TimezoneCode"/>
+          <cl:gridcell std:sid="gh-cell-baef8d09" rowindex="0" colindex="11" targetcolumnname="BlackList" sortable="false" filterable="false" text="BlackList"/>
+          <cl:gridcell std:sid="gh-cell-7074b7f8" rowindex="0" colindex="12" targetcolumnname="FPIdentify" sortable="false" filterable="false" text="FPIdentify"/>
+          <cl:gridcell std:sid="gh-cell-29519382" rowindex="0" colindex="13" targetcolumnname="FaceIdentify" sortable="false" filterable="false" text="FaceIdentify"/>
+          <cl:gridcell std:sid="gh-cell-5388bdc3" rowindex="0" colindex="14" targetcolumnname="APBZone" sortable="false" filterable="false" text="APBZone"/>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-6db93186">
+          <cl:gridrow std:sid="g-row-64e49027"/>
+          <cl:gridcell std:sid="gd-cell-3b0abc14" rowindex="0" colindex="0" columntype="checkbox" columnname=""/>
+          <cl:gridcell std:sid="gd-cell-428449cd" rowindex="0" colindex="1" columnname="ID"/>
+          <cl:gridcell std:sid="gd-cell-a6c94567" rowindex="0" colindex="2" columnname="UniqueID"/>
+          <cl:gridcell std:sid="gd-cell-35cfeb72" rowindex="0" colindex="3" columnname="Name"/>
+          <cl:gridcell std:sid="gd-cell-1afb3836" rowindex="0" colindex="4" columnname="AuthInfo"/>
+          <cl:gridcell std:sid="gd-cell-4aeb1315" rowindex="0" colindex="5" columnname="Privilege"/>
+          <cl:gridcell std:sid="gd-cell-4f6aba52" rowindex="0" colindex="6" columnname="GroupCode"/>
+          <cl:gridcell std:sid="gd-cell-778af056" rowindex="0" colindex="7" columnname="AccessGroupCode"/>
+          <cl:gridcell std:sid="gd-cell-6134231c" rowindex="0" colindex="8" columnname="RegistDate"/>
+          <cl:gridcell std:sid="gd-cell-c49f3bef" rowindex="0" colindex="9" columnname="ExpiredDate"/>
+          <cl:gridcell std:sid="gd-cell-3c01399e" rowindex="0" colindex="10" columnname="TimezoneCode"/>
+          <cl:gridcell std:sid="gd-cell-9c066e6d" rowindex="0" colindex="11" columnname="BlackList"/>
+          <cl:gridcell std:sid="gd-cell-24cec759" rowindex="0" colindex="12" columnname="FPIdentify"/>
+          <cl:gridcell std:sid="gd-cell-bbb77295" rowindex="0" colindex="13" columnname="FaceIdentify"/>
+          <cl:gridcell std:sid="gd-cell-d29da802" rowindex="0" colindex="14" columnname="APBZone"/>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:formlayout std:sid="f-layout-d04faa15">
+        <cl:rows length="1" unit="FRACTION" shadetype="NONE" shadecolor="#000000"/>
+        <cl:rows length="40" unit="PIXEL" shadetype="NONE" shadecolor="#000000"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:group std:sid="group-86aab08f" style="padding:4px;" class="un-form-border">
+      <cl:xylayoutdata std:sid="xyl-data-5acebe4f" top="0px" bottom="0px" left="0px" width="200px" horizontalAnchor="LEFT" verticalAnchor="BOTH"/>
+      <cl:tabfolder std:sid="t-folder-8035194e">
+        <cl:xylayoutdata std:sid="xyl-data-8cb93395" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+        <cl:tabitem std:sid="t-item-64e28ae0" selected="true" text="그룹">
+          <cl:group std:sid="group-d2eeb8e8">
+            <std:metadata>
+              <std:property key="locked" value="true"/>
+            </std:metadata>
+            <cl:tree std:sid="tree-704b6ec8" id="userListGroup_treeGroup">
+              <cl:listener std:sid="listener-fe861150" name="selection-change" handler="onUserListGroup_treeGroupSelectionChange"/>
+              <cl:xylayoutdata std:sid="xyl-data-35799b91" top="0px" right="1px" left="0px" height="674px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+              <cl:treeitem std:sid="t-item-077fca0b" label="전체" value="0"/>
+              <cl:treeitemset datasetid="GroupList" label="Name" value="GroupID" parent="Parent"/>
+            </cl:tree>
+            <cl:xylayout std:sid="xylayout-d01e708f"/>
+          </cl:group>
+        </cl:tabitem>
+      </cl:tabfolder>
+      <cl:xylayout std:sid="xylayout-c7e8d4dd"/>
+    </cl:group>
+    <cl:group std:sid="group-9a92d50a">
+      <cl:xylayoutdata std:sid="xyl-data-e390f4ea" top="0px" right="0px" left="210px" height="30px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+      <cl:button std:sid="button-23a375ea" id="userListGroup_btnSearch" class="search" value="검색">
+        <cl:listener std:sid="listener-7c802e18" name="click" handler="onUserListGroup_btnSearchClick"/>
+        <cl:formdata std:sid="f-data-3950a43a" row="0" col="2"/>
+      </cl:button>
+      <cl:inputbox std:sid="i-box-e0df28f9" id="userListGroup__ipbKeyword" placeholder="검색 키워드 입력">
+        <cl:apppropbind property="value" category="PROPERTY" app-property="searchKeyword"/>
+        <cl:formdata std:sid="f-data-e077e72b" row="0" col="1"/>
+      </cl:inputbox>
+      <cl:combobox std:sid="c-box-e997b9e5" id="userListGroup__cmbSearchCategory" preventinput="true">
+        <cl:apppropbind property="value" category="PROPERTY" app-property="searchCategory"/>
+        <cl:formdata std:sid="f-data-022ffbf2" valign="CENTER" row="0" col="0"/>
+        <cl:item std:sid="item-31a7c7ba" label="ID" value="id"/>
+        <cl:item std:sid="item-2e33e5ef" label="NAME" value="name"/>
+        <cl:item std:sid="item-536df5b2" label="UniqueID" value="uniqueID"/>
+      </cl:combobox>
+      <cl:output std:sid="output-d9dd614e" style="text-align:right;" value="Total :">
+        <cl:formdata std:sid="f-data-bff74870" row="0" col="3"/>
+      </cl:output>
+      <cl:output std:sid="output-9f862153" id="userListGroup_opbTotal" value="200000">
+        <cl:datamapbind property="value" datacontrolid="Total" columnname="Count"/>
+        <cl:formdata std:sid="f-data-5bbe731a" row="0" col="4"/>
+      </cl:output>
+      <cl:formlayout std:sid="f-layout-075cbc2a">
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+        <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+        <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+        <cl:columns length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+        <cl:columns length="60" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+        <cl:columns length="60" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-1a81ad1b"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

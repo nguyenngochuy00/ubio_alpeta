@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-f772aa43" version="1.0.0.0">
+  <head std:sid="head-e366bb72">
+    <title>musteringLPRList</title>
+    <screen std:sid="screen-0668da3e" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="600" customWidth="400"/>
+    <screen std:sid="screen-5c8c5215" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-1976c17d" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-ea37b46b">
+      <cl:dataset std:sid="d-set-0d6f4ebf" id="LPRSelectedList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-61efa988" name="DeviceID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-6a5a421d" name="InOut" datatype="number"/>
+        </cl:datacolumnlist>
+        <cl:datarowlist/>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-c0e198fb" id="LPRList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-2ba52b9c" name="DeviceID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-2653325b" name="DeviceName"/>
+          <cl:datacolumn std:sid="d-column-bf18aa19" name="InOut" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-5ff300e0" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-cd80a037" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-1804400d" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-28001652" name="Count" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-67449244" id="sms_getMusteringLpr" method="get" action="/v1/mustering/lpr/0">
+        <cl:listener std:sid="listener-17a9dec4" name="submit-done" handler="onSms_getMusteringLprSubmitDone"/>
+        <cl:listener std:sid="listener-93e090ed" name="submit-error" handler="onSms_getMusteringLprSubmitError"/>
+        <cl:listener std:sid="listener-3f0858a4" name="submit-timeout" handler="onSms_getMusteringLprSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="LPRList"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-859eb5b7" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-3eeabd97" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-8482ce0d" style="color:#010101;">
+      <cl:xylayoutdata std:sid="xyl-data-c242569a" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:grid std:sid="grid-b7b1733a" id="MLL_grdLPRList" class="grid-amhq" datasetid="LPRList">
+        <cl:formdata std:sid="f-data-cdc5e870" row="1" col="0" rowspan="1" colspan="3"/>
+        <cl:gridcolumn std:sid="g-column-e6eda4f0" width="25px"/>
+        <cl:gridcolumn std:sid="g-column-40c9a97b"/>
+        <cl:gridcolumn std:sid="g-column-6de61f43" width="200px"/>
+        <cl:gridheader std:sid="gh-band-085f09ee">
+          <cl:gridrow std:sid="g-row-5e56eded" height="50px"/>
+          <cl:gridcell std:sid="gh-cell-4dee52b6" rowindex="0" colindex="0" sortable="false" filterable="false" columntype="checkbox"/>
+          <cl:gridcell std:sid="gh-cell-ac094f18" rowindex="0" colindex="1" targetcolumnname="DeviceID" sortable="false" filterable="false" text="아이디"/>
+          <cl:gridcell std:sid="gh-cell-ab03c35f" rowindex="0" colindex="2" targetcolumnname="DeviceName" sortable="false" filterable="false" text="장비 위치"/>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-44bf9673">
+          <cl:gridrow std:sid="g-row-96a01f1a" height="30px"/>
+          <cl:gridcell std:sid="gd-cell-33fa0536" rowindex="0" colindex="0" columntype="checkbox"/>
+          <cl:gridcell std:sid="gd-cell-51563720" rowindex="0" colindex="1" columnname="DeviceID"/>
+          <cl:gridcell std:sid="gd-cell-e444d2f0" rowindex="0" colindex="2" columnname="DeviceName"/>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:button std:sid="button-311c1d65" id="MLL_btnApply" class="button-amhq">
+        <cl:listener std:sid="listener-78cd2603" name="click" handler="onMLL_btnApplyClick"/>
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_Apply"/>
+        <cl:formdata std:sid="f-data-b8ba5110" row="0" col="1"/>
+      </cl:button>
+      <cl:button std:sid="button-9292704d" id="MLL_btnCancel" class="button-amhq">
+        <cl:listener std:sid="listener-b44c474f" name="click" handler="onMLL_btnCancelClick"/>
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_Cancel"/>
+        <cl:formdata std:sid="f-data-36443722" row="0" col="2"/>
+      </cl:button>
+      <cl:formlayout std:sid="f-layout-d4d54265" top-margin="5px" right-margin="5px" bottom-margin="5px" left-margin="5px">
+        <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="80" unit="PIXEL" autoSizing="false" minlength="0"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-f83aeb52"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

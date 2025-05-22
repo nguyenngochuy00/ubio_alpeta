@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-35170797" version="1.0.0.0">
+  <head std:sid="head-23ce9dd4">
+    <title>ServerLogDownload</title>
+    <screen std:sid="screen-005739b6" id="default" name="default" minwidth="1024px" width="1024px" height="768px"/>
+    <screen std:sid="screen-55f3edbc" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-1e9db788" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-4644a3cb">
+      <cl:dataset std:sid="d-set-9a882f41" id="dsLogFileList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-0cdf803e" name="LogFilePath"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-78a7689a" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-203d365d" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-03a01fa9" id="sms_getServerLogList" method="get" action="/v1/armyhq/serverlogs">
+        <cl:listener std:sid="listener-1f68b2c8" name="submit-done" handler="onSms_getServerLogSubmitDone"/>
+        <cl:listener std:sid="listener-84444000" name="submit-error" handler="onSubmitError"/>
+        <cl:listener std:sid="listener-60db2ae5" name="submit-timeout" handler="onSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="dsLogFileList" alias="LogFileList"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-27318e2f" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-73909361" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-e571783e">
+      <cl:xylayoutdata std:sid="xyl-data-ef7f4a7a" top="25px" right="10px" bottom="0px" left="50px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-9715fdcc">
+        <cl:formdata std:sid="f-data-7e96edb1" row="0" col="0"/>
+        <cl:output std:sid="output-d304fa2a" class="menu-title-amhq" value="서버로그 다운로드">
+          <cl:formdata std:sid="f-data-4581e019" row="0" col="0" rowspan="1" colspan="1"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-a714bd8a" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="400" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-5b5905b7">
+        <cl:formdata std:sid="f-data-857d1d10" row="2" col="0"/>
+        <cl:output std:sid="output-aea85aec" style="border-radius:0px;" class="section-green-top-amhq" value="서버로그 조회">
+          <cl:formdata std:sid="f-data-c27a2dc0" row="0" col="0"/>
+        </cl:output>
+        <cl:group std:sid="group-015aa883" class="section-white-top-amhq">
+          <cl:formdata std:sid="f-data-35e3c0b6" row="0" col="1"/>
+          <cl:dateinput std:sid="d-input-b0e4796a" id="AMSD_dtiDate" style="color:#000000;" class="dateinput-amhq" format="YYYY-MM-DD">
+            <cl:formdata std:sid="f-data-3df36569" row="0" col="0"/>
+          </cl:dateinput>
+          <cl:button std:sid="button-6c10507a" id="AMACI_btnPersonnelListSearch" class="button-search-amhq" value="검색" icon="../../../../theme/custom/armyhq/btn_search.PNG" iconalign="right">
+            <cl:listener std:sid="listener-58855a0e" name="click" handler="onAMACI_btnPersonnelListSearchClick"/>
+            <cl:formdata std:sid="f-data-2e1c8fec" row="0" col="2"/>
+            <cl:iconstyle style="width:30px; height:30px;"/>
+          </cl:button>
+          <cl:formlayout std:sid="f-layout-aa310b76" scrollable="false" hspace="0px" vspace="0px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="120" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="90" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-178ab5b6" scrollable="false" hspace="0px" vspace="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="170" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-1dda4190" id="AMSD_grpLogList" style="padding-top:20px; padding-left:20px; padding-bottom:20px; padding-right:20px;">
+        <cl:formdata std:sid="f-data-de9aaa07" row="4" col="0"/>
+        <cl:verticallayout std:sid="v-layout-f2d2c4f9"/>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-ffaea908" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+        <cl:rows length="35" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-dbcf63c7"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-de240c72" version="1.0.0.0">
+  <head std:sid="head-c4403649">
+    <title>userFileSend</title>
+    <screen std:sid="screen-1e8ef40e" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="500" customWidth="700"/>
+    <screen std:sid="screen-b6314348" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-06021487" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-5b908518">
+      <cl:dataset std:sid="d-set-739e6df3" id="TerminalList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-03c83cd3" name="ID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-0a9d6b0a" name="Name"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-d8f4efcf" id="TerminalIDList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-4d2ad413" name="TerminalID" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-72d1f34a" id="FileInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-6229cf75" name="type" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-ca7391e2" name="name"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-a33aca7f" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-aba2d9d1" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-d3b27b1f" id="sms_terminalFileTransfer" action="/v1/terminals/filetransfer" mediatype="multipart/form-data">
+        <cl:listener std:sid="listener-5f7000bd" name="submit-done" handler="onSms_terminalFileTransferSubmitDone"/>
+        <cl:listener std:sid="listener-38cb47e7" name="submit-error" handler="onSms_terminalFileTransferSubmitError"/>
+        <cl:listener std:sid="listener-3a21bd7c" name="submit-timeout" handler="onSms_terminalFileTransferSubmitTimeout"/>
+        <cl:requestdata dataid="FileInfo"/>
+        <cl:requestdata dataid="TerminalIDList"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec dev-comment="UFMGR_cmbFileType"/>
+  </head>
+  <body std:sid="body-2ae959b7" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-b313098e" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-eeedfa7d">
+      <cl:xylayoutdata std:sid="xyl-data-74838202" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-5e92ad5c" style="padding:10px 10px 10px 5px;">
+        <cl:formdata std:sid="f-data-d220566a" row="0" col="0"/>
+        <cl:group std:sid="group-6843dc17">
+          <cl:formdata std:sid="f-data-b253c8cf" row="0" col="0"/>
+          <cl:output std:sid="output-9700e2d5" style="font-size:14px; text-align:center;">
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_FileType"/>
+            <cl:formdata std:sid="f-data-fcf93e7c" row="0" col="0"/>
+          </cl:output>
+          <cl:button std:sid="button-4b7daca8" id="UFMGR_btnSendFile" class="userInfo_btn">
+            <cl:listener std:sid="listener-5ed6c88e" name="click" handler="onUFMGR_btnSendFileClick"/>
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_Submit"/>
+            <cl:formdata std:sid="f-data-f9b91477" row="0" col="3"/>
+          </cl:button>
+          <cl:group std:sid="group-6835747f">
+            <cl:formdata std:sid="f-data-2132df2e" row="0" col="1"/>
+            <cl:combobox std:sid="c-box-34c069a3" id="UFMGR_cmbFileType" style="font-size:14px;" preventinput="true">
+              <cl:listener std:sid="listener-cc548c2b" name="selection-change" handler="onUFMGR_cmbFileTypeSelectionChange"/>
+              <cl:xylayoutdata std:sid="xyl-data-7fdb485b" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+            </cl:combobox>
+            <cl:xylayout std:sid="xylayout-c052d7fa"/>
+          </cl:group>
+          <cl:group std:sid="group-78762d01">
+            <cl:formdata std:sid="f-data-7b0777b7" row="0" col="2"/>
+            <cl:fileinput std:sid="f-input-ef317506" id="UFMGR_fiFileInput" style="font-size:14px;">
+              <cl:listener std:sid="listener-b2764cda" name="value-change" handler="onUFMGR_fiFileInputValueChange"/>
+              <cl:langbind property="placeholder" category="PROPERTY" keypath="Str_DragFile"/>
+              <cl:xylayoutdata std:sid="xyl-data-da50dec6" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+            </cl:fileinput>
+            <cl:xylayout std:sid="xylayout-638129ef"/>
+          </cl:group>
+          <cl:img std:sid="image-7af9813a" id="UFMGR_imgHelpPage" src="../../../theme/images/common/common_btn_window_top_q.png">
+            <cl:listener std:sid="listener-b9e79b66" name="click" handler="onUFMGR_imgHelpPageClick"/>
+            <cl:formdata std:sid="f-data-3a63c277" halign="CENTER" valign="CENTER" width="14" height="14" row="0" col="5"/>
+          </cl:img>
+          <cl:formlayout std:sid="f-layout-0a7a2979" hspace="0px" vspace="0px">
+            <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+            <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+            <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+            <cl:columns length="2" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+            <cl:columns length="80" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="5" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="14" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:group std:sid="group-135d4526" style="background-color:#F2F1EF; padding:10px 0px 10px 10px;">
+          <cl:formdata std:sid="f-data-5a278a07" row="1" col="0"/>
+          <cl:group std:sid="group-273ffdbb">
+            <cl:formdata std:sid="f-data-841f7801" row="0" col="0"/>
+            <cl:output std:sid="output-5f2a379e" style="font-weight:700; font-size:14px; text-align:left;">
+              <cl:langbind property="value" category="PROPERTY" keypath="Str_TerminalList"/>
+              <cl:formdata std:sid="f-data-40e51f8d" row="0" col="0"/>
+            </cl:output>
+            <cl:combobox std:sid="c-box-8d7d0fc4" id="cmb1" style="font-size:14px; text-align:center;" visible="false" value="0">
+              <cl:formdata std:sid="f-data-3f670d7c" row="0" col="1"/>
+              <cl:item std:sid="item-a2296d43" label="All" value="0"/>
+              <cl:item std:sid="item-a719e63f" label="AC7000" value="1"/>
+            </cl:combobox>
+            <cl:formlayout std:sid="f-layout-1d2c39df" hspace="0px" vspace="0px">
+              <cl:rows length="1" unit="FRACTION"/>
+              <cl:columns length="120" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:grid std:sid="grid-8efe6958" id="UFMGR_grdTerminalList" readonly="false" datasetid="TerminalList" resizablecolumns="none" columnMovable="false">
+            <cl:formdata std:sid="f-data-0740f635" row="1" col="0"/>
+            <cl:gridcolumn std:sid="g-column-04162a0c" width="25px"/>
+            <cl:gridcolumn std:sid="g-column-20510637" width="73px"/>
+            <cl:gridcolumn std:sid="g-column-3b3a03c4"/>
+            <cl:gridheader std:sid="gh-band-71f0f0b2">
+              <cl:gridrow std:sid="g-row-71562cef"/>
+              <cl:gridcell std:sid="gh-cell-5a64dd64" rowindex="0" colindex="0" sortable="false" filterable="false" columntype="checkbox"/>
+              <cl:gridcell std:sid="gh-cell-f2f66377" rowindex="0" colindex="1" targetcolumnname="ID" sortable="false" filterable="false" text="ID"/>
+              <cl:gridcell std:sid="gh-cell-7ba61b30" rowindex="0" colindex="2" targetcolumnname="Name" sortable="false" filterable="false" text="Name"/>
+            </cl:gridheader>
+            <cl:griddetail std:sid="gd-band-b208cdb1">
+              <cl:gridrow std:sid="g-row-94423c64"/>
+              <cl:gridcell std:sid="gd-cell-5bcaad41" rowindex="0" colindex="0" columntype="checkbox"/>
+              <cl:gridcell std:sid="gd-cell-681e1da6" rowindex="0" colindex="1" columnname="ID"/>
+              <cl:gridcell std:sid="gd-cell-2017c6fe" rowindex="0" colindex="2" columnname="Name"/>
+            </cl:griddetail>
+          </cl:grid>
+          <cl:formlayout std:sid="f-layout-c0df2acd" hspace="0px">
+            <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-0b249589" hspace="0px" vspace="5px">
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-6444a702" hspace="0px" vspace="0px">
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-5ccc81f0"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

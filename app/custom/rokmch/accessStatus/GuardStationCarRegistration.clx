@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-14e75da8" version="1.0.0.0">
+  <head std:sid="head-36da3beb">
+    <title>GuardStationCarRegistration</title>
+    <screen std:sid="screen-f615696b" id="default" name="default" minwidth="1024px" width="1024px" height="768px"/>
+    <screen std:sid="screen-afaf2b30" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-0428166c" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-6d8b137d">
+      <cl:dataset std:sid="d-set-2e14bae8" id="MusteringList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-47a37b83" name="MusteringID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-eb5fd0fd" name="MusteringName"/>
+          <cl:datacolumn std:sid="d-column-b1638230" name="MusteringDesc"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-e7118db5" id="dsCarAccessInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn comment="출입장소 ID&#x9;" std:sid="d-column-6b49387f" name="AccessAreaID" datatype="number"/>
+          <cl:datacolumn comment="출입구분 (1:입영, 2:퇴영)" std:sid="d-column-84fae363" name="AccessType" datatype="number"/>
+          <cl:datacolumn comment="출입시간 (HH:mm)" std:sid="d-column-6829427f" name="AccessTime"/>
+          <cl:datacolumn comment="차량 종류" std:sid="d-column-7ea70935" name="CarType" datatype="number"/>
+          <cl:datacolumn comment="차량 번호" std:sid="d-column-a9e22b1f" name="CarNumber"/>
+          <cl:datacolumn comment="이름" std:sid="d-column-b15222a5" name="Name"/>
+          <cl:datacolumn comment="주소/비고" std:sid="d-column-273cf511" name="AddressNote"/>
+          <cl:datacolumn comment="계급/직급" std:sid="d-column-dc94851c" name="Position"/>
+          <cl:datacolumn comment="출입목적" std:sid="d-column-7c52551c" name="PurposeOfAccess"/>
+          <cl:datacolumn comment="출입날짜 (YYYY-MM-DD)" std:sid="d-column-d9d94c35" info="" name="AccessDate"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-d2a9335d" id="dsUserAccessInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn comment="출입장소 ID" std:sid="d-column-683f7773" name="AccessAreaID" datatype="number"/>
+          <cl:datacolumn comment="출입구분 (1:입영, 2:퇴영)" std:sid="d-column-3806e8bf" name="AccessType" datatype="number"/>
+          <cl:datacolumn comment="출입시간 (HH:mm)" std:sid="d-column-f9704c11" name="AccessTime"/>
+          <cl:datacolumn comment="인원구분" std:sid="d-column-0dcd092e" name="UserType" datatype="number"/>
+          <cl:datacolumn comment="이름" std:sid="d-column-9229288d" name="Name"/>
+          <cl:datacolumn comment="주소/비고" std:sid="d-column-e5f16346" name="AddressNote"/>
+          <cl:datacolumn comment="계급/직급" std:sid="d-column-99604ebc" name="Position"/>
+          <cl:datacolumn comment="출입목적" std:sid="d-column-280034cc" name="PurposeOfAccess"/>
+          <cl:datacolumn comment="출입날짜 (YYYY-MM-DD)" std:sid="d-column-d969274a" name="AccessDate"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-a33aca7f" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-80d61523" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-deb91fe5" id="sms_getMusteringList" method="get" action="/v1/rollcalls">
+        <cl:listener std:sid="listener-84ad3e84" name="submit-done" handler="onSms_getMusteringListSubmitDone"/>
+        <cl:listener std:sid="listener-122e71ca" name="submit-error" handler="onSms_getMusteringListSubmitError"/>
+        <cl:listener std:sid="listener-937c9190" name="submit-timeout" handler="onSms_getMusteringListSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="MusteringList"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-df5bf1bb" id="sms_postManualAccessStatus" action="/v1/armyhq/manualAccessStatus/{type}">
+        <cl:listener std:sid="listener-409a8316" name="submit-done" handler="onSms_postManualAccessStatusSubmitDone"/>
+        <cl:listener std:sid="listener-6ab41bec" name="submit-error" handler="onSms_postManualAccessStatusSubmitError"/>
+        <cl:listener std:sid="listener-803c027a" name="submit-timeout" handler="onSms_postManualAccessStatusSubmitTimeout"/>
+        <cl:requestdata dataid="dsUserAccessInfo"/>
+        <cl:requestdata dataid="dsCarAccessInfo"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-ac363f95" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-adce4e36" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-b16ccd0f">
+      <cl:xylayoutdata std:sid="xyl-data-7e878b72" top="25px" right="10px" bottom="0px" left="50px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-9715fdcc">
+        <cl:formdata std:sid="f-data-5715e090" row="0" col="0" rowspan="1" colspan="2"/>
+        <cl:output std:sid="output-d304fa2a" class="menu-title-amhq">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_ARMYHQ_GuardStationCarRegistraion"/>
+          <cl:formdata std:sid="f-data-4581e019" row="0" col="0" rowspan="1" colspan="1"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-a714bd8a" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="400" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:output std:sid="output-43cd68ae" class="section-title-amhq">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_ARMYHQ_CarAccessBatchReistration"/>
+        <cl:formdata std:sid="f-data-197d3747" row="2" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-7f1c7c8d" class="section-green-top-amhq" visible="true">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_ARMYHQ_BatchApplicationUpload"/>
+        <cl:formdata std:sid="f-data-8fa03ceb" row="3" col="0"/>
+      </cl:output>
+      <cl:group std:sid="group-938391d3" class="section-white-top-amhq">
+        <cl:formdata std:sid="f-data-cf191fb3" row="3" col="1"/>
+        <cl:fileinput std:sid="f-input-bb1c9979" id="AMGCR_fiUserFile" class="fileinput-amhq">
+          <cl:listener std:sid="listener-50fd612c" name="value-change" handler="onAMGCR_fiUserFileValueChange"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_DragFile"/>
+          <cl:xylayoutdata std:sid="xyl-data-1447ff19" top="0px" bottom="0px" left="11px" width="270px" horizontalAnchor="LEFT" verticalAnchor="BOTH"/>
+        </cl:fileinput>
+        <cl:htmlsnippet comment="DownloadLink" std:sid="htmlsnippet-aa185ec8" id="AMGCR_sniDownloadLink" class="htmlsnippet-amhq" visible="true">
+          <cl:xylayoutdata std:sid="xyl-data-9ccb3bcd" top="0px" left="290px" width="100px" height="30px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+        </cl:htmlsnippet>
+        <cl:xylayout std:sid="xylayout-4b5b7b86" scrollable="false"/>
+      </cl:group>
+      <cl:group std:sid="group-ba341dd7">
+        <cl:formdata std:sid="f-data-56489cb0" row="5" col="0" rowspan="1" colspan="2"/>
+        <cl:button std:sid="button-058ecdc9" class="button-amhq">
+          <cl:listener std:sid="listener-5738d580" name="click" handler="onDeleteLineButtonClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_ARMYHQ_DeleteLine"/>
+          <cl:formdata std:sid="f-data-d77225f8" row="0" col="1"/>
+        </cl:button>
+        <cl:button std:sid="button-88696bb4" class="button-amhq">
+          <cl:listener std:sid="listener-4b1e7ab3" name="click" handler="onAddLineButtonClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_ARMYHQ_AddLine"/>
+          <cl:formdata std:sid="f-data-f4355c97" row="0" col="3"/>
+        </cl:button>
+        <cl:button std:sid="button-b9c29628" class="button-search-green-amhq">
+          <cl:listener std:sid="listener-36a3c456" name="click" handler="onRegistButtonClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Regist"/>
+          <cl:formdata std:sid="f-data-2ef05545" row="0" col="5"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-a3fce2ba" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="10" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="10" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:grid std:sid="grid-374af73b" id="ASR_grdCarAccessRegistration" class="grid-amhq" datasetid="dsCarAccessInfo">
+        <cl:formdata std:sid="f-data-4963b695" row="7" col="0" rowspan="1" colspan="2"/>
+        <cl:gridcolumn std:sid="g-column-10dde421" width="35px"/>
+        <cl:gridcolumn std:sid="g-column-117a9408"/>
+        <cl:gridcolumn std:sid="g-column-45ac7956"/>
+        <cl:gridcolumn std:sid="g-column-59b78434"/>
+        <cl:gridcolumn std:sid="g-column-b92116d0"/>
+        <cl:gridcolumn std:sid="g-column-adc7bfe6"/>
+        <cl:gridcolumn std:sid="g-column-0d252be2"/>
+        <cl:gridcolumn std:sid="g-column-95861c96"/>
+        <cl:gridcolumn std:sid="g-column-3411d45e"/>
+        <cl:gridcolumn std:sid="g-column-4c3c2a23"/>
+        <cl:gridcolumn std:sid="g-column-20e18032"/>
+        <cl:gridheader std:sid="gh-band-a3f6586c">
+          <cl:gridrow std:sid="g-row-7f2fe347" height="50px"/>
+          <cl:gridcell std:sid="gh-cell-c496f641" rowindex="0" colindex="0" text="No"/>
+          <cl:gridcell std:sid="gh-cell-d4f480ef" rowindex="0" colindex="1" targetcolumnname="AccessAreaID">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_ARMYHQ_AccessArea"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-ebc79d77" rowindex="0" colindex="2" targetcolumnname="AccessType">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_ARMYHQ_AccessType"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-c5cd1e85" rowindex="0" colindex="3" targetcolumnname="AccessTime">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_ARMYHQ_AccessTime"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-8bbc44d2" rowindex="0" colindex="4" targetcolumnname="CarType">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_ARMY_CarType"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-805f08c2" rowindex="0" colindex="5" style="background-repeat:no-repeat; background-size:20px 20px; background-image:url('../../../../theme/custom/armyhq/required_icon2.PNG'); background-position:right;" targetcolumnname="CarNumber">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_CarNumber"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-155cf8cf" rowindex="0" colindex="6" style="background-repeat:no-repeat; background-size:20px 20px; background-image:url('../../../../theme/custom/armyhq/required_icon2.PNG'); background-position:right;" targetcolumnname="Name">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_ARMY_Name"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-f48b028b" rowindex="0" colindex="7" style="background-repeat:no-repeat; background-size:20px 20px; background-image:url('../../../../theme/custom/armyhq/required_icon2.PNG'); background-position:right;" targetcolumnname="AddressNote">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_ARMYHQ_AddressNote"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-be246125" rowindex="0" colindex="8" targetcolumnname="Position">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_ARMY_Position"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-9906d322" rowindex="0" colindex="9" style="background-repeat:no-repeat; background-size:20px 20px; background-image:url('../../../../theme/custom/armyhq/required_icon2.PNG'); background-position:right;" targetcolumnname="PurposeOfAccess">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_ARMYHQ_PurposeOfAccess"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-7b6f2ae9" rowindex="0" colindex="10" targetcolumnname="AccessDate" text="AccessDate" visible="false"/>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-616fc16e">
+          <cl:gridrow std:sid="g-row-42ab7a0a" height="30px"/>
+          <cl:gridcell std:sid="gd-cell-c1493cd5" rowindex="0" colindex="0" columntype="rowindex"/>
+          <cl:gridcell std:sid="gd-cell-726f4caf" rowindex="0" colindex="1" columnname="AccessAreaID">
+            <cl:combobox std:sid="c-box-e5463254" id="AMGCR_cmbAccessArea">
+              <cl:itemset datasetid="MusteringList" label="MusteringName" value="MusteringID"/>
+            </cl:combobox>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-577bb8c8" rowindex="0" colindex="2" columnname="AccessType">
+            <cl:combobox std:sid="c-box-a3016315" id="AMGCR_cmbAccessType">
+              <cl:item std:sid="item-d4e8a4c1" label="label1" value="1">
+                <cl:langbind property="label" category="PROPERTY" keypath="Str_ARMYHQ_AccessIN"/>
+              </cl:item>
+              <cl:item std:sid="item-256de25a" label="label2" value="2">
+                <cl:langbind property="label" category="PROPERTY" keypath="Str_ARMYHQ_AccessOUT"/>
+              </cl:item>
+            </cl:combobox>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-6de9bfa2" rowindex="0" colindex="3" columnname="AccessTime">
+            <cl:inputbox std:sid="i-box-fe31ad0a" id="AMGCR_ipbAccessTime"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-05422d81" rowindex="0" colindex="4" columnname="CarType">
+            <cl:combobox std:sid="c-box-def3eaf4" id="AMGCR_cmbCarType">
+              <cl:item std:sid="item-30bbe754" label="label1" value="1">
+                <cl:langbind property="label" category="PROPERTY" keypath="Str_ARMYHQ_GeneralCar"/>
+              </cl:item>
+              <cl:item std:sid="item-14667ce5" label="label2" value="2">
+                <cl:langbind property="label" category="PROPERTY" keypath="Str_ARMYHQ_RFIDCar"/>
+              </cl:item>
+            </cl:combobox>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-1cb306f6" rowindex="0" colindex="5" columnname="CarNumber">
+            <cl:inputbox std:sid="i-box-40c460e2" id="AMGCR_ipbCarNumber"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-991387ed" rowindex="0" colindex="6" columnname="Name">
+            <cl:inputbox std:sid="i-box-3c13b77a" id="AMGCR_ipbName"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-faf87ead" rowindex="0" colindex="7" columnname="AddressNote">
+            <cl:inputbox std:sid="i-box-646e92dc" id="AMGCR_ipbAddressNote"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-5ccc5607" rowindex="0" colindex="8" columnname="Position">
+            <cl:inputbox std:sid="i-box-9370fb31" id="AMGCR_ipbPosition"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-839756f8" rowindex="0" colindex="9" columnname="PurposeOfAccess">
+            <cl:inputbox std:sid="i-box-de27bdf3" id="AMGCR_ipbPurposeOfAccess"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-bee0967e" rowindex="0" colindex="10" columnname="AccessDate"/>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:formlayout std:sid="f-layout-96512065" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+        <cl:rows length="35" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="10" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="240" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-e63235ef"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

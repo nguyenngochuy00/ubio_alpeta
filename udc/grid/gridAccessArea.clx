@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-0a734106" version="1.0.0.0">
+  <head std:sid="head-c972cb2b">
+    <title>gridAccessArea</title>
+    <screen std:sid="screen-08942dd4" id="default" customHeight="600" customWidth="800" height="768px" minwidth="1024px" name="default" width="1024px"/>
+    <screen std:sid="screen-4880d8b8" id="tablet" height="667px" maxwidth="1023px" minwidth="500px" name="tablet" width="500px"/>
+    <screen std:sid="screen-7571aa4d" id="mobile" height="525px" maxwidth="499px" name="mobile" width="350px"/>
+    <cl:model std:sid="model-7e71561b">
+      <cl:dataset std:sid="d-set-271fb2e9" id="AccessAreaList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-17352da4" datatype="number" name="ID"/>
+          <cl:datacolumn std:sid="d-column-270a1bed" name="Name"/>
+          <cl:datacolumn std:sid="d-column-3e1cc5aa" datatype="number" name="Timezone"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-c2bd18fc" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-500c72fd" datatype="number" name="Count"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-a33aca7f" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-97aee4dd" datatype="number" name="ResultCode"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-ef1cabb2" id="sms_getAccessAreaList" action="/v1/accessAreas" method="get">
+        <cl:listener std:sid="listener-e8d4d173" handler="onSms_getTerminalListSubmitDone" name="submit-done"/>
+        <cl:listener std:sid="listener-81b6205a" handler="onSms_getTerminalListSubmitSuccess" name="submit-success"/>
+        <cl:listener std:sid="listener-905b5160" handler="onSms_getTerminalListSubmitError" name="submit-error"/>
+        <cl:listener std:sid="listener-fc44edea" handler="onSms_getTerminalListSubmitTimeout" name="submit-timeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total"/>
+        <cl:responsedata dataid="AccessAreaList"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec>
+      <cl:event name="areaDblClick" type="cpr.events.CGridEvent"/>
+      <cl:event name="areaSelectionChange" type="cpr.events.CSelectionEvent"/>
+    </cl:appspec>
+  </head>
+  <body std:sid="body-19b67a6e" style="top:0px; left:0px; width:260px; height:400px;">
+    <cl:listener std:sid="listener-7105aa3f" handler="onBodyLoad" name="load"/>
+    <cl:group std:sid="group-3d9e721b">
+      <cl:xylayoutdata std:sid="xyl-data-0a3da0b3" bottom="0px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="BOTH"/>
+      <cl:grid std:sid="grid-db21dc27" id="gridAccessArea_grdAccessArea" columnMovable="false" columnResizable="false" datasetid="AccessAreaList" readonly="false">
+        <cl:listener std:sid="listener-3ff8c827" handler="onGridAccessArea_grdAccessAreaRowDblclick" name="row-dblclick"/>
+        <cl:listener std:sid="listener-e5139c33" handler="onGridAccessArea_grdAccessAreaSelectionChange" name="selection-change"/>
+        <cl:formdata std:sid="f-data-c993d3eb" col="0" row="0"/>
+        <cl:gridcolumn std:sid="g-column-3418877b" width="25px"/>
+        <cl:gridcolumn std:sid="g-column-f9cbf39a"/>
+        <cl:gridcolumn std:sid="g-column-22216d17"/>
+        <cl:gridcolumn std:sid="g-column-29ea903c"/>
+        <cl:gridheader std:sid="gh-band-fbd3a9c6">
+          <cl:gridrow std:sid="g-row-e87117dc"/>
+          <cl:gridcell std:sid="gh-cell-5b56d108" colindex="0" rowindex="0" columntype="checkbox" filterable="false" sortable="false"/>
+          <cl:gridcell std:sid="gh-cell-bd9ae07d" colindex="1" rowindex="0" filterable="false" sortable="false" targetcolumnname="ID">
+            <cl:langbind category="PROPERTY" property="text" keypath="Str_ID"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-80a2b742" colindex="2" rowindex="0" filterable="false" sortable="false" targetcolumnname="Name" text="Name">
+            <cl:langbind category="PROPERTY" property="text" keypath="Str_Name"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-3edc96fc" colindex="3" rowindex="0" filterable="false" sortable="false" targetcolumnname="Timezone" text="Timezone">
+            <cl:langbind category="PROPERTY" property="text" keypath="Str_Timezone"/>
+          </cl:gridcell>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-fadd4f73">
+          <cl:gridrow std:sid="g-row-4498219d"/>
+          <cl:gridcell std:sid="gd-cell-83ed8f9e" colindex="0" rowindex="0" columntype="checkbox"/>
+          <cl:gridcell std:sid="gd-cell-b3489824" colindex="1" rowindex="0" columnname="ID"/>
+          <cl:gridcell std:sid="gd-cell-31a88183" colindex="2" rowindex="0" columnname="Name"/>
+          <cl:gridcell std:sid="gd-cell-dd0affad" colindex="3" rowindex="0" columnname="Timezone"/>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:formlayout std:sid="f-layout-2b0c378d">
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-d5d9d997"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

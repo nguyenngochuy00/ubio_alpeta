@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-df357a2d" version="1.0.0.0">
+  <head std:sid="head-c472e368">
+    <title>userFingerRegist</title>
+    <screen std:sid="screen-6874a6b3" id="default" customHeight="440" customWidth="600" height="768px" minwidth="1024px" name="default" useCustomHeight="true" useCustomWidth="true" width="1024px"/>
+    <screen std:sid="screen-da6c7a00" id="tablet" height="667px" maxwidth="1023px" minwidth="500px" name="tablet" width="500px"/>
+    <screen std:sid="screen-e2f25ab5" id="mobile" height="525px" maxwidth="499px" name="mobile" width="350px"/>
+    <cl:model std:sid="model-5300f702">
+      <cl:dataset std:sid="d-set-a7351d38" id="UserFPInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="FingerID"/>
+          <cl:datacolumn datatype="number" name="MinConvType"/>
+          <cl:datacolumn datatype="number" name="TemplateIndex"/>
+          <cl:datacolumn name="TemplateData"/>
+          <cl:datacolumn datatype="number" name="Duress"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-e14c941e" id="dsFingerRegistMenu">
+        <cl:datacolumnlist>
+          <cl:datacolumn name="label"/>
+          <cl:datacolumn name="value"/>
+          <cl:datacolumn name="parent"/>
+        </cl:datacolumnlist>
+        <cl:datarowlist>
+          <cl:datarow>
+            <cl:datavalue columnname="label"><![CDATA[지문등록]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[regist]]></cl:datavalue>
+            <cl:datavalue columnname="parent"><![CDATA[]]></cl:datavalue>
+          </cl:datarow>
+        </cl:datarowlist>
+      </cl:dataset>
+      <cl:submission std:sid="submission-bb39e02c" id="sms_getUserFPInfo" method="get">
+        <cl:listener std:sid="listener-25517ca5" handler="onSms_getUserFPInfoSubmitDone" name="submit-done"/>
+        <cl:listener std:sid="listener-ebccb631" handler="onSms_getUserFPInfoSubmitError" name="submit-error"/>
+        <cl:listener std:sid="listener-f1310da6" handler="onSms_getUserFPInfoSubmitTimeout" name="submit-timeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="UserFPInfo"/>
+      </cl:submission>
+      <cl:datamap std:sid="d-map-866f6864" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="ResultCode"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:dataset std:sid="d-set-69ae6104" id="dsFingerModifyMenu">
+        <cl:datacolumnlist>
+          <cl:datacolumn name="label"/>
+          <cl:datacolumn name="value"/>
+          <cl:datacolumn name="parent"/>
+        </cl:datacolumnlist>
+        <cl:datarowlist>
+          <cl:datarow>
+            <cl:datavalue columnname="label"><![CDATA[지문재등록]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[regist]]></cl:datavalue>
+            <cl:datavalue columnname="parent"><![CDATA[]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="label"><![CDATA[지문삭제]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[delete]]></cl:datavalue>
+            <cl:datavalue columnname="parent"><![CDATA[]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="label"><![CDATA[협박지문등록]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[duressOn]]></cl:datavalue>
+            <cl:datavalue columnname="parent"><![CDATA[]]></cl:datavalue>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="label"><![CDATA[협박지문삭제]]></cl:datavalue>
+            <cl:datavalue columnname="value"><![CDATA[duressOff]]></cl:datavalue>
+            <cl:datavalue columnname="parent"><![CDATA[]]></cl:datavalue>
+          </cl:datarow>
+        </cl:datarowlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-fda74626" id="dm_FPInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="string" name="userID"/>
+          <cl:datacolumn datatype="number" name="fingerID"/>
+          <cl:datacolumn name="Template1"/>
+          <cl:datacolumn name="Template2"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-4a1725d4" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-9815f642" handler="onBodyLoad" name="load"/>
+    <cl:listener std:sid="listener-600ea823" handler="onBodyUnload" name="unload"/>
+    <cl:group std:sid="group-7372f8e2">
+      <cl:formdata std:sid="f-data-6c51f065" col="0" row="0"/>
+      <cl:output std:sid="output-5b8a51ee" value="등록 디바이스 선택">
+        <cl:formdata std:sid="f-data-570d1245" col="0" row="0"/>
+      </cl:output>
+      <cl:radiobutton std:sid="r-button-4dc13091" id="USFPR_rdbDeviceType" value="0">
+        <cl:formdata std:sid="f-data-b4ed0dcb" col="0" row="1"/>
+        <cl:item label="단말기" value="0"/>
+        <cl:item label="햄스터" value="1"/>
+      </cl:radiobutton>
+      <cl:output std:sid="output-b7a4c68f" value="등록 지문">
+        <cl:formdata std:sid="f-data-2507546b" col="0" row="2"/>
+      </cl:output>
+      <cl:group std:sid="group-24b7cebc">
+        <cl:formdata std:sid="f-data-db222ba2" col="0" row="3"/>
+        <cl:group std:sid="group-a4053b30">
+          <cl:formdata std:sid="f-data-dc599db1" col="0" row="0"/>
+          <cl:img std:sid="image-2c191e61" src="../../../theme/images/fingerRegistration/user_fingerprint_img_hand_left.png">
+            <cl:xylayoutdata std:sid="xyl-data-9e7c7672" height="160px" horizontalAnchor="LEFT" left="4px" top="4px" verticalAnchor="TOP" width="120px"/>
+          </cl:img>
+          <cl:img std:sid="image-d2012308" id="USFPR_imgfinger_6" src="../../../theme/images/common/common_check_box_normal.png">
+            <cl:listener std:sid="listener-fcde054d" handler="onImageContextmenu" name="click"/>
+            <cl:xylayoutdata std:sid="xyl-data-1997ebaf" height="16px" horizontalAnchor="LEFT" left="99px" top="76px" verticalAnchor="TOP" width="16px"/>
+          </cl:img>
+          <cl:img std:sid="image-6f51ee39" id="USFPR_imgfinger_7" src="../../../theme/images/common/common_check_box_normal.png">
+            <cl:listener std:sid="listener-084bdb8d" handler="onImageContextmenu" name="click"/>
+            <cl:xylayoutdata std:sid="xyl-data-7f36ab34" height="16px" horizontalAnchor="LEFT" left="70px" top="24px" verticalAnchor="TOP" width="16px"/>
+          </cl:img>
+          <cl:img std:sid="image-9f01f8a6" id="USFPR_imgfinger_8" src="../../../theme/images/common/common_check_box_normal.png">
+            <cl:listener std:sid="listener-f72159bb" handler="onImageContextmenu" name="click"/>
+            <cl:xylayoutdata std:sid="xyl-data-37391e37" height="16px" horizontalAnchor="LEFT" left="50px" top="9px" verticalAnchor="TOP" width="16px"/>
+          </cl:img>
+          <cl:img std:sid="image-7fa51b8a" id="USFPR_imgfinger_9" src="../../../theme/images/common/common_check_box_normal.png">
+            <cl:listener std:sid="listener-5e28e06d" handler="onImageContextmenu" name="click"/>
+            <cl:xylayoutdata std:sid="xyl-data-ed77351e" height="16px" horizontalAnchor="LEFT" left="32px" top="20px" verticalAnchor="TOP" width="16px"/>
+          </cl:img>
+          <cl:img std:sid="image-07b6bb37" id="USFPR_imgfinger_10" src="../../../theme/images/common/common_check_box_normal.png">
+            <cl:listener std:sid="listener-dfb6920b" handler="onImageContextmenu" name="click"/>
+            <cl:xylayoutdata std:sid="xyl-data-e83ec370" height="16px" horizontalAnchor="LEFT" left="13px" top="48px" verticalAnchor="TOP" width="16px"/>
+          </cl:img>
+          <cl:xylayout std:sid="xylayout-816a8f5a"/>
+        </cl:group>
+        <cl:group std:sid="group-f0ca6ce7">
+          <cl:formdata std:sid="f-data-5b3da970" col="1" row="0"/>
+          <cl:img std:sid="image-e537e004" src="../../../theme/images/fingerRegistration/user_fingerprint_img_hand_right.png">
+            <cl:xylayoutdata std:sid="xyl-data-612e940d" height="160px" horizontalAnchor="LEFT" left="4px" top="4px" verticalAnchor="TOP" width="120px"/>
+          </cl:img>
+          <cl:img std:sid="image-189b6799" id="USFPR_imgfinger_5" src="../../../theme/images/common/common_check_box_normal.png">
+            <cl:listener std:sid="listener-93e4c3e4" handler="onImageContextmenu" name="click"/>
+            <cl:xylayoutdata std:sid="xyl-data-abd6c9d3" height="16px" horizontalAnchor="LEFT" left="101px" top="48px" verticalAnchor="TOP" width="16px"/>
+          </cl:img>
+          <cl:img std:sid="image-e5620c17" id="USFPR_imgfinger_4" src="../../../theme/images/common/common_check_box_normal.png">
+            <cl:listener std:sid="listener-87ec8ddd" handler="onImageContextmenu" name="click"/>
+            <cl:xylayoutdata std:sid="xyl-data-efbe6152" height="16px" horizontalAnchor="LEFT" left="81px" top="20px" verticalAnchor="TOP" width="16px"/>
+          </cl:img>
+          <cl:img std:sid="image-616a5eab" id="USFPR_imgfinger_3" src="../../../theme/images/common/common_check_box_normal.png">
+            <cl:listener std:sid="listener-d46343fc" handler="onImageContextmenu" name="click"/>
+            <cl:xylayoutdata std:sid="xyl-data-93003331" height="16px" horizontalAnchor="LEFT" left="64px" top="8px" verticalAnchor="TOP" width="16px"/>
+          </cl:img>
+          <cl:img std:sid="image-d98aeb74" id="USFPR_imgfinger_2" src="../../../theme/images/common/common_check_box_normal.png">
+            <cl:listener std:sid="listener-a2123a6b" handler="onImageContextmenu" name="click"/>
+            <cl:xylayoutdata std:sid="xyl-data-6e170240" height="16px" horizontalAnchor="LEFT" left="44px" top="24px" verticalAnchor="TOP" width="16px"/>
+          </cl:img>
+          <cl:img std:sid="image-cd79054e" id="USFPR_imgfinger_1" src="../../../theme/images/common/common_check_box_normal.png">
+            <cl:listener std:sid="listener-ec3d10a8" handler="onImageContextmenu" name="click"/>
+            <cl:xylayoutdata std:sid="xyl-data-88efd96f" height="16px" horizontalAnchor="LEFT" left="14px" top="76px" verticalAnchor="TOP" width="16px"/>
+          </cl:img>
+          <cl:xylayout std:sid="xylayout-55947509"/>
+        </cl:group>
+        <cl:group std:sid="group-c9d9f9bb">
+          <cl:formdata std:sid="f-data-32565f07" col="0" colspan="2" row="1" rowspan="1"/>
+          <cl:output std:sid="output-3456e28c" id="USFPR_opbMessage" style="text-align:center;" value="Output">
+            <cl:xylayoutdata std:sid="xyl-data-dcb1bd95" bottom="4px" horizontalAnchor="LEFT" left="4px" top="4px" verticalAnchor="BOTH" width="163px"/>
+          </cl:output>
+          <cl:button std:sid="button-a73d491c" id="USFPR_btnRegist" value="등록">
+            <cl:xylayoutdata std:sid="xyl-data-7138eb7d" bottom="4px" horizontalAnchor="RIGHT" right="4px" top="4px" verticalAnchor="BOTH" width="80px"/>
+          </cl:button>
+          <cl:xylayout std:sid="xylayout-ab96c7e2"/>
+        </cl:group>
+        <cl:group std:sid="group-0399399f">
+          <cl:formdata std:sid="f-data-7ca2bd11" col="0" row="2"/>
+          <cl:img std:sid="image-bfaf3b94" id="USFPR_imgFPDisplay_1">
+            <cl:xylayoutdata std:sid="xyl-data-d450c7ab" bottom="4px" horizontalAnchor="BOTH" left="4px" right="4px" top="4px" verticalAnchor="BOTH"/>
+          </cl:img>
+          <cl:xylayout std:sid="xylayout-1e44aaa9"/>
+        </cl:group>
+        <cl:group std:sid="group-c05ca4c0">
+          <cl:formdata std:sid="f-data-ee1c43b9" col="1" row="2"/>
+          <cl:img std:sid="image-d5bc6ac6" id="USFPR_imgFPDisplay_2">
+            <cl:xylayoutdata std:sid="xyl-data-f3a62ba5" bottom="4px" horizontalAnchor="BOTH" left="4px" right="4px" top="4px" verticalAnchor="BOTH"/>
+          </cl:img>
+          <cl:xylayout std:sid="xylayout-28e45732"/>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-6af5ff7f">
+          <cl:rows autoSizing="false" length="168" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns autoSizing="false" length="1" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-5206a7c5">
+        <cl:rows length="25" unit="PIXEL"/>
+        <cl:rows length="25" unit="PIXEL"/>
+        <cl:rows length="25" unit="PIXEL"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:group std:sid="group-cec419ca">
+      <cl:formdata std:sid="f-data-81ccce3d" col="1" row="0"/>
+      <cl:udc std:sid="ud-control-f02fed8c" id="USFPR_udcTerminalList" type="udc.grid.terminalList">
+        <cl:formdata std:sid="f-data-dc867316" col="0" row="3"/>
+      </cl:udc>
+      <cl:udc std:sid="ud-control-3583714a" type="udc.search.searchTerminal">
+        <cl:formdata std:sid="f-data-d9bfd156" col="0" row="2"/>
+      </cl:udc>
+      <cl:output std:sid="output-0fb86cea" value="단말기 리스트">
+        <cl:formdata std:sid="f-data-795c2c9e" col="0" row="1"/>
+      </cl:output>
+      <cl:group std:sid="group-0e16fa20">
+        <cl:formdata std:sid="f-data-28abdd13" col="0" row="0"/>
+        <cl:button std:sid="button-149ef28c" id="USFPR_btnApply" value="적용">
+          <cl:listener std:sid="listener-cf79ec73" handler="onUSFPR_btnApplyClick" name="click"/>
+          <cl:xylayoutdata std:sid="xyl-data-b844f2a7" bottom="4px" horizontalAnchor="RIGHT" right="10px" top="4px" verticalAnchor="BOTH" width="80px"/>
+        </cl:button>
+        <cl:xylayout std:sid="xylayout-0901caa9"/>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-d9060fc3">
+        <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:formlayout std:sid="f-layout-d29a8799">
+      <cl:rows autoSizing="false" length="440" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+      <cl:columns autoSizing="false" length="260" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+      <cl:columns autoSizing="false" length="1" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+    </cl:formlayout>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

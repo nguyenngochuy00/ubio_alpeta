@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-dc340c4b" version="1.0.0.0">
+  <head std:sid="head-c9aca3d8">
+    <title>webCamCapture</title>
+    <screen std:sid="screen-4208488c" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="400" customWidth="640"/>
+    <screen std:sid="screen-22874086" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-cc8e1c84" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-ae829c71">
+      <cl:datamap std:sid="d-map-de68808e" id="UserPhoto">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-f0edcc1b" name="Photo"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-a33aca7f" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-8c91325a" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-07ed87eb" id="sms_CheckUseUserPhoto" method="post" action="/v1/visitor/CheckToUsePhoto">
+        <cl:listener std:sid="listener-5ef9ee44" name="submit-done" handler="onSms_CheckUseUserPhotoSubmitDone"/>
+        <cl:listener std:sid="listener-11a81fbf" name="submit-error" handler="onSms_CheckUseUserPhotoSubmitError"/>
+        <cl:listener std:sid="listener-7a3ac419" name="submit-timeout" handler="onSms_CheckUseUserPhotoSubmitTimeout"/>
+        <cl:requestdata dataid="UserPhoto"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-ff49008c" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-6f30085d" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-01b6519e">
+      <cl:xylayoutdata std:sid="xyl-data-8b4c90af" top="25px" width="360px" height="400px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
+      <cl:tabfolder std:sid="t-folder-3f4bdafd" id="VMUPR_tabRegistType">
+        <cl:listener std:sid="listener-4c5b3c2c" name="selection-change" handler="onVMUPR_tabRegistTypeSelectionChange"/>
+        <cl:formdata std:sid="f-data-179dd3c9" halign="CENTER" width="360" row="0" col="0"/>
+        <cl:tabitem std:sid="t-item-72c02aa2" text="WebCam">
+          <std:metadata>
+            <std:property key="is-active-item" value="true"/>
+          </std:metadata>
+          <cl:langbind property="text" category="PROPERTY" keypath="Str_WebCam"/>
+          <cl:group std:sid="group-ea23c7c1">
+            <std:metadata>
+              <std:property key="locked" value="true"/>
+            </std:metadata>
+            <cl:group std:sid="group-a203deb5" style="border-right-style:solid; border-top-width:1px; border-left-style:solid; border-right-width:1px; border-bottom-width:1px; border-bottom-style:solid; border-left-width:1px; border-top-style:solid;">
+              <cl:xylayoutdata std:sid="xyl-data-bba0a0b5" top="1px" right="0px" bottom="1px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+              <cl:uicontrolshell std:sid="uic-shell-3fecc903" id="shlCameraPreview">
+                <cl:listener std:sid="listener-95c23260" name="load" handler="onShlCameraPreviewLoad"/>
+                <cl:xylayoutdata std:sid="xyl-data-67d0873f" top="1px" bottom="2px" width="320px" horizontalAnchor="CENTER" verticalAnchor="BOTH"/>
+              </cl:uicontrolshell>
+              <cl:img std:sid="image-a200ad72" id="VMUPR_imgCameraCapture" visible="false">
+                <cl:xylayoutdata std:sid="xyl-data-9c0df3d7" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+              </cl:img>
+              <cl:xylayout std:sid="xylayout-b96cfcf5"/>
+            </cl:group>
+            <cl:xylayout std:sid="xylayout-08677459"/>
+          </cl:group>
+        </cl:tabitem>
+        <cl:tabitem std:sid="t-item-7d9bcee2" selected="true" text="File">
+          <cl:langbind property="text" category="PROPERTY" keypath="Str_UserFile"/>
+          <cl:group std:sid="group-f7a756c4">
+            <std:metadata>
+              <std:property key="locked" value="true"/>
+            </std:metadata>
+            <cl:group std:sid="group-ecc968fa">
+              <cl:xylayoutdata std:sid="xyl-data-fed86df0" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+              <cl:img std:sid="image-4ceb3c5a" id="VMUPR_imgVisitorPhoto" src="../../../theme/images/no_userPicture.png">
+                <cl:formdata std:sid="f-data-fca2cf01" halign="CENTER" valign="CENTER" width="320" height="320" row="0" col="0" rowspan="1" colspan="1"/>
+              </cl:img>
+              <cl:formlayout std:sid="f-layout-ec5943bb">
+                <cl:rows length="325" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="1" unit="FRACTION"/>
+              </cl:formlayout>
+            </cl:group>
+            <cl:xylayout std:sid="xylayout-e1617d61"/>
+          </cl:group>
+        </cl:tabitem>
+      </cl:tabfolder>
+      <cl:group std:sid="group-0e20f7d4">
+        <cl:formdata std:sid="f-data-c63c927c" row="1" col="0"/>
+        <cl:button std:sid="button-445f490c" id="VMUPR_btnCapture" class="userInfo_btn">
+          <cl:listener std:sid="listener-a0f050ce" name="click" handler="onVMUPR_btnCaptureClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_CaptureStart"/>
+          <cl:formdata std:sid="f-data-a7691c74" halign="RIGHT" width="120" row="0" col="1" rowspan="1" colspan="1"/>
+        </cl:button>
+        <cl:button std:sid="button-bc5f7112" id="VMUPR_btnSelect" class="userInfo_btn">
+          <cl:listener std:sid="listener-28833d38" name="click" handler="onVMUPR_btnSelectClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Apply"/>
+          <cl:formdata std:sid="f-data-ee18669a" halign="LEFT" row="0" col="2"/>
+        </cl:button>
+        <cl:uicontrolshell std:sid="uic-shell-077dbf47" id="VMUPR_shlInput">
+          <cl:listener std:sid="listener-e4357205" name="load" handler="onVMUPR_shlInputLoad"/>
+          <cl:formdata std:sid="f-data-e2a5a70e" row="0" col="0"/>
+        </cl:uicontrolshell>
+        <cl:uicontrolshell std:sid="uic-shell-af082c17" id="shl1">
+          <cl:listener std:sid="listener-b52f8ce3" name="load" handler="onShlCaptureCanvasLoad"/>
+          <cl:formdata std:sid="f-data-2d5fbe0f" row="0" col="3"/>
+        </cl:uicontrolshell>
+        <cl:formlayout std:sid="f-layout-c8b3593d">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="10" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="10" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-4c3303c2">
+        <cl:rows length="360" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="360" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-961a4c2a"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

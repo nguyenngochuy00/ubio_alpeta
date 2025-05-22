@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-b0071142" version="1.0.0.0">
+  <head std:sid="head-cf08b406">
+    <title>terminalMCPPageSchedule</title>
+    <screen std:sid="screen-52f03443" id="default" height="768px" minwidth="1024px" name="default" width="1024px"/>
+    <screen std:sid="screen-99daf39a" id="tablet" height="667px" maxwidth="1023px" minwidth="500px" name="tablet" width="500px"/>
+    <screen std:sid="screen-91b0c95a" id="mobile" height="525px" maxwidth="499px" name="mobile" width="350px"/>
+    <cl:model std:sid="model-8c618537">
+      <cl:submission std:sid="submission-3097c73d" id="smsGetAcuAlarmScheduleOption" method="get" mediatype="application/x-www-form-urlencoded">
+        <cl:listener std:sid="listener-d50d74ac" handler="onSmsGetAcuAlarmScheduleOptionSubmitDone" name="submit-done"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-a403049b" id="smsPutAcuAlarmScheduleOption" method="put" mediatype="application/json">
+        <cl:listener std:sid="listener-a80bd1e1" handler="onSmsPutAcuAlarmScheduleOptionSubmitDone" name="submit-done"/>
+      </cl:submission>
+      <cl:dataset std:sid="d-set-dbe57caf" id="dsSchedule">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-51abb013" datatype="string" name="AlarmTime"/>
+          <cl:datacolumn std:sid="d-column-696a3645" datatype="number" name="Duration"/>
+          <cl:datacolumn std:sid="d-column-668a9dd7" name="Contents"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-a581befd" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-67147b08" handler="onBodyLoad" name="load"/>
+    <cl:group std:sid="group-5a1e6d82" id="basicgrd" style="border-radius:2px; padding:10px;">
+      <cl:xylayoutdata std:sid="xyl-data-9a3b62fa" height="759px" horizontalAnchor="LEFT" left="10px" top="10px" verticalAnchor="TOP" width="687px"/>
+      <cl:group std:sid="group-878d6771" style="padding:0px; border-radius:2px;">
+        <cl:formdata std:sid="f-data-6e7ea375" col="0" colspan="1" row="0" rowspan="1"/>
+        <cl:output std:sid="output-db9f8757" style="font-weight:700; font-size:14px;">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_Input"/>
+          <cl:formdata std:sid="f-data-a00d7ac6" col="1" colspan="1" row="0" rowspan="1"/>
+        </cl:output>
+        <cl:output std:sid="output-cde4a98d" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:2px; border-left-color:#c5c5c5; font-size:14px; border-right-color:#c5c5c5; border-left-width:1px; border-top-style:solid; background-color:#f6f6f6; border-left-style:solid; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; text-align:center;">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_AlarmTime"/>
+          <cl:formdata std:sid="f-data-4faf8a58" col="1" row="1"/>
+        </cl:output>
+        <cl:output std:sid="output-0595e6e6" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:2px; border-left-style:solid; border-bottom-width:1px; border-left-color:#c5c5c5; font-size:14px; border-right-color:#c5c5c5; border-bottom-style:solid; border-left-width:1px; text-align:center;">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_Setup"/>
+          <cl:formdata std:sid="f-data-68da0de3" col="1" row="2"/>
+        </cl:output>
+        <cl:output std:sid="output-7320d39e" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:2px; border-left-color:#c5c5c5; font-size:14px; border-right-color:#c5c5c5; border-left-width:1px; border-top-style:solid; background-color:#f6f6f6; border-left-style:solid; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; text-align:center;">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_Duration"/>
+          <cl:formdata std:sid="f-data-9d36c533" col="1" row="5"/>
+        </cl:output>
+        <cl:output std:sid="output-a803e9a0" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:2px; border-left-color:#c5c5c5; font-size:14px; border-right-color:#c5c5c5; border-left-width:1px; border-top-style:solid; background-color:#f6f6f6; border-left-style:solid; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; text-align:center;">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_AutoSetOnSetupPartition"/>
+          <cl:formdata std:sid="f-data-45d3fcf7" col="1" row="6"/>
+        </cl:output>
+        <cl:combobox std:sid="c-box-742e7623" id="cmbAlarmHour" style="font-size:14px; text-align:center;" preventinput="true">
+          <cl:formdata std:sid="f-data-77aea242" col="3" row="1"/>
+        </cl:combobox>
+        <cl:output std:sid="output-df9284ee">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_Hour2"/>
+          <cl:formdata std:sid="f-data-cee7c0d9" col="5" row="1"/>
+        </cl:output>
+        <cl:combobox std:sid="c-box-d5856c6a" id="cmbAlarmMinute" style="font-size:14px; text-align:center;" preventinput="true">
+          <cl:formdata std:sid="f-data-f0d12f4d" col="7" row="1"/>
+        </cl:combobox>
+        <cl:output std:sid="output-53f9c002">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_Minute"/>
+          <cl:formdata std:sid="f-data-e26b7b06" col="9" row="1"/>
+        </cl:output>
+        <cl:combobox std:sid="c-box-2c6c5498" id="cmbSetup" style="font-size:14px; text-align:center;" preventinput="true">
+          <cl:listener std:sid="listener-33699e31" handler="onCmbSetupSelectionChange" name="selection-change"/>
+          <cl:formdata std:sid="f-data-74bfbd77" col="3" colspan="7" row="2" rowspan="1"/>
+        </cl:combobox>
+        <cl:output std:sid="output-412c46c8" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:2px; border-left-color:#c5c5c5; font-size:14px; border-right-color:#c5c5c5; border-left-width:1px; border-top-style:solid; background-color:#f6f6f6; border-left-style:solid; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; text-align:center;">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_AutoSetOffSetupPartition"/>
+          <cl:formdata std:sid="f-data-3e48ec65" col="1" row="7"/>
+        </cl:output>
+        <cl:output std:sid="output-5966cdcd" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:2px; border-left-color:#c5c5c5; font-size:14px; border-right-color:#c5c5c5; border-left-width:1px; border-top-style:solid; background-color:#f6f6f6; border-left-style:solid; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; text-align:center;">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_Output"/>
+          <cl:formdata std:sid="f-data-61ae46b2" col="1" row="8"/>
+        </cl:output>
+        <cl:combobox std:sid="c-box-ec59dd98" id="cmbDuration" style="font-size:14px; text-align:center;" preventinput="true">
+          <cl:formdata std:sid="f-data-89c65875" col="3" row="5"/>
+        </cl:combobox>
+        <cl:output std:sid="output-52e95ab2">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_Second"/>
+          <cl:formdata std:sid="f-data-485e3176" col="5" row="5"/>
+        </cl:output>
+        <cl:output std:sid="output-73b446d7" style="border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:2px; border-left-color:#c5c5c5; font-size:14px; border-right-color:#c5c5c5; border-left-width:1px; border-top-style:solid; background-color:#f6f6f6; border-left-style:solid; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; text-align:center;">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_Contents"/>
+          <cl:formdata std:sid="f-data-af0d2f6d" col="1" row="10"/>
+        </cl:output>
+        <cl:inputbox std:sid="i-box-06be2b78" id="ipbContents">
+          <cl:formdata std:sid="f-data-a67d0858" col="3" colspan="15" row="10" rowspan="1"/>
+        </cl:inputbox>
+        <cl:button std:sid="button-d7a27c54" id="btnAdd" class="userInfo_btn" style="background-color:#7cae0e; color:#ffffff;">
+          <cl:listener std:sid="listener-18958313" handler="onBtnReaderInfoSaveClick" name="click"/>
+          <cl:listener std:sid="listener-750f8873" handler="onBtnAddClick" name="click"/>
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_Add"/>
+          <cl:formdata std:sid="f-data-c69bce25" col="3" colspan="3" row="12" rowspan="1"/>
+        </cl:button>
+        <cl:button std:sid="button-f533da6d" id="btnModify" class="userInfo_btn" style="background-color:#7cae0e; color:#ffffff;">
+          <cl:listener std:sid="listener-3f5a3ee4" handler="onButtonClick" name="click"/>
+          <cl:listener std:sid="listener-18ecfa68" handler="onBtnModifyClick" name="click"/>
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_Modification"/>
+          <cl:formdata std:sid="f-data-647e36af" col="7" colspan="3" row="12" rowspan="1"/>
+        </cl:button>
+        <cl:button std:sid="button-879eb6c5" id="btnDelete" class="userInfo_btn" style="background-color:#636363; color:#ffffff;">
+          <cl:listener std:sid="listener-cce3a885" handler="onButtonClick2" name="click"/>
+          <cl:listener std:sid="listener-7576a46e" handler="onBtnDeleteClick" name="click"/>
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_Delete"/>
+          <cl:formdata std:sid="f-data-0df742ee" col="11" colspan="3" row="12" rowspan="1"/>
+        </cl:button>
+        <cl:checkbox std:sid="c-box-86203474" id="cbxWeek1" style="vertical-align:middle; text-align:left;">
+          <cl:langbind category="PROPERTY" property="text" keypath="Str_Week1"/>
+          <cl:formdata std:sid="f-data-3d8c159a" col="5" row="3"/>
+        </cl:checkbox>
+        <cl:checkbox std:sid="c-box-4ac8ce90" id="cbxWeek0" style="vertical-align:middle; text-align:left;" value="">
+          <cl:langbind category="PROPERTY" property="text" keypath="Str_Week0"/>
+          <cl:formdata std:sid="f-data-98842f1a" col="3" row="3"/>
+        </cl:checkbox>
+        <cl:checkbox std:sid="c-box-089ca3a8" id="cbxWeek2" style="vertical-align:middle; text-align:left;">
+          <cl:langbind category="PROPERTY" property="text" keypath="Str_Week2"/>
+          <cl:formdata std:sid="f-data-586dd09f" col="7" row="3"/>
+        </cl:checkbox>
+        <cl:checkbox std:sid="c-box-50eaf96f" id="cbxWeek3" style="vertical-align:middle; text-align:left;">
+          <cl:langbind category="PROPERTY" property="text" keypath="Str_Week3"/>
+          <cl:formdata std:sid="f-data-c654c3a3" col="9" row="3"/>
+        </cl:checkbox>
+        <cl:checkbox std:sid="c-box-8aa452ca" id="cbxWeek4" style="vertical-align:middle; text-align:left;">
+          <cl:langbind category="PROPERTY" property="text" keypath="Str_Week4"/>
+          <cl:formdata std:sid="f-data-3e1f49e0" col="11" row="3"/>
+        </cl:checkbox>
+        <cl:checkbox std:sid="c-box-78b8bdae" id="cbxWeek5" style="vertical-align:middle; text-align:left;" value="">
+          <cl:langbind category="PROPERTY" property="text" keypath="Str_Week5"/>
+          <cl:formdata std:sid="f-data-def3a8aa" col="13" row="3"/>
+        </cl:checkbox>
+        <cl:checkbox std:sid="c-box-762c801b" id="cbxWeek6" style="vertical-align:middle; text-align:left;" value="">
+          <cl:langbind category="PROPERTY" property="text" keypath="Str_Week6"/>
+          <cl:formdata std:sid="f-data-eeb0b1dc" col="15" row="3"/>
+        </cl:checkbox>
+        <cl:checkbox std:sid="c-box-9710c056" id="cbxExcludeHoliday" style="vertical-align:middle; text-align:left;" value="">
+          <cl:langbind category="PROPERTY" property="text" keypath="Str_ExcludeHoliday"/>
+          <cl:formdata std:sid="f-data-c1142fe5" col="3" colspan="6" row="4" rowspan="1"/>
+        </cl:checkbox>
+        <cl:checkbox std:sid="c-box-7f2ec4c9" id="cbxSetOff1" style="vertical-align:middle; text-align:center;" text="1" value="">
+          <cl:formdata std:sid="f-data-111494d5" col="3" row="6"/>
+        </cl:checkbox>
+        <cl:checkbox std:sid="c-box-6c400236" id="cbxSetOff2" style="vertical-align:middle; text-align:center;" text="2" value="">
+          <cl:formdata std:sid="f-data-9d1c287c" col="5" row="6"/>
+        </cl:checkbox>
+        <cl:checkbox std:sid="c-box-3755f329" id="cbxSetOff3" style="vertical-align:middle; text-align:center;" text="3">
+          <cl:formdata std:sid="f-data-0d6b9909" col="7" row="6"/>
+        </cl:checkbox>
+        <cl:checkbox std:sid="c-box-2017b1bf" id="cbxSetOff4" style="vertical-align:middle; text-align:center;" text="4">
+          <cl:formdata std:sid="f-data-84745584" col="9" row="6"/>
+        </cl:checkbox>
+        <cl:checkbox std:sid="c-box-b5cbac0e" id="cbxSetOn1" style="vertical-align:middle; text-align:center;" text="1">
+          <cl:formdata std:sid="f-data-c04118ab" col="3" row="7"/>
+        </cl:checkbox>
+        <cl:checkbox std:sid="c-box-17441162" id="cbxSetOn2" style="vertical-align:middle; text-align:center;" text="2" value="">
+          <cl:formdata std:sid="f-data-8eb7507a" col="5" row="7"/>
+        </cl:checkbox>
+        <cl:checkbox std:sid="c-box-ac84ea82" id="cbxSetOn3" style="vertical-align:middle; text-align:center;" text="3">
+          <cl:formdata std:sid="f-data-325e87bd" col="7" row="7"/>
+        </cl:checkbox>
+        <cl:checkbox std:sid="c-box-b4049842" id="cbxSetOn4" style="vertical-align:middle; text-align:center;" text="4">
+          <cl:formdata std:sid="f-data-61c4aeb6" col="9" row="7"/>
+        </cl:checkbox>
+        <cl:checkbox std:sid="c-box-ed774261" id="cbxOutput1" style="vertical-align:middle; text-align:center;" text="1">
+          <cl:formdata std:sid="f-data-48e500c4" col="3" row="8"/>
+        </cl:checkbox>
+        <cl:checkbox std:sid="c-box-7cac52c9" id="cbxOutput2" style="vertical-align:middle; text-align:center;" text="2">
+          <cl:formdata std:sid="f-data-70a3d39d" col="5" row="8"/>
+        </cl:checkbox>
+        <cl:checkbox std:sid="c-box-e0d357fd" id="cbxOutput3" style="vertical-align:middle; text-align:center;" text="3">
+          <cl:formdata std:sid="f-data-c60c8ee2" col="7" row="8"/>
+        </cl:checkbox>
+        <cl:checkbox std:sid="c-box-1de2559c" id="cbxOutput4" style="vertical-align:middle; text-align:center;" text="4">
+          <cl:formdata std:sid="f-data-a54fb5ec" col="9" row="8"/>
+        </cl:checkbox>
+        <cl:checkbox std:sid="c-box-748dee9e" id="cbxOutput5" style="vertical-align:middle; text-align:center;" text="5">
+          <cl:formdata std:sid="f-data-c702db5f" col="11" row="8"/>
+        </cl:checkbox>
+        <cl:checkbox std:sid="c-box-fff51671" id="cbxOutput6" style="vertical-align:middle; text-align:center;" text="6">
+          <cl:formdata std:sid="f-data-bb6b2882" col="13" row="8"/>
+        </cl:checkbox>
+        <cl:checkbox std:sid="c-box-5593de5f" id="cbxOutput7" style="vertical-align:middle; text-align:center;" text="7">
+          <cl:formdata std:sid="f-data-a2c485b2" col="15" row="8"/>
+        </cl:checkbox>
+        <cl:checkbox std:sid="c-box-cadbb6e7" id="cbxOutput8" style="vertical-align:middle; text-align:center;" text="8" value="">
+          <cl:formdata std:sid="f-data-6a5a75c1" col="17" row="8"/>
+        </cl:checkbox>
+        <cl:formlayout std:sid="f-layout-d02aee26" hspace="0px" vspace="0px">
+          <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows autoSizing="false" length="15" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows autoSizing="false" length="15" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="1" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="150" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="10" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="50" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="10" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="50" minlength="0" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="10" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="50" minlength="0" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="10" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="50" minlength="0" shadecolor="transparent" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="10" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="50" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="10" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="50" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="10" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="50" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="10" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="50" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="1" minlength="0" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-5911b912">
+        <cl:formdata std:sid="f-data-889def20" col="0" row="2"/>
+        <cl:grid std:sid="grid-e48f7d19" id="grdSchedule" datasetid="dsSchedule">
+          <cl:listener std:sid="listener-45e3725a" handler="onGrdScheduleSelectionChange" name="selection-change"/>
+          <cl:xylayoutdata std:sid="xyl-data-1d97d7fd" bottom="0px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="BOTH"/>
+          <cl:gridcolumn std:sid="g-column-68a40881"/>
+          <cl:gridcolumn std:sid="g-column-83b19463"/>
+          <cl:gridcolumn std:sid="g-column-a0930858"/>
+          <cl:gridheader std:sid="gh-band-170b0925">
+            <cl:gridrow std:sid="g-row-b537666e"/>
+            <cl:gridcell std:sid="gh-cell-9d2efd96" colindex="0" rowindex="0" filterable="false" sortable="false" targetcolumnname="AlarmTime" text="AlarmTime">
+              <cl:langbind category="PROPERTY" property="text" keypath="Str_AlarmTime"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gh-cell-4977a51f" colindex="1" rowindex="0" filterable="false" sortable="false" targetcolumnname="Duration" text="Duration">
+              <cl:langbind category="PROPERTY" property="text" keypath="Str_Duration"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gh-cell-75f412dd" colindex="2" rowindex="0" filterable="false" sortable="false" targetcolumnname="Contents" text="Contents">
+              <cl:langbind category="PROPERTY" property="text" keypath="Str_Contents"/>
+            </cl:gridcell>
+          </cl:gridheader>
+          <cl:griddetail std:sid="gd-band-f23ae679">
+            <cl:gridrow std:sid="g-row-8369c64a"/>
+            <cl:gridcell std:sid="gd-cell-98c2c87c" colindex="0" rowindex="0" columnname="AlarmTime"/>
+            <cl:gridcell std:sid="gd-cell-3c3a50c9" colindex="1" rowindex="0" columnname="Duration"/>
+            <cl:gridcell std:sid="gd-cell-1262f5e6" colindex="2" rowindex="0" columnname="Contents"/>
+          </cl:griddetail>
+        </cl:grid>
+        <cl:xylayout std:sid="xylayout-70c1566f"/>
+      </cl:group>
+      <cl:group std:sid="group-905aefcd">
+        <cl:formdata std:sid="f-data-84646a93" col="0" row="3"/>
+        <cl:button std:sid="button-0824931c" id="btnImport" class="userInfo_btn" style="background-color:#7cae0e; color:#ffffff;">
+          <cl:listener std:sid="listener-8e61bca8" handler="onBtnImportClick" name="click"/>
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_Import"/>
+          <cl:xylayoutdata std:sid="xyl-data-974cee57" height="26px" horizontalAnchor="LEFT" left="10px" top="2px" verticalAnchor="TOP" width="110px"/>
+        </cl:button>
+        <cl:button std:sid="button-330c6801" id="btnExport" class="userInfo_btn" style="background-color:#7cae0e; color:#ffffff;">
+          <cl:listener std:sid="listener-46d8abf0" handler="onBtnExportClick" name="click"/>
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_Export"/>
+          <cl:xylayoutdata std:sid="xyl-data-3ffa58be" height="26px" horizontalAnchor="LEFT" left="140px" top="2px" verticalAnchor="TOP" width="110px"/>
+        </cl:button>
+        <cl:xylayout std:sid="xylayout-be1e0017"/>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-dcd2fe65" hspace="0px" vspace="0px">
+        <cl:rows autoSizing="false" length="400" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:rows autoSizing="false" length="10" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:rows autoSizing="false" length="200" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:rows autoSizing="false" length="30" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-39dc8c86"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

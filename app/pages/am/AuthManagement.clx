@@ -1,0 +1,507 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-389387a7" version="1.0.0.0">
+  <head std:sid="head-86d72773">
+    <title>AuthManagement</title>
+    <screen std:sid="screen-0710ae54" id="default" height="768px" minwidth="1024px" name="default" width="1024px"/>
+    <screen std:sid="screen-8f883c13" id="tablet" height="667px" maxwidth="1023px" minwidth="500px" name="tablet" width="500px"/>
+    <screen std:sid="screen-06619f93" id="mobile" height="525px" maxwidth="499px" name="mobile" width="350px"/>
+    <cl:model std:sid="model-765efc00">
+      <cl:dataset std:sid="d-set-c6f2c2d1" id="privileges">
+        <cl:datacolumnlist>
+          <cl:datacolumn name="PrivilegeID"/>
+          <cl:datacolumn name="Name"/>
+        </cl:datacolumnlist>
+        <cl:datarowlist/>
+      </cl:dataset>
+      <cl:submission std:sid="submission-3959a29e" id="privileges_list_sm" action="data/privileges_data/privileges.json" mediatype="application/json">
+        <cl:responsedata dataid="privileges"/>
+      </cl:submission>
+      <cl:dataset std:sid="d-set-e052c01f" id="Monitoring">
+        <cl:datacolumnlist>
+          <cl:datacolumn name="title"/>
+          <cl:datacolumn name="value"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-ae5c54e3" id="Terminal">
+        <cl:datacolumnlist>
+          <cl:datacolumn name="title"/>
+          <cl:datacolumn name="value"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-84beb7be" id="User">
+        <cl:datacolumnlist>
+          <cl:datacolumn name="title"/>
+          <cl:datacolumn name="value"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-c8839c47" id="Group">
+        <cl:datacolumnlist>
+          <cl:datacolumn name="title"/>
+          <cl:datacolumn name="value"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-a2e434a7" id="Guest">
+        <cl:datacolumnlist>
+          <cl:datacolumn name="title"/>
+          <cl:datacolumn name="value"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-7c57fe32" id="Blacklist">
+        <cl:datacolumnlist>
+          <cl:datacolumn name="title"/>
+          <cl:datacolumn name="value"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-5573e642" id="AccessControl">
+        <cl:datacolumnlist>
+          <cl:datacolumn name="title"/>
+          <cl:datacolumn name="value"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-4b038ca0" id="Map">
+        <cl:datacolumnlist>
+          <cl:datacolumn name="title"/>
+          <cl:datacolumn name="value"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-2ddfe507" id="TNA">
+        <cl:datacolumnlist>
+          <cl:datacolumn name="title"/>
+          <cl:datacolumn name="value"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-8a000357" id="Log">
+        <cl:datacolumnlist>
+          <cl:datacolumn name="title"/>
+          <cl:datacolumn name="value"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-6bcc3898" id="Option">
+        <cl:datacolumnlist>
+          <cl:datacolumn name="title"/>
+          <cl:datacolumn name="value"/>
+        </cl:datacolumnlist>
+        <cl:datarowlist/>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-d5b9f9de" id="Meal">
+        <cl:datacolumnlist>
+          <cl:datacolumn name="title"/>
+          <cl:datacolumn name="value"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:submission std:sid="submission-2c76d2ea" id="privileges_sm" action="data/privileges_data/privileges_users.json">
+        <cl:listener std:sid="listener-ae24557e" handler="onPrivileges_users_smSubmitSuccess" name="submit-success"/>
+        <cl:responsedata dataid="Monitoring"/>
+        <cl:responsedata dataid="Terminal"/>
+        <cl:responsedata dataid="User"/>
+        <cl:responsedata dataid="Group"/>
+        <cl:responsedata dataid="Guest"/>
+        <cl:responsedata dataid="Blacklist"/>
+        <cl:responsedata dataid="AccessControl"/>
+        <cl:responsedata dataid="Map"/>
+        <cl:responsedata dataid="TNA"/>
+        <cl:responsedata dataid="Log"/>
+        <cl:responsedata dataid="Option"/>
+        <cl:responsedata dataid="Meal"/>
+      </cl:submission>
+      <cl:dataset std:sid="d-set-14927a91" id="privileges_include_users">
+        <cl:datacolumnlist>
+          <cl:datacolumn name="ID"/>
+          <cl:datacolumn name="UniqueID"/>
+          <cl:datacolumn name="Name"/>
+          <cl:datacolumn datatype="expression" expression="ID" name="id"/>
+          <cl:datacolumn datatype="expression" expression="UniqueID" name="uid"/>
+          <cl:datacolumn datatype="expression" expression="Name" name="name"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-71d31028" id="privileges_include_terminals">
+        <cl:datacolumnlist>
+          <cl:datacolumn name="ID"/>
+          <cl:datacolumn name="Name"/>
+          <cl:datacolumn name="Type"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:submission std:sid="submission-4895f887" id="privileges_include_terminals_sm" action="data/privileges_data/privileges_include_terminals.json">
+        <cl:listener std:sid="listener-633aeb29" handler="onPrivileges_include_terminals_smSubmitSuccess" name="submit-success"/>
+        <cl:responsedata dataid="privileges_include_terminals"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-e2397205" id="privileges_include_users_sm" action="data/privileges_data/privileges_include_users.json">
+        <cl:listener std:sid="listener-29f58df2" handler="onPrivileges_include_users_smSubmitSuccess" name="submit-success"/>
+        <cl:responsedata dataid="privileges_include_users"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec>
+      <cl:property default="10pt" name="gridFontSize" type="string"/>
+    </cl:appspec>
+  </head>
+  <body std:sid="body-d8d5d97e" style="padding:20px; top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-94ef2f3c" handler="onBodyLoad" name="load"/>
+    <cl:group std:sid="group-940c3e06">
+      <cl:xylayoutdata std:sid="xyl-data-7da644e7" bottom="0px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-1c229aa2" id="container_layout" class="un-form-border" style="padding:10px;">
+        <cl:attribute name="gridFontSize" value="12pt"/>
+        <cl:formdata std:sid="f-data-04f8133b" col="1" colspan="1" row="0" rowspan="1"/>
+        <cl:group std:sid="group-ddd6f1a9" class="un-form-border" style="padding:10px;" visible="false">
+          <cl:xylayoutdata std:sid="xyl-data-3214197a" height="50px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="TOP"/>
+          <cl:grid std:sid="grid-4a5576a3" id="Monitoring_grid" columnMovable="false" columnResizable="false" datasetid="Monitoring" hscroll="hidden" readonly="false" rowindexerstartnum="6" visible="false">
+            <cl:xylayoutdata std:sid="xyl-data-4f53627d" bottom="0px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="BOTH"/>
+            <cl:rowstyle/>
+            <cl:gridcolumn std:sid="g-column-bd019f45" width="50px"/>
+            <cl:gridcolumn std:sid="g-column-3c627221" width="50px"/>
+            <cl:gridheader std:sid="gh-band-90c4d009">
+              <cl:gridrow std:sid="g-row-6b6fed03"/>
+              <cl:gridcell std:sid="gh-cell-e9dbca78" colindex="0" colspan="2" rowindex="0" rowspan="1" filterable="false" sortable="false" targetcolumnname="title" text="Monitoring"/>
+            </cl:gridheader>
+            <cl:griddetail std:sid="gd-band-cc130792">
+              <cl:gridrow std:sid="g-row-0079729f" height="25px"/>
+              <cl:gridcell std:sid="gd-cell-802e99d1" colindex="0" rowindex="0" columnname="title"/>
+              <cl:gridcell std:sid="gd-cell-4ed18e6b" colindex="1" rowindex="0" columnname="value"/>
+            </cl:griddetail>
+            <cl:gridrowgrouplist std:sid="grg-list-28374a1b"/>
+          </cl:grid>
+          <cl:output std:sid="output-615a002c" value="Monitoring">
+            <cl:xylayoutdata std:sid="xyl-data-afb8ffd7" height="25px" horizontalAnchor="LEFT" left="0px" top="0px" verticalAnchor="TOP" width="125px"/>
+          </cl:output>
+          <cl:xylayout std:sid="xylayout-27d54d0c"/>
+        </cl:group>
+        <cl:group std:sid="group-4ae6bc77" class="un-form-border" style="padding:10px;" visible="false">
+          <cl:xylayoutdata std:sid="xyl-data-f16853a8" height="50px" horizontalAnchor="BOTH" left="0px" right="0px" top="50px" verticalAnchor="TOP"/>
+          <cl:grid std:sid="grid-f7737cfc" id="Terminal_grid" columnMovable="false" columnResizable="false" datasetid="Terminal" hscroll="hidden" readonly="false" rowindexerstartnum="6" visible="false">
+            <cl:xylayoutdata std:sid="xyl-data-1936b8ba" bottom="0px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="BOTH"/>
+            <cl:rowstyle/>
+            <cl:gridcolumn std:sid="g-column-cdfd2dd1" width="50px"/>
+            <cl:gridcolumn std:sid="g-column-945b0497" width="50px"/>
+            <cl:gridheader std:sid="gh-band-b98a51cc">
+              <cl:gridrow std:sid="g-row-1d9e771c"/>
+              <cl:gridcell std:sid="gh-cell-b078a457" colindex="0" colspan="2" rowindex="0" rowspan="1" filterable="false" sortable="false" targetcolumnname="title" text="Terminal"/>
+            </cl:gridheader>
+            <cl:griddetail std:sid="gd-band-ed53c670">
+              <cl:gridrow std:sid="g-row-93b01130"/>
+              <cl:gridcell std:sid="gd-cell-cd2b2659" colindex="0" rowindex="0" columnname="title"/>
+              <cl:gridcell std:sid="gd-cell-caa330ed" colindex="1" rowindex="0" columnname="value"/>
+            </cl:griddetail>
+            <cl:gridrowgrouplist std:sid="grg-list-bc984952"/>
+          </cl:grid>
+          <cl:output std:sid="output-3927a6bb" value="Terminal">
+            <cl:xylayoutdata std:sid="xyl-data-ad7880bf" height="25px" horizontalAnchor="LEFT" left="0px" top="0px" verticalAnchor="TOP" width="125px"/>
+          </cl:output>
+          <cl:xylayout std:sid="xylayout-66640cb1"/>
+        </cl:group>
+        <cl:group std:sid="group-b0bb558f" class="un-form-border" style="padding:10px;" visible="false">
+          <cl:xylayoutdata std:sid="xyl-data-b2985d46" height="50px" horizontalAnchor="BOTH" left="0px" right="0px" top="100px" verticalAnchor="TOP"/>
+          <cl:grid std:sid="grid-ba7ca441" id="User_grid" columnMovable="false" columnResizable="false" datasetid="User" hscroll="hidden" readonly="false" rowindexerstartnum="6" visible="false">
+            <cl:xylayoutdata std:sid="xyl-data-dbd27ec6" bottom="0px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="BOTH"/>
+            <cl:rowstyle/>
+            <cl:gridcolumn std:sid="g-column-676f6aef" width="50px"/>
+            <cl:gridcolumn std:sid="g-column-99d50fc7" width="50px"/>
+            <cl:gridheader std:sid="gh-band-4fa862fa">
+              <cl:gridrow std:sid="g-row-67921909"/>
+              <cl:gridcell std:sid="gh-cell-a46eeaf9" colindex="0" colspan="2" rowindex="0" rowspan="1" filterable="false" sortable="false" targetcolumnname="title" text="User"/>
+            </cl:gridheader>
+            <cl:griddetail std:sid="gd-band-847ea266">
+              <cl:gridrow std:sid="g-row-85555c40"/>
+              <cl:gridcell std:sid="gd-cell-6933c31c" colindex="0" rowindex="0" columnname="title"/>
+              <cl:gridcell std:sid="gd-cell-9e31df4c" colindex="1" rowindex="0" columnname="value"/>
+            </cl:griddetail>
+            <cl:gridrowgrouplist std:sid="grg-list-2e82eed5"/>
+          </cl:grid>
+          <cl:output std:sid="output-f48ad114" value="User">
+            <cl:xylayoutdata std:sid="xyl-data-3a70a6f8" height="25px" horizontalAnchor="LEFT" left="0px" top="0px" verticalAnchor="TOP" width="125px"/>
+          </cl:output>
+          <cl:xylayout std:sid="xylayout-2a2295bf"/>
+        </cl:group>
+        <cl:group std:sid="group-aa4b889b" class="un-form-border" style="padding:10px;" visible="false">
+          <cl:xylayoutdata std:sid="xyl-data-13072cd3" height="50px" horizontalAnchor="BOTH" left="0px" right="0px" top="150px" verticalAnchor="TOP"/>
+          <cl:grid std:sid="grid-65bc62da" id="Group_grid" columnMovable="false" columnResizable="false" datasetid="Group" hscroll="hidden" readonly="false" rowindexerstartnum="6" visible="false">
+            <cl:xylayoutdata std:sid="xyl-data-a953433c" bottom="0px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="BOTH"/>
+            <cl:rowstyle/>
+            <cl:gridcolumn std:sid="g-column-d2f15eff" width="50px"/>
+            <cl:gridcolumn std:sid="g-column-34a9379a" width="50px"/>
+            <cl:gridheader std:sid="gh-band-1f97881b">
+              <cl:gridrow std:sid="g-row-9692ef78"/>
+              <cl:gridcell std:sid="gh-cell-b9aff4f0" colindex="0" colspan="2" rowindex="0" rowspan="1" filterable="false" sortable="false" targetcolumnname="title" text="Group"/>
+            </cl:gridheader>
+            <cl:griddetail std:sid="gd-band-5bb88559">
+              <cl:gridrow std:sid="g-row-39d0a07e"/>
+              <cl:gridcell std:sid="gd-cell-deee7bf5" colindex="0" rowindex="0" columnname="title"/>
+              <cl:gridcell std:sid="gd-cell-347f4a96" colindex="1" rowindex="0" columnname="value"/>
+            </cl:griddetail>
+            <cl:gridrowgrouplist std:sid="grg-list-5b9b97b3"/>
+          </cl:grid>
+          <cl:output std:sid="output-0933e1d0" value="Group">
+            <cl:xylayoutdata std:sid="xyl-data-dc95e957" height="25px" horizontalAnchor="LEFT" left="0px" top="0px" verticalAnchor="TOP" width="125px"/>
+          </cl:output>
+          <cl:xylayout std:sid="xylayout-d781fa45"/>
+        </cl:group>
+        <cl:group std:sid="group-4328eb53" class="un-form-border" style="padding:10px;" visible="false">
+          <cl:xylayoutdata std:sid="xyl-data-88dddc1d" height="50px" horizontalAnchor="BOTH" left="0px" right="0px" top="200px" verticalAnchor="TOP"/>
+          <cl:grid std:sid="grid-9e76c851" id="Guest_grid" columnMovable="false" columnResizable="false" datasetid="Guest" hscroll="hidden" readonly="false" rowindexerstartnum="6" visible="false">
+            <cl:xylayoutdata std:sid="xyl-data-8a318634" bottom="0px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="BOTH"/>
+            <cl:rowstyle/>
+            <cl:gridcolumn std:sid="g-column-7d8b30f9" width="50px"/>
+            <cl:gridcolumn std:sid="g-column-6723c744" width="50px"/>
+            <cl:gridheader std:sid="gh-band-3bf3948d">
+              <cl:gridrow std:sid="g-row-44d5a970"/>
+              <cl:gridcell std:sid="gh-cell-b36b9916" colindex="0" colspan="2" rowindex="0" rowspan="1" filterable="false" sortable="false" targetcolumnname="title" text="Guest"/>
+            </cl:gridheader>
+            <cl:griddetail std:sid="gd-band-47d76433">
+              <cl:gridrow std:sid="g-row-97b28e85"/>
+              <cl:gridcell std:sid="gd-cell-83ca53de" colindex="0" rowindex="0" columnname="title"/>
+              <cl:gridcell std:sid="gd-cell-2ae52c29" colindex="1" rowindex="0" columnname="value"/>
+            </cl:griddetail>
+            <cl:gridrowgrouplist std:sid="grg-list-11e92283"/>
+          </cl:grid>
+          <cl:output std:sid="output-dd88844d" value="Guest">
+            <cl:xylayoutdata std:sid="xyl-data-5dbcd0ed" height="25px" horizontalAnchor="LEFT" left="0px" top="0px" verticalAnchor="TOP" width="125px"/>
+          </cl:output>
+          <cl:xylayout std:sid="xylayout-51007ef1"/>
+        </cl:group>
+        <cl:group std:sid="group-56cd0692" class="un-form-border" style="padding:10px;" visible="false">
+          <cl:xylayoutdata std:sid="xyl-data-53cd8dd6" height="50px" horizontalAnchor="BOTH" left="0px" right="0px" top="250px" verticalAnchor="TOP"/>
+          <cl:grid std:sid="grid-473c6df4" id="Blacklist_grid" columnMovable="false" columnResizable="false" datasetid="Blacklist" hscroll="hidden" readonly="false" rowindexerstartnum="6" visible="false">
+            <cl:xylayoutdata std:sid="xyl-data-6d3853b6" bottom="0px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="BOTH"/>
+            <cl:rowstyle/>
+            <cl:gridcolumn std:sid="g-column-21dc64f1" width="50px"/>
+            <cl:gridcolumn std:sid="g-column-bdbdb487" width="50px"/>
+            <cl:gridheader std:sid="gh-band-2c3499eb">
+              <cl:gridrow std:sid="g-row-4ddbb7a0"/>
+              <cl:gridcell std:sid="gh-cell-80ea01b2" colindex="0" colspan="2" rowindex="0" rowspan="1" filterable="false" sortable="false" targetcolumnname="title" text="Blacklist"/>
+            </cl:gridheader>
+            <cl:griddetail std:sid="gd-band-9c9a8fb0">
+              <cl:gridrow std:sid="g-row-acd34f19"/>
+              <cl:gridcell std:sid="gd-cell-c2625e38" colindex="0" rowindex="0" columnname="title"/>
+              <cl:gridcell std:sid="gd-cell-babdceb6" colindex="1" rowindex="0" columnname="value"/>
+            </cl:griddetail>
+            <cl:gridrowgrouplist std:sid="grg-list-10cfdd83"/>
+          </cl:grid>
+          <cl:output std:sid="output-83cc5968" value="Blacklist">
+            <cl:xylayoutdata std:sid="xyl-data-295d2370" height="25px" horizontalAnchor="LEFT" left="0px" top="0px" verticalAnchor="TOP" width="125px"/>
+          </cl:output>
+          <cl:xylayout std:sid="xylayout-e3b387f0"/>
+        </cl:group>
+        <cl:group std:sid="group-80e3d38a" class="un-form-border" style="padding:10px;" visible="false">
+          <cl:xylayoutdata std:sid="xyl-data-ca7e253a" height="50px" horizontalAnchor="BOTH" left="0px" right="0px" top="300px" verticalAnchor="TOP"/>
+          <cl:grid std:sid="grid-192ceab1" id="AccessControl_grid" columnMovable="false" columnResizable="false" datasetid="AccessControl" hscroll="hidden" readonly="false" rowindexerstartnum="6" visible="false">
+            <cl:xylayoutdata std:sid="xyl-data-65b8b91c" bottom="0px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="BOTH"/>
+            <cl:rowstyle/>
+            <cl:gridcolumn std:sid="g-column-7e597135" width="50px"/>
+            <cl:gridcolumn std:sid="g-column-276d359a" width="50px"/>
+            <cl:gridheader std:sid="gh-band-f0d1cf43">
+              <cl:gridrow std:sid="g-row-6eeaaa3f"/>
+              <cl:gridcell std:sid="gh-cell-c98a7af4" colindex="0" colspan="2" rowindex="0" rowspan="1" filterable="false" sortable="false" targetcolumnname="title" text="AccessControl"/>
+            </cl:gridheader>
+            <cl:griddetail std:sid="gd-band-fc4768e7">
+              <cl:gridrow std:sid="g-row-d3ac1372"/>
+              <cl:gridcell std:sid="gd-cell-d5bba6d3" colindex="0" rowindex="0" columnname="title"/>
+              <cl:gridcell std:sid="gd-cell-702a1a22" colindex="1" rowindex="0" columnname="value"/>
+            </cl:griddetail>
+            <cl:gridrowgrouplist std:sid="grg-list-777ed6f8"/>
+          </cl:grid>
+          <cl:output std:sid="output-fbdf1ba6" value="AccessControl">
+            <cl:xylayoutdata std:sid="xyl-data-9b8c27f1" height="25px" horizontalAnchor="LEFT" left="0px" top="0px" verticalAnchor="TOP" width="125px"/>
+          </cl:output>
+          <cl:xylayout std:sid="xylayout-75c5a4c2"/>
+        </cl:group>
+        <cl:group std:sid="group-777ce7e9" class="un-form-border" style="padding:10px;" visible="false">
+          <cl:xylayoutdata std:sid="xyl-data-5dc2ff98" height="50px" horizontalAnchor="BOTH" left="0px" right="0px" top="350px" verticalAnchor="TOP"/>
+          <cl:grid std:sid="grid-d90c9d3f" id="Map_grid" columnMovable="false" columnResizable="false" datasetid="Map" hscroll="hidden" readonly="false" rowindexerstartnum="6" visible="false">
+            <cl:xylayoutdata std:sid="xyl-data-531f5bee" bottom="0px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="BOTH"/>
+            <cl:rowstyle/>
+            <cl:gridcolumn std:sid="g-column-f6703822" width="50px"/>
+            <cl:gridcolumn std:sid="g-column-95580c26" width="50px"/>
+            <cl:gridheader std:sid="gh-band-49ede9f0">
+              <cl:gridrow std:sid="g-row-8756106d"/>
+              <cl:gridcell std:sid="gh-cell-7f709459" colindex="0" colspan="2" rowindex="0" rowspan="1" filterable="false" sortable="false" targetcolumnname="title" text="Map"/>
+            </cl:gridheader>
+            <cl:griddetail std:sid="gd-band-e7223914">
+              <cl:gridrow std:sid="g-row-ce7e7fec"/>
+              <cl:gridcell std:sid="gd-cell-9457df4a" colindex="0" rowindex="0" columnname="title"/>
+              <cl:gridcell std:sid="gd-cell-7751867f" colindex="1" rowindex="0" columnname="value"/>
+            </cl:griddetail>
+            <cl:gridrowgrouplist std:sid="grg-list-1d0a11ce"/>
+          </cl:grid>
+          <cl:output std:sid="output-6b0b4dc1" value="Map">
+            <cl:xylayoutdata std:sid="xyl-data-59076e6c" height="25px" horizontalAnchor="LEFT" left="0px" top="0px" verticalAnchor="TOP" width="125px"/>
+          </cl:output>
+          <cl:xylayout std:sid="xylayout-4b2579e0"/>
+        </cl:group>
+        <cl:group std:sid="group-8c844576" class="un-form-border" style="padding:10px;" visible="false">
+          <cl:xylayoutdata std:sid="xyl-data-6b3c8a77" height="50px" horizontalAnchor="BOTH" left="0px" right="-4px" top="400px" verticalAnchor="TOP"/>
+          <cl:grid std:sid="grid-a913bb5d" id="TNA_grid" columnMovable="false" columnResizable="false" datasetid="TNA" hscroll="hidden" readonly="false" rowindexerstartnum="6" visible="false">
+            <cl:xylayoutdata std:sid="xyl-data-4662c581" bottom="0px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="BOTH"/>
+            <cl:rowstyle/>
+            <cl:gridcolumn std:sid="g-column-91b58040" width="50px"/>
+            <cl:gridcolumn std:sid="g-column-99a8eebf" width="50px"/>
+            <cl:gridheader std:sid="gh-band-dd2cc6b9">
+              <cl:gridrow std:sid="g-row-96bafb33"/>
+              <cl:gridcell std:sid="gh-cell-d4022085" colindex="0" colspan="2" rowindex="0" rowspan="1" filterable="false" sortable="false" targetcolumnname="title" text="TNA"/>
+            </cl:gridheader>
+            <cl:griddetail std:sid="gd-band-0824f3b6">
+              <cl:gridrow std:sid="g-row-80dc5c94"/>
+              <cl:gridcell std:sid="gd-cell-7e852ef3" colindex="0" rowindex="0" columnname="title"/>
+              <cl:gridcell std:sid="gd-cell-ae3cfa00" colindex="1" rowindex="0" columnname="value"/>
+            </cl:griddetail>
+            <cl:gridrowgrouplist std:sid="grg-list-93d1669b"/>
+          </cl:grid>
+          <cl:output std:sid="output-62cd8d4a" value="TNA">
+            <cl:xylayoutdata std:sid="xyl-data-c8451836" height="25px" horizontalAnchor="LEFT" left="0px" top="0px" verticalAnchor="TOP" width="125px"/>
+          </cl:output>
+          <cl:xylayout std:sid="xylayout-142f9b47"/>
+        </cl:group>
+        <cl:group std:sid="group-ae94c298" class="un-form-border" style="padding:10px;" visible="false">
+          <cl:xylayoutdata std:sid="xyl-data-d8aa9d14" height="50px" horizontalAnchor="BOTH" left="0px" right="0px" top="450px" verticalAnchor="TOP"/>
+          <cl:grid std:sid="grid-2b9bd30f" id="Log_grid" columnMovable="false" columnResizable="false" datasetid="Log" hscroll="hidden" readonly="false" rowindexerstartnum="6" visible="false">
+            <cl:xylayoutdata std:sid="xyl-data-86ae199a" bottom="0px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="BOTH"/>
+            <cl:rowstyle/>
+            <cl:gridcolumn std:sid="g-column-67f58f67" width="50px"/>
+            <cl:gridcolumn std:sid="g-column-90ec20ba" width="50px"/>
+            <cl:gridheader std:sid="gh-band-77e92f7c">
+              <cl:gridrow std:sid="g-row-3005a5f3"/>
+              <cl:gridcell std:sid="gh-cell-ba9acbae" colindex="0" colspan="2" rowindex="0" rowspan="1" filterable="false" sortable="false" targetcolumnname="title" text="Log"/>
+            </cl:gridheader>
+            <cl:griddetail std:sid="gd-band-ffacb177">
+              <cl:gridrow std:sid="g-row-77e78309"/>
+              <cl:gridcell std:sid="gd-cell-2e539ba4" colindex="0" rowindex="0" columnname="title"/>
+              <cl:gridcell std:sid="gd-cell-eb587cd3" colindex="1" rowindex="0" columnname="value"/>
+            </cl:griddetail>
+            <cl:gridrowgrouplist std:sid="grg-list-227a805b"/>
+          </cl:grid>
+          <cl:output std:sid="output-290a6551" value="Log">
+            <cl:xylayoutdata std:sid="xyl-data-71d2485f" height="25px" horizontalAnchor="LEFT" left="0px" top="0px" verticalAnchor="TOP" width="125px"/>
+          </cl:output>
+          <cl:xylayout std:sid="xylayout-3e3fa9bf"/>
+        </cl:group>
+        <cl:group std:sid="group-b51a097c" class="un-form-border" style="padding:10px;" visible="false">
+          <cl:xylayoutdata std:sid="xyl-data-274d41ea" height="50px" horizontalAnchor="BOTH" left="0px" right="0px" top="500px" verticalAnchor="TOP"/>
+          <cl:grid std:sid="grid-78cc153f" id="Option_grid" columnMovable="false" columnResizable="false" datasetid="Option" readonly="false" visible="false">
+            <cl:xylayoutdata std:sid="xyl-data-37578090" bottom="0px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="BOTH"/>
+            <cl:gridcolumn std:sid="g-column-35ab1e7c"/>
+            <cl:gridcolumn std:sid="g-column-521e8c2b"/>
+            <cl:gridheader std:sid="gh-band-c5263aa1">
+              <cl:gridrow std:sid="g-row-e8493b26"/>
+              <cl:gridcell std:sid="gh-cell-e978484d" colindex="0" colspan="2" rowindex="0" rowspan="1" filterable="false" sortable="false" targetcolumnname="title" text="Option"/>
+            </cl:gridheader>
+            <cl:griddetail std:sid="gd-band-f4e66c17">
+              <cl:gridrow std:sid="g-row-4fa0fac8"/>
+              <cl:gridcell std:sid="gd-cell-9c29c1ea" colindex="0" rowindex="0" columnname="title"/>
+              <cl:gridcell std:sid="gd-cell-31dd5fff" colindex="1" rowindex="0" columnname="value"/>
+            </cl:griddetail>
+          </cl:grid>
+          <cl:output std:sid="output-b88d2e46" value="Option">
+            <cl:xylayoutdata std:sid="xyl-data-910ee914" height="25px" horizontalAnchor="LEFT" left="0px" top="0px" verticalAnchor="TOP" width="125px"/>
+          </cl:output>
+          <cl:xylayout std:sid="xylayout-c6f433a2"/>
+        </cl:group>
+        <cl:group std:sid="group-2ac83157" class="un-form-border" style="padding:10px;" visible="false">
+          <cl:xylayoutdata std:sid="xyl-data-183e8eed" height="50px" horizontalAnchor="BOTH" left="0px" right="0px" top="550px" verticalAnchor="TOP"/>
+          <cl:grid std:sid="grid-b1d28be9" id="Meal_grid" columnMovable="false" columnResizable="false" datasetid="Meal" hscroll="hidden" readonly="false" rowindexerstartnum="6" visible="false">
+            <cl:xylayoutdata std:sid="xyl-data-28b287fa" bottom="0px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="BOTH"/>
+            <cl:rowstyle/>
+            <cl:gridcolumn std:sid="g-column-a1bfc330" width="50px"/>
+            <cl:gridcolumn std:sid="g-column-2fce8e33" width="50px"/>
+            <cl:gridheader std:sid="gh-band-47ff420f">
+              <cl:gridrow std:sid="g-row-53f7f053"/>
+              <cl:gridcell std:sid="gh-cell-bd6907ab" colindex="0" colspan="2" rowindex="0" rowspan="1" filterable="false" sortable="false" targetcolumnname="value" text="Meal"/>
+            </cl:gridheader>
+            <cl:griddetail std:sid="gd-band-b7af1764">
+              <cl:gridrow std:sid="g-row-d962ae07"/>
+              <cl:gridcell std:sid="gd-cell-3344ae80" colindex="0" rowindex="0" columnname="title"/>
+              <cl:gridcell std:sid="gd-cell-caf0626d" colindex="1" rowindex="0" columnname="value"/>
+            </cl:griddetail>
+            <cl:gridrowgrouplist std:sid="grg-list-f9db0d3f"/>
+          </cl:grid>
+          <cl:output std:sid="output-9090d005" value="Meal">
+            <cl:xylayoutdata std:sid="xyl-data-1d1f48ff" height="25px" horizontalAnchor="LEFT" left="0px" top="0px" verticalAnchor="TOP" width="125px"/>
+          </cl:output>
+          <cl:xylayout std:sid="xylayout-91745b1c"/>
+        </cl:group>
+        <cl:group std:sid="group-57a2ae67" class="un-form-border" style="padding:10px;" visible="false">
+          <cl:xylayoutdata std:sid="xyl-data-935a306f" height="50px" horizontalAnchor="LEFT" left="0px" top="600px" verticalAnchor="TOP" width="409px"/>
+          <cl:grid std:sid="grid-e9d5a746" id="privileges_include_terminals_grid" autorowheight="all" columnMovable="false" columnResizable="false" datasetid="privileges_include_terminals" readonly="false">
+            <cl:xylayoutdata std:sid="xyl-data-4602fbf4" bottom="0px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="BOTH"/>
+            <cl:gridcolumn std:sid="g-column-668a28ad" width="33%"/>
+            <cl:gridcolumn std:sid="g-column-d85c144e" width="33%"/>
+            <cl:gridcolumn std:sid="g-column-3b62be96" width="33%"/>
+            <cl:gridheader std:sid="gh-band-0aa942d6">
+              <cl:gridrow std:sid="g-row-4d449d84"/>
+              <cl:gridcell std:sid="gh-cell-c62e2d88" colindex="0" rowindex="0" filterable="false" sortable="false" targetcolumnname="ID" text="ID"/>
+              <cl:gridcell std:sid="gh-cell-8563cdd7" colindex="1" rowindex="0" filterable="false" sortable="false" targetcolumnname="Name" text="Name"/>
+              <cl:gridcell std:sid="gh-cell-e687dff1" colindex="2" rowindex="0" filterable="false" sortable="false" targetcolumnname="Type" text="Type"/>
+            </cl:gridheader>
+            <cl:griddetail std:sid="gd-band-d8bd7b12">
+              <cl:gridrow std:sid="g-row-7016d44f"/>
+              <cl:gridcell std:sid="gd-cell-b1d71070" colindex="0" rowindex="0" columnname="ID"/>
+              <cl:gridcell std:sid="gd-cell-c6e24028" colindex="1" rowindex="0" columnname="Name"/>
+              <cl:gridcell std:sid="gd-cell-4b1ab5ac" colindex="2" rowindex="0" columnname="Type"/>
+            </cl:griddetail>
+          </cl:grid>
+          <cl:button std:sid="button-2ba95b4d" id="privileges_include_terminals_modify" value="변경">
+            <cl:listener std:sid="listener-5afeb3cc" handler="onPrivileges_include_terminals_modifyClick" name="click"/>
+            <cl:xylayoutdata std:sid="xyl-data-7e08fcdf" height="25px" horizontalAnchor="RIGHT" right="0px" top="0px" verticalAnchor="TOP" width="125px"/>
+          </cl:button>
+          <cl:output std:sid="output-3c379392" value="Terminals List">
+            <cl:xylayoutdata std:sid="xyl-data-53073a19" height="25px" horizontalAnchor="LEFT" left="0px" top="0px" verticalAnchor="TOP" width="125px"/>
+          </cl:output>
+          <cl:xylayout std:sid="xylayout-a8a4482b"/>
+        </cl:group>
+        <cl:group std:sid="group-f368fd27" class="un-form-border" style="padding:10px;" visible="false">
+          <cl:xylayoutdata std:sid="xyl-data-0e3de21c" height="50px" horizontalAnchor="RIGHT" right="0px" top="600px" verticalAnchor="TOP" width="410px"/>
+          <cl:grid std:sid="grid-612691ec" id="privileges_include_users_grid" columnMovable="false" columnResizable="false" datasetid="privileges_include_users" readonly="false">
+            <cl:xylayoutdata std:sid="xyl-data-e76717b7" bottom="0px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="BOTH"/>
+            <cl:gridcolumn std:sid="g-column-1a9a7cfb" width="33%"/>
+            <cl:gridcolumn std:sid="g-column-428304e7" width="33%"/>
+            <cl:gridcolumn std:sid="g-column-058d48f1" width="33%"/>
+            <cl:gridheader std:sid="gh-band-34302ce8">
+              <cl:gridrow std:sid="g-row-a15b9f54"/>
+              <cl:gridcell std:sid="gh-cell-206caec3" colindex="0" rowindex="0" filterable="false" sortable="false" targetcolumnname="ID" text="ID"/>
+              <cl:gridcell std:sid="gh-cell-77beaddb" colindex="1" rowindex="0" filterable="false" sortable="false" targetcolumnname="UniqueID" text="UniqueID"/>
+              <cl:gridcell std:sid="gh-cell-fd690943" colindex="2" rowindex="0" filterable="false" sortable="false" targetcolumnname="Name" text="Name"/>
+            </cl:gridheader>
+            <cl:griddetail std:sid="gd-band-9dd9556b">
+              <cl:gridrow std:sid="g-row-d7046091"/>
+              <cl:gridcell std:sid="gd-cell-fcf23924" colindex="0" rowindex="0" columnname="ID"/>
+              <cl:gridcell std:sid="gd-cell-0300d7e9" colindex="1" rowindex="0" columnname="UniqueID"/>
+              <cl:gridcell std:sid="gd-cell-3c365e60" colindex="2" rowindex="0" columnname="Name"/>
+            </cl:griddetail>
+          </cl:grid>
+          <cl:button std:sid="button-433e8d50" id="privileges_include_users_modify" value="변경">
+            <cl:listener std:sid="listener-08c93073" handler="onPrivileges_include_users_modifyClick" name="click"/>
+            <cl:xylayoutdata std:sid="xyl-data-a67d5670" height="25px" horizontalAnchor="RIGHT" right="0px" top="0px" verticalAnchor="TOP" width="125px"/>
+          </cl:button>
+          <cl:output std:sid="output-6c8dcb64" value="Users List">
+            <cl:xylayoutdata std:sid="xyl-data-7a3a0521" height="25px" horizontalAnchor="LEFT" left="0px" top="0px" verticalAnchor="TOP" width="125px"/>
+          </cl:output>
+          <cl:xylayout std:sid="xylayout-d31ca10a"/>
+        </cl:group>
+        <cl:xylayout std:sid="xylayout-1a20365f"/>
+      </cl:group>
+      <cl:group std:sid="group-247a4713" class="un-form-border">
+        <cl:formdata std:sid="f-data-c026fc72" col="0" row="0"/>
+        <cl:grid std:sid="grid-c976a9cd" id="privileges_grid" columnMovable="false" columnResizable="false" datasetid="privileges" readonly="false">
+          <cl:listener std:sid="listener-544a7dc5" handler="onPrivileges_gridCellClick" name="click"/>
+          <cl:xylayoutdata std:sid="xyl-data-c058571b" bottom="0px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="BOTH"/>
+          <cl:gridcolumn std:sid="g-column-e2ddfe82"/>
+          <cl:gridheader std:sid="gh-band-adff2022">
+            <cl:gridrow std:sid="g-row-e1e2781b"/>
+            <cl:gridcell std:sid="gh-cell-774aa236" colindex="0" rowindex="0" filterable="false" sortable="false" targetcolumnname="Name" text="권한 목록"/>
+          </cl:gridheader>
+          <cl:griddetail std:sid="gd-band-506a6d03">
+            <cl:gridrow std:sid="g-row-36f5bfa2"/>
+            <cl:gridcell std:sid="gd-cell-9e4b7365" colindex="0" rowindex="0" columnname="Name"/>
+          </cl:griddetail>
+        </cl:grid>
+        <cl:xylayout std:sid="xylayout-0dcf21bd"/>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-e9713974">
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="1" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+        <cl:columns length="5" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-83829d1d"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

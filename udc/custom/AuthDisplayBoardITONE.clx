@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-79d28434" version="1.0.0.0">
+  <head std:sid="head-1caebede">
+    <title>AuthLogStatistic</title>
+    <screen std:sid="screen-272ee0f8" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="550" customWidth="480"/>
+    <screen std:sid="screen-17bba0f7" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-bb1332bf" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-13a176fb">
+      <cl:datamap std:sid="d-map-b0e8c03b" id="AuthLogImage">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-326642ae" name="IndexKey" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-108b116a" name="UniqueID" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-b9b0337f" name="UserID"/>
+          <cl:datacolumn std:sid="d-column-94c9c665" name="UserName"/>
+          <cl:datacolumn std:sid="d-column-8a038f35" name="AuthType" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-9270109b" name="AuthResult" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-0f66a32f" name="TerminalID" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-cb1e1cad" name="TerminalName"/>
+          <cl:datacolumn std:sid="d-column-313b9b62" name="EventTime"/>
+          <cl:datacolumn std:sid="d-column-30c192fc" name="Card"/>
+          <cl:datacolumn std:sid="d-column-1b6dabcb" name="GroupName"/>
+          <cl:datacolumn std:sid="d-column-bd83724c" name="ReserveType" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-ccaea800" name="ReserveData"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-866f6864" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-8a1acc85" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-7d901d8a" id="PictureInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-2c1355c1" name="ImageType"/>
+          <cl:datacolumn std:sid="d-column-1b10ef22" name="Picture"/>
+          <cl:datacolumn std:sid="d-column-8486b3c8" name="UserID" datatype="string"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-25b9a277" id="fontSize">
+        <cl:datacolumnlist>
+          <cl:datacolumn comment="단말기명" std:sid="d-column-485456ec" name="font1" datatype="string"/>
+          <cl:datacolumn comment="사용자/인증 사진" std:sid="d-column-1e65de80" name="font2" datatype="string"/>
+          <cl:datacolumn comment="필드" std:sid="d-column-f54b1588" name="font3" datatype="string"/>
+          <cl:datacolumn comment="필드 데이터" std:sid="d-column-d3ebfd29" name="font4" datatype="string"/>
+          <cl:datacolumn comment="강조 필드" std:sid="d-column-b3083921" name="font5"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-e62ec51c" id="sms_getUserPicture" method="get">
+        <cl:listener std:sid="listener-de11966e" name="submit-done" handler="onSms_getUserPictureSubmitDone"/>
+        <cl:listener std:sid="listener-cb65814f" name="submit-error" handler="onSms_getUserPictureSubmitError"/>
+        <cl:listener std:sid="listener-db47fab2" name="submit-timeout" handler="onSms_getUserPictureSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="PictureInfo"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-5eacfe69" style="top:0px; left:0px; width:480px; height:550px;">
+    <cl:listener std:sid="listener-07a477ae" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-72caede7" id="layOut">
+      <cl:formdata std:sid="f-data-83575c5a" row="0" col="0"/>
+      <cl:group std:sid="group-91dcc478" id="layOutGroup" style="border-right-style:solid; border-top-width:2px; border-bottom-color:#024475; border-right-width:2px; border-left-color:#024475; border-right-color:#024475; border-left-width:2px; border-top-style:solid; border-radius:10px; background-color:#000000; border-left-style:solid; border-bottom-width:2px; border-top-color:#024475; border-bottom-style:solid;">
+        <cl:formdata std:sid="f-data-837b69ad" row="2" col="0" rowspan="1" colspan="1"/>
+        <cl:output std:sid="output-9cc0e59b" id="ADBIT_OPT_TerminalName" style="color:#fefefe; text-align:center;" class="common-titlelabel">
+          <cl:datamapbind property="font-size" category="STYLER" datacontrolid="fontSize" columnname="font2"/>
+          <cl:formdata std:sid="f-data-9d9d68bc" row="0" col="0" rowspan="1" colspan="2"/>
+        </cl:output>
+        <cl:img std:sid="image-7bd504f4" id="image" style="border-right-style:solid; border-top-width:1px; border-left-style:solid; border-right-width:1px; border-bottom-width:1px; border-bottom-style:solid; border-left-width:1px; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-3641830c" row="1" col="0" rowspan="1" colspan="2"/>
+        </cl:img>
+        <cl:group std:sid="group-eae6f975" id="authInfo" style="border-right-style:solid; border-top-width:1px; border-left-style:solid; border-right-width:1px; border-bottom-width:1px; border-bottom-style:solid; border-left-width:1px; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-59642993" row="2" col="0" rowspan="1" colspan="2"/>
+          <cl:output std:sid="output-f7eba992" style="color:#fefefe; font-weight:bolder;">
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_AuthEventTime"/>
+            <cl:datamapbind property="font-size" category="STYLER" datacontrolid="fontSize" columnname="font3"/>
+            <cl:formdata std:sid="f-data-4945b370" row="3" col="0"/>
+          </cl:output>
+          <cl:output std:sid="output-f5584ea5" style="color:#fefefe; text-align:center;">
+            <cl:datamapbind property="value" category="PROPERTY" datacontrolid="AuthLogImage" columnname="EventTime"/>
+            <cl:datamapbind property="font-size" category="STYLER" datacontrolid="fontSize" columnname="font4"/>
+            <cl:formdata std:sid="f-data-0ad742f1" row="3" col="1"/>
+          </cl:output>
+          <cl:output std:sid="output-528a2c5a" style="color:#fefefe; font-weight:bolder;">
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_UserName"/>
+            <cl:datamapbind property="font-size" category="STYLER" datacontrolid="fontSize" columnname="font3"/>
+            <cl:formdata std:sid="f-data-99d2a5eb" row="0" col="0"/>
+          </cl:output>
+          <cl:output std:sid="output-7050a325" style="color:#fefefe; font-weight:bold; text-align:center;" class="common-titlelabel">
+            <cl:datamapbind property="value" category="PROPERTY" datacontrolid="AuthLogImage" columnname="UserName"/>
+            <cl:datamapbind property="font-size" category="STYLER" datacontrolid="fontSize" columnname="font5"/>
+            <cl:formdata std:sid="f-data-8c03e103" row="0" col="1"/>
+          </cl:output>
+          <cl:output std:sid="output-6a5ad9ac" id="ADB_AuthType" style="color:#fefefe; font-weight:bolder;">
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_AuthType"/>
+            <cl:datamapbind property="font-size" category="STYLER" datacontrolid="fontSize" columnname="font3"/>
+            <cl:formdata std:sid="f-data-498536f1" row="2" col="0"/>
+          </cl:output>
+          <cl:output std:sid="output-8c853e56" id="outAuthType" style="color:#fefefe; text-align:center;">
+            <cl:datamapbind property="value" category="PROPERTY" datacontrolid="AuthLogImage" columnname="AuthType"/>
+            <cl:datamapbind property="font-size" category="STYLER" datacontrolid="fontSize" columnname="font4"/>
+            <cl:formdata std:sid="f-data-351f43ae" row="2" col="1"/>
+          </cl:output>
+          <cl:output std:sid="output-ea8eebc0" style="color:#fefefe; font-weight:bolder;" value="회사명">
+            <cl:datamapbind property="font-size" category="STYLER" datacontrolid="fontSize" columnname="font3"/>
+            <cl:formdata std:sid="f-data-8e63552e" row="1" col="0"/>
+          </cl:output>
+          <cl:output std:sid="output-31b88e57" style="color:#fefefe; text-align:center;">
+            <cl:datamapbind property="font-size" category="STYLER" datacontrolid="fontSize" columnname="font4"/>
+            <cl:datamapbind property="value" category="PROPERTY" datacontrolid="AuthLogImage" columnname="GroupName"/>
+            <cl:formdata std:sid="f-data-e9d2cb4e" row="1" col="1"/>
+          </cl:output>
+          <cl:formlayout std:sid="f-layout-d646f9db" top-margin="5px" right-margin="5px" bottom-margin="5px" left-margin="5px">
+            <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="1" unit="FRACTION" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="80"/>
+            <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-d1c3b67b" hspace="5px" vspace="0px" top-margin="5px" right-margin="5px" bottom-margin="5px" left-margin="5px">
+          <cl:rows length="1" unit="FRACTION" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="5" unit="FRACTION" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="3" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+          <cl:columns length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-af8cea8d">
+        <cl:formdata std:sid="f-data-e22a5a42" row="1" col="0"/>
+        <cl:output std:sid="output-849f74f5" id="ADB_OptTerminalName" style="background-color:#000000; border-radius:5px; color:#FFFFFF;" class="common-titlelabel">
+          <cl:datamapbind property="font-size" category="STYLER" datacontrolid="fontSize" columnname="font1"/>
+          <cl:formdata std:sid="f-data-f97c0fb0" row="0" col="0"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-82e62eed" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-93addfb6" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+        <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="25" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="2" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:formlayout std:sid="f-layout-68aad89f" hspace="5px" vspace="5px" top-margin="5px" right-margin="5px" bottom-margin="5px" left-margin="5px">
+      <cl:rows length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+      <cl:columns length="1" unit="FRACTION"/>
+    </cl:formlayout>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

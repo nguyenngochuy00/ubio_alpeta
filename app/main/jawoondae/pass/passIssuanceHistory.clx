@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-0ff6b87b" version="1.0.0.0">
+  <head std:sid="head-2a2fc28b">
+    <title>CardIssuanceHistory</title>
+    <screen std:sid="screen-e80c9983" id="default" customHeight="400" customWidth="1015" height="768px" minwidth="1024px" name="default" useCustomHeight="true" useCustomWidth="true" width="1024px"/>
+    <screen std:sid="screen-4ae9a47b" id="tablet" height="667px" maxwidth="1023px" minwidth="500px" name="tablet" width="500px"/>
+    <screen std:sid="screen-979b4ef7" id="mobile" height="525px" maxwidth="499px" name="mobile" width="350px"/>
+    <cl:model std:sid="model-f937bdf2">
+      <cl:dataset std:sid="d-set-5b89dd98" id="CardIssuelogList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-e9f328c1" name="EventTime"/>
+          <cl:datacolumn std:sid="d-column-5185105b" name="CardNum"/>
+          <cl:datacolumn std:sid="d-column-764a4473" name="CardType"/>
+          <cl:datacolumn std:sid="d-column-d119ef58" name="StartTime"/>
+          <cl:datacolumn std:sid="d-column-44022708" name="EndTime"/>
+          <cl:datacolumn std:sid="d-column-6d0af9ac" name="AdminID"/>
+          <cl:datacolumn std:sid="d-column-f64859d9" name="AdminName"/>
+          <cl:datacolumn std:sid="d-column-2b4c2350" name="IssuedUniqueID"/>
+          <cl:datacolumn std:sid="d-column-5ad926c1" name="IssuedName"/>
+          <cl:datacolumn std:sid="d-column-32a0e0bf" name="IssueStatus"/>
+          <cl:datacolumn std:sid="d-column-3df8502a" name="EventType"/>
+          <cl:datacolumn std:sid="d-column-baf4f5ca" name="CardName"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:submission std:sid="submission-84177b63" id="sms_getPassIssuedLogList" action="/v1/cardIssuelog" method="get">
+        <cl:listener std:sid="listener-09f2c958" handler="onSms_getPassIssuedLogListSubmitDone" name="submit-done"/>
+        <cl:responsedata dataid="CardIssuelogList"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total"/>
+      </cl:submission>
+      <cl:datamap std:sid="d-map-d97bc3ee" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-c9613624" name="ResultCode"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-4dd5f766" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-cfe993db" name="Count"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-b224c9b8" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-35b73e6d" handler="onBodyLoad" name="load"/>
+    <cl:group std:sid="group-7788e736">
+      <cl:xylayoutdata std:sid="xyl-data-55cc8dd8" bottom="5px" horizontalAnchor="BOTH" left="5px" right="5px" top="5px" verticalAnchor="BOTH"/>
+      <cl:udc std:sid="ud-control-9cb48910" id="udcPassIssuanceHistoryGrid" readonly="true" type="udc.grid.PassLog">
+        <cl:listener std:sid="listener-f356861a" handler="onUdcPassIssuanceHistoryGridPagechange" name="pagechange"/>
+        <cl:formdata std:sid="f-data-4e46fe8e" col="0" row="1"/>
+      </cl:udc>
+      <cl:group std:sid="group-c8818d75">
+        <cl:formdata std:sid="f-data-2b68d721" col="0" row="0"/>
+        <cl:output std:sid="output-eaa48d3e" class="common-titlelabel" style="text-align:center;">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_Total"/>
+          <cl:formdata std:sid="f-data-d62dfedd" valign="FILL" col="0" row="0"/>
+        </cl:output>
+        <cl:dateinput std:sid="d-input-1d31563d" id="ELMGR_dtStart" autoselect="false" format="YYYY-MM-DD">
+          <cl:formdata std:sid="f-data-b2364c68" valign="FILL" col="3" row="0"/>
+        </cl:dateinput>
+        <cl:dateinput std:sid="d-input-723a5ac8" id="ELMGR_dtEnd" autoselect="false" format="YYYY-MM-DD">
+          <cl:formdata std:sid="f-data-fb067a75" valign="FILL" col="5" row="0"/>
+        </cl:dateinput>
+        <cl:output std:sid="output-ca941888" style="font-weight:bold; vertical-align:middle; text-align:center;" value="~">
+          <cl:formdata std:sid="f-data-396a86cb" col="4" row="0"/>
+        </cl:output>
+        <cl:output std:sid="output-e5ee5846" class="common-titlelabel" style="text-align:center;">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_Period"/>
+          <cl:formdata std:sid="f-data-9c154111" valign="FILL" col="2" row="0"/>
+        </cl:output>
+        <cl:output std:sid="output-f29985f4" id="ELMGR_opbTotal" datatype="number" format="s#,###">
+          <cl:datamapbind property="value" columnname="Count" datacontrolid="Total"/>
+          <cl:formdata std:sid="f-data-9121c628" valign="FILL" col="1" row="0"/>
+        </cl:output>
+        <cl:group std:sid="group-8bb4086f" style="border-right-style:solid; border-top-width:1px; border-bottom-color:#cccccc; border-right-width:1px; border-left-color:#cccccc; border-right-color:#cccccc; border-left-width:1px; border-top-style:solid; background-color:#F6F6F6; border-radius:10px; border-left-style:solid; border-bottom-width:1px; border-top-color:#cccccc; border-bottom-style:solid;">
+          <cl:formdata std:sid="f-data-79dcad01" valign="FILL" col="6" row="0"/>
+          <cl:combobox std:sid="c-box-dadcdfc7" id="ELMGR_cmbCategory" style="background-color:#F6F6F6; border-right-style:none; border-left-style:none; font-size:14px; border-bottom-style:none; border-top-style:none; text-align:center;" value="0">
+            <cl:formdata std:sid="f-data-9443b813" valign="CENTER" col="0" row="0"/>
+            <cl:item std:sid="item-2154bada" label="전체" value="all">
+              <cl:langbind category="PROPERTY" property="label" keypath="Str_All"/>
+            </cl:item>
+            <cl:item std:sid="item-c2d14dea" label="출입증 번호" value="cardnum">
+              <cl:langbind category="PROPERTY" property="label" keypath="Str_PassNumber"/>
+            </cl:item>
+            <cl:item std:sid="item-40b4c31f" label="발급자 이름" value="adminname">
+              <cl:langbind category="PROPERTY" property="label" keypath="Str_IssuedPerson"/>
+            </cl:item>
+            <cl:item std:sid="item-4d5ac5ae" label="발급대상 군번" value="uniqueid">
+              <cl:langbind category="PROPERTY" property="label" keypath="Str_IssueTargetNumber"/>
+            </cl:item>
+            <cl:item std:sid="item-b42d63f5" label="발급대상 이름" value="name">
+              <cl:langbind category="PROPERTY" property="label" keypath="Str_IssueTargetName"/>
+            </cl:item>
+          </cl:combobox>
+          <cl:inputbox std:sid="i-box-76316213" id="ELMGR_edtKeyword" style="background-color:#F6F6F6; border-right-style:solid; border-left-style:solid; border-right-width:1px; border-left-color:#cccccc; border-bottom-style:none; border-right-color:#cccccc; border-left-width:1px; border-top-style:none;">
+            <cl:formdata std:sid="f-data-f4b2fd10" valign="CENTER" col="1" row="0"/>
+          </cl:inputbox>
+          <cl:group std:sid="group-be83275c" style="cursor:pointer;">
+            <cl:listener std:sid="listener-ad9848a8" handler="onGroupClick" name="click"/>
+            <cl:formdata std:sid="f-data-cd7b2ddf" col="2" row="0"/>
+            <cl:img std:sid="image-0e7c7c95" src="/theme/images/common/common_text_field_btn_icons_search.png">
+              <cl:xylayoutdata std:sid="xyl-data-8ac81b72" height="26px" horizontalAnchor="CENTER" verticalAnchor="CENTER" width="26px"/>
+            </cl:img>
+            <cl:xylayout std:sid="xylayout-cb436a60"/>
+          </cl:group>
+          <cl:formlayout std:sid="f-layout-f40aab88" hspace="0px" vspace="0px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns autoSizing="false" length="1" minlength="0" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+            <cl:columns autoSizing="false" length="3" minlength="0" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:combobox std:sid="c-box-e3f21e4e" id="cmbPassType" style="border-right-style:solid; padding:5px; border-top-width:1px; border-bottom-color:#cccccc; border-right-width:1px; font-weight:12.0; border-left-color:#cccccc; border-right-color:#cccccc; border-left-width:1px; border-top-style:solid; background-color:#f6f6f6; border-radius:10px; border-left-style:solid; border-bottom-width:1px; border-top-color:#cccccc; border-bottom-style:solid; background-image:none;" value="0">
+          <cl:formdata std:sid="f-data-f6be2d1f" halign="FILL" valign="FILL" col="7" row="0"/>
+          <cl:item std:sid="item-5a01b4d9" label="전체" value="0">
+            <cl:langbind category="PROPERTY" property="label" keypath="Str_All"/>
+          </cl:item>
+          <cl:item std:sid="item-4c1bbc32" label="임시" value="2">
+            <cl:langbind category="PROPERTY" property="label" keypath="Str_Temporary"/>
+          </cl:item>
+          <cl:item std:sid="item-9053e65c" label="교육" value="3">
+            <cl:langbind category="PROPERTY" property="label" keypath="Str_Education"/>
+          </cl:item>
+          <cl:item std:sid="item-2b59b1ab" label="공무" value="4">
+            <cl:langbind category="PROPERTY" property="label" keypath="Str_PublicAffairs"/>
+          </cl:item>
+          <cl:item std:sid="item-a3642700" label="상시" value="6">
+            <cl:langbind category="PROPERTY" property="label" keypath="Str_OrdinaryTime"/>
+          </cl:item>
+          <cl:item std:sid="item-882e5b9a" label="방문" value="8">
+            <cl:langbind category="PROPERTY" property="label" keypath="Str_Visit"/>
+          </cl:item>
+        </cl:combobox>
+        <cl:group std:sid="group-be6bd7a0">
+          <cl:formdata std:sid="f-data-9994e485" col="8" row="0"/>
+          <cl:radiobutton std:sid="r-button-9b19b02c" id="rdb_etc" style="font-size:9px;">
+            <cl:formdata std:sid="f-data-61a71934" col="0" row="0"/>
+          </cl:radiobutton>
+          <cl:img std:sid="image-f50a0304" id="USMAG_imgHelpPage" style="cursor:help;" src="../../../../theme/images/common/common_btn_window_top_q.png">
+            <cl:listener std:sid="listener-64822d86" handler="onUSMAG_imgHelpPageClick" name="click"/>
+            <cl:formdata std:sid="f-data-1e8c6e80" halign="CENTER" height="15" valign="CENTER" width="15" col="1" row="0"/>
+          </cl:img>
+          <cl:formlayout std:sid="f-layout-58f55e21">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+            <cl:columns autoSizing="false" length="30" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-67540923">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns autoSizing="false" length="40" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="50" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="47" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="90" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="10" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="90" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="225" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="100" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="320" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-f8ce3a69">
+        <cl:rows autoSizing="false" length="30" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:rows length="1" shadecolor="transparent" shadetype="NONE" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-f493f81b"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

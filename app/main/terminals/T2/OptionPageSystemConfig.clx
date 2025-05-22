@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-449177f5" version="1.0.0.0">
+  <head std:sid="head-d1060cd5">
+    <title>terminalNOptionPageSystemConfig</title>
+    <screen std:sid="screen-8a3644bd" id="default" customHeight="350" customWidth="550" height="768px" minwidth="1024px" name="default" useCustomHeight="true" useCustomWidth="true" width="1024px"/>
+    <screen std:sid="screen-dfe65100" id="tablet" height="667px" maxwidth="1023px" minwidth="500px" name="tablet" width="500px"/>
+    <screen std:sid="screen-daa428ba" id="mobile" height="525px" maxwidth="499px" name="mobile" width="350px"/>
+    <cl:model std:sid="model-0f37c313">
+      <cl:datamap std:sid="d-map-09aa2f25" id="SystemInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="UIDLength"/>
+          <cl:datacolumn datatype="number" name="MandatoryItem"/>
+          <cl:datacolumn datatype="number" name="ConnectMode"/>
+          <cl:datacolumn datatype="number" name="FPNum"/>
+          <cl:datacolumn datatype="number" name="FP1to1Level"/>
+          <cl:datacolumn datatype="number" name="FP1toNLevel"/>
+          <cl:datacolumn datatype="number" name="LFDLevel"/>
+          <cl:datacolumn datatype="number" name="FPTemplateFormat"/>
+          <cl:datacolumn datatype="number" name="CheckSameFP"/>
+          <cl:datacolumn datatype="number" name="MultiVerify"/>
+          <cl:datacolumn datatype="number" name="Enable1toN"/>
+          <cl:datacolumn datatype="number" name="FaceMatchingLevel"/>
+          <cl:datacolumn datatype="number" name="FaceTemplateSize"/>
+          <cl:datacolumn datatype="number" name="FaceExposure"/>
+          <cl:datacolumn datatype="number" name="FaceCameraAngle"/>
+          <cl:datacolumn datatype="number" name="FaceFastmode"/>
+          <cl:datacolumn datatype="number" name="FaceDetectionAngle"/>
+          <cl:datacolumn datatype="number" name="FaceFirst"/>
+          <cl:datacolumn datatype="number" name="NormalQualityThreshold"/>
+          <cl:datacolumn datatype="number" name="IRQualityThreshold"/>
+          <cl:datacolumn datatype="number" name="TimeSync"/>
+          <cl:datacolumn datatype="number" name="DateFormat"/>
+          <cl:datacolumn datatype="number" name="UseGroupID"/>
+          <cl:datacolumn datatype="number" name="AuthType"/>
+          <cl:datacolumn datatype="number" name="TOC"/>
+          <cl:datacolumn name="Reserved"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-0b0d6b51" id="sms_get_terminal_option_system_config" action="/v1/terminals/" method="get">
+        <cl:listener std:sid="listener-2ed8e22c" handler="onSms_get_terminal_option_system_configSubmitDone" name="submit-done"/>
+        <cl:listener std:sid="listener-a58213ef" handler="onSms_get_terminal_option_system_configSubmitError" name="submit-error"/>
+        <cl:listener std:sid="listener-bae77b5f" handler="onSms_get_terminal_option_system_configSubmitTimeout" name="submit-timeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="SystemInfo"/>
+      </cl:submission>
+      <cl:datamap std:sid="d-map-29807ebc" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="ResultCode"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-91c91f46" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-aac5a67b" handler="onBodyLoad" name="load"/>
+    <cl:group std:sid="group-263c83f1" id="TMST2_grpSystemConfig">
+      <cl:xylayoutdata std:sid="xyl-data-5670c2ac" bottom="0px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-91d3131b" id="TMST2_grpAuthType">
+        <cl:formdata std:sid="f-data-a3cd0187" col="0" row="0"/>
+        <cl:output std:sid="output-76a65399">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_AuthType"/>
+          <cl:formdata std:sid="f-data-80503818" col="0" colspan="2" row="0" rowspan="1"/>
+        </cl:output>
+        <cl:output std:sid="output-2d01bf1b">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_Order"/>
+          <cl:formdata std:sid="f-data-65809e1f" col="0" row="1"/>
+        </cl:output>
+        <cl:combobox std:sid="c-box-445c0de2" id="cmb1" style="padding:5px;">
+          <cl:datamapbind property="value" columnname="ConnectMode" datacontrolid="SystemInfo"/>
+          <cl:formdata std:sid="f-data-dc0c758f" col="1" row="1"/>
+          <cl:item label="서버/단말기" value="0"/>
+          <cl:item label="단말기/서버" value="1"/>
+          <cl:item label="서버전용" value="2"/>
+          <cl:item label="단말기전용" value="3"/>
+        </cl:combobox>
+        <cl:formlayout std:sid="f-layout-7ed65676">
+          <cl:rows autoSizing="false" length="30" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows autoSizing="false" length="30" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="150" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-c4b462f1" id="TMST2_grpFpDetect">
+        <cl:formdata std:sid="f-data-47cc8188" col="0" row="1"/>
+        <cl:output std:sid="output-b461a250">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_FPDetection"/>
+          <cl:formdata std:sid="f-data-7312d40e" col="0" colspan="2" row="0" rowspan="1"/>
+        </cl:output>
+        <cl:output std:sid="output-b34e4a70">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_1vsNSecurityRatingSet"/>
+          <cl:formdata std:sid="f-data-bbdb5771" col="0" row="1"/>
+        </cl:output>
+        <cl:output std:sid="output-74d4d9de">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_1vs1SecurityRatingSet"/>
+          <cl:formdata std:sid="f-data-a4f208b3" col="0" row="2"/>
+        </cl:output>
+        <cl:output std:sid="output-d2e98683">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_CounterfeitFPSecurityRatingSet"/>
+          <cl:formdata std:sid="f-data-c925ea00" col="0" row="3"/>
+        </cl:output>
+        <cl:combobox std:sid="c-box-59b82fa3" id="cmb2" style="padding:5px;">
+          <cl:datamapbind property="value" columnname="FP1toNLevel" datacontrolid="SystemInfo"/>
+          <cl:formdata std:sid="f-data-42f47028" col="1" row="1"/>
+          <cl:item label="3" value="3"/>
+          <cl:item label="4" value="4"/>
+          <cl:item label="5" value="5"/>
+          <cl:item label="6" value="6"/>
+          <cl:item label="7" value="7"/>
+          <cl:item label="8" value="8"/>
+          <cl:item label="9" value="9"/>
+        </cl:combobox>
+        <cl:combobox std:sid="c-box-9b76440f" id="cmb3" style="padding:5px;">
+          <cl:datamapbind property="value" columnname="FP1to1Level" datacontrolid="SystemInfo"/>
+          <cl:formdata std:sid="f-data-443d1565" col="1" row="2"/>
+          <cl:item label="1" value="1"/>
+          <cl:item label="2" value="2"/>
+          <cl:item label="3" value="3"/>
+          <cl:item label="4" value="4"/>
+          <cl:item label="5" value="5"/>
+          <cl:item label="6" value="6"/>
+          <cl:item label="7" value="7"/>
+          <cl:item label="8" value="8"/>
+          <cl:item label="9" value="9"/>
+        </cl:combobox>
+        <cl:combobox std:sid="c-box-ed040d20" id="cmb4" style="padding:5px;">
+          <cl:datamapbind property="value" columnname="LFDLevel" datacontrolid="SystemInfo"/>
+          <cl:formdata std:sid="f-data-936731e2" col="1" row="3"/>
+          <cl:item label="사용안함" value="0"/>
+          <cl:item label="낮음" value="1"/>
+          <cl:item label="중간" value="2"/>
+          <cl:item label="높읍" value="3"/>
+        </cl:combobox>
+        <cl:formlayout std:sid="f-layout-b87d7025">
+          <cl:rows autoSizing="false" length="30" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows autoSizing="false" length="30" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows autoSizing="false" length="30" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows autoSizing="false" length="30" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="150" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns length="1" shadecolor="transparent" shadetype="NONE" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-2a6e53cc" id="TMST2_grpDayTime">
+        <cl:formdata std:sid="f-data-35590d32" col="0" row="2"/>
+        <cl:output std:sid="output-73d8b4a2">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_DayTime"/>
+          <cl:formdata std:sid="f-data-1508eb3d" col="0" colspan="2" row="0" rowspan="1"/>
+        </cl:output>
+        <cl:output std:sid="output-525f0889">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_ExpressionType"/>
+          <cl:formdata std:sid="f-data-c1da104c" col="0" row="1"/>
+        </cl:output>
+        <cl:combobox std:sid="c-box-1a496303" id="cmb5" style="padding:5px;">
+          <cl:datamapbind property="value" columnname="DateFormat" datacontrolid="SystemInfo"/>
+          <cl:formdata std:sid="f-data-78ad70d1" col="1" row="1"/>
+          <cl:item label="사용 안함" tooltip="" value="0"/>
+          <cl:item label="yyyy-MM-dd" tooltip="" value="1"/>
+          <cl:item label="dd-MM-yyyy" value="2"/>
+        </cl:combobox>
+        <cl:formlayout std:sid="f-layout-fde9c6ab">
+          <cl:rows autoSizing="false" length="30" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows autoSizing="false" length="30" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="150" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-0e02e124" hspace="0px" vspace="0px">
+        <cl:rows autoSizing="false" length="80" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:rows autoSizing="false" length="150" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:rows autoSizing="false" length="1" minlength="0" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-59c1dbb3"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

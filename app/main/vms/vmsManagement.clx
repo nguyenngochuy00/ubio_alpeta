@@ -1,0 +1,728 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-33d28f93" version="1.0.0.0">
+  <head std:sid="head-22917203">
+    <title>vmsManagement</title>
+    <screen std:sid="screen-1bea24e5" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="540" customWidth="800"/>
+    <screen std:sid="screen-1ce0c483" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-9301a753" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-d3209253">
+      <cl:dataset std:sid="d-set-71ba8e27" id="TerminalList" sortcondition="">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-6e30c3de" name="ID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-64cce495" name="Name"/>
+          <cl:datacolumn std:sid="d-column-b18f564a" name="Status" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-7545874b" id="CameraList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-cf76e2e0" name="CameraID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-0d44d5ef" name="CameraName"/>
+          <cl:datacolumn std:sid="d-column-b01dc65b" name="CameraIP"/>
+          <cl:datacolumn std:sid="d-column-aec894fd" name="CameraPort"/>
+          <cl:datacolumn std:sid="d-column-d1865969" info="IDIS -> 채널" name="Param1"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-30f85485" id="TerminalCameraList" sortcondition="">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-4e553fc8" name="CameraID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-299795f7" name="CameraName"/>
+          <cl:datacolumn std:sid="d-column-147d9301" name="Param1"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-7f89470b" id="DeviceList" sortcondition="">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-eacdcb9a" name="EncodeDevIndexCode"/>
+          <cl:datacolumn std:sid="d-column-3ca9fa87" name="EncodeDevName"/>
+          <cl:datacolumn std:sid="d-column-f7de4fe8" name="EncodeDevIp"/>
+          <cl:datacolumn std:sid="d-column-11778f67" name="EncodeDevPort"/>
+          <cl:datacolumn std:sid="d-column-1bca3755" name="EncodeDevCode"/>
+          <cl:datacolumn std:sid="d-column-79c4d8ee" name="Param1"/>
+        </cl:datacolumnlist>
+        <cl:datarowlist/>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-74f78bb7" id="DeviceIDList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-8eef626e" name="ID"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-92b025cb" id="VMSConnectionInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-2b57e55d" name="VmsType" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-dba6b055" name="ServerAddress"/>
+          <cl:datacolumn std:sid="d-column-59f47326" name="ServerPort" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-0767b73e" name="UserID"/>
+          <cl:datacolumn std:sid="d-column-496180d0" name="UserPassword"/>
+          <cl:datacolumn std:sid="d-column-1009e6ea" name="StreamServer"/>
+          <cl:datacolumn std:sid="d-column-8d084bed" name="StreamPort" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-cfb7c4ff" name="PopUpCount" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-135f0a7f" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-97893e48" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-f71590c2" id="ResultMessage">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-2d7f5682" name="Message"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-cfa3802c" id="PageInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-194c1cd2" name="Total" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-cbed39b9" name="PageNo" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-cc7e7385" name="PageSize" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-f49007e1" id="CameraInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-7a69f9f3" name="CameraID"/>
+          <cl:datacolumn std:sid="d-column-04e26a6f" name="CameraName"/>
+          <cl:datacolumn std:sid="d-column-2d0522d8" name="CameraIP"/>
+          <cl:datacolumn std:sid="d-column-6efa03dc" name="CameraPort"/>
+          <cl:datacolumn std:sid="d-column-35eb7db4" name="CameraParam1"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap comment="영상 요청하기 위해 필요한 정보" std:sid="d-map-ebc7671c" id="VurixServerInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn comment="중계서버 url" std:sid="d-column-41318568" name="DmsURL"/>
+          <cl:datacolumn comment="vurix 고유아이디" std:sid="d-column-a13131fb" name="VmsID"/>
+          <cl:datacolumn comment="영상화질" std:sid="d-column-e675d28d" name="TransCode"/>
+          <cl:datacolumn comment="Vurix API Server" std:sid="d-column-04cf5f05" name="VurixApiURL"/>
+          <cl:datacolumn comment="Vurix에 등록한 ID" std:sid="d-column-33ba7bbf" name="VurixID"/>
+          <cl:datacolumn comment="Vurix ID의 Password" std:sid="d-column-4482d23e" name="VurixPass"/>
+          <cl:datacolumn comment="Vurix ID의 group" std:sid="d-column-0730fb9d" name="VurixGroup"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-eb7e145e" id="sms_getVmsSetting" method="get" action="/v1/vms/setting">
+        <cl:listener std:sid="listener-2ded7aeb" name="submit-done" handler="onSms_getVmsSettingSubmitDone"/>
+        <cl:listener std:sid="listener-43f49efe" name="submit-error" handler="onSms_getVmsSettingSubmitError"/>
+        <cl:listener std:sid="listener-e556fb46" name="submit-timeout" handler="onSms_getVmsSettingSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="VMSConnectionInfo"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-81098f99" id="sms_putVmsSetting" method="put" action="/v1/vms/setting">
+        <cl:listener std:sid="listener-6cc7ada5" name="submit-done" handler="onSms_putVmsSettingSubmitDone"/>
+        <cl:listener std:sid="listener-7ba19a50" name="submit-error" handler="onSms_putVmsSettingSubmitError"/>
+        <cl:listener std:sid="listener-0bf8c9ca" name="submit-timeout" handler="onSms_putVmsSettingSubmitTimeout"/>
+        <cl:requestdata dataid="VMSConnectionInfo"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-780e986b" id="sms_postVmsConnectionTest" action="/v1/vms/setting/connectionTest">
+        <cl:listener std:sid="listener-00c83a37" name="submit-done" handler="onSms_postVmsConnectionTestSubmitDone"/>
+        <cl:listener std:sid="listener-8d09abb0" name="submit-error" handler="onSms_postVmsConnectionTestSubmitError"/>
+        <cl:listener std:sid="listener-621e0bb8" name="submit-timeout" handler="onSms_postVmsConnectionTestSubmitTimeout"/>
+        <cl:requestdata dataid="VMSConnectionInfo"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="ResultMessage"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-f926e2ef" id="sms_getCameraSearch" method="get" action="/v1/vms/camera/search">
+        <cl:listener std:sid="listener-a3e072d4" name="submit-done" handler="onSms_getCareraSearchSubmitDone"/>
+        <cl:listener std:sid="listener-7e86b1f3" name="submit-error" handler="onSms_getCareraSearchSubmitError"/>
+        <cl:listener std:sid="listener-41ac6019" name="submit-timeout" handler="onSms_getCareraSearchSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="PageInfo"/>
+        <cl:responsedata dataid="DeviceList" isadd="false"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-4a9776c9" id="sms_postCamera" action="/v1/vms/camera">
+        <cl:listener std:sid="listener-2a1d3068" name="submit-done" handler="onSms_postCameraSubmitDone"/>
+        <cl:listener std:sid="listener-5aadf291" name="submit-error" handler="onSms_postCameraSubmitError"/>
+        <cl:listener std:sid="listener-9ffbb085" name="submit-timeout" handler="onSms_postCameraSubmitTimeout"/>
+        <cl:requestdata dataid="CameraInfo"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-bf86bd76" id="sms_deleteCamera" method="delete" action="/v1/vms/camera">
+        <cl:listener std:sid="listener-ca513f50" name="submit-done" handler="onSms_deleteCameraSubmitDone"/>
+        <cl:listener std:sid="listener-a0b5dcc6" name="submit-error" handler="onSms_deleteCameraSubmitError"/>
+        <cl:listener std:sid="listener-b246b80f" name="submit-timeout" handler="onSms_deleteCameraSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-c31b5b37" id="sms_getCamera" method="get" action="/v1/vms/camera">
+        <cl:listener std:sid="listener-261e960e" name="submit-done" handler="onSms_getCameraSubmitDone"/>
+        <cl:listener std:sid="listener-a0662a32" name="submit-error" handler="onSms_getCameraSubmitError"/>
+        <cl:listener std:sid="listener-9f0c9f35" name="submit-timeout" handler="onSms_getCameraSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="CameraList"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-e1461f3a" id="sms_getTerminalCamera" method="get" action="/v1/vms/terminal/{tid}/camera">
+        <cl:listener std:sid="listener-9f506b83" name="submit-done" handler="onSms_getTerminalCameraSubmitDone"/>
+        <cl:listener std:sid="listener-2d6b880e" name="submit-error" handler="onSms_getTerminalCameraSubmitError"/>
+        <cl:listener std:sid="listener-a52142a0" name="submit-timeout" handler="onSms_getTerminalCameraSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="TerminalCameraList"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-02c1b3e7" id="sms_postTerminalCamera" action="/v1/vms/terminal/{tid}/camera">
+        <cl:listener std:sid="listener-642f4649" name="submit-done" handler="onSms_postTerminalCameraSubmitDone"/>
+        <cl:listener std:sid="listener-fbe56020" name="submit-error" handler="onSms_postTerminalCameraSubmitError"/>
+        <cl:listener std:sid="listener-aeb6f4b5" name="submit-timeout" handler="onSms_postTerminalCameraSubmitTimeout"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-99017c84" id="sms_deleteTerminalCamera" method="delete" action="/v1/vms/terminal/{tid}/camera/{id}">
+        <cl:listener std:sid="listener-614f6e90" name="submit-done" handler="onSms_deleteTerminalCameraSubmitDone"/>
+        <cl:listener std:sid="listener-a5661a35" name="submit-error" handler="onSms_deleteTerminalCameraSubmitError"/>
+        <cl:listener std:sid="listener-472bed4b" name="submit-timeout" handler="onSms_deleteTerminalCameraSubmitTimeout"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-e9488610" id="sms_putMultiViewSetting" method="put" action="/v1/vms/multiViewSetting">
+        <cl:listener std:sid="listener-2ebf0cd1" name="submit-done" handler="onSms_putMultiViewSettingSubmitDone"/>
+        <cl:listener std:sid="listener-fe682fa8" name="submit-timeout" handler="onSms_getVmsSettingSubmitTimeout"/>
+        <cl:listener std:sid="listener-58dce57a" name="submit-error" handler="onSms_getVmsSettingSubmitError"/>
+        <cl:requestdata dataid="VurixServerInfo"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-cfbee0cd" id="sms_getMultiViewSetting" method="get" action="/v1/vms/multiViewSetting">
+        <cl:listener std:sid="listener-c6e011a1" name="submit-done" handler="onSms_getMultiViewSettingSubmitDone"/>
+        <cl:listener std:sid="listener-4600126c" name="submit-timeout" handler="onSms_getVmsSettingSubmitTimeout"/>
+        <cl:listener std:sid="listener-20603de1" name="submit-error" handler="onSms_getVmsSettingSubmitError"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="VurixServerInfo"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-d1f6e8b8" id="sms_postVurixApiConnectionTest" action="/v1/vurix/connectionTest">
+        <cl:listener std:sid="listener-e268187a" name="submit-done" handler="onSms_postVurixApiConnectionTestSubmitDone"/>
+        <cl:listener std:sid="listener-1a8eef25" name="submit-error" handler="onSms_getVmsSettingSubmitError"/>
+        <cl:listener std:sid="listener-2c576f58" name="submit-timeout" handler="onSms_getVmsSettingSubmitTimeout"/>
+        <cl:requestdata dataid="VurixServerInfo"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="ResultMessage"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-741380fa" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-568e3da4" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-05192dbe">
+      <cl:xylayoutdata std:sid="xyl-data-f5876b47" top="0px" right="10px" bottom="10px" left="10px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:tabfolder std:sid="t-folder-0d982671" id="VM_TabFolder">
+        <cl:listener std:sid="listener-437aebaa" name="selection-change" handler="onTabFolderSelectionChange"/>
+        <cl:xylayoutdata std:sid="xyl-data-facb9058" top="20px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+        <cl:tabitem std:sid="t-item-b190690f" selected="true" text="단말 설정">
+          <cl:langbind property="text" category="PROPERTY" keypath="Str_CameraTerminalSetting"/>
+          <cl:group std:sid="group-46bf983a">
+            <std:metadata>
+              <std:property key="locked" value="true"/>
+            </std:metadata>
+            <cl:group std:sid="group-7369fd06">
+              <cl:xylayoutdata std:sid="xyl-data-cdd2060a" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+              <cl:output std:sid="output-2e29cd4b" style="border-bottom-color:#2446a4; font-weight:700; border-bottom-width:1px; font-size:14px; border-bottom-style:solid;">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_TerminalList"/>
+                <cl:formdata std:sid="f-data-9a27c856" halign="LEFT" width="200" row="0" col="0"/>
+              </cl:output>
+              <cl:grid std:sid="grid-88c79e21" id="VMTSP_grdTerminalList" readonly="true" datasetid="TerminalList" resizablecolumns="all">
+                <cl:listener std:sid="listener-b4a1718c" name="selection-change" handler="onVMTSP_grdTerminalListSelectionChange"/>
+                <cl:formdata std:sid="f-data-6d4fc475" row="1" col="0" rowspan="4" colspan="1"/>
+                <cl:gridcolumn std:sid="g-column-b6778e5a" width="25px"/>
+                <cl:gridcolumn std:sid="g-column-981d91ea"/>
+                <cl:gridcolumn std:sid="g-column-f2ab63ea"/>
+                <cl:gridheader std:sid="gh-band-7ff1b935">
+                  <cl:gridrow std:sid="g-row-27fbe705"/>
+                  <cl:gridcell std:sid="gh-cell-17c64be5" rowindex="0" colindex="0" sortable="false" filterable="false" columntype="checkbox"/>
+                  <cl:gridcell std:sid="gh-cell-bc58b13b" rowindex="0" colindex="1" targetcolumnname="ID" sortable="false" filterable="false" text="ID"/>
+                  <cl:gridcell std:sid="gh-cell-55ebb401" rowindex="0" colindex="2" targetcolumnname="Name" sortable="false" filterable="false" text="Name"/>
+                </cl:gridheader>
+                <cl:griddetail std:sid="gd-band-036fc4b3">
+                  <cl:gridrow std:sid="g-row-8a147b6d"/>
+                  <cl:gridcell std:sid="gd-cell-465e80e6" rowindex="0" colindex="0" columntype="checkbox"/>
+                  <cl:gridcell std:sid="gd-cell-7b4ab91a" rowindex="0" colindex="1" columnname="ID"/>
+                  <cl:gridcell std:sid="gd-cell-4452b84c" rowindex="0" colindex="2" columnname="Name"/>
+                </cl:griddetail>
+              </cl:grid>
+              <cl:grid std:sid="grid-94a7eeb1" id="VMTSP_grdLinkedCameraList" readonly="true" datasetid="TerminalCameraList" resizablecolumns="all">
+                <cl:formdata std:sid="f-data-c4a54069" row="1" col="1"/>
+                <cl:gridcolumn std:sid="g-column-ab26b4fe" width="25px"/>
+                <cl:gridcolumn std:sid="g-column-0951a7b4"/>
+                <cl:gridcolumn std:sid="g-column-706fa622"/>
+                <cl:gridcolumn std:sid="g-column-d08e6dcb"/>
+                <cl:gridheader std:sid="gh-band-5d0b7fb5">
+                  <cl:gridrow std:sid="g-row-f32e185c"/>
+                  <cl:gridcell std:sid="gh-cell-0e2adaaf" rowindex="0" colindex="0" sortable="false" filterable="false" columntype="checkbox"/>
+                  <cl:gridcell std:sid="gh-cell-95dd5eb1" rowindex="0" colindex="1" targetcolumnname="CameraID" sortable="false" filterable="false" text="CameraID" sortcolumnname="parseInt(CameraID,10)"/>
+                  <cl:gridcell std:sid="gh-cell-6e15386d" rowindex="0" colindex="2" targetcolumnname="CameraName" sortable="false" filterable="false" text="Name" sortcolumnname="CameraName"/>
+                  <cl:gridcell std:sid="gh-cell-557270fa" rowindex="0" colindex="3" targetcolumnname="Param1" text="Channel" sortcolumnname="parseInt(Param1,10)"/>
+                </cl:gridheader>
+                <cl:griddetail std:sid="gd-band-d7af2d00">
+                  <cl:gridrow std:sid="g-row-2c3f9b86"/>
+                  <cl:gridcell std:sid="gd-cell-9d28eba0" rowindex="0" colindex="0" columntype="checkbox"/>
+                  <cl:gridcell std:sid="gd-cell-5f4727a6" rowindex="0" colindex="1" columnname="CameraID"/>
+                  <cl:gridcell std:sid="gd-cell-01eb35ae" rowindex="0" colindex="2" columnname="CameraName"/>
+                  <cl:gridcell std:sid="gd-cell-508833c6" rowindex="0" colindex="3" columnname="Param1"/>
+                </cl:griddetail>
+              </cl:grid>
+              <cl:grid std:sid="grid-a90381e7" id="VMTSP_grdLinkableCameraList" readonly="true" datasetid="CameraList" resizablecolumns="all">
+                <cl:formdata std:sid="f-data-240b214f" row="4" col="1"/>
+                <cl:gridcolumn std:sid="g-column-8fb45925" width="25px"/>
+                <cl:gridcolumn std:sid="g-column-ba8b93eb"/>
+                <cl:gridcolumn std:sid="g-column-7a956d47"/>
+                <cl:gridcolumn std:sid="g-column-3d3bb31b"/>
+                <cl:gridheader std:sid="gh-band-e2a48105">
+                  <cl:gridrow std:sid="g-row-afbd1639"/>
+                  <cl:gridcell std:sid="gh-cell-1323ee6e" rowindex="0" colindex="0" sortable="false" filterable="false" columntype="checkbox"/>
+                  <cl:gridcell std:sid="gh-cell-4ddcae58" rowindex="0" colindex="1" targetcolumnname="CameraID" sortable="false" filterable="false" text="CameraID" sortcolumnname="parseInt(CameraID,10)"/>
+                  <cl:gridcell std:sid="gh-cell-c7da0492" rowindex="0" colindex="2" targetcolumnname="CameraName" sortable="false" filterable="false" text="Name" sortcolumnname="CameraName"/>
+                  <cl:gridcell std:sid="gh-cell-0bb75e22" rowindex="0" colindex="3" targetcolumnname="Param1" text="Channel" sortcolumnname="parseInt(Param1,10)"/>
+                </cl:gridheader>
+                <cl:griddetail std:sid="gd-band-be1309d1">
+                  <cl:gridrow std:sid="g-row-bc54e83f"/>
+                  <cl:gridcell std:sid="gd-cell-ab43a240" rowindex="0" colindex="0" columntype="checkbox"/>
+                  <cl:gridcell std:sid="gd-cell-61a0c42e" rowindex="0" colindex="1" columnname="CameraID"/>
+                  <cl:gridcell std:sid="gd-cell-1ab7b239" rowindex="0" colindex="2" columnname="CameraName"/>
+                  <cl:gridcell std:sid="gd-cell-5c41f22e" rowindex="0" colindex="3" columnname="Param1"/>
+                </cl:griddetail>
+              </cl:grid>
+              <cl:group std:sid="group-049ff2a3">
+                <cl:formdata std:sid="f-data-40f9bf73" row="0" col="1"/>
+                <cl:output std:sid="output-d478415f" style="border-bottom-color:#2446a4; font-weight:700; border-bottom-width:1px; font-size:14px; border-bottom-style:solid;">
+                  <cl:langbind property="value" category="PROPERTY" keypath="Str_LinkedCameraList"/>
+                  <cl:formdata std:sid="f-data-eba11dbe" row="0" col="0"/>
+                </cl:output>
+                <cl:formlayout std:sid="f-layout-cf0cdf69" hspace="10px" vspace="10px">
+                  <cl:rows length="1" unit="FRACTION"/>
+                  <cl:columns length="200" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="1" unit="FRACTION"/>
+                </cl:formlayout>
+              </cl:group>
+              <cl:group std:sid="group-641e6de9">
+                <cl:formdata std:sid="f-data-3b857c5f" row="3" col="1"/>
+                <cl:output std:sid="output-b084f339" style="border-bottom-color:#2446a4; font-weight:700; border-bottom-width:1px; font-size:14px; border-bottom-style:solid;">
+                  <cl:langbind property="value" category="PROPERTY" keypath="Str_CameraList"/>
+                  <cl:formdata std:sid="f-data-40d15148" row="0" col="0"/>
+                </cl:output>
+                <cl:checkbox std:sid="c-box-aa2e1106" id="VMCSP_cbxTeminalSettingCameraListSort" style="font-size:14px;" value="0" truevalue="1" falsevalue="0">
+                  <cl:listener std:sid="listener-7d2126b4" name="value-change" handler="onVMCSP_cbxTeminalSettingCameraListSortValueChange"/>
+                  <cl:langbind property="text" category="PROPERTY" keypath="Str_CameraListDeviceSort"/>
+                  <cl:formdata std:sid="f-data-bb1c8f8e" row="0" col="1"/>
+                </cl:checkbox>
+                <cl:formlayout std:sid="f-layout-c7b0ce20" hspace="10px" vspace="10px">
+                  <cl:rows length="1" unit="FRACTION"/>
+                  <cl:columns length="200" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="1" unit="FRACTION"/>
+                </cl:formlayout>
+              </cl:group>
+              <cl:group std:sid="group-d6a36ae0">
+                <cl:formdata std:sid="f-data-7227f1b5" row="2" col="1"/>
+                <cl:button std:sid="button-8cf6fdc2" id="VMTSP_btnCameraRemove" style="padding-top:0px; background-repeat:no-repeat; padding-left:0px; padding-bottom:0px; background-image:url('../../../theme/images/arrow_icon/down.png'); background-position:center; padding-right:0px;" class="userInfo_btn">
+                  <cl:listener std:sid="listener-1baf27fe" name="click" handler="onVMTSP_btnCameraRemoveClick"/>
+                  <cl:formdata std:sid="f-data-5c551968" row="0" col="1"/>
+                </cl:button>
+                <cl:button std:sid="button-1c05429f" id="VMTSP_btnCameraRegist" style="padding-top:0px; background-repeat:no-repeat; padding-left:0px; padding-bottom:0px; background-image:url('../../../theme/images/arrow_icon/up.png'); background-position:center; padding-right:0px;" class="userInfo_btn">
+                  <cl:listener std:sid="listener-44cc73aa" name="click" handler="onVMTSP_btnCameraRegistClick"/>
+                  <cl:formdata std:sid="f-data-155a1c61" row="0" col="2"/>
+                </cl:button>
+                <cl:formlayout std:sid="f-layout-c6f1b6e8" hspace="10px" vspace="10px">
+                  <cl:rows length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+                  <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="1" unit="FRACTION"/>
+                </cl:formlayout>
+              </cl:group>
+              <cl:formlayout std:sid="f-layout-217701e2" hspace="10px" vspace="10px">
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="2" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="1" unit="FRACTION"/>
+              </cl:formlayout>
+            </cl:group>
+            <cl:xylayout std:sid="xylayout-dc26242c"/>
+          </cl:group>
+        </cl:tabitem>
+        <cl:tabitem std:sid="t-item-66425242" text="카메라 설정">
+          <std:metadata>
+            <std:property key="is-active-item" value="true"/>
+          </std:metadata>
+          <cl:langbind property="text" category="PROPERTY" keypath="Str_CameraSetting"/>
+          <cl:group std:sid="group-a695cb81">
+            <std:metadata>
+              <std:property key="locked" value="true"/>
+            </std:metadata>
+            <cl:group std:sid="group-bbf19648">
+              <cl:datarowcontext datacontrolid="CameraList" rowindex="0"/>
+              <cl:xylayoutdata std:sid="xyl-data-d9bf6282" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+              <cl:grid std:sid="grid-7429a310" id="VMCSP_grdCameraSearchList" readonly="true" datasetid="DeviceList" resizablecolumns="all">
+                <cl:formdata std:sid="f-data-63fe9c72" row="1" col="2"/>
+                <cl:gridcolumn std:sid="g-column-08b005e5" width="25px"/>
+                <cl:gridcolumn std:sid="g-column-4802e2c7"/>
+                <cl:gridcolumn std:sid="g-column-fbedadc3"/>
+                <cl:gridcolumn std:sid="g-column-72fadefa"/>
+                <cl:gridcolumn std:sid="g-column-688e2dc7"/>
+                <cl:gridcolumn std:sid="g-column-025a6703"/>
+                <cl:gridheader std:sid="gh-band-fbf5b8f2">
+                  <cl:gridrow std:sid="g-row-ceb6fde8"/>
+                  <cl:gridcell std:sid="gh-cell-3df7fda5" rowindex="0" colindex="0" sortable="false" filterable="false" columntype="checkbox"/>
+                  <cl:gridcell std:sid="gh-cell-632964ad" rowindex="0" colindex="1" targetcolumnname="EncodeDevIndexCode" sortable="false" filterable="false" text="EncodeDevIndexCode" sortcolumnname="parseInt(EncodeDevIndexCode,10)">
+                    <cl:langbind property="text" category="PROPERTY" keypath="Str_ID"/>
+                  </cl:gridcell>
+                  <cl:gridcell std:sid="gh-cell-ec7b75d3" rowindex="0" colindex="2" targetcolumnname="EncodeDevName" sortable="false" filterable="false" text="EncodeDevName" sortcolumnname="EncodeDevName">
+                    <cl:langbind property="text" category="PROPERTY" keypath="Str_Name"/>
+                  </cl:gridcell>
+                  <cl:gridcell std:sid="gh-cell-57e93e57" rowindex="0" colindex="3" targetcolumnname="EncodeDevIp" sortable="false" filterable="false" text="EncodeDevIp" sortcolumnname="EncodeDevIp">
+                    <cl:langbind property="text" category="PROPERTY" keypath="Str_IPAddress"/>
+                  </cl:gridcell>
+                  <cl:gridcell std:sid="gh-cell-aca355a2" rowindex="0" colindex="4" targetcolumnname="EncodeDevPort" sortable="false" filterable="false" text="EncodeDevPort" sortcolumnname="parseInt(EncodeDevPort,10)">
+                    <cl:langbind property="text" category="PROPERTY" keypath="Str_Port"/>
+                  </cl:gridcell>
+                  <cl:gridcell std:sid="gh-cell-c86d2374" rowindex="0" colindex="5" targetcolumnname="Param1" sortcolumnname="parseInt(Param1,10)">
+                    <cl:langbind property="text" category="PROPERTY" keypath="Str_Channel"/>
+                  </cl:gridcell>
+                </cl:gridheader>
+                <cl:griddetail std:sid="gd-band-1f40b6c4">
+                  <cl:gridrow std:sid="g-row-736c1ebd"/>
+                  <cl:gridcell std:sid="gd-cell-7dbabc07" rowindex="0" colindex="0" columntype="checkbox"/>
+                  <cl:gridcell std:sid="gd-cell-82036c72" rowindex="0" colindex="1" columnname="EncodeDevIndexCode"/>
+                  <cl:gridcell std:sid="gd-cell-d054e7ee" rowindex="0" colindex="2" columnname="EncodeDevName"/>
+                  <cl:gridcell std:sid="gd-cell-ce7c9ae8" rowindex="0" colindex="3" columnname="EncodeDevIp"/>
+                  <cl:gridcell std:sid="gd-cell-5ff69256" rowindex="0" colindex="4" columnname="EncodeDevPort"/>
+                  <cl:gridcell std:sid="gd-cell-584f6364" rowindex="0" colindex="5" columnname="Param1"/>
+                </cl:griddetail>
+              </cl:grid>
+              <cl:grid std:sid="grid-d3f80321" id="VMCSP_grdCameraList" readonly="true" datasetid="CameraList" resizablecolumns="all">
+                <cl:formdata std:sid="f-data-ef6c079f" row="1" col="0"/>
+                <cl:gridcolumn std:sid="g-column-58a2e0ac" width="25px"/>
+                <cl:gridcolumn std:sid="g-column-21cebbb3"/>
+                <cl:gridcolumn std:sid="g-column-b9ea4708"/>
+                <cl:gridcolumn std:sid="g-column-fd74dcf5"/>
+                <cl:gridcolumn std:sid="g-column-e37227c6"/>
+                <cl:gridcolumn std:sid="g-column-0d1f32e9"/>
+                <cl:gridheader std:sid="gh-band-51cd4abd">
+                  <cl:gridrow std:sid="g-row-36eac119"/>
+                  <cl:gridcell std:sid="gh-cell-4e6060c6" rowindex="0" colindex="0" sortable="false" filterable="false" columntype="checkbox"/>
+                  <cl:gridcell std:sid="gh-cell-250e38b7" rowindex="0" colindex="1" targetcolumnname="CameraID" sortable="false" filterable="false" text="CameraID" sortcolumnname="parseInt(CameraID,10)"/>
+                  <cl:gridcell std:sid="gh-cell-a9f60e6f" rowindex="0" colindex="2" targetcolumnname="CameraName" sortable="false" filterable="false" text="CameraName" sortcolumnname="CameraName"/>
+                  <cl:gridcell std:sid="gh-cell-90a95cb5" rowindex="0" colindex="3" targetcolumnname="CameraIP" sortable="false" filterable="false" text="CameraIP" sortcolumnname="CameraIP"/>
+                  <cl:gridcell std:sid="gh-cell-7d8f9f7d" rowindex="0" colindex="4" targetcolumnname="CameraPort" sortable="false" filterable="false" text="CameraPort" sortcolumnname="parseInt(CameraPort,10)"/>
+                  <cl:gridcell std:sid="gh-cell-043e173a" rowindex="0" colindex="5" targetcolumnname="Param1" text="Channel" sortcolumnname="parseInt(Param1,10)"/>
+                </cl:gridheader>
+                <cl:griddetail std:sid="gd-band-0c472d69">
+                  <cl:gridrow std:sid="g-row-154ecd6a"/>
+                  <cl:gridcell std:sid="gd-cell-a95b5fa6" rowindex="0" colindex="0" columntype="checkbox"/>
+                  <cl:gridcell std:sid="gd-cell-6be4eae9" rowindex="0" colindex="1" columnname="CameraID"/>
+                  <cl:gridcell std:sid="gd-cell-4e140bd2" rowindex="0" colindex="2" columnname="CameraName"/>
+                  <cl:gridcell std:sid="gd-cell-2f3ab777" rowindex="0" colindex="3" columnname="CameraIP"/>
+                  <cl:gridcell std:sid="gd-cell-045d65a5" rowindex="0" colindex="4" columnname="CameraPort"/>
+                  <cl:gridcell std:sid="gd-cell-c7b09059" rowindex="0" colindex="5" columnname="Param1"/>
+                </cl:griddetail>
+              </cl:grid>
+              <cl:group std:sid="group-bcb215bb">
+                <cl:formdata std:sid="f-data-bcce9a06" row="1" col="1"/>
+                <cl:button std:sid="button-f0f47084" id="VMCSP_btnCameraUnRegist" style="background-repeat:no-repeat; background-size:auto; background-image:url('../../../theme/images/arrow_icon/foward.png'); background-position:center; background-origin:padding-box;" class="userInfo_btn">
+                  <cl:listener std:sid="listener-42fe6974" name="click" handler="onVMCSP_btnCameraUnRegistClick"/>
+                  <cl:formdata std:sid="f-data-37679104" row="2" col="0"/>
+                </cl:button>
+                <cl:button std:sid="button-d1c46104" id="VMCSP_btnCameraRegist" style="background-repeat:no-repeat; background-size:auto; background-image:url('../../../theme/images/arrow_icon/rewind.png'); background-position:center; background-origin:padding-box;" class="userInfo_btn">
+                  <cl:listener std:sid="listener-5573707f" name="click" handler="onVMCSP_btnCameraRegistClick"/>
+                  <cl:formdata std:sid="f-data-30c41d93" row="1" col="0"/>
+                </cl:button>
+                <cl:formlayout std:sid="f-layout-a3247470" hspace="10px" vspace="10px">
+                  <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:rows length="1" unit="FRACTION"/>
+                  <cl:columns length="1" unit="FRACTION"/>
+                </cl:formlayout>
+              </cl:group>
+              <cl:group std:sid="group-b64514c1">
+                <cl:formdata std:sid="f-data-0c72a5e7" row="0" col="2"/>
+                <cl:output std:sid="output-2008012d" style="border-bottom-color:#2446a4; font-weight:700; border-bottom-width:1px; font-size:14px; border-bottom-style:solid;">
+                  <cl:langbind property="value" category="PROPERTY" keypath="Str_CameraSearchList"/>
+                  <cl:formdata std:sid="f-data-158ef818" row="0" col="0"/>
+                </cl:output>
+                <cl:button std:sid="button-a0bbceed" id="VMCSP_btnCarmeraSearch" style="padding:0px;" class="userInfo_btn">
+                  <cl:listener std:sid="listener-f1ee36d7" name="click" handler="onVMCSP_btnCarmeraSearchClick"/>
+                  <cl:langbind property="value" category="PROPERTY" keypath="Str_Search"/>
+                  <cl:formdata std:sid="f-data-b4dea1bb" row="0" col="3"/>
+                </cl:button>
+                <cl:udc std:sid="ud-control-23c36b60" id="VMCSP_udcSearchCameraSearchList" type="udc.search.searchCamera">
+                  <cl:listener std:sid="listener-ea7b117e" name="search" handler="onSearchCameraSearch"/>
+                  <cl:listener std:sid="listener-6d510246" name="searchKeydown" handler="onSearchCameraSearchKeydown"/>
+                  <cl:formdata std:sid="f-data-1ffdb70f" valign="BOTTOM" height="30" row="0" col="2"/>
+                </cl:udc>
+                <cl:checkbox std:sid="c-box-3007a3fe" id="VMCSP_cbxCameraSearchListSort" style="font-size:14px;" value="0" truevalue="1" falsevalue="0">
+                  <cl:listener std:sid="listener-ea22313b" name="value-change" handler="onVMCSP_cbxCameraSearchListSortValueChange"/>
+                  <cl:langbind property="text" category="PROPERTY" keypath="Str_CameraListDeviceSort"/>
+                  <cl:formdata std:sid="f-data-3f219e71" halign="FILL" valign="BOTTOM" height="30" row="0" col="1"/>
+                </cl:checkbox>
+                <cl:formlayout std:sid="f-layout-99c9ac7c" hspace="10px" vspace="10px">
+                  <cl:rows length="1" unit="FRACTION"/>
+                  <cl:columns length="200" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="transparent" minlength="0"/>
+                  <cl:columns length="3" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                </cl:formlayout>
+              </cl:group>
+              <cl:group std:sid="group-889a0173">
+                <cl:formdata std:sid="f-data-3a0aec88" row="0" col="0"/>
+                <cl:output std:sid="output-02993367" style="border-bottom-color:#2446a4; font-weight:700; border-bottom-width:1px; font-size:14px; border-bottom-style:solid;">
+                  <cl:langbind property="value" category="PROPERTY" keypath="Str_CameraList"/>
+                  <cl:formdata std:sid="f-data-519964ff" row="0" col="0"/>
+                </cl:output>
+                <cl:button std:sid="button-a4ab7419" id="VMCSP_btnLiveVideo" style="padding:0px;" class="userInfo_btn">
+                  <cl:listener std:sid="listener-1ec7b245" name="click" handler="onVMCSP_btnLiveVideoClick"/>
+                  <cl:langbind property="value" category="PROPERTY" keypath="Str_LiveVideo"/>
+                  <cl:formdata std:sid="f-data-6f30f057" row="0" col="2"/>
+                </cl:button>
+                <cl:checkbox std:sid="c-box-01d22e99" id="VMCSP_cbxCameraListSort" style="font-size:14px;" value="0" truevalue="1" falsevalue="0">
+                  <cl:listener std:sid="listener-55e84fd7" name="value-change" handler="onVMCSP_cbxCameraListSortValueChange"/>
+                  <cl:langbind property="text" category="PROPERTY" keypath="Str_CameraListDeviceSort"/>
+                  <cl:formdata std:sid="f-data-b8ba5c2e" valign="BOTTOM" height="30" row="0" col="1"/>
+                </cl:checkbox>
+                <cl:formlayout std:sid="f-layout-313631da" hspace="10px" vspace="10px">
+                  <cl:rows length="1" unit="FRACTION"/>
+                  <cl:columns length="200" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="1" unit="FRACTION"/>
+                  <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                </cl:formlayout>
+              </cl:group>
+              <cl:formlayout std:sid="f-layout-76c2b1db" hspace="10px" vspace="10px">
+                <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="1" unit="FRACTION"/>
+                <cl:columns length="1" unit="FRACTION"/>
+                <cl:columns length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="1" unit="FRACTION"/>
+              </cl:formlayout>
+            </cl:group>
+            <cl:xylayout std:sid="xylayout-30880910"/>
+          </cl:group>
+        </cl:tabitem>
+        <cl:tabitem std:sid="t-item-a2a5c4ac" text="VMS 설정">
+          <cl:langbind property="text" category="PROPERTY" keypath="Str_VMSSetting"/>
+          <cl:group std:sid="group-622998f7">
+            <std:metadata>
+              <std:property key="locked" value="true"/>
+            </std:metadata>
+            <cl:group std:sid="group-230b8c32" id="VMVMS_grpConnectionInfo">
+              <cl:xylayoutdata std:sid="xyl-data-ab17dca6" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+              <cl:output std:sid="output-d304fa2a" style="border-bottom-color:#2446a4; font-weight:700; border-bottom-width:1px; font-size:14px; border-bottom-style:solid;">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_ServerConnection"/>
+                <cl:formdata std:sid="f-data-8780854a" row="0" col="0"/>
+              </cl:output>
+              <cl:output std:sid="output-bad71d53" style="text-align:right;">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_ServerAddress"/>
+                <cl:formdata std:sid="f-data-9ca6fdb4" row="2" col="0"/>
+              </cl:output>
+              <cl:inputbox std:sid="i-box-62513d94" id="ipb1">
+                <cl:datamapbind property="value" datacontrolid="VMSConnectionInfo" columnname="ServerAddress"/>
+                <cl:formdata std:sid="f-data-997844e1" halign="LEFT" width="200" row="2" col="1"/>
+              </cl:inputbox>
+              <cl:inputbox std:sid="i-box-3393bdfa" id="ipb2">
+                <cl:datamapbind property="value" datacontrolid="VMSConnectionInfo" columnname="ServerPort"/>
+                <cl:formdata std:sid="f-data-f5cfd063" halign="LEFT" row="3" col="1"/>
+              </cl:inputbox>
+              <cl:button std:sid="button-967d21d0" id="VMVMS_btnApply" style="padding:0px;" class="userInfo_btn">
+                <cl:listener std:sid="listener-f7128d25" name="click" handler="onVMVMS_btnApplyClick"/>
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_Apply"/>
+                <cl:formdata std:sid="f-data-5da36141" halign="RIGHT" row="10" col="2"/>
+              </cl:button>
+              <cl:output std:sid="output-064ce636" style="text-align:right;">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_Port"/>
+                <cl:formdata std:sid="f-data-dd892bdd" row="3" col="0"/>
+              </cl:output>
+              <cl:output std:sid="output-6fc1f2e5" style="text-align:right;">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_ID"/>
+                <cl:formdata std:sid="f-data-f44c4f29" row="4" col="0"/>
+              </cl:output>
+              <cl:output std:sid="output-1d6c784f" style="text-align:right;">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_Password"/>
+                <cl:formdata std:sid="f-data-668eaeb4" row="5" col="0"/>
+              </cl:output>
+              <cl:inputbox std:sid="i-box-2fb1bb09" id="ipb3">
+                <cl:datamapbind property="value" datacontrolid="VMSConnectionInfo" columnname="UserID"/>
+                <cl:formdata std:sid="f-data-9d522a7a" halign="LEFT" width="120" row="4" col="1" rowspan="1" colspan="1"/>
+              </cl:inputbox>
+              <cl:inputbox std:sid="i-box-39b9ad58" id="ipb4" secret="true">
+                <cl:datamapbind property="value" datacontrolid="VMSConnectionInfo" columnname="UserPassword"/>
+                <cl:formdata std:sid="f-data-1b54fcc1" halign="LEFT" width="200" row="5" col="1"/>
+              </cl:inputbox>
+              <cl:output std:sid="output-5a1e4047" style="text-align:right;">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_VMSType"/>
+                <cl:formdata std:sid="f-data-86146005" row="1" col="0"/>
+              </cl:output>
+              <cl:combobox std:sid="c-box-c3c740a2" id="VMVMS_cmbVMSType">
+                <cl:listener std:sid="listener-8e362ab3" name="selection-change" handler="onVMVMS_cmbVMSTypeSelectionChange"/>
+                <cl:datamapbind property="value" datacontrolid="VMSConnectionInfo" columnname="VmsType"/>
+                <cl:formdata std:sid="f-data-0a598ae3" halign="LEFT" width="200" row="1" col="1"/>
+              </cl:combobox>
+              <cl:textarea std:sid="t-area-8174b97c" id="VMVMS_txaTestResult" readonly="true">
+                <cl:datamapbind property="value" datacontrolid="ResultMessage" columnname="Message"/>
+                <cl:formdata std:sid="f-data-3e49e9bf" row="3" col="2" rowspan="5" colspan="1"/>
+              </cl:textarea>
+              <cl:button std:sid="button-10279bd4" id="VMVMS_btnConnectionTest" style="padding:0px;" class="userInfo_btn" enabled="true">
+                <cl:listener std:sid="listener-3af8a2a1" name="click" handler="onVMVMS_btnConnectionTestClick"/>
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_ConnectionTest"/>
+                <cl:formdata std:sid="f-data-8b470f92" row="2" col="2"/>
+              </cl:button>
+              <cl:output std:sid="output-9b347912" style="text-align:right;">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_ServerAddress"/>
+                <cl:formdata std:sid="f-data-ce5e2626" row="6" col="0"/>
+              </cl:output>
+              <cl:output std:sid="output-695fe790" style="text-align:right;">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_Port"/>
+                <cl:formdata std:sid="f-data-2e0f9df7" row="7" col="0"/>
+              </cl:output>
+              <cl:inputbox std:sid="i-box-4bb966fb" id="ipb5">
+                <cl:datamapbind property="value" datacontrolid="VMSConnectionInfo" columnname="StreamServer"/>
+                <cl:formdata std:sid="f-data-a880eb51" halign="LEFT" width="200" row="6" col="1"/>
+              </cl:inputbox>
+              <cl:inputbox std:sid="i-box-fea93fdb" id="ipb6">
+                <cl:datamapbind property="value" datacontrolid="VMSConnectionInfo" columnname="StreamPort"/>
+                <cl:formdata std:sid="f-data-6adc47cf" halign="LEFT" row="7" col="1"/>
+              </cl:inputbox>
+              <cl:button std:sid="button-88cea3b1" id="btnInnodepVms" style="padding:0px;" class="userInfo_btn">
+                <cl:listener std:sid="listener-32b0ef00" name="click" handler="onBtnInnodepVmsClick2"/>
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_InnodepVmsSetup"/>
+                <cl:formdata std:sid="f-data-0f8502ed" row="1" col="2"/>
+              </cl:button>
+              <cl:group std:sid="group-279c2f42" id="grpVideoPopUp">
+                <cl:formdata std:sid="f-data-496312cf" row="8" col="0" rowspan="2" colspan="3"/>
+                <cl:output std:sid="output-73b2e9c3" style="border-bottom-color:#2446a4; font-weight:700; border-bottom-width:1px; font-size:14px; border-bottom-style:solid;">
+                  <cl:langbind property="value" category="PROPERTY" keypath="Str_VMSVideoPopupSetting"/>
+                  <cl:formdata std:sid="f-data-972dc974" row="0" col="0"/>
+                </cl:output>
+                <cl:output std:sid="output-a1416bbb" style="text-align:right;">
+                  <cl:langbind property="value" category="PROPERTY" keypath="Str_FailCount"/>
+                  <cl:formdata std:sid="f-data-46577d73" row="1" col="0"/>
+                </cl:output>
+                <cl:inputbox std:sid="i-box-bbd0b875" id="ipb7">
+                  <cl:datamapbind property="value" category="PROPERTY" datacontrolid="VMSConnectionInfo" columnname="PopUpCount"/>
+                  <cl:formdata std:sid="f-data-81cc7550" halign="LEFT" row="1" col="1"/>
+                </cl:inputbox>
+                <cl:output std:sid="output-44444e0e" id="vmsDescriptionMessage" style="color:#ff0000;" value="Output">
+                  <cl:formdata std:sid="f-data-55c11015" row="1" col="2"/>
+                </cl:output>
+                <cl:formlayout std:sid="f-layout-591d5713" hspace="10px" vspace="10px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+                  <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="160" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="1" unit="FRACTION"/>
+                  <cl:columns length="1" unit="FRACTION"/>
+                </cl:formlayout>
+              </cl:group>
+              <cl:formlayout std:sid="f-layout-86f0c00a" hspace="10px" vspace="10px">
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="1" unit="FRACTION"/>
+                <cl:columns length="160" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="4" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="6" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              </cl:formlayout>
+            </cl:group>
+            <cl:xylayout std:sid="xylayout-f6d31739"/>
+          </cl:group>
+        </cl:tabitem>
+        <cl:tabitem std:sid="t-item-ea7e899b" visible="false">
+          <cl:langbind property="text" category="PROPERTY" keypath="Str_MultiView"/>
+          <cl:group std:sid="group-ff4f075d">
+            <std:metadata>
+              <std:property key="locked" value="true"/>
+            </std:metadata>
+            <cl:group std:sid="group-230fa447" id="vms_multiView_setting">
+              <cl:xylayoutdata std:sid="xyl-data-fa4190d8" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+              <cl:output std:sid="output-8106626a" style="border-bottom-color:#2446a4; font-weight:700; border-bottom-width:1px; font-size:14px; border-bottom-style:solid;">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_ServerConnection"/>
+                <cl:formdata std:sid="f-data-e8bfd8e7" row="0" col="0"/>
+              </cl:output>
+              <cl:output std:sid="output-579201b1" style="text-align:right;" visible="true" value="VmsID">
+                <cl:formdata std:sid="f-data-88ac60d5" row="2" col="0"/>
+              </cl:output>
+              <cl:inputbox std:sid="i-box-01817e75" id="vmsId" style="padding-left:10px; text-align:left;" visible="true" tabindex="1">
+                <cl:datamapbind property="value" category="PROPERTY" datacontrolid="VurixServerInfo" columnname="VmsID"/>
+                <cl:formdata std:sid="f-data-419f61d8" halign="LEFT" width="200" row="2" col="1"/>
+              </cl:inputbox>
+              <cl:button std:sid="button-c01bc0cc" style="padding:0px;" class="userInfo_btn" tabindex="8">
+                <cl:listener std:sid="listener-8643d0e0" name="click" handler="onButtonClick"/>
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_Apply"/>
+                <cl:formdata std:sid="f-data-8f7d4f60" halign="RIGHT" row="9" col="1"/>
+              </cl:button>
+              <cl:output std:sid="output-0e74a5ca" style="text-align:right;" visible="false" value="TransCode">
+                <cl:formdata std:sid="f-data-e00fe65f" row="3" col="0"/>
+              </cl:output>
+              <cl:output std:sid="output-6ca97f4b" style="text-align:right;" value="VurixApiURL">
+                <cl:formdata std:sid="f-data-49f5767a" row="4" col="0"/>
+              </cl:output>
+              <cl:output std:sid="output-110760bc" style="text-align:right;" value="VurixID">
+                <cl:formdata std:sid="f-data-3d4c8c0f" row="5" col="0"/>
+              </cl:output>
+              <cl:inputbox std:sid="i-box-b5a423ba" id="vurixid" style="padding-left:10px;" tabindex="3">
+                <cl:datamapbind property="value" category="PROPERTY" datacontrolid="VurixServerInfo" columnname="VurixID"/>
+                <cl:formdata std:sid="f-data-81ad9e15" halign="LEFT" width="200" row="5" col="1" rowspan="1" colspan="2"/>
+              </cl:inputbox>
+              <cl:output std:sid="output-dcb91edd" style="text-align:right;" visible="false" value="DmsURL">
+                <cl:formdata std:sid="f-data-bcb0b5ab" row="1" col="0"/>
+              </cl:output>
+              <cl:output std:sid="output-f51c575f" style="text-align:right;" value="VurixPass">
+                <cl:formdata std:sid="f-data-deffa2ba" row="6" col="0"/>
+              </cl:output>
+              <cl:output std:sid="output-4d8b884b" style="text-align:right;" value="VurixGroup">
+                <cl:formdata std:sid="f-data-f8d018ec" row="7" col="0"/>
+              </cl:output>
+              <cl:inputbox std:sid="i-box-442b713f" id="vurixPw" style="padding-left:10px;" tabindex="4" secret="true">
+                <cl:listener std:sid="listener-ec23bde2" name="mousedown" handler="onVurixPwMousedown"/>
+                <cl:listener std:sid="listener-cedd32be" name="mouseup" handler="onVurixPwMouseup"/>
+                <cl:datamapbind property="value" category="PROPERTY" datacontrolid="VurixServerInfo" columnname="VurixPass"/>
+                <cl:formdata std:sid="f-data-4e519e0c" halign="LEFT" width="200" row="6" col="1"/>
+              </cl:inputbox>
+              <cl:inputbox std:sid="i-box-d36320da" id="vurixGroup" style="padding-left:10px;" tabindex="5">
+                <cl:datamapbind property="value" category="PROPERTY" datacontrolid="VurixServerInfo" columnname="VurixGroup"/>
+                <cl:formdata std:sid="f-data-8936b840" halign="LEFT" row="7" col="1"/>
+              </cl:inputbox>
+              <cl:inputbox std:sid="i-box-4359fb4c" id="dmsUrl" style="padding-left:10px; text-align:left;" visible="false" tabindex="1" placeholder="IP:8080">
+                <cl:datamapbind property="value" category="PROPERTY" datacontrolid="VurixServerInfo" columnname="DmsURL"/>
+                <cl:formdata std:sid="f-data-0d28ca0e" row="1" col="1" rowspan="1" colspan="1"/>
+              </cl:inputbox>
+              <cl:inputbox std:sid="i-box-e2f9b5cc" id="apiurl" style="padding-left:10px;" tabindex="2">
+                <cl:datamapbind property="value" category="PROPERTY" datacontrolid="VurixServerInfo" columnname="VurixApiURL"/>
+                <cl:formdata std:sid="f-data-f32c16b1" halign="FILL" row="4" col="1"/>
+              </cl:inputbox>
+              <cl:combobox std:sid="c-box-8ff86c2b" id="cmb_TransCode" visible="false" tabindex="3" preventinput="true">
+                <cl:datamapbind property="value" category="PROPERTY" datacontrolid="VurixServerInfo" columnname="TransCode"/>
+                <cl:formdata std:sid="f-data-f69d6a81" halign="LEFT" row="3" col="1" rowspan="1" colspan="1"/>
+              </cl:combobox>
+              <cl:button std:sid="button-6b8fbc33" style="padding:0px;" class="userInfo_btn" enabled="true">
+                <cl:listener std:sid="listener-59ca0682" name="click" handler="onButtonClick2"/>
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_ConnectionTest"/>
+                <cl:formdata std:sid="f-data-dac65aa3" row="9" col="2"/>
+              </cl:button>
+              <cl:formlayout std:sid="f-layout-858477c0" hspace="10px" vspace="10px">
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" hidden="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" hidden="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="1" unit="FRACTION"/>
+                <cl:columns length="160" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="1" unit="FRACTION"/>
+                <cl:columns length="200" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              </cl:formlayout>
+            </cl:group>
+            <cl:xylayout std:sid="xylayout-7543439b"/>
+          </cl:group>
+        </cl:tabitem>
+      </cl:tabfolder>
+      <cl:img std:sid="image-2fb52bce" id="VMSMV_imgHelpPage" style="cursor:help;" src="../../../theme/images/common/common_btn_window_top_q.png">
+        <cl:listener std:sid="listener-1e6c4339" name="click" handler="onVMSMV_imgHelpPageClick"/>
+        <cl:xylayoutdata std:sid="xyl-data-ec97f60a" top="4px" right="7px" width="14px" height="14px" horizontalAnchor="RIGHT" verticalAnchor="TOP"/>
+      </cl:img>
+      <cl:xylayout std:sid="xylayout-f07ced4b"/>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-b2efcd1a"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler>
+      <std:guide position="800"/>
+    </std:hruler>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

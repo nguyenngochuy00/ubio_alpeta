@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-79fbdf40" version="1.0.0.0">
+  <head std:sid="head-32e6bf4c">
+    <title>noticeManagement</title>
+    <screen std:sid="screen-e6e8500a" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="500" customWidth="900"/>
+    <screen std:sid="screen-00b016c5" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-539d3927" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-7297c874">
+      <cl:dataset std:sid="d-set-d06efc34" id="SystemNoticeList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-68cd5104" name="NoticeIndex"/>
+          <cl:datacolumn std:sid="d-column-2d2c9283" name="NoticeTitle"/>
+          <cl:datacolumn std:sid="d-column-b44b5906" name="RegisterName"/>
+          <cl:datacolumn std:sid="d-column-2dc12626" name="RegistAt"/>
+          <cl:datacolumn std:sid="d-column-40d5c72e" name="ViewCount" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-f5b9ae8d" name="FixedFlag" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-cedbe583" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-87513087" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-b4f20a50" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-66a7b98f" name="Count" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-9b6c804a" id="sms_getSystemNoticeList" method="get" action="/v1/systemNotices">
+        <cl:listener std:sid="listener-e252d69c" name="submit-done" handler="onSms_getSystemNoticeListSubmitDone"/>
+        <cl:listener std:sid="listener-51f0e533" name="submit-error" handler="onSubmitError"/>
+        <cl:listener std:sid="listener-37ec1c0e" name="submit-timeout" handler="onSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total"/>
+        <cl:responsedata dataid="SystemNoticeList"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-5c3b83d2" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-6d913778" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-bc5e07e4" style="color:#010101;">
+      <cl:xylayoutdata std:sid="xyl-data-8816b8de" top="25px" right="10px" bottom="0px" left="50px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:grid std:sid="grid-1e5ed8f1" id="SNNLP_grdNoticeList" class="grid-amhq" readonly="true" datasetid="SystemNoticeList" resizablecolumns="all">
+        <cl:listener std:sid="listener-91065d91" name="row-dblclick" handler="onSNNLP_grdNoticeListRowDblclick"/>
+        <cl:formdata std:sid="f-data-a90e07f3" row="4" col="0" rowspan="1" colspan="5"/>
+        <cl:gridcolumn std:sid="g-column-770caa9a" width="30px"/>
+        <cl:gridcolumn std:sid="g-column-19c7ba8e" width="100px"/>
+        <cl:gridcolumn std:sid="g-column-309572fd" width="300px"/>
+        <cl:gridcolumn std:sid="g-column-5a219810" width="60px"/>
+        <cl:gridcolumn std:sid="g-column-b00aa20c" width="60px"/>
+        <cl:gridcolumn std:sid="g-column-0f4cf33e" width="60px"/>
+        <cl:gridheader std:sid="gh-band-6f5c964f">
+          <cl:gridrow std:sid="g-row-86615eaa" height="50px"/>
+          <cl:gridcell std:sid="gh-cell-e20b57ef" rowindex="0" colindex="0" sortable="false" filterable="false" text="번호"/>
+          <cl:gridcell std:sid="gh-cell-ff34c66e" rowindex="0" colindex="1" targetcolumnname="NoticeIndex" sortable="false" filterable="false" text="NoticeIndex" visible="false"/>
+          <cl:gridcell std:sid="gh-cell-9a3d49ad" rowindex="0" colindex="2" targetcolumnname="NoticeTitle" sortable="false" filterable="false" text="제 목"/>
+          <cl:gridcell std:sid="gh-cell-db0ac361" rowindex="0" colindex="3" targetcolumnname="RegisterName" sortable="false" filterable="false" text="작성자"/>
+          <cl:gridcell std:sid="gh-cell-db536ab3" rowindex="0" colindex="4" targetcolumnname="RegistAt" sortable="false" filterable="false" text="작성일"/>
+          <cl:gridcell std:sid="gh-cell-efe990a8" rowindex="0" colindex="5" targetcolumnname="ViewCount" sortable="false" filterable="false" text="조회수"/>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-e2067b66">
+          <cl:gridrow std:sid="g-row-46168eb6" height="30px"/>
+          <cl:gridcell std:sid="gd-cell-cee747a2" rowindex="0" colindex="0" columntype="rowindex">
+            <cl:expbind property="background-color" category="STYLER" expression="switch ( FixedFlag ) {&#xD;&#xA;&#x9;case 0: &quot;white&quot;&#xD;&#xA;&#x9;case 1: &quot;#808080&quot;&#xD;&#xA;&#x9;default: &quot;white&quot;&#xD;&#xA;}"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-98320a06" rowindex="0" colindex="1" columnname="NoticeIndex">
+            <cl:expbind property="background-color" category="STYLER" expression="switch ( FixedFlag ) {&#xD;&#xA;&#x9;case 0: &quot;white&quot;&#xD;&#xA;&#x9;case 1: &quot;#808080&quot;&#xD;&#xA;&#x9;default: &quot;white&quot;&#xD;&#xA;}"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-e65f6300" rowindex="0" colindex="2" columnname="NoticeTitle">
+            <cl:expbind property="background-color" category="STYLER" expression="switch ( FixedFlag ) {&#xD;&#xA;&#x9;case 0: &quot;white&quot;&#xD;&#xA;&#x9;case 1: &quot;#808080&quot;&#xD;&#xA;&#x9;default: &quot;white&quot;&#xD;&#xA;}"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-872ad90c" rowindex="0" colindex="3" columnname="RegisterName">
+            <cl:expbind property="background-color" category="STYLER" expression="switch ( FixedFlag ) {&#xD;&#xA;&#x9;case 0: &quot;white&quot;&#xD;&#xA;&#x9;case 1: &quot;#808080&quot;&#xD;&#xA;&#x9;default: &quot;white&quot;&#xD;&#xA;}"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-a1355823" rowindex="0" colindex="4" columnname="RegistAt">
+            <cl:expbind property="background-color" category="STYLER" expression="switch ( FixedFlag ) {&#xD;&#xA;&#x9;case 0: &quot;white&quot;&#xD;&#xA;&#x9;case 1: &quot;#808080&quot;&#xD;&#xA;&#x9;default: &quot;white&quot;&#xD;&#xA;}"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-9b01a42c" rowindex="0" colindex="5" columnname="ViewCount">
+            <cl:expbind property="background-color" category="STYLER" expression="switch ( FixedFlag ) {&#xD;&#xA;&#x9;case 0: &quot;white&quot;&#xD;&#xA;&#x9;case 1: &quot;#808080&quot;&#xD;&#xA;&#x9;default: &quot;white&quot;&#xD;&#xA;}"/>
+          </cl:gridcell>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:output std:sid="output-49b34f86" id="ACAPAP_opbTitle" class="menu-title-amhq" value="공지사항">
+        <cl:formdata std:sid="f-data-48940f24" halign="LEFT" width="200" row="0" col="0"/>
+      </cl:output>
+      <cl:group std:sid="group-0faca52d" style="color:#010101;">
+        <cl:formdata std:sid="f-data-a73d1bc2" row="2" col="0" rowspan="1" colspan="5"/>
+        <cl:button std:sid="button-82ba7864" id="SNNLP_btnSearch" class="button-search-amhq" value="조회" icon="../../../../theme/custom/armyhq/btn_search.PNG" iconalign="right">
+          <cl:listener std:sid="listener-53b8089a" name="click" handler="onSNNLP_btnSearchClick"/>
+          <cl:formdata std:sid="f-data-08777f9e" row="0" col="4"/>
+          <cl:iconstyle style="width:30px; height:30px;"/>
+        </cl:button>
+        <cl:button std:sid="button-0c5a9d2f" id="SNNLP_btnRegist" style="font-size:16px;" class="button-search-green-amhq" value="신규">
+          <cl:listener std:sid="listener-8b6ae12c" name="click" handler="onSNNLP_btnRegistClick"/>
+          <cl:formdata std:sid="f-data-13e204b1" row="0" col="5"/>
+        </cl:button>
+        <cl:combobox std:sid="c-box-0642fca7" id="SNNLP_cmbSearch" style="color:#010101; text-align:center;" class="combobox-amhq">
+          <cl:formdata std:sid="f-data-aee07670" row="0" col="2"/>
+          <cl:item std:sid="item-89df3f3c" label="--------" value="0"/>
+          <cl:item std:sid="item-651c5378" label="작성자" value="1"/>
+          <cl:item std:sid="item-4c5e1f77" label="제목" value="2"/>
+        </cl:combobox>
+        <cl:inputbox std:sid="i-box-533fe273" id="SNNLP_ipbSearchContent" class="inputbox-amhq">
+          <cl:listener std:sid="listener-5d885233" name="keydown" handler="onKeywordKeydown"/>
+          <cl:listener std:sid="listener-cd558605" name="keyup" handler="onSNNLP_ipbSearchContentKeyup"/>
+          <cl:formdata std:sid="f-data-6bad3bfd" row="0" col="3"/>
+        </cl:inputbox>
+        <cl:output std:sid="output-9f93ae55" class="section-title-amhq" value="공지사항 목록">
+          <cl:formdata std:sid="f-data-b3c9737d" row="0" col="0"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-d9a58035" scrollable="false" hspace="5px" vspace="0px" top-margin="1px" right-margin="1px" bottom-margin="1px" left-margin="1px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="200" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="80" unit="PIXEL"/>
+          <cl:columns length="140" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="90" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:pageindexer std:sid="p-indexer-28d1fcdc" id="SNNLP_piNoticeList" class="userList_paging">
+        <cl:listener std:sid="listener-a6d1bbdc" name="click" handler="onSNNLP_piNoticeListClick"/>
+        <cl:formdata std:sid="f-data-6e9aeb58" row="5" col="0" rowspan="1" colspan="5"/>
+      </cl:pageindexer>
+      <cl:group std:sid="group-ef3a5eee">
+        <cl:formdata std:sid="f-data-a0f7e830" row="1" col="0" rowspan="1" colspan="5"/>
+        <cl:xylayout std:sid="xylayout-3194fb25"/>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-48889241" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+        <cl:rows length="35" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="35" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="10" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+        <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="160" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-d0be93d3" scrollable="false"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

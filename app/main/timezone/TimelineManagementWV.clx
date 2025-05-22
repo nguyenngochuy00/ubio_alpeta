@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-f64d3491" version="1.0.0.0">
+  <head std:sid="head-aa3f7fe7">
+    <title>TimelineManagementW</title>
+    <screen std:sid="screen-0d698a00" id="default" height="768px" minwidth="1024px" name="default" width="1024px"/>
+    <screen std:sid="screen-304459c5" id="tablet" height="667px" maxwidth="1023px" minwidth="500px" name="tablet" width="500px"/>
+    <screen std:sid="screen-f8fca7e0" id="mobile" height="525px" maxwidth="499px" name="mobile" width="350px"/>
+    <cl:model std:sid="model-df4f147f">
+      <cl:dataset std:sid="d-set-ac86a6cf" id="dayList">
+        <cl:datacolumnlist>
+          <cl:datacolumn name="요일"/>
+          <cl:datacolumn name="타임라인"/>
+          <cl:datacolumn name="타임라인선택"/>
+        </cl:datacolumnlist>
+        <cl:datarowlist>
+          <cl:datarow>
+            <cl:datavalue columnname="요일">월요일</cl:datavalue>
+            <cl:datavalue columnname="타임라인"/>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="요일">화요일</cl:datavalue>
+            <cl:datavalue columnname="타임라인"/>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="요일">수요일</cl:datavalue>
+            <cl:datavalue columnname="타임라인"/>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="요일">목요일</cl:datavalue>
+            <cl:datavalue columnname="타임라인"/>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="요일">금요일</cl:datavalue>
+            <cl:datavalue columnname="타임라인"/>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="요일">토요일</cl:datavalue>
+            <cl:datavalue columnname="타임라인"/>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="요일">일요일</cl:datavalue>
+            <cl:datavalue columnname="타임라인"/>
+          </cl:datarow>
+          <cl:datarow>
+            <cl:datavalue columnname="요일">휴일1</cl:datavalue>
+            <cl:datavalue columnname="타임라인"/>
+          </cl:datarow>
+        </cl:datarowlist>
+      </cl:dataset>
+      <cl:submission std:sid="submission-e8c1ef3b" id="smsGetTimeZone" action="/v1/timezones" method="get">
+        <cl:listener std:sid="listener-09cc4f02" handler="onSmsGetTimeZoneSubmitDone" name="submit-done"/>
+        <cl:responsedata dataid="TimezoneList"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-16ae7ef3" id="smsGetTimeline" action="/v1/timezones/timelines" method="get">
+        <cl:listener std:sid="listener-4c7b8246" handler="onSmsGetTimelineSubmitSuccess" name="submit-success"/>
+        <cl:responsedata dataid="ValList"/>
+        <cl:responsedata dataid="TimelineList"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-f2839382" id="smsSaveTimeZone" action="/v1/timezones" mediatype="application/x-www-form-urlencoded">
+        <cl:listener std:sid="listener-875aee43" handler="onSmsSaveTimeZoneSubmitDone" name="submit-done"/>
+        <cl:listener std:sid="listener-16a922f0" handler="onSmsSaveTimeZoneSubmitError" name="submit-error"/>
+        <cl:listener std:sid="listener-1cc01e46" handler="onSmsSaveTimeZoneSubmitTimeout" name="submit-timeout"/>
+        <cl:requestdata dataid="TimezoneInfo"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-b59622fa" id="smsDeleteTimeZone" action="/v1/timezones" method="delete"/>
+      <cl:submission std:sid="submission-e53958f3" id="smsGetHolidayInfo" action="/v1/timezones/holidays" method="get">
+        <cl:listener std:sid="listener-58187977" handler="onSmsGetHolidayInfoSubmitSuccess" name="submit-success"/>
+        <cl:responsedata dataid="HolidayList"/>
+      </cl:submission>
+      <cl:dataset std:sid="d-set-f18f397f" id="TimezoneList">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" info="타임라인아이디" name="TimezoneID"/>
+          <cl:datacolumn name="Name"/>
+          <cl:datacolumn datatype="number" displayonly="false" name="HolidayID"/>
+          <cl:datacolumn datatype="number" name="Monday"/>
+          <cl:datacolumn datatype="number" name="Tuesday"/>
+          <cl:datacolumn datatype="number" name="Wednesday"/>
+          <cl:datacolumn datatype="number" name="Thursday"/>
+          <cl:datacolumn datatype="number" name="Friday"/>
+          <cl:datacolumn datatype="number" name="Saturday"/>
+          <cl:datacolumn datatype="number" name="Sunday"/>
+          <cl:datacolumn datatype="number" name="Holiday"/>
+        </cl:datacolumnlist>
+        <cl:datarowlist/>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-61cee618" id="ValList">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" info="타임라인아이디" name="TimelineID"/>
+          <cl:datacolumn datatype="number" name="Type"/>
+          <cl:datacolumn datatype="string" name="ExtVal"/>
+          <cl:datacolumn datatype="number" info="타임라인아이템" name="StartTime"/>
+          <cl:datacolumn datatype="number" info="타임라인아이템" name="EndTime"/>
+        </cl:datacolumnlist>
+        <cl:datarowlist/>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-8b564a07" id="TimelineList">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="TimelineID"/>
+          <cl:datacolumn name="Name"/>
+          <cl:datacolumn name="Type"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-26273774" id="TimezoneHolidayInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="HolidayID"/>
+          <cl:datacolumn name="Name"/>
+          <cl:datacolumn datatype="number" name="RepeatYear"/>
+          <cl:datacolumn name="Holidays"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:dataset std:sid="d-set-542489b0" id="HolidayList">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="HolidayID"/>
+          <cl:datacolumn name="Name"/>
+          <cl:datacolumn datatype="number" name="RepeatYear"/>
+          <cl:datacolumn name="Holidays"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-177ee704" id="TimezoneInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="TimezoneID"/>
+          <cl:datacolumn name="Name"/>
+          <cl:datacolumn datatype="number" name="HolidayID"/>
+          <cl:datacolumn datatype="number" name="Holiday"/>
+          <cl:datacolumn datatype="number" name="Sunday"/>
+          <cl:datacolumn datatype="number" name="Monday"/>
+          <cl:datacolumn datatype="number" name="Tuesday"/>
+          <cl:datacolumn datatype="number" name="Wednesday"/>
+          <cl:datacolumn datatype="number" name="Thursday"/>
+          <cl:datacolumn datatype="number" name="Friday"/>
+          <cl:datacolumn datatype="number" name="Saturday"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-940d95a3" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="ResultCode"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-26a56b8e" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-ef26aff7" handler="onBodyLoad" name="load"/>
+    <cl:group std:sid="group-bac56390" style="padding:10px;">
+      <cl:xylayoutdata std:sid="xyl-data-1bc36108" bottom="0px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="BOTH"/>
+      <cl:grid std:sid="grid-bfc55c2f" id="TMTZV_grdTimezoneList" columnMovable="false" columnResizable="false" datasetid="TimezoneList" readonly="false" showdeletedrow="false">
+        <cl:listener std:sid="listener-2bdc5706" handler="onTMTZV_grdTimezoneListSelectionChange" name="selection-change"/>
+        <cl:listener std:sid="listener-bb974dbd" handler="onTMTZV_grdTimezoneListUpdate" name="update"/>
+        <cl:listener std:sid="listener-40662933" handler="onTMTZV_grdTimezoneListInsert" name="insert"/>
+        <cl:listener std:sid="listener-9638ba50" handler="onTMTZV_grdTimezoneListBeforeSelectionChange" name="before-selection-change"/>
+        <cl:formdata std:sid="f-data-43332fa8" col="0" row="1"/>
+        <cl:gridcolumn std:sid="g-column-e062cb93"/>
+        <cl:gridcolumn std:sid="g-column-7e6cbc23"/>
+        <cl:gridcolumn std:sid="g-column-ceb4f09f"/>
+        <cl:gridcolumn std:sid="g-column-d2d28881"/>
+        <cl:gridcolumn std:sid="g-column-ddf867b8"/>
+        <cl:gridcolumn std:sid="g-column-3ef811e6"/>
+        <cl:gridcolumn std:sid="g-column-d10cbba4"/>
+        <cl:gridcolumn std:sid="g-column-227c84ba"/>
+        <cl:gridcolumn std:sid="g-column-59eb839a"/>
+        <cl:gridcolumn std:sid="g-column-d58de255"/>
+        <cl:gridcolumn std:sid="g-column-9aa757d6"/>
+        <cl:gridheader std:sid="gh-band-68b3a5f2">
+          <cl:gridrow std:sid="g-row-d2f3785e"/>
+          <cl:gridcell std:sid="gh-cell-194d1cc0" colindex="0" rowindex="0" filterable="false" sortable="false" targetcolumnname="TimezoneID" text="ID"/>
+          <cl:gridcell std:sid="gh-cell-33b87d76" colindex="1" rowindex="0" filterable="false" sortable="false" targetcolumnname="Name" text="Name">
+            <cl:langbind category="PROPERTY" property="filterDialogTitle" keypath="Str_Name"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-00a62cfb" colindex="2" rowindex="0" filterable="false" sortable="false" targetcolumnname="HolidayID" text="HolidayID" visible="false"/>
+          <cl:gridcell std:sid="gh-cell-217191fd" colindex="3" rowindex="0" filterable="false" sortable="false" targetcolumnname="Monday" text="Monday" visible="false"/>
+          <cl:gridcell std:sid="gh-cell-31a05abb" colindex="4" rowindex="0" filterable="false" sortable="false" targetcolumnname="Tuesday" text="Tuesday" visible="false"/>
+          <cl:gridcell std:sid="gh-cell-17ff62ce" colindex="5" rowindex="0" filterable="false" sortable="false" targetcolumnname="Wednesday" text="Wednesday" visible="false"/>
+          <cl:gridcell std:sid="gh-cell-d21a31db" colindex="6" rowindex="0" filterable="false" sortable="false" targetcolumnname="Thursday" text="Thursday" visible="false"/>
+          <cl:gridcell std:sid="gh-cell-ef26350e" colindex="7" rowindex="0" filterable="false" sortable="false" targetcolumnname="Friday" text="Friday" visible="false"/>
+          <cl:gridcell std:sid="gh-cell-8d9ee425" colindex="8" rowindex="0" filterable="false" sortable="false" targetcolumnname="Saturday" text="Saturday" visible="false"/>
+          <cl:gridcell std:sid="gh-cell-db8e1c47" colindex="9" rowindex="0" filterable="false" sortable="false" targetcolumnname="Sunday" text="Sunday" visible="false"/>
+          <cl:gridcell std:sid="gh-cell-9c508527" colindex="10" rowindex="0" filterable="false" sortable="false" targetcolumnname="Holiday" text="Holiday" visible="false"/>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-5859846c">
+          <cl:gridrow std:sid="g-row-a5980b76"/>
+          <cl:gridcell std:sid="gd-cell-c6201c01" colindex="0" rowindex="0" columnname="TimezoneID"/>
+          <cl:gridcell std:sid="gd-cell-56fce6ef" colindex="1" rowindex="0" columnname="Name">
+            <cl:inputbox std:sid="i-box-3724b375" id="ipb3"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-b49f6310" colindex="2" rowindex="0" columnname="HolidayID">
+            <cl:output std:sid="output-2070095d" datatype="number"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-26661c99" colindex="3" rowindex="0" columnname="Monday">
+            <cl:output std:sid="output-31824f0a" datatype="number"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-17c740ca" colindex="4" rowindex="0" columnname="Tuesday">
+            <cl:output std:sid="output-70e95d3d" datatype="number"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-6afe69ba" colindex="5" rowindex="0" columnname="Wednesday">
+            <cl:output std:sid="output-e56d3f48" datatype="number"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-776a0925" colindex="6" rowindex="0" columnname="Thursday">
+            <cl:output std:sid="output-158d5109" datatype="number"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-0f545c3b" colindex="7" rowindex="0" columnname="Friday">
+            <cl:output std:sid="output-d7d428bd" datatype="number"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-dba11bc5" colindex="8" rowindex="0" columnname="Saturday">
+            <cl:output std:sid="output-7ded217c" datatype="number"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-71a1fcc5" colindex="9" rowindex="0" columnname="Sunday">
+            <cl:output std:sid="output-9d3382ff" datatype="number"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-2b99c04c" colindex="10" rowindex="0" columnname="Holiday">
+            <cl:output std:sid="output-1dd9b9ea" datatype="number"/>
+          </cl:gridcell>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:group std:sid="group-15881739" style="padding:0px;">
+        <cl:formdata std:sid="f-data-ab6b05e3" col="0" row="0"/>
+        <cl:button std:sid="button-48d78642" id="btnRowAdd" class="userInfo_btn">
+          <cl:listener std:sid="listener-8df3a0a8" handler="onBtnRowAddClick" name="click"/>
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_Add"/>
+          <cl:formdata std:sid="f-data-bf51dc5e" col="0" row="0" valign="FILL"/>
+        </cl:button>
+        <cl:button std:sid="button-e9a2a02f" id="btnRowDel" class="userInfo_btn" enabled="false">
+          <cl:listener std:sid="listener-4657ba96" handler="onBtnRowDelClick" name="click"/>
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_Delete"/>
+          <cl:formdata std:sid="f-data-647d74b2" col="1" row="0" valign="FILL"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-5018a652">
+          <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="1" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+          <cl:columns autoSizing="false" length="1" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-64f285aa">
+        <cl:formdata std:sid="f-data-50ed85e6" col="1" row="0"/>
+        <cl:output std:sid="output-14c024cb" id="optTitle" style="font-weight:700; font-size:14px;">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_SelectTimezonList"/>
+          <cl:formdata std:sid="f-data-4c778eb5" col="0" colspan="2" row="0" rowspan="1"/>
+        </cl:output>
+        <cl:group std:sid="group-4d561e51">
+          <cl:formdata std:sid="f-data-b570f4bd" col="2" row="0"/>
+          <cl:button std:sid="button-a152a20b" id="btnOpenTmgt" class="userInfo_btn">
+            <cl:listener std:sid="listener-760e9dca" handler="onBtnOpenTmgtClick" name="click"/>
+            <cl:langbind category="PROPERTY" property="value" keypath="Str_TimelineManagement"/>
+            <cl:formdata std:sid="f-data-aab6885e" col="0" row="0" valign="FILL"/>
+          </cl:button>
+          <cl:button std:sid="button-5bc8c483" id="btnOpenHmgt" class="userInfo_btn">
+            <cl:listener std:sid="listener-f7b717ee" handler="onBtnOpenHmgtClick" name="click"/>
+            <cl:langbind category="PROPERTY" property="value" keypath="Str_HolidayManagement"/>
+            <cl:formdata std:sid="f-data-1deede13" col="1" row="0" valign="FILL"/>
+          </cl:button>
+          <cl:button std:sid="button-8d64dca0" id="btnTmSave" class="userInfo_btn" enabled="false">
+            <cl:listener std:sid="listener-37814616" handler="onBtnTmSaveClick" name="click"/>
+            <cl:langbind category="PROPERTY" property="value" keypath="Str_Save"/>
+            <cl:formdata std:sid="f-data-a967de0a" col="2" row="0" valign="FILL"/>
+          </cl:button>
+          <cl:formlayout std:sid="f-layout-f73e3f18">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns autoSizing="false" length="120" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+            <cl:columns autoSizing="false" length="120" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+            <cl:columns autoSizing="false" length="120" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:img std:sid="image-3ad8901c" style="cursor:help;" src="../../../theme/images/common/common_btn_window_top_q.png">
+          <cl:listener std:sid="listener-d73d6a52" handler="onImageClick" name="click"/>
+          <cl:formdata std:sid="f-data-d18301d5" col="3" colspan="1" halign="CENTER" height="14" row="0" rowspan="1" valign="CENTER" width="14"/>
+        </cl:img>
+        <cl:formlayout std:sid="f-layout-58b06dd9">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns autoSizing="false" length="100" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns autoSizing="false" length="370" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="14" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-8da770f2">
+        <cl:formdata std:sid="f-data-1a24fe75" col="1" row="1"/>
+        <cl:udc std:sid="ud-control-cc72c6f4" id="embDouble" type="udc.timeline.TimeWeekV">
+          <cl:xylayoutdata std:sid="xyl-data-c8455702" bottom="0px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="BOTH"/>
+        </cl:udc>
+        <cl:xylayout std:sid="xylayout-b432f5ea"/>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-ee7f650f">
+        <cl:rows autoSizing="false" length="30" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns autoSizing="false" length="220" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:columns autoSizing="false" length="3" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-9813d119"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

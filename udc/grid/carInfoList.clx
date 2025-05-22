@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-472f5394" version="1.0.0.0">
+  <head std:sid="head-1f677683">
+    <title>userList</title>
+    <screen std:sid="screen-38dd8729" id="default" name="default" minwidth="1024px" width="1024px" height="768px" customHeight="600" customWidth="800"/>
+    <screen std:sid="screen-94acb6d5" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-98cb4470" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-cf2dbeda">
+      <cl:dataset std:sid="d-set-38aeedf4" id="CarInfoList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-2125c70a" name="UserIndexKey" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-3f3e4b44" name="VisitorIndexKey" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-e2cb0fc8" name="CarNumber"/>
+          <cl:datacolumn std:sid="d-column-ab0cecf2" name="CarColor"/>
+          <cl:datacolumn std:sid="d-column-cfab004a" name="CarType"/>
+          <cl:datacolumn std:sid="d-column-75fbacef" name="Name"/>
+          <cl:datacolumn std:sid="d-column-c4338e6a" name="Group"/>
+          <cl:datacolumn std:sid="d-column-f062ad14" name="Position"/>
+          <cl:datacolumn std:sid="d-column-03313d70" name="UniqueID"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+    </cl:model>
+    <cl:appspec>
+      <cl:event name="pagechange" type="cpr.events.CSelectionEvent"/>
+      <cl:event name="before-pagechange" type="cpr.events.CSelectionEvent"/>
+      <cl:event name="userListDblclick" type="cpr.events.CGridEvent"/>
+      <cl:event name="userListClick" type="cpr.events.CSelectionEvent"/>
+    </cl:appspec>
+  </head>
+  <body std:sid="body-0fe2faea" style="top:0px; left:0px; width:500px; height:400px;">
+    <cl:listener std:sid="listener-1476d8fb" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-4aba554e">
+      <cl:xylayoutdata std:sid="xyl-data-dd22167b" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:pageindexer std:sid="p-indexer-0812fa71" id="userListPageIndexer" style="color:#404040;" class="userList_paging">
+        <cl:listener std:sid="listener-f4ec5b1b" name="before-selection-change" handler="onUserListPageIndexerBeforeSelectionChange"/>
+        <cl:listener std:sid="listener-91c8802d" name="selection-change" handler="onUserListPageIndexerSelectionChange"/>
+        <cl:formdata std:sid="f-data-3b0882a3" width="100" row="1" col="0"/>
+      </cl:pageindexer>
+      <cl:grid std:sid="grid-61327aeb" id="UDC_grdCarInfoList" readonly="false" datasetid="CarInfoList" columnResizable="false" columnMovable="false">
+        <cl:listener std:sid="listener-5c67587f" name="row-dblclick" handler="onUserListGridRowDblclick"/>
+        <cl:listener std:sid="listener-874ad049" name="selection-change" handler="onUDC_grdUserListSelectionChange"/>
+        <cl:formdata std:sid="f-data-941ebce7" row="0" col="0"/>
+        <cl:gridcolumn std:sid="g-column-0682fa48" width="52px"/>
+        <cl:gridcolumn std:sid="g-column-f0eb4c79"/>
+        <cl:gridcolumn std:sid="g-column-2d871f71"/>
+        <cl:gridcolumn std:sid="g-column-2d0d9479"/>
+        <cl:gridcolumn std:sid="g-column-5714cffe"/>
+        <cl:gridcolumn std:sid="g-column-b84ee5aa"/>
+        <cl:gridcolumn std:sid="g-column-cede92f4"/>
+        <cl:gridcolumn std:sid="g-column-7db46512"/>
+        <cl:gridcolumn std:sid="g-column-b1b91ffd"/>
+        <cl:gridcolumn std:sid="g-column-2dad3d8a"/>
+        <cl:gridheader std:sid="gh-band-beb5c431">
+          <cl:gridrow std:sid="g-row-c088c9d7"/>
+          <cl:gridcell std:sid="gh-cell-5357812d" rowindex="0" colindex="4" targetcolumnname="UserIndexKey" sortable="false" filterable="false" text="UserIndexKey">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_UserIndexKey"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-dd5dea45" rowindex="0" colindex="6" targetcolumnname="VisitorIndexKey" sortable="false" filterable="false" text="VisitorIndexKey">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_VisitorIndexKey"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-73bf72b7" rowindex="0" colindex="7" targetcolumnname="CarNumber" sortable="false" filterable="false" text="CarNumber">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_CarNumber"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-1f41789a" rowindex="0" colindex="8" targetcolumnname="CarColor" sortable="false" filterable="false" text="CarColor">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_Color"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-77c181ea" rowindex="0" colindex="9" targetcolumnname="CarType" sortable="false" filterable="false" text="CarType">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_CarType"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-7763bbda" rowindex="0" colindex="0" columntype="checkbox"/>
+          <cl:gridcell std:sid="gh-cell-0e7ec046" rowindex="0" colindex="1" targetcolumnname="Name">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_Name"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-283344da" rowindex="0" colindex="2" targetcolumnname="Group">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_GroupName"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-d2ba5b56" rowindex="0" colindex="3" targetcolumnname="Position">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_Position"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-36403c41" rowindex="0" colindex="5" text="Str_UniqueID">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_UniqueID"/>
+          </cl:gridcell>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-ef4a51f1">
+          <cl:gridrow std:sid="g-row-2b3a040b"/>
+          <cl:gridcell std:sid="gd-cell-12ae3629" rowindex="0" colindex="4" columnname="UserIndexKey"/>
+          <cl:gridcell std:sid="gd-cell-b219c375" rowindex="0" colindex="6" columnname="VisitorIndexKey"/>
+          <cl:gridcell std:sid="gd-cell-3dfbc040" rowindex="0" colindex="7" columnname="CarNumber"/>
+          <cl:gridcell std:sid="gd-cell-5dfcda82" rowindex="0" colindex="8" columnname="CarColor"/>
+          <cl:gridcell std:sid="gd-cell-eef83902" rowindex="0" colindex="9" columnname="CarType"/>
+          <cl:gridcell std:sid="gd-cell-3dd493d6" rowindex="0" colindex="0" columntype="checkbox"/>
+          <cl:gridcell std:sid="gd-cell-b32d9c55" rowindex="0" colindex="1" columnname="Name"/>
+          <cl:gridcell std:sid="gd-cell-3666ffc0" rowindex="0" colindex="2" columnname="Group"/>
+          <cl:gridcell std:sid="gd-cell-4728c655" rowindex="0" colindex="3" columnname="Position"/>
+          <cl:gridcell std:sid="gd-cell-d57fc947" rowindex="0" colindex="5" columnname="UniqueID"/>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:formlayout std:sid="f-layout-8ae29e84" vspace="0px">
+        <cl:rows length="1" unit="FRACTION" shadetype="NONE" shadecolor="#000000"/>
+        <cl:rows length="40" unit="PIXEL" shadetype="NONE" shadecolor="#000000"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-aeaad4e3"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

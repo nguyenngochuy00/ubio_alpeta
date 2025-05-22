@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-9a2eeea3" version="1.0.0.0">
+  <head std:sid="head-2ee2e91b">
+    <title>AccessGroupUserSelect</title>
+    <screen std:sid="screen-feb27913" id="default" height="768px" minwidth="1024px" name="default" width="1024px"/>
+    <screen std:sid="screen-8832b4fe" id="tablet" height="667px" maxwidth="1023px" minwidth="500px" name="tablet" width="500px"/>
+    <screen std:sid="screen-b81768bc" id="mobile" height="525px" maxwidth="499px" name="mobile" width="350px"/>
+    <cl:model std:sid="model-bf1778e0">
+      <cl:dataset std:sid="d-set-a1e53e49" id="UserList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-aab0b4a1" datatype="string" name="ID"/>
+          <cl:datacolumn std:sid="d-column-9f1a7648" name="UniqueID"/>
+          <cl:datacolumn std:sid="d-column-99e2c326" datatype="string" name="Name"/>
+          <cl:datacolumn std:sid="d-column-1e923e86" name="AuthInfo"/>
+          <cl:datacolumn std:sid="d-column-aaf3d648" name="Privilege"/>
+          <cl:datacolumn std:sid="d-column-78170f0d" name="RegistDate"/>
+          <cl:datacolumn std:sid="d-column-d2ec8365" name="ExpiredDate"/>
+          <cl:datacolumn std:sid="d-column-2b2433e5" name="GroupCode"/>
+          <cl:datacolumn std:sid="d-column-279a18be" datatype="string" name="AccessGroupCode"/>
+          <cl:datacolumn std:sid="d-column-669dda93" name="TimezoneCode"/>
+          <cl:datacolumn std:sid="d-column-1d90238d" name="BlackList"/>
+          <cl:datacolumn std:sid="d-column-298afd75" name="FPIdentify"/>
+          <cl:datacolumn std:sid="d-column-3701518f" name="FaceIdentify"/>
+          <cl:datacolumn std:sid="d-column-35d4c44a" name="APBZone"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-9cc19187" id="UserSelectList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-22df3de7" datatype="string" name="ID"/>
+          <cl:datacolumn std:sid="d-column-acb60f8f" datatype="string" name="Name"/>
+          <cl:datacolumn std:sid="d-column-83a23f78" name="GroupCode"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-c2bd18fc" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-de221ff5" datatype="number" name="Count"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-a33aca7f" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-373ed6fb" datatype="number" name="ResultCode"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-8f727f9d" id="sms_getUserListAll" action="/v1/users" method="get">
+        <cl:listener std:sid="listener-1a01671f" handler="onSms_getUserListAllSubmitDone" name="submit-done"/>
+        <cl:listener std:sid="listener-4256ef73" handler="onSms_getUserListAllSubmitSuccess" name="submit-success"/>
+        <cl:listener std:sid="listener-de3eb7ed" handler="onSms_getUserListAllSubmitError" name="submit-error"/>
+        <cl:listener std:sid="listener-10e949da" handler="onSms_getUserListAllSubmitTimeout" name="submit-timeout"/>
+        <cl:requestparam name="searchCategory"/>
+        <cl:requestparam name="searchKeyword"/>
+        <cl:requestparam name="offset" value="0"/>
+        <cl:requestparam name="limit" value="50"/>
+        <cl:requestparam name="picture" value="false"/>
+        <cl:requestparam name="fields"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total"/>
+        <cl:responsedata dataid="UserList" isadd="false"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec dev-comment="AUSSEL_udcUser"/>
+  </head>
+  <body std:sid="body-f2d9a135" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-712daaa6" handler="onBodyLoad" name="load"/>
+    <cl:listener std:sid="listener-9576d8f5" handler="onBodyUnload" name="unload"/>
+    <cl:group std:sid="group-dab65c96">
+      <cl:xylayoutdata bottom="1px" horizontalAnchor="BOTH" left="1px" right="1px" top="1px" verticalAnchor="BOTH"/>
+      <cl:udc std:sid="ud-control-4cb71764" id="AUSSEL_udcUserAccessGroup" type="udc.grid.gridAccessGroupUser">
+        <cl:listener std:sid="listener-ae23b8a0" handler="onAUSSEL_udcUserAccessGroupUserListDblclickAccessGroup" name="userListDblclickAccessGroup"/>
+        <cl:listener std:sid="listener-78b5e439" handler="onAUSSEL_udcUserAccessGroupUserListUpdateAccessGroup" name="userListUpdateAccessGroup"/>
+        <cl:formdata col="0" colspan="1" row="0" rowspan="2"/>
+      </cl:udc>
+      <cl:group std:sid="group-bb34e300">
+        <cl:formdata col="1" colspan="1" row="0" rowspan="2"/>
+        <cl:button std:sid="button-1b25ece5" id="AUSSEL_btnAdd" class="userInfo_btn" style="padding:5px;" value=">">
+          <cl:listener std:sid="listener-95687bb2" handler="onAUSSEL_btnAddClick" name="click"/>
+          <cl:xylayoutdata std:sid="xyl-data-f9690c56" height="30px" horizontalAnchor="BOTH" left="0px" right="0px" top="130px" verticalAnchor="TOP"/>
+        </cl:button>
+        <cl:button std:sid="button-e7e0629f" id="AUSSEL_btnRemove" class="userInfo_btn" style="padding:5px;" value="&lt;">
+          <cl:listener std:sid="listener-6a02d93e" handler="onAUSSEL_btnRemoveClick" name="click"/>
+          <cl:xylayoutdata std:sid="xyl-data-22e7b707" height="30px" horizontalAnchor="BOTH" left="0px" right="0px" top="170px" verticalAnchor="TOP"/>
+        </cl:button>
+        <cl:button std:sid="button-3903e508" id="AUSSEL_btnAddAll" class="userInfo_btn" style="padding:5px;" value=">>">
+          <cl:listener std:sid="listener-3b78688e" handler="onAUSSEL_btnAddAllClick" name="click"/>
+          <cl:xylayoutdata std:sid="xyl-data-551cc65f" height="30px" horizontalAnchor="BOTH" left="0px" right="0px" top="220px" verticalAnchor="TOP"/>
+        </cl:button>
+        <cl:button std:sid="button-41d1c196" id="AUSSEL_btnRemoveAll" class="userInfo_btn" style="padding:5px;" value="&lt;&lt;">
+          <cl:listener std:sid="listener-29d55ee7" handler="onAUSSEL_btnRemoveAllClick" name="click"/>
+          <cl:xylayoutdata std:sid="xyl-data-ec6946b3" height="30px" horizontalAnchor="BOTH" left="0px" right="0px" top="260px" verticalAnchor="TOP"/>
+        </cl:button>
+        <cl:xylayout std:sid="xylayout-396ebe63"/>
+      </cl:group>
+      <cl:udc std:sid="ud-control-92371607" id="AUSSEL_udcUserSelectList" type="udc.grid.userList">
+        <cl:listener std:sid="listener-00a3fe29" handler="onAUSSEL_udcUserSelectListUserListDblclick" name="userListDblclick"/>
+        <cl:listener std:sid="listener-0a83936a" handler="onAUSSEL_udcUserSelectListPagechange" name="pagechange"/>
+        <cl:formdata std:sid="f-data-c0aeff01" col="2" row="1"/>
+      </cl:udc>
+      <cl:group std:sid="group-85f7b12e" id="grp1">
+        <cl:formdata std:sid="f-data-abb9462c" col="2" row="0"/>
+        <cl:group std:sid="group-3d412563" id="grp2">
+          <cl:formdata std:sid="f-data-5dd2a293" col="0" row="0"/>
+          <cl:output std:sid="output-150a9b82" id="AUSSEL_optUserSelectTotal" datatype="number" format="s#,###" value="0">
+            <cl:formdata std:sid="f-data-000fb90a" col="1" row="0"/>
+          </cl:output>
+          <cl:output std:sid="output-28e65b02" class="common-titlelabel" style="text-align:center;">
+            <cl:langbind category="PROPERTY" property="value" keypath="Str_Total"/>
+            <cl:formdata std:sid="f-data-d9f33953" col="0" row="0"/>
+          </cl:output>
+          <cl:formlayout std:sid="f-layout-c304c1ec">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns autoSizing="false" length="40" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+            <cl:columns autoSizing="false" length="70" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:group std:sid="group-88109567" id="grp3">
+          <cl:formdata std:sid="f-data-d5365dee" col="0" row="1"/>
+          <cl:output std:sid="output-fca2b9fe" class="common-titlelabel">
+            <cl:langbind category="PROPERTY" property="value" keypath="Str_SelectList"/>
+            <cl:formdata std:sid="f-data-b5c8ba9d" col="0" row="0"/>
+          </cl:output>
+          <cl:button std:sid="button-b0af1ff8" id="AUSSEL_btnApply" class="userInfo_btn">
+            <cl:listener std:sid="listener-f629df82" handler="onAUSSEL_btnApplyClick" name="click"/>
+            <cl:langbind category="PROPERTY" property="value" keypath="Str_Apply"/>
+            <cl:formdata std:sid="f-data-34cc8438" col="2" row="0"/>
+          </cl:button>
+          <cl:formlayout std:sid="f-layout-793a2d0e">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+            <cl:columns autoSizing="false" length="80" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-a3499fdf">
+          <cl:rows autoSizing="false" length="1" minlength="0" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout>
+        <cl:rows autoSizing="false" length="65" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns autoSizing="false" length="560" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:columns autoSizing="false" length="30" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-1f87cb20"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

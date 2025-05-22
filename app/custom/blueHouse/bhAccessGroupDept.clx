@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-5c92428a" version="1.0.0.0">
+  <head std:sid="head-1eb42823">
+    <title>bhAccessGroupDept</title>
+    <screen std:sid="screen-cfda0bd5" id="default" name="default" minwidth="1024px" width="1024px" height="768px"/>
+    <screen std:sid="screen-d34a11af" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-d7abe596" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-20dc5668">
+      <cl:dataset std:sid="d-set-9d7681d8" id="bhAccessGroupList" sortcondition="">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-c9309dc3" name="ID"/>
+          <cl:datacolumn std:sid="d-column-4d30ce64" name="Name"/>
+          <cl:datacolumn std:sid="d-column-f2221e39" name="Deptid"/>
+          <cl:datacolumn std:sid="d-column-56247115" name="SyncUseFlag" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-e332e7e0" name="DeptName"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-a29af4a4" id="UserList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-87c8ab68" name="ID"/>
+          <cl:datacolumn std:sid="d-column-d2d0fac0" name="UniqueID"/>
+          <cl:datacolumn std:sid="d-column-a3cd7118" name="Name"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-a26a90aa" id="TerminalsInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-ef0ed3ae" name="ID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-4f2b7dff" name="Name"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-174ba88d" id="GroupList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-823c140c" name="GroupID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-8ff2bb30" name="Parent" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-30c5f08a" name="Name"/>
+          <cl:datacolumn std:sid="d-column-d1a9cce3" name="Description"/>
+          <cl:datacolumn std:sid="d-column-3d01f98d" name="GroupCode"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-866f6864" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-6b0a42cc" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-b5bf4ffe" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-03aa1e67" name="Count" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-0d1d7784" id="AccessGroupMapping">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-a4b75053" name="DeptID" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-fb458107" name="SyncFlag" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-09002544" id="TerminalsTotal">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-5a96ec9d" name="Count" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-c956fe3f" id="sms_getBhAccessGroupList" method="get" action="/v1/bluehouse/accessgroupMap">
+        <cl:listener std:sid="listener-8f66729e" name="submit-done" handler="onSms_getBhAccessGroupListSubmitDone"/>
+        <cl:listener std:sid="listener-001e4acb" name="submit-error" handler="onSms_getBhSubmitError"/>
+        <cl:listener std:sid="listener-909444d8" name="submit-timeout" handler="onSms_getBhSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="bhAccessGroupList"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-81231b5a" id="sms_getUserList" method="get" action="/v1/users">
+        <cl:listener std:sid="listener-0e9c29e5" name="submit-error" handler="onSms_getBhSubmitError"/>
+        <cl:listener std:sid="listener-de654944" name="submit-timeout" handler="onSms_getBhSubmitTimeout"/>
+        <cl:listener std:sid="listener-2fc2301f" name="submit-done" handler="onSms_getUserListSubmitDone"/>
+        <cl:requestparam name="searchCategory"/>
+        <cl:requestparam name="searchKeyword" value=""/>
+        <cl:requestparam name="offset" value="0"/>
+        <cl:requestparam name="limit" value="50"/>
+        <cl:requestparam name="picture" value="false"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total" isadd="false"/>
+        <cl:responsedata dataid="UserList" isadd="false"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-ef1cabb2" id="sms_getTerminalList" method="get" action="/v1/accessGroups/&quot;{ID)+&quot;/terminals">
+        <cl:listener std:sid="listener-94bf1beb" name="submit-error" handler="onSms_getBhSubmitError"/>
+        <cl:listener std:sid="listener-17b0f82c" name="submit-timeout" handler="onSms_getBhSubmitTimeout"/>
+        <cl:listener std:sid="listener-f881d1a6" name="submit-done" handler="onSms_getTerminalListSubmitDone"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="TerminalsTotal"/>
+        <cl:responsedata dataid="TerminalsInfo"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-19f69542" id="sms_putBhAccessGroupMappingInfo" method="put">
+        <cl:listener std:sid="listener-9f133cf6" name="submit-done" handler="onSms_putBhAccessGroupMappingInfoSubmitDone"/>
+        <cl:requestdata dataid="AccessGroupMapping"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec dev-comment="BHAGM"/>
+  </head>
+  <body std:sid="body-97776888" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-f4dde1fa" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-f8987df9" id="BHAGM_grpMain">
+      <cl:xylayoutdata std:sid="xyl-data-ae4b6a45" top="1px" right="1px" bottom="1px" left="1px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:grid std:sid="grid-a8357b4c" id="BHAGM_grdAccessGroupList" style="padding-top:5px; padding-left:5px; padding-bottom:5px; padding-right:5px;" class="common-snbarea" readonly="true" datasetid="bhAccessGroupList" resizablecolumns="all">
+        <cl:listener std:sid="listener-fd8cb99d" name="selection-change" handler="onBHAGM_grdAccessGroupListSelectionChange"/>
+        <cl:formdata std:sid="f-data-97525b7d" row="0" col="0"/>
+        <cl:gridcolumn std:sid="g-column-f9b62a8c" width="60px"/>
+        <cl:gridcolumn std:sid="g-column-ef374509"/>
+        <cl:gridcolumn std:sid="g-column-327eba90"/>
+        <cl:gridcolumn std:sid="g-column-01f07530"/>
+        <cl:gridheader std:sid="gh-band-eb96df18">
+          <cl:gridrow std:sid="g-row-d92881db"/>
+          <cl:gridcell std:sid="gh-cell-0a9ce9ee" rowindex="0" colindex="0" targetcolumnname="ID" sortable="false" filterable="false" text="아이디"/>
+          <cl:gridcell std:sid="gh-cell-67984137" rowindex="0" colindex="1" targetcolumnname="Name" sortable="false" filterable="false" text="명칭"/>
+          <cl:gridcell std:sid="gh-cell-a3b1ad2b" rowindex="0" colindex="2" targetcolumnname="Deptid" sortable="false" filterable="false" text="맵핑코드"/>
+          <cl:gridcell std:sid="gh-cell-e859e27e" rowindex="0" colindex="3" text="부서 이름"/>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-9c100f92">
+          <cl:gridrow std:sid="g-row-1df627ce"/>
+          <cl:gridcell std:sid="gd-cell-624354f2" rowindex="0" colindex="0" columnname="ID"/>
+          <cl:gridcell std:sid="gd-cell-ef1dd87b" rowindex="0" colindex="1" columnname="Name"/>
+          <cl:gridcell std:sid="gd-cell-42023772" rowindex="0" colindex="2" columnname="Deptid"/>
+          <cl:gridcell std:sid="gd-cell-88c8ff25" rowindex="0" colindex="3" columnname="DeptName"/>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:group std:sid="group-fe6876a7">
+        <cl:formdata std:sid="f-data-7e6896cf" row="0" col="1"/>
+        <cl:group std:sid="group-6b4eda8e">
+          <cl:formdata std:sid="f-data-1ec73336" row="0" col="0"/>
+          <cl:output std:sid="output-54d1ff66" style="background-color:#f6f6f6; font-weight:bold; font-size:14px; background-image:none; text-align:center;" class="userInfo_bold" value="아이디">
+            <cl:formdata std:sid="f-data-3dd10e2a" row="0" col="0"/>
+          </cl:output>
+          <cl:output std:sid="output-d8420a7f" style="background-color:#f6f6f6; font-weight:bold; font-size:14px; background-image:none; text-align:center;" class="userInfo_bold" value="명칭">
+            <cl:formdata std:sid="f-data-5a0a545e" row="0" col="2"/>
+          </cl:output>
+          <cl:output std:sid="output-88826ee0" style="background-color:#f6f6f6; font-weight:bold; font-size:14px; background-image:none; text-align:center;" class="userInfo_bold" value="부서 이름">
+            <cl:formdata std:sid="f-data-a6a4e662" row="0" col="4"/>
+          </cl:output>
+          <cl:button std:sid="button-b0758abc" id="BHAGM_btnModify" class="userInfo_btn" value="수정">
+            <cl:listener std:sid="listener-b625b024" name="click" handler="onBHAGM_btnModifyClick"/>
+            <cl:formdata std:sid="f-data-ba191c5e" row="0" col="6"/>
+          </cl:button>
+          <cl:inputbox std:sid="i-box-498f2a24" id="BHAGM_ipbAGID" style="padding-left:10px;" readonly="true">
+            <cl:formdata std:sid="f-data-df52158f" row="0" col="1"/>
+          </cl:inputbox>
+          <cl:inputbox std:sid="i-box-496f4518" id="BHAGM_ipbName" style="padding-left:10px;" readonly="true">
+            <cl:formdata std:sid="f-data-126aeede" row="0" col="3"/>
+          </cl:inputbox>
+          <cl:combobox std:sid="c-box-f8119918" id="BHAGM_lcbMapCode" style="text-align:center;">
+            <cl:formdata std:sid="f-data-2a487309" row="0" col="5"/>
+            <cl:item std:sid="item-19efe910" label="----" value="0"/>
+          </cl:combobox>
+          <cl:formlayout std:sid="f-layout-61146c35" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="1" unit="FRACTION"/>
+            <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="1" unit="FRACTION"/>
+            <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="1" unit="FRACTION"/>
+            <cl:columns length="70" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:group std:sid="group-b7deb78a">
+          <cl:formdata std:sid="f-data-726633ab" row="2" col="0"/>
+          <cl:group std:sid="group-8aafee81">
+            <cl:formdata std:sid="f-data-f3cd84ab" row="0" col="0"/>
+            <cl:group std:sid="group-df2f36a2">
+              <cl:formdata std:sid="f-data-9c813629" row="0" col="0"/>
+              <cl:output std:sid="output-2d1961f3" style="background-color:#f6f6f6; font-weight:bold; font-size:14px; background-image:none; text-align:center;" class="userInfo_bold" value="총계 : ">
+                <cl:formdata std:sid="f-data-ff733f41" row="0" col="1"/>
+              </cl:output>
+              <cl:output std:sid="output-73617181" id="BHAGM_ipbUserCnt" style="font-size:13px; text-align:center;" value="0">
+                <cl:formdata std:sid="f-data-fa3e2b00" row="0" col="2"/>
+              </cl:output>
+              <cl:output std:sid="output-d76402ef" style="background-color:#f6f6f6; font-weight:bold; font-size:14px; background-image:none; text-align:center;" class="userInfo_bold" value="인원정보">
+                <cl:formdata std:sid="f-data-23cae5de" row="0" col="0"/>
+              </cl:output>
+              <cl:formlayout std:sid="f-layout-d97d9c75" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+                <cl:rows length="1" unit="FRACTION"/>
+                <cl:columns length="1" unit="FRACTION"/>
+                <cl:columns length="1" unit="FRACTION"/>
+                <cl:columns length="1" unit="FRACTION"/>
+              </cl:formlayout>
+            </cl:group>
+            <cl:grid std:sid="grid-20dea273" id="grd1" readonly="true" datasetid="UserList" resizablecolumns="all">
+              <cl:formdata std:sid="f-data-5b4f0014" row="1" col="0"/>
+              <cl:gridcolumn std:sid="g-column-091cf420"/>
+              <cl:gridcolumn std:sid="g-column-43e5a47c"/>
+              <cl:gridcolumn std:sid="g-column-3787a170"/>
+              <cl:gridheader std:sid="gh-band-5be6413f">
+                <cl:gridrow std:sid="g-row-677bec60"/>
+                <cl:gridcell std:sid="gh-cell-f5fcaa2c" rowindex="0" colindex="0" targetcolumnname="ID" sortable="false" filterable="false" text="ID"/>
+                <cl:gridcell std:sid="gh-cell-127d3dfc" rowindex="0" colindex="1" targetcolumnname="UniqueID" sortable="false" filterable="false" text="유니크 아이디"/>
+                <cl:gridcell std:sid="gh-cell-8ff53301" rowindex="0" colindex="2" targetcolumnname="Name" sortable="false" filterable="false" text="이름"/>
+              </cl:gridheader>
+              <cl:griddetail std:sid="gd-band-477c4fa8">
+                <cl:gridrow std:sid="g-row-2048208e"/>
+                <cl:gridcell std:sid="gd-cell-efd6bbc6" rowindex="0" colindex="0" columnname="ID"/>
+                <cl:gridcell std:sid="gd-cell-b88bb375" rowindex="0" colindex="1" columnname="UniqueID"/>
+                <cl:gridcell std:sid="gd-cell-41bbee5b" rowindex="0" colindex="2" columnname="Name"/>
+              </cl:griddetail>
+            </cl:grid>
+            <cl:pageindexer std:sid="p-indexer-700b4b78" id="usersPageIndexer" class="userList_paging">
+              <cl:listener std:sid="listener-dbd95734" name="selection-change" handler="onUsersPageIndexerSelectionChange"/>
+              <cl:formdata std:sid="f-data-29fc24c5" row="2" col="0"/>
+            </cl:pageindexer>
+            <cl:formlayout std:sid="f-layout-2b065f4b" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+              <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:rows length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+              <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="1" unit="FRACTION"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:group std:sid="group-a498eef2">
+            <cl:formdata std:sid="f-data-e2b7d30b" row="0" col="1"/>
+            <cl:group std:sid="group-c73b3f85">
+              <cl:formdata std:sid="f-data-feee754d" row="0" col="0"/>
+              <cl:output std:sid="output-22c11bc6" style="background-color:#f6f6f6; font-weight:bold; font-size:14px; background-image:none; text-align:center;" class="userInfo_bold" value="총계 : ">
+                <cl:formdata std:sid="f-data-e44854d0" row="0" col="1"/>
+              </cl:output>
+              <cl:output std:sid="output-5557604e" id="BHAGM_ipbTerminalCnt" style="font-size:13px; text-align:center;" value="0">
+                <cl:formdata std:sid="f-data-bead40a6" row="0" col="2"/>
+              </cl:output>
+              <cl:output std:sid="output-2e1d4167" style="background-color:#f6f6f6; font-weight:bold; font-size:14px; background-image:none; text-align:center;" class="userInfo_bold" value="단말정보">
+                <cl:formdata std:sid="f-data-8f6963fa" row="0" col="0"/>
+              </cl:output>
+              <cl:formlayout std:sid="f-layout-f54bcb77" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+                <cl:rows length="1" unit="FRACTION"/>
+                <cl:columns length="1" unit="FRACTION"/>
+                <cl:columns length="1" unit="FRACTION"/>
+                <cl:columns length="1" unit="FRACTION"/>
+              </cl:formlayout>
+            </cl:group>
+            <cl:grid std:sid="grid-47f044b9" id="grd2" readonly="true" datasetid="TerminalsInfo" resizablecolumns="all">
+              <cl:formdata std:sid="f-data-a6f76fe3" row="1" col="0"/>
+              <cl:gridcolumn std:sid="g-column-fbb1a686"/>
+              <cl:gridcolumn std:sid="g-column-d8d903ec"/>
+              <cl:gridheader std:sid="gh-band-4e4662cb">
+                <cl:gridrow std:sid="g-row-8f754ba5"/>
+                <cl:gridcell std:sid="gh-cell-f5e76dc6" rowindex="0" colindex="0" targetcolumnname="ID" sortable="false" filterable="false" text="ID"/>
+                <cl:gridcell std:sid="gh-cell-9250f52d" rowindex="0" colindex="1" targetcolumnname="Name" sortable="false" filterable="false" text="명칭"/>
+              </cl:gridheader>
+              <cl:griddetail std:sid="gd-band-d9fa4816">
+                <cl:gridrow std:sid="g-row-7ab7446d"/>
+                <cl:gridcell std:sid="gd-cell-0b9c47f6" rowindex="0" colindex="0" columnname="ID"/>
+                <cl:gridcell std:sid="gd-cell-eaced602" rowindex="0" colindex="1" columnname="Name"/>
+              </cl:griddetail>
+            </cl:grid>
+            <cl:pageindexer std:sid="p-indexer-b676ade9" id="terminalsPageIndexer" class="userList_paging">
+              <cl:listener std:sid="listener-6f5cc592" name="selection-change" handler="onTerminalsPageIndexerSelectionChange"/>
+              <cl:formdata std:sid="f-data-7d834268" row="2" col="0"/>
+            </cl:pageindexer>
+            <cl:formlayout std:sid="f-layout-6a72eea5" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+              <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:rows length="1" unit="FRACTION" shadetype="NONE" shadecolor="transparent"/>
+              <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="1" unit="FRACTION"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:formlayout std:sid="f-layout-dea728ff" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:checkbox std:sid="c-box-35c2ac48" id="BHAGM_cbxLocalUse" style="background-color:#f6f6f6; background-image:none; text-align:left;" class="userInfo_bold" text="독립 출입그룹 사용(동기화 제외 출입그룹)">
+          <cl:formdata std:sid="f-data-282139ae" row="1" col="0"/>
+        </cl:checkbox>
+        <cl:formlayout std:sid="f-layout-63a29062" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-f314c7a5" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="400" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="2" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-118c6031"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

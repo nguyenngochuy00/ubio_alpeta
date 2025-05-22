@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-8219151a" version="1.0.0.0">
+  <head std:sid="head-bea8a47e">
+    <title>userImport</title>
+    <screen std:sid="screen-1d715e3d" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" customHeight="600" customWidth="400"/>
+    <screen std:sid="screen-7fb55219" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-a01ec43c" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-8afae15e">
+      <cl:dataset std:sid="d-set-9d7681d8" id="AccessGroupList" sortcondition="">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-c9309dc3" name="ID" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-4d30ce64" name="Name"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-cedbe583" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-87513087" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-b8455ed7" id="sms_postAccessGroupImport" action="/v1/accessGroups/import">
+        <cl:listener std:sid="listener-1a6a1b13" name="submit-done" handler="onSms_postGroupImportSubmitDone"/>
+        <cl:listener std:sid="listener-d2a5e823" name="submit-error" handler="onSms_postGroupImportSubmitError"/>
+        <cl:listener std:sid="listener-d9052940" name="submit-timeout" handler="onSms_postGroupImportSubmitTimeout"/>
+        <cl:requestdata dataid="AccessGroupList"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec dev-comment="USIMP_"/>
+  </head>
+  <body std:sid="body-530913c9" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-8882809d" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-11371556" style="padding:10px;">
+      <cl:xylayoutdata std:sid="xyl-data-9c383d81" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:grid std:sid="grid-5a1428f2" id="GIDLGP_grdGroupImportList" class="user_allList" readonly="true" datasetid="AccessGroupList" resizablecolumns="all" columnMovable="false">
+        <cl:formdata std:sid="f-data-7a3548db" row="2" col="0"/>
+        <cl:gridcolumn std:sid="g-column-197cde03"/>
+        <cl:gridcolumn std:sid="g-column-d0c390d3"/>
+        <cl:gridheader std:sid="gh-band-370811ad">
+          <cl:gridrow std:sid="g-row-920fff5d"/>
+          <cl:gridcell std:sid="gh-cell-7153d67e" rowindex="0" colindex="0" targetcolumnname="ID" sortable="false" filterable="false" text="ID"/>
+          <cl:gridcell std:sid="gh-cell-b0ea2826" rowindex="0" colindex="1" targetcolumnname="Name" sortable="false" filterable="false" text="Name"/>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-6cca5a0f">
+          <cl:gridrow std:sid="g-row-bdc4a93b"/>
+          <cl:gridcell std:sid="gd-cell-d95e51fe" rowindex="0" colindex="0" columnname="ID"/>
+          <cl:gridcell std:sid="gd-cell-ecae0f74" rowindex="0" colindex="1" columnname="Name"/>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:group std:sid="group-8a95eb33">
+        <cl:formdata std:sid="f-data-a8d4cfcd" row="1" col="0" rowspan="1" colspan="1"/>
+        <cl:fileinput std:sid="f-input-0e67fdb8" id="AGAAI_fiAccessGroup">
+          <cl:listener std:sid="listener-f21ce8e3" name="value-change" handler="onAGAAI_fiAccessGroupValueChange"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_DragFile"/>
+          <cl:langbind property="placeholder" category="PROPERTY" keypath="Str_DragFile"/>
+          <cl:formdata std:sid="f-data-31c5632a" row="0" col="1"/>
+        </cl:fileinput>
+        <cl:output std:sid="output-79d0a322">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_AccessGroup"/>
+          <cl:formdata std:sid="f-data-81b96c2b" row="0" col="0"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-65bf496c">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="transparent" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-867a2f04">
+        <cl:formdata std:sid="f-data-1f528c5d" row="0" col="0" rowspan="1" colspan="1"/>
+        <cl:button std:sid="button-4fd5d2e8" id="GIDLG_btnGroupImport" class="userInfo_btn" visible="true">
+          <cl:listener std:sid="listener-34ab8fa7" name="click" handler="onGIDLG_btnGroupImportClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_BatchApply"/>
+          <cl:formdata std:sid="f-data-2993ce5e" row="0" col="2"/>
+        </cl:button>
+        <cl:button std:sid="button-57a54c7d" id="GIDLG_btnRefresh" class="userInfo_btn" visible="false">
+          <cl:listener std:sid="listener-7d00f9d4" name="click" handler="onGIDLG_btnRefreshClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Renewal"/>
+          <cl:formdata std:sid="f-data-651b0d13" row="0" col="1"/>
+        </cl:button>
+        <cl:img std:sid="image-c74f3ce3" id="USIMP_btnHelpPage" style="cursor:help;" visible="false" src="../../../theme/images/common/common_btn_window_top_q.png">
+          <cl:listener std:sid="listener-7485bded" name="click" handler="onUSIMP_btnHelpPageClick"/>
+          <cl:formdata std:sid="f-data-3dbe4d49" halign="CENTER" valign="CENTER" width="14" height="14" row="0" col="3"/>
+        </cl:img>
+        <cl:formlayout std:sid="f-layout-2ad1cb46" hspace="1px" vspace="1px" top-margin="1px" right-margin="1px" bottom-margin="1px" left-margin="1px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="14" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-4eaa90a4" hspace="5px" vspace="5px">
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-e33ba410"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

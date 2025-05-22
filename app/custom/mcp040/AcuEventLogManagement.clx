@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-4c745fa2" version="1.0.0.0">
+  <head std:sid="head-38a209d8">
+    <title>EventLogManagement</title>
+    <screen std:sid="screen-3c96e65e" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="false" useCustomHeight="false" customHeight="600" customWidth="900"/>
+    <screen std:sid="screen-6b8b15e0" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-c6d10217" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-64fbba43">
+      <cl:dataset std:sid="d-set-9a1b7ed5" id="AcuEventList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-b349062e" name="EventTime"/>
+          <cl:datacolumn std:sid="d-column-0889e540" name="TerminalID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-a0fc728d" name="UserID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-d5eac451" name="Category" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-ffc24a22" name="Content" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-9e31f265" name="Detail"/>
+          <cl:datacolumn std:sid="d-column-ed8dd228" name="Account" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-547dea9f" name="Target" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-5b9f3cb0" name="Partition" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-04c37eef" name="Qualifier" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-85bad124" name="EventInfo"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-c2bd18fc" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-94b2ee54" name="Count" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-a33aca7f" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-e1e16727" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-abf83f49" id="sms_getAcuEventLogList" method="get" action="/v1/logs/acu_event_log">
+        <cl:listener std:sid="listener-f426a95e" name="submit-done" handler="onSms_getAcuEventLogListSubmitDone"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total"/>
+        <cl:responsedata dataid="AcuEventList"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec dev-comment="유니스 누락 기능으로  acu_event_logs테이블 조회 개발 _ bij" dev-description="ACU 이벤트 로그 조회(MCP040)"/>
+  </head>
+  <body std:sid="body-15b5ce5d" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-0c1f29eb" name="load" handler="onBodyLoad"/>
+    <cl:listener std:sid="listener-fc12967f" name="keydown" handler="onBodyKeydown"/>
+    <cl:group std:sid="group-cccfcaf6" style="padding:10px;">
+      <cl:xylayoutdata std:sid="xyl-data-d0d6e24d" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-045033d1" id="ALMGR_grp">
+        <cl:xylayoutdata std:sid="xyl-data-9acbd2f2" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+        <cl:group std:sid="group-58936da2">
+          <cl:formdata std:sid="f-data-2f6ceafc" row="0" col="0"/>
+          <cl:output std:sid="output-6d08baea" style="text-align:center;" class="common-titlelabel">
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_Total"/>
+            <cl:formdata std:sid="f-data-853fd505" row="0" col="0"/>
+          </cl:output>
+          <cl:dateinput std:sid="d-input-51977816" id="ELMGR_dtStart" value="2018-11-23" format="YYYY-MM-DD" autoselect="false">
+            <cl:formdata std:sid="f-data-152f4703" row="0" col="5"/>
+          </cl:dateinput>
+          <cl:dateinput std:sid="d-input-4847512b" id="ELMGR_dtEnd" value="2018-11-23" format="YYYY-MM-DD" autoselect="false">
+            <cl:formdata std:sid="f-data-371e19c2" row="0" col="7"/>
+          </cl:dateinput>
+          <cl:output std:sid="output-ab9362ae" style="font-weight:bold; vertical-align:middle; text-align:center;" value="~">
+            <cl:formdata std:sid="f-data-dc591591" row="0" col="6"/>
+          </cl:output>
+          <cl:output std:sid="output-e11f026e" style="text-align:right;" class="common-titlelabel">
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_Period"/>
+            <cl:formdata std:sid="f-data-a104559c" row="0" col="4"/>
+          </cl:output>
+          <cl:output std:sid="output-49f7d780" id="AELMGR_opbTotal" datatype="number" format="s#,###">
+            <cl:datamapbind property="value" category="PROPERTY" datacontrolid="Total" columnname="Count"/>
+            <cl:formdata std:sid="f-data-f2ddedf1" row="0" col="1"/>
+          </cl:output>
+          <cl:group std:sid="group-73a59f7e" style="border-right-style:solid; border-top-width:1px; border-bottom-color:#cccccc; border-right-width:1px; border-left-color:#cccccc; border-right-color:#cccccc; border-left-width:1px; border-top-style:solid; background-color:#F6F6F6; border-radius:10px; border-left-style:solid; border-bottom-width:1px; border-top-color:#cccccc; border-bottom-style:solid;">
+            <cl:formdata std:sid="f-data-1fe1be47" row="0" col="8"/>
+            <cl:combobox std:sid="c-box-f84b25dc" id="AELMGR_cmbCategory" style="background-color:#F6F6F6; border-left-style:none; border-bottom-style:none; border-top-style:none; text-align:center;" value="0" preventinput="true">
+              <cl:listener std:sid="listener-f72fa6e5" name="selection-change" handler="onELMGR_cmbCategorySelectionChange"/>
+              <cl:formdata std:sid="f-data-3d5e9f09" row="0" col="0"/>
+            </cl:combobox>
+            <cl:inputbox std:sid="i-box-af7712e4" id="AELMGR_edtKeyword" style="background-color:#F6F6F6; border-right-style:solid; border-left-style:solid; border-right-width:1px; border-left-color:#cccccc; border-bottom-style:none; border-right-color:#cccccc; border-left-width:1px; border-top-style:none;">
+              <cl:formdata std:sid="f-data-ac7c724f" row="0" col="1"/>
+            </cl:inputbox>
+            <cl:group std:sid="group-76f9cfda" style="cursor:pointer; border-left-style:solid; border-left-color:#cccccc; border-left-width:1px;">
+              <cl:listener std:sid="listener-61921a3c" name="click" handler="onELMGR_btnSearchClick"/>
+              <cl:formdata std:sid="f-data-2ce58e4a" row="0" col="2"/>
+              <cl:img std:sid="image-c00edf5f" id="ELMGR_btnSearch" src="/theme/images/common/common_text_field_btn_icons_search.png">
+                <cl:xylayoutdata std:sid="xyl-data-57c78c98" width="26px" height="26px" horizontalAnchor="CENTER" verticalAnchor="CENTER"/>
+              </cl:img>
+              <cl:xylayout std:sid="xylayout-a1a75415"/>
+            </cl:group>
+            <cl:formlayout std:sid="f-layout-038c26a9" hspace="0px" vspace="0px">
+              <cl:rows length="1" unit="FRACTION"/>
+              <cl:columns length="2" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="4" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="1" unit="FRACTION"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:img std:sid="image-b6942c2b" style="cursor:help;" src="../../../theme/images/common/common_btn_window_top_q.png">
+            <cl:listener std:sid="listener-7f9996ab" name="click" handler="onImageClick"/>
+            <cl:formdata std:sid="f-data-bba45df9" halign="CENTER" valign="CENTER" width="14" height="14" row="0" col="10"/>
+          </cl:img>
+          <cl:combobox std:sid="c-box-84e4c34b" id="AELMGR_cmbContent" style="text-align:center;" value="0" preventinput="true">
+            <cl:formdata std:sid="f-data-f54b48bd" row="0" col="3"/>
+            <cl:item std:sid="item-6b963a7c" label="label1" value="0">
+              <cl:langbind property="label" category="PROPERTY" keypath="Str_All"/>
+            </cl:item>
+          </cl:combobox>
+          <cl:output std:sid="output-633f50b1" style="text-align:right;" class="common-titlelabel">
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_Content"/>
+            <cl:formdata std:sid="f-data-c598a1f3" row="0" col="2"/>
+          </cl:output>
+          <cl:formlayout std:sid="f-layout-b5cf2616">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="40" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="80" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="100" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="120" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+            <cl:columns length="10" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+            <cl:columns length="120" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+            <cl:columns length="350" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="14" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:group std:sid="group-d6b2fff8">
+          <cl:formdata std:sid="f-data-c8ac71df" row="1" col="0"/>
+          <cl:pageindexer std:sid="p-indexer-811287cc" id="AcuEventLogListPageIndexer" class="userList_paging">
+            <cl:listener std:sid="listener-b7e3dfd5" name="selection-change" handler="onAcuEventLogListPageIndexerSelectionChange"/>
+            <cl:formdata std:sid="f-data-8552b3a2" row="1" col="0"/>
+          </cl:pageindexer>
+          <cl:grid std:sid="grid-25d3f659" id="AcuEventLogListGrid" readonly="true" datasetid="AcuEventList" resizablecolumns="all" columnMovable="true">
+            <cl:formdata std:sid="f-data-4832b1cb" row="0" col="0"/>
+            <cl:gridcolumn std:sid="g-column-162e3d9a"/>
+            <cl:gridcolumn std:sid="g-column-671c1cd6"/>
+            <cl:gridcolumn std:sid="g-column-4fe880d9"/>
+            <cl:gridcolumn std:sid="g-column-6aefbee1"/>
+            <cl:gridcolumn std:sid="g-column-748072e0"/>
+            <cl:gridcolumn std:sid="g-column-ebb47594"/>
+            <cl:gridcolumn std:sid="g-column-5431ff2b"/>
+            <cl:gridcolumn std:sid="g-column-8a2efc7e"/>
+            <cl:gridcolumn std:sid="g-column-0d7f024f"/>
+            <cl:gridcolumn std:sid="g-column-7df377ca"/>
+            <cl:gridcolumn std:sid="g-column-55ddfdb0"/>
+            <cl:gridheader std:sid="gh-band-9f04a805">
+              <cl:gridrow std:sid="g-row-46b8f9d5"/>
+              <cl:gridcell std:sid="gh-cell-f6b82933" rowindex="0" colindex="0" targetcolumnname="EventTime" sortable="false" filterable="false" text="EventTime">
+                <cl:langbind property="text" category="PROPERTY" keypath="Str_Time3"/>
+              </cl:gridcell>
+              <cl:gridcell std:sid="gh-cell-60c88338" rowindex="0" colindex="1" targetcolumnname="TerminalID" sortable="false" filterable="false" text="TerminalID">
+                <cl:langbind property="text" category="PROPERTY" keypath="Str_TerminalID"/>
+              </cl:gridcell>
+              <cl:gridcell std:sid="gh-cell-4af5e244" rowindex="0" colindex="2" targetcolumnname="UserID" sortable="false" filterable="false" text="UserID" visible="false">
+                <cl:langbind property="text" category="PROPERTY" keypath="Str_UserID"/>
+              </cl:gridcell>
+              <cl:gridcell std:sid="gh-cell-3e5c049e" rowindex="0" colindex="3" targetcolumnname="Category" sortable="false" filterable="false" text="Category" visible="false">
+                <cl:langbind property="text" category="PROPERTY" keypath="Str_Category"/>
+              </cl:gridcell>
+              <cl:gridcell std:sid="gh-cell-69196454" rowindex="0" colindex="4" targetcolumnname="Partition" sortable="false" filterable="false" text="Partition">
+                <cl:langbind property="text" category="PROPERTY" keypath="Str_Partition"/>
+              </cl:gridcell>
+              <cl:gridcell std:sid="gh-cell-8e843a3e" rowindex="0" colindex="5" targetcolumnname="Account" sortable="false" filterable="false" text="Account">
+                <cl:langbind property="text" category="PROPERTY" keypath="Str_Account"/>
+              </cl:gridcell>
+              <cl:gridcell std:sid="gh-cell-109b0bc9" rowindex="0" colindex="6" targetcolumnname="Content" sortable="false" filterable="false" text="Content">
+                <cl:langbind property="text" category="PROPERTY" keypath="Str_Content"/>
+              </cl:gridcell>
+              <cl:gridcell std:sid="gh-cell-3ad97b0a" rowindex="0" colindex="7" targetcolumnname="Detail" sortable="false" filterable="false" text="Detail">
+                <cl:langbind property="text" category="PROPERTY" keypath="Str_EventInfo"/>
+              </cl:gridcell>
+              <cl:gridcell std:sid="gh-cell-488017b9" rowindex="0" colindex="8" targetcolumnname="Qualifier" sortable="false" filterable="false" text="Qualifier">
+                <cl:langbind property="text" category="PROPERTY" keypath="Str_Qualifier"/>
+              </cl:gridcell>
+              <cl:gridcell std:sid="gh-cell-8404aa8b" rowindex="0" colindex="9" targetcolumnname="Target" sortable="false" filterable="false" text="Target">
+                <cl:langbind property="text" category="PROPERTY" keypath="Str_Zone"/>
+              </cl:gridcell>
+              <cl:gridcell std:sid="gh-cell-688747c3" rowindex="0" colindex="10" targetcolumnname="EventInfo" sortable="false" filterable="false" text="EventInfo">
+                <cl:langbind property="text" category="PROPERTY" keypath="Str_Remarks"/>
+              </cl:gridcell>
+            </cl:gridheader>
+            <cl:griddetail std:sid="gd-band-150df12d">
+              <cl:gridrow std:sid="g-row-aea617f6"/>
+              <cl:gridcell std:sid="gd-cell-354ac6b5" rowindex="0" colindex="0" columnname="EventTime"/>
+              <cl:gridcell std:sid="gd-cell-f3b5c710" rowindex="0" colindex="1" columnname="TerminalID"/>
+              <cl:gridcell std:sid="gd-cell-d9c68819" rowindex="0" colindex="2" columnname="UserID"/>
+              <cl:gridcell std:sid="gd-cell-2f9e411d" rowindex="0" colindex="3" columnname="Category"/>
+              <cl:gridcell std:sid="gd-cell-7f190e24" rowindex="0" colindex="4" columnname="Partition"/>
+              <cl:gridcell std:sid="gd-cell-b33dfceb" rowindex="0" colindex="5" columnname="Account"/>
+              <cl:gridcell std:sid="gd-cell-4df4dba9" rowindex="0" colindex="6" columnname="Content">
+                <cl:combobox std:sid="c-box-e8e25cc3" id="AELMGR_grdcmbContent"/>
+              </cl:gridcell>
+              <cl:gridcell std:sid="gd-cell-bea36a64" rowindex="0" colindex="7" columnname="Detail"/>
+              <cl:gridcell std:sid="gd-cell-a5d1b0d3" rowindex="0" colindex="8" columnname="Qualifier">
+                <cl:combobox std:sid="c-box-d2fd7b07" id="AELMGR_grdcmbQualifier"/>
+              </cl:gridcell>
+              <cl:gridcell std:sid="gd-cell-8313ed3c" rowindex="0" colindex="9" columnname="Target"/>
+              <cl:gridcell std:sid="gd-cell-58e2ab8d" rowindex="0" colindex="10" columnname="EventInfo"/>
+            </cl:griddetail>
+          </cl:grid>
+          <cl:formlayout std:sid="f-layout-d9fdc7a3" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+            <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-96f672fc">
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:xylayout std:sid="xylayout-8bd37ce1"/>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-3733f494"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

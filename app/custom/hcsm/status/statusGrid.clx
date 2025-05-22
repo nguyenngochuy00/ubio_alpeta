@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-034240aa" version="1.0.0.0">
+  <head std:sid="head-f64421b8">
+    <title>statusGrid</title>
+    <screen std:sid="screen-79316743" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="700" customWidth="766"/>
+    <screen std:sid="screen-db80ecc9" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-5e618c19" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-55c76a2c">
+      <cl:dataset std:sid="d-set-183f51ee" id="CheckInRecodeInfoList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-33a8c38e" name="DDay" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-d41ce348" name="CheckIn" datatype="number"/>
+        </cl:datacolumnlist>
+        <cl:datarowlist/>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-7ca0261d" id="WeekStatus">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-47a277e1" name="D6" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-b297b065" name="D5" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-c6396587" name="D4" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-0fc3b1bf" name="D3" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-2438d007" name="D2" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-c603d964" name="D1" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-b1971b11" name="D0" datatype="number"/>
+        </cl:datacolumnlist>
+        <cl:datarowlist/>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-5fa96fcf" id="OneDayStatusInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-5c5fc717" name="CheckIn" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-57500ca9" name="CheckOut" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-6a5555c1" name="InSite" datatype="number"/>
+        </cl:datacolumnlist>
+        <cl:datarowlist/>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-27345e4c" id="TodayStatus">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-3975ddd9" name="DDay" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-5834804f" name="CheckIn" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-a33aca7f" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-c6595abd" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-d331894f" id="CheckStatusInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-ae3f4e85" name="CheckIn" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-a5a469d1" name="CheckOut" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-d66e0dd2" name="InSite" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-2bd4f8d5" id="sms_getStatusCheck" method="get" action="/v1/oemData/hcsm/checkStatus">
+        <cl:listener std:sid="listener-54a2f941" name="submit-error" handler="onSms_getStatusCheckSubmitError"/>
+        <cl:listener std:sid="listener-d65efc9d" name="submit-timeout" handler="onSms_getStatusCheckSubmitTimeout"/>
+        <cl:listener std:sid="listener-1b5cee41" name="submit-done" handler="onSms_getStatusCheckSubmitDone"/>
+        <cl:listener std:sid="listener-6fe89f66" name="before-send" handler="onSms_getStatusCheckBeforeSend"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="CheckStatusInfo"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-4b779d3c" id="sms_getCheckInRecode" method="get" action="/v1/oemData/hcsm/checkStatus/recode/all">
+        <cl:listener std:sid="listener-c748dbde" name="submit-done" handler="onSms_getCheckInRecodeSubmitDone"/>
+        <cl:listener std:sid="listener-1dd0c45a" name="submit-error" handler="onSms_getCheckInRecodeSubmitError"/>
+        <cl:listener std:sid="listener-530e26a4" name="submit-timeout" handler="onSms_getCheckInRecodeSubmitTimeout"/>
+        <cl:responsedata dataid="CheckInRecodeInfoList"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-599a09cc" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-e4d40e07" name="load" handler="onBodyLoad"/>
+    <cl:output std:sid="output-4b03a940" style="font-weight:bold; padding-left:5px; font-size:15px; text-align:left;">
+      <cl:langbind property="value" category="PROPERTY" keypath="Str_Date"/>
+      <cl:formdata std:sid="f-data-bfec42cb" row="0" col="0"/>
+    </cl:output>
+    <cl:dateinput std:sid="d-input-2b328027" id="HCSM_baseDate" style="padding-left:5px; font-size:15px;" format="YYYY-MM-DD" autoselect="false">
+      <cl:formdata std:sid="f-data-42b493f5" row="0" col="1"/>
+    </cl:dateinput>
+    <cl:button std:sid="button-9374908c" id="persentSettingButton" class="userInfo_btn">
+      <cl:listener std:sid="listener-edb79123" name="click" handler="onPersentSettingButtonClick"/>
+      <cl:langbind property="value" category="PROPERTY" keypath="Str_Setting"/>
+      <cl:formdata std:sid="f-data-32e6bc4b" row="0" col="3"/>
+    </cl:button>
+    <cl:output std:sid="output-6059862f" style="font-weight:bold; padding-left:5px; vertical-align:bottom; font-size:15px; padding-bottom:2px;">
+      <cl:langbind property="value" category="PROPERTY" keypath="Str_StatusOfLast7Days"/>
+      <cl:formdata std:sid="f-data-86ef49ec" row="2" col="0" rowspan="1" colspan="5"/>
+    </cl:output>
+    <cl:uicontrolshell std:sid="uic-shell-92c2ec99" id="chartShell" style="padding-top:25px;">
+      <cl:listener std:sid="listener-39e0edc7" name="load" handler="onChartShellLoad"/>
+      <cl:listener std:sid="listener-1bbecf19" name="init" handler="onChartShellInit"/>
+      <cl:formdata std:sid="f-data-ea371f28" row="4" col="0" rowspan="1" colspan="5"/>
+    </cl:uicontrolshell>
+    <cl:group std:sid="group-46505194">
+      <cl:formdata std:sid="f-data-ccaf6519" row="1" col="0" rowspan="1" colspan="5"/>
+      <cl:grid std:sid="grid-d3ea9028" id="oneDayStatusGrid" style="font-size:13px;" readonly="true" datasetid="OneDayStatusInfo">
+        <cl:listener std:sid="listener-4e5d87d9" name="cell-click" handler="onOneDayStatusGridCellClick"/>
+        <cl:verticaldata std:sid="v-data-3c0b03d8" width="731px" height="65px" autosize="both"/>
+        <cl:gridcolumn std:sid="g-column-f443c5b9" width="59px"/>
+        <cl:gridcolumn std:sid="g-column-0c019db3"/>
+        <cl:gridcolumn std:sid="g-column-d34c4759"/>
+        <cl:gridcolumn std:sid="g-column-82e64b34"/>
+        <cl:gridheader std:sid="gh-band-cdc89389">
+          <cl:gridrow std:sid="g-row-6a0cb83f" height="29px"/>
+          <cl:gridcell std:sid="gh-cell-9ea3411d" rowindex="0" colindex="1" targetcolumnname="CheckIn" sortable="false" filterable="false" text="CheckIn">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_CheckIn"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-1c2974a0" rowindex="0" colindex="2" targetcolumnname="CheckOut" sortable="false" filterable="false" text="CheckOut">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_CheckOut"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-8864bb98" rowindex="0" colindex="3" targetcolumnname="InSite" sortable="false" filterable="false" text="InSite">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_InSite"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-264f1275" rowindex="0" colindex="0"/>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-21f3a83c">
+          <cl:gridrow std:sid="g-row-cfaac5f3" height="35px"/>
+          <cl:gridcell std:sid="gd-cell-3f275959" rowindex="0" colindex="1" columnname="CheckIn"/>
+          <cl:gridcell std:sid="gd-cell-a9bc00ca" rowindex="0" colindex="2" columnname="CheckOut"/>
+          <cl:gridcell std:sid="gd-cell-d39ef233" rowindex="0" colindex="3" style="cursor:pointer;" columnname="InSite"/>
+          <cl:gridcell std:sid="gd-cell-684cddd5" rowindex="0" colindex="0">
+            <cl:output std:sid="output-4bea2057" style="font-size:12px; text-align:center;">
+              <cl:langbind property="value" category="PROPERTY" keypath="Str_NumberOfLabor"/>
+            </cl:output>
+          </cl:gridcell>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:verticallayout std:sid="v-layout-9f6954dc"/>
+    </cl:group>
+    <cl:group std:sid="group-266afdc6">
+      <cl:formdata std:sid="f-data-d9234543" row="3" col="0" rowspan="1" colspan="5"/>
+      <cl:grid std:sid="grid-441a4823" id="lastWeekStatusGrid" style="font-size:13px;" readonly="true" datasetid="WeekStatus">
+        <cl:verticaldata std:sid="v-data-10437c94" width="280px" height="65px" autosize="both"/>
+        <cl:gridcolumn std:sid="g-column-1e9aca74" width="61px"/>
+        <cl:gridcolumn std:sid="g-column-5f267c3d" width="90px"/>
+        <cl:gridcolumn std:sid="g-column-61936fb0" width="90px"/>
+        <cl:gridcolumn std:sid="g-column-529aff51" width="90px"/>
+        <cl:gridcolumn std:sid="g-column-30c2edd4" width="90px"/>
+        <cl:gridcolumn std:sid="g-column-18047f77" width="90px"/>
+        <cl:gridcolumn std:sid="g-column-7377e4b3" width="90px"/>
+        <cl:gridcolumn std:sid="g-column-3af37b63" width="90px"/>
+        <cl:gridheader std:sid="gh-band-3e3d74c8">
+          <cl:gridrow std:sid="g-row-240edd7b" height="29px"/>
+          <cl:gridcell std:sid="gh-cell-0fb1e5c3" rowindex="0" colindex="1" targetcolumnname="D6" sortable="false" filterable="false" text="D-6"/>
+          <cl:gridcell std:sid="gh-cell-5f3e3820" rowindex="0" colindex="2" targetcolumnname="D5" sortable="false" filterable="false" text="D-5"/>
+          <cl:gridcell std:sid="gh-cell-71722ac8" rowindex="0" colindex="3" targetcolumnname="D4" sortable="false" filterable="false" text="D-4"/>
+          <cl:gridcell std:sid="gh-cell-00b34b4e" rowindex="0" colindex="4" targetcolumnname="D3" sortable="false" filterable="false" text="D-3"/>
+          <cl:gridcell std:sid="gh-cell-26099793" rowindex="0" colindex="5" targetcolumnname="D2" sortable="false" filterable="false" text="D-2"/>
+          <cl:gridcell std:sid="gh-cell-81c619bd" rowindex="0" colindex="6" targetcolumnname="D1" sortable="false" filterable="false" text="D-1"/>
+          <cl:gridcell std:sid="gh-cell-b162958c" rowindex="0" colindex="7" targetcolumnname="D0" sortable="false" filterable="false" text="D-0"/>
+          <cl:gridcell std:sid="gh-cell-5f48c135" rowindex="0" colindex="0"/>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-8128e3ec">
+          <cl:gridrow std:sid="g-row-a6ff9309" height="35px"/>
+          <cl:gridcell std:sid="gd-cell-3c8489bd" rowindex="0" colindex="1" columnname="D6"/>
+          <cl:gridcell std:sid="gd-cell-0179e454" rowindex="0" colindex="2" columnname="D5"/>
+          <cl:gridcell std:sid="gd-cell-9448a78c" rowindex="0" colindex="3" columnname="D4"/>
+          <cl:gridcell std:sid="gd-cell-8e022d31" rowindex="0" colindex="4" columnname="D3"/>
+          <cl:gridcell std:sid="gd-cell-256651de" rowindex="0" colindex="5" columnname="D2"/>
+          <cl:gridcell std:sid="gd-cell-51b6faf6" rowindex="0" colindex="6" columnname="D1"/>
+          <cl:gridcell std:sid="gd-cell-3ad82b27" rowindex="0" colindex="7" columnname="D0"/>
+          <cl:gridcell std:sid="gd-cell-1f039a3a" rowindex="0" colindex="0">
+            <cl:output std:sid="output-20513c3b" style="font-size:12px; text-align:center;">
+              <cl:langbind property="value" category="PROPERTY" keypath="Str_NumberOfLabor"/>
+            </cl:output>
+          </cl:gridcell>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:verticallayout std:sid="v-layout-15e26813"/>
+    </cl:group>
+    <cl:button std:sid="button-2ea2097d" class="userInfo_btn">
+      <cl:listener std:sid="listener-311e0d2a" name="click" handler="onButtonClick"/>
+      <cl:langbind property="value" category="PROPERTY" keypath="Str_Search"/>
+      <cl:formdata std:sid="f-data-79bf7a4d" row="0" col="4"/>
+    </cl:button>
+    <cl:formlayout std:sid="f-layout-60b4541b" hspace="10px" vspace="10px" top-margin="15px" right-margin="15px" bottom-margin="15px" left-margin="15px">
+      <cl:rows length="35" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="69"/>
+      <cl:rows length="35" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="70"/>
+      <cl:rows length="5" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      <cl:columns length="40" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      <cl:columns length="180" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      <cl:columns length="1" unit="FRACTION"/>
+      <cl:columns length="90" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      <cl:columns length="90" unit="PIXEL" autoSizing="false" minlength="0"/>
+    </cl:formlayout>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

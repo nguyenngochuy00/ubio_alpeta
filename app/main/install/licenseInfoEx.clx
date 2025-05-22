@@ -1,0 +1,514 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-6c7300aa" version="1.0.0.0">
+  <head std:sid="head-d5cb5434">
+    <title>licenseInfoEx</title>
+    <screen std:sid="screen-f622e31d" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="540" customWidth="660"/>
+    <screen std:sid="screen-512843bf" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-f9d5ed4d" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-d7a34cad">
+      <cl:datamap std:sid="d-map-a33aca7f" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-227082d2" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-45408f7d" id="LicenseInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-9b083390" name="LicenseType" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-1953831a" name="ExpireAt"/>
+          <cl:datacolumn std:sid="d-column-63269ad7" name="LicenseKey"/>
+          <cl:datacolumn std:sid="d-column-561de289" name="SerialKey"/>
+          <cl:datacolumn std:sid="d-column-ded69cd3" name="CustomerID"/>
+          <cl:datacolumn std:sid="d-column-67a20219" name="CompanyName"/>
+          <cl:datacolumn std:sid="d-column-01da0e34" name="Status" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-46075065" name="ServerAddress"/>
+          <cl:datacolumn std:sid="d-column-89d382ed" name="ServerPort" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-304d67bf" name="ServerAddress2"/>
+          <cl:datacolumn std:sid="d-column-ab4f269e" name="ServerPort2" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-5222e55b" id="LicenseActivation">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-e750adca" name="Mode"/>
+          <cl:datacolumn std:sid="d-column-b8863952" name="SerialKey"/>
+          <cl:datacolumn std:sid="d-column-896cf7b3" name="CustomerID"/>
+          <cl:datacolumn std:sid="d-column-3785d8f1" name="CompanyName"/>
+          <cl:datacolumn std:sid="d-column-2e05489b" name="LicenseKey"/>
+          <cl:datacolumn std:sid="d-column-0b8412da" name="ServerAddress"/>
+          <cl:datacolumn std:sid="d-column-5efe9976" name="ServerPort" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-bca6fdcc" name="ServerAddress2"/>
+          <cl:datacolumn std:sid="d-column-8e448ef8" name="ServerPort2" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-70e06935" id="ClientKeyInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-5b0a3579" name="ClientKey"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-ce56f01f" id="XkeyLicenseInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-2eeacbe9" name="LicenseKey"/>
+          <cl:datacolumn std:sid="d-column-a28f1d1e" name="SerialKey"/>
+          <cl:datacolumn std:sid="d-column-5aa817e2" name="SiteCode"/>
+          <cl:datacolumn std:sid="d-column-962b5b00" name="ServerIP"/>
+          <cl:datacolumn std:sid="d-column-9d02afd7" name="ServerPort" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-e728abe4" name="Type" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-62ae80b3" id="XkeyClientKeyInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-bf13b6fc" name="ClientKey"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-7cdf42ea" id="XkeyLicenseActivation">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-37135e80" name="Mode"/>
+          <cl:datacolumn std:sid="d-column-f51e5ae8" name="SerialKey"/>
+          <cl:datacolumn std:sid="d-column-786bb4c0" name="SiteCode"/>
+          <cl:datacolumn std:sid="d-column-088036b9" name="LicenseKey"/>
+          <cl:datacolumn std:sid="d-column-4a2e206c" name="ServerIP"/>
+          <cl:datacolumn std:sid="d-column-79c4bd2b" name="ServerPort" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-3dc38d7a" id="sms_postLicenseActivate" action="/v1/license/activate">
+        <cl:listener std:sid="listener-dddefc3a" name="submit-done" handler="onSms_postLicenseActivateSubmitDone"/>
+        <cl:listener std:sid="listener-2b7fb8ec" name="submit-error" handler="onSms_postLicenseActivateSubmitError"/>
+        <cl:listener std:sid="listener-d34d9daf" name="submit-timeout" handler="onSms_postLicenseActivateSubmitTimeout"/>
+        <cl:requestdata dataid="LicenseActivation"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="LicenseInfo"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-65a15d99" id="sms_getLicenseInfo" method="get" action="/v1/license">
+        <cl:listener std:sid="listener-48a8de4e" name="submit-done" handler="onSms_getLicenseInfoSubmitDone"/>
+        <cl:listener std:sid="listener-bb4a44fb" name="submit-error" handler="onSms_getLicenseInfoSubmitError"/>
+        <cl:listener std:sid="listener-35741be0" name="submit-timeout" handler="onSms_getLicenseInfoSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="LicenseInfo"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-447b1005" id="sms_getClientKey" method="get" action="/v1/license/clientKey">
+        <cl:listener std:sid="listener-a956396b" name="submit-done" handler="onSms_getClientKeySubmitDone"/>
+        <cl:listener std:sid="listener-cf73b09a" name="submit-error" handler="onSms_getClientKeySubmitError"/>
+        <cl:listener std:sid="listener-aa0e76ef" name="submit-timeout" handler="onSms_getClientKeySubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="ClientKeyInfo"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-4c1977cf" id="sms_getXkeyLicenseInfo" method="get" action="/v1/xkeyLicense">
+        <cl:listener std:sid="listener-35ca21bf" name="submit-done" handler="onSms_getXkeyLicenseInfoSubmitDone"/>
+        <cl:listener std:sid="listener-b8330aed" name="submit-error" handler="onSms_getXkeyLicenseInfoSubmitError"/>
+        <cl:listener std:sid="listener-d603946c" name="submit-timeout" handler="onSms_getXkeyLicenseInfoSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="XkeyLicenseInfo"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-3eb350cf" id="sms_postXkeyClientKey" method="post" action="/v1/xkeyLicense/clientKey">
+        <cl:listener std:sid="listener-ca57acc8" name="submit-done" handler="onSms_postXkeyClientKeySubmitDone"/>
+        <cl:listener std:sid="listener-baf453f9" name="submit-error" handler="onSms_postXkeyClientKeySubmitError"/>
+        <cl:listener std:sid="listener-cfbd3090" name="submit-timeout" handler="onSms_postXkeyClientKeySubmitTimeout"/>
+        <cl:requestdata dataid="XkeyLicenseInfo"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="XkeyClientKeyInfo"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-8fddf890" id="sms_postXkeyLicenseActivate" action="/v1/xkeyLicense/activate">
+        <cl:listener std:sid="listener-37011325" name="submit-done" handler="onSms_postXkeyLicenseActivateSubmitDone"/>
+        <cl:listener std:sid="listener-b27330f8" name="submit-error" handler="onSms_postXkeyLicenseActivateSubmitError"/>
+        <cl:listener std:sid="listener-328927de" name="submit-timeout" handler="onSms_postXkeyLicenseActivateSubmitTimeout"/>
+        <cl:requestdata dataid="XkeyLicenseActivation"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="XkeyLicenseInfo"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec dev-comment="/v1/license/activate"/>
+  </head>
+  <body std:sid="body-6cabf53f" style="top:0px; left:0px; width:800px; height:600px;" class="custom_tap">
+    <cl:listener std:sid="listener-99275cc7" name="load" handler="onBodyLoad"/>
+    <cl:tabfolder std:sid="t-folder-3bab92d4" id="LMLIP_TapFolder" style="padding-top:15px;" item-align="center" item-sizing="fixed" item-spacing="30" preferred-item-width="280">
+      <cl:listener std:sid="listener-463ec3f7" name="selection-change" handler="onLMLIP_TapFolderSelectionChange"/>
+      <cl:xylayoutdata std:sid="xyl-data-7ab9f059" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:tabitem std:sid="t-item-4039e0ca" selected="true" text="Alpeta">
+        <std:metadata>
+          <std:property key="is-active-item" value="true"/>
+        </std:metadata>
+        <cl:group std:sid="group-c110d51d">
+          <std:metadata>
+            <std:property key="locked" value="true"/>
+          </std:metadata>
+          <cl:group std:sid="group-bfd034b8" id="alpetaLicenseGroup" style="padding-top:10px; border-top-width:1px; border-top-color:#d9d9d9; border-top-style:solid;">
+            <cl:xylayoutdata std:sid="xyl-data-dc159083" top="10px" right="15px" bottom="10px" left="15px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+            <cl:group std:sid="group-aab7bcfe" id="LI_grpCustomerInfo">
+              <cl:xylayoutdata std:sid="xyl-data-10c0feda" top="171px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+              <cl:output std:sid="output-8e328c80" style="padding:0px 10px 0px 0px; text-align:right;">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_SerialKey"/>
+                <cl:formdata std:sid="f-data-b8454b13" row="0" col="0"/>
+              </cl:output>
+              <cl:output std:sid="output-b3a14cd9" style="padding:0px 10px 0px 0px; text-align:right;">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_CustomerID"/>
+                <cl:formdata std:sid="f-data-c9533d45" row="2" col="0"/>
+              </cl:output>
+              <cl:output std:sid="output-8f654d53" style="padding:0px 10px 0px 0px; text-align:right;">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_CompanyName"/>
+                <cl:formdata std:sid="f-data-eb572dc5" row="4" col="0"/>
+              </cl:output>
+              <cl:group std:sid="group-51ef9de3">
+                <cl:formdata std:sid="f-data-b1e410e0" row="0" col="2" rowspan="1" colspan="4"/>
+                <cl:output std:sid="output-77f065a9" style="text-align:center;" value="-">
+                  <cl:formdata std:sid="f-data-87419a6b" row="0" col="1"/>
+                </cl:output>
+                <cl:output std:sid="output-49417ba2" style="text-align:center;" value="-">
+                  <cl:formdata std:sid="f-data-e4260724" row="0" col="3"/>
+                </cl:output>
+                <cl:output std:sid="output-71f8b0a5" style="text-align:center;" value="-">
+                  <cl:formdata std:sid="f-data-ff377b48" row="0" col="5"/>
+                </cl:output>
+                <cl:inputbox std:sid="i-box-4dba790d" id="LMLIE_ipbSerial1" style="font-size:14px; text-align:center;" tabindex="1" maxlength="6">
+                  <cl:listener std:sid="listener-236c4b25" name="keydown" handler="onLMLIE_ipbSerial1Keydown"/>
+                  <cl:listener std:sid="listener-b6be05c9" name="value-change" handler="onLMLIE_ipbSerial1ValueChange"/>
+                  <cl:formdata std:sid="f-data-ff8fb6b9" row="0" col="0"/>
+                </cl:inputbox>
+                <cl:inputbox std:sid="i-box-1ec07166" id="LMLIE_ipbSerial2" style="font-size:14px; text-align:center;" tabindex="2" maxlength="6">
+                  <cl:formdata std:sid="f-data-a4d72a0e" row="0" col="2"/>
+                </cl:inputbox>
+                <cl:inputbox std:sid="i-box-41913b41" id="LMLIE_ipbSerial3" style="font-size:14px; text-align:center;" tabindex="3" maxlength="6">
+                  <cl:formdata std:sid="f-data-9cd20213" row="0" col="4"/>
+                </cl:inputbox>
+                <cl:inputbox std:sid="i-box-6a471547" id="LMLIE_ipbSerial4" style="font-size:14px; text-align:center;" tabindex="4" maxlength="8">
+                  <cl:formdata std:sid="f-data-842b649e" row="0" col="6"/>
+                </cl:inputbox>
+                <cl:formlayout std:sid="f-layout-4d65b2dd">
+                  <cl:rows length="1" unit="FRACTION"/>
+                  <cl:columns length="1" unit="FRACTION"/>
+                  <cl:columns length="16" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="1" unit="FRACTION"/>
+                  <cl:columns length="16" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="1" unit="FRACTION"/>
+                  <cl:columns length="16" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="1" unit="FRACTION"/>
+                </cl:formlayout>
+              </cl:group>
+              <cl:inputbox std:sid="i-box-796d4940" id="LMLIE_ipbCustomerID" style="padding:0px 0px 0px 10px;" maxlength="20">
+                <cl:datamapbind property="value" datacontrolid="LicenseInfo" columnname="CustomerID"/>
+                <cl:formdata std:sid="f-data-df5a67af" row="2" col="2"/>
+              </cl:inputbox>
+              <cl:inputbox std:sid="i-box-603d5738" id="LMLIE_ipbCompanyName" style="padding:0px 0px 0px 10px;" maxlength="50">
+                <cl:datamapbind property="value" datacontrolid="LicenseInfo" columnname="CompanyName"/>
+                <cl:formdata std:sid="f-data-87e0a939" row="4" col="2"/>
+              </cl:inputbox>
+              <cl:output std:sid="output-0edef9cc" style="color:red; text-align:center;" value="*">
+                <cl:formdata std:sid="f-data-3346f9d2" row="0" col="1"/>
+              </cl:output>
+              <cl:output std:sid="output-70b24685" style="color:red; text-align:center;" value="*">
+                <cl:formdata std:sid="f-data-1d9ae577" row="2" col="1"/>
+              </cl:output>
+              <cl:button std:sid="button-088b0ba8" id="LI_btnClientKeyCreate" style="font-size:12px;" class="userInfo_btn">
+                <cl:listener std:sid="listener-100fe189" name="click" handler="onButtonClick"/>
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_Create"/>
+                <cl:formdata std:sid="f-data-da3f7d3d" row="7" col="2"/>
+              </cl:button>
+              <cl:output std:sid="output-1bf538b4" id="LI_opbClientKey" style="padding:0px 10px 0px 0px; text-align:right;">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_ClientKey"/>
+                <cl:formdata std:sid="f-data-d9f32d51" row="7" col="0"/>
+              </cl:output>
+              <cl:output std:sid="output-9edecb89" id="LMLIE_opbClientKey">
+                <cl:datamapbind property="value" datacontrolid="ClientKeyInfo" columnname="ClientKey"/>
+                <cl:formdata std:sid="f-data-9df1d456" row="9" col="2" rowspan="1" colspan="3"/>
+              </cl:output>
+              <cl:output std:sid="output-9006ba2d" id="LI_opbClientKeyGuide" style="vertical-align:middle;">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_ClientKeyGuide"/>
+                <cl:formdata std:sid="f-data-306c9dff" row="8" col="2" rowspan="1" colspan="3"/>
+              </cl:output>
+              <cl:uicontrolshell std:sid="uic-shell-32660f7a" id="li_shlQRCode" style="border-right-style:none; border-left-style:none; border-bottom-style:none; border-top-style:none;">
+                <cl:listener std:sid="listener-0b79ff03" name="load" handler="onLi_shlQRCodeLoad"/>
+                <cl:formdata std:sid="f-data-347839b0" row="2" col="5" rowspan="8" colspan="1"/>
+              </cl:uicontrolshell>
+              <cl:output std:sid="output-9e7a8185" style="padding:0px 10px 0px 0px; text-align:right;">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_ServerAddress"/>
+                <cl:formdata std:sid="f-data-f79fa1db" row="5" col="0"/>
+              </cl:output>
+              <cl:inputbox std:sid="i-box-c7e974a5" id="LI_ipbServerAddress" style="padding:0px 0px 0px 10px;" maxlength="64">
+                <cl:datamapbind property="value" datacontrolid="LicenseActivation" columnname="ServerAddress"/>
+                <cl:formdata std:sid="f-data-73069cbf" row="5" col="2"/>
+              </cl:inputbox>
+              <cl:inputbox std:sid="i-box-c3577cfc" id="LI_ipbServerAddress2" style="padding:0px 0px 0px 10px;" visible="false" maxlength="64">
+                <cl:datamapbind property="value" datacontrolid="LicenseActivation" columnname="ServerAddress"/>
+                <cl:formdata std:sid="f-data-a3eda164" row="6" col="2"/>
+              </cl:inputbox>
+              <cl:inputbox std:sid="i-box-f8633278" id="LI_ipbServerPort2" style="padding:0px 0px 0px 10px;" visible="false" maxlength="5">
+                <cl:datamapbind property="value" datacontrolid="LicenseActivation" columnname="ServerPort"/>
+                <cl:formdata std:sid="f-data-5aef9772" halign="LEFT" width="60" row="6" col="4"/>
+              </cl:inputbox>
+              <cl:inputbox std:sid="i-box-8da9cf7d" id="LI_ipbServerPort" style="padding:0px 0px 0px 10px;" maxlength="5" inputfilter="[0-9]">
+                <cl:datamapbind property="value" datacontrolid="LicenseActivation" columnname="ServerPort"/>
+                <cl:formdata std:sid="f-data-bffcebbd" halign="LEFT" width="60" row="5" col="4"/>
+              </cl:inputbox>
+              <cl:output std:sid="output-cc7af545" style="padding:0px 10px 0px 0px; text-align:right;">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_Port"/>
+                <cl:formdata std:sid="f-data-2e7960b1" row="5" col="3"/>
+              </cl:output>
+              <cl:formlayout std:sid="f-layout-a673f79a" hspace="0px">
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="2" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="2" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="8" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="160" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="1" unit="FRACTION" autoSizing="false" minlength="0"/>
+                <cl:columns length="210" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              </cl:formlayout>
+            </cl:group>
+            <cl:output std:sid="output-c70df3dc" style="padding-top:6px; border-bottom-color:#2446a4; font-weight:500; padding-left:0px; border-bottom-width:2px; font-size:16px; padding-bottom:0px; border-bottom-style:solid; padding-right:0px;" value="License Info">
+              <cl:xylayoutdata std:sid="xyl-data-b58124ac" top="7px" left="0px" width="147px" height="30px"/>
+            </cl:output>
+            <cl:button std:sid="button-03821a09" id="LMLIP_btnActivate" class="userInfo_btn">
+              <cl:listener std:sid="listener-3a8b31f7" name="click" handler="onLMLIP_btnActivateClick"/>
+              <cl:langbind property="value" category="PROPERTY" keypath="Str_Activation"/>
+              <cl:xylayoutdata std:sid="xyl-data-f0b0af47" top="20px" right="0px" width="150px" height="30px" horizontalAnchor="RIGHT"/>
+            </cl:button>
+            <cl:group std:sid="group-7c4f89ed" id="LI_grpLicenseInfo">
+              <cl:xylayoutdata std:sid="xyl-data-dad31b49" top="95px" right="0px" left="0px" height="66px" horizontalAnchor="BOTH"/>
+              <cl:output std:sid="output-563ebf39" style="padding:0px 10px 0px 0px; text-align:right;">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_LicenseType"/>
+                <cl:formdata std:sid="f-data-7ed0cd11" row="0" col="0"/>
+              </cl:output>
+              <cl:combobox std:sid="c-box-c4012029" id="LI_cmbLicenseType" style="text-align:center;" readonly="true" hidebutton="true">
+                <cl:datamapbind property="value" datacontrolid="LicenseInfo" columnname="LicenseType"/>
+                <cl:formdata std:sid="f-data-81d64ef0" row="0" col="1"/>
+              </cl:combobox>
+              <cl:output std:sid="output-dadd2c16" style="padding:0px 10px 0px 0px; text-align:right;">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_ExpireDate"/>
+                <cl:formdata std:sid="f-data-1499e757" row="0" col="4"/>
+              </cl:output>
+              <cl:output std:sid="output-a0fd39e4" id="LI_opbLicenseExpireAt" style="border-right-style:solid; border-top-width:1px; border-bottom-color:#dbdbdb; border-right-width:1px; border-left-color:#dbdbdb; border-right-color:#dbdbdb; border-left-width:1px; border-top-style:solid; border-left-style:solid; border-bottom-width:1px; border-top-color:#dbdbdb; border-bottom-style:solid; text-align:center;" readonly="true">
+                <cl:datamapbind property="value" datacontrolid="LicenseInfo" columnname="ExpireAt"/>
+                <cl:formdata std:sid="f-data-6ac056ca" row="0" col="5"/>
+              </cl:output>
+              <cl:output std:sid="output-78933f36" style="padding:0px 10px 0px 0px; text-align:right;">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_LicenseKey"/>
+                <cl:formdata std:sid="f-data-092f5651" row="1" col="0"/>
+              </cl:output>
+              <cl:inputbox std:sid="i-box-15165f48" id="LI_ipbLicenseKey" style="text-align:center;" maxlength="62" inputfilter="[a-zA-Z0-9/-]">
+                <cl:datamapbind property="value" datacontrolid="LicenseInfo" columnname="LicenseKey"/>
+                <cl:formdata std:sid="f-data-b53a4153" row="1" col="1" rowspan="1" colspan="5"/>
+              </cl:inputbox>
+              <cl:output std:sid="output-264e4917" style="padding:0px 10px 0px 0px; text-align:right;">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_State"/>
+                <cl:formdata std:sid="f-data-8e8c87cb" row="0" col="2"/>
+              </cl:output>
+              <cl:combobox std:sid="c-box-6e346773" id="LI_cmbLicenseStatus" style="text-align:center;" readonly="true" hidebutton="true">
+                <cl:datamapbind property="value" datacontrolid="LicenseInfo" columnname="Status"/>
+                <cl:formdata std:sid="f-data-d693e7a0" row="0" col="3"/>
+              </cl:combobox>
+              <cl:formlayout std:sid="f-layout-eedcb5e3">
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="100" unit="PIXEL"/>
+                <cl:columns length="1" unit="FRACTION"/>
+                <cl:columns length="100" unit="PIXEL"/>
+                <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              </cl:formlayout>
+            </cl:group>
+            <cl:group std:sid="group-33a135a6">
+              <cl:xylayoutdata std:sid="xyl-data-03a370ec" top="56px" right="0px" left="0px" height="29px" horizontalAnchor="BOTH"/>
+              <cl:radiobutton std:sid="r-button-337ca136" id="LI_rdbRegistType" style="vertical-align:middle;" value="1">
+                <cl:listener std:sid="listener-1d8fe8d4" name="selection-change" handler="onLI_rdbRegistTypeSelectionChange"/>
+                <cl:formdata std:sid="f-data-e074482e" row="0" col="0" rowspan="1" colspan="1"/>
+              </cl:radiobutton>
+              <cl:formlayout std:sid="f-layout-d8c7f0e5">
+                <cl:rows length="28" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="1" unit="FRACTION"/>
+              </cl:formlayout>
+            </cl:group>
+            <cl:img std:sid="image-6d2b4a49" id="LMLIP_imgHelp" style="cursor:help;" src="../../../theme/images/common/common_btn_window_top_q.png">
+              <cl:listener std:sid="listener-5a9848af" name="click" handler="onLMLIP_imgHelpClick"/>
+              <cl:xylayoutdata std:sid="xyl-data-3d2dd410" top="0px" right="0px" width="14px" height="14px" horizontalAnchor="RIGHT"/>
+            </cl:img>
+            <cl:xylayout std:sid="xylayout-2eba1e6f"/>
+          </cl:group>
+          <cl:xylayout std:sid="xylayout-f256bf7d"/>
+        </cl:group>
+      </cl:tabitem>
+      <cl:tabitem std:sid="t-item-30bd16ee" text="UBio-Xkey">
+        <cl:group std:sid="group-1717c9ab">
+          <std:metadata>
+            <std:property key="locked" value="true"/>
+          </std:metadata>
+          <cl:group std:sid="group-aa7341c4" style="padding-top:10px; border-top-width:1px; border-top-color:#d9d9d9; border-top-style:solid;">
+            <cl:xylayoutdata std:sid="xyl-data-2199c056" top="10px" right="15px" bottom="10px" left="15px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+            <cl:group std:sid="group-eaa97ec9" id="LI_grpXkeylicInfo">
+              <cl:xylayoutdata std:sid="xyl-data-78bd72d5" top="133px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+              <cl:output std:sid="output-2f7a18b4" style="padding:0px 10px 0px 0px; text-align:right;">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_SerialKey"/>
+                <cl:formdata std:sid="f-data-0ed9df67" row="0" col="0"/>
+              </cl:output>
+              <cl:output std:sid="output-54810b67" style="padding:0px 10px 0px 0px; text-align:right;">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_SiteCode"/>
+                <cl:formdata std:sid="f-data-fc6ebbb5" row="1" col="0"/>
+              </cl:output>
+              <cl:group std:sid="group-6fd84948">
+                <cl:formdata std:sid="f-data-73f87b0b" row="0" col="2" rowspan="1" colspan="4"/>
+                <cl:output std:sid="output-13df8101" style="text-align:center;" value="-">
+                  <cl:formdata std:sid="f-data-eb072c8d" row="0" col="1"/>
+                </cl:output>
+                <cl:output std:sid="output-991f133d" style="text-align:center;" value="-">
+                  <cl:formdata std:sid="f-data-3632b09e" row="0" col="3"/>
+                </cl:output>
+                <cl:output std:sid="output-92770fe4" style="text-align:center;" value="-">
+                  <cl:formdata std:sid="f-data-2f5bb4b2" row="0" col="5"/>
+                </cl:output>
+                <cl:inputbox std:sid="i-box-e29bc80b" id="LMLIE_ipbMCardSerial1" style="font-size:14px; text-align:center;" tabindex="1" maxlength="-1">
+                  <cl:listener std:sid="listener-326ecf96" name="value-change" handler="onLMLIE_ipbMCardSerial1ValueChange"/>
+                  <cl:listener std:sid="listener-103d59a7" name="keydown" handler="onLMLIE_ipbMCardSerial1Keydown"/>
+                  <cl:formdata std:sid="f-data-5470e321" row="0" col="0"/>
+                </cl:inputbox>
+                <cl:inputbox std:sid="i-box-fab36bcf" id="LMLIE_ipbMCardSerial2" style="font-size:14px; text-align:center;" tabindex="2" maxlength="6">
+                  <cl:formdata std:sid="f-data-92bff854" row="0" col="2"/>
+                </cl:inputbox>
+                <cl:inputbox std:sid="i-box-7bb28c83" id="LMLIE_ipbMCardSerial3" style="font-size:14px; text-align:center;" tabindex="3" maxlength="6">
+                  <cl:formdata std:sid="f-data-dba73ab8" row="0" col="4"/>
+                </cl:inputbox>
+                <cl:inputbox std:sid="i-box-8dcf4476" id="LMLIE_ipbMCardSerial4" style="font-size:14px; text-align:center;" tabindex="4" maxlength="8">
+                  <cl:formdata std:sid="f-data-750b512c" row="0" col="6"/>
+                </cl:inputbox>
+                <cl:formlayout std:sid="f-layout-a5961ad0">
+                  <cl:rows length="1" unit="FRACTION"/>
+                  <cl:columns length="1" unit="FRACTION"/>
+                  <cl:columns length="16" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="1" unit="FRACTION"/>
+                  <cl:columns length="16" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="1" unit="FRACTION"/>
+                  <cl:columns length="16" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                  <cl:columns length="1" unit="FRACTION"/>
+                </cl:formlayout>
+              </cl:group>
+              <cl:inputbox std:sid="i-box-d7683fbc" id="LMLIE_ipbXkeySiteCode" style="padding:0px 0px 0px 10px;" maxlength="20" inputfilter="[a-zA-Z0-9]">
+                <cl:datamapbind property="value" datacontrolid="XkeyLicenseInfo" columnname="SiteCode"/>
+                <cl:formdata std:sid="f-data-5df8bfb0" row="1" col="2" rowspan="1" colspan="2"/>
+              </cl:inputbox>
+              <cl:output std:sid="output-943941bb" style="color:red; text-align:center;" value="*">
+                <cl:formdata std:sid="f-data-7d6a264c" row="0" col="1"/>
+              </cl:output>
+              <cl:output std:sid="output-546691b1" style="color:red; text-align:center;" value="*">
+                <cl:formdata std:sid="f-data-3fe10124" row="1" col="1"/>
+              </cl:output>
+              <cl:button std:sid="button-ea17aac2" id="LI_btnMCardClientKeyCreate" style="font-size:12px;" class="userInfo_btn" visible="false">
+                <cl:listener std:sid="listener-53b77a9c" name="click" handler="onLI_btnMCardClientKeyCreateClick"/>
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_Create"/>
+                <cl:formdata std:sid="f-data-e2d6ffb4" row="4" col="2"/>
+              </cl:button>
+              <cl:output std:sid="output-e38fb547" id="LI_opbMCardClientKey" style="padding:0px 10px 0px 0px; text-align:right;" visible="false">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_ClientKey"/>
+                <cl:formdata std:sid="f-data-f8140bcb" row="4" col="0"/>
+              </cl:output>
+              <cl:output std:sid="output-94e9c2dd" id="LMLIE_opbMCardClientKey" visible="false">
+                <cl:datamapbind property="value" datacontrolid="XkeyClientKeyInfo" columnname="ClientKey"/>
+                <cl:formdata std:sid="f-data-6565fda6" row="7" col="5"/>
+              </cl:output>
+              <cl:output std:sid="output-b4a58def" id="LI_opbMCardClientKeyGuide" style="vertical-align:middle;" visible="false">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_ClientKeyGuide"/>
+                <cl:formdata std:sid="f-data-fdea80ed" row="5" col="2" rowspan="1" colspan="3"/>
+              </cl:output>
+              <cl:uicontrolshell std:sid="uic-shell-e339a7de" id="li_shlXkeyQRCode" style="border-right-style:none; border-left-style:none; border-bottom-style:none; border-top-style:none;">
+                <cl:listener std:sid="listener-8c103999" name="load" handler="onLi_shlXkeyQRCodeLoad"/>
+                <cl:formdata std:sid="f-data-68bf21eb" row="1" col="5" rowspan="6" colspan="1"/>
+              </cl:uicontrolshell>
+              <cl:output std:sid="output-db91fdf0" style="padding:0px 10px 0px 0px; text-align:right;">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_IPAddress"/>
+                <cl:formdata std:sid="f-data-42baf334" row="2" col="0"/>
+              </cl:output>
+              <cl:inputbox std:sid="i-box-64417d5d" id="LMLIE_ipbXkeyServerIP" style="padding:0px 0px 0px 10px;" maxlength="80" inputfilter="[\S]">
+                <cl:datamapbind property="value" datacontrolid="XkeyLicenseInfo" columnname="ServerIP"/>
+                <cl:formdata std:sid="f-data-02ec3dfb" row="2" col="2" rowspan="1" colspan="1"/>
+              </cl:inputbox>
+              <cl:inputbox std:sid="i-box-277c7532" id="LMLIE_ipbXkeyServerPort" style="padding:0px 0px 0px 10px;" maxlength="5" inputfilter="[0-9]">
+                <cl:datamapbind property="value" datacontrolid="XkeyLicenseInfo" columnname="ServerPort"/>
+                <cl:formdata std:sid="f-data-27d3c0ad" halign="FILL" width="70" row="3" col="2" rowspan="1" colspan="1"/>
+              </cl:inputbox>
+              <cl:output std:sid="output-e35daefc" style="padding:0px 10px 0px 0px; text-align:right;">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_Port"/>
+                <cl:formdata std:sid="f-data-e63e0cb4" row="3" col="0"/>
+              </cl:output>
+              <cl:output std:sid="output-fbd4d371" style="color:red; text-align:center;" value="*">
+                <cl:formdata std:sid="f-data-7a8c54b3" row="2" col="1"/>
+              </cl:output>
+              <cl:output std:sid="output-380ff7cc" style="color:red; text-align:center;" value="*">
+                <cl:formdata std:sid="f-data-70e95860" row="3" col="1"/>
+              </cl:output>
+              <cl:formlayout std:sid="f-layout-091312ff" hspace="0px" vspace="8px">
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="110" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="8" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="160" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="1" unit="FRACTION" autoSizing="false" minlength="0"/>
+                <cl:columns length="225" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              </cl:formlayout>
+            </cl:group>
+            <cl:output std:sid="output-aeb0db0c" style="padding-top:6px; border-bottom-color:#2446a4; font-weight:500; padding-left:0px; border-bottom-width:2px; font-size:16px; padding-bottom:0px; border-bottom-style:solid; padding-right:0px;" value="License Info">
+              <cl:xylayoutdata std:sid="xyl-data-1c0c42db" top="7px" left="0px" width="147px" height="30px"/>
+            </cl:output>
+            <cl:button std:sid="button-c218c372" id="LMLIP_btnXkeyActivate" class="userInfo_btn">
+              <cl:listener std:sid="listener-7800d2ed" name="click" handler="onLMLIP_btnXkeyActivateClick"/>
+              <cl:langbind property="value" category="PROPERTY" keypath="Str_Activation"/>
+              <cl:xylayoutdata std:sid="xyl-data-c9fb47c5" top="20px" right="0px" width="150px" height="30px" horizontalAnchor="RIGHT"/>
+            </cl:button>
+            <cl:group std:sid="group-b3d59ce9" id="LI_grpXkeylicensKey">
+              <cl:xylayoutdata std:sid="xyl-data-2027e07f" top="95px" right="0px" left="0px" height="30px" horizontalAnchor="BOTH"/>
+              <cl:output std:sid="output-047a5b13" style="padding:0px 10px 0px 0px; text-align:right;">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_LicenseKey"/>
+                <cl:formdata std:sid="f-data-0e81df9e" row="0" col="0"/>
+              </cl:output>
+              <cl:inputbox std:sid="i-box-38bf3ddb" id="LI_ipbMCardLicenseKey" style="text-align:center;" readonly="true" maxlength="62" inputfilter="[a-zA-Z0-9/-]">
+                <cl:datamapbind property="value" datacontrolid="XkeyLicenseInfo" columnname="LicenseKey"/>
+                <cl:formdata std:sid="f-data-c9164c5c" row="0" col="1" rowspan="1" colspan="5"/>
+              </cl:inputbox>
+              <cl:formlayout std:sid="f-layout-099cfb21">
+                <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="110" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="1" unit="FRACTION"/>
+                <cl:columns length="100" unit="PIXEL"/>
+                <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              </cl:formlayout>
+            </cl:group>
+            <cl:group std:sid="group-4b606295">
+              <cl:xylayoutdata std:sid="xyl-data-740299b9" top="56px" right="0px" left="0px" height="29px" horizontalAnchor="BOTH"/>
+              <cl:radiobutton std:sid="r-button-22e8abbb" id="LI_rdbMobileRegistType" style="vertical-align:middle;" value="1">
+                <cl:listener std:sid="listener-fe66a730" name="selection-change" handler="onLI_rdbMobileRegistTypeSelectionChange"/>
+                <cl:formdata std:sid="f-data-100ded37" row="0" col="0" rowspan="1" colspan="1"/>
+              </cl:radiobutton>
+              <cl:formlayout std:sid="f-layout-580ea0f3">
+                <cl:rows length="28" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="1" unit="FRACTION"/>
+              </cl:formlayout>
+            </cl:group>
+            <cl:img std:sid="image-cd202f0d" style="cursor:help;" visible="false" src="../../../theme/images/common/common_btn_window_top_q.png">
+              <cl:xylayoutdata std:sid="xyl-data-10c3b7cd" top="0px" right="0px" width="14px" height="14px" horizontalAnchor="RIGHT"/>
+            </cl:img>
+            <cl:xylayout std:sid="xylayout-51418a38"/>
+          </cl:group>
+          <cl:xylayout std:sid="xylayout-fbd8d5ef"/>
+        </cl:group>
+      </cl:tabitem>
+      <cl:item-style style="border-right-style:none; border-left-style:none; border-bottom-style:none; border-top-style:none;"/>
+    </cl:tabfolder>
+    <cl:xylayout std:sid="xylayout-d3357297"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-5802c473" version="1.0.0.0">
+  <head std:sid="head-c4359bef">
+    <title>setFingerPrintCardLayoutFormat</title>
+    <screen std:sid="screen-d125c1d0" id="default" customHeight="600" customWidth="500" height="768px" minwidth="1024px" name="default" useCustomHeight="true" useCustomWidth="true" width="1024px"/>
+    <screen std:sid="screen-e44bac39" id="tablet" height="667px" maxwidth="1023px" minwidth="500px" name="tablet" width="500px"/>
+    <screen std:sid="screen-abafe3f5" id="mobile" height="525px" maxwidth="499px" name="mobile" width="350px"/>
+    <cl:model std:sid="model-c35b936b">
+      <cl:datamap std:sid="d-map-80da28d2" id="dmCardLayoutInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" defaultvalue="1" info="지문 카드용량" name="CardSize"/>
+          <cl:datacolumn datatype="number" defaultvalue="0" info="카드종류" name="CardType"/>
+          <cl:datacolumn datatype="number" defaultvalue="0" info="카드 읽기 구분" name="ReadType"/>
+          <cl:datacolumn datatype="number" defaultvalue="0" info="지문 템플릿" name="TemplateSize"/>
+          <cl:datacolumn datatype="number" defaultvalue="0" info="지문 Template 개수" name="TemplateCount"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-60f3b8e9" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="ResultCode"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:dataset std:sid="d-set-eef09e0e" id="dsCardLayoutData">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="Index"/>
+          <cl:datacolumn datatype="number" name="Sector"/>
+          <cl:datacolumn datatype="number" name="Block"/>
+          <cl:datacolumn datatype="number" name="Start"/>
+          <cl:datacolumn datatype="number" name="Length"/>
+          <cl:datacolumn datatype="number" name="KeyType"/>
+          <cl:datacolumn name="KeyValue"/>
+          <cl:datacolumn name="AIDCode"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:submission std:sid="submission-75ee2c33" id="sms_getCardInfo" action="/v1/cardLayout" method="get">
+        <cl:listener std:sid="listener-98c6f202" handler="onSms_getCardInfoSubmitDone" name="submit-done"/>
+        <cl:listener std:sid="listener-dd9358bb" handler="onSms_getCardInfoSubmitError" name="submit-error"/>
+        <cl:listener std:sid="listener-8f652279" handler="onSms_getCardInfoSubmitTimeout" name="submit-timeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="dmCardLayoutInfo"/>
+        <cl:responsedata dataid="dsCardLayoutData"/>
+      </cl:submission>
+      <cl:dataset std:sid="d-set-a9b4f7d3" id="grdFingerCardLayoutDataList">
+        <cl:datacolumnlist>
+          <cl:datacolumn name="strSector"/>
+          <cl:datacolumn datatype="number" name="nBlock"/>
+          <cl:datacolumn name="nKeyType"/>
+          <cl:datacolumn name="SiteKey"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+    </cl:model>
+    <cl:appspec dev-comment="SFPCF : set FingerPrint Card Format&#xD;&#xA;"/>
+  </head>
+  <body std:sid="body-75afc54e" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-4b7ce72c" handler="onBodyLoad" name="load"/>
+    <cl:group std:sid="group-83f3de26" id="SFPCF_grpMain" style="padding:5px;">
+      <cl:xylayoutdata std:sid="xyl-data-56c23c8b" bottom="0px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-ec7da570" id="SFPCF_grpRegistedCardLayout">
+        <cl:formdata std:sid="f-data-6e7164d4" col="0" row="1"/>
+        <cl:output std:sid="output-acc798b7" id="SFPCF_opbRegistedCardLayout" value="등록된 카드 레이아웃">
+          <cl:formdata std:sid="f-data-6a0f8495" col="0" row="0"/>
+        </cl:output>
+        <cl:grid std:sid="grid-e6893654" id="SFPCF_grdRegistedCardLayoutSectorList">
+          <cl:formdata std:sid="f-data-2d4f7564" col="0" row="1"/>
+          <cl:gridcolumn std:sid="g-column-13bd8985"/>
+          <cl:gridcolumn std:sid="g-column-d76c3c13"/>
+          <cl:gridcolumn std:sid="g-column-92e85dc3"/>
+          <cl:gridcolumn std:sid="g-column-7adf641f"/>
+          <cl:gridcolumn std:sid="g-column-c0967f36"/>
+          <cl:gridheader std:sid="gh-band-2af9a436">
+            <cl:gridrow std:sid="g-row-3b4f68fd"/>
+            <cl:gridcell std:sid="gh-cell-d9e3216b" colindex="0" rowindex="0"/>
+            <cl:gridcell std:sid="gh-cell-1de58c0f" colindex="1" rowindex="0"/>
+            <cl:gridcell std:sid="gh-cell-020dc61f" colindex="2" rowindex="0"/>
+            <cl:gridcell std:sid="gh-cell-1a940328" colindex="3" rowindex="0"/>
+            <cl:gridcell std:sid="gh-cell-5c7be8d7" colindex="4" rowindex="0"/>
+          </cl:gridheader>
+          <cl:griddetail std:sid="gd-band-7c80d65c">
+            <cl:gridrow std:sid="g-row-939b26ed"/>
+            <cl:gridcell std:sid="gd-cell-d4fa4808" colindex="0" rowindex="0"/>
+            <cl:gridcell std:sid="gd-cell-5e4efd41" colindex="1" rowindex="0"/>
+            <cl:gridcell std:sid="gd-cell-f0a8ee37" colindex="2" rowindex="0"/>
+            <cl:gridcell std:sid="gd-cell-285c5954" colindex="3" rowindex="0"/>
+            <cl:gridcell std:sid="gd-cell-2d05e6b4" colindex="4" rowindex="0"/>
+          </cl:griddetail>
+        </cl:grid>
+        <cl:formlayout std:sid="f-layout-2eedcfa1">
+          <cl:rows autoSizing="false" length="30" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-4583979c" id="SFPCF_grpIssuedCardNumList">
+        <cl:formdata std:sid="f-data-56c8ef07" col="0" row="2"/>
+        <cl:output std:sid="output-95ec7ff0" id="SFPCF_opbIssuedCardNumList" value="발행된 카드 리스트">
+          <cl:formdata std:sid="f-data-8569092d" col="0" row="0"/>
+        </cl:output>
+        <cl:grid std:sid="grid-7caf2777" id="SFPCF_grdIssuedCardNumList">
+          <cl:formdata std:sid="f-data-3aab1161" col="0" row="1"/>
+          <cl:gridcolumn std:sid="g-column-504b56e9"/>
+          <cl:gridcolumn std:sid="g-column-442e3b8c"/>
+          <cl:gridcolumn std:sid="g-column-778cfb20"/>
+          <cl:gridcolumn std:sid="g-column-a5435855"/>
+          <cl:gridcolumn std:sid="g-column-ad5ea99c"/>
+          <cl:gridheader std:sid="gh-band-9e65956a">
+            <cl:gridrow std:sid="g-row-1e2c05dd"/>
+            <cl:gridcell std:sid="gh-cell-444c209a" colindex="0" rowindex="0"/>
+            <cl:gridcell std:sid="gh-cell-1b312984" colindex="1" rowindex="0"/>
+            <cl:gridcell std:sid="gh-cell-a1b31a17" colindex="2" rowindex="0"/>
+            <cl:gridcell std:sid="gh-cell-19d94caa" colindex="3" rowindex="0"/>
+            <cl:gridcell std:sid="gh-cell-89494858" colindex="4" rowindex="0"/>
+          </cl:gridheader>
+          <cl:griddetail std:sid="gd-band-4a4152e2">
+            <cl:gridrow std:sid="g-row-5b21fdff"/>
+            <cl:gridcell std:sid="gd-cell-25c1bb8a" colindex="0" rowindex="0"/>
+            <cl:gridcell std:sid="gd-cell-d5330f2e" colindex="1" rowindex="0"/>
+            <cl:gridcell std:sid="gd-cell-34c1785f" colindex="2" rowindex="0"/>
+            <cl:gridcell std:sid="gd-cell-97400328" colindex="3" rowindex="0"/>
+            <cl:gridcell std:sid="gd-cell-c3cd6b63" colindex="4" rowindex="0"/>
+          </cl:griddetail>
+        </cl:grid>
+        <cl:formlayout std:sid="f-layout-1ed5152a">
+          <cl:rows autoSizing="false" length="30" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-19951622">
+        <cl:formdata std:sid="f-data-0cd04a5f" col="0" row="3"/>
+        <cl:button std:sid="button-9001abe7" id="SFPCF_btnIssueCardNum" class="userInfo_btn" value="스마트 카드 발생">
+          <cl:listener std:sid="listener-b24cdf1f" handler="onSFPCF_btnIssueCardNumClick" name="click"/>
+          <cl:formdata std:sid="f-data-67a7cdd3" col="2" row="0"/>
+        </cl:button>
+        <cl:button std:sid="button-0db3c553" id="SFPCF_btnClose" class="userInfo_btn" value="닫기">
+          <cl:formdata std:sid="f-data-665c82cb" col="3" row="0"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-92e5dee5">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-8603dc3e" id="SFPCF_grpCardLayoutFormatText">
+        <cl:formdata std:sid="f-data-913ccca2" col="0" row="0"/>
+        <cl:output std:sid="output-7c551095" id="SFPCF_opbMessage" value="">
+          <cl:formdata std:sid="f-data-1c9b495a" col="0" row="0"/>
+        </cl:output>
+        <cl:htmlsnippet std:sid="htmlsnippet-4130be4e" id="SFPCF_sniDownloadLink" visible="false">
+          <cl:formdata std:sid="f-data-d41e96fe" col="0" row="1"/>
+        </cl:htmlsnippet>
+        <cl:formlayout std:sid="f-layout-3f9db33c">
+          <cl:rows autoSizing="false" length="30" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows autoSizing="false" length="30" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-22f06408">
+        <cl:rows autoSizing="false" length="1" minlength="0" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+        <cl:rows autoSizing="false" length="3" minlength="0" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+        <cl:rows autoSizing="false" length="3" minlength="0" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+        <cl:rows autoSizing="false" length="30" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-92bedbbf"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

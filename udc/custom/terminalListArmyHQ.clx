@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-1a988500" version="1.0.0.0">
+  <head std:sid="head-0f794faa">
+    <title>terminalListArmyHQ</title>
+    <screen std:sid="screen-9d12ce3d" id="default" name="default" minwidth="1024px" width="1024px" height="768px" customHeight="600" customWidth="800"/>
+    <screen std:sid="screen-7dc71ce1" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-36b0b464" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-75bc7b86">
+      <cl:dataset std:sid="d-set-a944bb60" id="TerminalList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-3b40e544" name="ID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-9f01ab85" name="Name"/>
+          <cl:datacolumn std:sid="d-column-4ac2ee78" name="GroupCode" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-a3deeb7a" name="Status" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-6dede21c" name="Type" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-b6039e92" name="FuncType" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-1f108f90" name="IPAddress"/>
+          <cl:datacolumn std:sid="d-column-950bde88" name="MacAddress"/>
+          <cl:datacolumn std:sid="d-column-fba1b989" name="Version"/>
+          <cl:datacolumn std:sid="d-column-95dac513" name="RemoteDoor" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-9b65baf3" name="UTCIndex" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-965da28a" name="Description"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-174ba88d" id="GroupList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-292c0c8f" name="GroupID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-6b6c195c" name="Parent" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-aaff3071" name="Name"/>
+          <cl:datacolumn std:sid="d-column-d351c048" name="Description"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+    </cl:model>
+    <cl:appspec>
+      <cl:event name="pagechange" type="cpr.events.CSelectionEvent"/>
+      <cl:event name="before-pagechange" type="cpr.events.CSelectionEvent"/>
+      <cl:event name="terminalListDblclick" type="cpr.events.CGridEvent"/>
+      <cl:event name="terminalListClick" type="cpr.events.CSelectionEvent"/>
+    </cl:appspec>
+  </head>
+  <body std:sid="body-bb1d7d68" style="top:0px; left:0px; width:500px; height:400px;" class="userList_paging">
+    <cl:group std:sid="group-ae8d5dca">
+      <cl:datarowcontext datacontrolid="TerminalList" rowindex="0"/>
+      <cl:xylayoutdata std:sid="xyl-data-40dc3ac9" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:pageindexer std:sid="p-indexer-cb06a191" id="terminalListPageIndexer">
+        <cl:listener std:sid="listener-860718ee" name="selection-change" handler="onTerminalListPageIndexerSelectionChange"/>
+        <cl:listener std:sid="listener-5c9f9ea8" name="before-selection-change" handler="onTerminalListPageIndexerBeforeSelectionChange"/>
+        <cl:formdata std:sid="f-data-62a66fc3" width="100" row="1" col="0"/>
+      </cl:pageindexer>
+      <cl:grid std:sid="grid-163a35b9" id="terminalListGrid" class="grid-amhq" readonly="true" datasetid="TerminalList" resizablecolumns="all" columnMovable="false">
+        <cl:listener std:sid="listener-e28b52bb" name="row-dblclick" handler="onTerminalListGridRowDblclick"/>
+        <cl:listener std:sid="listener-2bc8cffc" name="selection-change" handler="onTerminalListGridSelectionChange"/>
+        <cl:formdata std:sid="f-data-e86b5258" row="0" col="0"/>
+        <cl:gridcolumn std:sid="g-column-de101a30" width="25px"/>
+        <cl:gridcolumn std:sid="g-column-58e073d8" width="77px"/>
+        <cl:gridcolumn std:sid="g-column-08efc91b" width="140px"/>
+        <cl:gridcolumn std:sid="g-column-47f4c1a1"/>
+        <cl:gridcolumn std:sid="g-column-c13c191a"/>
+        <cl:gridcolumn std:sid="g-column-8db3e5e6"/>
+        <cl:gridcolumn std:sid="g-column-bee4ebf2"/>
+        <cl:gridcolumn std:sid="g-column-74da22b4"/>
+        <cl:gridcolumn std:sid="g-column-fd6d8f78"/>
+        <cl:gridcolumn std:sid="g-column-45a3ae74"/>
+        <cl:gridcolumn std:sid="g-column-2cbe8fcd"/>
+        <cl:gridcolumn std:sid="g-column-a12edbd5"/>
+        <cl:gridheader std:sid="gh-band-eee6815a">
+          <cl:gridrow std:sid="g-row-60d295d6" height="50px"/>
+          <cl:gridcell std:sid="gh-cell-c35f823c" rowindex="0" colindex="0" style="font-weight:700; font-size:14px;" sortable="false" filterable="false" columntype="checkbox"/>
+          <cl:gridcell std:sid="gh-cell-7a8b5baa" rowindex="0" colindex="1" style="font-weight:700; font-size:14px;" targetcolumnname="ID" sortable="false" filterable="false" text="아이디">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_ID"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-c567a7a8" rowindex="0" colindex="2" style="font-weight:700; font-size:14px;" targetcolumnname="Name" sortable="false" filterable="false" text="이름">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_TerminalLocation"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-fbf1f74c" rowindex="0" colindex="3" style="font-weight:700; font-size:14px;" targetcolumnname="GroupCode" sortable="false" filterable="false" text="그룹">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_ARMY_UserGroup1"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-123d09f1" rowindex="0" colindex="4" style="font-weight:700; font-size:14px;" targetcolumnname="Type" sortable="false" filterable="false" text="타입">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_Type"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-9ef1f809" rowindex="0" colindex="5" style="font-weight:700; font-size:14px;" targetcolumnname="FuncType" sortable="false" filterable="false" text="기능키" visible="false"/>
+          <cl:gridcell std:sid="gh-cell-cd4eb22a" rowindex="0" colindex="6" style="font-weight:700; font-size:14px;" targetcolumnname="IPAddress" sortable="false" filterable="false" text="IP">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_IPAddress"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-70eeb0c5" rowindex="0" colindex="7" style="font-weight:700; font-size:14px;" targetcolumnname="MacAddress" sortable="false" filterable="false" text="MAC">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_MacAddress"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-964e899d" rowindex="0" colindex="8" style="font-weight:700; font-size:14px;" targetcolumnname="Version" sortable="false" filterable="false" text="버전">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_Version"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-cd35069c" rowindex="0" colindex="9" style="font-weight:700; font-size:14px;" targetcolumnname="RemoteDoor" sortable="false" filterable="false" text="원격 도어" visible="false"/>
+          <cl:gridcell std:sid="gh-cell-eb980b3c" rowindex="0" colindex="10" style="font-weight:700; font-size:14px;" targetcolumnname="UTCIndex" sortable="false" filterable="false" text="UTC" visible="false"/>
+          <cl:gridcell std:sid="gh-cell-9bf66741" rowindex="0" colindex="11" style="font-weight:700; font-size:14px;" targetcolumnname="Description" sortable="false" filterable="false" text="설명">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_Description"/>
+          </cl:gridcell>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-852f5310">
+          <cl:gridrow std:sid="g-row-19bc8d1b" height="30px"/>
+          <cl:gridcell std:sid="gd-cell-68f783dc" rowindex="0" colindex="0" style="font-size:14px;" columntype="checkbox"/>
+          <cl:gridcell std:sid="gd-cell-15b1114e" rowindex="0" colindex="1" style="font-size:14px;" columnname="ID"/>
+          <cl:gridcell std:sid="gd-cell-2eb5c394" rowindex="0" colindex="2" style="font-size:14px;" columnname="Name"/>
+          <cl:gridcell std:sid="gd-cell-9fbda377" rowindex="0" colindex="3" style="font-size:14px;" columnname="GroupCode">
+            <cl:combobox std:sid="c-box-e90a2f55" id="TerminalList_cmbGroup"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-03ae54f2" rowindex="0" colindex="4" style="font-size:14px;" columnname="Type">
+            <cl:combobox std:sid="c-box-276bce8d" id="TerminalList_cmbType">
+              <cl:item std:sid="item-209b30c5" label="NAC 2500" value="2"/>
+              <cl:item std:sid="item-220410b0" label="NAC 3000" value="3"/>
+              <cl:item std:sid="item-d5f76186" label="NAC 2500 (4MF)" value="4"/>
+              <cl:item std:sid="item-1bdc5b89" label="NAC 5000" value="6"/>
+              <cl:item std:sid="item-60b40113" label="NAC 1500" value="9"/>
+              <cl:item std:sid="item-eb9a96af" label="T5" value="18"/>
+              <cl:item std:sid="item-c112b9bb" label="T3" value="19"/>
+              <cl:item std:sid="item-4b9cdda4" label="T1" value="20"/>
+              <cl:item std:sid="item-980f76bc" label="T9" value="22"/>
+              <cl:item std:sid="item-ab96cc0c" label="FKA2" value="23"/>
+              <cl:item std:sid="item-665d894c" label="eNCardi" value="24"/>
+              <cl:item std:sid="item-cd1a3557" label="T2" value="25"/>
+              <cl:item std:sid="item-568a4e9e" label="UBio-X Slim(N)" value="26"/>
+              <cl:item std:sid="item-24837c82" label="AC1100" value="30"/>
+              <cl:item std:sid="item-01eb760a" label="AC2000" value="31"/>
+              <cl:item std:sid="item-30e2bfd7" label="AC2200" value="32"/>
+              <cl:item std:sid="item-47b33eb8" label="AC5000" value="33"/>
+              <cl:item std:sid="item-aac08008" label="AC5100" value="34"/>
+              <cl:item std:sid="item-38a29682" label="AC7000" value="35"/>
+              <cl:item std:sid="item-69992f27" label="UBio-X Pro Lite" value="36"/>
+              <cl:item std:sid="item-88a87fed" label="UBio-X Pro" value="37"/>
+              <cl:item std:sid="item-b64c7b42" label="AC6000" value="38"/>
+              <cl:item std:sid="item-70fa9b5f" label="UBioTablet5" value="39"/>
+              <cl:item std:sid="item-34b901ad" label="UBio-X Slim" value="40"/>
+              <cl:item std:sid="item-5b9db007" label="UBio-X Pro2" value="41"/>
+              <cl:item std:sid="item-c82e5cc1" label="AC1000" value="42"/>
+              <cl:item std:sid="item-e9d1ed00" label="UBio-X Iris" value="43"/>
+              <cl:item std:sid="item-1385360d" label="MCP040" value="21"/>
+              <cl:item std:sid="item-cb1f6aea" label="AC2100 Plus" value="44"/>
+              <cl:item std:sid="item-eb487200" label="UBio-X Face" value="45"/>
+              <cl:item std:sid="item-2376a0f3" label="UBio-X Face Premium" value="46"/>
+              <cl:item std:sid="item-f5139f3b" label="UBio-X Face Pro" value="47"/>
+            </cl:combobox>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-a73d1379" rowindex="0" colindex="5" style="font-size:14px;" columnname="FuncType"/>
+          <cl:gridcell std:sid="gd-cell-f6803fba" rowindex="0" colindex="6" style="font-size:14px;" columnname="IPAddress"/>
+          <cl:gridcell std:sid="gd-cell-f27d19cd" rowindex="0" colindex="7" style="font-size:14px;" columnname="MacAddress"/>
+          <cl:gridcell std:sid="gd-cell-a090d880" rowindex="0" colindex="8" style="font-size:14px;" columnname="Version">
+            <cl:output std:sid="output-e571c3e1" style="font-size:14px; text-align:left;" ellipsis="true"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-6c9e0070" rowindex="0" colindex="9" style="font-size:14px;" columnname="RemoteDoor"/>
+          <cl:gridcell std:sid="gd-cell-83b7528d" rowindex="0" colindex="10" style="font-size:14px;" columnname="UTCIndex"/>
+          <cl:gridcell std:sid="gd-cell-c8c5dee7" rowindex="0" colindex="11" style="font-size:14px;" columnname="Description">
+            <cl:output std:sid="output-2b8b50b5" value="Output" ellipsis="true">
+              <cl:expbind property="tooltip" category="PROPERTY" expression="Description"/>
+            </cl:output>
+          </cl:gridcell>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:formlayout std:sid="f-layout-91741358" hspace="0px" vspace="0px">
+        <cl:rows length="1" unit="FRACTION" shadetype="NONE" shadecolor="#000000"/>
+        <cl:rows length="40" unit="PIXEL" shadetype="NONE" shadecolor="#000000"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-05bd7c89"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

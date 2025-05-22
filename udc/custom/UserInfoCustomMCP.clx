@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-13e13b3a" version="1.0.0.0">
+  <head std:sid="head-7166bc8e">
+    <title>UserInfoCustomMCP</title>
+    <screen std:sid="screen-21a18278" id="default" name="default" minwidth="1024px" width="1024px" height="768px" customHeight="600" customWidth="800"/>
+    <screen std:sid="screen-9ae0a64c" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-2c33249b" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-ea63d037">
+      <cl:dataset std:sid="d-set-e8735a72" id="UserCarInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-2a0cfeec" name="CarNumber" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-b72a6ed6" name="CarType"/>
+          <cl:datacolumn std:sid="d-column-216a86f6" name="CarColor"/>
+          <cl:datacolumn std:sid="d-column-faf91181" name="CarBlackbox" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-ab9c534d" id="deleteCarInfoList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-2c940d51" name="carNumber"/>
+          <cl:datacolumn std:sid="d-column-c40b5157" name="rowIndex" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-66c93913" id="BPARKInfoList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-d8399a65" name="IndexKey" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-8af8b532" name="TypeID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-49a6c063" name="Name"/>
+          <cl:datacolumn std:sid="d-column-7723376f" name="BasicTime" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-bdee2e4b" name="BasicPrice" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-a33aca7f" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-80d61523" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-eb0f3504" id="BPARKUser">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-6e8e0698" name="UserID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-c15ed4da" name="PaymentTime" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-10a859ba" name="SeasonTicketFlag" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-fdfcaad4" name="SeasonTicketExpireAt"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-f1ff6e8e" id="sms_CarInfoDelete" method="delete" action="/v1/users/carInfo">
+        <cl:listener std:sid="listener-a546bf7b" name="submit-done" handler="onSms_CarInfoDeleteSubmitDone"/>
+        <cl:listener std:sid="listener-8616b582" name="submit-error" handler="onSms_CarInfoDeleteSubmitError"/>
+        <cl:listener std:sid="listener-29ad2578" name="submit-timeout" handler="onSms_CarInfoDeleteSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-2041ce22" id="sms_getBPARKUser" method="get" action="/v1/oemData/bpark/user/{ID}">
+        <cl:listener std:sid="listener-12007043" name="submit-done" handler="onSms_getBPARKUserSubmitDone"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="BPARKUser"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec dev-comment="UCMCP_ : UserCarInfo MotorCycle Park "/>
+  </head>
+  <body std:sid="body-a27f69a4" style="top:0px; left:0px; width:300px; height:300px;">
+    <cl:listener std:sid="listener-e3231d26" name="load" handler="onBodyLoad"/>
+    <cl:output std:sid="output-24d3d1c2" id="UCMCP_OpbCarInfo" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; border-right-color:#c5c5c5; border-bottom-style:solid; text-align:center;" class="userInfo_bold" visible="true">
+      <cl:langbind property="value" category="PROPERTY" keypath="Str_CarInfo"/>
+      <cl:formdata std:sid="f-data-a4fc736c" row="0" col="0" rowspan="4" colspan="1"/>
+    </cl:output>
+    <cl:grid std:sid="grid-f4b06409" id="UCMCP_grdCarList" style="padding:5px;" datasetid="UserCarInfo" showdeletedrow="false">
+      <cl:listener std:sid="listener-7f9996bc" name="update" handler="onUCMCP_grdCarListUpdate"/>
+      <cl:formdata std:sid="f-data-8ba825f2" row="0" col="1" rowspan="4" colspan="2"/>
+      <cl:gridcolumn std:sid="g-column-7ac84a65" width="25px"/>
+      <cl:gridcolumn std:sid="g-column-f0d14a47" width="90px"/>
+      <cl:gridcolumn std:sid="g-column-e11be8e4" width="70px"/>
+      <cl:gridcolumn std:sid="g-column-c894fa71" width="50px"/>
+      <cl:gridcolumn std:sid="g-column-9179e66a" width="70px"/>
+      <cl:gridheader std:sid="gh-band-85bf0a38">
+        <cl:gridrow std:sid="g-row-45fc5302"/>
+        <cl:gridcell std:sid="gh-cell-87dd7eac" rowindex="0" colindex="0" sortable="false" filterable="false" columntype="checkbox"/>
+        <cl:gridcell std:sid="gh-cell-0591d36c" rowindex="0" colindex="1" targetcolumnname="CarNumber" sortable="false" filterable="false" text="carNumber">
+          <cl:langbind property="text" category="PROPERTY" keypath="Str_CarNumber"/>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gh-cell-dfbf50df" rowindex="0" colindex="2" targetcolumnname="CarType" sortable="false" filterable="false" text="carType">
+          <cl:langbind property="text" category="PROPERTY" keypath="Str_CarType"/>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gh-cell-8534b6b0" rowindex="0" colindex="3" targetcolumnname="CarColor" sortable="false" filterable="false" text="carColor">
+          <cl:langbind property="text" category="PROPERTY" keypath="Str_Color"/>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gh-cell-9837c48b" rowindex="0" colindex="4" targetcolumnname="CarBlackbox">
+          <cl:langbind property="text" category="PROPERTY" keypath="Str_CarBlackbox"/>
+        </cl:gridcell>
+      </cl:gridheader>
+      <cl:griddetail std:sid="gd-band-b8738462">
+        <cl:gridrow std:sid="g-row-7d579154"/>
+        <cl:gridcell std:sid="gd-cell-3a3258cd" rowindex="0" colindex="0" columntype="checkbox"/>
+        <cl:gridcell std:sid="gd-cell-e0e32380" rowindex="0" colindex="1" columnname="CarNumber">
+          <cl:inputbox std:sid="i-box-9e436630" id="ipb2"/>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gd-cell-10450473" rowindex="0" colindex="2" columnname="CarType">
+          <cl:inputbox std:sid="i-box-a9124cc1" id="ipb3"/>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gd-cell-8a4c5e90" rowindex="0" colindex="3" columnname="CarColor">
+          <cl:inputbox std:sid="i-box-79a60de2" id="ipb4"/>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gd-cell-54ade072" rowindex="0" colindex="4" columnname="CarBlackbox">
+          <cl:combobox std:sid="c-box-6276000b" id="cmb1">
+            <cl:item std:sid="item-49bb952a" label="미설치" value="0">
+              <cl:langbind property="label" category="PROPERTY" keypath="Str_NotInstall"/>
+            </cl:item>
+            <cl:item std:sid="item-5f415a40" label="설치" value="1">
+              <cl:langbind property="label" category="PROPERTY" keypath="Str_Install"/>
+            </cl:item>
+          </cl:combobox>
+        </cl:gridcell>
+      </cl:griddetail>
+    </cl:grid>
+    <cl:button std:sid="button-096c26d4" id="UCMCP_btnCarAdd" class="userInfo_btn">
+      <cl:listener std:sid="listener-ca9e357f" name="click" handler="onUCMCP_btnCarAddClick2"/>
+      <cl:langbind property="value" category="PROPERTY" keypath="Str_Add"/>
+      <cl:formdata std:sid="f-data-f258bae6" row="0" col="3" rowspan="2" colspan="1"/>
+    </cl:button>
+    <cl:button std:sid="button-64229339" id="UCMCP_btnCarDelete" class="userInfo_btn">
+      <cl:listener std:sid="listener-d6a17c74" name="click" handler="onUCMCP_btnCarDeleteClick2"/>
+      <cl:langbind property="value" category="PROPERTY" keypath="Str_Delete"/>
+      <cl:formdata std:sid="f-data-e2e0d532" row="2" col="3" rowspan="2" colspan="1"/>
+    </cl:button>
+    <cl:group std:sid="group-65d95723" id="BPARK_grpSeasonTicket" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+      <cl:formdata std:sid="f-data-ddc8e598" row="4" col="0" rowspan="2" colspan="4"/>
+      <cl:output std:sid="output-7d82a79d" id="BPARK_optSeasonTicket" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; border-right-color:#c5c5c5; border-bottom-style:solid; text-align:center;" class="userInfo_bold" visible="true">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_BPARK_SeasonTicket"/>
+        <cl:formdata std:sid="f-data-d66adea8" row="0" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-fb1e01b9" id="BPARK_optSeasonTicketExpireAt" style="padding-top:5px; padding-left:5px; padding-bottom:5px; padding-right:5px; text-align:center;" class="userInfo_bold">
+        <cl:formdata std:sid="f-data-15a0971f" row="0" col="1" rowspan="1" colspan="2"/>
+      </cl:output>
+      <cl:button std:sid="button-007b6ea6" id="BPARK_btnDelSeasonTicket" class="userInfo_btn">
+        <cl:listener std:sid="listener-2917ece1" name="click" handler="onBPARK_btnDelSeasonTicketClick"/>
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_BPARK_Collect"/>
+        <cl:formdata std:sid="f-data-d70f3259" row="0" col="4"/>
+      </cl:button>
+      <cl:button std:sid="button-5b58f1b4" id="BPARK_btnSeasonTicket" class="userInfo_btn">
+        <cl:listener std:sid="listener-d12f767c" name="click" handler="onBPARK_btnSeasonTicketClick"/>
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_BPARK_IssuanceAndExtension"/>
+        <cl:formdata std:sid="f-data-c23992e8" row="0" col="3"/>
+      </cl:button>
+      <cl:output std:sid="output-5cf3b895" id="BPARK_optDailyFare" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; border-right-color:#c5c5c5; border-bottom-style:solid; text-align:center;" class="userInfo_bold" visible="true">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_BPARK_PaidToday"/>
+        <cl:formdata std:sid="f-data-a2e8ee24" row="1" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-94b58dbd" id="BPARK_optDailyPaymentResult" style="padding-top:5px; padding-left:5px; padding-bottom:5px; padding-right:5px; text-align:center;" class="userInfo_bold">
+        <cl:formdata std:sid="f-data-aaabdddb" row="1" col="1" rowspan="1" colspan="3"/>
+      </cl:output>
+      <cl:button std:sid="button-0268ae14" id="BPARK_btnDailyFare" class="userInfo_btn">
+        <cl:listener std:sid="listener-0037ec5e" name="click" handler="onBPARK_btnDailyFareClick"/>
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_BPARK_DayPayment"/>
+        <cl:formdata std:sid="f-data-8c25fd74" row="1" col="4"/>
+      </cl:button>
+      <cl:formlayout std:sid="f-layout-039abe21" hspace="1px" vspace="1px">
+        <cl:rows length="45" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="45" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="129" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="2" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="2" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="120" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="60" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:formlayout std:sid="f-layout-c99bbabd" hspace="1px" vspace="1px" top-margin="1px" right-margin="1px" bottom-margin="1px" left-margin="1px">
+      <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      <cl:rows length="47" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      <cl:rows length="47" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      <cl:columns length="129" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      <cl:columns length="2" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      <cl:columns length="2" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      <cl:columns length="60" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+    </cl:formlayout>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

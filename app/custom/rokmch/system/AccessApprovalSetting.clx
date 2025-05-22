@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-a1ef4bac" version="1.0.0.0">
+  <head std:sid="head-48f5c476">
+    <title>AccessApprovalSetting</title>
+    <screen std:sid="screen-c14725e9" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomHeight="true" customHeight="900" customWidth="800"/>
+    <screen std:sid="screen-8a567f5e" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-0f8cdae8" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-ad34a819">
+      <cl:dataset std:sid="d-set-054dd98e" id="AccessApprovalSettings">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-3507831c" name="ApprovalType" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-dc066482" name="ApprovalValue" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-a33aca7f" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-80d61523" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-62ce18c4" id="sms_getAccessApprovalSetting" method="get" action="/v1/armyhq/accessApprovalSetting">
+        <cl:listener std:sid="listener-0cf97686" name="submit-done" handler="onSms_getAccessApprovalSettingSubmitDone"/>
+        <cl:listener std:sid="listener-4e983567" name="submit-error" handler="onSubmitError"/>
+        <cl:listener std:sid="listener-4f601fd7" name="submit-timeout" handler="onSubmitTimeout"/>
+        <cl:responsedata dataid="AccessApprovalSettings"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-d999f8a2" id="sms_putAccessApprovalSetting" method="put" action="/v1/armyhq/accessApprovalSetting">
+        <cl:listener std:sid="listener-14797190" name="submit-done" handler="onSms_putAccessApprovalSettingSubmitDone"/>
+        <cl:listener std:sid="listener-ab8de061" name="submit-error" handler="onSubmitError"/>
+        <cl:listener std:sid="listener-d599fea7" name="submit-timeout" handler="onSubmitTimeout"/>
+        <cl:requestdata dataid="AccessApprovalSettings" payload="all"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-f10a1917" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-444bb0ba" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-aa16a5af">
+      <cl:xylayoutdata std:sid="xyl-data-800664cd" top="25px" bottom="0px" left="50px" width="585px" horizontalAnchor="LEFT" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-67a0da6e">
+        <cl:formdata std:sid="f-data-9a0de5e0" row="0" col="0" rowspan="1" colspan="2"/>
+        <cl:output std:sid="output-d304fa2a" class="menu-title-amhq" value="출입신청 결재 설정">
+          <cl:formdata std:sid="f-data-cd5053f5" row="0" col="0"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-c5ffb928" scrollable="false" hspace="1px" vspace="1px" top-margin="1px" right-margin="1px" bottom-margin="1px" left-margin="1px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="300" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:output std:sid="output-1f569f53" class="section-title-amhq" value="방문신청">
+        <cl:formdata std:sid="f-data-f133df70" row="2" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-01cc2401" class="section-green-top-amhq" visible="true" value="사전 방문신청 민간인">
+        <cl:formdata std:sid="f-data-3ef36529" row="3" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-16df4ba5" class="section-green-amhq" visible="true" value="사전 방문신청 타부대원">
+        <cl:formdata std:sid="f-data-4a7455e7" row="4" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-a9ef844e" class="section-green-amhq" visible="true" value="현장 방문신청 민간인">
+        <cl:formdata std:sid="f-data-4464dfb9" row="5" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-75f7a43c" class="section-green-amhq" visible="true" value="현장 방문신청 타부대원">
+        <cl:formdata std:sid="f-data-71b33fcb" row="6" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-ae5da999" class="section-title-amhq" value="출입신청">
+        <cl:formdata std:sid="f-data-82c7704e" row="8" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-09e1fdb0" class="section-green-top-amhq" visible="true" value="병사 출입신청">
+        <cl:formdata std:sid="f-data-81959ecc" row="9" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-20fbc017" class="section-green-amhq" visible="true" value="군가족 출입신청">
+        <cl:formdata std:sid="f-data-16c11249" row="10" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-a68b74d7" class="section-green-amhq" visible="true" value="상주민간인 출입신청">
+        <cl:formdata std:sid="f-data-19728ab0" row="11" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-b16e5409" class="section-green-amhq" visible="true" value="고정출입자 출입신청">
+        <cl:formdata std:sid="f-data-33bf769a" row="12" col="0"/>
+      </cl:output>
+      <cl:group std:sid="group-800d380f">
+        <cl:formdata std:sid="f-data-87ba0090" row="14" col="0" rowspan="1" colspan="2"/>
+        <cl:button std:sid="button-22a185c5" id="SMSNM_btnSave" style="padding-top:0px; padding-left:0px; padding-bottom:0px; padding-right:0px;" class="button-green-amhq" value="저장">
+          <cl:listener std:sid="listener-20cdf217" name="click" handler="onSMSNM_btnSaveClick"/>
+          <cl:formdata std:sid="f-data-c0cbc7cd" row="0" col="1"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-5eeaaba8" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="120" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-e4c3f1bf" class="section-white-top-amhq">
+        <cl:formdata std:sid="f-data-258c7dbb" row="3" col="1"/>
+        <cl:checkboxgroup std:sid="cb-group-4d0088e5" id="AAS_cbgVisit1" style="font-size:13px;" maxselect="-1">
+          <cl:listener std:sid="listener-ef063cc4" name="selection-change" handler="onAAS_cbgVisit1SelectionChange"/>
+          <cl:formdata std:sid="f-data-5ce895b6" row="0" col="0"/>
+          <cl:item std:sid="item-ec428086" label="1차 승인" value="1"/>
+          <cl:item std:sid="item-8cc8b71c" label="2차 승인" value="2"/>
+          <cl:item std:sid="item-bc83ee5c" label="전결" value="4"/>
+          <cl:value>0</cl:value>
+        </cl:checkboxgroup>
+        <cl:formlayout std:sid="f-layout-35d019c5" scrollable="false" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-e126ba76" class="section-white-top-amhq">
+        <cl:formdata std:sid="f-data-7d5781ce" row="9" col="1"/>
+        <cl:checkboxgroup std:sid="cb-group-8488f78e" id="AAS_cbgAccess1" style="font-size:13px;" maxselect="-1">
+          <cl:listener std:sid="listener-de6e7df2" name="selection-change" handler="onAAS_cbgVisit1SelectionChange"/>
+          <cl:formdata std:sid="f-data-57aa1d63" row="0" col="0"/>
+          <cl:item std:sid="item-d7d091b0" label="1차 승인" value="1"/>
+          <cl:item std:sid="item-cd371d3b" label="2차 승인" value="2"/>
+          <cl:item std:sid="item-a44267e9" label="전결" value="4"/>
+          <cl:value>0</cl:value>
+        </cl:checkboxgroup>
+        <cl:formlayout std:sid="f-layout-fd2e7a1b" scrollable="false" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-fa339b4e" class="section-white-amhq">
+        <cl:formdata std:sid="f-data-a91dfc7b" row="4" col="1"/>
+        <cl:checkboxgroup std:sid="cb-group-f43014fb" id="AAS_cbgVisit2" style="font-size:13px;" maxselect="-1">
+          <cl:listener std:sid="listener-16538850" name="selection-change" handler="onAAS_cbgVisit1SelectionChange"/>
+          <cl:formdata std:sid="f-data-bbc39507" row="0" col="0"/>
+          <cl:item std:sid="item-dc8f2d8c" label="1차 승인" value="1"/>
+          <cl:item std:sid="item-5e1a7de3" label="2차 승인" value="2"/>
+          <cl:item std:sid="item-5ca79c0d" label="전결" value="4"/>
+          <cl:value>0</cl:value>
+        </cl:checkboxgroup>
+        <cl:formlayout std:sid="f-layout-827559e1" scrollable="false" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-bf17a65b" class="section-white-amhq">
+        <cl:formdata std:sid="f-data-cdb551ad" row="5" col="1"/>
+        <cl:checkboxgroup std:sid="cb-group-0e5a2a90" id="AAS_cbgVisit3" style="font-size:13px;" maxselect="-1">
+          <cl:listener std:sid="listener-066f115a" name="selection-change" handler="onAAS_cbgVisit1SelectionChange"/>
+          <cl:formdata std:sid="f-data-8a76dfe7" row="0" col="0"/>
+          <cl:item std:sid="item-28a0f29a" label="1차 승인" value="1"/>
+          <cl:item std:sid="item-76060f72" label="2차 승인" value="2"/>
+          <cl:item std:sid="item-24eb83c9" label="전결" value="4"/>
+          <cl:value>0</cl:value>
+        </cl:checkboxgroup>
+        <cl:formlayout std:sid="f-layout-c79c7e53" scrollable="false" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-14209b6d" class="section-white-amhq">
+        <cl:formdata std:sid="f-data-c415fb59" row="6" col="1"/>
+        <cl:checkboxgroup std:sid="cb-group-2cf127ee" id="AAS_cbgVisit4" style="font-size:13px;" maxselect="-1">
+          <cl:listener std:sid="listener-4b70f2ed" name="selection-change" handler="onAAS_cbgVisit1SelectionChange"/>
+          <cl:formdata std:sid="f-data-82e593a9" row="0" col="0"/>
+          <cl:item std:sid="item-0b5beac9" label="1차 승인" value="1"/>
+          <cl:item std:sid="item-d34ab6b6" label="2차 승인" value="2"/>
+          <cl:item std:sid="item-e6047588" label="전결" value="4"/>
+          <cl:value>0</cl:value>
+        </cl:checkboxgroup>
+        <cl:formlayout std:sid="f-layout-8ee91799" scrollable="false" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-d0ee3107" class="section-white-amhq">
+        <cl:formdata std:sid="f-data-017a2f27" row="10" col="1"/>
+        <cl:checkboxgroup std:sid="cb-group-0c59b3d9" id="AAS_cbgAccess2" style="font-size:13px;" maxselect="-1">
+          <cl:listener std:sid="listener-c13e8c0b" name="selection-change" handler="onAAS_cbgVisit1SelectionChange"/>
+          <cl:formdata std:sid="f-data-f67c1bfa" row="0" col="0"/>
+          <cl:item std:sid="item-3e92700f" label="1차 승인" value="1"/>
+          <cl:item std:sid="item-179a381a" label="2차 승인" value="2"/>
+          <cl:item std:sid="item-35e724df" label="전결" value="4"/>
+          <cl:value>0</cl:value>
+        </cl:checkboxgroup>
+        <cl:formlayout std:sid="f-layout-917c5660" scrollable="false" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-f3890e71" class="section-white-amhq">
+        <cl:formdata std:sid="f-data-857a9661" row="11" col="1"/>
+        <cl:checkboxgroup std:sid="cb-group-dc54c270" id="AAS_cbgAccess3" style="font-size:13px;" maxselect="-1">
+          <cl:listener std:sid="listener-861849f8" name="selection-change" handler="onAAS_cbgVisit1SelectionChange"/>
+          <cl:formdata std:sid="f-data-2691b8de" row="0" col="0"/>
+          <cl:item std:sid="item-f96a2cf0" label="1차 승인" value="1"/>
+          <cl:item std:sid="item-e5f4ddc3" label="2차 승인" value="2"/>
+          <cl:item std:sid="item-7c14163c" label="전결" value="4"/>
+          <cl:value>0</cl:value>
+        </cl:checkboxgroup>
+        <cl:formlayout std:sid="f-layout-8dfb9d82" scrollable="false" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-9a940342" class="section-white-amhq">
+        <cl:formdata std:sid="f-data-1ced03bc" row="12" col="1"/>
+        <cl:checkboxgroup std:sid="cb-group-cd400fa0" id="AAS_cbgAccess4" style="font-size:13px;" maxselect="-1">
+          <cl:listener std:sid="listener-8fddf416" name="selection-change" handler="onAAS_cbgVisit1SelectionChange"/>
+          <cl:formdata std:sid="f-data-0674c976" row="0" col="0"/>
+          <cl:item std:sid="item-968b64bc" label="1차 승인" value="1"/>
+          <cl:item std:sid="item-246aba32" label="2차 승인" value="2"/>
+          <cl:item std:sid="item-d43aa107" label="전결" value="4"/>
+          <cl:value>0</cl:value>
+        </cl:checkboxgroup>
+        <cl:formlayout std:sid="f-layout-651a7789" scrollable="false" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-096f68cd" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+        <cl:rows length="35" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="200" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-992c56d9"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler>
+      <std:guide position="-9"/>
+    </std:vruler>
+  </std:studiosetting>
+</html>

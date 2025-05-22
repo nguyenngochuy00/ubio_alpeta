@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-fdaf10d6" version="1.0.0.0">
+  <head std:sid="head-3f18d3c8">
+    <title>UserListInGroupRow</title>
+    <screen std:sid="screen-ffbff43a" id="default" active="true" height="768px" minwidth="1024px" name="default" width="1024px"/>
+    <screen std:sid="screen-0c72af79" id="tablet" height="667px" maxwidth="1023px" minwidth="500px" name="tablet" width="500px"/>
+    <screen std:sid="screen-2cec9c08" id="ipplus" height="736px" maxwidth="499px" minwidth="414px" name="ipplus" width="414px"/>
+    <screen std:sid="screen-c4785608" id="ip678" active="false" height="667px" maxwidth="413px" minwidth="375px" name="ip678" width="375px"/>
+    <screen std:sid="screen-8aba43c7" id="mobile" height="525px" maxwidth="374px" minwidth="350px" name="mobile" width="350px"/>
+    <screen std:sid="screen-88067704" id="test" height="585px" maxwidth="349px" name="ip5" width="320px"/>
+    <cl:model std:sid="model-99889a41">
+      <cl:submission std:sid="submission-f4dd2ba3" id="smsGetPicture" action="/users/{id}/picture" method="get" withCredentials="true">
+        <cl:listener std:sid="listener-644cb840" handler="onSmsGetPictureBeforeSubmit" name="before-submit"/>
+        <cl:listener std:sid="listener-b3ca93a2" handler="onSmsGetPictureReceive" name="receive"/>
+        <cl:listener std:sid="listener-9360a123" handler="onSmsGetPictureSubmitDone" name="submit-done"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="PictureInfo"/>
+      </cl:submission>
+      <cl:datamap std:sid="d-map-1a4bcfc0" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-e6085eb2" datatype="number" name="ResultCode"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-99f4f251" id="PictureInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-fbe652cc" name="ImageType"/>
+          <cl:datacolumn std:sid="d-column-49a52032" name="Picture"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+    </cl:model>
+    <cl:appspec>
+      <cl:property name="UserName" type="string"/>
+      <cl:property name="UserID" type="string"/>
+      <cl:property name="UserType" type="string"/>
+      <cl:property name="AuthType" type="string"/>
+      <cl:property name="UniqueID" type="string"/>
+    </cl:appspec>
+  </head>
+  <body std:sid="body-bff0ee47" style="border-radius:30px; background-color:#FFFFFF; padding-top:10px; top:0px; left:0px; padding-left:10px; width:300px; padding-bottom:10px; height:300px; padding-right:28px;">
+    <cl:listener std:sid="listener-1cbc7a23" handler="onBodyLoad" name="load"/>
+    <cl:group std:sid="group-d23b03b0">
+      <cl:formdata std:sid="f-data-2622c5a3" col="0" row="0"/>
+      <cl:img std:sid="image-52c27a36" id="userPicture" src="/theme/images/mobile/common_img_profile_blank_gray_human@3x.png">
+        <cl:xylayoutdata std:sid="xyl-data-2f31df5e" height="54px" horizontalAnchor="CENTER" verticalAnchor="CENTER" width="54px"/>
+      </cl:img>
+      <cl:xylayout std:sid="xylayout-5b931c9c"/>
+    </cl:group>
+    <cl:group std:sid="group-66f32f37">
+      <cl:formdata std:sid="f-data-32c92299" col="1" row="0"/>
+      <cl:group std:sid="group-ea0da21f" style="border-bottom-color:#e4e4e4; border-bottom-width:1px; border-bottom-style:solid;">
+        <cl:formdata std:sid="f-data-7ee356e7" valign="BOTTOM" col="0" row="0"/>
+        <cl:output std:sid="output-3aab5848" style="color:#404040; font-weight:bold; font-size:12px;">
+          <cl:apppropbind category="PROPERTY" property="value" app-property="UserName"/>
+          <cl:xylayoutdata std:sid="xyl-data-a28764c0" bottom="0px" horizontalAnchor="LEFT" left="0px" top="0px" verticalAnchor="BOTH" width="100px"/>
+        </cl:output>
+        <cl:output std:sid="output-7a68e2bd" style="color:#91C720; font-size:12px; text-align:right;">
+          <cl:apppropbind category="PROPERTY" property="value" app-property="UserType"/>
+          <cl:xylayoutdata std:sid="xyl-data-314044e8" bottom="0px" horizontalAnchor="RIGHT" right="0px" top="0px" verticalAnchor="BOTH" width="100px"/>
+        </cl:output>
+        <cl:xylayout std:sid="xylayout-44949555"/>
+      </cl:group>
+      <cl:group std:sid="group-971259fb">
+        <cl:formdata std:sid="f-data-76b24229" topSpacing="2" valign="FILL" col="0" row="1"/>
+        <cl:group std:sid="group-4d069d38">
+          <cl:verticaldata std:sid="v-data-aa49b853" height="22px" width="400px"/>
+          <cl:output std:sid="output-ec7845d6">
+            <cl:apppropbind category="PROPERTY" property="value" app-property="UserID"/>
+            <cl:flowlayoutdata std:sid="f-data-b353d302" autosize="width" height="20px" width="88px"/>
+          </cl:output>
+          <cl:output std:sid="output-05e34340" value="/">
+            <cl:flowlayoutdata std:sid="f-data-b624ce2d" autosize="width" height="20px" width="5px"/>
+          </cl:output>
+          <cl:output std:sid="output-41ea2d3d">
+            <cl:apppropbind category="PROPERTY" property="value" app-property="UniqueID"/>
+            <cl:flowlayoutdata std:sid="f-data-4f85a11a" autosize="width" height="20px" width="86px"/>
+          </cl:output>
+          <cl:flowlayout std:sid="f-layout-2c4c5070" spacing="3"/>
+        </cl:group>
+        <cl:output std:sid="output-ba416b9b" style="color:#848484; font-size:12px;">
+          <cl:apppropbind category="PROPERTY" property="value" app-property="AuthType"/>
+          <cl:verticaldata std:sid="v-data-e9be102d" autosize="width" height="20px" width="100px"/>
+        </cl:output>
+        <cl:verticallayout std:sid="v-layout-b88061c3" spacing="0"/>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-edf15931" hspace="0px" vspace="0px">
+        <cl:rows autoSizing="false" length="2" minlength="0" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+        <cl:rows autoSizing="false" length="3" minlength="0" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:formlayout std:sid="f-layout-ebe09a39" hspace="0px" vspace="0px">
+      <cl:rows length="1" unit="FRACTION"/>
+      <cl:columns autoSizing="false" length="2" minlength="0" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+      <cl:columns autoSizing="false" length="5" minlength="0" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+    </cl:formlayout>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler>
+      <std:guide position="64"/>
+    </std:vruler>
+  </std:studiosetting>
+</html>

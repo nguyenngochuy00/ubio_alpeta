@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-86e32103" version="1.0.0.0">
+  <head std:sid="head-1304b5b8">
+    <title>terminalManualSearch</title>
+    <screen std:sid="screen-2616162b" id="default" name="default" minwidth="1024px" width="1024px" height="768px" customHeight="600" customWidth="800" active="false"/>
+    <screen std:sid="screen-50edd317" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-bbd83607" id="new-screen" name="new-screen" minwidth="400px" maxwidth="499px" width="400px" height="300px" customHeight="600" customWidth="800" active="true"/>
+    <screen std:sid="screen-a39a6faa" id="mobile" name="mobile" maxwidth="399px" width="350px" height="525px"/>
+    <cl:model std:sid="model-2e0b1983">
+      <cl:datamap comment="단말기 수동 찾기" std:sid="d-map-0450e4e6" id="ManualTerminalInfo" info="단말기 수동 찾기">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-53c59b31" name="TerminalID" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-e71e675f" name="NetWorkIpAddr"/>
+          <cl:datacolumn std:sid="d-column-be05d1b3" name="NetWorkGateway"/>
+          <cl:datacolumn std:sid="d-column-193f0cfe" name="ServerPort"/>
+          <cl:datacolumn std:sid="d-column-33802df3" name="MacAddr"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-6e414ca7" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-e84c5ec0" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-11304579">
+      <cl:xylayoutdata std:sid="xyl-data-ddead72d" top="25px" right="25px" bottom="25px" left="25px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:button std:sid="button-b85c43db" class="userInfo_btn" tabindex="3" value="확인">
+        <cl:listener std:sid="listener-61aff218" name="click" handler="onButtonClick"/>
+        <cl:formdata std:sid="f-data-febd239b" row="4" col="1"/>
+      </cl:button>
+      <cl:button std:sid="button-ef7e9083" class="userInfo_btn" value="취소">
+        <cl:listener std:sid="listener-f6c62c9a" name="click" handler="onButtonClick2"/>
+        <cl:formdata std:sid="f-data-53bcbdc3" row="4" col="0"/>
+      </cl:button>
+      <cl:output std:sid="output-1694878b" style="border-right-style:none;" class="common-controllabel">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_MacAddres"/>
+        <cl:formdata std:sid="f-data-e4f76dc9" row="3" col="0"/>
+      </cl:output>
+      <cl:inputbox std:sid="i-box-16f42a78" id="TMS_ipbMac" style="font-size:14px;" tooltip="포트포워딩이 되어있어야 합니다." readonly="true">
+        <cl:datamapbind property="value" category="PROPERTY" datacontrolid="ManualTerminalInfo" columnname="MacAddr"/>
+        <cl:formdata std:sid="f-data-34daa0c4" row="3" col="1"/>
+      </cl:inputbox>
+      <cl:output std:sid="output-134ebb54" style="border-right-style:none;" class="common-controllabel">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_TerminalID"/>
+        <cl:formdata std:sid="f-data-ad8c1f57" row="0" col="0"/>
+      </cl:output>
+      <cl:inputbox std:sid="i-box-f11596e7" id="TMS_ipbID" style="font-weight:bolder; font-size:14px;" tooltip="000.000.000.000" maxlength="15">
+        <cl:datamapbind property="value" category="PROPERTY" datacontrolid="ManualTerminalInfo" columnname="TerminalID"/>
+        <cl:formdata std:sid="f-data-d4fb911d" row="0" col="1"/>
+      </cl:inputbox>
+      <cl:output std:sid="output-4c8f1025" style="border-right-style:none;" class="common-controllabel">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_Port"/>
+        <cl:formdata std:sid="f-data-d2ef9e19" row="2" col="0"/>
+      </cl:output>
+      <cl:inputbox std:sid="i-box-1bb5a21b" id="TMS_ipbPort" style="font-weight:bolder; font-size:14px;" tooltip="포트포워딩이 되어있어야 합니다." readonly="true">
+        <cl:datamapbind property="value" datacontrolid="ManualTerminalInfo" columnname="ServerPort"/>
+        <cl:formdata std:sid="f-data-635479cb" row="2" col="1"/>
+      </cl:inputbox>
+      <cl:output comment="TMS_ipbIP" std:sid="output-ffe36ce5" style="border-right-style:none;" class="common-controllabel">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_TerminalIp"/>
+        <cl:formdata std:sid="f-data-41182128" row="1" col="0"/>
+      </cl:output>
+      <cl:maskeditor std:sid="m-editor-97a90139" id="TMS_ipbIP" style="font-weight:bolder; font-size:14px;" mask="000.000.000.000">
+        <cl:datamapbind property="value" category="PROPERTY" datacontrolid="ManualTerminalInfo" columnname="NetWorkIpAddr"/>
+        <cl:formdata std:sid="f-data-a17a268c" row="1" col="1"/>
+      </cl:maskeditor>
+      <cl:formlayout std:sid="f-layout-2a3eb488" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+        <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION" autoSizing="false" hidden="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-5a5875d5"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-e4512983" version="1.0.0.0">
+  <head std:sid="head-8b3f22e7">
+    <title>terminalSync</title>
+    <screen std:sid="screen-df565af5" id="default" customHeight="200" customWidth="500" height="768px" minwidth="1024px" name="default" useCustomHeight="true" useCustomWidth="true" width="1024px"/>
+    <screen std:sid="screen-0f6a55f1" id="tablet" height="667px" maxwidth="1023px" minwidth="500px" name="tablet" width="500px"/>
+    <screen std:sid="screen-bc10b3fc" id="mobile" height="525px" maxwidth="499px" name="mobile" width="350px"/>
+    <cl:model std:sid="model-4aa76ad5">
+      <cl:submission std:sid="submission-83d075dc" id="sms_getTerminalUserCount" method="get">
+        <cl:listener std:sid="listener-75b075d7" handler="onSms_getTerminalUserCountSubmitDone" name="submit-done"/>
+        <cl:listener std:sid="listener-ad2d8d9e" handler="onSms_getTerminalUserCountSubmitError" name="submit-error"/>
+        <cl:listener std:sid="listener-4dc9d1c3" handler="onSms_getTerminalUserCountSubmitTimeout" name="submit-timeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="ServerCount" isadd="false"/>
+        <cl:responsedata dataid="TerminalCount"/>
+      </cl:submission>
+      <cl:datamap std:sid="d-map-57c1ba13" id="ServerCount">
+        <cl:datacolumnlist>
+          <cl:datacolumn defaultvalue="0" name="Count"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-de681183" id="TerminalCount">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" defaultvalue="0" name="Count"/>
+          <cl:datacolumn datatype="number" defaultvalue="0" name="Offset"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-3ab84797" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="ResultCode"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-de4f283a" id="sms_getTerminalSyncList" method="get">
+        <cl:listener std:sid="listener-991ab0c3" handler="onSms_getTerminalSyncListSubmitDone" name="submit-done"/>
+        <cl:listener std:sid="listener-ca25354d" handler="onSms_getTerminalSyncListSubmitError" name="submit-error"/>
+        <cl:listener std:sid="listener-b0a6e128" handler="onSms_getTerminalSyncListSubmitTimeout" name="submit-timeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total"/>
+      </cl:submission>
+      <cl:datamap std:sid="d-map-eb86c754" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="Count"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-5d7451f7" id="SyncRequest">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="string" name="Timezone"/>
+          <cl:datacolumn datatype="string" name="UserList"/>
+          <cl:datacolumn datatype="string" name="SyncList"/>
+          <cl:datacolumn datatype="string" name="EntireSync"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-da508c4f" id="sms_postTerminalSync">
+        <cl:listener std:sid="listener-72e5f4d3" handler="onSms_postTerminalSyncSubmitDone" name="submit-done"/>
+        <cl:listener std:sid="listener-fec32b10" handler="onSms_postTerminalSyncSubmitError" name="submit-error"/>
+        <cl:listener std:sid="listener-74e2e409" handler="onSms_postTerminalSyncSubmitTimeout" name="submit-timeout"/>
+        <cl:requestdata dataid="SyncRequest"/>
+        <cl:requestdata dataid="TerminalIDList" payload="all"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:dataset std:sid="d-set-135e44ec" id="TerminalIDList">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="ID"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-b24ea5e6" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-e7bf0b56" handler="onBodyLoad" name="load"/>
+    <cl:group std:sid="group-298e9967">
+      <cl:xylayoutdata std:sid="xyl-data-cfae5ecf" bottom="0px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-60045d9e">
+        <cl:formdata std:sid="f-data-6aa245c9" col="0" row="2"/>
+        <cl:checkbox std:sid="c-box-97c6466c" id="TMSYN_cbxTimezone">
+          <cl:langbind category="PROPERTY" property="text" keypath="Str_TimezoneVersion"/>
+          <cl:xylayoutdata std:sid="xyl-data-9ed52b68" bottom="0px" horizontalAnchor="BOTH" left="4px" right="0px" top="0px" verticalAnchor="BOTH"/>
+        </cl:checkbox>
+        <cl:xylayout std:sid="xylayout-ec393cb8"/>
+      </cl:group>
+      <cl:group std:sid="group-801c03d9">
+        <cl:formdata std:sid="f-data-da5e748b" col="1" row="2"/>
+        <cl:checkbox std:sid="c-box-078f1572" id="TMSYN_cbxUser">
+          <cl:langbind category="PROPERTY" property="text" keypath="Str_UserList"/>
+          <cl:xylayoutdata std:sid="xyl-data-745d111e" bottom="0px" horizontalAnchor="LEFT" left="4px" top="0px" verticalAnchor="BOTH" width="143px"/>
+        </cl:checkbox>
+        <cl:xylayout std:sid="xylayout-be423680"/>
+      </cl:group>
+      <cl:group std:sid="group-18036375">
+        <cl:formdata std:sid="f-data-5416e4a6" col="2" row="2"/>
+        <cl:checkbox std:sid="c-box-338c03d9" id="TMSYN_cbxSyncList">
+          <cl:langbind category="PROPERTY" property="text" keypath="Str_SyncList"/>
+          <cl:xylayoutdata std:sid="xyl-data-2206702d" bottom="0px" horizontalAnchor="BOTH" left="4px" right="0px" top="0px" verticalAnchor="BOTH"/>
+        </cl:checkbox>
+        <cl:xylayout std:sid="xylayout-a6fda7b4"/>
+      </cl:group>
+      <cl:group std:sid="group-03768886" style="border-top-width:1px; border-right-width:1px; border-bottom-width:1px; border-left-width:1px;">
+        <cl:formdata std:sid="f-data-805a8d63" col="0" row="3"/>
+        <cl:output std:sid="output-9f1c306d">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_Server"/>
+          <cl:formdata std:sid="f-data-61a2ebe2" col="0" row="0"/>
+        </cl:output>
+        <cl:output std:sid="output-373959e1">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_Terminal"/>
+          <cl:formdata std:sid="f-data-6e806564" col="0" row="1"/>
+        </cl:output>
+        <cl:output std:sid="output-e707ade0" id="TMSYN_opbTZVersionServer" value="0">
+          <cl:formdata std:sid="f-data-26b9f8eb" col="1" row="0"/>
+        </cl:output>
+        <cl:output std:sid="output-71f96869" id="TMSYN_opbTZVersionTerminal" value="0">
+          <cl:formdata std:sid="f-data-c1af0e9e" col="1" row="1"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-a61e4662">
+          <cl:rows autoSizing="false" length="30" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows autoSizing="false" length="30" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="1" minlength="0" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+          <cl:columns autoSizing="false" length="46" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-eaeda5c3">
+        <cl:formdata std:sid="f-data-248aed29" col="0" colspan="3" row="0" rowspan="1"/>
+        <cl:button std:sid="button-bbdaada1" id="TMSYN_btnSync" class="userInfo_btn">
+          <cl:listener std:sid="listener-78d4bb1a" handler="onTMSYN_btnSyncClick" name="click"/>
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_Sync"/>
+          <cl:formdata std:sid="f-data-77f8b7d6" col="1" row="0"/>
+        </cl:button>
+        <cl:img std:sid="image-144e12da" id="TMSYN_imgHelpPage" style="cursor:help;" src="../../../../theme/images/common/common_btn_window_top_q.png">
+          <cl:formdata std:sid="f-data-f60456fd" halign="CENTER" height="14" valign="CENTER" width="14" col="2" row="0"/>
+        </cl:img>
+        <cl:group std:sid="group-5e2479f0">
+          <cl:formdata std:sid="f-data-1cd3ea19" col="0" row="0"/>
+          <cl:xylayout std:sid="xylayout-f1d7bdaa"/>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-f8170c29">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns autoSizing="false" length="120" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="14" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-8c1e5153">
+        <cl:formdata std:sid="f-data-647767a0" col="1" row="3"/>
+        <cl:output std:sid="output-f38a1026">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_Server"/>
+          <cl:formdata std:sid="f-data-5503942c" col="0" row="0"/>
+        </cl:output>
+        <cl:output std:sid="output-9adb0041">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_Terminal"/>
+          <cl:formdata std:sid="f-data-06870501" col="0" row="1"/>
+        </cl:output>
+        <cl:output std:sid="output-63dc34c9" id="TMSYN_opbUserCountServer">
+          <cl:datamapbind property="value" columnname="Count" datacontrolid="ServerCount"/>
+          <cl:formdata std:sid="f-data-d637cda7" col="1" row="0"/>
+        </cl:output>
+        <cl:output std:sid="output-4f9efb18" id="TMSYN_opbUserCountTerminal">
+          <cl:datamapbind property="value" columnname="Count" datacontrolid="TerminalCount"/>
+          <cl:formdata std:sid="f-data-40b938e8" col="1" row="1"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-4e48b6ae">
+          <cl:rows autoSizing="false" length="30" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows autoSizing="false" length="30" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="1" minlength="0" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+          <cl:columns autoSizing="false" length="46" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-c19d2f8d">
+        <cl:formdata std:sid="f-data-50fb3c6d" col="2" row="3"/>
+        <cl:output std:sid="output-5c050608">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_SyncListCount"/>
+          <cl:formdata std:sid="f-data-18004210" col="0" row="0"/>
+        </cl:output>
+        <cl:output std:sid="output-22704ebf" id="TMSYN_opbSyncListCount">
+          <cl:datamapbind property="value" columnname="Count" datacontrolid="Total"/>
+          <cl:formdata std:sid="f-data-8f2de7ec" col="1" row="0"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-0c4caefb">
+          <cl:rows autoSizing="false" length="30" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows autoSizing="false" length="30" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="1" minlength="0" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+          <cl:columns autoSizing="false" length="46" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-fa965922" hmargin="10px" vmargin="10px">
+        <cl:rows autoSizing="false" length="30" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:rows autoSizing="false" length="10" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:rows autoSizing="false" length="30" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:rows autoSizing="false" length="1" minlength="0" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+        <cl:columns autoSizing="false" length="1" minlength="0" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+        <cl:columns autoSizing="false" length="1" minlength="0" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+        <cl:columns autoSizing="false" length="1" minlength="0" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-4faa9590"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

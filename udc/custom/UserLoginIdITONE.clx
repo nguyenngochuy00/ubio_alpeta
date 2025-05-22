@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-36899a3b" version="1.0.0.0">
+  <head std:sid="head-8df0e7a9">
+    <title>UserLoginIdITONE</title>
+    <screen std:sid="screen-eda747ca" id="default" name="default" minwidth="1024px" width="1024px" height="768px"/>
+    <screen std:sid="screen-d168030e" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-9123c7d9" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-b1d417e4">
+      <cl:datamap std:sid="d-map-20156aaf" id="ITONEUser">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-3392d5e0" name="LoginID"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-a33aca7f" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-80d61523" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-f22f231c" id="sms_chkLoginIDDuplication" method="get">
+        <cl:listener std:sid="listener-1939a2ff" name="before-submit" handler="onSms_chkLoginIDDuplicationBeforeSubmit"/>
+        <cl:listener std:sid="listener-16b946a8" name="submit-done" handler="onSms_chkLoginIDDuplicationSubmitDone"/>
+        <cl:listener std:sid="listener-3263133f" name="submit-error" handler="onSms_chkLoginIDDuplicationSubmitError"/>
+        <cl:listener std:sid="listener-e338dd8c" name="submit-timeout" handler="onSms_chkLoginIDDuplicationSubmitTimeout"/>
+        <cl:requestdata dataid="ITONEUser"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-2a60ecd3" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-933946f8" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-f86d2bd1" style="border-bottom-color:#c5c5c5; border-bottom-width:1px;">
+      <cl:xylayoutdata std:sid="xyl-data-b378e0db" top="0px" left="0px" width="600px" height="40px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      <cl:group std:sid="group-e0169811" style="border-bottom-width:1px; border-bottom-style:c5c5c5;">
+        <cl:formdata std:sid="f-data-86066ab0" row="0" col="1"/>
+        <cl:inputbox std:sid="i-box-f47287fe" id="ITONE_LoginID" style="padding-left:5px;" tooltip="원격접속이 가능해야 이용가능합니다." placeholder="LoginID" maxlength="20">
+          <cl:datamapbind property="value" category="PROPERTY" datacontrolid="ITONEUser" columnname="LoginID"/>
+          <cl:xylayoutdata std:sid="xyl-data-d2e612ac" top="5px" right="8px" bottom="5px" left="8px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+        </cl:inputbox>
+        <cl:xylayout std:sid="xylayout-02218356"/>
+      </cl:group>
+      <cl:group std:sid="group-264e69d0">
+        <cl:formdata std:sid="f-data-be809a9e" row="0" col="2"/>
+        <cl:button std:sid="button-0268ae14" id="ITONE_btnLoginIDduplication" class="userInfo_btn" value="중복 체크">
+          <cl:listener std:sid="listener-d254b078" name="click" handler="onITONE_btnLoginIDduplicationClick"/>
+          <cl:xylayoutdata std:sid="xyl-data-af8c75b1" top="5px" right="8px" bottom="5px" left="8px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+        </cl:button>
+        <cl:xylayout std:sid="xylayout-fa183cf5"/>
+      </cl:group>
+      <cl:output std:sid="output-3a6a2030" style="border-right-style:solid; background-color:#f6f6f6; border-bottom-color:#c5c5c5; border-top-width:1px; color:#010101; border-right-width:2px; border-bottom-width:1px; border-top-color:#c5c5c5; border-right-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid; text-align:center;" class="userInfo_bold" value="로그인 ID">
+        <cl:formdata std:sid="f-data-b47cead8" row="0" col="0"/>
+      </cl:output>
+      <cl:formlayout std:sid="f-layout-2e6aa9c3" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+        <cl:rows length="39" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="120" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="3" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-07487997"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

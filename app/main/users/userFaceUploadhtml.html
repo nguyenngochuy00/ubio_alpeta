@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+	<input type="file" id="filepicker" name="fileList" webkitdirectory="true" />
+	<ul id="listing"></ul>
+	<script type="text/javascript">
+		function fileInputClick() {
+			document.getElementById("filepicker").click();
+		}
+		
+	   	document.getElementById("filepicker").addEventListener("click", function(event) {
+		   	if(_ownerApp.lookup('ds_fileInfo').getRowCount() == 0){
+		   		/* 파일 없음 초기화 */
+		    	event.target.value = null;
+		   	} else {
+		   	 	/* 파일 있음  */
+		   	}
+	   	}, false);
+	   	
+	    document.getElementById("filepicker").addEventListener("change", function(event) {
+	    	if (event.target.files.length) {
+	    		// console.log('embedded page change event');
+	    		/* 확인용 */
+	    		// console.log('embedded page target.files:',event.target.files);
+	    		
+	    		/* 데이터 셋, file Arr clear */
+	    		_ownerApp.lookup('ds_fileInfo').clear();
+	    		_arr = [];
+	    		
+	    		let files = event.target.files;
+	    		let dsFileInfo = _ownerApp.lookup('ds_fileInfo');
+	    		let x = 0;
+	    		for (let i = 0; i < files.length; i++) {
+	    			if (files[i].type == "image/jpeg" || files[i].type == "image/png") {
+	    				_arr.push(files[i]); /* 전송 파일 file Array */
+	    				dsFileInfo.addRowData(files[i]); /* 그리드 용 dataSet */
+	    				var userId = Number(files[i].name.toString().split('.')[0])
+	    				// dsFileInfo.setValue(x, 'userId', userId);
+	    				if (Number.isNaN(userId)) { /* IE 는 isNaN 지원 안함 대체 => userId.toString() == 'NaN' */
+	    					dsFileInfo.setValue(x, 'rn', 99999999);				   /* 정렬을 위한 rn필드 */
+	    					dsFileInfo.setValue(x, 'userId', _ErrorFileName);      /* 사용자 ID 파일명이 잘못되었습니다. */
+	    					dsFileInfo.setValue(x, 'statusValue', _ErrorFileName); /* 결과 파일명이 잘못되었습니다.*/
+	    				} else {
+	    					dsFileInfo.setValue(x, 'rn', userId);
+	    					dsFileInfo.setValue(x, 'userId', userId);
+	    					dsFileInfo.setValue(x, 'statusValue', _Waiting);       /* Str_대기 */
+	    				}
+	    				x++;
+	    			}
+	    		};
+	    		/* _arr(전송 파일 file Array)순서 적용 */
+	    		_arr.sort((a, b) => {
+	    			  const baseNameA = a.name.split('.')[0];
+	    			  const baseNameB = b.name.split('.')[0];
+
+	    			  let numA = isNaN(baseNameA) ? 99999999 : parseInt(baseNameA, 10);
+	    			  let numB = isNaN(baseNameB) ? 99999999 : parseInt(baseNameB, 10);
+
+	    			  return numA - numB;
+	    		});
+	    		dsFileInfo.setSort("rn ASC"); // ID 숫자 기준으로 정렬, 잘못된 파일명 제일 밑으로
+	    		dsFileInfo.commit();
+	    		
+	    		let dsCount = dsFileInfo.getRowCount();
+	    		if (dsCount) {
+	    			for (let y = 0; dsCount > y; y++) {
+	    				if (isNaN(dsFileInfo.getValue(y, 'userId'))) {
+	    					_GrdFileInfoList.setRowState(y, _GrdDELETED); /* 숫자 아닌 파일명 그리드ROW 상태 삭제 처리 */
+	    					_GrdFileInfoList.setCheckColumnEnabled(y, false);/* 숫자 아닌 파일명 그리드ROW 체크 비활 */
+	    				}
+	    			}
+	    			_GrdFileInfoList.redraw();
+	    		}
+	    	}
+	    }, false);
+	    
+</script>
+</body>
+</html>

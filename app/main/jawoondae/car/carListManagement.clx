@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-befd59f4" version="1.0.0.0">
+  <head std:sid="head-581c5431">
+    <title>carListManagement</title>
+    <screen std:sid="screen-5bf5e239" id="default" height="768px" minwidth="1024px" name="default" width="1024px"/>
+    <screen std:sid="screen-a8c7e5ce" id="tablet" height="667px" maxwidth="1023px" minwidth="500px" name="tablet" width="500px"/>
+    <screen std:sid="screen-87c41091" id="mobile" height="525px" maxwidth="499px" name="mobile" width="350px"/>
+    <cl:model std:sid="model-14b6733e">
+      <cl:datamap std:sid="d-map-c2bd18fc" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="Count"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-a33aca7f" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="ResultCode"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-81231b5a" id="sms_getCarInfoList" action="/v1/jawoondae/carinfo" method="get">
+        <cl:listener std:sid="listener-322feefa" handler="onSms_getCarInfoListSubmitDone" name="submit-done"/>
+        <cl:listener std:sid="listener-b0cbbb48" handler="onSms_getCarInfoListSubmitError" name="submit-error"/>
+        <cl:listener std:sid="listener-30c03def" handler="onSms_getCarInfoListSubmitTimeout" name="submit-timeout"/>
+        <cl:requestparam name="searchCategory"/>
+        <cl:requestparam name="searchKeyword" value=""/>
+        <cl:requestparam name="offset" value="0"/>
+        <cl:requestparam name="limit" value="50"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total" isadd="false"/>
+        <cl:responsedata dataid="CarInfoList" isadd="false"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-203e17a7" id="sms_deleteCarInfo" action="/v1/jawoondae/carinfo/delete/" method="get">
+        <cl:listener std:sid="listener-daa4f642" handler="onSms_deleteCarInfoSubmitDone" name="submit-done"/>
+        <cl:listener std:sid="listener-ba198655" handler="onSms_deleteCarInfoSubmitError" name="submit-error"/>
+        <cl:listener std:sid="listener-96a96ea7" handler="onSms_deleteCarInfoSubmitTimeout" name="submit-timeout"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:dataset std:sid="d-set-a1e53e49" id="CarInfoList">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="UserIndexKey"/>
+          <cl:datacolumn datatype="number" name="VisitorIndexKey"/>
+          <cl:datacolumn name="CarNumber"/>
+          <cl:datacolumn name="CarColor"/>
+          <cl:datacolumn name="CarType"/>
+          <cl:datacolumn name="Name"/>
+          <cl:datacolumn name="Group"/>
+          <cl:datacolumn name="Position"/>
+          <cl:datacolumn name="UniqueID"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-8026adec" id="dsCarDeleteList">
+        <cl:datacolumnlist>
+          <cl:datacolumn name="UserIndexKey"/>
+          <cl:datacolumn name="VisitorIndexKey"/>
+          <cl:datacolumn name="CarNumber"/>
+          <cl:datacolumn name="rowIndex"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-cc517011" id="dm_ExportParam">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="offset"/>
+          <cl:datacolumn datatype="number" name="total"/>
+          <cl:datacolumn name="mode"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:dataset std:sid="d-set-4f0fde6a" id="ExportCarInfoList">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="UserIndexKey"/>
+          <cl:datacolumn datatype="number" name="VisitorIndexKey"/>
+          <cl:datacolumn name="Group"/>
+          <cl:datacolumn datatype="string" name="Position"/>
+          <cl:datacolumn name="UniqueID"/>
+          <cl:datacolumn datatype="string" name="Name"/>
+          <cl:datacolumn name="CarNumber"/>
+          <cl:datacolumn datatype="string" name="CarColor"/>
+          <cl:datacolumn datatype="string" name="CarType"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+    </cl:model>
+    <cl:appspec dev-comment="USMAG_udcSearchUser&#xD;&#xA;USMGR_btnDeleteCar"/>
+  </head>
+  <body std:sid="body-f648da0f" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-3cad1c07" handler="onBodyLoad" name="load"/>
+    <cl:listener std:sid="listener-7cb764de" handler="onBodyKeydown" name="keydown"/>
+    <cl:group std:sid="group-cdd4adef">
+      <cl:xylayoutdata std:sid="xyl-data-7b8ed9c0" bottom="1px" horizontalAnchor="BOTH" left="1px" right="1px" top="1px" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-ecd6adbb">
+        <cl:formdata std:sid="f-data-077486b4" col="0" row="0"/>
+        <cl:button std:sid="button-f25e20fd" id="USMGR_btnDeleteCar" class="userInfo_btn" style="background-color:white; font-size:14px;">
+          <cl:listener std:sid="listener-56383eac" handler="onUSMGR_btnDeleteCarClick" name="click"/>
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_Delete"/>
+          <cl:formdata std:sid="f-data-3d16d532" col="4" row="0"/>
+        </cl:button>
+        <cl:output std:sid="output-9cc0e59b" class="common-titlelabel" style="text-align:center;">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_Total"/>
+          <cl:formdata std:sid="f-data-49768f7e" col="0" row="0"/>
+        </cl:output>
+        <cl:output std:sid="output-a241e38e" id="opt_tot" style="vertical-align:middle; text-align:left;" datatype="number" format="s#,###">
+          <cl:datamapbind property="value" columnname="Count" datacontrolid="Total"/>
+          <cl:formdata std:sid="f-data-76d3a01c" col="1" row="0"/>
+        </cl:output>
+        <cl:img std:sid="image-f50a0304" id="USMAG_imgHelpPage" style="cursor:help;" src="../../../../theme/images/common/common_btn_window_top_q.png">
+          <cl:formdata std:sid="f-data-4ea58b96" halign="CENTER" height="15" valign="CENTER" width="15" col="6" row="0"/>
+        </cl:img>
+        <cl:group std:sid="group-a84f9729" style="border-right-style:solid; color:#6b6b6b; border-top-width:1px; border-bottom-color:#cccccc; border-right-width:1px; border-left-color:#cccccc; border-right-color:#cccccc; border-left-width:1px; border-top-style:solid; background-color:#F6F6F6; border-radius:10px; border-left-style:solid; border-bottom-width:1px; border-top-color:#cccccc; border-bottom-style:solid;">
+          <cl:formdata std:sid="f-data-6c32f7e9" col="3" row="0"/>
+          <cl:combobox std:sid="c-box-6107e546" id="USMAG_cmbCategory" style="background-color:#F6F6F6; border-right-style:none; border-left-style:none; border-bottom-style:none; border-top-style:none;" preventinput="true">
+            <cl:apppropbind category="PROPERTY" property="value" app-property="searchCategory"/>
+            <cl:formdata std:sid="f-data-8adb84bb" col="0" row="0"/>
+            <cl:item label="ID" value="id">
+              <cl:langbind category="PROPERTY" property="label" keypath="Str_ID"/>
+            </cl:item>
+            <cl:item label="Name" value="name">
+              <cl:langbind category="PROPERTY" property="label" keypath="Str_Name"/>
+            </cl:item>
+            <cl:item label="UniqueID" value="uniqueid">
+              <cl:langbind category="PROPERTY" property="label" keypath="Str_UniqueID"/>
+            </cl:item>
+            <cl:item label="차량번호" value="carnumber"/>
+          </cl:combobox>
+          <cl:inputbox std:sid="i-box-c326c7b5" id="USMAG_ipbKeyword" style="background-color:#F6F6F6; padding:0px 0px 0px 10px; border-bottom-color:#cccccc; border-left-color:#cccccc; border-top-color:#cccccc; border-bottom-style:none; border-right-color:#cccccc; border-top-style:none;">
+            <cl:langbind category="PROPERTY" property="placeholder" keypath="Str_SearchKeword"/>
+            <cl:apppropbind category="PROPERTY" property="value" app-property="searchKeyword"/>
+            <cl:formdata std:sid="f-data-87f7c575" col="1" row="0"/>
+          </cl:inputbox>
+          <cl:group std:sid="group-94b972ce" id="USMAG_btnSearch" style="border-right-style:none; cursor:pointer; background-color:transparent; background-repeat:no-repeat; border-left-style:none; border-bottom-style:none; background-image:url('../../../../theme/images/common/common_text_field_btn_icons_search.png'); background-position:center; border-top-style:none;">
+            <cl:listener std:sid="listener-26cd06db" handler="onUSMAG_btnSearchClick" name="click"/>
+            <cl:formdata std:sid="f-data-838eccbc" height="29" col="2" row="0"/>
+            <cl:xylayout std:sid="xylayout-3b76f87f"/>
+          </cl:group>
+          <cl:formlayout std:sid="f-layout-409a1d5f" hspace="0px" vspace="0px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+            <cl:columns autoSizing="false" length="3" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:button std:sid="button-26601da6" id="USMAG_btnExport" class="userInfo_btn" value="내보내기">
+          <cl:listener std:sid="listener-9ba30681" handler="onUSMAG_btnExportClick" name="click"/>
+          <cl:formdata std:sid="f-data-aa3c0163" col="5" row="0"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-0886cf82" hspace="5px" vspace="5px">
+          <cl:rows length="30" shadecolor="transparent" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="40" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="70" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="1" minlength="0" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+          <cl:columns autoSizing="false" length="370" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="80" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="80" minlength="0" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="30" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="14" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:udc std:sid="ud-control-b5132dcc" id="USMAG_udcCarInfoList" type="udc.grid.carInfoList">
+        <cl:listener std:sid="listener-abcd908b" handler="onUSMAG_udcCarInfoListPagechange" name="pagechange"/>
+        <cl:formdata std:sid="f-data-d5cbabba" col="0" row="1"/>
+      </cl:udc>
+      <cl:formlayout std:sid="f-layout-1f99f0ba">
+        <cl:rows autoSizing="false" length="30" minlength="0" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-b4b16ed6"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

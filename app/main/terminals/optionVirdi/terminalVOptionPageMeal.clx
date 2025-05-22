@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-e85e2ee9" version="1.0.0.0">
+  <head std:sid="head-2a11dc3e">
+    <title>terminalVOptionPageMeal</title>
+    <screen std:sid="screen-0896c0bb" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="500" customWidth="420"/>
+    <screen std:sid="screen-efe9ddb9" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-fc41495e" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-e1fbe895">
+      <cl:datamap std:sid="d-map-f6c406cc" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-88227c52" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-5287533a" id="MealOptValue">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-e2ddd4f2" name="bStartHour" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-c90e347a" name="bStartMinute" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-d3e85c34" name="bEndHour" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-5d50b411" name="bEndMinute" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-2b388128" name="lStartHour" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-5bbe84ce" name="lStartMinute" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-9c6f51cd" name="lEndHour" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-34bf4249" name="lEndMinute" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-6a92a5b7" name="dStartHour" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-b8a91fbf" name="dStartMinute" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-6c4a5416" name="dEndHour" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-fc60698c" name="dEndMinute" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-43c3cd90" name="lsStartHour" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-890e7f8b" name="lsStartMinute" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-339a53d3" name="lsEndHour" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-cb922dbb" name="lsEndMinute" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-d9adec51" name="sStartHour" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-94068ad8" name="sStartMinute" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-7813e087" name="sEndHour" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-be2230cb" name="sEndMinute" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-04ea75b7" name="MonthLimit" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-5335c91c" name="DayLimit" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-77684f05" name="Duplicate" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-fc2c17cb" name="MealName"/>
+          <cl:datacolumn comment="" std:sid="d-column-10712f09" info="강원랜드 OEM" name="MealOperation" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-ed730d8e" info="무벡스 OEM" name="MealLocation" defaultvalue="0"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-47502062" id="sms_get_terminal_option_meal" method="get" action="/v1/terminals/">
+        <cl:listener std:sid="listener-99cb6267" name="submit-done" handler="onSms_get_terminal_option_mealSubmitDone"/>
+        <cl:listener std:sid="listener-e3e3c78c" name="submit-error" handler="onSms_get_terminal_option_mealSubmitError"/>
+        <cl:listener std:sid="listener-0e22105d" name="submit-timeout" handler="onSms_get_terminal_option_mealSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="MealOptValue"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-89a22353" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-acea42ae" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-a50a03a9" id="TMVME_grd" style="padding:10px;">
+      <cl:xylayoutdata std:sid="xyl-data-3d2c69bd" top="0px" left="0px" width="500px" height="400px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      <cl:output std:sid="output-48c0daa6" style="font-weight:700; font-size:14px;">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_InpuMeal"/>
+        <cl:formdata std:sid="f-data-471a16e5" row="0" col="0" rowspan="1" colspan="2"/>
+      </cl:output>
+      <cl:output std:sid="output-f0ab9e6c" style="border-right-style:solid; background-color:#f6f6f6; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-top-color:#c5c5c5; border-right-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid; text-align:center;">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_BreakFast"/>
+        <cl:formdata std:sid="f-data-45812f96" row="1" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-91d6aa7c" style="border-right-style:solid; background-color:#f6f6f6; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-right-color:#c5c5c5; border-bottom-style:solid; text-align:center;">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_Lunch"/>
+        <cl:formdata std:sid="f-data-b79d21c1" row="2" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-8f320a4b" style="border-right-style:solid; background-color:#f6f6f6; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-right-color:#c5c5c5; border-bottom-style:solid; text-align:center;">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_Dinner"/>
+        <cl:formdata std:sid="f-data-c853a564" row="3" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-4b9cbebc" style="border-right-style:solid; background-color:#f6f6f6; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-right-color:#c5c5c5; border-bottom-style:solid; text-align:center;">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_Snack"/>
+        <cl:formdata std:sid="f-data-8bb335fb" row="4" col="0"/>
+      </cl:output>
+      <cl:checkbox std:sid="c-box-f431293a" id="Duplicate_cbx" style="font-size:14px;" value="" truevalue="1" falsevalue="0">
+        <cl:listener std:sid="listener-bbc0b6de" name="value-change" handler="onSnbeValueChange"/>
+        <cl:datamapbind property="value" datacontrolid="MealOptValue" columnname="Duplicate"/>
+        <cl:langbind property="text" category="PROPERTY" keypath="Str_AllowDuplicate"/>
+        <cl:formdata std:sid="f-data-c24d144d" row="6" col="0" rowspan="1" colspan="2"/>
+      </cl:checkbox>
+      <cl:output std:sid="output-62cbb914" style="border-right-style:solid; background-color:#f6f6f6; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-right-color:#c5c5c5; border-bottom-style:solid; text-align:center;">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_LateSnack"/>
+        <cl:formdata std:sid="f-data-1e21ea77" row="5" col="0"/>
+      </cl:output>
+      <cl:group std:sid="group-bbcbecf9" style="font-size:14px;">
+        <cl:formdata std:sid="f-data-0eccd5c2" row="1" col="1" rowspan="4" colspan="1"/>
+        <cl:output std:sid="output-e8025a44" style="border-bottom-color:#c5c5c5; border-top-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid; text-align:center;" value="~">
+          <cl:formdata std:sid="f-data-cbecd1af" row="0" col="3"/>
+        </cl:output>
+        <cl:output std:sid="output-98de7dae" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid; text-align:center;" value="~">
+          <cl:formdata std:sid="f-data-21bc828c" row="1" col="3"/>
+        </cl:output>
+        <cl:output std:sid="output-9051c3cc" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid; text-align:center;" value="~">
+          <cl:formdata std:sid="f-data-d4ed35f6" row="2" col="3"/>
+        </cl:output>
+        <cl:output std:sid="output-160bb484" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid; text-align:center;" value="~">
+          <cl:formdata std:sid="f-data-0626dfe9" row="3" col="3"/>
+        </cl:output>
+        <cl:group std:sid="group-a5d068e9" style="border-bottom-color:#c5c5c5; border-top-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-0e131818" row="0" col="0" rowspan="1" colspan="3"/>
+          <cl:group std:sid="group-e51cf285">
+            <cl:xylayoutdata std:sid="xyl-data-eee3f542" top="2px" bottom="2px" width="95px" horizontalAnchor="CENTER" verticalAnchor="BOTH"/>
+            <cl:numbereditor std:sid="n-editor-d3f644e9" id="breakfast_sHour_nbe" style="text-align:center;" value="00" min="0.0" max="23.0" spinbutton="false" format="00">
+              <cl:listener std:sid="listener-6f80ca03" name="value-change" handler="onSnbeValueChange"/>
+              <cl:datamapbind property="value" datacontrolid="MealOptValue" columnname="bStartHour"/>
+              <cl:xylayoutdata std:sid="xyl-data-95b9a2bc" top="0px" bottom="0px" left="0px" width="40px" horizontalAnchor="LEFT" verticalAnchor="BOTH"/>
+            </cl:numbereditor>
+            <cl:output std:sid="output-7384c953" style="text-align:center;" value=":">
+              <cl:xylayoutdata std:sid="xyl-data-5b88e581" top="0px" bottom="0px" left="40px" width="15px" horizontalAnchor="LEFT" verticalAnchor="BOTH"/>
+            </cl:output>
+            <cl:numbereditor std:sid="n-editor-fb7b90e6" id="breakfast_sMin_nbe" style="text-align:center;" value="00" min="0.0" max="59.0" spinbutton="false" format="00">
+              <cl:listener std:sid="listener-c99a2a8f" name="value-change" handler="onSnbeValueChange"/>
+              <cl:datamapbind property="value" datacontrolid="MealOptValue" columnname="bStartMinute"/>
+              <cl:xylayoutdata std:sid="xyl-data-7e87c5a0" top="0px" bottom="0px" left="55px" width="40px" horizontalAnchor="LEFT" verticalAnchor="BOTH"/>
+            </cl:numbereditor>
+            <cl:xylayout std:sid="xylayout-bfc37a8e"/>
+          </cl:group>
+          <cl:xylayout std:sid="xylayout-00844a60"/>
+        </cl:group>
+        <cl:group std:sid="group-92bc3463" style="border-bottom-color:#c5c5c5; border-top-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-eb64053b" row="0" col="4" rowspan="1" colspan="3"/>
+          <cl:group std:sid="group-c1d24596">
+            <cl:xylayoutdata std:sid="xyl-data-ce649dee" top="2px" bottom="2px" width="95px" horizontalAnchor="CENTER" verticalAnchor="BOTH"/>
+            <cl:numbereditor std:sid="n-editor-5e079a98" id="breakfast_eHour_nbe" style="text-align:center;" value="00" min="0.0" max="23.0" spinbutton="false" format="00">
+              <cl:listener std:sid="listener-00d75f18" name="value-change" handler="onSnbeValueChange"/>
+              <cl:datamapbind property="value" datacontrolid="MealOptValue" columnname="bEndHour"/>
+              <cl:xylayoutdata std:sid="xyl-data-abf2b93c" top="0px" bottom="0px" left="0px" width="40px" horizontalAnchor="LEFT" verticalAnchor="BOTH"/>
+            </cl:numbereditor>
+            <cl:output std:sid="output-b846b047" style="text-align:center;" value=":">
+              <cl:xylayoutdata std:sid="xyl-data-45ba2094" top="0px" bottom="0px" left="40px" width="15px" horizontalAnchor="LEFT" verticalAnchor="BOTH"/>
+            </cl:output>
+            <cl:numbereditor std:sid="n-editor-a6b11fd7" id="breakfast_eMin_nbe" style="text-align:center;" value="00" min="0.0" max="59.0" spinbutton="false" format="00">
+              <cl:listener std:sid="listener-5bef7481" name="value-change" handler="onSnbeValueChange"/>
+              <cl:datamapbind property="value" datacontrolid="MealOptValue" columnname="bEndMinute"/>
+              <cl:xylayoutdata std:sid="xyl-data-6c130a09" top="0px" right="0px" bottom="0px" width="40px" horizontalAnchor="RIGHT" verticalAnchor="BOTH"/>
+            </cl:numbereditor>
+            <cl:xylayout std:sid="xylayout-b7e5a438"/>
+          </cl:group>
+          <cl:xylayout std:sid="xylayout-53b49491"/>
+        </cl:group>
+        <cl:group std:sid="group-66fee008" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+          <cl:formdata std:sid="f-data-4b9d3a5f" row="1" col="0" rowspan="1" colspan="3"/>
+          <cl:group std:sid="group-58c02097">
+            <cl:xylayoutdata std:sid="xyl-data-15b7f766" top="2px" bottom="2px" width="95px" horizontalAnchor="CENTER" verticalAnchor="BOTH"/>
+            <cl:numbereditor std:sid="n-editor-816c0aa4" id="lunch_sHour_nbe" style="text-align:center;" value="00" min="0.0" max="23.0" spinbutton="false" format="00">
+              <cl:listener std:sid="listener-344cafff" name="value-change" handler="onSnbeValueChange"/>
+              <cl:datamapbind property="value" datacontrolid="MealOptValue" columnname="lStartHour"/>
+              <cl:xylayoutdata std:sid="xyl-data-0653c6c3" top="0px" bottom="0px" left="0px" width="40px" horizontalAnchor="LEFT" verticalAnchor="BOTH"/>
+            </cl:numbereditor>
+            <cl:output std:sid="output-e59b4116" style="text-align:center;" value=":">
+              <cl:xylayoutdata std:sid="xyl-data-362ce29d" top="0px" bottom="0px" left="40px" width="15px" horizontalAnchor="LEFT" verticalAnchor="BOTH"/>
+            </cl:output>
+            <cl:numbereditor std:sid="n-editor-d3af7a93" id="lunch_sMin_nbe" style="text-align:center;" value="00" min="0.0" max="59.0" spinbutton="false" format="00">
+              <cl:listener std:sid="listener-6422c6d1" name="value-change" handler="onSnbeValueChange"/>
+              <cl:datamapbind property="value" datacontrolid="MealOptValue" columnname="lStartMinute"/>
+              <cl:xylayoutdata std:sid="xyl-data-a8c2460b" top="0px" right="0px" bottom="0px" width="40px" horizontalAnchor="RIGHT" verticalAnchor="BOTH"/>
+            </cl:numbereditor>
+            <cl:xylayout std:sid="xylayout-2601b61b"/>
+          </cl:group>
+          <cl:xylayout std:sid="xylayout-2c2b8c50"/>
+        </cl:group>
+        <cl:group std:sid="group-f91491fa" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+          <cl:formdata std:sid="f-data-02c1ba99" row="1" col="4" rowspan="1" colspan="3"/>
+          <cl:group std:sid="group-8291ab69">
+            <cl:xylayoutdata std:sid="xyl-data-63ed3462" top="2px" bottom="2px" width="95px" horizontalAnchor="CENTER" verticalAnchor="BOTH"/>
+            <cl:numbereditor std:sid="n-editor-2c189e3b" id="lunch_eHour_nbe" style="text-align:center;" value="00" min="0.0" max="23.0" spinbutton="false" format="00">
+              <cl:listener std:sid="listener-017a8e31" name="value-change" handler="onSnbeValueChange"/>
+              <cl:datamapbind property="value" datacontrolid="MealOptValue" columnname="lEndHour"/>
+              <cl:xylayoutdata std:sid="xyl-data-fcb9e867" top="0px" bottom="0px" left="0px" width="40px" horizontalAnchor="LEFT" verticalAnchor="BOTH"/>
+            </cl:numbereditor>
+            <cl:output std:sid="output-508f5f08" style="text-align:center;" value=":">
+              <cl:xylayoutdata std:sid="xyl-data-7e2bc368" top="0px" bottom="0px" left="40px" width="15px" horizontalAnchor="LEFT" verticalAnchor="BOTH"/>
+            </cl:output>
+            <cl:numbereditor std:sid="n-editor-b34b72bd" id="lunch_eMin_nbe" style="text-align:center;" value="00" min="0.0" max="59.0" spinbutton="false" format="00">
+              <cl:listener std:sid="listener-a04bd383" name="value-change" handler="onSnbeValueChange"/>
+              <cl:datamapbind property="value" datacontrolid="MealOptValue" columnname="lEndMinute"/>
+              <cl:xylayoutdata std:sid="xyl-data-e8c96b64" top="0px" right="0px" bottom="0px" width="40px" horizontalAnchor="RIGHT" verticalAnchor="BOTH"/>
+            </cl:numbereditor>
+            <cl:xylayout std:sid="xylayout-6c8057df"/>
+          </cl:group>
+          <cl:xylayout std:sid="xylayout-01b30889"/>
+        </cl:group>
+        <cl:group std:sid="group-aed78d7d" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+          <cl:formdata std:sid="f-data-9370c282" row="2" col="0" rowspan="1" colspan="3"/>
+          <cl:group std:sid="group-51d87b46">
+            <cl:xylayoutdata std:sid="xyl-data-11585948" top="2px" width="95px" height="26px" horizontalAnchor="CENTER" verticalAnchor="TOP"/>
+            <cl:numbereditor std:sid="n-editor-e6dbe5eb" id="dinner_sHour_nbe" style="text-align:center;" value="00" min="0.0" max="23.0" spinbutton="false" format="00">
+              <cl:listener std:sid="listener-e1758232" name="value-change" handler="onSnbeValueChange"/>
+              <cl:datamapbind property="value" datacontrolid="MealOptValue" columnname="dStartHour"/>
+              <cl:xylayoutdata std:sid="xyl-data-ef30b528" top="0px" bottom="0px" left="0px" width="40px" horizontalAnchor="LEFT" verticalAnchor="BOTH"/>
+            </cl:numbereditor>
+            <cl:output std:sid="output-0d5c0c19" style="text-align:center;" value=":">
+              <cl:xylayoutdata std:sid="xyl-data-10bfe592" top="0px" bottom="0px" left="40px" width="15px" horizontalAnchor="LEFT" verticalAnchor="BOTH"/>
+            </cl:output>
+            <cl:numbereditor std:sid="n-editor-08f58421" id="dinner_sMin_nbe" style="text-align:center;" value="00" min="0.0" max="59.0" spinbutton="false" format="00">
+              <cl:listener std:sid="listener-d060074d" name="value-change" handler="onSnbeValueChange"/>
+              <cl:datamapbind property="value" datacontrolid="MealOptValue" columnname="dStartMinute"/>
+              <cl:xylayoutdata std:sid="xyl-data-795d9211" top="0px" right="0px" bottom="0px" width="40px" horizontalAnchor="RIGHT" verticalAnchor="BOTH"/>
+            </cl:numbereditor>
+            <cl:xylayout std:sid="xylayout-c75b7c6d"/>
+          </cl:group>
+          <cl:xylayout std:sid="xylayout-c0eb2a95"/>
+        </cl:group>
+        <cl:group std:sid="group-31a03e11" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+          <cl:formdata std:sid="f-data-5ac70ea1" row="2" col="4" rowspan="1" colspan="3"/>
+          <cl:group std:sid="group-b3c55a52">
+            <cl:xylayoutdata std:sid="xyl-data-f4657be2" top="2px" bottom="2px" width="95px" horizontalAnchor="CENTER" verticalAnchor="BOTH"/>
+            <cl:numbereditor std:sid="n-editor-f3f6db03" id="dinner_eHour_nbe" style="text-align:center;" value="00" min="0.0" max="23.0" spinbutton="false" format="00">
+              <cl:listener std:sid="listener-899823cc" name="value-change" handler="onSnbeValueChange"/>
+              <cl:datamapbind property="value" datacontrolid="MealOptValue" columnname="dEndHour"/>
+              <cl:xylayoutdata std:sid="xyl-data-aabf2d6f" top="0px" bottom="0px" left="0px" width="40px" horizontalAnchor="LEFT" verticalAnchor="BOTH"/>
+            </cl:numbereditor>
+            <cl:output std:sid="output-6f395b1e" style="text-align:center;" value=":">
+              <cl:xylayoutdata std:sid="xyl-data-c0161b68" top="0px" bottom="0px" left="40px" width="15px" horizontalAnchor="LEFT" verticalAnchor="BOTH"/>
+            </cl:output>
+            <cl:numbereditor std:sid="n-editor-ea1b2fa4" id="dinner_eMin_nbe" style="text-align:center;" value="00" min="0.0" max="59.0" spinbutton="false" format="00">
+              <cl:listener std:sid="listener-4171cb4a" name="value-change" handler="onSnbeValueChange"/>
+              <cl:datamapbind property="value" datacontrolid="MealOptValue" columnname="dEndMinute"/>
+              <cl:xylayoutdata std:sid="xyl-data-3cb6ef8a" top="0px" right="0px" bottom="0px" width="40px" horizontalAnchor="RIGHT" verticalAnchor="BOTH"/>
+            </cl:numbereditor>
+            <cl:xylayout std:sid="xylayout-613920c0"/>
+          </cl:group>
+          <cl:xylayout std:sid="xylayout-62854680"/>
+        </cl:group>
+        <cl:group std:sid="group-eea5f1ba" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+          <cl:formdata std:sid="f-data-1d88aa91" row="3" col="0" rowspan="1" colspan="3"/>
+          <cl:group std:sid="group-b87c0032">
+            <cl:xylayoutdata std:sid="xyl-data-ecba3f11" top="2px" bottom="2px" width="95px" horizontalAnchor="CENTER" verticalAnchor="BOTH"/>
+            <cl:numbereditor std:sid="n-editor-9daa977d" id="snack_sHour_nbe" style="text-align:center;" value="00" min="0.0" max="23.0" spinbutton="false" format="00">
+              <cl:listener std:sid="listener-3d344e22" name="value-change" handler="onSnbeValueChange"/>
+              <cl:datamapbind property="value" datacontrolid="MealOptValue" columnname="sStartHour"/>
+              <cl:xylayoutdata std:sid="xyl-data-90ea6527" top="0px" bottom="0px" left="0px" width="40px" horizontalAnchor="LEFT" verticalAnchor="BOTH"/>
+            </cl:numbereditor>
+            <cl:output std:sid="output-b113b993" style="text-align:center;" value=":">
+              <cl:xylayoutdata std:sid="xyl-data-cfddb865" top="0px" bottom="0px" left="40px" width="15px" horizontalAnchor="LEFT" verticalAnchor="BOTH"/>
+            </cl:output>
+            <cl:numbereditor std:sid="n-editor-a9192671" id="snack_sMin_nbe" style="text-align:center;" value="00" min="0.0" max="59.0" spinbutton="false" format="00">
+              <cl:listener std:sid="listener-d2f16f57" name="value-change" handler="onSnbeValueChange"/>
+              <cl:datamapbind property="value" datacontrolid="MealOptValue" columnname="sStartMinute"/>
+              <cl:xylayoutdata std:sid="xyl-data-076adfd6" top="0px" right="0px" bottom="0px" width="40px" horizontalAnchor="RIGHT" verticalAnchor="BOTH"/>
+            </cl:numbereditor>
+            <cl:xylayout std:sid="xylayout-672d564a"/>
+          </cl:group>
+          <cl:xylayout std:sid="xylayout-0087ea98"/>
+        </cl:group>
+        <cl:group std:sid="group-52a8888d" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+          <cl:formdata std:sid="f-data-4540dd34" row="3" col="4" rowspan="1" colspan="3"/>
+          <cl:group std:sid="group-1477110c">
+            <cl:xylayoutdata std:sid="xyl-data-68e19344" top="2px" bottom="2px" width="95px" horizontalAnchor="CENTER" verticalAnchor="BOTH"/>
+            <cl:numbereditor std:sid="n-editor-2f1e0097" id="snack_eMin_nbe" style="text-align:center;" value="00" min="0.0" max="59.0" spinbutton="false" format="00">
+              <cl:listener std:sid="listener-ebb45e03" name="value-change" handler="onSnbeValueChange"/>
+              <cl:datamapbind property="value" datacontrolid="MealOptValue" columnname="sEndMinute"/>
+              <cl:xylayoutdata std:sid="xyl-data-92d627d6" top="0px" right="0px" bottom="0px" width="40px" horizontalAnchor="RIGHT" verticalAnchor="BOTH"/>
+            </cl:numbereditor>
+            <cl:numbereditor std:sid="n-editor-a4b95ecb" id="snack_eHour_nbe" style="text-align:center;" value="00" min="0.0" max="23.0" spinbutton="false" format="00">
+              <cl:listener std:sid="listener-1161707a" name="value-change" handler="onSnbeValueChange"/>
+              <cl:datamapbind property="value" datacontrolid="MealOptValue" columnname="sEndHour"/>
+              <cl:xylayoutdata std:sid="xyl-data-3fe4be2e" top="0px" bottom="0px" left="0px" width="40px" horizontalAnchor="LEFT" verticalAnchor="BOTH"/>
+            </cl:numbereditor>
+            <cl:output std:sid="output-b774da57" style="text-align:center;" value=":">
+              <cl:xylayoutdata std:sid="xyl-data-329ea2ef" top="0px" bottom="0px" left="40px" width="15px" horizontalAnchor="LEFT" verticalAnchor="BOTH"/>
+            </cl:output>
+            <cl:xylayout std:sid="xylayout-a67c19e2"/>
+          </cl:group>
+          <cl:xylayout std:sid="xylayout-2def443f"/>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-cef5065d" hspace="0px" vspace="0px">
+          <cl:rows length="30" unit="PIXEL"/>
+          <cl:rows length="30" unit="PIXEL"/>
+          <cl:rows length="30" unit="PIXEL"/>
+          <cl:rows length="30" unit="PIXEL"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="15" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="15" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="15" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:output std:sid="output-36028401" id="KWL_opbMealDataType" style="border-right-style:solid; background-color:#f6f6f6; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-right-color:#c5c5c5; border-bottom-style:solid; text-align:center;" visible="false" value="식수운영타입">
+        <cl:formdata std:sid="f-data-0686875d" row="7" col="0"/>
+      </cl:output>
+      <cl:combobox std:sid="c-box-1295fca8" id="KWL_cmbMealDataType" visible="false">
+        <cl:listener std:sid="listener-088379e3" name="selection-change" handler="onKWL_cmbMealDataTypeSelectionChange"/>
+        <cl:datamapbind property="value" datacontrolid="MealOptValue" columnname="MealOperation"/>
+        <cl:formdata std:sid="f-data-68850da1" row="7" col="1"/>
+        <cl:item std:sid="item-d1a351ff" label="사용안함" value="0" tooltip="기본 0"/>
+        <cl:item std:sid="item-78435904" label="일반식수" value="1" tooltip="식수지정하면 자동선택"/>
+        <cl:item std:sid="item-174cfc86" label="테이크아웃" value="2"/>
+        <cl:item std:sid="item-ce0317b0" label="패스트푸드" value="3"/>
+        <cl:item std:sid="item-9b616cda" label="간식전용" value="4"/>
+      </cl:combobox>
+      <cl:group std:sid="group-fe0e75eb">
+        <cl:formdata std:sid="f-data-9f931d04" row="5" col="1"/>
+        <cl:group std:sid="group-868318fa" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+          <cl:formdata std:sid="f-data-42f5f5b5" row="0" col="0" rowspan="1" colspan="3"/>
+          <cl:group std:sid="group-67de9083">
+            <cl:xylayoutdata std:sid="xyl-data-181f72ac" top="2px" bottom="2px" width="95px" horizontalAnchor="CENTER" verticalAnchor="BOTH"/>
+            <cl:numbereditor std:sid="n-editor-a0451737" id="latesnack_sHour_nbe" style="text-align:center;" value="00" min="0.0" max="23.0" spinbutton="false" format="00">
+              <cl:listener std:sid="listener-560de22f" name="value-change" handler="onSnbeValueChange"/>
+              <cl:datamapbind property="value" datacontrolid="MealOptValue" columnname="lsStartHour"/>
+              <cl:xylayoutdata std:sid="xyl-data-be43a5ec" top="0px" bottom="0px" left="0px" width="40px" horizontalAnchor="LEFT" verticalAnchor="BOTH"/>
+            </cl:numbereditor>
+            <cl:output std:sid="output-2b29b0dd" style="text-align:center;" value=":">
+              <cl:xylayoutdata std:sid="xyl-data-17a67478" top="0px" bottom="0px" left="40px" width="15px" horizontalAnchor="LEFT" verticalAnchor="BOTH"/>
+            </cl:output>
+            <cl:numbereditor std:sid="n-editor-27c5a86b" id="latesnack_sMin_nbe" style="text-align:center;" value="00" min="0.0" max="59.0" spinbutton="false" format="00">
+              <cl:listener std:sid="listener-1e73b295" name="value-change" handler="onSnbeValueChange"/>
+              <cl:datamapbind property="value" datacontrolid="MealOptValue" columnname="lsStartMinute"/>
+              <cl:xylayoutdata std:sid="xyl-data-2ed39c7e" top="0px" right="0px" bottom="0px" width="40px" horizontalAnchor="RIGHT" verticalAnchor="BOTH"/>
+            </cl:numbereditor>
+            <cl:xylayout std:sid="xylayout-410a576d"/>
+          </cl:group>
+          <cl:xylayout std:sid="xylayout-1dd8011f"/>
+        </cl:group>
+        <cl:output std:sid="output-ad2f7d04" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid; text-align:center;" value="~">
+          <cl:formdata std:sid="f-data-37b7a87f" row="0" col="3"/>
+        </cl:output>
+        <cl:group std:sid="group-502fd08b" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+          <cl:formdata std:sid="f-data-edfc34c3" row="0" col="4" rowspan="1" colspan="3"/>
+          <cl:group std:sid="group-3923eca6">
+            <cl:xylayoutdata std:sid="xyl-data-10f17c1f" top="2px" bottom="2px" width="95px" horizontalAnchor="CENTER" verticalAnchor="BOTH"/>
+            <cl:numbereditor std:sid="n-editor-9be4d509" id="latesnack_eHour_nbe" style="text-align:center;" value="00" min="0.0" max="23.0" spinbutton="false" format="00">
+              <cl:listener std:sid="listener-54925676" name="value-change" handler="onSnbeValueChange"/>
+              <cl:datamapbind property="value" datacontrolid="MealOptValue" columnname="lsEndHour"/>
+              <cl:xylayoutdata std:sid="xyl-data-0bbe1481" top="0px" bottom="0px" left="0px" width="40px" horizontalAnchor="LEFT" verticalAnchor="BOTH"/>
+            </cl:numbereditor>
+            <cl:numbereditor std:sid="n-editor-ff8c0d43" id="latesnack_eMin_nbe" style="text-align:center;" value="00" min="0.0" max="59.0" spinbutton="false" format="00">
+              <cl:listener std:sid="listener-1f95ae1d" name="value-change" handler="onSnbeValueChange"/>
+              <cl:datamapbind property="value" datacontrolid="MealOptValue" columnname="lsEndMinute"/>
+              <cl:xylayoutdata std:sid="xyl-data-49a953f1" top="0px" right="0px" bottom="0px" width="40px" horizontalAnchor="RIGHT" verticalAnchor="BOTH"/>
+            </cl:numbereditor>
+            <cl:output std:sid="output-0f25ede1" style="text-align:center;" value=":">
+              <cl:xylayoutdata std:sid="xyl-data-8249915a" top="0px" bottom="0px" width="15px" horizontalAnchor="CENTER" verticalAnchor="BOTH"/>
+            </cl:output>
+            <cl:xylayout std:sid="xylayout-3049a441"/>
+          </cl:group>
+          <cl:xylayout std:sid="xylayout-21c783d5"/>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-936c60db" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="15" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="15" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="15" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:output std:sid="output-be72aec3" id="HCJF_opbMealLocation" style="border-right-style:solid; background-color:#f6f6f6; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-right-color:#c5c5c5; border-bottom-style:solid; text-align:center;" visible="false" value="식수 지역">
+        <cl:formdata std:sid="f-data-652da581" row="8" col="0"/>
+      </cl:output>
+      <cl:combobox std:sid="c-box-5c15a2ca" id="HCJF_cmbMealLocation" style="text-align:center;" visible="false">
+        <cl:listener std:sid="listener-de2e6f1b" name="selection-change" handler="onHCJF_cmbMealLocationSelectionChange"/>
+        <cl:datamapbind property="value" datacontrolid="MealOptValue" columnname="MealLocation"/>
+        <cl:formdata std:sid="f-data-8b81dc4c" row="8" col="1"/>
+      </cl:combobox>
+      <cl:formlayout std:sid="f-layout-ce6094c2" hspace="0px" vspace="0px">
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+        <cl:rows length="30" unit="PIXEL"/>
+        <cl:rows length="30" unit="PIXEL"/>
+        <cl:rows length="30" unit="PIXEL"/>
+        <cl:rows length="30" unit="PIXEL"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL"/>
+        <cl:rows length="30" unit="PIXEL"/>
+        <cl:rows length="30" unit="PIXEL"/>
+        <cl:rows length="30" unit="PIXEL"/>
+        <cl:rows length="30" unit="PIXEL"/>
+        <cl:columns length="120" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-2b2aaa39"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

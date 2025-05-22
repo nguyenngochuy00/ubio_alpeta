@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-99191751" version="1.0.0.0">
+  <head std:sid="head-de85035f">
+    <title>OptionPageInnodep</title>
+    <screen std:sid="screen-8656627b" id="default" name="default" minwidth="1024px" width="1024px" height="768px"/>
+    <screen std:sid="screen-f805e9b5" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-7e586974" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-046a4ca3">
+      <cl:datamap std:sid="d-map-9d2f207b" id="OptionInnodep">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-7448f150" name="ServerIP" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-48763c00" name="ServerPort" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-d9f6242c" name="UserID" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-b0f131c4" name="UserPW" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-3ef275c7" name="License" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-8a309048" name="UseRecording" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-196a58e2" name="RegularRecording" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-9b5d3614" name="BeforeRecordingTime" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-f0acf40f" name="AfterRecordingTime" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-0c9bddf1" name="PlayerServerIP" defaultvalue=""/>
+          <cl:datacolumn std:sid="d-column-f851faf1" name="PlayerServerPort" datatype="number" defaultvalue="0"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-35d85d5a" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-fae20911" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-6aacc886" id="sms_getOption" method="get" action="/v1/options">
+        <cl:listener std:sid="listener-48eab764" name="submit-done" handler="onSms_getOptionSubmitDone"/>
+        <cl:listener std:sid="listener-072baa4d" name="submit-error" handler="onSms_getOptionSubmitError"/>
+        <cl:listener std:sid="listener-40dbcdf5" name="submit-timeout" handler="onSms_getOptionSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="OptionInnodep"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-24d8670d" id="sms_updateOption" method="put" action="/v1/OptionInnodepSave" mediatype="application/x-www-form-urlencoded">
+        <cl:listener std:sid="listener-1857e69d" name="submit-done" handler="onSms_updateOptionSubmitDone"/>
+        <cl:listener std:sid="listener-f0ffdacd" name="submit-error" handler="onSms_updateOptionSubmitError"/>
+        <cl:listener std:sid="listener-ac323d70" name="submit-timeout" handler="onSms_updateOptionSubmitTimeout"/>
+        <cl:requestdata dataid="OptionInnodep"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-8afe4445" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-5315586e" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-4c50b1cf" id="Vms_grpMain">
+      <cl:xylayoutdata std:sid="xyl-data-b748984e" top="10px" right="20px" bottom="20px" left="10px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:output std:sid="output-0a9719d5" style="font-weight:700; font-size:16px;" value="VMS">
+        <cl:formdata std:sid="f-data-0aa46835" row="0" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-6d0e4973" class="common-controllabel">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_InnodepServerIP"/>
+        <cl:formdata std:sid="f-data-e1a0d1b7" row="1" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-af2f0401" class="common-controllabel">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_InnodepServerPort"/>
+        <cl:formdata std:sid="f-data-e4da9458" row="2" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-ffb1d73c" class="common-controllabel">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_InnodepID"/>
+        <cl:formdata std:sid="f-data-b38f2ee2" row="3" col="0"/>
+      </cl:output>
+      <cl:inputbox std:sid="i-box-7c022247" id="ipb_InnodepServerIP" style="font-size:14px; text-align:center;">
+        <cl:datamapbind property="value" category="PROPERTY" datacontrolid="OptionInnodep" columnname="ServerIP"/>
+        <cl:formdata std:sid="f-data-17385828" row="1" col="1"/>
+      </cl:inputbox>
+      <cl:inputbox std:sid="i-box-6217f279" id="ipb_InnodepServerPort" style="font-size:14px; text-align:center;">
+        <cl:datamapbind property="value" category="PROPERTY" datacontrolid="OptionInnodep" columnname="ServerPort"/>
+        <cl:formdata std:sid="f-data-a4c50be5" row="2" col="1"/>
+      </cl:inputbox>
+      <cl:inputbox std:sid="i-box-5f83072c" id="ipb_InnodepID" style="font-size:14px; text-align:center;">
+        <cl:datamapbind property="value" category="PROPERTY" datacontrolid="OptionInnodep" columnname="UserID"/>
+        <cl:formdata std:sid="f-data-62805f03" row="3" col="1"/>
+      </cl:inputbox>
+      <cl:output std:sid="output-c904ad6d" class="common-controllabel">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_InnodepPW"/>
+        <cl:formdata std:sid="f-data-5f5b0b38" row="4" col="0"/>
+      </cl:output>
+      <cl:inputbox std:sid="i-box-c9f83512" id="ipb_InnodepPW" style="font-size:14px; text-align:center;">
+        <cl:datamapbind property="value" category="PROPERTY" datacontrolid="OptionInnodep" columnname="UserPW"/>
+        <cl:formdata std:sid="f-data-42cc46ae" row="4" col="1"/>
+      </cl:inputbox>
+      <cl:output std:sid="output-3e65b162" class="common-controllabel">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_InnodepLic"/>
+        <cl:formdata std:sid="f-data-dfbf8223" row="5" col="0"/>
+      </cl:output>
+      <cl:inputbox std:sid="i-box-cd0d5881" id="ipb_InnodepLic" style="font-size:14px; text-align:center;">
+        <cl:datamapbind property="value" category="PROPERTY" datacontrolid="OptionInnodep" columnname="License"/>
+        <cl:formdata std:sid="f-data-72801186" row="5" col="1"/>
+      </cl:inputbox>
+      <cl:checkbox std:sid="c-box-99906c71" id="cbx_InnodepUseRecording" style="font-size:14px;" truevalue="1" falsevalue="0">
+        <cl:langbind property="text" category="PROPERTY" keypath="Str_InnodepUseRecording"/>
+        <cl:datamapbind property="value" category="PROPERTY" datacontrolid="OptionInnodep" columnname="UseRecording"/>
+        <cl:formdata std:sid="f-data-5e9da72e" row="6" col="0"/>
+      </cl:checkbox>
+      <cl:checkbox std:sid="c-box-e0d2c980" id="cbx_InnodepRegularRecording" style="font-size:14px;" truevalue="1" falsevalue="0">
+        <cl:langbind property="text" category="PROPERTY" keypath="Str_InnodepRegularRecording"/>
+        <cl:datamapbind property="value" category="PROPERTY" datacontrolid="OptionInnodep" columnname="RegularRecording"/>
+        <cl:formdata std:sid="f-data-40f3fde3" row="7" col="0"/>
+      </cl:checkbox>
+      <cl:output std:sid="output-76cc902b" class="common-controllabel">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_BeforeRecordingTime"/>
+        <cl:formdata std:sid="f-data-ef86dca9" row="8" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-0acaf205" class="common-controllabel">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_AfterRecordingTime"/>
+        <cl:formdata std:sid="f-data-7f3b3890" row="9" col="0"/>
+      </cl:output>
+      <cl:combobox std:sid="c-box-06500b38" id="cmb_BeforeRecordingTime" style="font-size:14px; text-align:center;">
+        <cl:datamapbind property="value" category="PROPERTY" datacontrolid="OptionInnodep" columnname="BeforeRecordingTime"/>
+        <cl:formdata std:sid="f-data-e6cfebde" row="8" col="1"/>
+        <cl:item std:sid="item-51a400bb" label="10분" value="0">
+          <cl:langbind property="label" category="PROPERTY" keypath="Str_1Minute"/>
+        </cl:item>
+        <cl:item std:sid="item-816e9b20" label="20분" value="1">
+          <cl:langbind property="label" category="PROPERTY" keypath="Str_2Minute"/>
+        </cl:item>
+        <cl:item std:sid="item-aecc4af7" label="1시" value="2">
+          <cl:langbind property="label" category="PROPERTY" keypath="Str_3Minute"/>
+        </cl:item>
+        <cl:item std:sid="item-9255c215" label="2시" value="3">
+          <cl:langbind property="label" category="PROPERTY" keypath="Str_4Minute"/>
+        </cl:item>
+        <cl:item std:sid="item-2eba7d8a" label="5시" value="4">
+          <cl:langbind property="label" category="PROPERTY" keypath="Str_5Minute"/>
+        </cl:item>
+      </cl:combobox>
+      <cl:combobox std:sid="c-box-2c9213a9" id="cmb_AfterRecordingTime" style="font-size:14px; text-align:center;">
+        <cl:datamapbind property="value" category="PROPERTY" datacontrolid="OptionInnodep" columnname="AfterRecordingTime"/>
+        <cl:formdata std:sid="f-data-51065e32" row="9" col="1"/>
+        <cl:item std:sid="item-c0d78295" label="10분" value="0">
+          <cl:langbind property="label" category="PROPERTY" keypath="Str_1Minute"/>
+        </cl:item>
+        <cl:item std:sid="item-a0f617fa" label="20분" value="1">
+          <cl:langbind property="label" category="PROPERTY" keypath="Str_2Minute"/>
+        </cl:item>
+        <cl:item std:sid="item-150b79d6" label="1시" value="2">
+          <cl:langbind property="label" category="PROPERTY" keypath="Str_3Minute"/>
+        </cl:item>
+        <cl:item std:sid="item-f8b42bae" label="2시" value="3">
+          <cl:langbind property="label" category="PROPERTY" keypath="Str_4Minute"/>
+        </cl:item>
+        <cl:item std:sid="item-b6f35c21" label="5시" value="4">
+          <cl:langbind property="label" category="PROPERTY" keypath="Str_5Minute"/>
+        </cl:item>
+      </cl:combobox>
+      <cl:output std:sid="output-4ffad5b2" class="common-controllabel">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_InnodepPlayerServerIP"/>
+        <cl:formdata std:sid="f-data-15878117" row="10" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-fbf2470c" class="common-controllabel">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_InnodepPlayerServerPort"/>
+        <cl:formdata std:sid="f-data-493051d4" row="11" col="0"/>
+      </cl:output>
+      <cl:inputbox std:sid="i-box-016fbd24" id="ipb_InnodepPlayerServerIP" style="font-size:14px; text-align:center;">
+        <cl:datamapbind property="value" category="PROPERTY" datacontrolid="OptionInnodep" columnname="PlayerServerIP"/>
+        <cl:formdata std:sid="f-data-cbad46fa" row="10" col="1"/>
+      </cl:inputbox>
+      <cl:inputbox std:sid="i-box-7ae5dadd" id="ipb_InnodepPlayerServerPort" style="font-size:14px; text-align:center;">
+        <cl:datamapbind property="value" category="PROPERTY" datacontrolid="OptionInnodep" columnname="PlayerServerPort"/>
+        <cl:formdata std:sid="f-data-37d174e6" row="11" col="1"/>
+      </cl:inputbox>
+      <cl:group std:sid="group-c93eb2f0">
+        <cl:formdata std:sid="f-data-abe73e1d" row="0" col="1"/>
+        <cl:button std:sid="button-21752c15" id="btnSave" class="userInfo_btn">
+          <cl:listener std:sid="listener-11e35f45" name="click" handler="onBtnSaveClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Save"/>
+          <cl:formdata std:sid="f-data-ac0486fd" row="0" col="1"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-2ad54164" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-cf98b57a" hspace="0px" vspace="0px">
+        <cl:rows length="35" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" hidden="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="250" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-db383570"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

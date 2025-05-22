@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-bf781811" version="1.0.0.0">
+  <head std:sid="head-31b496e1">
+    <title>webNotice</title>
+    <screen std:sid="screen-33b6a258" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="350" customWidth="450"/>
+    <screen std:sid="screen-adce0062" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-88d7627d" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-441fe086">
+      <cl:datamap std:sid="d-map-9f004e22" id="WebNoticeInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-399319b8" name="Title"/>
+          <cl:datacolumn std:sid="d-column-74463062" name="Message"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-b9d1a461" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-47cd8969" name="ResultCode"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-46e414da" id="sms_getWebNotice" method="get" action="/v1/jawoondae/notice">
+        <cl:listener std:sid="listener-b3d1e4ba" name="submit-done" handler="onSms_getWebNoticeSubmitDone"/>
+        <cl:listener std:sid="listener-17fbd5cd" name="submit-error" handler="onSms_getWebNoticeSubmitError"/>
+        <cl:listener std:sid="listener-0b627414" name="submit-timeout" handler="onSms_getWebNoticeSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="WebNoticeInfo"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec dev-comment="wnpp&#xD;&#xA;&#xD;&#xA;"/>
+  </head>
+  <body std:sid="body-f9726d0b" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-4a6b0564" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-153bfd0a" style="padding:5px;">
+      <cl:xylayoutdata std:sid="xyl-data-f739c928" top="1px" right="1px" bottom="1px" left="1px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-6306bfd7">
+        <cl:formdata std:sid="f-data-8cab7863" row="0" col="0"/>
+        <cl:output std:sid="output-9fda1bd8" id="wnpp_opbTitle">
+          <cl:datamapbind property="value" datacontrolid="WebNoticeInfo" columnname="Title"/>
+          <cl:formdata std:sid="f-data-390443c5" row="0" col="1"/>
+        </cl:output>
+        <cl:output std:sid="output-2c96bc36" class="userInfo_bold" value="공지사항">
+          <cl:formdata std:sid="f-data-df51b3b7" row="0" col="0"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-6d2c8e37">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-b538b351">
+        <cl:formdata std:sid="f-data-8f474368" row="1" col="0"/>
+        <cl:group std:sid="group-59a8e199">
+          <cl:formdata std:sid="f-data-660bf657" row="1" col="0"/>
+          <cl:button std:sid="button-29ebf5aa" id="wnpp_btnClose" class="userInfo_btn" value="닫기">
+            <cl:listener std:sid="listener-3f8124df" name="click" handler="onWnpp_btnCloseClick"/>
+            <cl:formdata std:sid="f-data-55f80511" row="0" col="1"/>
+          </cl:button>
+          <cl:formlayout std:sid="f-layout-c10baa5e">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="120" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="1" unit="FRACTION" autoSizing="false" minlength="0"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:textarea std:sid="t-area-a9f75ec4" id="wnpp_opbMessage" style="font-weight:normal; font-size:14px;">
+          <cl:datamapbind property="value" datacontrolid="WebNoticeInfo" columnname="Message"/>
+          <cl:formdata std:sid="f-data-982a2e5b" row="0" col="0"/>
+        </cl:textarea>
+        <cl:formlayout std:sid="f-layout-1d60a8d5">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-f4f5b26a">
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-c0777a2a"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

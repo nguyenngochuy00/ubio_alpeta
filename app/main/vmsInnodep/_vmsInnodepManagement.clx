@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-8e1878aa" version="1.0.0.0">
+  <head std:sid="head-d6ee10b3">
+    <title>_vmsInnodepManagement</title>
+    <screen std:sid="screen-6f36bf74" id="default" height="768px" minwidth="1024px" name="default" width="1024px"/>
+    <screen std:sid="screen-2aa57a8c" id="tablet" height="667px" maxwidth="1023px" minwidth="500px" name="tablet" width="500px"/>
+    <screen std:sid="screen-22262e3b" id="mobile" height="525px" maxwidth="499px" name="mobile" width="350px"/>
+    <cl:model std:sid="model-5825cce3">
+      <cl:dataset std:sid="d-set-774d5c2c" id="dsDeviceInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-8a9d0c3a" name="deviceSerial"/>
+          <cl:datacolumn std:sid="d-column-8c6d850c" name="channelName"/>
+          <cl:datacolumn std:sid="d-column-8dd69ae8" name="channelSerial"/>
+          <cl:datacolumn std:sid="d-column-233353bd" name="channelMediaSerial"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-31601898" id="dsDeviceList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-a16b10e0" name="deviceSerial"/>
+          <cl:datacolumn std:sid="d-column-cee8cb4a" name="rtspUrl"/>
+          <cl:datacolumn std:sid="d-column-9d076df8" name="deviceName"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-9d2f207b" id="OptionInnodep">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-7448f150" defaultvalue="" name="ServerIP"/>
+          <cl:datacolumn std:sid="d-column-48763c00" datatype="number" defaultvalue="0" name="ServerPort"/>
+          <cl:datacolumn std:sid="d-column-d9f6242c" defaultvalue="" name="UserID"/>
+          <cl:datacolumn std:sid="d-column-b0f131c4" defaultvalue="" name="UserPW"/>
+          <cl:datacolumn std:sid="d-column-3ef275c7" defaultvalue="" name="License"/>
+          <cl:datacolumn std:sid="d-column-8a309048" datatype="number" defaultvalue="0" name="UseRecording"/>
+          <cl:datacolumn std:sid="d-column-196a58e2" datatype="number" defaultvalue="0" name="RegularRecording"/>
+          <cl:datacolumn std:sid="d-column-9b5d3614" datatype="number" defaultvalue="0" name="BeforeRecordingTime"/>
+          <cl:datacolumn std:sid="d-column-f0acf40f" datatype="number" defaultvalue="0" name="AfterRecordingTime"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-99a6a51e" id="smsGetOptionInnodep" action="/v1/options/innodep" method="get">
+        <cl:listener std:sid="listener-02c19d67" handler="onSmsGetOptionInnodepSubmitDone" name="submit-done"/>
+        <cl:listener std:sid="listener-456a0c88" handler="onSmsGetOptionInnodepSubmitSuccess" name="submit-success"/>
+        <cl:listener std:sid="listener-050acd40" handler="onSmsGetOptionInnodepSubmitError" name="submit-error"/>
+        <cl:listener std:sid="listener-56747fdd" handler="onSmsGetOptionInnodepSubmitTimeout" name="submit-timeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="OptionInnodep"/>
+      </cl:submission>
+      <cl:datamap std:sid="d-map-35d85d5a" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-fae20911" datatype="number" name="ResultCode"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:dataset std:sid="d-set-fb4ace31" id="dsInnodepList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-d088af47" datatype="number" name="TerminalID"/>
+          <cl:datacolumn std:sid="d-column-405f176f" name="DevName1"/>
+          <cl:datacolumn std:sid="d-column-394b082f" name="DevSerial1"/>
+          <cl:datacolumn std:sid="d-column-b90ed561" name="DevName2"/>
+          <cl:datacolumn std:sid="d-column-d0632883" name="DevSerial2"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:submission std:sid="submission-98a1998c" id="smsPostInnodepList" action="/v1/innodeps/">
+        <cl:listener std:sid="listener-a10617ec" handler="onSmsPostInnodepListSubmitDone" name="submit-done"/>
+        <cl:requestdata dataid="dsInnodepList"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-5fccd452" id="smsGetInnodepList" action="/v1/innodeps/" method="get">
+        <cl:listener std:sid="listener-bb710a66" handler="onSmsGetInnodepListSubmitDone" name="submit-done"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="dsInnodepList"/>
+      </cl:submission>
+      <cl:dataset std:sid="d-set-a944bb60" id="TerminalList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-ee1b992f" datatype="number" name="ID"/>
+          <cl:datacolumn std:sid="d-column-e70a2aaf" name="Name"/>
+          <cl:datacolumn std:sid="d-column-3cefac9b" datatype="number" name="GroupID"/>
+          <cl:datacolumn std:sid="d-column-5cf4c402" datatype="number" name="State"/>
+          <cl:datacolumn std:sid="d-column-c4fc3712" datatype="number" name="Type"/>
+          <cl:datacolumn std:sid="d-column-492998a9" datatype="number" name="FuncType"/>
+          <cl:datacolumn std:sid="d-column-e12df5a7" name="IPAddress"/>
+          <cl:datacolumn std:sid="d-column-22bfd19b" name="MacAddress"/>
+          <cl:datacolumn std:sid="d-column-b2892abb" name="Version"/>
+          <cl:datacolumn std:sid="d-column-23520194" datatype="number" name="RemoteDoor"/>
+          <cl:datacolumn std:sid="d-column-fb8644d3" datatype="number" name="UTCIndex"/>
+          <cl:datacolumn std:sid="d-column-d6de68a8" datatype="number" name="GroupCode"/>
+          <cl:datacolumn std:sid="d-column-e4f2b949" name="Description"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-b5bf4ffe" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-d9924134" datatype="number" name="Count"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-ef1cabb2" id="sms_getTerminalList" action="/v1/terminals" method="get">
+        <cl:listener std:sid="listener-84299b8a" handler="onSms_getTerminalListSubmitDone" name="submit-done"/>
+        <cl:listener std:sid="listener-61de4814" handler="onSms_getTerminalListSubmitError" name="submit-error"/>
+        <cl:listener std:sid="listener-74033823" handler="onSms_getTerminalListSubmitTimeout" name="submit-timeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total"/>
+        <cl:responsedata dataid="TerminalList"/>
+      </cl:submission>
+      <cl:dataset std:sid="d-set-b680bfb5" id="dsInnodepList2">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-862e465b" datatype="number" name="TerminalID"/>
+          <cl:datacolumn std:sid="d-column-3885ed10" name="DevName1"/>
+          <cl:datacolumn std:sid="d-column-ae6570c9" name="DevSerial1"/>
+          <cl:datacolumn std:sid="d-column-22adf9e2" name="DevName2"/>
+          <cl:datacolumn std:sid="d-column-b8c79511" name="DevSerial2"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-e912f010" id="dsSearchOnvifCamList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-47cbff19" name="address"/>
+          <cl:datacolumn std:sid="d-column-195b5d3d" name="firmware"/>
+          <cl:datacolumn std:sid="d-column-60ed545d" name="location"/>
+          <cl:datacolumn std:sid="d-column-74bf1fa3" name="model"/>
+          <cl:datacolumn std:sid="d-column-4ede583f" name="protocol"/>
+          <cl:datacolumn std:sid="d-column-5853c390" name="dev_name"/>
+          <cl:datacolumn std:sid="d-column-193cb8c9" name="dev_wport"/>
+          <cl:datacolumn std:sid="d-column-ae49c29d" name="dev_user"/>
+          <cl:datacolumn std:sid="d-column-0dfc0d00" name="dev_pwd"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-4bb39dd0" id="dsRecordServerList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-47958c46" name="srv_id"/>
+          <cl:datacolumn std:sid="d-column-3c315e5b" name="vms_id"/>
+          <cl:datacolumn std:sid="d-column-8e74db0f" datatype="number" name="srv_serial"/>
+          <cl:datacolumn std:sid="d-column-7a183fa5" name="srv_name"/>
+          <cl:datacolumn std:sid="d-column-0c18f73c" datatype="number" name="srv_type"/>
+          <cl:datacolumn std:sid="d-column-b5958c25" name="srv_svc_addr"/>
+          <cl:datacolumn std:sid="d-column-c6bba7f8" datatype="number" name="srv_svc_port"/>
+          <cl:datacolumn std:sid="d-column-ff6b3907" datatype="number" displayonly="false" name="srv_stat"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-badec1b2" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-5dc10ac5" handler="onBodyLoad" name="load"/>
+    <cl:listener std:sid="listener-bae8b452" handler="onBodyUnload" name="unload"/>
+    <cl:grid std:sid="grid-cba44ded" id="grd_DeviceList" datasetid="dsDeviceList" visible="true">
+      <cl:listener std:sid="listener-b2d4acf6" handler="onGrd_DeviceListSelectionChange" name="selection-change"/>
+      <cl:xylayoutdata std:sid="xyl-data-77ae157f" height="344px" horizontalAnchor="LEFT" left="32px" top="37px" verticalAnchor="TOP" width="255px"/>
+      <cl:gridcolumn std:sid="g-column-78beb45d"/>
+      <cl:gridcolumn std:sid="g-column-9281f858"/>
+      <cl:gridcolumn std:sid="g-column-da2dbbed"/>
+      <cl:gridheader std:sid="gh-band-1b707993">
+        <cl:gridrow std:sid="g-row-67d666bc"/>
+        <cl:gridcell std:sid="gh-cell-57f8d6d6" colindex="0" rowindex="0" filterable="false" sortable="false" targetcolumnname="deviceSerial" text="deviceSerial" visible="false"/>
+        <cl:gridcell std:sid="gh-cell-6b7b0663" colindex="1" rowindex="0" filterable="false" sortable="false" targetcolumnname="rtspUrl" text="rtspUrl" visible="false"/>
+        <cl:gridcell std:sid="gh-cell-b1a0f3ad" colindex="2" rowindex="0" filterable="false" sortable="false" targetcolumnname="deviceName" text="deviceName">
+          <cl:langbind category="PROPERTY" property="text" keypath="Str_DeviceName"/>
+        </cl:gridcell>
+      </cl:gridheader>
+      <cl:griddetail std:sid="gd-band-d2f432d4">
+        <cl:gridrow std:sid="g-row-3aff495a"/>
+        <cl:gridcell std:sid="gd-cell-b3caa34b" colindex="0" rowindex="0" columnname="deviceSerial"/>
+        <cl:gridcell std:sid="gd-cell-6363c451" colindex="1" rowindex="0" columnname="rtspUrl"/>
+        <cl:gridcell std:sid="gd-cell-e250469f" colindex="2" rowindex="0" columnname="deviceName"/>
+      </cl:griddetail>
+    </cl:grid>
+    <cl:uicontrolshell std:sid="uic-shell-72d07eb6" id="shl_player1" style="border-right-style:solid; border-bottom-color:#d02222; border-left-style:solid; border-left-color:#d02222; border-top-color:#d02222; border-bottom-style:solid; border-right-color:#d02222; border-top-style:solid;">
+      <cl:listener std:sid="listener-ca4dece1" handler="onShl_player1Load" name="load"/>
+      <cl:xylayoutdata std:sid="xyl-data-2a064cb5" height="167px" horizontalAnchor="LEFT" left="308px" top="37px" verticalAnchor="TOP" width="253px"/>
+    </cl:uicontrolshell>
+    <cl:uicontrolshell std:sid="uic-shell-741b8a0f" id="shl_player2" style="border-right-style:solid; border-bottom-color:#d02222; border-left-style:solid; border-left-color:#d02222; border-top-color:#d02222; border-bottom-style:solid; border-right-color:#d02222; border-top-style:solid;">
+      <cl:listener std:sid="listener-b11ce042" handler="onShl_player2Load" name="load"/>
+      <cl:xylayoutdata std:sid="xyl-data-5745d328" height="167px" horizontalAnchor="LEFT" left="571px" top="37px" verticalAnchor="TOP" width="253px"/>
+    </cl:uicontrolshell>
+    <cl:uicontrolshell std:sid="uic-shell-78c6aa45" id="shl_player3" style="border-right-style:solid; border-bottom-color:#d02222; border-left-style:solid; border-left-color:#d02222; border-top-color:#d02222; border-bottom-style:solid; border-right-color:#d02222; border-top-style:solid;">
+      <cl:listener std:sid="listener-711c2a6f" handler="onShl_player3Load" name="load"/>
+      <cl:xylayoutdata std:sid="xyl-data-32e577dd" height="167px" horizontalAnchor="LEFT" left="834px" top="37px" verticalAnchor="TOP" width="253px"/>
+    </cl:uicontrolshell>
+    <cl:uicontrolshell std:sid="uic-shell-3c7c6076" id="shl_player4" style="border-right-style:solid; border-bottom-color:#d02222; border-left-style:solid; border-left-color:#d02222; border-top-color:#d02222; border-bottom-style:solid; border-right-color:#d02222; border-top-style:solid;">
+      <cl:listener std:sid="listener-e317ed80" handler="onShl_player4Load" name="load"/>
+      <cl:xylayoutdata std:sid="xyl-data-70057506" height="167px" horizontalAnchor="LEFT" left="308px" top="214px" verticalAnchor="TOP" width="253px"/>
+    </cl:uicontrolshell>
+    <cl:button std:sid="button-16feac1a" value="매칭 리스트 저장">
+      <cl:listener std:sid="listener-d0cb118e" handler="onButtonClick" name="click"/>
+      <cl:xylayoutdata std:sid="xyl-data-80ee2552" height="20px" horizontalAnchor="LEFT" left="32px" top="625px" verticalAnchor="TOP" width="242px"/>
+    </cl:button>
+    <cl:button std:sid="button-e29a5f7f" value="매칭 리스트 가져오기">
+      <cl:listener std:sid="listener-7104096d" handler="onButtonClick2" name="click"/>
+      <cl:xylayoutdata std:sid="xyl-data-07f23708" height="20px" horizontalAnchor="LEFT" left="32px" top="595px" verticalAnchor="TOP" width="242px"/>
+    </cl:button>
+    <cl:button std:sid="button-1ec6928e" value="매칭 리스트 초기화">
+      <cl:listener std:sid="listener-be99bede" handler="onButtonClick3" name="click"/>
+      <cl:xylayoutdata std:sid="xyl-data-a89aebea" height="20px" horizontalAnchor="LEFT" left="32px" top="655px" verticalAnchor="TOP" width="242px"/>
+    </cl:button>
+    <cl:grid std:sid="grid-629286ec" id="grdTest" datasetid="dsInnodepList" visible="true">
+      <cl:xylayoutdata std:sid="xyl-data-7f7303d8" height="151px" horizontalAnchor="LEFT" left="308px" top="579px" verticalAnchor="TOP" width="527px"/>
+      <cl:gridcolumn std:sid="g-column-2c31dede"/>
+      <cl:gridcolumn std:sid="g-column-019097e4"/>
+      <cl:gridcolumn std:sid="g-column-1d5d65e8"/>
+      <cl:gridcolumn std:sid="g-column-a33e0c5b"/>
+      <cl:gridcolumn std:sid="g-column-d453ecf6"/>
+      <cl:gridheader std:sid="gh-band-c2a473a2">
+        <cl:gridrow std:sid="g-row-af5236da"/>
+        <cl:gridcell std:sid="gh-cell-91d698b3" colindex="0" rowindex="0" filterable="false" sortable="false" targetcolumnname="TerminalID" text="TerminalID"/>
+        <cl:gridcell std:sid="gh-cell-d5eb7573" colindex="1" rowindex="0" filterable="false" sortable="false" targetcolumnname="DevName1" text="DevName1"/>
+        <cl:gridcell std:sid="gh-cell-681f5776" colindex="2" rowindex="0" filterable="false" sortable="false" targetcolumnname="DevSerial1" text="DevSerial1"/>
+        <cl:gridcell std:sid="gh-cell-69f68b3a" colindex="3" rowindex="0" filterable="false" sortable="false" targetcolumnname="DevName2" text="DevName2"/>
+        <cl:gridcell std:sid="gh-cell-5f7efc3c" colindex="4" rowindex="0" filterable="false" sortable="false" targetcolumnname="DevSerial2" text="DevSerial2"/>
+      </cl:gridheader>
+      <cl:griddetail std:sid="gd-band-2b3740bf">
+        <cl:gridrow std:sid="g-row-49ff3bf3"/>
+        <cl:gridcell std:sid="gd-cell-58f01ee6" colindex="0" rowindex="0" columnname="TerminalID"/>
+        <cl:gridcell std:sid="gd-cell-4510e41e" colindex="1" rowindex="0" columnname="DevName1">
+          <cl:combobox std:sid="c-box-e7a397cd" id="cmbDevName1">
+            <cl:listener std:sid="listener-7b9b5de2" handler="onCmbDevName1SelectionChange2" name="selection-change"/>
+          </cl:combobox>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gd-cell-da615ecc" colindex="2" rowindex="0" columnname="DevSerial1"/>
+        <cl:gridcell std:sid="gd-cell-97deafda" colindex="3" rowindex="0" columnname="DevName2">
+          <cl:combobox std:sid="c-box-9c5faceb" id="cmbDevName2">
+            <cl:listener std:sid="listener-0a4dd064" handler="onCmbDevName2SelectionChange2" name="selection-change"/>
+          </cl:combobox>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gd-cell-b94a33cf" colindex="4" rowindex="0" columnname="DevSerial2"/>
+      </cl:griddetail>
+    </cl:grid>
+    <cl:uicontrolshell std:sid="uic-shell-0575b248" id="shl_player5" style="border-right-style:solid; border-bottom-color:#d02222; border-left-style:solid; border-left-color:#d02222; border-top-color:#d02222; border-bottom-style:solid; border-right-color:#d02222; border-top-style:solid;">
+      <cl:listener std:sid="listener-36cf9d28" handler="onShl_player5Load" name="load"/>
+      <cl:xylayoutdata std:sid="xyl-data-ad2cc74e" height="167px" horizontalAnchor="LEFT" left="571px" top="214px" verticalAnchor="TOP" width="253px"/>
+    </cl:uicontrolshell>
+    <cl:uicontrolshell std:sid="uic-shell-06d556f5" id="shl_player6" style="border-right-style:solid; border-bottom-color:#d02222; border-left-style:solid; border-left-color:#d02222; border-top-color:#d02222; border-bottom-style:solid; border-right-color:#d02222; border-top-style:solid;">
+      <cl:listener std:sid="listener-718fb560" handler="onShl_player6Load" name="load"/>
+      <cl:xylayoutdata std:sid="xyl-data-ed7f7aa1" height="167px" horizontalAnchor="LEFT" left="834px" top="214px" verticalAnchor="TOP" width="253px"/>
+    </cl:uicontrolshell>
+    <cl:uicontrolshell std:sid="uic-shell-49ea39b8" id="shl_player7" style="border-right-style:solid; border-bottom-color:#d02222; border-left-style:solid; border-left-color:#d02222; border-top-color:#d02222; border-bottom-style:solid; border-right-color:#d02222; border-top-style:solid;">
+      <cl:listener std:sid="listener-b616bfed" handler="onShl_player7Load" name="load"/>
+      <cl:xylayoutdata std:sid="xyl-data-85925bd4" height="167px" horizontalAnchor="LEFT" left="308px" top="394px" verticalAnchor="TOP" width="253px"/>
+    </cl:uicontrolshell>
+    <cl:uicontrolshell std:sid="uic-shell-cc6597a9" id="shl_player8" style="border-right-style:solid; border-bottom-color:#d02222; border-left-style:solid; border-left-color:#d02222; border-top-color:#d02222; border-bottom-style:solid; border-right-color:#d02222; border-top-style:solid;">
+      <cl:listener std:sid="listener-a8928ff2" handler="onShl_player8Load" name="load"/>
+      <cl:xylayoutdata std:sid="xyl-data-e9de05fb" height="167px" horizontalAnchor="LEFT" left="571px" top="394px" verticalAnchor="TOP" width="253px"/>
+    </cl:uicontrolshell>
+    <cl:uicontrolshell std:sid="uic-shell-c21fe185" id="shl_player9" style="border-right-style:solid; border-bottom-color:#d02222; border-left-style:solid; border-left-color:#d02222; border-top-color:#d02222; border-bottom-style:solid; border-right-color:#d02222; border-top-style:solid;">
+      <cl:listener std:sid="listener-76206753" handler="onShl_player9Load" name="load"/>
+      <cl:xylayoutdata std:sid="xyl-data-04bf7fc9" height="167px" horizontalAnchor="LEFT" left="834px" top="394px" verticalAnchor="TOP" width="253px"/>
+    </cl:uicontrolshell>
+    <cl:button std:sid="button-b05fc86e" id="btnLeft" style="background-color:#e3e3e3; color:#000000;" value="Left">
+      <cl:listener std:sid="listener-d818b328" handler="onBtnLeftClick" name="click"/>
+      <cl:listener std:sid="listener-bba77c2b" handler="onBtnLeftMousedown" name="mousedown"/>
+      <cl:listener std:sid="listener-0a05dd44" handler="onBtnLeftMouseup" name="mouseup"/>
+      <cl:xylayoutdata std:sid="xyl-data-62841796" height="41px" horizontalAnchor="LEFT" left="39px" top="459px" verticalAnchor="TOP" width="78px"/>
+    </cl:button>
+    <cl:button std:sid="button-3b6847d2" id="btnRight" style="background-color:#e3e3e3; color:#000000;" value="Right">
+      <cl:listener std:sid="listener-58bcb7f4" handler="onBtnRightClick" name="click"/>
+      <cl:listener std:sid="listener-f8800f3f" handler="onBtnRightMousedown" name="mousedown"/>
+      <cl:listener std:sid="listener-a9caf1e0" handler="onBtnRightMouseup" name="mouseup"/>
+      <cl:xylayoutdata std:sid="xyl-data-8948541f" height="42px" horizontalAnchor="LEFT" left="174px" top="459px" verticalAnchor="TOP" width="80px"/>
+    </cl:button>
+    <cl:button std:sid="button-b999bedf" id="btnBottom" style="background-color:#e3e3e3; color:#000000;" value="bottom">
+      <cl:listener std:sid="listener-ff410e31" handler="onBtnBottomClick" name="click"/>
+      <cl:listener std:sid="listener-f7496579" handler="onBtnBottomMousedown" name="mousedown"/>
+      <cl:listener std:sid="listener-db9afbf1" handler="onBtnBottomMouseup" name="mouseup"/>
+      <cl:xylayoutdata std:sid="xyl-data-45a38bf6" height="42px" horizontalAnchor="LEFT" left="103px" top="508px" verticalAnchor="TOP" width="80px"/>
+    </cl:button>
+    <cl:button std:sid="button-8270e83b" id="btnTop" style="background-color:#e3e3e3; color:#000000;" value="top">
+      <cl:listener std:sid="listener-e3f7f345" handler="onBtnTopClick" name="click"/>
+      <cl:listener std:sid="listener-95190acf" handler="onBtnTopMousedown" name="mousedown"/>
+      <cl:listener std:sid="listener-075bd0ca" handler="onBtnTopMouseup" name="mouseup"/>
+      <cl:xylayoutdata std:sid="xyl-data-e175849b" height="44px" horizontalAnchor="LEFT" left="102px" top="405px" verticalAnchor="TOP" width="82px"/>
+    </cl:button>
+    <cl:button std:sid="button-ab761a40" id="btnDevSearch" value="장비 검색">
+      <cl:listener std:sid="listener-6899e0e6" handler="onBtnDevSearchClick" name="click"/>
+      <cl:xylayoutdata std:sid="xyl-data-93c7c590" height="20px" horizontalAnchor="LEFT" left="32px" top="834px" verticalAnchor="TOP" width="242px"/>
+    </cl:button>
+    <cl:button std:sid="button-1900e547" value="수정된 사항 저장">
+      <cl:xylayoutdata std:sid="xyl-data-828a7f2f" height="22px" horizontalAnchor="LEFT" left="32px" top="863px" verticalAnchor="TOP" width="243px"/>
+    </cl:button>
+    <cl:grid std:sid="grid-0904d833" id="grdSearchOnvifCamList" datasetid="dsSearchOnvifCamList" visible="true">
+      <cl:xylayoutdata std:sid="xyl-data-12fa296a" height="111px" horizontalAnchor="LEFT" left="308px" top="864px" verticalAnchor="TOP" width="759px"/>
+      <cl:gridcolumn std:sid="g-column-78212a0d"/>
+      <cl:gridcolumn std:sid="g-column-6bb3ea29"/>
+      <cl:gridcolumn std:sid="g-column-0e96f27b"/>
+      <cl:gridcolumn std:sid="g-column-09b17a48"/>
+      <cl:gridcolumn std:sid="g-column-bce5c644"/>
+      <cl:gridcolumn std:sid="g-column-19841844"/>
+      <cl:gridcolumn std:sid="g-column-e8bf6c67"/>
+      <cl:gridcolumn std:sid="g-column-cd2b7aaa"/>
+      <cl:gridcolumn std:sid="g-column-3d520c60"/>
+      <cl:gridheader>
+        <cl:gridrow std:sid="g-row-4c4ef6fd"/>
+        <cl:gridcell std:sid="gh-cell-1583fa6b" colindex="0" rowindex="0" filterable="false" sortable="false" targetcolumnname="address" text="address"/>
+        <cl:gridcell std:sid="gh-cell-f6852f35" colindex="1" rowindex="0" filterable="false" sortable="false" targetcolumnname="firmware" text="firmware"/>
+        <cl:gridcell std:sid="gh-cell-d8c0c098" colindex="2" rowindex="0" filterable="false" sortable="false" targetcolumnname="location" text="location"/>
+        <cl:gridcell std:sid="gh-cell-2bdd375a" colindex="3" rowindex="0" filterable="false" sortable="false" targetcolumnname="model" text="model"/>
+        <cl:gridcell std:sid="gh-cell-b898c083" colindex="4" rowindex="0" filterable="false" sortable="false" targetcolumnname="protocol" text="protocol"/>
+        <cl:gridcell std:sid="gh-cell-5252f75a" colindex="5" rowindex="0" filterable="false" sortable="false" targetcolumnname="dev_name" text="dev_name"/>
+        <cl:gridcell std:sid="gh-cell-a097e2c4" colindex="6" rowindex="0" filterable="false" sortable="false" targetcolumnname="dev_wport" text="dev_wport"/>
+        <cl:gridcell std:sid="gh-cell-5479cd8c" colindex="7" rowindex="0" filterable="false" sortable="false" targetcolumnname="dev_user" text="dev_user"/>
+        <cl:gridcell std:sid="gh-cell-aa19a449" colindex="8" rowindex="0" filterable="false" sortable="false" targetcolumnname="dev_pwd" text="dev_pwd"/>
+      </cl:gridheader>
+      <cl:griddetail>
+        <cl:gridrow std:sid="g-row-094e5087"/>
+        <cl:gridcell std:sid="gd-cell-18943f32" colindex="0" rowindex="0" columnname="address"/>
+        <cl:gridcell std:sid="gd-cell-76ad132c" colindex="1" rowindex="0" columnname="firmware"/>
+        <cl:gridcell std:sid="gd-cell-28b0fbf2" colindex="2" rowindex="0" columnname="location"/>
+        <cl:gridcell std:sid="gd-cell-1ced8c14" colindex="3" rowindex="0" columnname="model"/>
+        <cl:gridcell std:sid="gd-cell-f6fcb8ba" colindex="4" rowindex="0" columnname="protocol"/>
+        <cl:gridcell std:sid="gd-cell-e41149c7" colindex="5" rowindex="0" columnname="dev_name">
+          <cl:inputbox std:sid="i-box-8705b87d" id="ipb1"/>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gd-cell-39267f62" colindex="6" rowindex="0" columnname="dev_wport">
+          <cl:inputbox std:sid="i-box-f7f7a00f" id="ipb2"/>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gd-cell-908e419c" colindex="7" rowindex="0" columnname="dev_user">
+          <cl:inputbox std:sid="i-box-fea57f28" id="ipb3"/>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gd-cell-e3e99241" colindex="8" rowindex="0" columnname="dev_pwd">
+          <cl:inputbox std:sid="i-box-a00dac57" id="ipb4"/>
+        </cl:gridcell>
+      </cl:griddetail>
+    </cl:grid>
+    <cl:button std:sid="button-0fe228a3" value="레코딩 서버 조회">
+      <cl:listener std:sid="listener-c39f2952" handler="onButtonClick4" name="click"/>
+      <cl:xylayoutdata std:sid="xyl-data-dcf26626" height="22px" horizontalAnchor="LEFT" left="32px" top="804px" verticalAnchor="TOP" width="243px"/>
+    </cl:button>
+    <cl:grid std:sid="grid-43d4cf92" id="grdSearchRecordServerList" datasetid="dsRecordServerList" visible="true">
+      <cl:xylayoutdata std:sid="xyl-data-468b68fe" height="112px" horizontalAnchor="LEFT" left="308px" top="743px" verticalAnchor="TOP" width="760px"/>
+      <cl:gridcolumn std:sid="g-column-5ca33cf9"/>
+      <cl:gridcolumn std:sid="g-column-512fa10c"/>
+      <cl:gridcolumn std:sid="g-column-40c8fcf1"/>
+      <cl:gridcolumn std:sid="g-column-a30a53db"/>
+      <cl:gridcolumn std:sid="g-column-01c8cd97"/>
+      <cl:gridcolumn std:sid="g-column-f369e167"/>
+      <cl:gridcolumn std:sid="g-column-d279756e"/>
+      <cl:gridcolumn std:sid="g-column-d9928289"/>
+      <cl:gridheader>
+        <cl:gridrow std:sid="g-row-f30d77bc"/>
+        <cl:gridcell std:sid="gh-cell-18a33b11" colindex="0" rowindex="0" filterable="false" sortable="false" targetcolumnname="srv_id" text="srv_id"/>
+        <cl:gridcell std:sid="gh-cell-2ba0c548" colindex="1" rowindex="0" filterable="false" sortable="false" targetcolumnname="vms_id" text="vms_id"/>
+        <cl:gridcell std:sid="gh-cell-d3d15ecd" colindex="2" rowindex="0" filterable="false" sortable="false" targetcolumnname="srv_serial" text="srv_serial"/>
+        <cl:gridcell std:sid="gh-cell-6f19e0da" colindex="3" rowindex="0" filterable="false" sortable="false" targetcolumnname="srv_name" text="srv_name"/>
+        <cl:gridcell std:sid="gh-cell-04b0925c" colindex="4" rowindex="0" filterable="false" sortable="false" targetcolumnname="srv_type" text="srv_type"/>
+        <cl:gridcell std:sid="gh-cell-c42ab499" colindex="5" rowindex="0" filterable="false" sortable="false" targetcolumnname="srv_svc_addr" text="srv_svc_addr"/>
+        <cl:gridcell std:sid="gh-cell-734f41ca" colindex="6" rowindex="0" filterable="false" sortable="false" targetcolumnname="srv_svc_port" text="srv_svc_port"/>
+        <cl:gridcell std:sid="gh-cell-b699bdb1" colindex="7" rowindex="0" filterable="false" sortable="false" targetcolumnname="srv_stat" text="srv_stat"/>
+      </cl:gridheader>
+      <cl:griddetail>
+        <cl:gridrow std:sid="g-row-8bf16a44"/>
+        <cl:gridcell std:sid="gd-cell-30f575ea" colindex="0" rowindex="0" columnname="srv_id"/>
+        <cl:gridcell std:sid="gd-cell-35da4964" colindex="1" rowindex="0" columnname="vms_id"/>
+        <cl:gridcell std:sid="gd-cell-fea68f18" colindex="2" rowindex="0" columnname="srv_serial"/>
+        <cl:gridcell std:sid="gd-cell-2d0a5be7" colindex="3" rowindex="0" columnname="srv_name"/>
+        <cl:gridcell std:sid="gd-cell-5678ba90" colindex="4" rowindex="0" columnname="srv_type"/>
+        <cl:gridcell std:sid="gd-cell-672bdece" colindex="5" rowindex="0" columnname="srv_svc_addr"/>
+        <cl:gridcell std:sid="gd-cell-b39ae6fd" colindex="6" rowindex="0" columnname="srv_svc_port"/>
+        <cl:gridcell std:sid="gd-cell-6c8b1134" colindex="7" rowindex="0" columnname="srv_stat"/>
+      </cl:griddetail>
+    </cl:grid>
+    <cl:xylayout std:sid="xylayout-73048894"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

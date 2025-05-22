@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-bdfb15be" version="1.0.0.0">
+  <head std:sid="head-3cb0d851">
+    <title>siteNameManagement</title>
+    <screen std:sid="screen-1286f3e4" id="default" name="default" minwidth="1024px" width="1024px" height="768px"/>
+    <screen std:sid="screen-98c1419d" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-b32bd799" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-f5b9fb26">
+      <cl:datamap std:sid="d-map-e306c6f2" id="SiteInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-552c8472" name="SiteName"/>
+          <cl:datacolumn std:sid="d-column-eba05db2" name="SiteLogo"/>
+          <cl:datacolumn std:sid="d-column-d4531298" name="SiteMessageWarning"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-cedbe583" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-87513087" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-39743411" id="sms_postSiteInfo" action="/v1/armyhq/siteInfo">
+        <cl:listener std:sid="listener-16290880" name="submit-done" handler="onSms_postSiteInfoSubmitDone"/>
+        <cl:listener std:sid="listener-66a97933" name="submit-error" handler="onSubmitError"/>
+        <cl:listener std:sid="listener-f5ca6ad9" name="submit-timeout" handler="onSubmitTimeout"/>
+        <cl:requestdata dataid="SiteInfo"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-479caef0" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-6f7acdb3" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-5956d25c" style="color:#010101;">
+      <cl:xylayoutdata std:sid="xyl-data-1ce0bed1" top="25px" bottom="0px" left="50px" width="415px" horizontalAnchor="LEFT" verticalAnchor="BOTH"/>
+      <cl:output std:sid="output-632d22dd" class="section-green-top-amhq" visible="true" value="부대명">
+        <cl:formdata std:sid="f-data-548902ea" row="2" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-9c503584" class="section-green-amhq" visible="true" value="부대 로고">
+        <cl:formdata std:sid="f-data-bfda4846" row="3" col="0"/>
+      </cl:output>
+      <cl:img std:sid="image-0374e4a9" id="SMSNM_imgSiteLogo" style="background-repeat:no-repeat; background-size:contain; background-position:center;" class="section-white-amhq">
+        <cl:formdata std:sid="f-data-d8d41652" row="4" col="0" rowspan="1" colspan="2"/>
+      </cl:img>
+      <cl:group std:sid="group-2c5921ff" style="color:#010101;">
+        <cl:formdata std:sid="f-data-5844ac13" row="7" col="1"/>
+        <cl:button std:sid="button-22a185c5" id="SMSNM_btnSave" style="padding-top:0px; padding-left:0px; padding-bottom:0px; padding-right:0px;" class="button-green-amhq" value="저장">
+          <cl:listener std:sid="listener-e186df27" name="click" handler="onSMSNM_btnSaveClick"/>
+          <cl:formdata std:sid="f-data-f479926e" row="0" col="1"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-5da4adaa" scrollable="false" hspace="1px" vspace="1px" top-margin="1px" right-margin="1px" bottom-margin="1px" left-margin="1px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="120" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-67a0da6e">
+        <cl:formdata std:sid="f-data-0c6d050e" row="0" col="0" rowspan="1" colspan="2"/>
+        <cl:output std:sid="output-d304fa2a" class="menu-title-amhq" value="부대명 관리">
+          <cl:formdata std:sid="f-data-94a59bd5" row="0" col="0" rowspan="1" colspan="2"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-c5ffb928" scrollable="false" hspace="1px" vspace="1px" top-margin="1px" right-margin="1px" bottom-margin="1px" left-margin="1px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="200" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:output std:sid="output-375a863b" class="section-green-amhq" visible="true" value="경고문">
+        <cl:formdata std:sid="f-data-5eb4f59d" row="5" col="0"/>
+      </cl:output>
+      <cl:group std:sid="group-3aa006d2" class="section-white-top-amhq">
+        <cl:formdata std:sid="f-data-df4d927d" row="2" col="1"/>
+        <cl:inputbox std:sid="i-box-4369d44c" id="SMSNM_ipbSiteName" style="color:#010101; font-size:13px;">
+          <cl:datamapbind property="value" datacontrolid="SiteInfo" columnname="SiteName"/>
+          <cl:formdata std:sid="f-data-d6b808f4" row="0" col="0"/>
+        </cl:inputbox>
+        <cl:formlayout std:sid="f-layout-6a903b31" scrollable="false" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-ca007594" class="section-white-amhq">
+        <cl:formdata std:sid="f-data-9a0fb7f2" row="3" col="1"/>
+        <cl:fileinput std:sid="f-input-411967bd" id="SMSNM_fiSiteLogo" style="color:#010101; font-size:13px;" placeholder="로고를 변경하시려면 여기를 클릭해주세요" acceptfile=".jpg,.png">
+          <cl:listener std:sid="listener-1bedd2fe" name="value-change" handler="onSMSNM_fiSiteLogoValueChange"/>
+          <cl:formdata std:sid="f-data-2b84353a" row="0" col="0"/>
+        </cl:fileinput>
+        <cl:formlayout std:sid="f-layout-e18a1b51" scrollable="false" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-2c247985" class="section-white-amhq">
+        <cl:formdata std:sid="f-data-3984bd67" row="5" col="1"/>
+        <cl:inputbox std:sid="i-box-ddb415b8" id="SMSNM_ipbSiteMessageWarning" style="color:#010101; font-size:13px;">
+          <cl:datamapbind property="value" datacontrolid="SiteInfo" columnname="SiteMessageWarning"/>
+          <cl:formdata std:sid="f-data-1bcf9dc8" row="0" col="0"/>
+        </cl:inputbox>
+        <cl:formlayout std:sid="f-layout-38f8d8ba" scrollable="false" hspace="5px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-f8f4a860" scrollable="false" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+        <cl:rows length="35" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="200" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="100" unit="PIXEL"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-10686a14" scrollable="false"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

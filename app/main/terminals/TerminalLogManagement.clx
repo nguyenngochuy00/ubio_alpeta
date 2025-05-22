@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-32e2c8d8" version="1.0.0.0">
+  <head std:sid="head-5516bda7">
+    <title>TerminalLogManagement</title>
+    <screen std:sid="screen-0ab16609" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="400" customWidth="1000"/>
+    <screen std:sid="screen-301bcfb6" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-09343c8b" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-80e7cd4e">
+      <cl:dataset std:sid="d-set-a944bb60" id="TerminalList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-978122b3" name="ID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-44490be6" name="Name"/>
+          <cl:datacolumn std:sid="d-column-c1cb3f86" name="LogCount" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-0aa356da" name="Result"/>
+          <cl:datacolumn std:sid="d-column-73fc3688" name="Status" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-174ba88d" id="GroupList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-875a8c43" name="GroupID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-2bd00093" name="Parent" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-7800f118" name="Name"/>
+          <cl:datacolumn std:sid="d-column-9aecd285" name="Description"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-35e80197" id="ReqTerminalList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-06884270" name="TerminalID" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-c35df153" name="rowIndex" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-b5bf4ffe" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-9cbf6e19" name="Count" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-78a7689a" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-e8343441" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-9fed1940" id="sms_getTerminalList" method="get" action="/v1/terminals">
+        <cl:listener std:sid="listener-8c3c7448" name="submit-success" handler="onSms_getTerminalListSubmitSuccess"/>
+        <cl:listener std:sid="listener-8f644cec" name="submit-done" handler="onSms_getTerminalListSubmitDone"/>
+        <cl:listener std:sid="listener-857dd746" name="submit-error" handler="onSubmitError"/>
+        <cl:listener std:sid="listener-aa538c0d" name="submit-timeout" handler="onSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total"/>
+        <cl:responsedata dataid="TerminalList"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-d21681eb" id="sms_getTerminalLogCount" method="get">
+        <cl:listener std:sid="listener-87fa7468" name="submit-done" handler="onSms_getTerminalLogCountSubmitDone"/>
+        <cl:listener std:sid="listener-8d4693f8" name="submit-error" handler="onSubmitError"/>
+        <cl:listener std:sid="listener-6e98923a" name="submit-timeout" handler="onSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-21a8a6e1" id="sms_getTerminalLogData" method="get">
+        <cl:listener std:sid="listener-61c44b2f" name="submit-done" handler="onSms_getTerminalLogDataSubmitDone"/>
+        <cl:listener std:sid="listener-e8292506" name="submit-error" handler="onSubmitError"/>
+        <cl:listener std:sid="listener-6c184df0" name="submit-timeout" handler="onSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-01e894e4" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-4416e3d1" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-1bcd7370">
+      <cl:xylayoutdata std:sid="xyl-data-234eeb61" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-30b7367d" style="padding:10px 0px 0px 10px;" class="common-snbarea">
+        <cl:formdata std:sid="f-data-fbbb25a4" row="0" col="0"/>
+        <cl:mdifolder std:sid="mdifolder-d1420c47" id="mdi2" class="common-snbtab">
+          <cl:xylayoutdata std:sid="xyl-data-f076d62f" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+          <cl:tabitem std:sid="t-item-5778792e" selected="true" text="그룹">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_Group"/>
+            <cl:group std:sid="group-86f8df58">
+              <std:metadata>
+                <std:property key="locked" value="true"/>
+              </std:metadata>
+              <cl:tree std:sid="tree-f8e0feb2" id="TMLOM_treGroup" style="padding:0px 0px 0px 10px;" class="user_list">
+                <cl:listener std:sid="listener-e4824e0d" name="selection-change" handler="onTMLOM_treGroupSelectionChange"/>
+                <cl:xylayoutdata std:sid="xyl-data-4ced2da3" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+                <cl:treeitem std:sid="t-item-8884eff9" label="전체" value="0">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_All"/>
+                </cl:treeitem>
+                <cl:treeitemset datasetid="GroupList" label="Name" value="GroupID" parent="Parent"/>
+              </cl:tree>
+              <cl:xylayout std:sid="xylayout-655d9d16"/>
+            </cl:group>
+          </cl:tabitem>
+        </cl:mdifolder>
+        <cl:xylayout std:sid="xylayout-70361f75"/>
+      </cl:group>
+      <cl:group std:sid="group-72e482f9" style="padding:10px;">
+        <cl:formdata std:sid="f-data-46d90260" row="0" col="1" rowspan="1" colspan="1"/>
+        <cl:group std:sid="group-3877fec9">
+          <cl:formdata std:sid="f-data-ec0e8fd9" row="0" col="0"/>
+          <cl:output std:sid="output-8802ec30" style="font-weight:700; font-size:14px; text-align:center;">
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_Total"/>
+            <cl:formdata std:sid="f-data-9651722a" width="100" row="0" col="0"/>
+          </cl:output>
+          <cl:output std:sid="output-0a8100a6" id="TMLOM_lbTotal" style="font-size:14px;" value="0" datatype="number" format="s#,###">
+            <cl:datamapbind property="value" datacontrolid="Total" columnname="Count"/>
+            <cl:formdata std:sid="f-data-1dcac465" row="0" col="1"/>
+          </cl:output>
+          <cl:udc std:sid="ud-control-122bcde7" id="TMLOM_udcSearchTerminal" type="udc.search.searchTerminal">
+            <cl:listener std:sid="listener-bbf72dd9" name="search" handler="onTMLOM_udcSearchTerminalSearch"/>
+            <cl:formdata std:sid="f-data-f15e3d41" row="0" col="4"/>
+          </cl:udc>
+          <cl:img std:sid="image-c1872198" id="TMLOM_imgHelpPage" style="cursor:help;" src="../../../theme/images/common/common_btn_window_top_q.png">
+            <cl:listener std:sid="listener-d2555c7e" name="click" handler="onTMLOM_imgHelpPageClick"/>
+            <cl:formdata std:sid="f-data-4d6e0661" halign="CENTER" valign="CENTER" width="14" height="14" row="0" col="5"/>
+          </cl:img>
+          <cl:radiobutton std:sid="r-button-33a62aef" id="TMLOM_rdbType" visible="true" value="0">
+            <cl:listener std:sid="listener-ae04fa8b" name="selection-change" handler="onRdb1SelectionChange"/>
+            <cl:formdata std:sid="f-data-ebce44de" row="0" col="2"/>
+            <cl:item std:sid="item-3bfa29f8" label="label1" value="0">
+              <cl:langbind property="label" category="PROPERTY" keypath="Str_General"/>
+            </cl:item>
+            <cl:item std:sid="item-aac4dfd5" label="label2" value="1">
+              <cl:langbind property="label" category="PROPERTY" keypath="Str_AuditLog"/>
+            </cl:item>
+          </cl:radiobutton>
+          <cl:formlayout std:sid="f-layout-08be30c5" hspace="5px" vspace="0px">
+            <cl:rows length="30" unit="PIXEL" shadetype="NONE" shadecolor="#000000"/>
+            <cl:columns length="40" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="70" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="250" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="1" unit="FRACTION" autoSizing="false" minlength="0"/>
+            <cl:columns length="300" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="14" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:group std:sid="group-6c0587c3">
+          <cl:formdata std:sid="f-data-2f429273" row="1" col="0"/>
+          <cl:checkbox std:sid="c-box-007373c1" id="TMLOM_chkImage" falsevalue="false">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_IncludeImage"/>
+            <cl:formdata std:sid="f-data-9ef6af24" row="0" col="2"/>
+          </cl:checkbox>
+          <cl:button std:sid="button-d7a27c54" id="TMLOM_btnLogCount" class="userInfo_btn">
+            <cl:listener std:sid="listener-72ee2eaa" name="click" handler="onTMLOM_btnLogCountClick"/>
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_LogCount"/>
+            <cl:formdata std:sid="f-data-e84a57d8" row="0" col="4"/>
+          </cl:button>
+          <cl:button std:sid="button-bed2ef36" id="TMLOM_btnLogImport" class="userInfo_btn">
+            <cl:listener std:sid="listener-10b3af75" name="click" handler="onTMLOM_btnLogImportClick"/>
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_Import"/>
+            <cl:formdata std:sid="f-data-136aa598" row="0" col="6"/>
+          </cl:button>
+          <cl:group std:sid="group-2d0d1c39">
+            <cl:formdata std:sid="f-data-0eadee94" row="0" col="0"/>
+            <cl:combobox std:sid="c-box-ab1c5111" id="TMLOM_cmbCategory" style="text-align:center;" value="all" preventinput="true">
+              <cl:listener std:sid="listener-a2f06e63" name="selection-change" handler="onTMLOM_cmbCategorySelectionChange"/>
+              <cl:xylayoutdata std:sid="xyl-data-6d927071" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+            </cl:combobox>
+            <cl:xylayout std:sid="xylayout-f9ed8c55"/>
+          </cl:group>
+          <cl:group std:sid="group-0e0088f7" id="TMLOM_grpPeriod">
+            <cl:formdata std:sid="f-data-a36b59d5" row="0" col="1"/>
+            <cl:dateinput std:sid="d-input-09a82d38" id="TMLOM_dtStart" value="2018-11-23" autoselect="false">
+              <cl:formdata std:sid="f-data-67a9e995" row="0" col="0"/>
+            </cl:dateinput>
+            <cl:output std:sid="output-cf5afad8" style="text-align:center;" value="~">
+              <cl:formdata std:sid="f-data-fb32cfd2" row="0" col="1"/>
+            </cl:output>
+            <cl:dateinput std:sid="d-input-3d9c02b8" id="TMLOM_dtEnd" value="2018-11-23" autoselect="false">
+              <cl:formdata std:sid="f-data-2213758e" row="0" col="2"/>
+            </cl:dateinput>
+            <cl:formlayout std:sid="f-layout-3c906ce8" hspace="1px" vspace="1px" top-margin="1px" right-margin="1px" bottom-margin="1px" left-margin="1px">
+              <cl:rows length="1" unit="FRACTION"/>
+              <cl:columns length="90" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="1" unit="FRACTION"/>
+              <cl:columns length="90" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:formlayout std:sid="f-layout-02167010" hspace="0px" vspace="0px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="100" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="200" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="148" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="100" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="5" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="80" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:grid std:sid="grid-e6785b7f" id="TMLOM_grdTerminalList" readonly="false" datasetid="TerminalList" resizablecolumns="none" columnMovable="false">
+          <cl:formdata std:sid="f-data-6db03f35" row="2" col="0"/>
+          <cl:gridcolumn std:sid="g-column-cca7dd7f" width="25px"/>
+          <cl:gridcolumn std:sid="g-column-e921ea14"/>
+          <cl:gridcolumn std:sid="g-column-3904a621"/>
+          <cl:gridcolumn std:sid="g-column-f1ee9848"/>
+          <cl:gridcolumn std:sid="g-column-8f22649f"/>
+          <cl:gridheader std:sid="gh-band-5891f26d">
+            <cl:gridrow std:sid="g-row-04a2f479"/>
+            <cl:gridcell std:sid="gh-cell-89cfac41" rowindex="0" colindex="0" sortable="false" filterable="false" columntype="checkbox"/>
+            <cl:gridcell std:sid="gh-cell-13537653" rowindex="0" colindex="1" targetcolumnname="ID" sortable="false" filterable="false" text="ID">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_ID"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gh-cell-1e995bfd" rowindex="0" colindex="2" targetcolumnname="Name" sortable="false" filterable="false" text="Name">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_Name"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gh-cell-c1b9f7cb" rowindex="0" colindex="3" targetcolumnname="LogCount" sortable="false" filterable="false" text="LogCount">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_LogCount"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gh-cell-8a1da224" rowindex="0" colindex="4" targetcolumnname="Result" sortable="false" filterable="false" text="Result">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_Result"/>
+            </cl:gridcell>
+          </cl:gridheader>
+          <cl:griddetail std:sid="gd-band-c0b1a2c5">
+            <cl:gridrow std:sid="g-row-b9d5d0b1"/>
+            <cl:gridcell std:sid="gd-cell-3d8975bb" rowindex="0" colindex="0" columntype="checkbox"/>
+            <cl:gridcell std:sid="gd-cell-98071422" rowindex="0" colindex="1" columnname="ID"/>
+            <cl:gridcell std:sid="gd-cell-4df86f26" rowindex="0" colindex="2" columnname="Name"/>
+            <cl:gridcell std:sid="gd-cell-0d5d29f8" rowindex="0" colindex="3" columnname="LogCount"/>
+            <cl:gridcell std:sid="gd-cell-cb47b34d" rowindex="0" colindex="4" columnname="Result"/>
+          </cl:griddetail>
+        </cl:grid>
+        <cl:formlayout std:sid="f-layout-e5ff9417" hspace="0px">
+          <cl:rows length="30" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
+          <cl:rows length="30" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
+          <cl:rows length="1" unit="FRACTION" shadetype="NONE" shadecolor="#000000"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-9a5a15e1">
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="200" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-e3ce6e89"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

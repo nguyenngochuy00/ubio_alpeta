@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-fccb3cb5" version="1.0.0.0">
+  <head std:sid="head-f273d19d">
+    <title>companyUserList</title>
+    <screen std:sid="screen-42f3f938" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="570" customWidth="1090"/>
+    <screen std:sid="screen-3e0606d7" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-2515a28b" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-42b4d0c1">
+      <cl:dataset std:sid="d-set-a1e53e49" id="UserList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-19081113" name="ID" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-006043cd" name="UniqueID"/>
+          <cl:datacolumn std:sid="d-column-cb3de128" name="Name" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-db11b938" name="Privilege" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-24a8e364" name="BloodID"/>
+          <cl:datacolumn std:sid="d-column-b830d626" name="GroupCode" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-a16bf075" name="AccessGroupCode" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-fcd360f6" name="TimezoneCode"/>
+          <cl:datacolumn std:sid="d-column-4fd84aeb" name="BlackList"/>
+          <cl:datacolumn std:sid="d-column-460ba6a9" name="APBZone"/>
+          <cl:datacolumn std:sid="d-column-2dbc86b9" name="PositionCode" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-fa5461f5" name="Department"/>
+          <cl:datacolumn std:sid="d-column-767e6c22" name="PassportNo"/>
+          <cl:datacolumn std:sid="d-column-c083fe0e" name="NationalityID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-12313d4a" name="TeamID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-a5b33835" name="PartID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-7bab3862" name="JobNo"/>
+          <cl:datacolumn std:sid="d-column-a7fc4ad1" name="IqamaNo"/>
+          <cl:datacolumn std:sid="d-column-2a9eb3f7" name="Mobile"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-99ce7101" id="HCSMPart">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-cec45093" name="TeamID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-664a2dda" name="PartID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-6cff4ff8" name="PartName"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-a33aca7f" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-c6595abd" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-ac0b016b" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-5a4b41a3" name="Count"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-dbd96e75" id="sms_getHCSMCompanyUserList" method="get" action="/v1/oemData/hcsm/user">
+        <cl:listener std:sid="listener-1eaee92d" name="submit-done" handler="onSms_getHCSMCompanyUserListSubmitDone"/>
+        <cl:listener std:sid="listener-f7e3887a" name="submit-error" handler="onSms_getHCSMCompanyUserListSubmitError"/>
+        <cl:listener std:sid="listener-1ec33351" name="submit-timeout" handler="onSms_getHCSMCompanyUserListSubmitTimeout"/>
+        <cl:responsedata dataid="Total"/>
+        <cl:responsedata dataid="UserList"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-4a2a50bd" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-f40f7e41" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-59a6a5a7">
+      <cl:formdata std:sid="f-data-eb9fb84b" row="0" col="1"/>
+      <cl:output std:sid="output-7f0a03fb" id="HCSM_companyNameOutput" style="padding-left:10px; font-size:15px; padding-right:2px;">
+        <cl:verticaldata std:sid="v-data-ae4012c5" width="100px" height="20px" autosize="height"/>
+      </cl:output>
+      <cl:verticallayout std:sid="v-layout-b103211e"/>
+    </cl:group>
+    <cl:group std:sid="group-9da526de">
+      <cl:formdata std:sid="f-data-2242e4b1" row="0" col="2"/>
+      <cl:output std:sid="output-e5ef3fb3" id="HCSM_userCountOutPut" style="padding-left:8px; font-size:15px; text-align:right; padding-right:10px;" value="" datatype="number" format="s#,###">
+        <cl:verticaldata std:sid="v-data-c175a3ad" width="100px" height="20px" autosize="height"/>
+      </cl:output>
+      <cl:verticallayout std:sid="v-layout-9aad74ca"/>
+    </cl:group>
+    <cl:group std:sid="group-fa0e909a">
+      <cl:formdata std:sid="f-data-ed7f69e1" row="1" col="0" rowspan="1" colspan="5"/>
+      <cl:grid std:sid="grid-3e7e239c" id="HCSMCompanyUserGrid" readonly="true" datasetid="UserList">
+        <cl:verticaldata std:sid="v-data-0738bbc9" width="400px" height="200px" autosize="both"/>
+        <cl:gridcolumn std:sid="g-column-4f669580" width="29px"/>
+        <cl:gridcolumn std:sid="g-column-07b227a2" width="138px"/>
+        <cl:gridcolumn std:sid="g-column-82de836c" width="70px"/>
+        <cl:gridcolumn std:sid="g-column-5495a599" width="90px"/>
+        <cl:gridcolumn std:sid="g-column-d343141d" width="85px"/>
+        <cl:gridcolumn std:sid="g-column-bc2b69d1" width="90px"/>
+        <cl:gridcolumn std:sid="g-column-98bdeea2"/>
+        <cl:gridcolumn std:sid="g-column-8e0f1b8e"/>
+        <cl:gridcolumn std:sid="g-column-a69d88dd" width="104px"/>
+        <cl:gridcolumn std:sid="g-column-efa07a28" width="80px"/>
+        <cl:gridcolumn std:sid="g-column-c3f9fd3b" width="95px"/>
+        <cl:gridheader std:sid="gh-band-83eb4eb0">
+          <cl:gridrow std:sid="g-row-e126a46d" height="28px"/>
+          <cl:gridcell std:sid="gh-cell-2036aaed" rowindex="0" colindex="0" sortable="false" filterable="false"/>
+          <cl:gridcell std:sid="gh-cell-87c6a3db" rowindex="0" colindex="1" style="font-size:13px;" targetcolumnname="Name" sortable="false" filterable="false" text="Name">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_Name"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-b6e71fa8" rowindex="0" colindex="2" style="font-size:13px;" targetcolumnname="ID" sortable="false" filterable="false" text="ID">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_ID"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-7790aaa0" rowindex="0" colindex="3" style="font-size:13px;" targetcolumnname="UniqueID" sortable="false" filterable="false" text="UniqueID">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_UniqueID"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-e14f8b11" rowindex="0" colindex="4" style="font-size:13px;" targetcolumnname="PassportNo" sortable="false" filterable="false" text="PassportNo">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_PassportNo"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-0d38a885" rowindex="0" colindex="5" style="font-size:13px;" targetcolumnname="NationalityID" sortable="false" filterable="false" text="NationalityID">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_Nationality"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-b78488e0" rowindex="0" colindex="6" style="font-size:13px;" targetcolumnname="TeamID" sortable="false" filterable="false" text="TeamID">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_Team"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-1749ebec" rowindex="0" colindex="7" style="font-size:13px;" targetcolumnname="PartID" sortable="false" filterable="false" text="PartID">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_Part"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-4faeaed6" rowindex="0" colindex="8" style="font-size:13px;" targetcolumnname="JobNo" sortable="false" filterable="false" text="JobNo" visible="false">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_JobNo"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-2e144f4c" rowindex="0" colindex="9" style="font-size:13px;" targetcolumnname="IqamaNo" sortable="false" filterable="false" text="IqamaNo">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_IqamaNo"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-3e22ba5c" rowindex="0" colindex="10" style="font-size:13px;" targetcolumnname="Mobile" sortable="false" filterable="false" text="Mobile" visible="false">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_MobileNum"/>
+          </cl:gridcell>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-2fc52e7a">
+          <cl:gridrow std:sid="g-row-c760a42a" height="27px"/>
+          <cl:gridcell std:sid="gd-cell-9db24e0c" rowindex="0" colindex="0" columntype="rowindex"/>
+          <cl:gridcell std:sid="gd-cell-e9c0ea7c" rowindex="0" colindex="1" style="font-size:13px;" columnname="Name"/>
+          <cl:gridcell std:sid="gd-cell-dc04ab6c" rowindex="0" colindex="2" style="font-size:13px;" columnname="ID"/>
+          <cl:gridcell std:sid="gd-cell-86f5c461" rowindex="0" colindex="3" style="font-size:13px;" columnname="UniqueID"/>
+          <cl:gridcell std:sid="gd-cell-95dc7e70" rowindex="0" colindex="4" style="font-size:13px;" columnname="PassportNo"/>
+          <cl:gridcell std:sid="gd-cell-acde6775" rowindex="0" colindex="5" style="font-size:13px;" columnname="NationalityID">
+            <cl:combobox std:sid="c-box-0b2bb09b" id="nationalityComb" style="font-size:13px; text-align:center;" readonly="false" hidebutton="true" preventinput="true"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-5ecfd19b" rowindex="0" colindex="6" style="font-size:13px;" columnname="TeamID">
+            <cl:combobox std:sid="c-box-e01606a9" id="teamCombo" style="font-size:13px; text-align:center;" hidebutton="true" preventinput="true"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-9fc16484" rowindex="0" colindex="7" style="font-size:13px;" columnname="PartID">
+            <cl:combobox std:sid="c-box-fe3a4383" id="partCombo" style="font-size:13px; text-align:center;" hidebutton="true" preventinput="true"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-a96a0e58" rowindex="0" colindex="8" style="font-size:13px;" columnname="JobNo"/>
+          <cl:gridcell std:sid="gd-cell-f09048e1" rowindex="0" colindex="9" style="font-size:13px;" columnname="IqamaNo"/>
+          <cl:gridcell std:sid="gd-cell-16bffedd" rowindex="0" colindex="10" style="font-size:13px;" columnname="Mobile"/>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:verticallayout std:sid="v-layout-2cb4e62f"/>
+    </cl:group>
+    <cl:group std:sid="group-4ea1d33c">
+      <cl:formdata std:sid="f-data-377de797" row="0" col="0"/>
+      <cl:output std:sid="output-887dd124" style="font-weight:700; padding-left:8px; font-size:15px;">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_CompanyName"/>
+        <cl:verticaldata std:sid="v-data-f34c589f" width="100px" height="37px" autosize="height"/>
+      </cl:output>
+      <cl:verticallayout std:sid="v-layout-74834d29"/>
+    </cl:group>
+    <cl:group std:sid="group-881e3f5c">
+      <cl:formdata std:sid="f-data-18bc2737" row="0" col="3"/>
+      <cl:output std:sid="output-004e753c" style="font-size:15px;" class="common-titlelabel">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_UsrCount"/>
+        <cl:verticaldata std:sid="v-data-be13bcae" width="40px" height="38px" autosize="height"/>
+      </cl:output>
+      <cl:verticallayout std:sid="v-layout-8e74b56d"/>
+    </cl:group>
+    <cl:pageindexer std:sid="p-indexer-7378f086" id="companyUserListPageIndexer" class="userList_paging">
+      <cl:listener std:sid="listener-77b3569d" name="selection-change" handler="onCompanyUserListPageIndexerSelectionChange"/>
+      <cl:formdata std:sid="f-data-bc4ffdad" row="2" col="0" rowspan="1" colspan="5"/>
+    </cl:pageindexer>
+    <cl:formlayout std:sid="f-layout-8af3c24b" hspace="0px" vspace="6px" top-margin="13px" right-margin="13px" bottom-margin="13px" left-margin="13px">
+      <cl:rows length="30" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      <cl:rows length="9" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      <cl:rows length="36" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      <cl:columns length="60" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      <cl:columns length="130" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      <cl:columns length="80" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      <cl:columns length="30" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      <cl:columns length="6" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+    </cl:formlayout>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

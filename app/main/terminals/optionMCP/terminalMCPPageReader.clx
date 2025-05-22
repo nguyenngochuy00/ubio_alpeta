@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-8ddaae58" version="1.0.0.0">
+  <head std:sid="head-12c6dd4b">
+    <title>terminalMCPPageReader</title>
+    <screen std:sid="screen-0013d7e3" id="default" name="default" minwidth="1024px" width="1024px" height="768px"/>
+    <screen std:sid="screen-743067e8" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-ea3d8067" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-a94a5e7d">
+      <cl:dataset std:sid="d-set-8b12de4c" id="dsAcuAlarmSchedule">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-58c95428" name="Hour" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-923b8875" name="Minute" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-3cda5d65" name="Weekday" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-f35527b1" name="Duration" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-06493925" name="AutoArmPatition" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-e84bb105" name="AutoDisarmPartition" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-170f033a" name="Output" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-e366d823" name="Reserved" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-dc5d957c" id="dsAcuReaderOption" staterestore="false">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-760bb5a4" info="" name="ReaderType" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-1e2460ea" name="Lock" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-c98449be" name="Partition" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-ecb4dc50" name="Mode" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-f82b2695" name="OpenTime" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-3b127880" name="AccessMode" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-6997a59f" name="EnterZone"/>
+          <cl:datacolumn std:sid="d-column-37b3dd5b" name="ExitZone"/>
+          <cl:datacolumn std:sid="d-column-e6d17db0" name="PassbackType" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-42735836" name="LockoutDuration"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-29b1eba6" id="dsAcuPartitionOption">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-19a82b69" name="Name"/>
+          <cl:datacolumn std:sid="d-column-470ff5ce" name="Account"/>
+          <cl:datacolumn std:sid="d-column-b1afa807" name="EntryDelay1" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-81a6327c" name="EntryDelay2" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-c715f60a" name="ExitDelay1" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-538ef46a" name="ExitDelay2" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-e8edfc82" name="SirenTime" datatype="number" displayonly="false"/>
+          <cl:datacolumn std:sid="d-column-ddca63d7" name="AlarmCount" datatype="number" displayonly="false"/>
+          <cl:datacolumn std:sid="d-column-889d4a82" name="Enable" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-6e75e984" name="Chime" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-9c2402e0" name="UnlockOnDisarm" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-2b50f8fc" id="dsAcuZoneOption">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-5e3df004" name="Name"/>
+          <cl:datacolumn std:sid="d-column-b516c9c8" name="Type" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-9405da58" name="Response" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-39e37b85" name="Double" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-0a80531f" name="Partition" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-2ad486f0" name="Number" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-b6812eb2" id="dsAcuInputsOption">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-ca5dce64" name="Type" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-637d3478" name="Time" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-464e2a65" name="Parameter" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-a336e81a" id="dsAcuOutputsOption">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-72068327" name="Type" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-41250eb9" name="Time" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-204e762c" name="Parameter" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-043f8436" name="Inverted" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-dca0bf7c" id="dsAcuLockSetOption">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-475ae1f9" name="ZoneDoor" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-cb363500" name="OpenWarnTime" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-76323377" name="ForceEnable" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-02d8b0f3" id="AreaList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-226e6ee8" name="AreaID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-a2d642cc" name="Name"/>
+          <cl:datacolumn std:sid="d-column-c6b1e437" name="isAlert"/>
+        </cl:datacolumnlist>
+        <cl:datarowlist/>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-a26f438a" id="dmAcuNetworkOption">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-f9e4fbfe" name="NetType" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-08b4b59f" name="IP"/>
+          <cl:datacolumn std:sid="d-column-7d84d879" name="Gateway"/>
+          <cl:datacolumn std:sid="d-column-8912538f" name="Subnet"/>
+          <cl:datacolumn std:sid="d-column-6b95c5d7" name="ServerIP"/>
+          <cl:datacolumn std:sid="d-column-7d751c88" name="ServerPort" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-5b7ab9e7" name="DHCP_IP"/>
+          <cl:datacolumn std:sid="d-column-1115adf7" name="DHCP_Gateway"/>
+          <cl:datacolumn std:sid="d-column-75b51dbf" name="DHCP_Subnet"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-923294db" id="dmAcuSystemOption">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-95d1d004" name="ForceArm" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-c794d34e" name="EndOfLineResistors" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-cb31ffc4" name="TimeSync" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-91ede1c1" name="InsideOpenLog" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-82d584d0" name="ServerPassback" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-731ed2ca" name="DoorInterlocking" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-330868aa" name="TerminalID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-f357d178" name="AuthenticationMode" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-9d85ab8b" name="LineTestTime" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-f6c406cc" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-54fae956" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-536a0e8f" id="dmAcuDoorControl">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-f040b719" name="AcuID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-b4cfd273" name="Option" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-ab8ae78f" name="Door" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-cec78853" id="smsGetAcuReaderOption" method="get">
+        <cl:listener std:sid="listener-1d1912fb" name="submit-done" handler="onSmsGetAcuReaderOptionSubmitDone"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="dsAcuReaderOption"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-d99d789e" id="smsPutAcuReaderOption" method="put" mediatype="application/x-www-form-urlencoded">
+        <cl:listener std:sid="listener-32cdc9ca" name="submit-done" handler="onSmsPutAcuReaderOptionSubmitDone"/>
+        <cl:requestdata dataid="dsAcuReaderOption" payload="all"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-8dc9c063" id="smsGetAcuPartitionOption" method="get">
+        <cl:listener std:sid="listener-593c4551" name="submit-done" handler="onSmsGetAcuPartitionOptionSubmitDone"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="dsAcuPartitionOption"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-59fc030f" id="smsPutAcuPartitionOption" method="put" mediatype="application/x-www-form-urlencoded">
+        <cl:listener std:sid="listener-17d86987" name="submit-done" handler="onSmsPutAcuPartitionOptionSubmitDone"/>
+        <cl:requestdata dataid="dsAcuPartitionOption" payload="all"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-6271205f" id="smsGetAcuLockOption" method="get">
+        <cl:listener std:sid="listener-221396dc" name="submit-done" handler="onSmsGetAcuLockOptionSubmitDone"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-d710d1b2" id="smsPutAcuLockOption" method="put" mediatype="application/json">
+        <cl:listener std:sid="listener-ca9bc2f7" name="submit-done" handler="onSmsPutAcuLockOptionSubmitDone"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-cdf88f92" id="smsGetAcuTerminalHolidayOption" method="get" mediatype="application/x-www-form-urlencoded">
+        <cl:listener std:sid="listener-73f29244" name="submit-done" handler="onSmsGetAcuTerminalHolidayOptionSubmitDone"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-81194a20" id="smsPutAcuTerminalHolidayOption" method="put" mediatype="application/json">
+        <cl:listener std:sid="listener-0349c722" name="submit-done" handler="onSmsPutAcuTerminalHolidayOptionSubmitDone"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-3097c73d" id="smsGetAcuAlarmScheduleOption" method="get" mediatype="application/x-www-form-urlencoded">
+        <cl:listener std:sid="listener-90628e00" name="submit-done" handler="onSmsGetAcuAlarmScheduleOptionSubmitDone"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-a403049b" id="smsPutAcuAlarmScheduleOption" method="put" mediatype="application/json">
+        <cl:listener std:sid="listener-1c1dd39b" name="submit-done" handler="onSmsPutAcuAlarmScheduleOptionSubmitDone"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-b5c93006" id="smsGetAcuSystemOption" method="get" mediatype="application/x-www-form-urlencoded">
+        <cl:listener std:sid="listener-4c40889a" name="submit-done" handler="onSmsGetAcuSystemOptionSubmitDone"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="dmAcuSystemOption"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-290dc74c" id="smsGetAcuNetworkOption" method="get" mediatype="application/x-www-form-urlencoded">
+        <cl:listener std:sid="listener-1a21f6a0" name="submit-done" handler="onSmsGetAcuNetworkOptionSubmitDone"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="dmAcuNetworkOption"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-d5e70993" id="smsGetAcuZoneOption" method="get" mediatype="application/x-www-form-urlencoded">
+        <cl:listener std:sid="listener-a3e41607" name="submit-done" handler="onSmsGetAcuZoneOptionSubmitDone"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="dsAcuZoneOption"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-b527d6a8" id="smsGetAcuInputsOption" method="get" mediatype="application/x-www-form-urlencoded">
+        <cl:listener std:sid="listener-3b919219" name="submit-done" handler="onSmsGetAcuInputsOptionSubmitDone"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="dsAcuInputsOption"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-867adb96" id="smsGetAcuOutputsOption" method="get" mediatype="application/x-www-form-urlencoded">
+        <cl:listener std:sid="listener-3c3d7410" name="submit-done" handler="onSmsGetAcuOutputsOptionSubmitDone"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="dsAcuOutputsOption"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-81679be0" id="smsPostAcuDoorControl">
+        <cl:listener std:sid="listener-a3918b6a" name="submit-done" handler="onSmsPostAcuDoorControlSubmitDone"/>
+        <cl:requestdata dataid="dmAcuDoorControl"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-82d75c6c" id="sms_getAreas" method="get" action="/v1/antiPassback/areas">
+        <cl:listener std:sid="listener-afaea4d5" name="submit-done" handler="onSms_getAreasSubmitDone"/>
+        <cl:responsedata dataid="AreaList"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-169d0ac1" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-9f4aba9e" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-5a1e6d82" id="basicgrd" style="border-radius:2px; padding:10px;">
+      <cl:xylayoutdata std:sid="xyl-data-41c9926e" top="10px" left="10px" width="700px" height="500px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      <cl:group std:sid="group-878d6771" style="padding:0px; border-radius:2px;">
+        <cl:formdata std:sid="f-data-56094e1d" row="0" col="0"/>
+        <cl:output std:sid="output-db9f8757" style="font-weight:700; font-size:14px;">
+          <cl:listener std:sid="listener-68dd15aa" name="dblclick" handler="onOutputDblclick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Reader"/>
+          <cl:formdata std:sid="f-data-a00d7ac6" row="0" col="0" rowspan="1" colspan="1"/>
+        </cl:output>
+        <cl:output std:sid="output-cde4a98d" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-top-color:#c5c5c5; border-right-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid; text-align:center;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_ReaderType"/>
+          <cl:formdata std:sid="f-data-4faf8a58" row="1" col="0"/>
+        </cl:output>
+        <cl:output std:sid="output-0595e6e6" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-right-color:#c5c5c5; border-bottom-style:solid; text-align:center;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_ReaderLock"/>
+          <cl:formdata std:sid="f-data-68da0de3" row="2" col="0"/>
+        </cl:output>
+        <cl:group std:sid="group-ac28a9c7" style="border-bottom-color:#c5c5c5; border-top-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-0abc9b08" row="1" col="1" rowspan="1" colspan="3"/>
+          <cl:combobox std:sid="c-box-bcffed65" id="cmbReaderType" style="font-size:14px; text-align:center;" preventinput="true">
+            <cl:xylayoutdata std:sid="xyl-data-bedc219a" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+            <cl:item std:sid="item-1a6bdc0b" label="CPMASTER" value="0"/>
+            <cl:item std:sid="item-ab7f4bb4" label="VSR20DSC" value="1"/>
+            <cl:item std:sid="item-8c3819b5" label="VSR20DRF" value="2"/>
+            <cl:item std:sid="item-1f05df6b" label="ACF100" value="3"/>
+            <cl:item std:sid="item-f015a50c" label="AC1000" value="4"/>
+            <cl:item std:sid="item-a84b2486" label="AC2100" value="5"/>
+            <cl:item std:sid="item-b5ab3cee" label="AC4000" value="6"/>
+            <cl:item std:sid="item-866279bf" label="AC5000" value="7"/>
+            <cl:item std:sid="item-00e7356d" label="AC6000" value="8"/>
+            <cl:item std:sid="item-96b1ba40" label="SR100" value="9"/>
+            <cl:item std:sid="item-19fdc03f" label="WIEGAND" value="10"/>
+            <cl:item std:sid="item-147791ea" label="UNKNOWN" value="11"/>
+            <cl:item std:sid="item-0344b5df" label="OEM" value="12"/>
+            <cl:item std:sid="item-893b09d3" label="AC7000" value="13"/>
+            <cl:item std:sid="item-3a50b7e9" label="AC2200" value="14"/>
+            <cl:item std:sid="item-9df4e132" label="HID" value="15"/>
+            <cl:item std:sid="item-07bb7f35" label="FMD" value="16"/>
+            <cl:item std:sid="item-4a4a5449" label="SW101_M2" value="17"/>
+            <cl:item std:sid="item-50634cb9" label="eNBioAccess_T1" value="18"/>
+            <cl:item std:sid="item-6a19e216" label="eNBioAccess_T2" value="19"/>
+            <cl:item std:sid="item-5614d246" label="eNBioAccess_T3" value="20"/>
+            <cl:item std:sid="item-8c7d42d1" label="AC1100" value="21"/>
+          </cl:combobox>
+          <cl:xylayout std:sid="xylayout-202e9875"/>
+        </cl:group>
+        <cl:group std:sid="group-34c4ccb1" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+          <cl:formdata std:sid="f-data-cb50239b" row="2" col="1" rowspan="1" colspan="3"/>
+          <cl:checkbox std:sid="c-box-08d23139" id="cbxReaderLock1" style="vertical-align:middle; text-align:center;" text="1">
+            <cl:xylayoutdata std:sid="xyl-data-b85ea5cc" top="2px" bottom="2px" left="20px" width="75px" horizontalAnchor="LEFT" verticalAnchor="BOTH"/>
+          </cl:checkbox>
+          <cl:checkbox std:sid="c-box-6e1978e2" id="cbxReaderLock2" style="vertical-align:middle; text-align:center;" value="" text="2">
+            <cl:xylayoutdata std:sid="xyl-data-5e756e18" top="2px" bottom="2px" left="105px" width="75px" horizontalAnchor="LEFT" verticalAnchor="BOTH"/>
+          </cl:checkbox>
+          <cl:checkbox std:sid="c-box-e0a48bd0" id="cbxReaderLock3" style="vertical-align:middle; text-align:center;" text="3">
+            <cl:xylayoutdata std:sid="xyl-data-d15ae77f" top="2px" bottom="2px" left="190px" width="75px" horizontalAnchor="LEFT" verticalAnchor="BOTH"/>
+          </cl:checkbox>
+          <cl:checkbox std:sid="c-box-734db9a9" id="cbxReaderLock4" style="vertical-align:middle; text-align:center;" text="4">
+            <cl:xylayoutdata std:sid="xyl-data-0b326e62" top="2px" bottom="2px" left="275px" width="75px" horizontalAnchor="LEFT" verticalAnchor="BOTH"/>
+          </cl:checkbox>
+          <cl:xylayout std:sid="xylayout-02c47cdf"/>
+        </cl:group>
+        <cl:group std:sid="group-e50db24a">
+          <cl:formdata std:sid="f-data-b3b29bcf" row="0" col="1" rowspan="1" colspan="3"/>
+          <cl:combobox std:sid="c-box-7bec1a2c" id="cmbSelectReader" style="font-size:14px; text-align:center;" preventinput="true">
+            <cl:listener std:sid="listener-026d51eb" name="selection-change" handler="onCmbSelectReaderSelectionChange"/>
+            <cl:xylayoutdata std:sid="xyl-data-7668100f" top="2px" bottom="2px" left="4px" width="314px" horizontalAnchor="LEFT" verticalAnchor="BOTH"/>
+            <cl:item std:sid="item-fed43723" label="-----" value="-1"/>
+            <cl:item std:sid="item-eb5bcff6" label="리더0" value="0">
+              <cl:langbind property="label" category="PROPERTY" keypath="Str_Reader0"/>
+            </cl:item>
+            <cl:item std:sid="item-9a23c729" label="리더1" value="1">
+              <cl:langbind property="label" category="PROPERTY" keypath="Str_Reader1"/>
+            </cl:item>
+            <cl:item std:sid="item-4fa261b2" label="리더2" value="2">
+              <cl:langbind property="label" category="PROPERTY" keypath="Str_Reader2"/>
+            </cl:item>
+            <cl:item std:sid="item-532db7cc" label="리더3" value="3">
+              <cl:langbind property="label" category="PROPERTY" keypath="Str_Reader3"/>
+            </cl:item>
+            <cl:item std:sid="item-601a9271" label="리더4" value="4">
+              <cl:langbind property="label" category="PROPERTY" keypath="Str_Reader4"/>
+            </cl:item>
+            <cl:item std:sid="item-1dec8baf" label="리더5" value="5">
+              <cl:langbind property="label" category="PROPERTY" keypath="Str_Reader5"/>
+            </cl:item>
+            <cl:item std:sid="item-1a8d767b" label="리더6" value="6">
+              <cl:langbind property="label" category="PROPERTY" keypath="Str_Reader6"/>
+            </cl:item>
+            <cl:item std:sid="item-e047b5ae" label="리더7" value="7">
+              <cl:langbind property="label" category="PROPERTY" keypath="Str_Reader7"/>
+            </cl:item>
+            <cl:item std:sid="item-0b2616ca" label="위겐드1" value="8">
+              <cl:langbind property="label" category="PROPERTY" keypath="Str_ReaderWiegand1"/>
+            </cl:item>
+            <cl:item std:sid="item-ce542038" label="위겐드2" value="9">
+              <cl:langbind property="label" category="PROPERTY" keypath="Str_ReaderWiegand2"/>
+            </cl:item>
+            <cl:item std:sid="item-a8d3ac18" label="위겐드3" value="10">
+              <cl:langbind property="label" category="PROPERTY" keypath="Str_ReaderWiegand3"/>
+            </cl:item>
+            <cl:item std:sid="item-59d7829a" label="위겐드4" value="11">
+              <cl:langbind property="label" category="PROPERTY" keypath="Str_ReaderWiegand4"/>
+            </cl:item>
+          </cl:combobox>
+          <cl:button std:sid="button-d7a27c54" id="btnReaderInfoSave" class="userInfo_btn">
+            <cl:listener std:sid="listener-69ec6423" name="click" handler="onBtnReaderInfoSaveClick"/>
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_Apply"/>
+            <cl:xylayoutdata std:sid="xyl-data-9d81aae6" top="1px" left="322px" width="183px" height="28px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+          </cl:button>
+          <cl:xylayout std:sid="xylayout-a982a0ef"/>
+        </cl:group>
+        <cl:output std:sid="output-eb9b63d0" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-right-color:#c5c5c5; border-bottom-style:solid; text-align:center;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_ReaderPartition"/>
+          <cl:formdata std:sid="f-data-54aa34fb" row="3" col="0"/>
+        </cl:output>
+        <cl:group std:sid="group-771ec6c2" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+          <cl:formdata std:sid="f-data-dd55f4c2" row="3" col="1" rowspan="1" colspan="3"/>
+          <cl:checkbox std:sid="c-box-a3f92c99" id="cbxReaderPartition1" style="vertical-align:middle; text-align:center;" text="1">
+            <cl:xylayoutdata std:sid="xyl-data-37acd96c" top="2px" bottom="2px" left="20px" width="75px" horizontalAnchor="LEFT" verticalAnchor="BOTH"/>
+          </cl:checkbox>
+          <cl:checkbox std:sid="c-box-838de3fc" id="cbxReaderPartition2" style="vertical-align:middle; text-align:center;" value="" text="2">
+            <cl:xylayoutdata std:sid="xyl-data-8d8160d1" top="2px" bottom="2px" left="105px" width="75px" horizontalAnchor="LEFT" verticalAnchor="BOTH"/>
+          </cl:checkbox>
+          <cl:checkbox std:sid="c-box-94d15e1c" id="cbxReaderPartition3" style="vertical-align:middle; text-align:center;" value="" text="3">
+            <cl:xylayoutdata std:sid="xyl-data-5b51effc" top="2px" bottom="2px" left="190px" width="75px" horizontalAnchor="LEFT" verticalAnchor="BOTH"/>
+          </cl:checkbox>
+          <cl:checkbox std:sid="c-box-e5303069" id="cbxReaderPartition4" style="vertical-align:middle; text-align:center;" text="4">
+            <cl:xylayoutdata std:sid="xyl-data-73d3666d" top="2px" bottom="2px" left="275px" width="75px" horizontalAnchor="LEFT" verticalAnchor="BOTH"/>
+          </cl:checkbox>
+          <cl:xylayout std:sid="xylayout-0deba70a"/>
+        </cl:group>
+        <cl:output std:sid="output-73989b14" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-top-color:#c5c5c5; border-right-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid; text-align:center;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_ReaderMode"/>
+          <cl:formdata std:sid="f-data-c54f2513" row="4" col="0"/>
+        </cl:output>
+        <cl:group std:sid="group-e8be790c" style="border-bottom-color:#c5c5c5; border-top-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-92d0d0db" row="4" col="1" rowspan="1" colspan="3"/>
+          <cl:combobox std:sid="c-box-b3196997" id="cmbReaderMode" style="font-size:14px; text-align:center;" preventinput="true">
+            <cl:xylayoutdata std:sid="xyl-data-e5a17097" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+            <cl:item std:sid="item-a501aa16" label="Access" value="0"/>
+            <cl:item std:sid="item-eed0b81b" label="Access+Security" value="1"/>
+            <cl:item std:sid="item-ebd69716" label="Access+Security+Card" value="2"/>
+          </cl:combobox>
+          <cl:xylayout std:sid="xylayout-72b85a0c"/>
+        </cl:group>
+        <cl:output std:sid="output-7320d39e" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-top-color:#c5c5c5; border-right-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid; text-align:center;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_ReaderOpenTime"/>
+          <cl:formdata std:sid="f-data-9d36c533" row="5" col="0"/>
+        </cl:output>
+        <cl:group std:sid="group-f415ab2e" style="border-bottom-color:#c5c5c5; border-top-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-e4b38d0b" row="5" col="1" rowspan="1" colspan="3"/>
+          <cl:inputbox std:sid="i-box-dfbcb18f" id="ipbReaderOpenTime" style="text-align:center;">
+            <cl:listener std:sid="listener-f8d4ff90" name="change" handler="onIpbReaderOpenTimeChange"/>
+            <cl:xylayoutdata std:sid="xyl-data-46696bc4" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+          </cl:inputbox>
+          <cl:xylayout std:sid="xylayout-b14bb016"/>
+        </cl:group>
+        <cl:output std:sid="output-a803e9a0" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-top-color:#c5c5c5; border-right-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid; text-align:center;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_ReaderAccessMode"/>
+          <cl:formdata std:sid="f-data-45d3fcf7" row="6" col="0"/>
+        </cl:output>
+        <cl:group std:sid="group-0040a3ab" style="border-bottom-color:#c5c5c5; border-top-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-0aba3164" row="6" col="1" rowspan="1" colspan="3"/>
+          <cl:combobox std:sid="c-box-46ccee16" id="cmbReaderAccessMode" style="font-size:14px; text-align:center;" preventinput="true">
+            <cl:xylayoutdata std:sid="xyl-data-758dd6f4" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+            <cl:item std:sid="item-9497b134" label="Access" value="0"/>
+            <cl:item std:sid="item-69af0c37" label="Enter" value="1"/>
+            <cl:item std:sid="item-f330e2e6" label="Exit" value="2"/>
+            <cl:item std:sid="item-c29e56de" label="Out" value="3"/>
+            <cl:item std:sid="item-5d8df092" label="In" value="4"/>
+          </cl:combobox>
+          <cl:xylayout std:sid="xylayout-7efc3f7c"/>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-d02aee26" hspace="0px" vspace="0px">
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-8e446b8b" style="padding:0px; border-radius:2px;">
+        <cl:formdata std:sid="f-data-16a81163" row="1" col="0"/>
+        <cl:output std:sid="output-072fccbb" style="font-weight:700; font-size:14px;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_AntipassBack"/>
+          <cl:formdata std:sid="f-data-79f4d0e1" row="0" col="0" rowspan="1" colspan="2"/>
+        </cl:output>
+        <cl:output std:sid="output-281ca90e" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-top-color:#c5c5c5; border-right-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid; text-align:center;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_EnterZone"/>
+          <cl:formdata std:sid="f-data-c73813f9" row="1" col="0" rowspan="1" colspan="1"/>
+        </cl:output>
+        <cl:output std:sid="output-2cda9e4a" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-right-color:#c5c5c5; border-bottom-style:solid; text-align:center;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Type"/>
+          <cl:formdata std:sid="f-data-d883bf53" row="3" col="0"/>
+        </cl:output>
+        <cl:output std:sid="output-49df4a3f" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-right-color:#c5c5c5; border-bottom-style:solid; text-align:center;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_ExitZone"/>
+          <cl:formdata std:sid="f-data-b6d1b3a3" row="2" col="0"/>
+        </cl:output>
+        <cl:group std:sid="group-dbe59ce2" style="border-top-width:1px; border-bottom-color:#c5c5c5; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-493dc823" row="1" col="1"/>
+          <cl:combobox std:sid="c-box-a8da45a8" id="cmbAntiPassbackEnterZone" style="font-size:14px; text-align:center;" preventinput="true">
+            <cl:xylayoutdata std:sid="xyl-data-ec26a5c2" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+          </cl:combobox>
+          <cl:xylayout std:sid="xylayout-f3ca40e8"/>
+        </cl:group>
+        <cl:group std:sid="group-2dafc01f" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+          <cl:formdata std:sid="f-data-ba921c5f" row="2" col="1"/>
+          <cl:combobox std:sid="c-box-74bb4f1c" id="cmbAntiPassbackExitZone" style="font-size:14px; text-align:center;" preventinput="true">
+            <cl:xylayoutdata std:sid="xyl-data-28c0856c" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+          </cl:combobox>
+          <cl:xylayout std:sid="xylayout-28524a69"/>
+        </cl:group>
+        <cl:group std:sid="group-8e3b5168" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+          <cl:formdata std:sid="f-data-87a0797d" row="3" col="1"/>
+          <cl:combobox std:sid="c-box-4cc4116f" id="cmbAntiPassbackType" style="font-size:14px; text-align:center;" value="4" preventinput="true">
+            <cl:xylayoutdata std:sid="xyl-data-51c392cb" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+            <cl:item std:sid="item-77a47b6d" label="Disabled" value="0"/>
+            <cl:item std:sid="item-d25f65d6" label="Hard" value="1"/>
+            <cl:item std:sid="item-a6a4168c" label="Soft" value="2"/>
+            <cl:item std:sid="item-ee2cc87d" label="Timed" value="3"/>
+          </cl:combobox>
+          <cl:xylayout std:sid="xylayout-7b3dd23e"/>
+        </cl:group>
+        <cl:output std:sid="output-4253bb71" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-right-color:#c5c5c5; border-bottom-style:solid; text-align:center;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_ReaderLockOutTime"/>
+          <cl:formdata std:sid="f-data-5696e747" row="4" col="0"/>
+        </cl:output>
+        <cl:group std:sid="group-b308945c" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+          <cl:formdata std:sid="f-data-5d49ea3c" row="4" col="1"/>
+          <cl:combobox std:sid="c-box-2b490aaf" id="cmbLockOutHH" style="font-size:14px; text-align:center;" value="4" preventinput="true">
+            <cl:xylayoutdata std:sid="xyl-data-677ada71" top="2px" bottom="2px" left="4px" width="48px" horizontalAnchor="LEFT" verticalAnchor="BOTH"/>
+          </cl:combobox>
+          <cl:combobox std:sid="c-box-1b447090" id="cmbLockOutMM" style="font-size:14px; text-align:center;" value="4" preventinput="true">
+            <cl:xylayoutdata std:sid="xyl-data-5b73a88a" top="2px" bottom="2px" left="61px" width="48px" horizontalAnchor="LEFT" verticalAnchor="BOTH"/>
+          </cl:combobox>
+          <cl:combobox std:sid="c-box-cb096a66" id="cmbLockOutSS" style="font-size:14px; text-align:center;" value="4" preventinput="true">
+            <cl:xylayoutdata std:sid="xyl-data-a2716591" top="2px" bottom="2px" left="118px" width="48px" horizontalAnchor="LEFT" verticalAnchor="BOTH"/>
+          </cl:combobox>
+          <cl:inputbox std:sid="i-box-4c60fdb6" style="text-align:center;" value=":">
+            <cl:xylayoutdata std:sid="xyl-data-a4e6a5ed" top="2px" bottom="2px" left="51px" width="11px" horizontalAnchor="LEFT" verticalAnchor="BOTH"/>
+          </cl:inputbox>
+          <cl:inputbox std:sid="i-box-7a8a0618" id="ipb1" style="text-align:center;" value=":">
+            <cl:xylayoutdata std:sid="xyl-data-7b17639d" top="2px" bottom="2px" left="108px" width="11px" horizontalAnchor="LEFT" verticalAnchor="BOTH"/>
+          </cl:inputbox>
+          <cl:xylayout std:sid="xylayout-85a1cb3e"/>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-172ce5de" hspace="0px" vspace="0px">
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          <cl:columns length="3" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:button std:sid="button-887657fc" id="btnTest1" class="userInfo_btn" visible="false" value="Test1">
+        <cl:listener std:sid="listener-b7247afd" name="click" handler="onBtnTest1Click"/>
+        <cl:formdata std:sid="f-data-9a4f30b0" row="2" col="0" rowspan="1" colspan="1"/>
+      </cl:button>
+      <cl:button std:sid="button-70117722" id="btnTest2" class="userInfo_btn" visible="false" value="Test2">
+        <cl:listener std:sid="listener-466be558" name="click" handler="onBtnTest2Click"/>
+        <cl:formdata std:sid="f-data-c522f944" row="3" col="0"/>
+      </cl:button>
+      <cl:button std:sid="button-69207e77" id="btnTest3" class="userInfo_btn" visible="false" value="Test3">
+        <cl:listener std:sid="listener-3417aa0b" name="click" handler="onBtnTest3Click"/>
+        <cl:formdata std:sid="f-data-9a6bdffa" row="4" col="0"/>
+      </cl:button>
+      <cl:formlayout std:sid="f-layout-dcd2fe65" scrollable="false" hspace="0px" vspace="0px">
+        <cl:rows length="230" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="150" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-2b31af62"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-4795d602" version="1.0.0.0">
+  <head std:sid="head-35e96594">
+    <title>AreaSelect</title>
+    <screen std:sid="screen-76dbc32c" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="150" customWidth="300"/>
+    <screen std:sid="screen-d9f45d94" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-5e271301" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-feb9b1b1">
+      <cl:datamap std:sid="d-map-f0083970" id="AreaInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-54ddb7de" name="AreaID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-a15ceddc" name="Name"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-cbfcbe66" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-36475117" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-d1862363" id="MapAreaInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-002f8e82" name="MapCode" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-9983ab29" name="Name"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-a7d18e89" id="smsCheckExist" method="get"/>
+      <cl:submission std:sid="submission-65e09b1e" id="smsSave" mediatype="application/x-www-form-urlencoded">
+        <cl:listener std:sid="listener-eea7181a" name="submit-done" handler="onSmsSaveSubmitDone"/>
+        <cl:listener std:sid="listener-6482ec7b" name="submit-error" handler="onSmsSaveSubmitError"/>
+        <cl:listener std:sid="listener-f2f2f404" name="submit-timeout" handler="onSmsSaveSubmitTimeout"/>
+        <cl:requestdata dataid="AreaInfo"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-1b8068b5" id="sms_postMapArea" action="/v1/map/areas">
+        <cl:listener std:sid="listener-df553236" name="submit-done" handler="onSms_postMapAreaSubmitDone"/>
+        <cl:listener std:sid="listener-d3a82422" name="submit-error" handler="onSms_postMapAreaSubmitError"/>
+        <cl:listener std:sid="listener-39648ece" name="submit-timeout" handler="onSms_postMapAreaSubmitTimeout"/>
+        <cl:requestdata dataid="MapAreaInfo"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-4be0e82d" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-e0e5219d" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-4d96574a" style="padding:10px;">
+      <cl:xylayoutdata std:sid="xyl-data-2b912c98" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-7863f2c6">
+        <cl:formdata std:sid="f-data-b3cf4cb8" row="0" col="0"/>
+        <cl:output std:sid="output-1531e0ae" class="common-controllabel required">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_ID"/>
+          <cl:formdata std:sid="f-data-debedb6c" halign="FILL" valign="FILL" width="90" row="0" col="0"/>
+        </cl:output>
+        <cl:group std:sid="group-1c63f969" style="border-bottom-color:#c5c5c5; border-top-width:1px; border-bottom-width:1px; font-size:14px; border-top-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-5e793721" row="0" col="1"/>
+          <cl:inputbox std:sid="i-box-b508fcba" id="iptID" maxlength="4" inputfilter="^[0-9]">
+            <cl:listener std:sid="listener-e55b534a" name="value-change" handler="onIptIDValueChange"/>
+            <cl:listener std:sid="listener-6ae4059f" name="keyup" handler="onIptIDKeyup"/>
+            <cl:xylayoutdata std:sid="xyl-data-6f846e33" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+          </cl:inputbox>
+          <cl:xylayout std:sid="xylayout-8442d276"/>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-1dfe0839" hspace="0px" vspace="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-8140e2c5">
+        <cl:formdata std:sid="f-data-2cf08577" row="1" col="0"/>
+        <cl:output std:sid="output-437838d9" class="common-controllabel required">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Name"/>
+          <cl:formdata std:sid="f-data-765948ac" halign="FILL" valign="FILL" width="90" row="0" col="0"/>
+        </cl:output>
+        <cl:group std:sid="group-31802905" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; font-size:14px; border-bottom-style:solid;">
+          <cl:formdata std:sid="f-data-df0a8acd" row="0" col="1"/>
+          <cl:inputbox std:sid="i-box-4dc2a325" id="iptName">
+            <cl:listener std:sid="listener-af0e37ba" name="value-change" handler="onIptNameValueChange"/>
+            <cl:listener std:sid="listener-bc8d4963" name="keyup" handler="onIptNameKeyup"/>
+            <cl:xylayoutdata std:sid="xyl-data-11a62d70" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+          </cl:inputbox>
+          <cl:xylayout std:sid="xylayout-4381f743"/>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-612f71d9" hspace="0px" vspace="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-d606a329">
+        <cl:formdata std:sid="f-data-9f0bbea6" row="4" col="0"/>
+        <cl:button std:sid="button-c58fac38" id="btnConfirm" class="userInfo_btn">
+          <cl:listener std:sid="listener-f5ac0e3f" name="click" handler="onBtnConfirmClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_OK"/>
+          <cl:formdata std:sid="f-data-e7c78b20" valign="FILL" row="0" col="1"/>
+        </cl:button>
+        <cl:button std:sid="button-9a3349b0" id="btnCancel" class="userInfo_btn">
+          <cl:listener std:sid="listener-aef97943" name="click" handler="onBtnCancelClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Cancel"/>
+          <cl:formdata std:sid="f-data-a2c40e18" valign="FILL" row="0" col="3"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-83cdd453" hspace="0px" vspace="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          <cl:columns length="10" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-804da033" id="grp1" visible="false">
+        <cl:formdata std:sid="f-data-e01bd3f9" row="2" col="0"/>
+        <cl:output std:sid="output-e4f42b6c" class="common-controllabel">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Description"/>
+          <cl:formdata std:sid="f-data-e2e504ef" halign="FILL" valign="FILL" width="90" row="0" col="0"/>
+        </cl:output>
+        <cl:group std:sid="group-771f6ca8" id="grp2" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; font-size:14px; border-bottom-style:solid;">
+          <cl:formdata std:sid="f-data-2a48c06b" row="0" col="1"/>
+          <cl:inputbox std:sid="i-box-2ecde443" id="ipb1">
+            <cl:xylayoutdata std:sid="xyl-data-8c46c1e0" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+          </cl:inputbox>
+          <cl:xylayout std:sid="xylayout-1df1cb77"/>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-b64a9c6b" hspace="0px" vspace="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="100" unit="PIXEL"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-61eff6ff" hspace="0px" vspace="0px">
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+        <cl:rows length="10" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="10" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-90c1bc17"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

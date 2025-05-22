@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-07e4d919" version="1.0.0.0">
+  <head std:sid="head-3535ed7e">
+    <title>userAccessGroupPrivilege</title>
+    <screen std:sid="screen-4c22e5ca" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="500" customWidth="800"/>
+    <screen std:sid="screen-a99396ba" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-bca535de" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-52926c78">
+      <cl:dataset std:sid="d-set-69135cbe" id="UserAccessGroupSetList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-bd0fceba" name="GroupCode" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-0436126a" name="UserPrivilege" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-b55908e8" name="AccessGroupCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-2ea02f31" id="UserAccessGroupSetListDelete">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-11f372a9" name="GroupCode" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-31c72417" name="UserPrivilege" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-111dd6e8" name="AccessGroupCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-78a7689a" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-8a721037" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-07f40d0f" id="UserAccessGroupSetInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-6870af10" name="GroupCode" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-6fb229b5" name="UserPrivilege" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-a53ef37e" name="AccessGroupCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-a367090c" id="sms_getUserAccessGroupSet" method="get" action="/v1/accessGroups/userAccessGroupSet">
+        <cl:listener std:sid="listener-2e4a495c" name="submit-error" handler="onSubmitError"/>
+        <cl:listener std:sid="listener-b3d303b4" name="submit-timeout" handler="onSubmitTimeout"/>
+        <cl:listener std:sid="listener-da69c452" name="submit-done" handler="onSms_getUserAccessGroupSetSubmitDone"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="UserAccessGroupSetList"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-12370391" id="sms_postUserAccessGroupSet" action="/v1/accessGroups/userAccessGroupSet">
+        <cl:listener std:sid="listener-6ed7f77f" name="submit-error" handler="onSubmitError"/>
+        <cl:listener std:sid="listener-e5d823d4" name="submit-timeout" handler="onSubmitTimeout"/>
+        <cl:listener std:sid="listener-ecb4f2e1" name="submit-done" handler="onSms_postUserAccessGroupSetSubmitDone"/>
+        <cl:requestdata dataid="UserAccessGroupSetInfo"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-a36f013b" id="sms_putUserAccessGroupSet">
+        <cl:listener std:sid="listener-a1d8eec7" name="submit-error" handler="onSubmitError"/>
+        <cl:listener std:sid="listener-972c8643" name="submit-timeout" handler="onSubmitTimeout"/>
+        <cl:listener std:sid="listener-55997f1d" name="submit-done" handler="onSms_putUserAccessGroupSetSubmitDone"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-c2b339a0" id="sms_deleteUserAccessGroupSet">
+        <cl:listener std:sid="listener-60326e8b" name="submit-error" handler="onSubmitError"/>
+        <cl:listener std:sid="listener-e78b954a" name="submit-timeout" handler="onSubmitTimeout"/>
+        <cl:listener std:sid="listener-f7d35b0f" name="submit-done" handler="onSms_deleteUserAccessGroupSetSubmitDone"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-8384eca8" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-ca24667b" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-e069944f">
+      <cl:xylayoutdata std:sid="xyl-data-9174eb7c" top="10px" right="10px" bottom="10px" left="10px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:grid std:sid="grid-9b14a4c1" id="UAGPS_grdSettingList" readonly="true" datasetid="UserAccessGroupSetList" resizablecolumns="all">
+        <cl:listener std:sid="listener-33e36d15" name="row-dblclick" handler="onUAGPS_grdSettingListRowDblclick"/>
+        <cl:formdata std:sid="f-data-0d79fe73" row="1" col="0"/>
+        <cl:gridcolumn std:sid="g-column-7096017a" width="25px"/>
+        <cl:gridcolumn std:sid="g-column-968de0d8"/>
+        <cl:gridcolumn std:sid="g-column-e26e6dfc"/>
+        <cl:gridcolumn std:sid="g-column-dba3728e"/>
+        <cl:gridheader std:sid="gh-band-2e5a1641">
+          <cl:gridrow std:sid="g-row-af0471b1"/>
+          <cl:gridcell std:sid="gh-cell-9345c628" rowindex="0" colindex="0" sortable="false" filterable="false" columntype="checkbox"/>
+          <cl:gridcell std:sid="gh-cell-496d3fed" rowindex="0" colindex="1" targetcolumnname="GroupCode" sortable="false" filterable="false" text="GroupCode">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_GroupName"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-09d96692" rowindex="0" colindex="2" targetcolumnname="UserPrivilege" sortable="false" filterable="false" text="UserID">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_Privilege"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-4c973b54" rowindex="0" colindex="3" targetcolumnname="AccessGroupCode" sortable="false" filterable="false" text="AccessGroupCode">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_AccessGroupName"/>
+          </cl:gridcell>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-93ee47bc">
+          <cl:gridrow std:sid="g-row-8b020d56"/>
+          <cl:gridcell std:sid="gd-cell-1074f5df" rowindex="0" colindex="0" columntype="checkbox"/>
+          <cl:gridcell std:sid="gd-cell-44f89eb6" rowindex="0" colindex="1" columnname="GroupCode">
+            <cl:combobox std:sid="c-box-0f1c3fd6" id="UAGPS_cmbGroup"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-bc91cbfa" rowindex="0" colindex="2" columnname="UserPrivilege">
+            <cl:combobox std:sid="c-box-efc4adf0" id="UAGPS_cmbPrivilege">
+              <cl:item std:sid="item-52e50691" label="일반직" value="101"/>
+              <cl:item std:sid="item-5f62ba51" label="특수직" value="102"/>
+              <cl:item std:sid="item-50d2b7f1" label="캐스트" value="103"/>
+              <cl:item std:sid="item-3443147e" label="용역직" value="104"/>
+              <cl:item std:sid="item-b00a4950" label="파견직" value="105"/>
+              <cl:item std:sid="item-f623bb67" label="일용직" value="106"/>
+              <cl:item std:sid="item-04b3564b" label="주차관리" value="107"/>
+              <cl:item std:sid="item-46554cfb" label="전문직" value="108"/>
+              <cl:item std:sid="item-6ed3931a" label="전문캐스트" value="109"/>
+            </cl:combobox>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-c57729fb" rowindex="0" colindex="3" columnname="AccessGroupCode">
+            <cl:combobox std:sid="c-box-c849be86" id="UAGPS_cmbAccessGroup"/>
+          </cl:gridcell>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:group std:sid="group-d3e28eb6">
+        <cl:formdata std:sid="f-data-b57bec94" row="0" col="0"/>
+        <cl:output std:sid="output-a7600860" style="font-size:12px;" value="사용자 출입그룹 설정 리스트">
+          <cl:formdata std:sid="f-data-c0b55016" row="0" col="0"/>
+        </cl:output>
+        <cl:button std:sid="button-149e4eb0" id="UAGPS_btnAdd" class="userInfo_btn" value="추가">
+          <cl:listener std:sid="listener-df423340" name="click" handler="onUAGPS_btnAddClick"/>
+          <cl:formdata std:sid="f-data-d6a3a219" row="0" col="2"/>
+        </cl:button>
+        <cl:button std:sid="button-a5655eb1" id="UAGPS_btnDelete" class="userInfo_btn" value="삭제">
+          <cl:listener std:sid="listener-eeb95896" name="click" handler="onUAGPS_btnDeleteClick"/>
+          <cl:formdata std:sid="f-data-4a8fbaa1" row="0" col="3"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-a7550c18" hspace="1px" vspace="1px" top-margin="1px" right-margin="1px" bottom-margin="1px" left-margin="1px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="200" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-9dcff112" hspace="1px" vspace="1px" top-margin="1px" right-margin="1px" bottom-margin="1px" left-margin="1px">
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-614dcb64"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

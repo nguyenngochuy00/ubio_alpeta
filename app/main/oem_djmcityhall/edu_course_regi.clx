@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-36a8f5c5" version="1.0.0.0">
+  <head std:sid="head-f93d9dc4">
+    <title>edu_course_regi</title>
+    <screen std:sid="screen-1c604b39" id="default" name="default" minwidth="1024px" width="1024px" height="768px"/>
+    <screen std:sid="screen-e1511522" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-c59ba607" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-79591d15">
+      <cl:dataset std:sid="d-set-ed25f851" id="EduMethodList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-c2c5cf1e" name="Code"/>
+          <cl:datacolumn std:sid="d-column-54bea7c8" name="Name"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-13c34ea4" id="EduTypeList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-6101b6ee" name="Code"/>
+          <cl:datacolumn std:sid="d-column-0cf60caa" name="Name"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-71f76a43" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-2afe3c12" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-1804400d" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-28001652" name="Count" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-cb28eaec" id="Rule">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-b874232d" name="OpenRule" datatype="number" defaultvalue="0"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-3acb3756" id="EduCourse">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-09f0a8b9" name="Code"/>
+          <cl:datacolumn std:sid="d-column-c9fe45ad" name="Name"/>
+          <cl:datacolumn std:sid="d-column-7dc11a36" name="Contents"/>
+          <cl:datacolumn std:sid="d-column-a6f6b43e" name="Type"/>
+          <cl:datacolumn std:sid="d-column-d5746476" name="Method"/>
+          <cl:datacolumn std:sid="d-column-1a0de648" name="StartDate"/>
+          <cl:datacolumn std:sid="d-column-848c2899" name="EndDate"/>
+          <cl:datacolumn std:sid="d-column-589fcc4c" name="Location"/>
+          <cl:datacolumn std:sid="d-column-c18d84e6" name="Terminals"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-057c514c" id="smsPostEduCourseList" action="/v1/djmch/edu_course">
+        <cl:listener std:sid="listener-3ae6b456" name="submit-done" handler="onSmsPostEduCourseListSubmitDone"/>
+        <cl:listener std:sid="listener-10ba27c8" name="submit-error" handler="onSms_GetListSubmitError"/>
+        <cl:listener std:sid="listener-ab82bcf8" name="submit-timeout" handler="onSms_GetListSubmitTimeout"/>
+        <cl:requestdata dataid="EduCourse"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-e4e1cb88" id="sms_GetEduTypeList" method="get" action="/v1/djmch/edu_type">
+        <cl:listener std:sid="listener-853b43f2" name="submit-done" handler="onSmsGetEduTypeListSubmitDone"/>
+        <cl:listener std:sid="listener-d5da90fd" name="submit-error" handler="onSms_GetListSubmitError"/>
+        <cl:listener std:sid="listener-7c0384ca" name="submit-timeout" handler="onSms_GetListSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total"/>
+        <cl:responsedata dataid="EduTypeList"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-57cfc21d" id="smsGetEduMethodList" method="get" action="/v1/djmch/edu_method">
+        <cl:listener std:sid="listener-9d4578fe" name="submit-done" handler="onSmsGetEduMethodListSubmitDone"/>
+        <cl:listener std:sid="listener-4e63650b" name="submit-timeout" handler="onSms_GetListSubmitTimeout"/>
+        <cl:listener std:sid="listener-24f06244" name="submit-error" handler="onSms_GetListSubmitError"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total"/>
+        <cl:responsedata dataid="EduMethodList"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec dev-comment="DJCHECR&#xD;&#xA;"/>
+  </head>
+  <body std:sid="body-8cb63006" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-d1ed1450" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-e4df8145" id="LPRRG_grpMain" style="padding:5px;">
+      <cl:xylayoutdata std:sid="xyl-data-48ba61a9" top="10px" left="10px" width="430px" height="310px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      <cl:group std:sid="group-e1ca0223">
+        <cl:formdata std:sid="f-data-1483edea" row="0" col="0"/>
+        <cl:output std:sid="output-152ef7ec" value="교육코드">
+          <cl:formdata std:sid="f-data-07569a09" row="0" col="0"/>
+        </cl:output>
+        <cl:inputbox std:sid="i-box-fbe5ca3c" id="DJCHECR_ipbEduCode">
+          <cl:datamapbind property="value" datacontrolid="EduCourse" columnname="Code"/>
+          <cl:formdata std:sid="f-data-dbc3b45c" row="0" col="1"/>
+        </cl:inputbox>
+        <cl:formlayout std:sid="f-layout-527c8e11">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="90" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-cbbef987">
+        <cl:formdata std:sid="f-data-817491b0" row="1" col="0"/>
+        <cl:output std:sid="output-4f4eef68" value="교육명">
+          <cl:formdata std:sid="f-data-f2a6c883" row="0" col="0"/>
+        </cl:output>
+        <cl:inputbox std:sid="i-box-5dfd2087" id="DJCHECR_ipbEduName" maxlength="-1">
+          <cl:datamapbind property="value" datacontrolid="EduCourse" columnname="Name"/>
+          <cl:formdata std:sid="f-data-125222f6" row="0" col="1"/>
+        </cl:inputbox>
+        <cl:formlayout std:sid="f-layout-cb58d4ff">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="90" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-082dd761">
+        <cl:formdata std:sid="f-data-e0b99f1b" row="2" col="0"/>
+        <cl:output std:sid="output-480970d6" value="교육내용">
+          <cl:formdata std:sid="f-data-4165e37a" row="0" col="0"/>
+        </cl:output>
+        <cl:inputbox std:sid="i-box-031cc42a" id="DJCHECR_ipbEduContents">
+          <cl:datamapbind property="value" datacontrolid="EduCourse" columnname="Contents"/>
+          <cl:formdata std:sid="f-data-83d44139" row="0" col="1"/>
+        </cl:inputbox>
+        <cl:formlayout std:sid="f-layout-d1af1aa9">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="90" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-799f0a56">
+        <cl:formdata std:sid="f-data-2519e288" row="3" col="0"/>
+        <cl:output std:sid="output-69f46d9e" value="교육유형">
+          <cl:formdata std:sid="f-data-53391d46" row="0" col="0"/>
+        </cl:output>
+        <cl:combobox std:sid="c-box-49318be8" id="DJCHECR_cmbEduType">
+          <cl:datamapbind property="value" datacontrolid="EduCourse" columnname="Type"/>
+          <cl:formdata std:sid="f-data-0e604de3" row="0" col="1"/>
+          <cl:itemset datasetid="EduTypeList" label="Name" value="Code"/>
+        </cl:combobox>
+        <cl:formlayout std:sid="f-layout-9fdf0020">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="90" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-7670bac1">
+        <cl:formdata std:sid="f-data-20d51b63" row="4" col="0"/>
+        <cl:output std:sid="output-2bd9efb0" value="학습방법">
+          <cl:formdata std:sid="f-data-b51ec428" row="0" col="0"/>
+        </cl:output>
+        <cl:combobox std:sid="c-box-50f1740e" id="DJCHECR_cmbEduMethod">
+          <cl:datamapbind property="value" datacontrolid="EduCourse" columnname="Method"/>
+          <cl:formdata std:sid="f-data-4a9a8cae" row="0" col="1"/>
+          <cl:itemset datasetid="EduMethodList" label="Name" value="Code"/>
+        </cl:combobox>
+        <cl:formlayout std:sid="f-layout-048452cf">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="90" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-2e3ff5d6">
+        <cl:formdata std:sid="f-data-e2d9c608" row="5" col="0"/>
+        <cl:output std:sid="output-26f4d446" value="교육기간">
+          <cl:formdata std:sid="f-data-ef1a01fb" row="0" col="0"/>
+        </cl:output>
+        <cl:dateinput std:sid="d-input-98972f0a" id="DJCHECR_dtiStart" mask="YYYY-MM-DD HH:mm" format="YYYY-MM-DD HH:mm:ss" autoselect="false">
+          <cl:formdata std:sid="f-data-58b9fae2" row="0" col="1"/>
+        </cl:dateinput>
+        <cl:output std:sid="output-2d3a6401" style="font-weight:bold; vertical-align:middle; text-align:right;" value="~">
+          <cl:formdata std:sid="f-data-6fa45b1e" row="0" col="2"/>
+        </cl:output>
+        <cl:dateinput std:sid="d-input-7169d71a" id="DJCHECR_dtiEnd" mask="YYYY-MM-DD HH:mm" format="YYYY-MM-DD HH:mm:ss" autoselect="false">
+          <cl:formdata std:sid="f-data-54ab3744" row="0" col="3"/>
+        </cl:dateinput>
+        <cl:formlayout std:sid="f-layout-7177df23">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="90" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="10" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-f58cc994">
+        <cl:formdata std:sid="f-data-2d098f08" row="6" col="0"/>
+        <cl:output std:sid="output-4bef6f1d" value="교육장소">
+          <cl:formdata std:sid="f-data-2ff675bc" row="0" col="0"/>
+        </cl:output>
+        <cl:inputbox std:sid="i-box-ad63cb96" id="DJCHECR_ipbEduLocation" maxlength="-1">
+          <cl:datamapbind property="value" datacontrolid="EduCourse" columnname="Location"/>
+          <cl:formdata std:sid="f-data-e75a331e" row="0" col="1"/>
+        </cl:inputbox>
+        <cl:formlayout std:sid="f-layout-3c8d8cc2">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="90" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-ae7fb35a">
+        <cl:formdata std:sid="f-data-e0d443f6" row="8" col="0"/>
+        <cl:button std:sid="button-20d02002" id="DJCHECR_btnClose" class="userInfo_btn" visible="true" value="닫기">
+          <cl:listener std:sid="listener-f2395a51" name="click" handler="onBtnCloseClick"/>
+          <cl:listener std:sid="listener-e6003d2f" name="click" handler="onDJCHECR_btnCloseClick"/>
+          <cl:formdata std:sid="f-data-9f2a1a33" row="0" col="3"/>
+        </cl:button>
+        <cl:button std:sid="button-6a89902c" id="DJCHECR_btnRegi" class="userInfo_btn" visible="true" value="추가">
+          <cl:listener std:sid="listener-164c42be" name="click" handler="onDJCHECR_btnRegiClick"/>
+          <cl:formdata std:sid="f-data-deafa26d" row="0" col="1"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-c80171eb">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="20" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-3cd5a258">
+        <cl:rows length="30" unit="PIXEL"/>
+        <cl:rows length="30" unit="PIXEL"/>
+        <cl:rows length="30" unit="PIXEL"/>
+        <cl:rows length="30" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
+        <cl:rows length="30" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="10" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-5a538932"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

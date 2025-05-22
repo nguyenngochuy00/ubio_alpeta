@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-bf474527" version="1.0.0.0">
+  <head std:sid="head-385f51ee">
+    <title>tempCardRegist</title>
+    <screen std:sid="screen-6b5195b3" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="160" customWidth="400"/>
+    <screen std:sid="screen-e032109f" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-d21ec358" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-580b9f26">
+      <cl:datamap std:sid="d-map-c36c7406" id="TempCardRegist">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-b5e2f8ba" name="CardType" datatype="number" defaultvalue="0"/>
+          <cl:datacolumn std:sid="d-column-787ab2be" name="CardName"/>
+          <cl:datacolumn std:sid="d-column-042361df" name="Description"/>
+          <cl:datacolumn std:sid="d-column-1cd47891" name="CardCount" datatype="number" defaultvalue="1"/>
+          <cl:datacolumn comment="출력대기" std:sid="d-column-b419b641" name="CardStatus" datatype="number" defaultvalue="1"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-cedbe583" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-87513087" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-0df785ab" id="sms_postTempCardRegist" action="/v1/armyhq/accessCards/visitCard">
+        <cl:listener std:sid="listener-836e9b9f" name="submit-done" handler="onSms_postTempCardRegistSubmitDone"/>
+        <cl:listener std:sid="listener-1fe3fee5" name="submit-error" handler="onSms_postTempCardRegistSubmitError"/>
+        <cl:listener std:sid="listener-d0282973" name="submit-timeout" handler="onSms_postTempCardRegistSubmitTimeout"/>
+        <cl:requestdata dataid="TempCardRegist"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-310dd483" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-12583ecc" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-40f81ba8">
+      <cl:xylayoutdata std:sid="xyl-data-9a5f2c55" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-914882bb" style="color:#010101;">
+        <cl:formdata std:sid="f-data-1f507df1" row="0" col="0" rowspan="1" colspan="4"/>
+        <cl:output std:sid="output-d304fa2a" style="color:#010101; font-weight:600.0; padding-left:10px; font-size:16px;" value="임시출입증 등록">
+          <cl:xylayoutdata std:sid="xyl-data-1c8c1f5c" top="0px" bottom="0px" left="0px" width="140px" horizontalAnchor="LEFT" verticalAnchor="BOTH"/>
+        </cl:output>
+        <cl:xylayout std:sid="xylayout-d8f6bf00"/>
+      </cl:group>
+      <cl:output std:sid="output-5fb564f5" style="background-color:#f6f6f6; border-right-style:solid; color:#010101; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; border-right-color:#c5c5c5; border-bottom-style:solid; background-image:none; text-align:center;" class="outputbox-amhq" visible="true" value="출입증 종류">
+        <cl:formdata std:sid="f-data-dbd85063" row="2" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-ba78499c" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; color:#010101; border-right-width:2px; border-bottom-width:1px; border-right-color:#c5c5c5; border-bottom-style:solid; text-align:center;" class="outputbox-amhq" visible="true" value="출입증명">
+        <cl:formdata std:sid="f-data-c7a08408" row="2" col="2"/>
+      </cl:output>
+      <cl:output std:sid="output-67dfc064" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; color:#010101; border-right-width:2px; border-bottom-width:1px; border-right-color:#c5c5c5; border-bottom-style:solid; text-align:center;" class="outputbox-amhq" visible="true" value="사유(비고)">
+        <cl:formdata std:sid="f-data-077e3149" row="3" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-cdf917df" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; color:#010101; border-right-width:2px; border-bottom-width:1px; border-right-color:#c5c5c5; border-bottom-style:solid; text-align:center;" class="outputbox-amhq" visible="true" value="신규발급수량">
+        <cl:formdata std:sid="f-data-e79b7187" row="3" col="2"/>
+      </cl:output>
+      <cl:combobox std:sid="c-box-2f3c6ec7" id="VMVCR_cmbCardType" style="color:#010101; text-align:center;" class="combobox-amhq" readonly="true">
+        <cl:datamapbind property="value" category="PROPERTY" datacontrolid="TempCardRegist" columnname="CardType"/>
+        <cl:formdata std:sid="f-data-4c2942a6" row="2" col="1"/>
+        <cl:item std:sid="item-b3fd7963" label="임시출입증" value="100"/>
+      </cl:combobox>
+      <cl:inputbox std:sid="i-box-9879fa5a" id="VMVCR_ipbCardName" style="color:#010101;" class="inputbox-amhq">
+        <cl:datamapbind property="value" category="PROPERTY" datacontrolid="TempCardRegist" columnname="CardName"/>
+        <cl:formdata std:sid="f-data-83f46aae" row="2" col="3"/>
+      </cl:inputbox>
+      <cl:inputbox std:sid="i-box-a2ca23f4" id="VMVCR_ipbDescription" style="color:#010101;" class="inputbox-amhq">
+        <cl:datamapbind property="value" category="PROPERTY" datacontrolid="TempCardRegist" columnname="Description"/>
+        <cl:formdata std:sid="f-data-22cd91e4" row="3" col="1"/>
+      </cl:inputbox>
+      <cl:numbereditor std:sid="n-editor-9657c4e5" id="VMVCR_nbeCardCount" style="color:#010101;" class="inputbox-amhq" min="1.0" max="100.0" spinbutton="false" placeholder=" 1 ~ 100">
+        <cl:datamapbind property="value" category="PROPERTY" datacontrolid="TempCardRegist" columnname="CardCount"/>
+        <cl:formdata std:sid="f-data-7c0a774f" row="3" col="3"/>
+      </cl:numbereditor>
+      <cl:group std:sid="group-f9295e17" style="color:#010101;">
+        <cl:formdata std:sid="f-data-1643408b" row="4" col="0" rowspan="1" colspan="4"/>
+        <cl:button std:sid="button-f9ea2835" id="VMVCR_btnCancel" class="button-amhq" value="취소">
+          <cl:listener std:sid="listener-3f9ef6a5" name="click" handler="onVMVCR_btnCancelClick"/>
+          <cl:formdata std:sid="f-data-d2d4e1c9" row="1" col="2"/>
+        </cl:button>
+        <cl:button std:sid="button-089d42ce" id="VMVCR_btnRegist" class="button-amhq" value="등록">
+          <cl:listener std:sid="listener-ae027359" name="click" handler="onVMVCR_btnRegistClick"/>
+          <cl:formdata std:sid="f-data-e5e93d15" row="1" col="1"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-77a64108" hspace="8px" vspace="1px" top-margin="1px" right-margin="1px" bottom-margin="1px" left-margin="1px">
+          <cl:rows length="10" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-9e8624ae" hspace="1px" vspace="1px" top-margin="1px" right-margin="1px" bottom-margin="1px" left-margin="1px">
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="4" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="100" unit="PIXEL"/>
+        <cl:columns length="1" unit="FRACTION"/>
+        <cl:columns length="100" unit="PIXEL"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-89d686b7"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

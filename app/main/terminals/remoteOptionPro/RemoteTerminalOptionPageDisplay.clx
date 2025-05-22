@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-58068c6e" version="1.0.0.0">
+  <head std:sid="head-30abb9e6">
+    <title>RemoteTerminalOptionPageDisplay</title>
+    <screen std:sid="screen-42631bd9" id="default" name="default" minwidth="1024px" width="1024px" height="768px"/>
+    <screen std:sid="screen-8a0fc5e3" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-eae7956c" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-a29df0f7">
+      <cl:dataset comment="Lang_Lang 설정 범위" std:sid="d-set-9076dcb4" id="Lang_Lang_Range">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-471f9e56" name="label" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-2a2a4182" name="value" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-a25a5160" id="DisplayOptionInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-65bcd879" name="Camera_DisplayOpt" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-a969a9ff" name="Camera_SavePhoto" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-29b9ec18" name="Lang_Lang_Int" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-196c08bc" name="DisOpt_PowerSave" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-ebd1aa77" name="DisOpt_DisplayOpt" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-6fdf1f3f" name="Msg_DisplayTime" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-c86e257e" name="Camera_SaveFaceFail" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-be9b9e49" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-d689b272" name="load" handler="onBodyLoad"/>
+    <cl:tabfolder std:sid="t-folder-1f5dc91c" id="displaytab" style="padding-top:10px; padding-left:10px; padding-bottom:10px; padding-right:10px;" class="common-snbtab">
+      <cl:xylayoutdata std:sid="xyl-data-bd253a5e" top="0px" left="0px" width="700px" height="600px" horizontalAnchor="LEFT" verticalAnchor="TOP"/>
+      <cl:tabitem std:sid="t-item-8c68ae0b" selected="true" text="카메라">
+        <cl:langbind property="text" category="PROPERTY" keypath="Str_Camera"/>
+        <cl:group std:sid="group-ab1ea3dc">
+          <std:metadata>
+            <std:property key="locked" value="true"/>
+          </std:metadata>
+          <cl:group std:sid="group-4fe150dc" style="padding:0px; border-radius:2px;">
+            <cl:formdata std:sid="f-data-a77f2c19" row="0" col="0"/>
+            <cl:output std:sid="output-21c1ef47" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-right-color:#c5c5c5; border-bottom-style:solid; text-align:center;">
+              <cl:langbind property="value" category="PROPERTY" keypath="Str_FailedToFaceAuthSavePhoto"/>
+              <cl:formdata std:sid="f-data-01bc66a9" row="3" col="0"/>
+            </cl:output>
+            <cl:group std:sid="group-6cdff006" style="border-top-width:1px; border-bottom-color:#c5c5c5; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid;">
+              <cl:formdata std:sid="f-data-7e594bdc" row="3" col="1"/>
+              <cl:combobox std:sid="c-box-bb5516be" id="cmb5" style="font-size:14px; text-align:center;" preventinput="true">
+                <cl:datamapbind property="value" category="PROPERTY" datacontrolid="DisplayOptionInfo" columnname="Camera_SaveFaceFail"/>
+                <cl:xylayoutdata std:sid="xyl-data-c8a345e4" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+                <cl:item std:sid="item-2d17b75c" label="0" value="0"/>
+                <cl:item std:sid="item-36aa92a0" label="1" value="1"/>
+                <cl:item std:sid="item-97cfa811" label="2" value="2"/>
+                <cl:item std:sid="item-b3ab1863" label="3" value="3"/>
+                <cl:item std:sid="item-abe46dba" label="4" value="4"/>
+                <cl:item std:sid="item-0375d3bf" label="5" value="5"/>
+              </cl:combobox>
+              <cl:xylayout std:sid="xylayout-e4806ff8"/>
+            </cl:group>
+            <cl:output std:sid="output-13a1845e" style="font-weight:bold; font-size:14px;">
+              <cl:langbind property="value" category="PROPERTY" keypath="Str_SaveCameraSet"/>
+              <cl:formdata std:sid="f-data-dd25cd33" row="0" col="0" rowspan="1" colspan="2"/>
+            </cl:output>
+            <cl:group std:sid="group-02992e93" id="RTOPD_Camera_SavePhoto">
+              <cl:formdata std:sid="f-data-ff405866" row="1" col="0" rowspan="1" colspan="2"/>
+              <cl:checkbox std:sid="c-box-1f053f83" id="RTOPD_Camera_SavePhoto_Success" style="font-size:14px;" truevalue="1" falsevalue="0">
+                <cl:listener std:sid="listener-cbffe16e" name="value-change" handler="ChkCamera_SaveFaceFail"/>
+                <cl:langbind property="text" category="PROPERTY" keypath="Str_AuthSuccessSave"/>
+                <cl:formdata std:sid="f-data-cf182cd0" row="0" col="0"/>
+              </cl:checkbox>
+              <cl:checkbox std:sid="c-box-f2da7338" id="RTOPD_Camera_SavePhoto_Fail" style="font-size:14px;" truevalue="1" falsevalue="0">
+                <cl:listener std:sid="listener-91e08aa0" name="value-change" handler="ChkCamera_SaveFaceFail"/>
+                <cl:langbind property="text" category="PROPERTY" keypath="Str_AuthFailSave"/>
+                <cl:formdata std:sid="f-data-8d5fc76c" row="0" col="1"/>
+              </cl:checkbox>
+              <cl:formlayout std:sid="f-layout-adfdfbf0" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+                <cl:rows length="1" unit="FRACTION"/>
+                <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+                <cl:columns length="1" unit="FRACTION"/>
+              </cl:formlayout>
+            </cl:group>
+            <cl:formlayout std:sid="f-layout-7c70f17d" hspace="0px" vspace="0px">
+              <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+              <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+              <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+              <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+              <cl:columns length="3" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="5" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:formlayout std:sid="f-layout-0b3f3ddd" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+      </cl:tabitem>
+      <cl:tabitem std:sid="t-item-1752b2d0" text="언어">
+        <std:metadata>
+          <std:property key="is-active-item" value="true"/>
+        </std:metadata>
+        <cl:langbind property="text" category="PROPERTY" keypath="Str_Language"/>
+        <cl:group std:sid="group-2293713a">
+          <std:metadata>
+            <std:property key="locked" value="true"/>
+          </std:metadata>
+          <cl:group std:sid="group-75e0ff1b">
+            <cl:formdata std:sid="f-data-bac09a02" row="0" col="0"/>
+            <cl:output std:sid="output-3b919c2c" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-top-color:#c5c5c5; border-right-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid; text-align:center;">
+              <cl:langbind property="value" category="PROPERTY" keypath="Str_Language"/>
+              <cl:formdata std:sid="f-data-e35fcafd" row="0" col="0"/>
+            </cl:output>
+            <cl:group std:sid="group-883e571b" style="border-bottom-color:#c5c5c5; border-top-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid;">
+              <cl:formdata std:sid="f-data-0b4f9a27" row="0" col="1"/>
+              <cl:combobox std:sid="c-box-da666a4b" id="RTOPD_Lang_Lang" style="font-size:14px; text-align:center;" preventinput="true">
+                <cl:datamapbind property="value" datacontrolid="DisplayOptionInfo" columnname="Lang_Lang_Int"/>
+                <cl:xylayoutdata std:sid="xyl-data-a826cf3e" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+                <cl:itemset datasetid="Lang_Lang_Range" label="label" value="value"/>
+              </cl:combobox>
+              <cl:xylayout std:sid="xylayout-62bf9684"/>
+            </cl:group>
+            <cl:formlayout std:sid="f-layout-340ffd5a" hspace="0px" vspace="0px">
+              <cl:rows length="30" shadetype="NONE" shadecolor="transparent"/>
+              <cl:rows length="30" shadetype="NONE" shadecolor="transparent"/>
+              <cl:columns length="3" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="5" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:formlayout std:sid="f-layout-44c003a5" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+      </cl:tabitem>
+      <cl:tabitem std:sid="t-item-db5d5daf" text="LCD 옵션">
+        <cl:langbind property="text" category="PROPERTY" keypath="Str_LCDOption"/>
+        <cl:group std:sid="group-6aee1057">
+          <std:metadata>
+            <std:property key="locked" value="true"/>
+          </std:metadata>
+          <cl:group std:sid="group-790d4d0e">
+            <cl:formdata std:sid="f-data-cd781dee" row="0" col="0"/>
+            <cl:output std:sid="output-5f0960ee" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-top-color:#c5c5c5; border-right-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid; text-align:center;">
+              <cl:langbind property="value" category="PROPERTY" keypath="Str_PowerSavingSet"/>
+              <cl:formdata std:sid="f-data-9b27d41e" row="0" col="0"/>
+            </cl:output>
+            <cl:output std:sid="output-aa41951a" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-right-color:#c5c5c5; border-bottom-style:solid; text-align:center;">
+              <cl:langbind property="value" category="PROPERTY" keypath="Str_UserDisplaySet"/>
+              <cl:formdata std:sid="f-data-a9a327e3" row="1" col="0" rowspan="1" colspan="1"/>
+            </cl:output>
+            <cl:group std:sid="group-f6c244d3" style="border-bottom-color:#c5c5c5; border-top-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid;">
+              <cl:formdata std:sid="f-data-78d00dc7" row="0" col="1"/>
+              <cl:combobox std:sid="c-box-9165d182" id="RTOPD_DisOpt_PowerSave" style="font-size:14px; text-align:center;" preventinput="true">
+                <cl:datamapbind property="value" datacontrolid="DisplayOptionInfo" columnname="DisOpt_PowerSave"/>
+                <cl:xylayoutdata std:sid="xyl-data-c5413a20" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+                <cl:item std:sid="item-d8d40dfa" label="none" value="0">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_NotUsed"/>
+                </cl:item>
+                <cl:item std:sid="item-dba11751" label="5sec" value="5">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_5sec"/>
+                </cl:item>
+                <cl:item std:sid="item-91e0df4e" label="10sec" value="10">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_10sec"/>
+                </cl:item>
+                <cl:item std:sid="item-87f17732" label="20sec" value="20">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_20sec"/>
+                </cl:item>
+                <cl:item std:sid="item-77756aef" label="30sec" value="30">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_30sec"/>
+                </cl:item>
+                <cl:item std:sid="item-027e87e5" label="1min" value="60">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_1min"/>
+                </cl:item>
+                <cl:item std:sid="item-135b4299" label="2min" value="120">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_2min"/>
+                </cl:item>
+                <cl:item std:sid="item-3fb0de82" label="5min" value="300">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_5min"/>
+                </cl:item>
+                <cl:item std:sid="item-ec26b086" label="10min" value="600">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_10min"/>
+                </cl:item>
+              </cl:combobox>
+              <cl:xylayout std:sid="xylayout-23124e79"/>
+            </cl:group>
+            <cl:group std:sid="group-d59f9fe0" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+              <cl:formdata std:sid="f-data-f4363ab9" row="1" col="1"/>
+              <cl:combobox std:sid="c-box-e277f3e8" id="RTOPD_DisOpt_DisplayOpt" style="font-size:14px; text-align:center;" preventinput="true">
+                <cl:datamapbind property="value" datacontrolid="DisplayOptionInfo" columnname="DisOpt_DisplayOpt"/>
+                <cl:xylayoutdata std:sid="xyl-data-530ea9b9" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+                <cl:item std:sid="item-8172f091" label="none" value="0">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_NotUsed"/>
+                </cl:item>
+                <cl:item std:sid="item-8eaa18ba" label="사용자아이디" value="1">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_UserIndexKey"/>
+                </cl:item>
+                <cl:item std:sid="item-3b964caa" label="사용자이름" value="2">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_UserName"/>
+                </cl:item>
+                <cl:item std:sid="item-a781e4e9" label="사원번호" value="3">
+                  <cl:langbind property="label" category="PROPERTY" keypath="Str_EXPORT_SDNO"/>
+                </cl:item>
+              </cl:combobox>
+              <cl:xylayout std:sid="xylayout-8f7b65bc"/>
+            </cl:group>
+            <cl:formlayout std:sid="f-layout-a2981c59" hspace="0px" vspace="0px">
+              <cl:rows length="30" shadetype="NONE" shadecolor="transparent"/>
+              <cl:rows length="30" shadetype="NONE" shadecolor="transparent"/>
+              <cl:rows length="30" unit="PIXEL" shadetype="NONE" shadecolor="transparent"/>
+              <cl:columns length="3" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="5" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:formlayout std:sid="f-layout-6369c557" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+      </cl:tabitem>
+      <cl:tabitem std:sid="t-item-566457e5" text="메세지 시간 설정">
+        <cl:langbind property="text" category="PROPERTY" keypath="Str_MessageTimeSet"/>
+        <cl:group std:sid="group-77e286d3">
+          <std:metadata>
+            <std:property key="locked" value="true"/>
+          </std:metadata>
+          <cl:group std:sid="group-bca2ead5">
+            <cl:formdata std:sid="f-data-e54c498a" row="0" col="0"/>
+            <cl:output std:sid="output-bfc185bb" style="background-color:#f6f6f6; border-right-style:solid; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-top-color:#c5c5c5; border-right-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid; text-align:center;">
+              <cl:langbind property="value" category="PROPERTY" keypath="Str_DisplayTimeMs"/>
+              <cl:formdata std:sid="f-data-2ad76bc7" row="0" col="0"/>
+            </cl:output>
+            <cl:group std:sid="group-45f4e6b7" style="border-bottom-color:#c5c5c5; border-top-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid;">
+              <cl:formdata std:sid="f-data-36b8abee" row="0" col="1"/>
+              <cl:numbereditor std:sid="n-editor-2a72ae4d" id="RTOPD_Msg_DisplayTime" style="padding-top:0px; padding-left:0px; padding-bottom:0px; text-align:center; padding-right:0px;" min="0.0" max="5000.0" spinbutton="false">
+                <cl:datamapbind property="value" datacontrolid="DisplayOptionInfo" columnname="Msg_DisplayTime"/>
+                <cl:xylayoutdata std:sid="xyl-data-a323eddc" top="2px" right="4px" bottom="2px" left="4px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+              </cl:numbereditor>
+              <cl:xylayout std:sid="xylayout-389c31c2"/>
+            </cl:group>
+            <cl:formlayout std:sid="f-layout-ead22344" hspace="0px" vspace="0px">
+              <cl:rows length="30" shadetype="NONE" shadecolor="transparent"/>
+              <cl:rows length="30" shadetype="NONE" shadecolor="transparent"/>
+              <cl:columns length="3" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="5" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:formlayout std:sid="f-layout-1d856860" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+      </cl:tabitem>
+      <cl:item-style style="cursor:pointer;"/>
+    </cl:tabfolder>
+    <cl:xylayout std:sid="xylayout-4b7872dd"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

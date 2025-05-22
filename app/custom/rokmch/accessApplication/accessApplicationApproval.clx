@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-24a05f91" version="1.0.0.0">
+  <head std:sid="head-10d54cbd">
+    <title>accessApplicationApproval</title>
+    <screen std:sid="screen-58c68d2d" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="740" customWidth="900"/>
+    <screen std:sid="screen-125205d9" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-aa7e567f" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-74d7b743">
+      <cl:dataset std:sid="d-set-3da7bdbe" id="AccessApplicationApprovalList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-b3e3dfba" name="ApplicationIndex" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-2cd0c9a1" name="CreateDT"/>
+          <cl:datacolumn std:sid="d-column-0c1fb80c" name="ApprovalState" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-645df894" name="OnestApprovalID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-6f11a91c" name="OnestApprovalName"/>
+          <cl:datacolumn std:sid="d-column-bdc09373" name="TwostApprovalID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-f1b349ec" name="TwostApprovalName"/>
+          <cl:datacolumn std:sid="d-column-766f6150" name="ApplicantUserType" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-a0f5f844" name="ApplicantName"/>
+          <cl:datacolumn std:sid="d-column-0ae46be5" name="ApplicantServiceNumber"/>
+          <cl:datacolumn std:sid="d-column-a9513539" name="ApplicantGroup" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-2b930b57" name="AccessGroup" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-174ba88d" id="GroupList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-7ad5f074" name="GroupID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-e30540db" name="Parent" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-a6bd5912" name="Name"/>
+          <cl:datacolumn std:sid="d-column-77412540" name="Description"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-f7aa1a5b" id="UserAccessApproval">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-6979fdcc" name="ApplicationIndex" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-36dab5d6" name="ApprovalState" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-5a92db4d" name="CreateDT" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-479bb5df" name="ModifitDT"/>
+          <cl:datacolumn std:sid="d-column-46129228" name="AprvDT"/>
+          <cl:datacolumn std:sid="d-column-7231c4af" name="Predecessor"/>
+          <cl:datacolumn std:sid="d-column-18bf0d3d" name="ApprovalUserID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-f77ff5ea" name="ApprovalName"/>
+          <cl:datacolumn std:sid="d-column-aa403a1f" name="ApprovalGroup"/>
+          <cl:datacolumn std:sid="d-column-271ec35e" name="Message"/>
+          <cl:datacolumn std:sid="d-column-e30da1f1" name="NextApprovalUserID" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-a33aca7f" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-80d61523" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-1804400d" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-251eeb54" name="Count" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-46336a98" id="sms_getAccessApplicationApprovals" method="get" action="/v1/armyhq/accessApproval">
+        <cl:listener std:sid="listener-340141db" name="submit-done" handler="onSms_getAccessApplicationApprovalsSubmitDone"/>
+        <cl:listener std:sid="listener-94c6db4e" name="submit-error" handler="onSms_getAccessApplicationApprovalsSubmitError"/>
+        <cl:listener std:sid="listener-ec5d82d7" name="submit-timeout" handler="onSms_getAccessApplicationApprovalsSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="AccessApplicationApprovalList"/>
+        <cl:responsedata dataid="Total"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-b0cfd1f6" id="sms_putAccessApplicationApprovals" method="put" action="/v1/armyhq/accessApproval">
+        <cl:listener std:sid="listener-9239a228" name="submit-done" handler="onSms_putAccessApplicationApprovalsSubmitDone"/>
+        <cl:listener std:sid="listener-97ec0a4f" name="submit-error" handler="onSms_putAccessApplicationApprovalsSubmitError"/>
+        <cl:listener std:sid="listener-e4cb1e4d" name="submit-timeout" handler="onSms_putAccessApplicationApprovalsSubmitTimeout"/>
+        <cl:requestdata dataid="UserAccessApproval"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-6a7de037" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-7f3a636c" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-b42a20b2">
+      <cl:xylayoutdata std:sid="xyl-data-be8aed23" top="10px" right="10px" bottom="10px" left="10px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-88f5990b" style="background-color:#f6f6f6; background-image:none;">
+        <cl:formdata std:sid="f-data-5199c22c" row="2" col="0"/>
+        <cl:group std:sid="group-5f26e718">
+          <cl:formdata std:sid="f-data-7515d80e" row="0" col="0" rowspan="1" colspan="2"/>
+          <cl:dateinput std:sid="d-input-b0e4796a" id="ACAPAP_dtiStart" style="color:#000000;">
+            <cl:formdata std:sid="f-data-646919a5" row="0" col="1"/>
+          </cl:dateinput>
+          <cl:dateinput std:sid="d-input-246c40d6" id="ACAPAP_dtiEnd" style="color:#000000;">
+            <cl:formdata std:sid="f-data-9d51d829" row="0" col="3"/>
+          </cl:dateinput>
+          <cl:output std:sid="output-8589e40d" style="color:#000000; text-align:center;" value="~">
+            <cl:formdata std:sid="f-data-66fbe6a2" row="0" col="2"/>
+          </cl:output>
+          <cl:button std:sid="button-55bddf05" id="ACAPAP_btnSearch" class="userInfo_btn" value="Search">
+            <cl:listener std:sid="listener-ca5e7dc8" name="click" handler="onACAPAP_btnSearchClick"/>
+            <cl:formdata std:sid="f-data-71eebefa" row="0" col="4"/>
+          </cl:button>
+          <cl:group std:sid="group-958d90bc">
+            <cl:formdata std:sid="f-data-a624fe52" row="0" col="0"/>
+            <cl:output std:sid="output-52824181" id="ACAPAP_opbTotal" style="padding-top:4px; color:#000000; padding-left:4px; font-size:13px; padding-bottom:4px; padding-right:4px;">
+              <cl:formdata std:sid="f-data-fd8a0891" row="0" col="1"/>
+            </cl:output>
+            <cl:output std:sid="output-e053a255" style="padding-top:4px; color:#000000; padding-left:4px; padding-bottom:4px; font-size:15px; text-align:right; padding-right:4px;">
+              <cl:langbind property="value" category="PROPERTY" keypath="Str_All"/>
+              <cl:formdata std:sid="f-data-70e8d15e" row="0" col="0"/>
+            </cl:output>
+            <cl:formlayout std:sid="f-layout-22d9046c" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+              <cl:rows length="1" unit="FRACTION"/>
+              <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="50" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="1" unit="FRACTION"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:formlayout std:sid="f-layout-255a5f4f" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+            <cl:columns length="120" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="10" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="120" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-6ee3e6a8" hspace="0px" vspace="0px" top-margin="5px" right-margin="5px" bottom-margin="5px" left-margin="5px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="150" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:grid std:sid="grid-4d5d8da9" id="ARMY_grdAccessApplicaionApproval" style="color:#000000;" readonly="true" datasetid="AccessApplicationApprovalList">
+        <cl:listener std:sid="listener-907035c5" name="row-dblclick" handler="onARMY_grdAccessApplicaionApprovalRowDblclick"/>
+        <cl:formdata std:sid="f-data-6e40e64b" row="3" col="0"/>
+        <cl:gridcolumn std:sid="g-column-2d586462" width="28px"/>
+        <cl:gridcolumn std:sid="g-column-b2c45552" width="77.2px"/>
+        <cl:gridcolumn std:sid="g-column-60ac230a" width="77.2px"/>
+        <cl:gridcolumn std:sid="g-column-7106c019" width="77.2px"/>
+        <cl:gridcolumn std:sid="g-column-40189ca6" width="77.2px"/>
+        <cl:gridcolumn std:sid="g-column-41a12d71" width="77.2px"/>
+        <cl:gridcolumn std:sid="g-column-62c1382d" width="77.2px"/>
+        <cl:gridcolumn std:sid="g-column-16ab34e2" width="77.2px"/>
+        <cl:gridcolumn std:sid="g-column-401a2493" width="77.2px"/>
+        <cl:gridcolumn std:sid="g-column-618f6244" width="77.2px"/>
+        <cl:gridcolumn std:sid="g-column-fe195562"/>
+        <cl:gridheader std:sid="gh-band-8ceb0881">
+          <cl:gridrow std:sid="g-row-faa7f02c"/>
+          <cl:gridcell std:sid="gh-cell-7ec5253a" rowindex="0" colindex="0"/>
+          <cl:gridcell std:sid="gh-cell-232a4a98" rowindex="0" colindex="1" targetcolumnname="CreateDT" text="Str_ARMY_EntryDate">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_ARMY_EntryDate"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-62e394a3" rowindex="0" colindex="2" targetcolumnname="ApprovalState" text="Str_ARMY_ApprovalStatus">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_ARMY_ApprovalStatus"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-e12e451a" rowindex="0" colindex="5" targetcolumnname="ApplicantUserType" text="Str_ARMY_ApplicantType">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_ARMY_ApplicantType"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-4e6b51e7" rowindex="0" colindex="6" targetcolumnname="ApplicantName" text="Str_ARMY_ApplicantName">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_ARMY_ApplicantName"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-417470f9" rowindex="0" colindex="7" targetcolumnname="ApplicantServiceNumber" text="Str_ARMY_ApplicantServiceNumer">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_ARMY_ApplicantServiceNumber"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-742bc2bf" rowindex="0" colindex="8" targetcolumnname="ApplicantGroup" text="Str_ARMY_UserGroup">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_ARMY_UserGroup"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-3ceb3abb" rowindex="0" colindex="3" targetcolumnname="OnestApprovalName">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_ARMY_1stApprovalName"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-5c38f1aa" rowindex="0" colindex="4" targetcolumnname="TwostApprovalName">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_ARMY_2stApprovalName"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gh-cell-a33f886f" rowindex="0" colindex="10" targetcolumnname="ApplicationIndex" visible="false"/>
+          <cl:gridcell std:sid="gh-cell-a0082d10" rowindex="0" colindex="9">
+            <cl:langbind property="text" category="PROPERTY" keypath="Str_ARMY_AccessPrivInfo"/>
+          </cl:gridcell>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-c20f6237">
+          <cl:gridrow std:sid="g-row-74b63257"/>
+          <cl:gridcell std:sid="gd-cell-ab6d589d" rowindex="0" colindex="0" style="font-size:14px; text-align:center;" columntype="checkbox" columnname="" suppressible="false" suppressref="-1">
+            <cl:expbind property="visible" category="STYLER" expression="false"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-e3dc952f" rowindex="0" colindex="1" columnname="CreateDT"/>
+          <cl:gridcell std:sid="gd-cell-54a64c5b" rowindex="0" colindex="2" columnname="ApprovalState">
+            <cl:combobox std:sid="c-box-a3ff5801" id="ARMY_cmbApprovalState" readonly="true">
+              <cl:item std:sid="item-8166de22" label="결재생성" value="0"/>
+              <cl:item std:sid="item-497f509a" label="결재대기" value="1"/>
+              <cl:item std:sid="item-9caa0290" label="결재진행" value="2"/>
+              <cl:item std:sid="item-8f2b8bb5" label="결재승인" value="3"/>
+              <cl:item std:sid="item-04a1ed16" label="결재반려" value="4"/>
+            </cl:combobox>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-55b819e0" rowindex="0" colindex="5" columnname="ApplicantUserType">
+            <cl:combobox std:sid="c-box-d10076fb" id="ARMY_cmbUserType" readonly="true">
+              <cl:item std:sid="item-2babd59f" label="현역" value="900"/>
+              <cl:item std:sid="item-d275b608" label="타부대원" value="901"/>
+              <cl:item std:sid="item-06a1af70" label="외래인" value="902"/>
+              <cl:item std:sid="item-71ed82d4" label="상주" value="903"/>
+              <cl:item std:sid="item-00e1f66d" label="상시" value="904"/>
+              <cl:item std:sid="item-e3ea4dcb" label="병사" value="905"/>
+              <cl:item std:sid="item-ad029bef" label="가족" value="906"/>
+              <cl:item std:sid="item-1b248fe5" label="영외소" value="2001"/>
+            </cl:combobox>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-a8618f88" rowindex="0" colindex="6" columnname="ApplicantName"/>
+          <cl:gridcell std:sid="gd-cell-402d46f0" rowindex="0" colindex="7" columnname="ApplicantServiceNumber"/>
+          <cl:gridcell std:sid="gd-cell-c9babab0" rowindex="0" colindex="8" columnname="ApplicantGroup">
+            <cl:combobox std:sid="c-box-13dbdb03" id="ARMY_cmbGroup" readonly="true"/>
+          </cl:gridcell>
+          <cl:gridcell std:sid="gd-cell-da04785f" rowindex="0" colindex="3" columnname="OnestApprovalName"/>
+          <cl:gridcell std:sid="gd-cell-37a0aa23" rowindex="0" colindex="4" columnname="TwostApprovalName"/>
+          <cl:gridcell std:sid="gd-cell-1f7d7ec7" rowindex="0" colindex="10" columnname="ApplicationIndex"/>
+          <cl:gridcell std:sid="gd-cell-cebfdf32" rowindex="0" colindex="9" columnname="AccessGroup">
+            <cl:combobox std:sid="c-box-a0296b65" id="ARMY_cmbAccessGroup"/>
+          </cl:gridcell>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:group std:sid="group-94857b3d">
+        <cl:formdata std:sid="f-data-51b51074" row="5" col="0"/>
+        <cl:button std:sid="button-f309c3dc" id="ACAPAP_btnCompanion" style="padding-top:0px; padding-left:0px; padding-bottom:0px; padding-right:0px;" class="userInfo_btn">
+          <cl:listener std:sid="listener-1dffc733" name="click" handler="onButtonClick"/>
+          <cl:listener std:sid="listener-19375324" name="click" handler="onACAPAP_btnCompanionClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_ARMY_Companion"/>
+          <cl:xylayoutdata std:sid="xyl-data-31e25ae3" right="168px" bottom="5px" width="80px" height="28px" horizontalAnchor="RIGHT" verticalAnchor="BOTTOM"/>
+        </cl:button>
+        <cl:button std:sid="button-152d1fa3" id="ACAPAP_btnApproved" style="padding-top:0px; padding-left:0px; padding-bottom:0px; padding-right:0px;" class="userInfo_btn">
+          <cl:listener std:sid="listener-b46ec320" name="click" handler="onButtonClick2"/>
+          <cl:listener std:sid="listener-e00a3bc6" name="click" handler="onACAPAP_btnApprovedClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_ARMY_Approved"/>
+          <cl:xylayoutdata std:sid="xyl-data-f421887f" right="78px" bottom="5px" width="80px" height="30px" horizontalAnchor="RIGHT" verticalAnchor="BOTTOM"/>
+        </cl:button>
+        <cl:xylayout std:sid="xylayout-602ce844"/>
+      </cl:group>
+      <cl:pageindexer std:sid="p-indexer-0812fa71" id="ACAPAP_listPageIndexer" style="color:#404040;" class="userList_paging">
+        <cl:listener std:sid="listener-4ecfbd34" name="selection-change" handler="onACAPAP_listPageIndexerSelectionChange"/>
+        <cl:formdata std:sid="f-data-954ad507" row="4" col="0"/>
+      </cl:pageindexer>
+      <cl:output std:sid="output-d304fa2a" id="ACAPAP_opbTitle" style="border-bottom-color:#2446a4; font-weight:700.0; border-bottom-width:1px; font-size:16px; border-bottom-style:solid;" value="출입신청 조회/승인">
+        <cl:formdata std:sid="f-data-1e5cddda" halign="LEFT" width="200" row="0" col="0"/>
+      </cl:output>
+      <cl:formlayout std:sid="f-layout-8ebe781c" hspace="0px" vspace="0px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="4" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="35" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-2a1a6300"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

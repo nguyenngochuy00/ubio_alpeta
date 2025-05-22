@@ -1,0 +1,540 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-89dedc85" version="1.0.0.0">
+  <head std:sid="head-986a37c5">
+    <title>monitoringManagement</title>
+    <screen std:sid="screen-584d961b" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="600" customWidth="1000"/>
+    <screen std:sid="screen-7faf75b9" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-6049b297" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-41d7d2f1">
+      <cl:dataset std:sid="d-set-3abb2c4c" id="AuthLogList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-4eb87d26" name="IndexKey" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-54ccef8e" name="TerminalID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-a51cf4aa" name="UserID" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-b4d1dcaf" name="GroupCode" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-f4787771" name="UserName"/>
+          <cl:datacolumn std:sid="d-column-03421dcf" name="EventTime"/>
+          <cl:datacolumn std:sid="d-column-6b36311d" name="ServerRecordTime"/>
+          <cl:datacolumn std:sid="d-column-6a458258" name="AuthType" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-26c7484d" name="AuthResult" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-a00b7f6e" name="Func" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-e27834f3" name="FuncType" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-b8bb2cfb" name="Card"/>
+          <cl:datacolumn std:sid="d-column-ffac9688" name="UserType" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-29f0a822" name="IsPicture" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-bf83f43a" name="Property"/>
+          <cl:datacolumn std:sid="d-column-756fa289" name="Detail"/>
+          <cl:datacolumn std:sid="d-column-69745114" name="DetailColor"/>
+          <cl:datacolumn std:sid="d-column-ce2fd6de" name="UniqueID"/>
+          <cl:datacolumn std:sid="d-column-e9249157" name="TerminalName"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-97a3794a" id="TerminalList" sortcondition="">
+        <cl:listener std:sid="listener-13b049e7" name="insert" handler="onTerminalListInsert"/>
+        <cl:listener std:sid="listener-26badaa3" name="sort" handler="onTerminalListSort"/>
+        <cl:listener std:sid="listener-ae47f173" name="delete" handler="onTerminalListDelete"/>
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-b10efe23" name="ID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-4e0a8188" name="Name"/>
+          <cl:datacolumn std:sid="d-column-5cf24df1" name="Status" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-b363cbf0" name="StatusEx" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-a41b6c02" name="Event" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-35f0aa90" name="GroupCode" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-12a8532b" name="TimezoneVersion" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-b576f6ed" name="TerminalStatus1" datatype="number" displayonly="false"/>
+          <cl:datacolumn std:sid="d-column-a12ede82" name="TerminalStatus2" datatype="number" displayonly="false"/>
+          <cl:datacolumn std:sid="d-column-da400e42" name="TerminalStatus3" datatype="number" displayonly="false"/>
+          <cl:datacolumn std:sid="d-column-b021fb9a" name="TerminalStatus4" datatype="number" displayonly="false"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-d2f9a20e" id="GroupList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-5fa4ecff" name="GroupID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-cc958999" name="Parent" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-2cf47264" name="Name"/>
+          <cl:datacolumn std:sid="d-column-f677c0f6" name="Description"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-ba70f5e5" id="EventLogList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-34451056" name="TerminalID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-d93618e1" name="EventTime" datatype="string"/>
+          <cl:datacolumn std:sid="d-column-fd706be6" name="Category" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-6a417a9e" name="Content" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-85094d22" name="Detail"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-b382aad6" id="TerminalLiveInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-89150067" name="ID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-06754123" name="Status" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-b2ea4837" name="Type" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-5212955c" id="TerminalMcpList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-315ec5c2" name="TerminalID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-e7434574" name="AcuTerminalID1" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-322c546f" name="AcuTerminalID2" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-c3ba5d51" name="AcuTerminalID3" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-c2cdbe54" name="AcuTerminalID4" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-4e159a8c" id="TerminalIDList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-459f09c4" name="ID" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-8085790e" id="GrdTerminalList" sortcondition="">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-a68182e1" name="ID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-c77f9bc5" name="Name"/>
+          <cl:datacolumn std:sid="d-column-6cf0736d" name="Status" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-b871f707" name="StatusEx" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-59c97204" name="Event" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-c7bfe77b" name="GroupCode" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-4bb95804" name="TimezoneVersion" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-e4b8e89d" name="TerminalStatus1" datatype="number" displayonly="false"/>
+          <cl:datacolumn std:sid="d-column-9fec2a9f" name="TerminalStatus2" datatype="number" displayonly="false"/>
+          <cl:datacolumn std:sid="d-column-e392d5ff" name="TerminalStatus3" datatype="number" displayonly="false"/>
+          <cl:datacolumn std:sid="d-column-9308c01f" name="TerminalStatus4" datatype="number" displayonly="false"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-866f6864" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-8a1acc85" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-e36698ae" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-86008f7a" name="Count" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-3f19629e" id="DoorOption">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-617b86c2" name="ID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-58402c67" name="Option" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-b0e8c03b" id="AuthLogImage">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-108b116a" name="LogIndex" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-b9b0337f" name="LogImage"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-89eb2e0f" id="AcuDoorOption">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-fbc7ab10" name="AcuID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-264126e2" name="Option" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-14bf74c8" name="Door" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-d18e6bb3" id="EmergencyOption">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-b0ea2849" name="TerminalID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-2cbe3808" name="Status" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-e6173542" name="Type" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-aac2bd40" id="sms_getTerminalLiveInfo" method="get" action="/v1/monitoring/terminals">
+        <cl:listener std:sid="listener-65a166c0" name="submit-done" handler="onSms_getTerminalLiveInfoSubmitDone"/>
+        <cl:listener std:sid="listener-c1ba508e" name="submit-error" handler="onSms_getTerminalLiveInfoSubmitError"/>
+        <cl:listener std:sid="listener-2b0d8f0c" name="submit-timeout" handler="onSms_getTerminalLiveInfoSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total"/>
+        <cl:responsedata dataid="TerminalLiveInfo"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-b609f955" id="sms_postTerminalDoorControl">
+        <cl:listener std:sid="listener-9011d636" name="submit-done" handler="onSms_postTerminalDoorControlSubmitDone"/>
+        <cl:requestdata dataid="DoorOption"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-442346ca" id="sms_PostAcuDoorControl">
+        <cl:requestdata dataid="AcuDoorOption"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-34edde0f" id="sms_get_mcp_list" method="get" action="/v1/mcps">
+        <cl:listener std:sid="listener-ce1b9238" name="submit-done" handler="onSms_get_mcp_listSubmitDone"/>
+        <cl:responsedata dataid="Total"/>
+        <cl:responsedata dataid="TerminalMcpList"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-215b86aa" id="sms_postTerminalResetEmergencyControl">
+        <cl:requestdata dataid="EmergencyOption"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-85e6e9a0" style="top:0px; left:0px; width:800px; height:600px; text-align:center;">
+    <cl:listener std:sid="listener-946dafa9" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-befe18af">
+      <cl:xylayoutdata std:sid="xyl-data-098dad81" top="25px" right="10px" bottom="0px" left="50px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-07c4b28e" style="padding-top:0px; padding-left:0px; padding-bottom:0px; padding-right:0px;">
+        <cl:formdata std:sid="f-data-97cb9f71" row="2" col="0"/>
+        <cl:tabfolder std:sid="t-folder-f5a5870b" class="common-snbtab">
+          <cl:formdata std:sid="f-data-466d8d82" row="0" col="0"/>
+          <cl:tabitem std:sid="t-item-229268ed" selected="true" text="부서">
+            <std:metadata>
+              <std:property key="is-active-item" value="true"/>
+            </std:metadata>
+            <cl:group std:sid="group-5cb8d14a">
+              <std:metadata>
+                <std:property key="locked" value="true"/>
+              </std:metadata>
+              <cl:tree std:sid="tree-26f17756" id="MRMAN_treGroup" style="border-right-style:solid; border-top-width:2px; border-bottom-color:#b2b2b2; border-left-style:solid; border-right-width:1px; border-bottom-width:1px; border-left-color:#b2b2b2; border-top-color:#528443; border-bottom-style:solid; border-right-color:#b2b2b2; border-left-width:1px; border-top-style:solid;" class="tree_amhq">
+                <cl:listener std:sid="listener-63b82dd0" name="selection-change" handler="onMRMAN_treGroupSelectionChange"/>
+                <cl:xylayoutdata std:sid="xyl-data-cd859ebd" top="0px" right="1px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+                <cl:treeitemset datasetid="GroupList" label="Name" value="GroupID" parent="Parent"/>
+              </cl:tree>
+              <cl:xylayout std:sid="xylayout-c325fcde"/>
+            </cl:group>
+          </cl:tabitem>
+          <cl:item-style style="background-color:#FFFFFF; color:#000000;"/>
+        </cl:tabfolder>
+        <cl:formlayout std:sid="f-layout-08ca2d18" hspace="1px" vspace="1px" top-margin="1px" right-margin="1px" bottom-margin="1px" left-margin="1px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-9df5161d" style="padding-top:0px; padding-left:10px; padding-bottom:0px; padding-right:10px;">
+        <cl:formdata std:sid="f-data-9d3ca752" row="2" col="1"/>
+        <cl:grid std:sid="grid-08fb0132" id="MRMAN_grdTerminalList" class="grid-amhq" readonly="true" datasetid="GrdTerminalList" resizablecolumns="all" columnMovable="false">
+          <cl:listener std:sid="listener-6fe9950e" name="row-dblclick" handler="onMRMAN_grdTerminalListRowDblclick"/>
+          <cl:listener std:sid="listener-ed29100b" name="cell-mouseover" handler="onMRMAN_grdTerminalListCellMouseover"/>
+          <cl:listener std:sid="listener-831160b0" name="contextmenu" handler="onMRMAN_grdTerminalListContextmenu"/>
+          <cl:formdata std:sid="f-data-92f77df3" row="1" col="0"/>
+          <cl:gridcolumn std:sid="g-column-d62b75df" width="30px"/>
+          <cl:gridcolumn std:sid="g-column-6bddb572" width="38px"/>
+          <cl:gridcolumn std:sid="g-column-84ad0484" width="41px"/>
+          <cl:gridcolumn std:sid="g-column-5e26c3ab" width="25px"/>
+          <cl:gridcolumn std:sid="g-column-b3537f6a" width="48px"/>
+          <cl:gridcolumn std:sid="g-column-f53c0cc5" width="30px"/>
+          <cl:gridcolumn std:sid="g-column-b1da6fd0" width="30px"/>
+          <cl:gridcolumn std:sid="g-column-40bb8336" width="30px"/>
+          <cl:gridheader std:sid="gh-band-b0f2d116">
+            <cl:gridrow std:sid="g-row-08c6ad37" height="50px"/>
+            <cl:gridcell std:sid="gh-cell-ae69a70d" rowindex="0" colindex="1" style="font-weight:700; font-size:14px;" targetcolumnname="ID" filterable="false" text="ID"/>
+            <cl:gridcell std:sid="gh-cell-e400bf93" rowindex="0" colindex="2" rowspan="1" colspan="6" style="font-weight:700; font-size:14px;" targetcolumnname="Name" sortable="false" filterable="false" text="장비명">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_TerminalLocation"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gh-cell-191547cd" rowindex="0" colindex="0" columntype="checkbox"/>
+          </cl:gridheader>
+          <cl:griddetail std:sid="gd-band-06648f2e">
+            <cl:gridrow std:sid="g-row-581ef8ac" height="30px"/>
+            <cl:gridrow std:sid="g-row-cf0748ab" height="30px"/>
+            <cl:gridcell std:sid="gd-cell-f7124209" rowindex="0" colindex="1" rowspan="2" colspan="1" style="font-size:14px;" columnname="ID"/>
+            <cl:gridcell std:sid="gd-cell-9c1fccda" rowindex="0" colindex="2" rowspan="1" colspan="6" style="padding:3px; font-size:14px; text-align:left;" columnname="Name"/>
+            <cl:gridcell std:sid="gd-cell-03e79eb3" rowindex="1" colindex="2" style="font-weight:700; font-size:14px;">
+              <cl:output std:sid="output-bab4b2c1" style="text-align:center;">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_State"/>
+              </cl:output>
+              <cl:langbind property="color" category="STYLER" keypath="Str_State"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gd-cell-ff234c0a" rowindex="1" colindex="4">
+              <cl:output std:sid="output-655903f7" style="text-align:center;">
+                <cl:langbind property="value" category="PROPERTY" keypath="Str_Event"/>
+              </cl:output>
+              <cl:langbind property="color" category="STYLER" keypath="Str_Event"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gd-cell-c187e539" rowindex="1" colindex="5">
+              <cl:img std:sid="image-c1546552" id="MRTMD_imgEvent1" style="background-repeat:no-repeat; background-size:auto; background-position:center;">
+                <cl:listener std:sid="listener-490f149e" name="mouseenter" handler="onMRTMD_imgEvent1Mouseenter"/>
+                <cl:listener std:sid="listener-10872a84" name="mouseup" handler="onMRTMD_imgEvent1Mouseup"/>
+                <cl:expbind property="background-color" category="STYLER" expression="switch (TerminalStatus2) {&#xD;&#xA;  &#x9;case 8388608:&quot;gray&quot;  // 미감시 – 0:정상 , 1: 미감시 : 문상태 미감시 TerminalStatusDoorNotMonitoring&#xD;&#xA;    default : &quot;&quot;&#xD;&#xA;}"/>
+                <cl:expbind property="background-image" category="STYLER" expression="switch (TerminalStatus2) {&#xD;&#xA;&#x9;case -2: &quot;url('theme/images/monitoring/location_information_icons_device_door_open_normal.png')&quot; //(도어 - 0:닫힘, 1:열림) : 출입문 열림 TerminalStatusDoorOpen&#xD;&#xA;   &#x9;case -3: &quot;url('theme/images/monitoring/location_information_icons_device_door_lock_normal.png')&quot; // (도어 - 0:닫힘, 1:열림) : 출입문 닫힘 TerminalStatusDoorClose&#xD;&#xA;    case 256: &quot;url('theme/images/monitoring/location_information_icons_device_door_open_danger.png')&quot; //(침입 - 0:정상, 1:침입) : 강제 침입  TerminalStatusDoorEmergency&#xD;&#xA;    case 512: &quot;url('theme/images/monitoring/location_information_icons_device_door_neglect_danger.png')&quot;  // (방치 - 0:정상, 1:방치) : 문열림 경고 TerminalStatusDoorOpenWarn&#xD;&#xA;    case 1024: &quot;url('theme/images/monitoring/location_information_icons_device_door_lock_open.png')&quot; // (상태 - 0:잠김, 1:열림) : 출입문 열림 TerminalStatusDoorLookState&#xD;&#xA;    case 2048: &quot;url('theme/images/monitoring/location_information_icons_device_door_neglect_danger.png')&quot; // (동작 - 0:정상, 1:고장) : 문열림 경고    TerminalStatusDoorLockWorking&#xD;&#xA;  &#x9;case 16777216: &quot;url('theme/images/monitoring/location_information_icons_device_door_lock_open.png')&quot; // 오른쪽 클릭 메뉴 -> 출입문 개방 TerminalStatusDoorOpenState‬&#xD;&#xA;  &#x9;default : &quot;&quot;&#xD;&#xA;}"/>
+              </cl:img>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gd-cell-5f2d025c" rowindex="1" colindex="3">
+              <cl:img std:sid="image-de413537" id="MRTMD_imgStatus" style="background-repeat:no-repeat; background-size:auto; background-position:center;">
+                <cl:listener std:sid="listener-473c4a14" name="mouseenter" handler="onMRTMD_imgStatusMouseenter"/>
+                <cl:listener std:sid="listener-ca83c689" name="mouseup" handler="onMRTMD_imgStatusMouseup"/>
+                <cl:expbind property="background-image" category="STYLER" expression="switch (TerminalStatus1) {&#xD;&#xA;    case 1: &quot;url('theme/images/monitoring/green.png')&quot;  //TerminalStatusConnect&#xD;&#xA;    case 16: &quot;url('theme/images/monitoring/green.png')&quot; //TerminalStatusRegist&#xD;&#xA;    case -1: &quot;url('theme/images/monitoring/monitoring_list_info_icons_status.png')&quot; //TerminalStatusUnRegist&#xD;&#xA;    case 32: &quot;url('theme/images/monitoring/monitoring_list_info_icons_status.png')&quot; //TerminalStatusIDConflict&#xD;&#xA;    case 64: &quot;url('theme/images/monitoring/monitoring_list_info_icons_status.png')&quot; //TerminalStatusInvalidType&#xD;&#xA;    case 32768: &quot;url('theme/images/monitoring/monitoring_list_info_icons_status.png')&quot; //TerminalStatusSyncUserIDLen&#xD;&#xA;    case 65536: &quot;url('theme/images/monitoring/monitoring_list_info_icons_status.png')&quot; //TerminalStatusSyncMacAddres&#xD;&#xA;    case 131072: &quot;url('theme/images/monitoring/monitoring_list_info_icons_status.png')&quot; //TerminalStatusSyncUserCount&#xD;&#xA;    case 262144: &quot;url('theme/images/monitoring/monitoring_list_info_icons_status.png')&quot; //TerminalStatusSyncFWVersion&#xD;&#xA;    default : &quot;url('theme/images/monitoring/red.png')&quot; &#xD;&#xA;}"/>
+              </cl:img>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gd-cell-3c46d051" rowindex="1" colindex="6">
+              <cl:img std:sid="image-0bdca2c2" id="MRTMD_imgEvent2" style="background-repeat:no-repeat; background-size:auto; background-position:center;">
+                <cl:listener std:sid="listener-ce0ceab3" name="mouseenter" handler="onMRTMD_imgEvent2Mouseenter"/>
+                <cl:listener std:sid="listener-b28944c8" name="mouseup" handler="onMRTMD_imgEvent2Mouseup"/>
+                <cl:expbind property="background-image" category="STYLER" expression="switch (TerminalStatus3) {&#xD;&#xA;&#x9;case 2: &quot;url('theme/images/monitoring/location_information_icons_device_door_neglect_danger.png')&quot;   // (잠김 - 0:해제, 1:잠김) : 문열림 경고     TerminalStatusLock&#xD;&#xA;    case 4: &quot;url('theme/images/monitoring/location_information_icons_map_danger.png')&quot; // (폐쇄 - 0:정상, 1:폐쇄) : 비상  TerminalStatusLockForce&#xD;&#xA;    case 8: &quot;url('theme/images/monitoring/location_information_icons_device_open_danger.png')&quot;  // (커버 - 0:결합, 1:분리) : 템퍼 분리  TerminalStatusCover&#xD;&#xA;    default : &quot;&quot;&#xD;&#xA;}"/>
+              </cl:img>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gd-cell-c3a18619" rowindex="1" colindex="7">
+              <cl:img std:sid="image-6df3fb0b" id="MRTMD_imgEvent3" style="background-repeat:no-repeat; background-size:auto; background-position:center;">
+                <cl:listener std:sid="listener-b34333d5" name="mouseenter" handler="onMRTMD_imgEvent3Mouseenter"/>
+                <cl:listener std:sid="listener-d9202935" name="mouseup" handler="onMRTMD_imgEvent3Mouseup"/>
+                <cl:expbind property="background-image" category="STYLER" expression="switch (TerminalStatus4) {&#xD;&#xA;    case 4096: &quot;url('theme/images/monitoring/location_information_icons_device_fire_danger.png')&quot; // (화재 - 0:정상, 1:화재) : 화재  TerminalStatusWarnFire&#xD;&#xA;    case 8192: &quot;url('theme/images/monitoring/location_information_icons_device_panic_danger.png')&quot; // (패닉 - 0:정상, 1:패닉) : 패닉 TerminalStatusWarnPanic&#xD;&#xA;    case 16384: &quot;url('theme/images/monitoring/location_information_icons_map_danger.png')&quot; // (위협 - 0:정상, 1:위협) : 비상 TerminalStatusWarnCricis&#xD;&#xA;    default : &quot;&quot;&#xD;&#xA;}"/>
+              </cl:img>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gd-cell-5d591984" rowindex="0" colindex="0" rowspan="2" colspan="1" columntype="checkbox"/>
+          </cl:griddetail>
+        </cl:grid>
+        <cl:group std:sid="group-d0af06bc">
+          <cl:formdata std:sid="f-data-412e3630" row="0" col="0"/>
+          <cl:output std:sid="output-40b380b4" style="padding-top:5px; padding-left:5px; padding-bottom:5px; padding-right:5px;" class="section-title-amhq" value="장비 상태">
+            <cl:formdata std:sid="f-data-73afd113" row="0" col="0"/>
+          </cl:output>
+          <cl:button std:sid="button-d2695222" id="MRMAN_btnDoorControl" class="button-amhq" visible="true">
+            <cl:listener std:sid="listener-c671a545" name="click" handler="onMRMAN_btnDoorControlClick"/>
+            <cl:langbind property="value" category="PROPERTY" keypath="Str_Send"/>
+            <cl:formdata std:sid="f-data-726142cb" valign="CENTER" height="30" row="0" col="2"/>
+          </cl:button>
+          <cl:combobox std:sid="c-box-f4494ebe" id="MRMAN_cmbDoorControlOption" style="text-align:center;" class="combobox-amhq" visible="true">
+            <cl:formdata std:sid="f-data-3e1d9a8b" valign="CENTER" height="30" row="0" col="1"/>
+            <cl:item std:sid="item-51ada0f3" label="Str_DoorCommandOpenTemp" value="0">
+              <cl:langbind property="label" category="PROPERTY" keypath="Str_DoorCommandOpenTemp"/>
+            </cl:item>
+            <cl:item std:sid="item-270d02d5" label="label2" value="1">
+              <cl:langbind property="label" category="PROPERTY" keypath="Str_DoorCommandOpen"/>
+            </cl:item>
+            <cl:item std:sid="item-a835ff97" label="label3" value="2">
+              <cl:langbind property="label" category="PROPERTY" keypath="Str_DoorCommandClose"/>
+            </cl:item>
+            <cl:item std:sid="item-44f8670a" label="label4" value="3">
+              <cl:langbind property="label" category="PROPERTY" keypath="Str_ResetEmergencyControl"/>
+            </cl:item>
+            <cl:item std:sid="item-d723cf55" label="----------" value="1000"/>
+          </cl:combobox>
+          <cl:formlayout std:sid="f-layout-4c406f3d" hspace="4px" vspace="4px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="130" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="60" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-41ddd379">
+          <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-1d4afe72" style="padding-top:0px; padding-left:10px; padding-bottom:0px; padding-right:10px;">
+        <cl:formdata std:sid="f-data-b478bbdc" row="2" col="2"/>
+        <cl:grid std:sid="grid-7fa0bf34" id="MRMAN_grdAuthlog" class="grid-amhq" readonly="true" datasetid="AuthLogList" resizablecolumns="all" columnMovable="false">
+          <cl:listener std:sid="listener-8796da1a" name="row-dblclick" handler="onMRMAN_grdAuthlogRowDblclick"/>
+          <cl:formdata std:sid="f-data-0273a6b0" row="1" col="0"/>
+          <cl:gridcolumn std:sid="g-column-834e3ab4" width="115px"/>
+          <cl:gridcolumn std:sid="g-column-dafa0ff7" width="80px"/>
+          <cl:gridcolumn std:sid="g-column-f9df8b00"/>
+          <cl:gridcolumn std:sid="g-column-3ab3dcb7"/>
+          <cl:gridcolumn std:sid="g-column-b0cc390d"/>
+          <cl:gridcolumn std:sid="g-column-0d96bc49"/>
+          <cl:gridcolumn std:sid="g-column-47e10b22"/>
+          <cl:gridcolumn std:sid="g-column-a857cb92"/>
+          <cl:gridcolumn std:sid="g-column-e50f66a1"/>
+          <cl:gridcolumn std:sid="g-column-54418fd2" width="70px"/>
+          <cl:gridcolumn std:sid="g-column-b3bfa6ca"/>
+          <cl:gridcolumn std:sid="g-column-99a46aaa"/>
+          <cl:gridcolumn std:sid="g-column-a8579462"/>
+          <cl:gridheader std:sid="gh-band-2fc25bbc">
+            <cl:gridrow std:sid="g-row-9053025a" height="50px"/>
+            <cl:gridcell std:sid="gh-cell-954a4a66" rowindex="0" colindex="0" style="font-weight:700; font-size:12px;" targetcolumnname="EventTime" sortable="false" filterable="false">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_EventTime"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gh-cell-798fc3af" rowindex="0" colindex="1" style="font-weight:700; font-size:12px;" targetcolumnname="TerminalID" sortable="false" filterable="false" text="장비 ID" visible="false"/>
+            <cl:gridcell std:sid="gh-cell-d1df7814" rowindex="0" colindex="4" style="font-weight:700; font-size:12px;" targetcolumnname="UserID" sortable="false" filterable="false" text="UserID" visible="false">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_UserID"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gh-cell-2a267178" rowindex="0" colindex="6" style="font-weight:700; font-size:12px;" targetcolumnname="UserName" sortable="false" filterable="false" text="UserName">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_UserName"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gh-cell-747e7a2f" rowindex="0" colindex="7" style="font-weight:700; font-size:12px;" targetcolumnname="AuthType" sortable="false" filterable="false" text="AuthType">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_AuthType"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gh-cell-3acec2e1" rowindex="0" colindex="8" style="font-weight:700; font-size:12px;" targetcolumnname="AuthResult" sortable="false" filterable="false" text="AuthResult">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_AuthResult"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gh-cell-07e9a817" rowindex="0" colindex="9" style="font-weight:700; font-size:12px;" targetcolumnname="Func" sortable="false" filterable="false" text="Func" visible="false">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_Func"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gh-cell-5dfabc6c" rowindex="0" colindex="10" style="font-weight:700; font-size:12px;" targetcolumnname="FuncType" sortable="false" filterable="false" text="FuncType" visible="false"/>
+            <cl:gridcell std:sid="gh-cell-4ba5033b" rowindex="0" colindex="11" style="font-weight:700; font-size:12px;" targetcolumnname="Card" sortable="false" filterable="false" text="Card" visible="false"/>
+            <cl:gridcell std:sid="gh-cell-47e90604" rowindex="0" colindex="12" style="font-size:12px;" targetcolumnname="Detail" text="Detail" visible="false">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_Detail"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gh-cell-5617c54f" rowindex="0" colindex="3" style="font-weight:700; font-size:12px;" text="인원구분"/>
+            <cl:gridcell std:sid="gh-cell-c44eefd9" rowindex="0" colindex="2" style="font-weight:700; font-size:12px;" sortable="false" filterable="false" columntype="normal" text="장비명" visible="true" emptyvaluesort="emptyString">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_TerminalLocation"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gh-cell-bb08490d" rowindex="0" colindex="5">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_UniqueID"/>
+            </cl:gridcell>
+          </cl:gridheader>
+          <cl:griddetail std:sid="gd-band-45ff089f">
+            <cl:gridrow std:sid="g-row-787569dc" height="30px"/>
+            <cl:gridcell std:sid="gd-cell-c901f09c" rowindex="0" colindex="0" style="font-size:12px;" columnname="EventTime">
+              <cl:expbind property="color" category="STYLER" expression="switch ( AuthResult ) {&#xD;&#xA;&#x9;case 0: &quot;green&quot;&#xD;&#xA;&#x9;case 7: &quot;red&quot;&#xD;&#xA;&#x9;case 8: &quot;red&quot;&#xD;&#xA;&#x9;case 25: &quot;red&quot;&#xD;&#xA;&#x9;default: &quot;#FFC000&quot;&#xD;&#xA;}"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gd-cell-32040322" rowindex="0" colindex="1" style="font-size:12px;" columnname="TerminalID">
+              <cl:expbind property="color" category="STYLER" expression="switch ( AuthResult ) {&#xD;&#xA;&#x9;case 0: &quot;green&quot;&#xD;&#xA;&#x9;case 7: &quot;red&quot;&#xD;&#xA;&#x9;case 8: &quot;red&quot;&#xD;&#xA;&#x9;case 25: &quot;red&quot;&#xD;&#xA;&#x9;default: &quot;#FFC000&quot;&#xD;&#xA;}"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gd-cell-5d818241" rowindex="0" colindex="4" style="font-size:12px;" columnname="UserID">
+              <cl:expbind property="color" category="STYLER" expression="switch ( AuthResult ) {&#xD;&#xA;&#x9;case 0: &quot;green&quot;&#xD;&#xA;&#x9;case 7: &quot;red&quot;&#xD;&#xA;&#x9;case 8: &quot;red&quot;&#xD;&#xA;&#x9;case 25: &quot;red&quot;&#xD;&#xA;&#x9;default: &quot;#FFC000&quot;&#xD;&#xA;}"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gd-cell-58fa5767" rowindex="0" colindex="6" style="font-size:12px;" columnname="UserName">
+              <cl:expbind property="color" category="STYLER" expression="switch ( AuthResult ) {&#xD;&#xA;&#x9;case 0: &quot;green&quot;&#xD;&#xA;&#x9;case 7: &quot;red&quot;&#xD;&#xA;&#x9;case 8: &quot;red&quot;&#xD;&#xA;&#x9;case 25: &quot;red&quot;&#xD;&#xA;&#x9;default: &quot;#FFC000&quot;&#xD;&#xA;}"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gd-cell-c7824084" rowindex="0" colindex="7" style="font-size:12px; text-align:center;" columnname="AuthType">
+              <cl:combobox std:sid="c-box-4eb745e4" id="MRMAN_cmbAuthType" style="text-align:center;">
+                <cl:expbind property="color" category="STYLER" expression="switch ( AuthResult ) {&#xD;&#xA;&#x9;case 0: &quot;green&quot;&#xD;&#xA;&#x9;case 7: &quot;red&quot;&#xD;&#xA;&#x9;case 8: &quot;red&quot;&#xD;&#xA;&#x9;case 25: &quot;red&quot;&#xD;&#xA;&#x9;default: &quot;#FFC000&quot;&#xD;&#xA;}"/>
+              </cl:combobox>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gd-cell-ae253c24" rowindex="0" colindex="8" style="font-size:12px; text-align:center;" columnname="AuthResult">
+              <cl:combobox std:sid="c-box-01bc912b" id="MRMAN_cmbAuthResult" style="text-align:center;">
+                <cl:expbind property="color" category="STYLER" expression="switch ( AuthResult ) {&#xD;&#xA;&#x9;case 0: &quot;green&quot;&#xD;&#xA;&#x9;case 7: &quot;red&quot;&#xD;&#xA;&#x9;case 8: &quot;red&quot;&#xD;&#xA;&#x9;case 25: &quot;red&quot;&#xD;&#xA;&#x9;default: &quot;#FFC000&quot;&#xD;&#xA;}"/>
+              </cl:combobox>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gd-cell-ce9af5e9" rowindex="0" colindex="9" style="font-size:12px; text-align:center;" columnname="Func">
+              <cl:combobox std:sid="c-box-306374ae" id="MRMAN_cmbFKey">
+                <cl:expbind property="color" category="STYLER" expression="switch ( AuthResult ) {&#xD;&#xA;&#x9;case 0: &quot;green&quot;&#xD;&#xA;&#x9;case 7: &quot;red&quot;&#xD;&#xA;&#x9;case 8: &quot;red&quot;&#xD;&#xA;&#x9;case 25: &quot;red&quot;&#xD;&#xA;&#x9;default: &quot;#FFC000&quot;&#xD;&#xA;}"/>
+              </cl:combobox>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gd-cell-63161e0a" rowindex="0" colindex="10" style="font-size:12px;" columnname="FuncType">
+              <cl:expbind property="color" category="STYLER" expression="switch ( AuthResult ) {&#xD;&#xA;&#x9;case 0: &quot;green&quot;&#xD;&#xA;&#x9;case 7: &quot;red&quot;&#xD;&#xA;&#x9;case 8: &quot;red&quot;&#xD;&#xA;&#x9;case 25: &quot;red&quot;&#xD;&#xA;&#x9;default: &quot;#FFC000&quot;&#xD;&#xA;}"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gd-cell-b5e4c105" rowindex="0" colindex="11" style="font-size:12px;" columnname="Card">
+              <cl:expbind property="color" category="STYLER" expression="switch ( AuthResult ) {&#xD;&#xA;&#x9;case 0: &quot;green&quot;&#xD;&#xA;&#x9;case 7: &quot;red&quot;&#xD;&#xA;&#x9;case 8: &quot;red&quot;&#xD;&#xA;&#x9;case 25: &quot;red&quot;&#xD;&#xA;&#x9;default: &quot;#FFC000&quot;&#xD;&#xA;}"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gd-cell-830d70b9" rowindex="0" colindex="12" style="font-size:12px;" columnname="Detail">
+              <cl:output std:sid="output-9cc39b12">
+                <cl:expbind property="color" category="STYLER" expression="switch ( DetailColor ) {&#xD;&#xA;&#x9;case 1: &quot;green&quot;&#xD;&#xA;&#x9;case 2: &quot;red&quot;&#xD;&#xA;&#x9;default: &quot;black&quot;&#xD;&#xA;}"/>
+              </cl:output>
+              <cl:expbind property="color" category="STYLER" expression="&#xD;&#xA;"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gd-cell-76fd8e5c" rowindex="0" colindex="3" columnname="UserType">
+              <cl:combobox std:sid="c-box-83b0bc57" id="cmb1" style="text-align:center;">
+                <cl:expbind property="color" category="STYLER" expression="switch ( AuthResult ) {&#xD;&#xA;&#x9;case 0: &quot;green&quot;&#xD;&#xA;&#x9;case 7: &quot;red&quot;&#xD;&#xA;&#x9;case 8: &quot;red&quot;&#xD;&#xA;&#x9;case 25: &quot;red&quot;&#xD;&#xA;&#x9;default: &quot;#FFC000&quot;&#xD;&#xA;}"/>
+                <cl:item std:sid="item-75672ab6" label="현역" value="900"/>
+                <cl:item std:sid="item-e7166239" label="타부대원" value="901"/>
+                <cl:item std:sid="item-45277eea" label="민간인" value="902"/>
+                <cl:item std:sid="item-6730e120" label="상주민간인" value="903"/>
+                <cl:item std:sid="item-135b02ee" label="고정출입자" value="904"/>
+                <cl:item std:sid="item-892b64a8" label="병사" value="905"/>
+                <cl:item std:sid="item-36eefd6f" label="군가족" value="906"/>
+                <cl:item std:sid="item-a28e96af" label="군무원" value="907"/>
+                <cl:item std:sid="item-5c960b95" label="일반차량" value="10000"/>
+                <cl:item std:sid="item-47e9fc5b" label="부대차량" value="10001"/>
+                <cl:item std:sid="item-7fddbd67" label="관리자" value="1"/>
+              </cl:combobox>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gd-cell-9275cd97" rowindex="0" colindex="2" style="color:switch ( AuthResult ) {; font-size:12px;" columnname="TerminalName">
+              <cl:expbind property="color" category="STYLER" expression="switch ( AuthResult ) {&#xD;&#xA;&#x9;case 0: &quot;green&quot;&#xD;&#xA;&#x9;case 7: &quot;red&quot;&#xD;&#xA;&#x9;case 8: &quot;red&quot;&#xD;&#xA;&#x9;case 25: &quot;red&quot;&#xD;&#xA;&#x9;default: &quot;#FFC000&quot;&#xD;&#xA;}"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gd-cell-b7703cb8" rowindex="0" colindex="5" columnname="UniqueID">
+              <cl:expbind property="color" category="STYLER" expression="switch ( AuthResult ) {&#xD;&#xA;&#x9;case 0: &quot;green&quot;&#xD;&#xA;&#x9;case 7: &quot;red&quot;&#xD;&#xA;&#x9;case 8: &quot;red&quot;&#xD;&#xA;&#x9;case 25: &quot;red&quot;&#xD;&#xA;&#x9;default: &quot;#FFC000&quot;&#xD;&#xA;}"/>
+            </cl:gridcell>
+          </cl:griddetail>
+        </cl:grid>
+        <cl:output std:sid="output-0983cccf" class="section-title-amhq">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_EventRecordList"/>
+          <cl:formdata std:sid="f-data-4529d354" row="2" col="0"/>
+        </cl:output>
+        <cl:grid std:sid="grid-a8dc1b0a" id="MRMAN_grdEventlog" class="grid-amhq" readonly="true" datasetid="EventLogList" showdeletedrow="true" resizablecolumns="all" columnMovable="false">
+          <cl:formdata std:sid="f-data-4b499a92" row="3" col="0"/>
+          <cl:gridcolumn std:sid="g-column-b0ee0c35" width="109px"/>
+          <cl:gridcolumn std:sid="g-column-b62098be"/>
+          <cl:gridcolumn std:sid="g-column-1201816b"/>
+          <cl:gridcolumn std:sid="g-column-83bc41ef"/>
+          <cl:gridcolumn std:sid="g-column-ed2ec73e"/>
+          <cl:gridcolumn std:sid="g-column-058840b7"/>
+          <cl:gridheader std:sid="gh-band-5f619f87">
+            <cl:gridrow std:sid="g-row-e65cac39" height="50px"/>
+            <cl:gridcell std:sid="gh-cell-04d43954" rowindex="0" colindex="0" style="font-size:12px;" targetcolumnname="EventTime" sortable="false" filterable="false" text="EventTime">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_EventTime"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gh-cell-06b75eb3" rowindex="0" colindex="1" style="font-size:12px;" targetcolumnname="TerminalID" sortable="false" filterable="false" text="장비 ID" visible="false"/>
+            <cl:gridcell std:sid="gh-cell-c635c1ad" rowindex="0" colindex="3" style="font-size:12px;" targetcolumnname="Category" sortable="false" filterable="false" text="Category">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_Category"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gh-cell-b232b101" rowindex="0" colindex="4" style="font-size:12px;" targetcolumnname="Content" sortable="false" filterable="false" text="Content">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_Content"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gh-cell-a8c2b34f" rowindex="0" colindex="5" style="font-size:12px;" targetcolumnname="Detail" sortable="false" filterable="false" text="Detail">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_Detail"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gh-cell-68f9c999" rowindex="0" colindex="2" style="font-size:12px;" targetcolumnname="TerminalID" sortable="false" filterable="false" columntype="normal" text="장비명" visible="true" emptyvaluesort="emptyString">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_TerminalLocation"/>
+            </cl:gridcell>
+          </cl:gridheader>
+          <cl:griddetail std:sid="gd-band-4e20a549">
+            <cl:gridrow std:sid="g-row-3cdd0039" height="30px"/>
+            <cl:gridcell std:sid="gd-cell-9695fc61" rowindex="0" colindex="0" style="font-size:12px;" columnname="EventTime"/>
+            <cl:gridcell std:sid="gd-cell-07209568" rowindex="0" colindex="1" style="font-size:12px; text-align:center;" columnname="TerminalID"/>
+            <cl:gridcell std:sid="gd-cell-62e81e63" rowindex="0" colindex="3" style="font-size:12px;" columnname="Category">
+              <cl:combobox std:sid="c-box-f6de9cfc" id="MRMAN_cmbEventCategory" style="text-align:center;"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gd-cell-77e33912" rowindex="0" colindex="4" style="font-size:12px;" columnname="Content">
+              <cl:combobox std:sid="c-box-0f0d706f" id="MRMAN_cmbEventContent" style="text-align:center;"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gd-cell-4f089af5" rowindex="0" colindex="5" style="font-size:12px;" columnname="Detail"/>
+            <cl:gridcell std:sid="gd-cell-712f9a30" rowindex="0" colindex="2" columnname="TerminalID">
+              <cl:combobox std:sid="c-box-437dff5f" id="MRMAN_cmbTerminalNameEvent" style="text-align:center;"/>
+            </cl:gridcell>
+          </cl:griddetail>
+        </cl:grid>
+        <cl:group std:sid="group-f7791411">
+          <cl:formdata std:sid="f-data-bedec000" row="0" col="0"/>
+          <cl:group std:sid="group-7eb95adb">
+            <cl:formdata std:sid="f-data-cfb9122e" row="0" col="0"/>
+            <cl:output std:sid="output-d8252a99" class="section-title-amhq" value="실시간 출입정보">
+              <cl:formdata std:sid="f-data-ccc3b194" row="0" col="0"/>
+            </cl:output>
+            <cl:output std:sid="output-65886df8" class="section-white-top-title-amhq" value="인원구분">
+              <cl:formdata std:sid="f-data-542f135e" valign="CENTER" height="30" row="0" col="2"/>
+            </cl:output>
+            <cl:combobox std:sid="c-box-f06de538" id="MRMAN_cmbUserType" style="text-align:center;" class="combobox-amhq" value="0" preventinput="true">
+              <cl:listener std:sid="listener-a0847fa3" name="selection-change" handler="onMRMAN_cmbUserTypeSelectionChange"/>
+              <cl:formdata std:sid="f-data-34485285" valign="CENTER" height="30" row="0" col="4"/>
+              <cl:item std:sid="item-f0ec9085" label="-----" value="0"/>
+              <cl:item std:sid="item-fad03f8f" label="관리자" value="1"/>
+              <cl:item std:sid="item-935ed9b6" label="현역" value="900"/>
+              <cl:item std:sid="item-2b2bf824" label="타부대원" value="901"/>
+              <cl:item std:sid="item-7514ebb2" label="민간인" value="902"/>
+              <cl:item std:sid="item-59bf77dd" label="상주민간인" value="903"/>
+              <cl:item std:sid="item-98f04e77" label="고정출입자" value="904"/>
+              <cl:item std:sid="item-13e3ab40" label="병사" value="905"/>
+              <cl:item std:sid="item-1da09b8c" label="군가족" value="906"/>
+              <cl:item std:sid="item-4237f5bf" label="군무원" value="907"/>
+              <cl:item std:sid="item-7340cacf" label="일반차량" value="10000"/>
+              <cl:item std:sid="item-07fac7ef" label="부대차량" value="10001"/>
+            </cl:combobox>
+            <cl:formlayout std:sid="f-layout-72887a07" scrollable="false" hspace="1px" vspace="1px" top-margin="1px" right-margin="1px" bottom-margin="1px" left-margin="1px">
+              <cl:rows length="1" unit="FRACTION"/>
+              <cl:columns length="170" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="1" unit="FRACTION"/>
+              <cl:columns length="60" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="5" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+              <cl:columns length="120" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            </cl:formlayout>
+          </cl:group>
+          <cl:formlayout std:sid="f-layout-6623412e">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-c3d26b89">
+          <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          <cl:rows length="40" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:output std:sid="output-7634935f" class="menu-title-amhq" value="모니터링 및 출입문 제어">
+        <cl:formdata std:sid="f-data-e1f20fe0" halign="LEFT" width="400" row="0" col="0" rowspan="1" colspan="1"/>
+      </cl:output>
+      <cl:formlayout std:sid="f-layout-4ec75982" user-resizing-mode="standard" vspace="0px">
+        <cl:rows length="35" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="210" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="360" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-7f506050"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

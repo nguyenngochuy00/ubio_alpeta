@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-5f511cf3" version="1.0.0.0">
+  <head std:sid="head-b5c0012d">
+    <title>OptionPageLog</title>
+    <screen std:sid="screen-e69022ae" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="600" customWidth="800"/>
+    <screen std:sid="screen-33eff584" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-8defb78a" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-c625da9c">
+      <cl:datamap std:sid="d-map-2449eb57" id="OptionLog">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-b7f6fc1d" name="SaveOnlySuccess" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-3042b87f" name="SaveAuthlogPeriod" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-6b5497d1" name="SaveSyslogPeriod" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-8fe700ed" name="SaveTerminallogPeriod" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-688e88a5" name="CheckAuthlogDuplicate" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-93a3ad3d" name="SyslogFilterOption" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-fae0199f" name="SyslogFilterLogin" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-0a7f5f3c" name="SyslogFilterUser" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-5e5d3aaf" name="SyslogFilterTerminal" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-8761a657" name="SyslogFilterGroup" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-c3e0214d" name="SyslogFilterPrivilege" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-2b774d53" name="SyslogFilterTna" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-ae226635" name="SyslogFilterMeal" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-7b8b61a9" name="TlogFilterOption" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-11ef6c5c" name="TlogFilterUser" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-e4e0d18e" name="TlogFilterNetwork" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-a4f25d99" name="TlogFilterDoorControl" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-688c98f4" name="TlogFilterWarningError" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+    </cl:model>
+    <cl:appspec dev-comment="SESLO"/>
+  </head>
+  <body std:sid="body-03d8a54d" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-ef636fc8" name="load" handler="onBodyLoad"/>
+    <cl:listener std:sid="listener-1f9c6e8f" name="unload" handler="onBodyUnload"/>
+    <cl:group std:sid="group-1fa6038f" id="SELOG_grpMain">
+      <cl:xylayoutdata std:sid="xyl-data-7d1550c5" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:output std:sid="output-4fa6b3b5" style="font-weight:700; font-size:16px;">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_OptionLogSavePeriodLimit"/>
+        <cl:formdata std:sid="f-data-8af3b5c6" row="0" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-a58ac518" class="common-controllabel">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_OptionAuthLog"/>
+        <cl:formdata std:sid="f-data-a31dd61f" row="1" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-e4349618" class="common-controllabel">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_OptionSystemLog"/>
+        <cl:formdata std:sid="f-data-2687f3fe" row="2" col="0"/>
+      </cl:output>
+      <cl:output std:sid="output-6ba335bb" class="common-controllabel">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_OptionTerminalLog"/>
+        <cl:formdata std:sid="f-data-4568031f" row="3" col="0"/>
+      </cl:output>
+      <cl:inputbox std:sid="i-box-3f11c339" id="SELOG_ipbAuthPeriod" style="font-size:14px; text-align:center;" maxlength="4" inputfilter="[0-9]">
+        <cl:listener std:sid="listener-02809e29" name="value-change" handler="onSELOG_ipbAuthPeriodValueChange"/>
+        <cl:datamapbind property="value" datacontrolid="OptionLog" columnname="SaveAuthlogPeriod"/>
+        <cl:formdata std:sid="f-data-767a2c85" row="1" col="1"/>
+      </cl:inputbox>
+      <cl:inputbox std:sid="i-box-2b024e32" id="SELOG_ipbSysPeriod" style="font-size:14px; text-align:center;" maxlength="4" inputfilter="[0-9]">
+        <cl:listener std:sid="listener-7dfd8f97" name="value-change" handler="onSELOG_ipbSysPeriodValueChange"/>
+        <cl:datamapbind property="value" datacontrolid="OptionLog" columnname="SaveSyslogPeriod"/>
+        <cl:formdata std:sid="f-data-61059690" row="2" col="1"/>
+      </cl:inputbox>
+      <cl:inputbox std:sid="i-box-b2c34449" id="SELOG_ipbTerminalPeriod" style="font-size:14px; text-align:center;" maxlength="4" inputfilter="[0-9]">
+        <cl:listener std:sid="listener-d27e4539" name="value-change" handler="onSELOG_ipbTerminalPeriodValueChange"/>
+        <cl:datamapbind property="value" datacontrolid="OptionLog" columnname="SaveTerminallogPeriod"/>
+        <cl:formdata std:sid="f-data-077642b8" row="3" col="1"/>
+      </cl:inputbox>
+      <cl:output std:sid="output-dae12b71" style="font-weight:700; font-size:16px;">
+        <cl:langbind property="value" category="PROPERTY" keypath="Str_OptionSaveLog"/>
+        <cl:formdata std:sid="f-data-d7d939d4" row="5" col="0"/>
+      </cl:output>
+      <cl:group std:sid="group-30821432" id="SELOG_grpSaveOptionMain">
+        <cl:formdata std:sid="f-data-5ff22d54" row="6" col="0" rowspan="1" colspan="2"/>
+        <cl:checkbox std:sid="c-box-61f564a5" id="SESLO_cbx3" style="font-size:14px;" visible="false" truevalue="1" falsevalue="0">
+          <cl:datamapbind property="value" datacontrolid="OptionLog" columnname="SyslogFilterOption"/>
+          <cl:langbind property="text" category="PROPERTY" keypath="Str_OptionSystemLogSave"/>
+          <cl:formdata std:sid="f-data-a936ae7a" row="1" col="0"/>
+        </cl:checkbox>
+        <cl:checkbox std:sid="c-box-1640dfd4" id="SESLO_cbx1" style="font-size:14px;" truevalue="1" falsevalue="0">
+          <cl:datamapbind property="value" datacontrolid="OptionLog" columnname="SaveOnlySuccess"/>
+          <cl:langbind property="text" category="PROPERTY" keypath="Str_OptionSuccessLogSave"/>
+          <cl:formdata std:sid="f-data-b36e6cbd" row="0" col="0"/>
+        </cl:checkbox>
+        <cl:checkbox std:sid="c-box-e2299d4d" id="SESLO_cbx4" style="font-size:14px;" visible="false" truevalue="1" falsevalue="0">
+          <cl:datamapbind property="value" datacontrolid="OptionLog" columnname="SyslogFilterLogin"/>
+          <cl:langbind property="text" category="PROPERTY" keypath="Str_OptionClientLoginSave"/>
+          <cl:formdata std:sid="f-data-32e4ac98" row="2" col="2"/>
+        </cl:checkbox>
+        <cl:checkbox std:sid="c-box-96725121" id="SESLO_cbx5" style="font-size:14px;" visible="false" truevalue="1" falsevalue="0">
+          <cl:datamapbind property="value" datacontrolid="OptionLog" columnname="SyslogFilterUser"/>
+          <cl:langbind property="text" category="PROPERTY" keypath="Str_OptionUserLogSave"/>
+          <cl:formdata std:sid="f-data-30de704c" row="2" col="0"/>
+        </cl:checkbox>
+        <cl:checkbox std:sid="c-box-49fe9085" id="SESLO_cbx6" style="font-size:14px;" visible="false" truevalue="1" falsevalue="0">
+          <cl:datamapbind property="value" datacontrolid="OptionLog" columnname="SyslogFilterTerminal"/>
+          <cl:langbind property="text" category="PROPERTY" keypath="Str_OptionTerminalLogSave"/>
+          <cl:formdata std:sid="f-data-2b69bb5f" row="3" col="2"/>
+        </cl:checkbox>
+        <cl:checkbox std:sid="c-box-9f16d9b6" id="SESLO_cbx7" style="font-size:14px;" visible="false" truevalue="1" falsevalue="0">
+          <cl:datamapbind property="value" datacontrolid="OptionLog" columnname="SyslogFilterGroup"/>
+          <cl:langbind property="text" category="PROPERTY" keypath="Str_OptionGroupLogSave"/>
+          <cl:formdata std:sid="f-data-a46f41d8" row="3" col="0"/>
+        </cl:checkbox>
+        <cl:checkbox std:sid="c-box-c490ba99" id="SESLO_cbx8" style="font-size:14px;" visible="false" truevalue="1" falsevalue="0">
+          <cl:datamapbind property="value" datacontrolid="OptionLog" columnname="SyslogFilterPrivilege"/>
+          <cl:langbind property="text" category="PROPERTY" keypath="Str_OptionPriviligeLogSave"/>
+          <cl:formdata std:sid="f-data-49ac3f45" row="4" col="2"/>
+        </cl:checkbox>
+        <cl:checkbox std:sid="c-box-e5bf50ab" id="SESLO_cbx9" style="font-size:14px;" visible="false" truevalue="1" falsevalue="0">
+          <cl:datamapbind property="value" datacontrolid="OptionLog" columnname="SyslogFilterTna"/>
+          <cl:langbind property="text" category="PROPERTY" keypath="Str_OptionTnaLogSave"/>
+          <cl:formdata std:sid="f-data-7a97a049" row="4" col="0"/>
+        </cl:checkbox>
+        <cl:checkbox std:sid="c-box-d252ff4c" id="SESLO_cbx10" style="font-size:14px;" visible="false" truevalue="1" falsevalue="0">
+          <cl:datamapbind property="value" datacontrolid="OptionLog" columnname="SyslogFilterMeal"/>
+          <cl:langbind property="text" category="PROPERTY" keypath="Str_OptionMealLogSave"/>
+          <cl:formdata std:sid="f-data-60d6e0f7" row="5" col="2"/>
+        </cl:checkbox>
+        <cl:checkbox std:sid="c-box-87d63dd7" id="SESLO_cbx11" style="font-size:14px;" visible="false" truevalue="1" falsevalue="0">
+          <cl:datamapbind property="value" datacontrolid="OptionLog" columnname="TlogFilterOption"/>
+          <cl:langbind property="text" category="PROPERTY" keypath="Str_OptionTerminalOptionModifyLogSave"/>
+          <cl:formdata std:sid="f-data-a2e4b2f9" row="5" col="0"/>
+        </cl:checkbox>
+        <cl:checkbox std:sid="c-box-a6e7012a" id="SESLO_cbx12" style="font-size:14px;" visible="false" truevalue="1" falsevalue="0">
+          <cl:datamapbind property="value" datacontrolid="OptionLog" columnname="TlogFilterUser"/>
+          <cl:langbind property="text" category="PROPERTY" keypath="Str_OptionTerminalUserLogSave"/>
+          <cl:formdata std:sid="f-data-f8b3de19" row="6" col="2"/>
+        </cl:checkbox>
+        <cl:checkbox std:sid="c-box-b53e5086" id="SESLO_cbx13" style="font-size:14px;" visible="false" truevalue="1" falsevalue="0">
+          <cl:datamapbind property="value" datacontrolid="OptionLog" columnname="TlogFilterNetwork"/>
+          <cl:langbind property="text" category="PROPERTY" keypath="Str_OptionTerminalNetworkLogSave"/>
+          <cl:formdata std:sid="f-data-4c29df44" row="6" col="0"/>
+        </cl:checkbox>
+        <cl:checkbox std:sid="c-box-43591bf0" id="SESLO_cbx14" style="font-size:14px;" truevalue="1" falsevalue="0">
+          <cl:datamapbind property="value" datacontrolid="OptionLog" columnname="TlogFilterDoorControl"/>
+          <cl:langbind property="text" category="PROPERTY" keypath="Str_OptionTerminalDoorLogSave"/>
+          <cl:formdata std:sid="f-data-4880c0d2" row="0" col="2"/>
+        </cl:checkbox>
+        <cl:checkbox std:sid="c-box-0033fa7c" id="SESLO_cbx15" style="font-size:14px;" visible="false" truevalue="1" falsevalue="0">
+          <cl:datamapbind property="value" datacontrolid="OptionLog" columnname="TlogFilterWarningError"/>
+          <cl:langbind property="text" category="PROPERTY" keypath="Str_OptionTerminalAlertLogSave"/>
+          <cl:formdata std:sid="f-data-f8856137" row="7" col="0"/>
+        </cl:checkbox>
+        <cl:checkbox std:sid="c-box-633f9fb4" id="SESLO_cbx2" style="font-size:14px;" visible="false" truevalue="1" falsevalue="0">
+          <cl:datamapbind property="value" datacontrolid="OptionLog" columnname="CheckAuthlogDuplicate"/>
+          <cl:langbind property="text" category="PROPERTY" keypath="Str_OptionAuthLogDuplicateCheck"/>
+          <cl:formdata std:sid="f-data-bbfbbee3" row="1" col="2"/>
+        </cl:checkbox>
+        <cl:group std:sid="group-518d2392">
+          <cl:formdata std:sid="f-data-f7002300" row="10" col="0"/>
+          <cl:formlayout std:sid="f-layout-844614d0" hspace="1px" vspace="1px" top-margin="1px" right-margin="1px" bottom-margin="1px" left-margin="1px">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+            <cl:columns length="80" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-49080d5c" hspace="0px" vspace="0px">
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="350" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="100"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="350" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-30126b4d" hspace="0px" vspace="0px">
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="300" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-2213c640"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

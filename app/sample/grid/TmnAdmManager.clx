@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-4cd3a074" version="1.0.0.0">
+  <head std:sid="head-ea92db7e">
+    <title>TerminalAdmManager</title>
+    <screen std:sid="screen-f2ccffca" id="default" active="false" customHeight="600" customWidth="800" height="768px" minwidth="1024px" name="default" width="1024px"/>
+    <screen std:sid="screen-6372c3bf" id="new-screen" active="true" height="600px" maxwidth="1023px" minwidth="600px" name="new-screen" width="600px"/>
+    <screen std:sid="screen-e48d7a3c" id="tablet" height="667px" maxwidth="599px" minwidth="500px" name="tablet" width="500px"/>
+    <screen std:sid="screen-3535bbeb" id="mobile" height="525px" maxwidth="499px" name="mobile" width="350px"/>
+    <cl:model std:sid="model-396d6bba">
+      <cl:dataset std:sid="d-set-aeea2433" id="ManagableList" info="관리가능한단말기목록">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="string" name="ID"/>
+          <cl:datacolumn name="Name"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-034bb3ee" id="ManagedList" info="관리대상단말기목록">
+        <cl:datacolumnlist>
+          <cl:datacolumn name="ID"/>
+          <cl:datacolumn name="Name"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-b562f859" id="AdminList" info="관리자목록">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="string" name="ID"/>
+          <cl:datacolumn name="Name"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:submission std:sid="submission-d6f2831c" id="getList" action="data/terminal/TmnAdmManager.json" mediatype="application/json" method="get">
+        <cl:listener std:sid="listener-bd66759b" handler="onGetListSubmitSuccess" name="submit-success"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-0f24f703" id="getManagedTmnList">
+        <cl:listener std:sid="listener-659fcd65" handler="onGetManagedTmnListSubmitSuccess" name="submit-success"/>
+        <cl:responsedata dataid="ManagedList"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-d3b9cd36" id="getTmnList">
+        <cl:listener std:sid="listener-82e4deb0" handler="onGetTmnListSubmitSuccess" name="submit-success"/>
+        <cl:responsedata dataid="ManagableList"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-ee51cc4c" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-325838d2" handler="onBodyLoad" name="load"/>
+    <cl:group std:sid="group-5e3e425b">
+      <cl:xylayoutdata std:sid="xyl-data-a9ee7346" bottom="5px" horizontalAnchor="BOTH" left="5px" right="5px" top="5px" verticalAnchor="BOTH"/>
+      <cl:grid std:sid="grid-fdca6403" id="grd2" style="background-color:transparent;" columnMovable="false" columnResizable="false" datasetid="ManagableList" readonly="false" selectionmulti="multi">
+        <cl:listener std:sid="listener-526ec671" handler="onGrd2RowDblclick" name="row-dblclick"/>
+        <cl:formdata std:sid="f-data-51e3596e" col="1" row="1"/>
+        <cl:rowstyle>
+          <cl:expbind category="STYLER" property="background-color" expression="changeRowColor(#ManagableList,getIndex(),#ManagedList)==true?'#cce5f0':''"/>
+        </cl:rowstyle>
+        <cl:gridcolumn std:sid="g-column-e9eb4a7e" width="70px"/>
+        <cl:gridcolumn std:sid="g-column-6fd5f41b" width="85px"/>
+        <cl:gridheader std:sid="gh-band-be479539">
+          <cl:gridrow std:sid="g-row-a1b7fd81"/>
+          <cl:gridcell std:sid="gh-cell-94f4af0d" colindex="0" rowindex="0" filterable="false" sortable="false" targetcolumnname="ID" text="ID"/>
+          <cl:gridcell std:sid="gh-cell-36f1596c" colindex="1" rowindex="0" filterable="false" sortable="false" targetcolumnname="Name" text="Name"/>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-7f6b4e78">
+          <cl:gridrow std:sid="g-row-e0a312c7"/>
+          <cl:gridcell std:sid="gd-cell-d2a54f93" colindex="0" rowindex="0" columnname="ID"/>
+          <cl:gridcell std:sid="gd-cell-20e74be2" colindex="1" rowindex="0" columnname="Name"/>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:grid std:sid="grid-41d872c9" id="grd3" style="background-color:transparent;" columnMovable="false" columnResizable="false" datasetid="ManagedList" readonly="false" selectionmulti="multi" showdeletedrow="false">
+        <cl:listener std:sid="listener-d8c0c3b1" handler="onGrd3RowDblclick" name="row-dblclick"/>
+        <cl:formdata std:sid="f-data-ba3add2a" col="3" row="1"/>
+        <cl:gridcolumn std:sid="g-column-4a518d2a" width="70px"/>
+        <cl:gridcolumn std:sid="g-column-e54f55d1" width="85px"/>
+        <cl:gridheader std:sid="gh-band-380f036f">
+          <cl:gridrow std:sid="g-row-daec29c6"/>
+          <cl:gridcell std:sid="gh-cell-3e30f0d1" colindex="0" rowindex="0" filterable="false" sortable="false" targetcolumnname="ID" text="ID"/>
+          <cl:gridcell std:sid="gh-cell-dcc001e3" colindex="1" rowindex="0" filterable="false" sortable="false" targetcolumnname="Name" text="Name"/>
+        </cl:gridheader>
+        <cl:griddetail std:sid="gd-band-b0bbb199">
+          <cl:gridrow std:sid="g-row-f84d2124"/>
+          <cl:gridcell std:sid="gd-cell-45334e6a" colindex="0" rowindex="0" columnname="ID"/>
+          <cl:gridcell std:sid="gd-cell-1b835a44" colindex="1" rowindex="0" columnname="Name"/>
+        </cl:griddetail>
+      </cl:grid>
+      <cl:group std:sid="group-d1bf07e4">
+        <cl:formdata std:sid="f-data-87250e45" col="2" row="1"/>
+        <cl:button std:sid="button-4f213278" id="btn_left" style="background-repeat:no-repeat; background-size:contain; background-position:center;" value="&lt;">
+          <cl:listener std:sid="listener-04e1757c" handler="onBtn_leftClick" name="click"/>
+          <cl:formdata std:sid="f-data-e2f657e0" col="0" halign="CENTER" height="25" row="1" valign="CENTER" width="25"/>
+        </cl:button>
+        <cl:button std:sid="button-703378e8" id="btn_right" value=">">
+          <cl:listener std:sid="listener-b5eae418" handler="onBtn_rightClick" name="click"/>
+          <cl:formdata std:sid="f-data-642070bc" col="0" halign="CENTER" height="25" row="2" valign="CENTER" width="25"/>
+        </cl:button>
+        <cl:button std:sid="button-aab95945" id="btn_leftAll" value="&lt;&lt;">
+          <cl:listener std:sid="listener-6ce4a612" handler="onBtn_leftAllClick" name="click"/>
+          <cl:formdata std:sid="f-data-3075a388" col="0" halign="CENTER" height="25" row="3" valign="CENTER" width="25"/>
+        </cl:button>
+        <cl:button std:sid="button-7866f899" id="btn_rightAll" value=">>">
+          <cl:listener std:sid="listener-1699a8f2" handler="onBtn_rightAllClick" name="click"/>
+          <cl:formdata std:sid="f-data-2e49d4c9" col="0" halign="CENTER" height="25" row="4" valign="CENTER" width="25"/>
+        </cl:button>
+        <cl:formlayout std:sid="f-layout-25d93117">
+          <cl:rows length="1" shadecolor="transparent" shadetype="NONE" unit="FRACTION"/>
+          <cl:rows length="50" shadecolor="transparent" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows length="50" shadecolor="transparent" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows length="50" shadecolor="transparent" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows length="50" shadecolor="transparent" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:output std:sid="output-dd65abe1" style="background-color:#c3c5c6; text-align:center;" value="관리가능단말기">
+        <cl:formdata std:sid="f-data-ce1be107" col="1" row="0"/>
+      </cl:output>
+      <cl:output std:sid="output-a2bcce10" style="background-color:#c3c5c6; text-align:center;" value="관리대상단말기">
+        <cl:formdata std:sid="f-data-6234daa1" col="3" row="0"/>
+      </cl:output>
+      <cl:group std:sid="group-1e5538d7" class="un-form-border" style="padding:5px;">
+        <cl:formdata col="0" colspan="1" row="0" rowspan="2"/>
+        <cl:output std:sid="output-fb2c6a6c" style="background-color:#c3c5c6; text-align:center;" value="관리자리스트">
+          <cl:formdata std:sid="f-data-3295a2e3" col="0" row="0"/>
+        </cl:output>
+        <cl:grid std:sid="grid-5e245bee" id="grd1" clickmode="edit" columnMovable="false" columnResizable="false" datasetid="AdminList" readonly="false">
+          <cl:listener std:sid="listener-274a6ea1" handler="onGrd1SelectionChange" name="selection-change"/>
+          <cl:formdata std:sid="f-data-04aeb900" col="0" row="1"/>
+          <cl:gridcolumn std:sid="g-column-427c8b84" width="70px"/>
+          <cl:gridcolumn std:sid="g-column-1f21274a" width="85px"/>
+          <cl:gridheader std:sid="gh-band-466dfeb7">
+            <cl:gridrow std:sid="g-row-d27b7792"/>
+            <cl:gridcell std:sid="gh-cell-f0dd1291" colindex="0" rowindex="0" filterable="false" sortable="false" targetcolumnname="ID" text="ID"/>
+            <cl:gridcell std:sid="gh-cell-29164a58" colindex="1" rowindex="0" filterable="false" sortable="false" targetcolumnname="Name" text="Name"/>
+          </cl:gridheader>
+          <cl:griddetail std:sid="gd-band-bf2f809e">
+            <cl:gridrow std:sid="g-row-2969e171"/>
+            <cl:gridcell std:sid="gd-cell-8d928208" colindex="0" rowindex="0" columnname="ID"/>
+            <cl:gridcell std:sid="gd-cell-3dea8b0b" colindex="1" rowindex="0" columnname="Name"/>
+          </cl:griddetail>
+        </cl:grid>
+        <cl:formlayout>
+          <cl:rows length="50" shadecolor="transparent" shadetype="NONE" unit="PIXEL"/>
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-917c6697">
+        <cl:rows length="50" shadecolor="transparent" shadetype="NONE" unit="PIXEL"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION"/>
+        <cl:columns length="50" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-e6074ade"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

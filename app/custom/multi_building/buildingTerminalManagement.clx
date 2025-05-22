@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-b78b79ec" version="1.0.0.0">
+  <head std:sid="head-18dee1c2">
+    <title>buildingTerminalManagement</title>
+    <screen std:sid="screen-c9ff5839" id="default" name="default" minwidth="1024px" width="1024px" height="768px" useCustomWidth="true" useCustomHeight="true" customHeight="572" customWidth="980"/>
+    <screen std:sid="screen-7e22f170" id="tablet" name="tablet" minwidth="500px" maxwidth="1023px" width="500px" height="667px"/>
+    <screen std:sid="screen-b826a7ef" id="mobile" name="mobile" maxwidth="499px" width="350px" height="525px"/>
+    <cl:model std:sid="model-3ae2e7e9">
+      <cl:dataset std:sid="d-set-89e3aa66" id="ElevatorSetList">
+        <cl:datacolumnlist>
+          <cl:datacolumn comment="건물 코드로 사용" std:sid="d-column-aaad270e" info="" name="ElevatorSetID" datatype="number"/>
+          <cl:datacolumn comment="" std:sid="d-column-87594216" name="ElevatorSetName"/>
+          <cl:datacolumn std:sid="d-column-bbaa2d2d" name="AccessFloor" datatype="string"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-1e7a9ce3" id="TerminalList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-348df65a" name="ID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-6178839b" name="Name"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-0e99d58f" id="UnRegTerminalList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-6da0f5e1" name="ID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-9fd7bfaa" name="Name"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-cb581a9d" id="RegTerminalList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-d22049da" name="ID" datatype="number"/>
+          <cl:datacolumn std:sid="d-column-42e93d09" name="Name"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-525d32fb" id="TerminalIDs">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-3a146569" name="ID" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-a33aca7f" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-99a37a0f" name="ResultCode" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-ac2d0aca" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-8eb906b5" name="Count" datatype="number"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-0f3a40de" id="sms_getElevatorSetList" method="get" action="/v1/elevators">
+        <cl:listener std:sid="listener-ff0cc23b" name="submit-done" handler="onSms_getElevatorSetListSubmitDone"/>
+        <cl:listener std:sid="listener-866f385b" name="submit-error" handler="onSms_getElevatorSetListSubmitError"/>
+        <cl:listener std:sid="listener-3a2af468" name="submit-timeout" handler="onSms_getElevatorSetListSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="ElevatorSetList"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-1ae201d5" id="sms_getBuildingTerminalList" method="get" action="/v1/mbm/building/">
+        <cl:listener std:sid="listener-eec2eaa2" name="submit-done" handler="onSms_getBuildingTerminalListSubmitDone"/>
+        <cl:listener std:sid="listener-31ea7997" name="submit-error" handler="onSms_getBuildingTerminalListSubmitError"/>
+        <cl:listener std:sid="listener-3847be5a" name="submit-timeout" handler="onSms_getBuildingTerminalListSubmitTimeout"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total"/>
+        <cl:responsedata dataid="TerminalList"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-25b3e7f4" id="sms_getTerminalList" method="get" action="/v1/terminals">
+        <cl:listener std:sid="listener-5bd27244" name="submit-done" handler="onSms_getTerminalListSubmitDone"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total"/>
+        <cl:responsedata dataid="TerminalList"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-9be470f9" id="sms_postBuildingTerminal" method="post" action="/v1/mbm/building/">
+        <cl:listener std:sid="listener-d3057fb0" name="submit-done" handler="onSms_postBuildingTerminalSubmitDone"/>
+        <cl:listener std:sid="listener-3de98751" name="submit-error" handler="onSms_postBuildingTerminalSubmitError"/>
+        <cl:listener std:sid="listener-0beb2b30" name="submit-timeout" handler="onSms_postBuildingTerminalSubmitTimeout"/>
+        <cl:requestdata dataid="TerminalIDs"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-104c7dc7" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-8e7d9878" name="load" handler="onBodyLoad"/>
+    <cl:group std:sid="group-b6d37655">
+      <cl:xylayoutdata std:sid="xyl-data-1f0531ce" top="0px" right="0px" bottom="0px" left="0px" horizontalAnchor="BOTH" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-c59289fa">
+        <cl:formdata std:sid="f-data-c83149fb" row="0" col="0" rowspan="2" colspan="1"/>
+        <cl:grid std:sid="grid-a51ee5d7" id="BTM_grdBuildingList" style="background-image:none;" readonly="true" datasetid="ElevatorSetList" showdeletedrow="false" resizablecolumns="all" columnMovable="false">
+          <cl:listener std:sid="listener-338e1a05" name="selection-change" handler="onEVMGT_grdElevatorsListSelectionChange"/>
+          <cl:formdata std:sid="f-data-6ce36a78" row="0" col="0"/>
+          <cl:gridcolumn std:sid="g-column-71c8f554" width="90px"/>
+          <cl:gridcolumn std:sid="g-column-42b62e36"/>
+          <cl:gridheader std:sid="gh-band-6af4bab8">
+            <cl:gridrow std:sid="g-row-9a30cc1d"/>
+            <cl:gridcell std:sid="gh-cell-2bf435dd" rowindex="0" colindex="0" targetcolumnname="ElevatorSetID" sortable="false" filterable="false" text="ID">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_BuildingCode"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gh-cell-efbb5843" rowindex="0" colindex="1" style="border-right-style:none;" targetcolumnname="ElevatorSetName" sortable="false" filterable="false" text="Name">
+              <cl:langbind property="text" category="PROPERTY" keypath="Str_Name"/>
+            </cl:gridcell>
+          </cl:gridheader>
+          <cl:griddetail std:sid="gd-band-c9869d93">
+            <cl:gridrow std:sid="g-row-8b2bfea0"/>
+            <cl:gridcell std:sid="gd-cell-01db11b7" rowindex="0" colindex="0" columnname="ElevatorSetID">
+              <cl:datasetbind property="color" category="STYLER" datacontrolid="ElevatorSetList" columnname="ElevatorSetID"/>
+            </cl:gridcell>
+            <cl:gridcell std:sid="gd-cell-0e1a418a" rowindex="0" colindex="1" style="border-right-style:none;" columnname="ElevatorSetName">
+              <cl:datasetbind property="color" category="STYLER" datacontrolid="ElevatorSetList" columnname="ElevatorSetName"/>
+            </cl:gridcell>
+          </cl:griddetail>
+        </cl:grid>
+        <cl:formlayout std:sid="f-layout-0a11a9f6" hspace="0px" vspace="5px" top-margin="0px" right-margin="0px" bottom-margin="0px" left-margin="0px">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-83c13f84">
+        <cl:formdata std:sid="f-data-9c24a1f6" row="0" col="1"/>
+        <cl:button std:sid="button-fadf80f5" id="BTM_btnSave" class="userInfo_btn">
+          <cl:listener std:sid="listener-094dd8e2" name="click" handler="onBTM_btnSaveClick"/>
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_Save"/>
+          <cl:formdata std:sid="f-data-c9bf6bfe" row="0" col="1"/>
+        </cl:button>
+        <cl:img std:sid="image-f50a0304" id="USMAG_imgHelpPage" style="cursor:help;" src="../../../theme/images/common/common_btn_window_top_q.png">
+          <cl:formdata std:sid="f-data-ae4c7ccf" halign="CENTER" valign="CENTER" width="14" height="14" row="0" col="2"/>
+        </cl:img>
+        <cl:formlayout std:sid="f-layout-397a7a6c">
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="80" unit="PIXEL" autoSizing="true" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="14" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:group std:sid="group-9288137d">
+        <cl:formdata std:sid="f-data-d43ec596" row="1" col="1"/>
+        <cl:udc std:sid="ud-control-4de49d3d" id="BTM_udcRegistTerminalList" type="udc.grid.terminalList">
+          <cl:listener std:sid="listener-5f9807d9" name="pagechange" handler="onBTM_udcRegistTerminalListPagechange"/>
+          <cl:formdata std:sid="f-data-55468ec3" row="1" col="0"/>
+        </cl:udc>
+        <cl:udc std:sid="ud-control-33ce90a8" id="BTM_udcUnregistTerminalList" type="udc.grid.terminalList">
+          <cl:listener std:sid="listener-133fb93a" name="pagechange" handler="onBTM_udcUnregistTerminalListPagechange"/>
+          <cl:formdata std:sid="f-data-0d2bf800" row="1" col="2"/>
+        </cl:udc>
+        <cl:group std:sid="group-c7084087">
+          <cl:formdata std:sid="f-data-defab77e" row="1" col="1"/>
+          <cl:button std:sid="button-ef09385f" id="BTM_btnTerminalUnregist" style="padding-top:3px; padding-left:10px; padding-bottom:3px; padding-right:10px;" class="userInfo_btn" value=">">
+            <cl:listener std:sid="listener-a3a12cf9" name="click" handler="onBTM_btnTerminalUnregistClick"/>
+            <cl:xylayoutdata std:sid="xyl-data-ff5b2c51" top="70px" right="0px" left="0px" height="25px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+          </cl:button>
+          <cl:button std:sid="button-5a08da07" id="BTM_btnTerminalRegist" style="padding-top:3px; padding-left:10px; padding-bottom:3px; padding-right:10px;" class="userInfo_btn" value="&lt;">
+            <cl:listener std:sid="listener-f658f82d" name="click" handler="onBTM_btnTerminalRegistClick"/>
+            <cl:xylayoutdata std:sid="xyl-data-6eedcf3c" top="103px" right="0px" left="0px" height="25px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+          </cl:button>
+          <cl:button std:sid="button-ad060bb1" id="BTM_btnTerminalUnregistAll" style="padding-top:3px; padding-left:9px; padding-bottom:3px; padding-right:9px;" class="userInfo_btn" value=">>">
+            <cl:listener std:sid="listener-03c6ab6d" name="click" handler="onBTM_btnTerminalUnregistAllClick"/>
+            <cl:xylayoutdata std:sid="xyl-data-36dc5973" top="145px" right="0px" left="0px" height="25px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+          </cl:button>
+          <cl:button std:sid="button-c616389c" id="BTM_btnTerminalRegistAll" style="padding-top:3px; padding-left:9px; padding-bottom:3px; padding-right:9px;" class="userInfo_btn" value="&lt;&lt;">
+            <cl:listener std:sid="listener-b1549e7b" name="click" handler="onBTM_btnTerminalRegistAllClick"/>
+            <cl:xylayoutdata std:sid="xyl-data-95480c2d" top="177px" right="0px" left="0px" height="25px" horizontalAnchor="BOTH" verticalAnchor="TOP"/>
+          </cl:button>
+          <cl:xylayout std:sid="xylayout-d48f2c76"/>
+        </cl:group>
+        <cl:output std:sid="output-91e0cb03" style="font-weight:700; padding-left:5px; font-size:13px; padding-right:5px;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_EnrollmentTerminal"/>
+          <cl:formdata std:sid="f-data-536c1195" row="0" col="0"/>
+        </cl:output>
+        <cl:output std:sid="output-154394d6" style="font-weight:700; padding-left:5px; font-size:13px; padding-right:5px;">
+          <cl:langbind property="value" category="PROPERTY" keypath="Str_AdditionalTerminal"/>
+          <cl:formdata std:sid="f-data-2e15ee82" row="0" col="2"/>
+        </cl:output>
+        <cl:formlayout std:sid="f-layout-069dcc6c">
+          <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000"/>
+          <cl:rows length="1" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="35" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-92ec38e9" hspace="5px" vspace="5px" top-margin="10px" right-margin="10px" bottom-margin="10px" left-margin="10px">
+        <cl:rows length="30" unit="PIXEL" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="2" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+        <cl:columns length="5" unit="FRACTION" autoSizing="false" shadetype="NONE" shadecolor="#000000" minlength="0"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-093acaf7"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

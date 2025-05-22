@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-27e9fb86" version="1.0.0.0">
+  <head std:sid="head-aee6ca39">
+    <title>terminalVOptionPageVOIP</title>
+    <screen std:sid="screen-99f5869e" id="default" customHeight="500" customWidth="420" height="768px" minwidth="1024px" name="default" useCustomHeight="true" useCustomWidth="true" width="1024px"/>
+    <screen std:sid="screen-6bc38aff" id="tablet" height="667px" maxwidth="1023px" minwidth="500px" name="tablet" width="500px"/>
+    <screen std:sid="screen-d06f23cb" id="mobile" height="525px" maxwidth="499px" name="mobile" width="350px"/>
+    <cl:model std:sid="model-07081858">
+      <cl:datamap std:sid="d-map-f28ace34" id="VoipOptValue">
+        <cl:datacolumnlist>
+          <cl:datacolumn name="SvrAddress"/>
+          <cl:datacolumn name="AccountID"/>
+          <cl:datacolumn name="AccountPwd"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-453e3dc1" id="sms_get_terminal_option_voip" action="/v1/terminals/" method="get">
+        <cl:listener std:sid="listener-c836249e" handler="onSms_get_terminal_option_voipSubmitSuccess" name="submit-success"/>
+        <cl:listener std:sid="listener-31315c30" handler="onSms_get_terminal_option_voipSubmitDone" name="submit-done"/>
+        <cl:listener std:sid="listener-f63ffa1e" handler="onSms_get_terminal_option_voipSubmitTimeout" name="submit-timeout"/>
+        <cl:listener std:sid="listener-988affd8" handler="onSms_get_terminal_option_voipSubmitError" name="submit-error"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="VoipOptValue"/>
+      </cl:submission>
+      <cl:datamap std:sid="d-map-f6c406cc" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="ResultCode"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-d03c76fb" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-440bc41d" handler="onBodyLoad" name="load"/>
+    <cl:group std:sid="group-6f9d05ec" id="TMVVO_grp" style="padding:10px;">
+      <cl:xylayoutdata std:sid="xyl-data-7da28dae" height="400px" horizontalAnchor="LEFT" left="0px" top="0px" verticalAnchor="TOP" width="700px"/>
+      <cl:group std:sid="group-ef81471b" style="padding:0px;">
+        <cl:formdata std:sid="f-data-72e41a5c" col="0" row="0"/>
+        <cl:output std:sid="output-79bceff6" style="font-weight:700; font-size:14px;">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_Configuration"/>
+          <cl:formdata std:sid="f-data-56b6b130" col="0" colspan="2" row="0" rowspan="1"/>
+        </cl:output>
+        <cl:output std:sid="output-d1a05068" style="font-weight:700; font-size:14px;">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_Account1"/>
+          <cl:formdata std:sid="f-data-dbe28496" col="0" colspan="2" row="1" rowspan="1"/>
+        </cl:output>
+        <cl:output std:sid="output-88eb2a6a" style="border-right-style:solid; background-color:#f6f6f6; border-bottom-color:#c5c5c5; border-top-width:1px; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-top-color:#c5c5c5; border-bottom-style:solid; border-right-color:#c5c5c5; border-top-style:solid; text-align:center;">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_ServerAddress"/>
+          <cl:formdata std:sid="f-data-f0d2a8a7" col="0" row="2"/>
+        </cl:output>
+        <cl:output std:sid="output-7b2372a7" style="border-right-style:solid; background-color:#f6f6f6; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_ID"/>
+          <cl:formdata std:sid="f-data-f3d2f926" col="0" row="3"/>
+        </cl:output>
+        <cl:output std:sid="output-ef889b32" style="border-right-style:solid; background-color:#f6f6f6; border-bottom-color:#c5c5c5; border-right-width:2px; border-bottom-width:1px; font-size:14px; border-bottom-style:solid; border-right-color:#c5c5c5; text-align:center;">
+          <cl:langbind category="PROPERTY" property="value" keypath="Str_Password"/>
+          <cl:formdata std:sid="f-data-71ff8bf9" col="0" row="4"/>
+        </cl:output>
+        <cl:group std:sid="group-b6545332" style="border-bottom-color:#c5c5c5; border-top-width:1px; border-bottom-width:1px; border-top-color:#c5c5c5; border-bottom-style:solid; border-top-style:solid;">
+          <cl:formdata std:sid="f-data-3378198e" col="1" row="2"/>
+          <cl:inputbox std:sid="i-box-6720c733" id="TMVVO_ipaddress_ipb" style="font-size:14px;">
+            <cl:listener std:sid="listener-a340814e" handler="onTMVVO_ipbValueChange" name="value-change"/>
+            <cl:datamapbind property="value" columnname="SvrAddress" datacontrolid="VoipOptValue"/>
+            <cl:xylayoutdata std:sid="xyl-data-b05e2724" bottom="2px" horizontalAnchor="BOTH" left="4px" right="4px" top="2px" verticalAnchor="BOTH"/>
+          </cl:inputbox>
+          <cl:xylayout std:sid="xylayout-12aab851"/>
+        </cl:group>
+        <cl:group std:sid="group-9481dd48" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+          <cl:formdata std:sid="f-data-7b58fc62" col="1" row="3"/>
+          <cl:inputbox std:sid="i-box-cdfb2075" id="TMVVO_id_ipb" style="font-size:14px;">
+            <cl:listener std:sid="listener-840b7b49" handler="onTMVVO_ipbValueChange" name="value-change"/>
+            <cl:datamapbind property="value" columnname="AccountID" datacontrolid="VoipOptValue"/>
+            <cl:xylayoutdata std:sid="xyl-data-035cd27e" bottom="2px" horizontalAnchor="BOTH" left="4px" right="4px" top="2px" verticalAnchor="BOTH"/>
+          </cl:inputbox>
+          <cl:xylayout std:sid="xylayout-f414d974"/>
+        </cl:group>
+        <cl:group std:sid="group-8540aaa7" style="border-bottom-color:#c5c5c5; border-bottom-width:1px; border-bottom-style:solid;">
+          <cl:formdata std:sid="f-data-7a46776d" col="1" row="4"/>
+          <cl:inputbox std:sid="i-box-4a887bf6" id="TMVVO_pwd_ipb" style="font-size:14px;">
+            <cl:listener std:sid="listener-f427d050" handler="onTMVVO_ipbValueChange" name="value-change"/>
+            <cl:datamapbind property="value" columnname="AccountPwd" datacontrolid="VoipOptValue"/>
+            <cl:xylayoutdata std:sid="xyl-data-b9f98abb" bottom="2px" horizontalAnchor="BOTH" left="4px" right="4px" top="2px" verticalAnchor="BOTH"/>
+          </cl:inputbox>
+          <cl:xylayout std:sid="xylayout-10eee61c"/>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-29c0cbb6" hspace="0px" vspace="0px">
+          <cl:rows length="30" unit="PIXEL"/>
+          <cl:rows length="30" unit="PIXEL"/>
+          <cl:rows length="30" unit="PIXEL"/>
+          <cl:rows length="30" unit="PIXEL"/>
+          <cl:rows length="30" unit="PIXEL"/>
+          <cl:columns autoSizing="false" length="120" shadecolor="#000000" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns length="1" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-65f3f64d">
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-bd6f6199"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

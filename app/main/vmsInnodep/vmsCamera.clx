@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-b014a3f8" version="1.0.0.0">
+  <head std:sid="head-cc4c335a">
+    <title>vmsCamera</title>
+    <screen std:sid="screen-9929f753" id="default" height="768px" minwidth="1024px" name="default" width="1024px"/>
+    <screen std:sid="screen-d84957e4" id="tablet" height="667px" maxwidth="1023px" minwidth="500px" name="tablet" width="500px"/>
+    <screen std:sid="screen-315a496d" id="mobile" height="525px" maxwidth="499px" name="mobile" width="350px"/>
+    <cl:model std:sid="model-7d57fab6">
+      <cl:dataset std:sid="d-set-4bb39dd0" id="dsRecordServerList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-47958c46" datatype="number" name="srv_id"/>
+          <cl:datacolumn std:sid="d-column-3c315e5b" datatype="number" name="vms_id"/>
+          <cl:datacolumn std:sid="d-column-8e74db0f" datatype="number" name="srv_serial"/>
+          <cl:datacolumn std:sid="d-column-7a183fa5" name="srv_name"/>
+          <cl:datacolumn std:sid="d-column-0c18f73c" datatype="number" name="srv_type"/>
+          <cl:datacolumn std:sid="d-column-b5958c25" name="srv_svc_addr"/>
+          <cl:datacolumn std:sid="d-column-c6bba7f8" datatype="number" name="srv_svc_port"/>
+          <cl:datacolumn std:sid="d-column-ff6b3907" datatype="number" displayonly="false" name="srv_stat"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-a944bb60" id="TerminalList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-ee1b992f" datatype="number" name="ID"/>
+          <cl:datacolumn std:sid="d-column-e70a2aaf" name="Name"/>
+          <cl:datacolumn std:sid="d-column-3cefac9b" datatype="number" name="GroupID"/>
+          <cl:datacolumn std:sid="d-column-5cf4c402" datatype="number" name="State"/>
+          <cl:datacolumn std:sid="d-column-c4fc3712" datatype="number" name="Type"/>
+          <cl:datacolumn std:sid="d-column-492998a9" datatype="number" name="FuncType"/>
+          <cl:datacolumn std:sid="d-column-e12df5a7" name="IPAddress"/>
+          <cl:datacolumn std:sid="d-column-22bfd19b" name="MacAddress"/>
+          <cl:datacolumn std:sid="d-column-b2892abb" name="Version"/>
+          <cl:datacolumn std:sid="d-column-23520194" datatype="number" name="RemoteDoor"/>
+          <cl:datacolumn std:sid="d-column-fb8644d3" datatype="number" name="UTCIndex"/>
+          <cl:datacolumn std:sid="d-column-d6de68a8" datatype="number" name="GroupCode"/>
+          <cl:datacolumn std:sid="d-column-e4f2b949" name="Description"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-35d85d5a" id="Result">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-fae20911" datatype="number" name="ResultCode"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:datamap std:sid="d-map-b5bf4ffe" id="Total">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-d9924134" datatype="number" name="Count"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-ef1cabb2" id="sms_getTerminalList" action="/v1/terminals" method="get">
+        <cl:listener std:sid="listener-cdbaea96" handler="onSms_getTerminalListSubmitDone" name="submit-done"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="Total"/>
+        <cl:responsedata dataid="TerminalList"/>
+      </cl:submission>
+      <cl:dataset std:sid="d-set-774d5c2c" id="dsDeviceInfo">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-8a9d0c3a" name="deviceSerial"/>
+          <cl:datacolumn std:sid="d-column-8c6d850c" name="channelName"/>
+          <cl:datacolumn std:sid="d-column-8dd69ae8" name="channelSerial"/>
+          <cl:datacolumn std:sid="d-column-233353bd" name="channelMediaSerial"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-31601898" id="dsDeviceList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-a16b10e0" name="deviceSerial"/>
+          <cl:datacolumn std:sid="d-column-cee8cb4a" name="rtspUrl"/>
+          <cl:datacolumn std:sid="d-column-9d076df8" name="deviceName"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-fb4ace31" id="dsInnodepList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-d088af47" datatype="number" name="TerminalID"/>
+          <cl:datacolumn std:sid="d-column-405f176f" name="DevName1"/>
+          <cl:datacolumn std:sid="d-column-394b082f" name="DevSerial1"/>
+          <cl:datacolumn std:sid="d-column-b90ed561" name="DevName2"/>
+          <cl:datacolumn std:sid="d-column-d0632883" name="DevSerial2"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:submission std:sid="submission-98a1998c" id="smsPostInnodepList" action="/v1/innodeps/">
+        <cl:listener std:sid="listener-2e87ea5c" handler="onSmsPostInnodepListSubmitDone" name="submit-done"/>
+        <cl:requestdata dataid="dsInnodepList"/>
+        <cl:responsedata dataid="Result"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-5fccd452" id="smsGetInnodepList" action="/v1/innodeps/" method="get">
+        <cl:listener std:sid="listener-fe498490" handler="onSmsGetInnodepListSubmitDone" name="submit-done"/>
+        <cl:responsedata dataid="Result"/>
+        <cl:responsedata dataid="dsInnodepList"/>
+      </cl:submission>
+      <cl:dataset std:sid="d-set-dd8dc435" id="dsOnvifDeviceList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-b4b0b051" datatype="number" name="row enable"/>
+          <cl:datacolumn std:sid="d-column-11008d27" datatype="number" name="add to vms"/>
+          <cl:datacolumn std:sid="d-column-d0f4d791" datatype="number" name="in use"/>
+          <cl:datacolumn std:sid="d-column-8ccb3d1b" name="address"/>
+          <cl:datacolumn std:sid="d-column-59b6956e" name="firmware"/>
+          <cl:datacolumn std:sid="d-column-10d879fc" name="location"/>
+          <cl:datacolumn std:sid="d-column-bf88b39e" name="model"/>
+          <cl:datacolumn std:sid="d-column-7735e4dc" name="protocol"/>
+          <cl:datacolumn std:sid="d-column-af7274ba" name="service_url"/>
+          <cl:datacolumn std:sid="d-column-020eb281" name="dev_name"/>
+          <cl:datacolumn std:sid="d-column-da6ff670" name="dev_user"/>
+          <cl:datacolumn std:sid="d-column-424a8ab2" name="dev_pass"/>
+        </cl:datacolumnlist>
+        <cl:datarowlist/>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-db834027" id="dsDeviceInfoList">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-6a54ab3a" name="vms_id"/>
+          <cl:datacolumn std:sid="d-column-148b9ba1" name="dev_serial"/>
+          <cl:datacolumn std:sid="d-column-110e9859" name="dev_name"/>
+          <cl:datacolumn std:sid="d-column-5ea5b3e2" name="dev_user"/>
+          <cl:datacolumn std:sid="d-column-690ce93e" name="dev_pass"/>
+          <cl:datacolumn std:sid="d-column-3141949b" name="dev_addr"/>
+          <cl:datacolumn std:sid="d-column-a15cf879" name="dev_wport"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-7f62d21e" id="dsInnodepListGrid">
+        <cl:datacolumnlist>
+          <cl:datacolumn std:sid="d-column-b42bd4d6" datatype="number" name="TerminalID"/>
+          <cl:datacolumn std:sid="d-column-75bde149" name="DevName1"/>
+          <cl:datacolumn std:sid="d-column-01e5a633" name="DevSerial1"/>
+          <cl:datacolumn std:sid="d-column-517b1d62" name="DevName2"/>
+          <cl:datacolumn std:sid="d-column-b2888b4a" name="DevSerial2"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-68bee46b" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-4a9d7d15" handler="onBodyLoad" name="load"/>
+    <cl:button std:sid="button-0fe228a3" id="btnRefreshServerList">
+      <cl:listener std:sid="listener-34e8b078" handler="onBtnRefreshServerListClick" name="click"/>
+      <cl:langbind category="PROPERTY" property="value" keypath="Str_RecordingServerRefresh"/>
+      <cl:xylayoutdata std:sid="xyl-data-70cb94e1" height="22px" horizontalAnchor="LEFT" left="20px" top="20px" verticalAnchor="TOP" width="243px"/>
+    </cl:button>
+    <cl:grid std:sid="grid-43d4cf92" id="grdSearchRecordServerList" datasetid="dsRecordServerList" visible="true">
+      <cl:xylayoutdata std:sid="xyl-data-0755a54a" height="73px" horizontalAnchor="LEFT" left="20px" top="52px" verticalAnchor="TOP" width="932px"/>
+      <cl:gridcolumn std:sid="g-column-5ca33cf9" width="108px"/>
+      <cl:gridcolumn std:sid="g-column-512fa10c" width="108px"/>
+      <cl:gridcolumn std:sid="g-column-40c8fcf1" width="108px"/>
+      <cl:gridcolumn std:sid="g-column-a30a53db" width="108px"/>
+      <cl:gridcolumn std:sid="g-column-01c8cd97" width="108px"/>
+      <cl:gridcolumn std:sid="g-column-f369e167" width="108px"/>
+      <cl:gridcolumn std:sid="g-column-d279756e" width="108px"/>
+      <cl:gridcolumn std:sid="g-column-d9928289" width="108px"/>
+      <cl:gridheader std:sid="gh-band-b681a046">
+        <cl:gridrow std:sid="g-row-f30d77bc"/>
+        <cl:gridcell std:sid="gh-cell-18a33b11" colindex="0" rowindex="0" filterable="false" sortable="false" targetcolumnname="srv_id" text="server id">
+          <cl:langbind category="PROPERTY" property="text" keypath="Str_VmsServerID"/>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gh-cell-2ba0c548" colindex="1" rowindex="0" filterable="false" sortable="false" targetcolumnname="vms_id" text="vms id">
+          <cl:langbind category="PROPERTY" property="text" keypath="Str_VmsID"/>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gh-cell-d3d15ecd" colindex="2" rowindex="0" filterable="false" sortable="false" targetcolumnname="srv_serial" text="serial">
+          <cl:langbind category="PROPERTY" property="text" keypath="Str_VmsSerial"/>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gh-cell-6f19e0da" colindex="3" rowindex="0" filterable="false" sortable="false" targetcolumnname="srv_name" text="name">
+          <cl:langbind category="PROPERTY" property="text" keypath="Str_Name"/>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gh-cell-04b0925c" colindex="4" rowindex="0" filterable="false" sortable="false" targetcolumnname="srv_type" text="type">
+          <cl:langbind category="PROPERTY" property="text" keypath="Str_Type"/>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gh-cell-c42ab499" colindex="5" rowindex="0" filterable="false" sortable="false" targetcolumnname="srv_svc_addr" text="ip address">
+          <cl:langbind category="PROPERTY" property="text" keypath="Str_IPAddress"/>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gh-cell-734f41ca" colindex="6" rowindex="0" filterable="false" sortable="false" targetcolumnname="srv_svc_port" text="port">
+          <cl:langbind category="PROPERTY" property="text" keypath="Str_Port"/>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gh-cell-b699bdb1" colindex="7" rowindex="0" filterable="false" sortable="false" targetcolumnname="srv_stat" text="status">
+          <cl:langbind category="PROPERTY" property="text" keypath="Str_State"/>
+        </cl:gridcell>
+      </cl:gridheader>
+      <cl:griddetail std:sid="gd-band-0855cbff">
+        <cl:gridrow std:sid="g-row-8bf16a44"/>
+        <cl:gridcell std:sid="gd-cell-30f575ea" colindex="0" rowindex="0" columnname="srv_id"/>
+        <cl:gridcell std:sid="gd-cell-35da4964" colindex="1" rowindex="0" columnname="vms_id"/>
+        <cl:gridcell std:sid="gd-cell-fea68f18" colindex="2" rowindex="0" columnname="srv_serial"/>
+        <cl:gridcell std:sid="gd-cell-2d0a5be7" colindex="3" rowindex="0" columnname="srv_name"/>
+        <cl:gridcell std:sid="gd-cell-5678ba90" colindex="4" rowindex="0" columnname="srv_type"/>
+        <cl:gridcell std:sid="gd-cell-672bdece" colindex="5" rowindex="0" columnname="srv_svc_addr"/>
+        <cl:gridcell std:sid="gd-cell-b39ae6fd" colindex="6" rowindex="0" columnname="srv_svc_port"/>
+        <cl:gridcell std:sid="gd-cell-6c8b1134" colindex="7" rowindex="0" columnname="srv_stat"/>
+      </cl:griddetail>
+    </cl:grid>
+    <cl:button std:sid="button-6020651a" id="btnQearyDeviceList">
+      <cl:listener std:sid="listener-91e41697" handler="onBtnQearyDeviceListClick" name="click"/>
+      <cl:langbind category="PROPERTY" property="value" keypath="Str_VmsConnectedDeviceQuery"/>
+      <cl:xylayoutdata std:sid="xyl-data-d5d2b0b8" height="22px" horizontalAnchor="LEFT" left="20px" top="135px" verticalAnchor="TOP" width="243px"/>
+    </cl:button>
+    <cl:button std:sid="button-33529873" id="btnQearyOnvifDeviceList">
+      <cl:listener std:sid="listener-8235be34" handler="onBtnQearyOnvifDeviceListClick" name="click"/>
+      <cl:langbind category="PROPERTY" property="value" keypath="Str_VmsOnvifQuery"/>
+      <cl:xylayoutdata std:sid="xyl-data-d02cace5" height="22px" horizontalAnchor="LEFT" left="20px" top="303px" verticalAnchor="TOP" width="243px"/>
+    </cl:button>
+    <cl:grid std:sid="grid-629286ec" id="grdTest" datasetid="dsInnodepListGrid" visible="true">
+      <cl:xylayoutdata std:sid="xyl-data-554eda3d" height="151px" horizontalAnchor="LEFT" left="20px" top="480px" verticalAnchor="TOP" width="932px"/>
+      <cl:gridcolumn std:sid="g-column-f6edb889"/>
+      <cl:gridcolumn std:sid="g-column-e910b3ee"/>
+      <cl:gridcolumn std:sid="g-column-df5b5b32"/>
+      <cl:gridcolumn std:sid="g-column-bc421d5e"/>
+      <cl:gridcolumn std:sid="g-column-c95d1875"/>
+      <cl:gridheader std:sid="gh-band-5863f48d">
+        <cl:gridrow std:sid="g-row-13bdd516"/>
+        <cl:gridcell std:sid="gh-cell-0bcaaa25" colindex="0" rowindex="0" filterable="false" sortable="false" targetcolumnname="TerminalID" text="TerminalID">
+          <cl:langbind category="PROPERTY" property="text" keypath="Str_TerminalID"/>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gh-cell-71c2622e" colindex="1" rowindex="0" filterable="false" sortable="false" targetcolumnname="DevName1" text="DevName1">
+          <cl:langbind category="PROPERTY" property="text" keypath="Str_DeviceName1"/>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gh-cell-398af858" colindex="2" rowindex="0" filterable="false" sortable="false" targetcolumnname="DevSerial1" text="DevSerial1">
+          <cl:langbind category="PROPERTY" property="text" keypath="Str_DeviceSerial1"/>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gh-cell-ba80d3dc" colindex="3" rowindex="0" filterable="false" sortable="false" targetcolumnname="DevName2" text="DevName2">
+          <cl:langbind category="PROPERTY" property="text" keypath="Str_DeviceName2"/>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gh-cell-a6c2fc47" colindex="4" rowindex="0" filterable="false" sortable="false" targetcolumnname="DevSerial2" text="DevSerial2">
+          <cl:langbind category="PROPERTY" property="text" keypath="Str_DeviceSerial2"/>
+        </cl:gridcell>
+      </cl:gridheader>
+      <cl:griddetail std:sid="gd-band-993345b9">
+        <cl:gridrow std:sid="g-row-1abcaad5"/>
+        <cl:gridcell std:sid="gd-cell-e2a994ae" colindex="0" rowindex="0" columnname="TerminalID"/>
+        <cl:gridcell std:sid="gd-cell-ca8c7ca1" colindex="1" rowindex="0" columnname="DevName1">
+          <cl:combobox std:sid="c-box-3ed1721c" id="cmbDevName1">
+            <cl:listener std:sid="listener-bee65983" handler="onCmbDevName1SelectionChange2" name="selection-change"/>
+          </cl:combobox>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gd-cell-bdaa1b1f" colindex="2" rowindex="0" columnname="DevSerial1"/>
+        <cl:gridcell std:sid="gd-cell-4431ebc6" colindex="3" rowindex="0" columnname="DevName2">
+          <cl:combobox std:sid="c-box-36aa07cc" id="cmbDevName2">
+            <cl:listener std:sid="listener-141fe0a2" handler="onCmbDevName2SelectionChange2" name="selection-change"/>
+          </cl:combobox>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gd-cell-4af2e1e4" colindex="4" rowindex="0" columnname="DevSerial2"/>
+      </cl:griddetail>
+    </cl:grid>
+    <cl:button std:sid="button-c540f79d" id="btnGetMatchingList">
+      <cl:listener std:sid="listener-6cd25770" handler="onBtnGetMatchingListClick" name="click"/>
+      <cl:langbind category="PROPERTY" property="value" keypath="Str_VmsLoadMatchedList"/>
+      <cl:xylayoutdata std:sid="xyl-data-d79b50cc" height="22px" horizontalAnchor="LEFT" left="273px" top="448px" verticalAnchor="TOP" width="243px"/>
+    </cl:button>
+    <cl:button std:sid="button-7b417fab" id="btnSaveMatchingList">
+      <cl:listener std:sid="listener-ebacc6b9" handler="onBtnSaveMatchingListClick" name="click"/>
+      <cl:langbind category="PROPERTY" property="value" keypath="Str_VmsSaveMatchedList"/>
+      <cl:xylayoutdata std:sid="xyl-data-c83e8384" height="22px" horizontalAnchor="LEFT" left="526px" top="448px" verticalAnchor="TOP" width="243px"/>
+    </cl:button>
+    <cl:button std:sid="button-028718dc" id="btnNewMatchingList">
+      <cl:listener std:sid="listener-36a94220" handler="onBtnNewMatchingListClick" name="click"/>
+      <cl:langbind category="PROPERTY" property="value" keypath="Str_VmsCreateMatchedList"/>
+      <cl:xylayoutdata std:sid="xyl-data-ddcec443" height="22px" horizontalAnchor="LEFT" left="20px" top="448px" verticalAnchor="TOP" width="243px"/>
+    </cl:button>
+    <cl:grid std:sid="grid-e6b967ba" id="grdOnvifDeviceList" datasetid="dsOnvifDeviceList" visible="true">
+      <cl:xylayoutdata std:sid="xyl-data-2fe4a522" height="103px" horizontalAnchor="LEFT" left="20px" top="335px" verticalAnchor="TOP" width="932px"/>
+      <cl:gridcolumn std:sid="g-column-3f51b3fd"/>
+      <cl:gridcolumn std:sid="g-column-6d6be6d7"/>
+      <cl:gridcolumn std:sid="g-column-f3d0a7c1"/>
+      <cl:gridcolumn std:sid="g-column-1db8b066"/>
+      <cl:gridcolumn std:sid="g-column-0462a5a1"/>
+      <cl:gridcolumn std:sid="g-column-d02976b3"/>
+      <cl:gridcolumn std:sid="g-column-2b383849"/>
+      <cl:gridcolumn std:sid="g-column-d5ee98b1"/>
+      <cl:gridcolumn std:sid="g-column-6fa4011c"/>
+      <cl:gridcolumn std:sid="g-column-619588d7"/>
+      <cl:gridcolumn std:sid="g-column-ba9ac174"/>
+      <cl:gridheader std:sid="gh-band-8a5ce688">
+        <cl:gridrow std:sid="g-row-7f67b4b9"/>
+        <cl:gridcell std:sid="gh-cell-2e078f53" colindex="0" rowindex="0" filterable="false" sortable="false" targetcolumnname="add to vms" text="add to vms">
+          <cl:langbind category="PROPERTY" property="text" keypath="Str_AddToVms"/>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gh-cell-bf8fd3d0" colindex="1" rowindex="0" filterable="false" sortable="false" targetcolumnname="in use" text="in use">
+          <cl:langbind category="PROPERTY" property="text" keypath="Str_AlreadyInVms"/>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gh-cell-d49bdf72" colindex="2" rowindex="0" filterable="false" sortable="false" targetcolumnname="address" text="address">
+          <cl:langbind category="PROPERTY" property="text" keypath="Str_IPAddress"/>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gh-cell-5536a4bc" colindex="3" rowindex="0" filterable="false" sortable="false" targetcolumnname="dev_name" text="dev_name">
+          <cl:langbind category="PROPERTY" property="text" keypath="Str_DeviceName"/>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gh-cell-cebe14f3" colindex="4" rowindex="0" filterable="false" sortable="false" targetcolumnname="dev_user" text="dev_user">
+          <cl:langbind category="PROPERTY" property="text" keypath="Str_DevUser"/>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gh-cell-c2c8fd03" colindex="5" rowindex="0" filterable="false" sortable="false" targetcolumnname="dev_pass" text="dev_pass">
+          <cl:langbind category="PROPERTY" property="text" keypath="Str_DevPass"/>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gh-cell-a0dc72e2" colindex="6" rowindex="0" filterable="false" sortable="false" targetcolumnname="firmware" text="firmware">
+          <cl:langbind category="PROPERTY" property="text" keypath="Str_DevFirmware"/>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gh-cell-ee320fd6" colindex="7" rowindex="0" filterable="false" sortable="false" targetcolumnname="location" text="location">
+          <cl:langbind category="PROPERTY" property="text" keypath="Str_DevLocation"/>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gh-cell-f26793b4" colindex="8" rowindex="0" filterable="false" sortable="false" targetcolumnname="model" text="model">
+          <cl:langbind category="PROPERTY" property="text" keypath="Str_DevModel"/>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gh-cell-e8858a35" colindex="9" rowindex="0" filterable="false" sortable="false" targetcolumnname="protocol" text="protocol">
+          <cl:langbind category="PROPERTY" property="text" keypath="Str_DevProtocol"/>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gh-cell-3c3c482c" colindex="10" rowindex="0" filterable="false" sortable="false" targetcolumnname="service_url" text="service_url">
+          <cl:langbind category="PROPERTY" property="text" keypath="Str_DevServiceUrl"/>
+        </cl:gridcell>
+      </cl:gridheader>
+      <cl:griddetail std:sid="gd-band-e68e62bf">
+        <cl:gridrow std:sid="g-row-b076a65f"/>
+        <cl:gridcell std:sid="gd-cell-da200bbf" colindex="0" rowindex="0" columnname="add to vms">
+          <cl:checkbox std:sid="c-box-c3f248fa" id="cbxAddtoVms" style="text-align:center;" falsevalue="0" truevalue="1">
+            <cl:listener std:sid="listener-0974b6a0" handler="onCbxAddtoVmsValueChange" name="value-change"/>
+          </cl:checkbox>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gd-cell-2158dced" colindex="1" rowindex="0" columnname="in use">
+          <cl:checkbox std:sid="c-box-9b2e6c1e" id="cbx2" style="text-align:center;" enabled="false" falsevalue="0" truevalue="1"/>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gd-cell-53a4244f" colindex="2" rowindex="0" columnname="address"/>
+        <cl:gridcell std:sid="gd-cell-5e268c25" colindex="3" rowindex="0" columnname="dev_name">
+          <cl:inputbox std:sid="i-box-2f77b1de" id="ipb3" style="background-color:#c2f8eb; border-radius:3px; text-align:center;"/>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gd-cell-b387f6b4" colindex="4" rowindex="0" columnname="dev_user">
+          <cl:inputbox std:sid="i-box-8d95904c" id="ipb4" style="background-color:#c2f8eb; border-radius:3px; text-align:center;"/>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gd-cell-5b36e18c" colindex="5" rowindex="0" columnname="dev_pass">
+          <cl:inputbox std:sid="i-box-88a09aee" id="ipb5" style="background-color:#c2f8eb; border-radius:3px; text-align:center;"/>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gd-cell-5f336c79" colindex="6" rowindex="0" columnname="firmware"/>
+        <cl:gridcell std:sid="gd-cell-0f41ac72" colindex="7" rowindex="0" columnname="location"/>
+        <cl:gridcell std:sid="gd-cell-a81dcd80" colindex="8" rowindex="0" columnname="model"/>
+        <cl:gridcell std:sid="gd-cell-c912ee95" colindex="9" rowindex="0" columnname="protocol"/>
+        <cl:gridcell std:sid="gd-cell-8a113412" colindex="10" rowindex="0" columnname="service_url"/>
+      </cl:griddetail>
+    </cl:grid>
+    <cl:grid std:sid="grid-3296ffd9" id="grdDeviceList" datasetid="dsDeviceInfoList" visible="true">
+      <cl:xylayoutdata std:sid="xyl-data-af76da75" height="105px" horizontalAnchor="LEFT" left="20px" top="167px" verticalAnchor="TOP" width="932px"/>
+      <cl:gridcolumn std:sid="g-column-1ebe5b66"/>
+      <cl:gridcolumn std:sid="g-column-a077dfbe"/>
+      <cl:gridcolumn std:sid="g-column-b9c22ef5"/>
+      <cl:gridcolumn std:sid="g-column-2dea237f"/>
+      <cl:gridcolumn std:sid="g-column-c3e8dbd0"/>
+      <cl:gridcolumn std:sid="g-column-cd1938fd"/>
+      <cl:gridcolumn std:sid="g-column-8dd3dacd"/>
+      <cl:gridheader std:sid="gh-band-ecbd1faa">
+        <cl:gridrow std:sid="g-row-f6397e71"/>
+        <cl:gridcell std:sid="gh-cell-41aea0b1" colindex="0" rowindex="0" filterable="false" sortable="false" targetcolumnname="vms_id" text="vms_id">
+          <cl:langbind category="PROPERTY" property="text" keypath="Str_VmsID"/>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gh-cell-a41b9457" colindex="1" rowindex="0" filterable="false" sortable="false" targetcolumnname="dev_serial" text="dev_serial">
+          <cl:langbind category="PROPERTY" property="text" keypath="Str_DeviceSerial"/>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gh-cell-9a619fe4" colindex="2" rowindex="0" filterable="false" sortable="false" targetcolumnname="dev_name" text="dev_name">
+          <cl:langbind category="PROPERTY" property="text" keypath="Str_DeviceName"/>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gh-cell-b73d459f" colindex="3" rowindex="0" filterable="false" sortable="false" targetcolumnname="dev_user" text="dev_user">
+          <cl:langbind category="PROPERTY" property="text" keypath="Str_DevUser"/>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gh-cell-e40b483e" colindex="4" rowindex="0" filterable="false" sortable="false" targetcolumnname="dev_pass" text="dev_pass">
+          <cl:langbind category="PROPERTY" property="text" keypath="Str_DevPass"/>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gh-cell-6396e322" colindex="5" rowindex="0" filterable="false" sortable="false" targetcolumnname="dev_addr" text="dev_addr">
+          <cl:langbind category="PROPERTY" property="text" keypath="Str_IPAddress"/>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gh-cell-007ae5cf" colindex="6" rowindex="0" filterable="false" sortable="false" targetcolumnname="dev_wport" text="dev_wport">
+          <cl:langbind category="PROPERTY" property="text" keypath="Str_DevWebPort"/>
+        </cl:gridcell>
+      </cl:gridheader>
+      <cl:griddetail std:sid="gd-band-d6a832fd">
+        <cl:gridrow std:sid="g-row-7d14451b"/>
+        <cl:gridcell std:sid="gd-cell-d485adc0" colindex="0" rowindex="0" style="text-align:center;" columnname="vms_id"/>
+        <cl:gridcell std:sid="gd-cell-92d116ac" colindex="1" rowindex="0" style="text-align:center;" columnname="dev_serial"/>
+        <cl:gridcell std:sid="gd-cell-bd0600c5" colindex="2" rowindex="0" style="text-align:center;" columnname="dev_name">
+          <cl:inputbox std:sid="i-box-623302b5" id="ipb1" style="background-color:#c2f8eb; text-align:center;"/>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gd-cell-3621fcbb" colindex="3" rowindex="0" style="text-align:center;" columnname="dev_user">
+          <cl:inputbox std:sid="i-box-42b29e90" id="ipb2" style="background-color:#c2f8eb; text-align:center;"/>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gd-cell-11497361" colindex="4" rowindex="0" style="text-align:center;" columnname="dev_pass">
+          <cl:inputbox std:sid="i-box-fb9ad669" id="ipb6" style="background-color:#c2f8eb; text-align:center;"/>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gd-cell-dbbf5252" colindex="5" rowindex="0" style="text-align:center;" columnname="dev_addr">
+          <cl:inputbox std:sid="i-box-52d3f84b" id="ipb7" style="text-align:center;"/>
+        </cl:gridcell>
+        <cl:gridcell std:sid="gd-cell-cd2108a6" colindex="6" rowindex="0" style="text-align:center;" columnname="dev_wport">
+          <cl:inputbox std:sid="i-box-1a859618" id="ipb8" style="text-align:center;"/>
+        </cl:gridcell>
+      </cl:griddetail>
+    </cl:grid>
+    <cl:button std:sid="button-21ccdcb7" id="btnAddOnvifDevice">
+      <cl:listener std:sid="listener-a4ec95a3" handler="onBtnAddOnvifDeviceClick" name="click"/>
+      <cl:langbind category="PROPERTY" property="value" keypath="Str_VmsOnvifSave"/>
+      <cl:xylayoutdata std:sid="xyl-data-11e818de" height="22px" horizontalAnchor="LEFT" left="273px" top="303px" verticalAnchor="TOP" width="243px"/>
+    </cl:button>
+    <cl:button std:sid="button-f0a23ccd" id="btnDeviceDelete">
+      <cl:listener std:sid="listener-29a66910" handler="onBtnDeviceDeleteClick" name="click"/>
+      <cl:langbind category="PROPERTY" property="value" keypath="Str_VmsSelectedDeviceDelete"/>
+      <cl:xylayoutdata std:sid="xyl-data-a79d084b" height="22px" horizontalAnchor="LEFT" left="526px" top="135px" verticalAnchor="TOP" width="243px"/>
+    </cl:button>
+    <cl:button std:sid="button-6c9e8655" id="btnDeviceModify">
+      <cl:listener std:sid="listener-5c6390e9" handler="onBtnDeviceModifyClick" name="click"/>
+      <cl:langbind category="PROPERTY" property="value" keypath="Str_VmsSaveChanges"/>
+      <cl:xylayoutdata std:sid="xyl-data-bd3b8ec8" height="22px" horizontalAnchor="LEFT" left="273px" top="135px" verticalAnchor="TOP" width="243px"/>
+    </cl:button>
+    <cl:xylayout std:sid="xylayout-e980d89f"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>

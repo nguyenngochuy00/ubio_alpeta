@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cl="http://tomatosystem.co.kr/cleopatra" xmlns:std="http://tomatosystem.co.kr/cleopatra/studio" std:sid="html-9ae2af64" version="1.0.0.0">
+  <head std:sid="head-b1266550">
+    <title>select_terminal</title>
+    <screen std:sid="screen-4bacf80a" id="default" height="768px" minwidth="1024px" name="default" width="1024px"/>
+    <screen std:sid="screen-22c891a5" id="tablet" height="667px" maxwidth="1023px" minwidth="500px" name="tablet" width="500px"/>
+    <screen std:sid="screen-f17ce9c5" id="mobile" height="525px" maxwidth="499px" name="mobile" width="350px"/>
+    <cl:model std:sid="model-2f596e01">
+      <cl:dataset std:sid="d-set-1350cdc1" id="aceess_group_data">
+        <cl:datacolumnlist>
+          <cl:datacolumn name="ID"/>
+          <cl:datacolumn name="Name"/>
+          <cl:datacolumn name="Timezone"/>
+        </cl:datacolumnlist>
+        <cl:datarowlist/>
+      </cl:dataset>
+      <cl:datamap std:sid="d-map-beaeea89" id="resPage">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" defaultvalue="0" name="totCnt"/>
+          <cl:datacolumn datatype="number" defaultvalue="0" name="pageSize"/>
+          <cl:datacolumn datatype="number" defaultvalue="0" name="rowSize"/>
+          <cl:datacolumn datatype="number" defaultvalue="1" name="pageIdx"/>
+        </cl:datacolumnlist>
+      </cl:datamap>
+      <cl:submission std:sid="submission-b8193d9f" id="group_sub" action="./data/api_data/group.json" mediatype="application/json" responsetype="text">
+        <cl:responsedata dataid="group_data" isadd="false"/>
+      </cl:submission>
+      <cl:dataset std:sid="d-set-740788b9" id="group_data" sortcondition="GroupID ASC">
+        <cl:datacolumnlist>
+          <cl:datacolumn name="GroupID"/>
+          <cl:datacolumn name="Parent"/>
+          <cl:datacolumn name="Name"/>
+          <cl:datacolumn name="description"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-c4370706" id="terminal_data" sortcondition="ID ASC">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="ID"/>
+          <cl:datacolumn name="Name"/>
+          <cl:datacolumn name="GroupID"/>
+          <cl:datacolumn name="State"/>
+          <cl:datacolumn name="Type"/>
+          <cl:datacolumn name="FucType"/>
+          <cl:datacolumn name="IPAddress"/>
+          <cl:datacolumn name="MacAddress"/>
+          <cl:datacolumn name="Version"/>
+          <cl:datacolumn name="RemoteDoor"/>
+          <cl:datacolumn name="UTCIndex"/>
+          <cl:datacolumn name="Description"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:dataset std:sid="d-set-c4370706" id="response_terminal_data" sortcondition="">
+        <cl:datacolumnlist>
+          <cl:datacolumn datatype="number" name="ID"/>
+          <cl:datacolumn name="Name"/>
+          <cl:datacolumn name="GroupID"/>
+          <cl:datacolumn name="State"/>
+          <cl:datacolumn name="Type"/>
+          <cl:datacolumn name="FucType"/>
+          <cl:datacolumn name="IPAddress"/>
+          <cl:datacolumn name="MacAddress"/>
+          <cl:datacolumn name="Version"/>
+          <cl:datacolumn name="RemoteDoor"/>
+          <cl:datacolumn name="UTCIndex"/>
+          <cl:datacolumn name="Description"/>
+          <cl:datacolumn datatype="expression" expression="ID" name="TERMINAL_CODE"/>
+          <cl:datacolumn datatype="expression" expression="ID" name="TERMINAL_ID"/>
+          <cl:datacolumn datatype="expression" expression="Name" name="TERMINAL_NAME"/>
+          <cl:datacolumn datatype="expression" expression="Type == &quot;&quot; ? &quot;W&quot; : Type" info="" name="INOUT_TYPE_CCD"/>
+          <cl:datacolumn datatype="expression" expression="GroupID == &quot;&quot; ? &quot;0000000000&quot; : GroupID" name="INOUT_CODE"/>
+          <cl:datacolumn datatype="expression" name="INOUT_NAME"/>
+          <cl:datacolumn datatype="expression" name="USE_YN"/>
+          <cl:datacolumn datatype="expression" name="CREATE_USER"/>
+          <cl:datacolumn datatype="expression" name="CREATE_TIME"/>
+          <cl:datacolumn datatype="expression" name="MOD_USER"/>
+          <cl:datacolumn datatype="expression" name="MOD_TIME"/>
+        </cl:datacolumnlist>
+      </cl:dataset>
+      <cl:submission std:sid="submission-686fcf9b" id="access_group_sub" action="./data/api_data/access_group.json">
+        <cl:responsedata dataid="aceess_group_data"/>
+      </cl:submission>
+      <cl:submission std:sid="submission-b92559c9" id="terminal_sub" action="./data/api_data/terminal.json">
+        <cl:listener std:sid="listener-7ce54271" handler="onTerminal_subSubmitSuccess" name="submit-success"/>
+        <cl:responsedata dataid="terminal_data"/>
+      </cl:submission>
+    </cl:model>
+    <cl:appspec/>
+  </head>
+  <body std:sid="body-087e154f" style="top:0px; left:0px; width:800px; height:600px;">
+    <cl:listener std:sid="listener-5fa41905" handler="onBodyLoad" name="load"/>
+    <cl:listener std:sid="listener-cdf27e81" handler="onBodyBeforeUnload2" name="before-unload"/>
+    <cl:group std:sid="group-5e67cbc8">
+      <cl:xylayoutdata std:sid="xyl-data-60798217" bottom="0px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="BOTH"/>
+      <cl:group std:sid="group-67289e16">
+        <cl:formdata std:sid="f-data-bf8b6a47" col="0" row="0"/>
+        <cl:tabfolder std:sid="t-folder-c5a78463">
+          <cl:xylayoutdata std:sid="xyl-data-7f58dfe6" bottom="0px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="BOTH"/>
+          <cl:tabitem std:sid="t-item-1fa09ced" selected="true" text="그룹">
+            <cl:group std:sid="group-8c881025">
+              <std:metadata>
+                <std:property key="locked" value="true"/>
+              </std:metadata>
+              <cl:grid std:sid="grid-00664234" id="group_grid" columnMovable="false" columnResizable="false" datasetid="group_data" readonly="false">
+                <cl:listener std:sid="listener-f95b43d6" handler="onGroup_gridCellClick" name="cell-click"/>
+                <cl:xylayoutdata std:sid="xyl-data-756c7cdb" bottom="0px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="BOTH"/>
+                <cl:gridcolumn std:sid="g-column-b39ca280" width="24px"/>
+                <cl:gridcolumn std:sid="g-column-f2d85fd6"/>
+                <cl:gridheader std:sid="gh-band-663f5425">
+                  <cl:gridrow std:sid="g-row-c53fc09d" height="0"/>
+                  <cl:gridcell std:sid="gh-cell-afe5b686" colindex="1" rowindex="0" filterable="false" sortable="false" targetcolumnname="Name" text="Name"/>
+                  <cl:gridcell std:sid="gh-cell-e7441702" colindex="0" rowindex="0"/>
+                </cl:gridheader>
+                <cl:griddetail std:sid="gd-band-d0204ff3">
+                  <cl:gridrow std:sid="g-row-36025af3"/>
+                  <cl:gridcell std:sid="gd-cell-4ac99ee4" colindex="1" rowindex="0" style="border-top-width:2px; border-bottom-color:#ffffff; border-right-width:2px; border-bottom-width:2px; border-left-color:#ffffff; border-top-color:#ffffff; border-right-color:#ffffff; border-left-width:2px;" columnname="Name"/>
+                  <cl:gridcell std:sid="gd-cell-d311ea16" colindex="0" rowindex="0" style="border-top-width:2px; border-bottom-color:#ffffff; border-right-width:2px; border-bottom-width:2px; border-left-color:#ffffff; border-top-color:#ffffff; border-right-color:#ffffff; border-left-width:2px;">
+                    <cl:img std:sid="image-9f6b9a97" src="../../../theme/image/heding_group.png"/>
+                  </cl:gridcell>
+                </cl:griddetail>
+              </cl:grid>
+              <cl:xylayout std:sid="xylayout-5295142d"/>
+            </cl:group>
+          </cl:tabitem>
+          <cl:tabitem std:sid="t-item-dfd353f4" text="출입그룹">
+            <std:metadata>
+              <std:property key="is-active-item" value="true"/>
+            </std:metadata>
+            <cl:group std:sid="group-24738ab6">
+              <std:metadata>
+                <std:property key="locked" value="true"/>
+              </std:metadata>
+              <cl:grid std:sid="grid-0b55ab5d" id="access_group_grid" columnMovable="false" columnResizable="false" datasetid="aceess_group_data" readonly="false">
+                <cl:xylayoutdata std:sid="xyl-data-68182103" bottom="0px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="BOTH"/>
+                <cl:gridcolumn std:sid="g-column-0baae5ee" width="24px"/>
+                <cl:gridcolumn std:sid="g-column-0853db4c"/>
+                <cl:gridheader std:sid="gh-band-7deaeedb">
+                  <cl:gridrow std:sid="g-row-57e138ac" height="0"/>
+                  <cl:gridcell std:sid="gh-cell-d839bee7" colindex="1" rowindex="0" filterable="false" sortable="false" targetcolumnname="Name" text="Name"/>
+                  <cl:gridcell std:sid="gh-cell-c1f36152" colindex="0" rowindex="0"/>
+                </cl:gridheader>
+                <cl:griddetail std:sid="gd-band-d23607e1">
+                  <cl:gridrow std:sid="g-row-1607ba9a"/>
+                  <cl:gridcell std:sid="gd-cell-7915562b" colindex="1" rowindex="0" style="border-top-width:2px; border-bottom-color:#ffffff; border-right-width:2px; border-bottom-width:2px; border-left-color:#ffffff; border-top-color:#ffffff; border-right-color:#ffffff; border-left-width:2px;" columnname="Name" columntype="normal" suppressible="false" suppressref="-1"/>
+                  <cl:gridcell std:sid="gd-cell-1a17874b" colindex="0" rowindex="0" style="border-top-width:2px; border-bottom-color:#ffffff; border-right-width:2px; border-bottom-width:2px; border-left-color:#ffffff; border-top-color:#ffffff; border-right-color:#ffffff; border-left-width:2px;" columntype="normal" suppressible="false" suppressref="-1">
+                    <cl:img std:sid="image-d1a130d7" src="../../theme/image/heding_group.png"/>
+                  </cl:gridcell>
+                </cl:griddetail>
+              </cl:grid>
+              <cl:xylayout std:sid="xylayout-61e8cbae"/>
+            </cl:group>
+          </cl:tabitem>
+        </cl:tabfolder>
+        <cl:xylayout std:sid="xylayout-7336d1b1"/>
+      </cl:group>
+      <cl:group std:sid="group-7d8332a2">
+        <cl:formdata std:sid="f-data-ab698981" col="1" row="0"/>
+        <cl:group std:sid="group-fd7aa529" style="padding:10px;">
+          <cl:formdata std:sid="f-data-31d565f6" col="1" row="0"/>
+          <cl:button std:sid="button-5c696254" value=">">
+            <cl:listener std:sid="listener-85aea7ff" handler="onButtonClick" name="click"/>
+            <cl:attribute name="heading" value=">"/>
+            <cl:formdata std:sid="f-data-5f090cd2" col="0" halign="CENTER" height="30" row="1" valign="CENTER" width="30"/>
+          </cl:button>
+          <cl:button std:sid="button-22cc60dc" value=">>">
+            <cl:listener std:sid="listener-48a15cde" handler="onButtonClick" name="click"/>
+            <cl:attribute name="heading" value=">>"/>
+            <cl:formdata std:sid="f-data-da687383" col="0" halign="CENTER" height="30" row="2" valign="CENTER" width="30"/>
+          </cl:button>
+          <cl:button std:sid="button-119dbe42" value="&lt;">
+            <cl:listener std:sid="listener-3120537e" handler="onButtonClick" name="click"/>
+            <cl:attribute name="heading" value="&lt;"/>
+            <cl:formdata std:sid="f-data-e304f941" col="0" halign="CENTER" height="30" row="4" valign="CENTER" width="30"/>
+          </cl:button>
+          <cl:button std:sid="button-9237ed4d" value="&lt;&lt;">
+            <cl:listener std:sid="listener-58a3bb44" handler="onButtonClick" name="click"/>
+            <cl:attribute name="heading" value="&lt;&lt;"/>
+            <cl:formdata std:sid="f-data-2adb246e" col="0" halign="CENTER" height="30" row="5" valign="CENTER" width="30"/>
+          </cl:button>
+          <cl:formlayout std:sid="f-layout-33aadf3e">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:group std:sid="group-114f20a6">
+          <cl:formdata std:sid="f-data-0e4cda12" col="0" row="0"/>
+          <cl:grid std:sid="grid-efccf7f4" id="terminal_grid" columnMovable="false" columnResizable="false" datasetid="terminal_data" readonly="false" selectionmulti="multi">
+            <cl:xylayoutdata std:sid="xyl-data-3834e83f" bottom="0px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="BOTH"/>
+            <cl:gridcolumn std:sid="g-column-119ab75a"/>
+            <cl:gridcolumn std:sid="g-column-73e8f67e"/>
+            <cl:gridcolumn std:sid="g-column-611d4a33"/>
+            <cl:gridheader std:sid="gh-band-94f4a345">
+              <cl:gridrow std:sid="g-row-5bef5f61"/>
+              <cl:gridcell std:sid="gh-cell-51007382" colindex="0" rowindex="0" style="background-color:#FFFFFF; padding:2px; border-bottom-color:#7383ae; color:#7383ae; font-weight:5; border-bottom-width:2px; border-bottom-style:solid; background-image:none;" filterable="false" sortable="false" targetcolumnname="ID" text="ID"/>
+              <cl:gridcell std:sid="gh-cell-535dea46" colindex="1" rowindex="0" style="background-color:#FFFFFF; padding:2px; border-bottom-color:#7383ae; color:#7383ae; font-weight:5; border-bottom-width:2px; border-bottom-style:solid; background-image:none;" filterable="false" sortable="false" targetcolumnname="Name" text="Name"/>
+              <cl:gridcell std:sid="gh-cell-50eb48b2" colindex="2" rowindex="0" style="background-color:#FFFFFF; padding:2px; border-bottom-color:#7383ae; color:#7383ae; font-weight:5; border-bottom-width:2px; border-bottom-style:solid; background-image:none;" filterable="false" sortable="false" targetcolumnname="Type" text="Type"/>
+            </cl:gridheader>
+            <cl:griddetail std:sid="gd-band-051289fe">
+              <cl:gridrow std:sid="g-row-ed9417f8"/>
+              <cl:gridcell std:sid="gd-cell-5862aa3e" colindex="0" rowindex="0" columnname="ID"/>
+              <cl:gridcell std:sid="gd-cell-e4f9d919" colindex="1" rowindex="0" columnname="Name"/>
+              <cl:gridcell std:sid="gd-cell-6003ecc4" colindex="2" rowindex="0" columnname="Type"/>
+            </cl:griddetail>
+          </cl:grid>
+          <cl:xylayout std:sid="xylayout-f83dc1ec"/>
+        </cl:group>
+        <cl:group std:sid="group-588b26c4">
+          <cl:formdata std:sid="f-data-5cd2b0b9" col="2" row="0"/>
+          <cl:grid std:sid="grid-074acc88" id="response_terminal_grid" columnMovable="false" columnResizable="false" datasetid="response_terminal_data" readonly="false" selectionmulti="multi">
+            <cl:xylayoutdata std:sid="xyl-data-a605ed15" bottom="0px" horizontalAnchor="BOTH" left="0px" right="0px" top="0px" verticalAnchor="BOTH"/>
+            <cl:gridcolumn std:sid="g-column-73fc6690"/>
+            <cl:gridcolumn std:sid="g-column-562d46a6"/>
+            <cl:gridcolumn std:sid="g-column-82231c1d"/>
+            <cl:gridheader std:sid="gh-band-b4e77503">
+              <cl:gridrow std:sid="g-row-30f7e890"/>
+              <cl:gridcell std:sid="gh-cell-e758c520" colindex="0" rowindex="0" style="background-color:#FFFFFF; padding:2px; border-bottom-color:#7383ae; color:#7383ae; font-weight:5; border-bottom-width:2px; border-bottom-style:solid; background-image:none;" filterable="false" sortable="false" targetcolumnname="ID" text="ID"/>
+              <cl:gridcell std:sid="gh-cell-be14a174" colindex="1" rowindex="0" style="background-color:#FFFFFF; padding:2px; border-bottom-color:#7383ae; color:#7383ae; font-weight:5; border-bottom-width:2px; border-bottom-style:solid; background-image:none;" filterable="false" sortable="false" targetcolumnname="Name" text="Name"/>
+              <cl:gridcell std:sid="gh-cell-79b47dca" colindex="2" rowindex="0" style="background-color:#FFFFFF; padding:2px; border-bottom-color:#7383ae; color:#7383ae; font-weight:5; border-bottom-width:2px; border-bottom-style:solid; background-image:none;" filterable="false" sortable="false" targetcolumnname="Type" text="Type"/>
+            </cl:gridheader>
+            <cl:griddetail std:sid="gd-band-9153ac18">
+              <cl:gridrow std:sid="g-row-08b85181"/>
+              <cl:gridcell std:sid="gd-cell-a845a378" colindex="0" rowindex="0" columnname="ID"/>
+              <cl:gridcell std:sid="gd-cell-c52cb570" colindex="1" rowindex="0" columnname="Name"/>
+              <cl:gridcell std:sid="gd-cell-a0e96615" colindex="2" rowindex="0" columnname="Type"/>
+            </cl:griddetail>
+          </cl:grid>
+          <cl:xylayout std:sid="xylayout-75d97987"/>
+        </cl:group>
+        <cl:pageindexer std:sid="p-indexer-03c511f6" id="terminal_grid_paging">
+          <cl:formdata std:sid="f-data-5d0a865d" col="0" row="1"/>
+        </cl:pageindexer>
+        <cl:group std:sid="group-e6d7d9d1">
+          <cl:formdata std:sid="f-data-d5097b30" col="2" row="1"/>
+          <cl:button std:sid="button-1ed1bd16" id="apply" enabled="false" value="적용">
+            <cl:listener std:sid="listener-d3b7d47c" handler="onApplyClick" name="click"/>
+            <cl:formdata std:sid="f-data-18ddda19" col="0" halign="CENTER" row="0" valign="CENTER"/>
+          </cl:button>
+          <cl:button std:sid="button-cc9335c8" id="cancel" value="취소">
+            <cl:listener std:sid="listener-557bec4d" handler="onCancelClick" name="click"/>
+            <cl:formdata std:sid="f-data-a4621226" col="1" halign="CENTER" row="0" valign="CENTER"/>
+          </cl:button>
+          <cl:formlayout std:sid="f-layout-8a583850">
+            <cl:rows length="1" unit="FRACTION"/>
+            <cl:columns length="1" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+            <cl:columns length="1" unit="FRACTION"/>
+          </cl:formlayout>
+        </cl:group>
+        <cl:formlayout std:sid="f-layout-35687492">
+          <cl:rows length="1" shadecolor="transparent" shadetype="NONE" unit="FRACTION"/>
+          <cl:rows length="50" shadecolor="transparent" shadetype="NONE" unit="PIXEL"/>
+          <cl:columns length="5" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+          <cl:columns length="1" unit="FRACTION"/>
+          <cl:columns length="5" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+        </cl:formlayout>
+      </cl:group>
+      <cl:formlayout std:sid="f-layout-61c5fec9">
+        <cl:rows length="1" unit="FRACTION"/>
+        <cl:columns length="1" unit="FRACTION"/>
+        <cl:columns length="5" shadecolor="#000000" shadetype="NONE" unit="FRACTION"/>
+      </cl:formlayout>
+    </cl:group>
+    <cl:xylayout std:sid="xylayout-093eae07"/>
+  </body>
+  <std:studiosetting>
+    <std:hruler/>
+    <std:vruler/>
+  </std:studiosetting>
+</html>
