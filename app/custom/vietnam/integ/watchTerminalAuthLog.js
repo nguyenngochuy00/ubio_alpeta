@@ -23,6 +23,8 @@ function onBodyLoad(/* cpr.events.CEvent */ e){
 	
 	
 	app.lookup("image").src = "data:image/png;base64," + initValue["logImage"];
+	// Add feature alarm sound when popup image show
+    app.lookup("MRAIP_ctrlLogImageAudio").play();
 	var strEventTime = initValue["logEventTime"];
 	app.lookup("VICWTA_optEventTime").value = initValue["logEventTime"];
 	
