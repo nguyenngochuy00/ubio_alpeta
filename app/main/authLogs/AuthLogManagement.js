@@ -140,12 +140,6 @@ function onBodyLoad(/* cpr.events.CEvent */ e) {
       );
       cmbCategory.addItem(
         new cpr.controls.Item(
-          dataManager.getString("Str_CardNumber"),
-          "card_number"
-        )
-      );
-      cmbCategory.addItem(
-        new cpr.controls.Item(
           dataManager.getString("Str_TerminalName"),
           "terminal_name"
         )
@@ -155,6 +149,9 @@ function onBodyLoad(/* cpr.events.CEvent */ e) {
           dataManager.getString("Str_UniqueID"),
           "unique_id"
         )
+      );
+      cmbCategory.addItem(
+        new cpr.controls.Item(dataManager.getString("Str_CardNum"), "cardnum")
       );
       cmbCategory.addItem(
         new cpr.controls.Item(
@@ -273,6 +270,18 @@ function sendAuthLogListRequest() {
     if (bFound == false) {
       return;
     }
+  } else if (cmbCategory.value == "cardnum") {
+    // Handle card number search
+    if (edtKeyword.value != null && edtKeyword.value.length > 0) {
+      // Validate card number format if needed
+      var cardNumber = edtKeyword.value.trim();
+      if (cardNumber.length > 0) {
+        smsGetAuthLogList.setParameters("searchCategory", "cardnum");
+        smsGetAuthLogList.setParameters("searchKeyword", cardNumber);
+      } else {
+        return;
+      }
+    }
   } else if (cmbCategory.value != null && cmbCategory.value.length > 0) {
     smsGetAuthLogList.setParameters("searchCategory", cmbCategory.value);
     if (edtKeyword.value != null && edtKeyword.value.length > 0) {
@@ -354,6 +363,27 @@ function onSms_getAuthLogListSubmitDone(/* cpr.events.CSubmissionEvent */ e) {
         var searchData = terminalList.findFirstRow("ID =='" + terminalID + "'");
         if (searchData) {
           logInfo.setValue("TerminalName", searchData.getValue("Name"));
+        }
+      }
+      // Handle card number search results
+      var cmbCategory = app.lookup("ALMGR_cmbCategory");
+      if (cmbCategory.value == "cardnum") {
+        var cardNumber = logInfo.getValue("CardNumber");
+        if (!cardNumber || cardNumber.length == 0) {
+          // Remove rows without card numbers
+          dsAuthLogList.deleteRow(i);
+          i--;
+          count--;
+          continue;
+          // // Handle card number 
+          // var cardNumber = logInfo.getValue("Card");
+          // if (!cardNumber || cardNumber.length == 0) {
+          //   // If no card number, try to get it from user info
+          //   var userID = logInfo.getValue("UserID");
+          //   var userList = dataManager.getUserList();
+          //   var userData = userList.findFirstRow("ID == '" + userID + "'");
+          //   if (userData) {
+          //     logInfo.setValue("Card", userData.getValue("Card"));
         }
       }
 
